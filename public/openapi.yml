@@ -3,12 +3,12 @@ info:
   title: KPNP - 품새 API
   version: 0.0.1
 servers:
-  - url: https://dev.kpnpglobal.com:9143
+  - url: https://dev.kpnpglobal.com:9143/api/champs/ps/v1
 tags:
   - name: 대회개최
 
 paths:
-  /api/champs/ps/v1/competitions/default:
+  /competitions/default:
     get:
       summary: 기본 정보 설정 조회 (기본 값)
       tags:
@@ -280,7 +280,7 @@ paths:
                 FILE_TRANSFER_TO_S3_ERROR:
                   $ref: '#/components/examples/FILE_TRANSFER_TO_S3_ERROR'
 
-  /api/champs/ps/v1/competitions/default/{competitionSeq}:
+  /competitions/default/{competitionSeq}:
     get:
       summary: 기본 정보 설정 조회 (유저 입력값)
       tags:
@@ -299,7 +299,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/getCompetitionDefaultResponse'
 
-  /api/champs/ps/v1/competitions/media:
+  /competitions/media:
     post:
       summary: 기본 정보 설정 파일 저장
       tags:
