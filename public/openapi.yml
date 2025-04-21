@@ -332,6 +332,15 @@ paths:
                         type: number
                         example: 1
                         description: 파일 순서
+                mediaList[0].mediaInfo:
+                  type: string
+                  format: binary
+                  description: 업로드할 파일 (MultipartFile)
+                mediaList[0].mediaCategory:
+                  $ref: '#/components/schemas/MediaType'
+                mediaList[0].sortNo:
+                  type: integer
+                  description: 파일 정렬 순서
       responses:
         200:
           description: 성공
@@ -677,3 +686,14 @@ components:
               sortNo:
                 type: number
                 example: 2
+    # Enums
+    MediaType:
+      type: string
+      description: 미디어 구분
+      enum:
+        - M (메인사진)
+        - F (파일)
+        - CR (대회로고)
+        - HR (주최로고)
+        - BI (베너이미지)
+        - S (스폰서)
