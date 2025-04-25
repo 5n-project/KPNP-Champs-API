@@ -9,148 +9,100 @@ tags:
   - name: 공통
 
 paths:
-  /competitions/default:
+  /competitions/host:
     get:
-      summary: 기본 정보 설정 조회 (기본 값)
+      summary: 품새 대회 목록 조회
       tags:
         - 대회개최
       responses:
-        200:
-          description: 성공
+        '200':
+          description: 대회 목록
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  divisionList:
+                  success:
+                    type: boolean
+                  data:
                     type: array
-                    description: 대회룰 그룹 리스트
                     items:
                       type: object
                       properties:
-                        divisionSeq:
-                          type: number
-                        divisionCode:
+                        competitionSeq:
                           type: string
-                          example: "00"
-                        divisionNameEn:
+                          description: 대회 seq
+                        competitionNameKo:
                           type: string
-                          example: "WT Recognized Poomsae"
-                        divisionNameKo:
+                          description: 한글 대회명
+                        competitionNameEn:
                           type: string
-                          example: "WT 공인품새룰"
-                  countryList:
-                    type: array
-                    description: 국가 코드 리스트
-                    items:
-                      type: object
-                      properties:
-                        codeDetailNo:
+                          description: 영문 대회명
+                        competitionSdate:
                           type: string
-                          example: "AF"
-                        codeDetailName:
+                          format: date-time
+                          description: 대회 개최일
+                        competitionEdate:
                           type: string
-                          example: "(+93) Afghanistan"
-                  utcList:
-                    type: array
-                    description: UTC 리스트
-                    items:
-                      type: object
-                      properties:
-                        code:
+                          format: date-time
+                          description: 대회 종료일
+                        competitionStatus:
                           type: string
-                          example: "KOR"
-                        nameEn:
+                          description: 대회 현재 상태 값
+                        competitionSubSdate:
                           type: string
-                          example: "Korea (Seoul)"
-                        subCode1:
+                          format: date-time
+                          description: 신청 기간 시작일
+                        competitionSubEdate:
                           type: string
-                          example: "(Seoul)"
-                        exp1:
+                          format: date-time
+                          description: 신청 기간 종료일
+                        createdDate:
                           type: string
-                          example: "+0000"
-                        utcInfo:
-                          type: string
-                          example: "(UTC +04:30)"
-                  wtClassList:
-                    type: array
-                    description: WT 코드 리스트
-                    items:
-                      type: object
-                      properties:
-                        code:
-                          type: string
-                          example: "G1"
-                  bankList:
-                    type: array
-                    description: 은행 리스트
-                    items:
-                      type: object
-                      properties:
-                        code:
-                          type: string
-                        nameEn:
-                          type: string
-                          example: "BankOfChina"
-                        nameKo:
-                          type: string
-                          example: "중국은행"
-                  poomsaeList:
-                    type: array
-                    description: 품새 리스트
-                    items:
-                      type: object
-                      properties:
-                        code:
-                          type: string
-                        nameEn:
-                          type: string
-                          example: "Taegeuk 1 Jang"
-                        nameKo:
-                          type: string
-                          example: "태극 1장"
-                  compositeRateList:
-                    type: array
-                    description: 복합품새 비중 리스트
-                    items:
-                      type: object
-                      properties:
-                        code:
-                          type: string
-                        nameEn:
-                          type: string
-                          example: "공인10:자유90"
-                        nameKo:
-                          type: string
-                          example: "공인10:자유90"
-                  matchOrderList:
-                    type: array
-                    description: 품새 경기 순서 코드 리스트
-                    items:
-                      type: object
-                      properties:
-                        code:
-                          type: string
-                        nameEn:
-                          type: string
-                          example: "Chung-Chung-Hong-Hong"
-                        nameKo:
-                          type: string
-                          example: "청-청-홍-홍"
-                  poomsaeDrawList:
-                    type: array
-                    description: 품새 추첨 방식 리스트
-                    items:
-                      type: object
-                      properties:
-                        code:
-                          type: string
-                        nameEn:
-                          type: string
-                        nameKo:
-                          type: string
+                          format: date-time
+                          description: 생성일
+                        totalCnt:
+                          type: integer
+                          description: 참가자 수 총합
+                        confirmPaymentCnt:
+                          type: integer
+                          description: 확정 참가자 수
+                  error:
+                    type: object
+                    nullable: true
+              examples:
+                defaultResponse:
+                  summary: Default Example
+                  value:
+                    success: true
+                    data:
+                      - competitionSeq: "2030"
+                        competitionNameKo: "품새대회 등록"
+                        competitionNameEn: "Add Competition"
+                        competitionSdate: "2025-02-23 09:00:00.0"
+                        competitionEdate: "2025-03-10 23:00:00.0"
+                        competitionStatus: "NN"
+                        competitionSubSdate: "2025-02-19 15:00:00.0"
+                        competitionSubEdate: "2025-02-22 23:00:00.0"
+                        createdDate: "2025-04-25 08:02:00.0"
+                        totalCnt: 0
+                        confirmPaymentCnt: 0
+                      - competitionSeq: "2029"
+                        competitionNameKo: "품새대회 등록"
+                        competitionNameEn: "Add Competition"
+                        competitionSdate: "2025-02-23 09:00:00.0"
+                        competitionEdate: "2025-03-10 23:00:00.0"
+                        competitionStatus: "NN"
+                        competitionSubSdate: "2025-02-19 15:00:00.0"
+                        competitionSubEdate: "2025-02-22 23:00:00.0"
+                        createdDate: "2025-04-25 07:26:47.0"
+                        totalCnt: 0
+                        confirmPaymentCnt: 0
+                    error: null
+
+  /competitions/default:
     post:
-      summary: 기본 정보 설정 등록/수정
+      summary: 대회 개최
       tags:
         - 대회개최
       requestBody:
@@ -160,188 +112,80 @@ paths:
             schema:
               type: object
               properties:
-                hostDivisionList:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      divisionSeq:
-                        type: number
-                      delDivisionUsedSeq:
-                        type: number
-                hostDefaultInfo:
-                  type: object
-                  properties:
-                    competitionSeq:
-                      type: number
-                      example: 1
-                    competitionDiscipline:
-                      type: string
-                      example: "Taekwondo Poomsae"
-                    competitionNameKo:
-                      type: string
-                      example: "테스트대회"
-                    competitionNameEn:
-                      type: string
-                      example: "Test"
-                    competitionContent:
-                      type: string
-                      example: "대회소개6"
-                    competitionHostName:
-                      type: string
-                      example: "호스트"
-                    competitionHostCountry:
-                      type: string
-                      example: "KR"
-                    competitionHostCall:
-                      type: string
-                      example: "01075345140"
-                    competitionSdate:
-                      type: string
-                      format: date-time
-                      example: "2025-02-10T09:00:00.000Z"
-                    competitionEdate:
-                      type: string
-                      format: date-time
-                      example: "2025-02-20T23:00:00.000Z"
-                    competitionLocationKo:
-                      type: string
-                      example: "부산"
-                    competitionLocationEn:
-                      type: string
-                      example: "Busan"
-                    competitionUtcCode:
-                      type: string
-                      example: "KOR"
-                    competitionSubSdate:
-                      type: string
-                      format: date-time
-                      example: "2025-02-01T15:00:00.000Z"
-                    competitionSubEdate:
-                      type: string
-                      format: date-time
-                      example: "2025-02-02T23:00:00.000Z"
-                    competitionLocalYn:
-                      type: string
-                      example: "W"
-                    competitionWtCodeSendYn:
-                      type: string
-                      example: "Y"
-                    competitionWtClassCode:
-                      type: string
-                      example: "G1"
-                    competitionParticipantPayYn:
-                      type: string
-                      example: "N"
-                    bankName:
-                      type: string
-                      example: ""
-                    accountNumber:
-                      type: string
-                      example: ""
-                    accountHolderName:
-                      type: string
-                      example: ""
-                    competitionParticipantPay:
-                      type: string
-                      example: ""
-                    scoreDevice:
-                      type: string
-                      example: "D"
-                    delS3MediaSeq:
-                      type: string
-                      description: 삭제할 이미지 및 파일 seq 목록 (comma-separated)
-                      example: "71,72,74"
-                    delS3MediaSeqSortNo:
-                      type: string
-                      description: 삭제할 이미지 및 파일 순서 목록 (comma-separated)
-                      example: "2,3,1"
-      responses:
-        200:
-          description: 성공
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/responses/OK'
-              examples:
-                success:
-                  value:
-                    success: true
-                    data: "competitionSeq : 63"
-                    error: null
-                NO_COMPETITION:
-                  $ref: '#/components/examples/NO_COMPETITION'
-        500:
-          description: 실패
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/responses/Error'
-              examples:
-                FILE_TRANSFER_TO_S3_ERROR:
-                  $ref: '#/components/examples/FILE_TRANSFER_TO_S3_ERROR'
-
-  /competitions/default/{competitionSeq}:
-    get:
-      summary: 기본 정보 설정 조회 (유저 입력값)
-      tags:
-        - 대회개최
-      parameters:
-        - name: competitionSeq
-          in: path
-          required: true
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: 성공
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getCompetitionDefaultResponse'
-
-  /competitions/media:
-    post:
-      summary: 기본 정보 설정 파일 저장
-      tags:
-        - 대회개최
-      requestBody:
-        required: true
-        content:
-          multipart/form-data:
-            schema:
-              type: object
-              properties:
-                competitionSeq:
-                  type: number
-                  example: 13
-                  description: 대회 seq
-                mediaList:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      mediaInfo:
-                        type: string
-                        format: binary
-                        description: 업로드할 파일 (MultipartFile)
-                      mediaCategory:
-                        type: string
-                        example: "M"
-                        description: "미디어 구분 (메인사진: M, 파일: F, 대회로고: CR, 주최로고: HR, 배너이미지: BI, 스폰서: S)"
-                      sortNo:
-                        type: number
-                        example: 1
-                        description: 파일 순서
-                mediaList[0].mediaInfo:
+                poomsaeDivisionTypeList:
+                  $ref: "#/components/schemas/PoomsaeType"
+                competitionNameKo:
                   type: string
-                  format: binary
-                  description: 업로드할 파일 (MultipartFile)
-                mediaList[0].mediaCategory:
-                  $ref: '#/components/schemas/MediaType'
-                mediaList[0].sortNo:
-                  type: integer
-                  description: 파일 정렬 순서
+                  example: "품새대회 등록"
+                competitionNameEn:
+                  type: string
+                  example: "Add Competition"
+                competitionContent:
+                  type: string
+                  example: "품새대회 등록"
+                competitionHostName:
+                  type: string
+                  example: "호스트"
+                competitionHostCountryCodeDetailNo:
+                  type: string
+                  example: "KR"
+                competitionHostCall:
+                  type: string
+                  example: "01075345140"
+                competitionSdate:
+                  type: string
+                  format: date-time
+                  example: "2025-02-23T09:00:00.000Z"
+                competitionEdate:
+                  type: string
+                  format: date-time
+                  example: "2025-03-10T23:00:00.000Z"
+                competitionLocationKo:
+                  type: string
+                  example: "부산"
+                competitionLocationEn:
+                  type: string
+                  example: "Busan"
+                competitionUtcCode:
+                  type: string
+                  example: "KOR"
+                competitionSubSdate:
+                  type: string
+                  format: date-time
+                  example: "2025-02-19T15:00:00.000Z"
+                competitionSubEdate:
+                  type: string
+                  format: date-time
+                  example: "2025-02-22T23:00:00.000Z"
+                competitionLocalType:
+                  type: string
+                  description:
+                    로컬 타입 (Enum: W, L 등)
+                  example: "W"
+                competitionWtCodeSendYn:
+                  type: string
+                  example: "Y"
+                competitionWtGradeType:
+                  type: string
+                  example: "G1"
+                competitionParticipantPayYn:
+                  type: string
+                  example: "N"
+                bankName:
+                  type: string
+                  example: ""
+                accountNumber:
+                  type: string
+                  example: ""
+                accountHolderName:
+                  type: string
+                  example: ""
+                competitionParticipantPay:
+                  type: string
+                  example: "N"
+                competitionScoreDeviceType:
+                  type: string
+                  example: "D"
       responses:
         200:
           description: 성공
@@ -353,19 +197,13 @@ paths:
                 success:
                   value:
                     success: true
-                    data: "competitionSeq : 63"
+                    data:
+                      competitionSeq: 2020
                     error: null
-                NO_COMPETITION:
-                  $ref: '#/components/examples/NO_COMPETITION'
-        500:
-          description: 실패
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/responses/Error'
-              examples:
-                FILE_TRANSFER_TO_S3_ERROR:
-                  $ref: '#/components/examples/FILE_TRANSFER_TO_S3_ERROR'
+                COMPETITION_OVERLAP:
+                  $ref: '#/components/examples/COMPETITION_OVERLAP'
+
+
 
   /common/combo/rules:
     get:
@@ -867,6 +705,13 @@ components:
         error:
           message: "파일 S3에 전송 중 오류 발생."
           errorCode: "E009"
+    COMPETITION_OVERLAP:
+      value:
+        success: false
+        data: null
+        error:
+          message: "대회 중복 개최 요청"
+          errorCode: "E522"
 
   schemas:
     getCompetitionDefaultResponse:
@@ -1150,3 +995,15 @@ components:
         - HR (주최로고)
         - BI (베너이미지)
         - S (스폰서)
+    PoomsaeType:
+      type: string
+      enum:
+        - WT_RECOGNIZED_POOMSAE (WT 공인품새룰)
+        - FREE_STYLE_POOMSAE (자유품새룰)
+        - MIXED_POOMSAE (복합품새룰)
+        - KVR_RECOGNIZED_POOMSAE (한국 공인품새룰)
+        - OPEN_RECOGNIZED_POOMSAE (오픈대회 공인품새)
+        - OPEN_FREE_STYLE_POOMSAE (오픈대회 자유품새)
+      example:
+        - WT_RECOGNIZED_POOMSAE
+        - FREE_STYLE_POOMSAE
