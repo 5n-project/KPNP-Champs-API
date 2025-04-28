@@ -114,76 +114,99 @@ paths:
               properties:
                 poomsaeDivisionTypeList:
                   $ref: "#/components/schemas/PoomsaeType"
+                  description: 대회 룰 (/rules 의 poomsaeDivisionType)
                 competitionNameKo:
                   type: string
-                  example: "[대회명] 품새대회 등록"
+                  example: "품새대회 등록"
+                  description: 대회명
                 competitionNameEn:
                   type: string
-                  example: "[영문대회명] Add Competition"
+                  example: "Add Competition"
+                  description: 영문대회명
                 competitionContent:
                   type: string
-                  example: "[대회 개요] 품새대회 등록"
+                  example: "품새대회 등록"
+                  description: 대회 개요
                 competitionHostName:
                   type: string
-                  example: "[주최명] 호스트"
+                  example: "호스트"
+                  description: 주최명
                 competitionHostCountryCodeDetailNo:
                   type: string
-                  example: "[주최 연락처 코드] KR"
+                  example: "KR"
+                  description: 주최 연락처 코드 (/countries 의 codeDetailNo)
                 competitionHostCall:
                   type: string
-                  example: "[주최 연락처] 01075345140"
+                  example: "01075345140"
+                  description: 주최 연락처
                 competitionSdate:
                   type: string
                   format: date-time
-                  example: "[대회개최일] 2025-02-23T09:00:00.000Z"
+                  example: "2025-02-23T09:00:00.000Z"
+                  description: 대회개최일
                 competitionEdate:
                   type: string
                   format: date-time
-                  example: "[대회종료일] 2025-03-10T23:00:00.000Z"
+                  example: "2025-03-10T23:00:00.000Z"
+                  description: 대회종료일
                 competitionLocationKo:
                   type: string
-                  example: "[장소명] 부산"
+                  example: "부산"
+                  description: 장소명
                 competitionLocationEn:
                   type: string
-                  example: "[장소영문명] Busan"
+                  example: "Busan"
+                  description: 장소영문명
                 competitionUtcCode:
                   type: string
-                  example: "[대회장 표준 시간 코드] KOR"
+                  example: "KOR"
+                  description: 대회장 표준 시간 코드 (/noc-list 의 code)
                 competitionSubSdate:
                   type: string
                   format: date-time
-                  example: "[신청기간 시작일] 2025-02-19T15:00:00.000Z"
+                  example: "2025-02-19T15:00:00.000Z"
+                  description: 신청기간 시작일
                 competitionSubEdate:
                   type: string
                   format: date-time
-                  example: "[신청기간 종료일] 2025-02-22T23:00:00.000Z"
+                  example: "2025-02-22T23:00:00.000Z"
+                  description: 신청기간 종료일
                 competitionLocalType:
                   type: string
-                  example: "[국제대회 여부] W (국제) or L (한국대회)"
+                  example: "W"
+                  description: 국제대회 여부 W (국제) or L (한국대회)
                 competitionWtCodeSendYn:
                   type: string
-                  example: "[WT 송신여부] Y or N"
+                  example: Y
+                  description: WT 송신여부 Y or N
                 competitionWtGradeType:
                   type: string
-                  example: "[등급 코드] G1"
+                  example: "G1"
+                  description: 등급 (/wt-grades 의 poomsaeWTGradeTypeList 값 사용)
                 competitionParticipantPayYn:
                   type: string
-                  example: "[참가비 여부] Y or N"
+                  example: "Y"
+                  description: 참가비 여부 Y or N
                 bankName:
                   type: string
-                  example: "은행명"
+                  example: "BKCHCNBJ"
+                  description: 은행명 (/bank-list 의 codeDetailNo)
                 accountNumber:
                   type: string
-                  example: "예금주명"
+                  example: "김예금"
+                  description: "예금주명"
                 accountHolderName:
                   type: string
-                  example: "계좌번호"
+                  example: "100-101010101"
+                  description: "계좌번호"
                 competitionParticipantPay:
                   type: string
-                  example: "금액"
+                  example: "10000"
+                  description: "금액"
                 competitionScoreDeviceType:
                   type: string
-                  example: "[심사 방법] D or C"
+                  example: "C"
+                  description: "심사 방법 D (단말기) or C (Champs)"
       responses:
         200:
           description: 성공
@@ -213,79 +236,103 @@ paths:
               properties:
                 competitionSeq:
                   type: string
-                  example: "[대회 seq] 100"
+                  example: "100"
+                  description: 대회 seq
                 poomsaeDivisionTypeList:
                   $ref: "#/components/schemas/PoomsaeType"
+                  description: 대회 룰 (/rules 의 poomsaeDivisionType)
                 competitionNameKo:
                   type: string
-                  example: "[대회명] 품새대회 등록"
+                  example: "품새대회 등록"
+                  description: 대회명
                 competitionNameEn:
                   type: string
-                  example: "[영문대회명] Add Competition"
+                  example: "Add Competition"
+                  description: 영문대회명
                 competitionContent:
                   type: string
-                  example: "[대회 개요] 품새대회 등록"
+                  example: "품새대회 등록"
+                  description: 대회 개요
                 competitionHostName:
                   type: string
-                  example: "[주최명] 호스트"
+                  example: "호스트"
+                  description: 주최명
                 competitionHostCountryCodeDetailNo:
                   type: string
-                  example: "[주최 연락처 코드] KR"
+                  example: "KR"
+                  description: 주최 연락처 코드 (/countries 의 codeDetailNo)
                 competitionHostCall:
                   type: string
-                  example: "[주최 연락처] 01075345140"
+                  example: "01075345140"
+                  description: 주최 연락처
                 competitionSdate:
                   type: string
                   format: date-time
-                  example: "[대회개최일] 2025-02-23T09:00:00.000Z"
+                  example: "2025-02-23T09:00:00.000Z"
+                  description: 대회개최일
                 competitionEdate:
                   type: string
                   format: date-time
-                  example: "[대회종료일] 2025-03-10T23:00:00.000Z"
+                  example: "2025-03-10T23:00:00.000Z"
+                  description: 대회종료일
                 competitionLocationKo:
                   type: string
-                  example: "[장소명] 부산"
+                  example: "부산"
+                  description: 장소명
                 competitionLocationEn:
                   type: string
-                  example: "[장소영문명] Busan"
+                  example: "Busan"
+                  description: 장소영문명
                 competitionUtcCode:
                   type: string
-                  example: "[대회장 표준 시간 코드] KOR"
+                  example: "KOR"
+                  description: 대회장 표준 시간 코드 (/noc-list 의 code)
                 competitionSubSdate:
                   type: string
                   format: date-time
-                  example: "[신청기간 시작일] 2025-02-19T15:00:00.000Z"
+                  example: "2025-02-19T15:00:00.000Z"
+                  description: 신청기간 시작일
                 competitionSubEdate:
                   type: string
                   format: date-time
-                  example: "[신청기간 종료일] 2025-02-22T23:00:00.000Z"
+                  example: "2025-02-22T23:00:00.000Z"
+                  description: 신청기간 종료일
                 competitionLocalType:
                   type: string
-                  example: "[국제대회 여부] W (국제) or L (한국대회)"
+                  example: "W"
+                  description: 국제대회 여부 W (국제) or L (한국대회)
                 competitionWtCodeSendYn:
                   type: string
-                  example: "[WT 송신여부] Y or N"
+                  example: Y
+                  description: WT 송신여부 Y or N
                 competitionWtGradeType:
                   type: string
-                  example: "[등급 코드] G1"
+                  example: "G1"
+                  description: 등급 (/wt-grades 의 poomsaeWTGradeTypeList 값 사용)
                 competitionParticipantPayYn:
                   type: string
-                  example: "[참가비 여부] Y or N"
+                  example: "Y"
+                  description: 참가비 여부 Y or N
                 bankName:
                   type: string
-                  example: "은행명"
+                  example: "BKCHCNBJ"
+                  description: 은행명 (/bank-list 의 codeDetailNo)
                 accountNumber:
                   type: string
-                  example: "예금주명"
+                  example: "김예금"
+                  description: "예금주명"
                 accountHolderName:
                   type: string
-                  example: "계좌번호"
+                  example: "100-101010101"
+                  description: "계좌번호"
                 competitionParticipantPay:
                   type: string
-                  example: "금액"
+                  example: "10000"
+                  description: "금액"
                 competitionScoreDeviceType:
                   type: string
-                  example: "[심사 방법] D or C"
+                  example: "C"
+                  description: "심사 방법 D (단말기) or C (Champs)"
       responses:
         200:
           description: 성공
