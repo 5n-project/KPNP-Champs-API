@@ -102,7 +102,7 @@ paths:
 
   /competitions/default:
     post:
-      summary: 대회 개최
+      summary: 대회 개최 등록
       tags:
         - 대회개최
       requestBody:
@@ -116,76 +116,74 @@ paths:
                   $ref: "#/components/schemas/PoomsaeType"
                 competitionNameKo:
                   type: string
-                  example: "품새대회 등록"
+                  example: "[대회명] 품새대회 등록"
                 competitionNameEn:
                   type: string
-                  example: "Add Competition"
+                  example: "[영문대회명] Add Competition"
                 competitionContent:
                   type: string
-                  example: "품새대회 등록"
+                  example: "[대회 개요] 품새대회 등록"
                 competitionHostName:
                   type: string
-                  example: "호스트"
+                  example: "[주최명] 호스트"
                 competitionHostCountryCodeDetailNo:
                   type: string
-                  example: "KR"
+                  example: "[주최 연락처 코드] KR"
                 competitionHostCall:
                   type: string
-                  example: "01075345140"
+                  example: "[주최 연락처] 01075345140"
                 competitionSdate:
                   type: string
                   format: date-time
-                  example: "2025-02-23T09:00:00.000Z"
+                  example: "[대회개최일] 2025-02-23T09:00:00.000Z"
                 competitionEdate:
                   type: string
                   format: date-time
-                  example: "2025-03-10T23:00:00.000Z"
+                  example: "[대회종료일] 2025-03-10T23:00:00.000Z"
                 competitionLocationKo:
                   type: string
-                  example: "부산"
+                  example: "[장소명] 부산"
                 competitionLocationEn:
                   type: string
-                  example: "Busan"
+                  example: "[장소영문명] Busan"
                 competitionUtcCode:
                   type: string
-                  example: "KOR"
+                  example: "[대회장 표준 시간 코드] KOR"
                 competitionSubSdate:
                   type: string
                   format: date-time
-                  example: "2025-02-19T15:00:00.000Z"
+                  example: "[신청기간 시작일] 2025-02-19T15:00:00.000Z"
                 competitionSubEdate:
                   type: string
                   format: date-time
-                  example: "2025-02-22T23:00:00.000Z"
+                  example: "[신청기간 종료일] 2025-02-22T23:00:00.000Z"
                 competitionLocalType:
                   type: string
-                  description:
-                    로컬 타입 (Enum: W, L 등)
-                  example: "W"
+                  example: "[국제대회 여부] W (국제) or L (한국대회)"
                 competitionWtCodeSendYn:
                   type: string
-                  example: "Y"
+                  example: "[WT 송신여부] Y or N"
                 competitionWtGradeType:
                   type: string
-                  example: "G1"
+                  example: "[등급 코드] G1"
                 competitionParticipantPayYn:
                   type: string
-                  example: "N"
+                  example: "[참가비 여부] Y or N"
                 bankName:
                   type: string
-                  example: ""
+                  example: "은행명"
                 accountNumber:
                   type: string
-                  example: ""
+                  example: "예금주명"
                 accountHolderName:
                   type: string
-                  example: ""
+                  example: "계좌번호"
                 competitionParticipantPay:
                   type: string
-                  example: "N"
+                  example: "금액"
                 competitionScoreDeviceType:
                   type: string
-                  example: "D"
+                  example: "[심사 방법] D or C"
       responses:
         200:
           description: 성공
@@ -202,8 +200,108 @@ paths:
                     error: null
                 COMPETITION_OVERLAP:
                   $ref: '#/components/examples/COMPETITION_OVERLAP'
-
-
+    put:
+      summary: 대회 개최 수정
+      tags:
+        - 대회개최
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                competitionSeq:
+                  type: string
+                  example: "[대회 seq] 100"
+                poomsaeDivisionTypeList:
+                  $ref: "#/components/schemas/PoomsaeType"
+                competitionNameKo:
+                  type: string
+                  example: "[대회명] 품새대회 등록"
+                competitionNameEn:
+                  type: string
+                  example: "[영문대회명] Add Competition"
+                competitionContent:
+                  type: string
+                  example: "[대회 개요] 품새대회 등록"
+                competitionHostName:
+                  type: string
+                  example: "[주최명] 호스트"
+                competitionHostCountryCodeDetailNo:
+                  type: string
+                  example: "[주최 연락처 코드] KR"
+                competitionHostCall:
+                  type: string
+                  example: "[주최 연락처] 01075345140"
+                competitionSdate:
+                  type: string
+                  format: date-time
+                  example: "[대회개최일] 2025-02-23T09:00:00.000Z"
+                competitionEdate:
+                  type: string
+                  format: date-time
+                  example: "[대회종료일] 2025-03-10T23:00:00.000Z"
+                competitionLocationKo:
+                  type: string
+                  example: "[장소명] 부산"
+                competitionLocationEn:
+                  type: string
+                  example: "[장소영문명] Busan"
+                competitionUtcCode:
+                  type: string
+                  example: "[대회장 표준 시간 코드] KOR"
+                competitionSubSdate:
+                  type: string
+                  format: date-time
+                  example: "[신청기간 시작일] 2025-02-19T15:00:00.000Z"
+                competitionSubEdate:
+                  type: string
+                  format: date-time
+                  example: "[신청기간 종료일] 2025-02-22T23:00:00.000Z"
+                competitionLocalType:
+                  type: string
+                  example: "[국제대회 여부] W (국제) or L (한국대회)"
+                competitionWtCodeSendYn:
+                  type: string
+                  example: "[WT 송신여부] Y or N"
+                competitionWtGradeType:
+                  type: string
+                  example: "[등급 코드] G1"
+                competitionParticipantPayYn:
+                  type: string
+                  example: "[참가비 여부] Y or N"
+                bankName:
+                  type: string
+                  example: "은행명"
+                accountNumber:
+                  type: string
+                  example: "예금주명"
+                accountHolderName:
+                  type: string
+                  example: "계좌번호"
+                competitionParticipantPay:
+                  type: string
+                  example: "금액"
+                competitionScoreDeviceType:
+                  type: string
+                  example: "[심사 방법] D or C"
+      responses:
+        200:
+          description: 성공
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/OK'
+              examples:
+                success:
+                  value:
+                    success: true
+                    data:
+                      competitionSeq: 2020
+                    error: null
+                COMPETITION_OVERLAP:
+                  $ref: '#/components/examples/COMPETITION_OVERLAP'
 
   /common/combo/rules:
     get:
@@ -712,6 +810,20 @@ components:
         error:
           message: "대회 중복 개최 요청"
           errorCode: "E522"
+    VALIDATE_WT_GRAGE_IS_EMPTY:
+      value:
+        success: false
+        data: null
+        error:
+          message: "등급은 필수 항목입니다"
+          errorCode: "E700"
+    VALIDATE_BANK_INFO_IS_EMPTY:
+      value:
+        success: false
+        data: null
+        error:
+          message: "참가비 항목을 입력해주세요"
+          errorCode: "E701"
 
   schemas:
     getCompetitionDefaultResponse:
