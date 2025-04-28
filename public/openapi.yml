@@ -100,6 +100,190 @@ paths:
                         confirmPaymentCnt: 0
                     error: null
 
+  /competitions/default/{competitionSeq}:
+    get:
+      summary: 대회 기본 정보 조회
+      tags:
+        - 대회개최
+      parameters:
+        - in: path
+          name: competitionSeq
+          required: true
+          schema:
+            type: integer
+          description: 조회할 대회의 고유 ID
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    properties:
+                      competitionNameKo:
+                        type: string
+                        description: 대회명 (국문)
+                        example: 품새대회 등록 수정 테스트32432
+                      competitionNameEn:
+                        type: string
+                        description: 대회명 (영문)
+                        example: Add Competition 수정 테스트
+                      competitionContent:
+                        type: string
+                        description: 대회 설명
+                        example: 품새대회 등록 수정 테스트
+                      competitionHostName:
+                        type: string
+                        description: 주최자명
+                        example: 호스트 수정 테스트
+                      competitionHostCountryCodeDetailNo:
+                        type: string
+                        description: 주최자 국가코드
+                        example: BB
+                      competitionHostCall:
+                        type: string
+                        description: 주최자 연락처
+                        example: 01075345140 ff
+                      competitionSdate:
+                        type: string
+                        format: date-time
+                        description: 대회 시작일
+                        example: 2025-01-23T00:00:00.0
+                      competitionEdate:
+                        type: string
+                        format: date-time
+                        description: 대회 종료일
+                        example: 2025-05-10T23:59:00.0
+                      competitionLocationKo:
+                        type: string
+                        description: 대회 장소 (국문)
+                        example: 부산
+                      competitionLocationEn:
+                        type: string
+                        description: 대회 장소 (영문)
+                        example: Busan2345
+                      competitionUtcCode:
+                        type: string
+                        description: 대회 UTC 코드
+                        example: KOR
+                      competitionSubSdate:
+                        type: string
+                        format: date-time
+                        description: 참가 신청 시작일
+                        example: 2025-01-19T00:00:00.0
+                      competitionSubEdate:
+                        type: string
+                        format: date-time
+                        description: 참가 신청 종료일
+                        example: 2025-05-22T23:59:00.0
+                      competitionLocalType:
+                        type: string
+                        description: "대회 개최 형태 (L: 한국, W: 국제)"
+                        example: L
+                      competitionWtCodeSendYn:
+                        type: string
+                        description: WT 코드 발송 여부 (Y/N)
+                        example: Y
+                      competitionWtGradeType:
+                        type: string
+                        description: WT 등급 타입
+                        example: G4
+                      competitionParticipantPayYn:
+                        type: string
+                        description: 참가비 결제 여부 (Y/N)
+                        example: Y
+                      bankName:
+                        type: string
+                        description: 입금 은행명
+                        example: bankName
+                      accountNumber:
+                        type: string
+                        description: 계좌번호
+                        example: accountNumber
+                      accountHolderName:
+                        type: string
+                        description: 예금주명
+                        example: accountHolderName
+                      competitionParticipantPay:
+                        type: string
+                        description: 참가비
+                        example: "3456"
+                      competitionScoreDeviceType:
+                        type: string
+                        description: 점수 장비 타입
+                        example: C
+                      hostMainImgList:
+                        type: array
+                        description: 대회 관련 파일 리스트
+                        items:
+                          type: object
+                          properties:
+                            s3MediaSeq:
+                              type: integer
+                              description: S3 미디어 시퀀스
+                              example: 220
+                            s3CdnUrl:
+                              type: string
+                              description: CDN URL
+                              example: https://cdn.kpnpglobal.com/kpnp/media/file/champs/2024/02/308614928b5b477db2ec949cdbcad063.TXT
+                            mediaType:
+                              type: string
+                              description: "미디어 타입 (F: 파일)"
+                              example: F
+                            originName:
+                              type: string
+                              description: 원본 파일명
+                              example: 테스트 파일 - 복사본.txt
+                            fileSize:
+                              type: string
+                              description: 파일 사이즈
+                              example: "0"
+                            sortNo:
+                              type: string
+                              description: 정렬 순서
+                              example: "2"
+                      hostFileList:
+                        type: array
+                        description: 대회 관련 파일 리스트
+                        items:
+                          type: object
+                          properties:
+                            s3MediaSeq:
+                              type: integer
+                              description: S3 미디어 시퀀스
+                              example: 220
+                            s3CdnUrl:
+                              type: string
+                              description: CDN URL
+                              example: https://cdn.kpnpglobal.com/kpnp/media/file/champs/2024/02/308614928b5b477db2ec949cdbcad063.TXT
+                            mediaType:
+                              type: string
+                              description: "미디어 타입 (F: 파일)"
+                              example: F
+                            originName:
+                              type: string
+                              description: 원본 파일명
+                              example: 테스트 파일 - 복사본.txt
+                            fileSize:
+                              type: string
+                              description: 파일 사이즈
+                              example: "0"
+                            sortNo:
+                              type: string
+                              description: 정렬 순서
+                              example: "2"
+                  error:
+                    type: object
+                    example: null
+                    nullable: true
+                    description: 에러 정보 (성공 시 null)
+
   /competitions/default:
     post:
       summary: 대회 개최 등록
