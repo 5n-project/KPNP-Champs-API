@@ -1482,8 +1482,6 @@ paths:
                   $ref: '#/components/examples/INVALID_HEAD_REFEREE'
                 INSUFFICIENT_REFEREES_FOR_GROUP_CREATION:
                   $ref: '#/components/examples/INSUFFICIENT_REFEREES_FOR_GROUP_CREATION'
-                MATCH_STATE_INVALID_FOR_OPERATION:
-                  $ref: '#/components/examples/MATCH_STATE_INVALID_FOR_OPERATION'
         500:
           description: 실패
           content:
@@ -1493,70 +1491,6 @@ paths:
               examples:
                 IS_NOT_AUTHORIZED:
                   $ref: '#/components/examples/IS_NOT_AUTHORIZED'
-
-  /competitions/{competitionSeq}/referee/csv:
-    post:
-      summary: CSV 파일로 심판 밀어 넣기
-      tags:
-        - 심판관리
-      parameters:
-        - name: competitionSeq
-          in: path
-          required: true
-          schema:
-            type: integer
-      requestBody:
-        required: true
-        content:
-          multipart/form-data:
-            schema:
-              type: object
-              required:
-                - file
-              properties:
-                file:
-                  type: string
-                  format: binary
-                  description: '업로드할 CSV 파일'
-            encoding:
-              file:
-                contentType: text/csv
-      responses:
-        '200':
-          description: 심판 CSV 등록 성공
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/responses/OK'
-              examples:
-                defaultResponse:
-                  summary: 성공 응답 예시
-                  value:
-                    success: true
-                    data: null
-                    error: null
-                MATCH_STATE_INVALID_FOR_OPERATION:
-                  $ref: '#/components/examples/MATCH_STATE_INVALID_FOR_OPERATION'
-                REFEREE_CSV_DATA_NOT_FOUND:
-                  $ref: '#/components/examples/REFEREE_CSV_DATA_NOT_FOUND'
-        500:
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/responses/Error'
-              examples:
-                IS_NOT_AUTHORIZED:
-                  $ref: '#/components/examples/IS_NOT_AUTHORIZED'
-        400:
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/responses/Error'
-              examples:
-                FILE_LOAD_FAILURE:
-                  $ref: '#/components/examples/FILE_LOAD_FAILURE'
 
 components:
   responses:
@@ -1599,52 +1533,6 @@ components:
                     type: string
                     example: "500"
   examples:
-    # 500
-    FILE_TRANSFER_TO_S3_ERROR:
-      value:
-        success: false
-        data: null
-        error:
-          message: "파일 S3에 전송 중 오류 발생."
-          errorCode: "E009"
-    COMPETITION_OVERLAP:
-      value:
-        success: false
-        data: null
-        error:
-          message: "대회 중복 개최 요청"
-          errorCode: "E522"
-    IS_NOT_AUTHORIZED:
-      value:
-        success: false
-        data: null
-        error:
-          message: "접근 권한이 없습니다."
-          errorCode: "E099"
-    VALIDATE_WT_GRAGE_IS_EMPTY:
-      value:
-        success: false
-        data: null
-        error:
-          message: "등급은 필수 항목입니다"
-          errorCode: "E700"
-    VALIDATE_BANK_INFO_IS_EMPTY:
-      value:
-        success: false
-        data: null
-        error:
-          message: "참가비 항목을 입력해주세요"
-          errorCode: "E701"
-
-    #400
-    FILE_LOAD_FAILURE:
-      value:
-        success: false
-        data: null
-        error:
-          message: "불러오기를 실패했습니다. 다시 확인해주세요."
-          errorCode: "E604"
-
     # 200
     NO_COMPETITION:
       value:
@@ -1702,20 +1590,43 @@ components:
         error:
           message: "심판조 생성을 위한 충분한 심판 인원이 부족합니다."
           errorCode: "E648"
-    MATCH_STATE_INVALID_FOR_OPERATION:
+
+    # 500
+    FILE_TRANSFER_TO_S3_ERROR:
       value:
         success: false
         data: null
         error:
-          message: "경기가 진행 중이거나 종료되어 해당 작업을 수행할 수 없습니다."
-          errorCode: "E651"
-    REFEREE_CSV_DATA_NOT_FOUND:
+          message: "파일 S3에 전송 중 오류 발생."
+          errorCode: "E009"
+    COMPETITION_OVERLAP:
       value:
         success: false
         data: null
         error:
-          message: "CSV 파일에 심판 데이터가 포함되어 있지 않습니다."
-          errorCode: "E650"
+          message: "대회 중복 개최 요청"
+          errorCode: "E522"
+    IS_NOT_AUTHORIZED:
+      value:
+        success: false
+        data: null
+        error:
+          message: "접근 권한이 없습니다."
+          errorCode: "E099"
+    VALIDATE_WT_GRAGE_IS_EMPTY:
+      value:
+        success: false
+        data: null
+        error:
+          message: "등급은 필수 항목입니다"
+          errorCode: "E700"
+    VALIDATE_BANK_INFO_IS_EMPTY:
+      value:
+        success: false
+        data: null
+        error:
+          message: "참가비 항목을 입력해주세요"
+          errorCode: "E701"
 
   schemas:
     getCompetitionDefaultResponse:
