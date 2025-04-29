@@ -7,6 +7,7 @@ servers:
 tags:
   - name: 대회개최
   - name: 공통
+  - name: 심판관리
 
 paths:
   /competitions/host:
@@ -977,6 +978,520 @@ paths:
                     type: object
                     nullable: true
                     example: null
+
+  /competitions/{competitionSeq}/referees:
+    get:
+      summary: 심판 리스트 조회
+      tags:
+        - 심판관리
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 심판 리스트
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        refereeSeq:
+                          type: integer
+                        refereeGroupingSeq:
+                          type: integer
+                          nullable: true
+                        groupName:
+                          type: string
+                          nullable: true
+                        gender:
+                          type: string
+                        givenName:
+                          type: string
+                        familyName:
+                          type: string
+                        birthDate:
+                          type: string
+                        email:
+                          type: string
+                        noc:
+                          type: string
+                        wtfId:
+                          type: string
+                        refereeRole:
+                          type: string
+                  error:
+                    type: object
+                    nullable: true
+              examples:
+                defaultResponse:
+                  summary: Default Example
+                  value:
+                    success: true
+                    data:
+                      - refereeSeq: 101
+                        refereeGroupingSeq: 10
+                        groupName: "A"
+                        gender: "M"
+                        givenName: "Jihoon"
+                        familyName: "Lee"
+                        birthDate: "19900101"
+                        email: "jihoon.lee@example.com"
+                        noc: "KOR"
+                        wtfId: "WTF123"
+                        refereeRole: "HEAD_REFEREE"
+                      - refereeSeq: 102
+                        refereeGroupingSeq: 10
+                        groupName: "A"
+                        gender: "F"
+                        givenName: "Yuna"
+                        familyName: "Park"
+                        birthDate: "19920530"
+                        email: "yuna.park@example.org"
+                        noc: "KOR"
+                        wtfId: "YP2025"
+                        refereeRole: "ASSISTANT_REFEREE"
+                    error: null
+        500:
+          description: 실패
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '#/components/examples/IS_NOT_AUTHORIZED'
+
+  /competitions/{competitionSeq}/referee/non-member:
+    post:
+      summary: 비회원 심판 직접 추가
+      tags:
+        - 심판관리
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - gender
+                - givenName
+                - familyName
+                - birthDate
+                - email
+                - noc
+                - wtfId
+              properties:
+                gender:
+                  type: string
+                  pattern: '^[MF]$'
+                  description: '성별'
+                givenName:
+                  type: string
+                  description: '이름'
+                familyName:
+                  type: string
+                  description: '성'
+                birthDate:
+                  type: string
+                  pattern: '^\\d+$'
+                  description: '생년월일 ex) 19980915'
+                email:
+                  type: string
+                  format: email
+                  maxLength: 30
+                  description: '이메일'
+                noc:
+                  type: string
+                  description: 'noc 국가코드'
+                wtfId:
+                  type: string
+                  description: 'wtf 아이디'
+            examples:
+              defaultRequest:
+                summary: 요청 예시
+                value:
+                  gender: "M"
+                  givenName: "Jihoon"
+                  familyName: "Lee"
+                  birthDate: "19900101"
+                  email: "jihoon.lee@example.com"
+                  noc: "KOR"
+                  wtfId: "WTF123"
+      responses:
+        '200':
+          description: 추가 성공
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/OK'
+              examples:
+                defaultResponse:
+                  summary: Default Example
+                  value:
+                    success: true
+                    data: null
+                    error: null
+        500:
+          description: 실패
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '#/components/examples/IS_NOT_AUTHORIZED'
+
+  /competitions/{competitionSeq}/referee:
+    delete:
+      summary: 심판 삭제
+      tags:
+        - 심판관리
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - refereeSeqList
+              properties:
+                refereeSeqList:
+                  type: array
+                  items:
+                    type: integer
+            examples:
+              defaultRequest:
+                summary: 요청 예시
+                value:
+                  refereeSeqList: [ 6700, 6701 ]
+      responses:
+        '200':
+          description: 삭제 성공 여부
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/OK'
+              examples:
+                defaultResponse:
+                  summary: Default Example
+                  value:
+                    success: true
+                    data: true
+                    error: null
+                EXIST_REFEREE_GROUP:
+                  $ref: '#/components/examples/EXIST_REFEREE_GROUP'
+                REFEREE_DELETE_REQUEST_INVALID_1:
+                  $ref: '#/components/examples/REFEREE_DELETE_REQUEST_INVALID_1'
+        500:
+          description: 실패
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '#/components/examples/IS_NOT_AUTHORIZED'
+
+  /competitions/{competitionSeq}/referee/{refereeSeq}:
+    put:
+      summary: 심판 정보 수정
+      tags:
+        - 심판관리
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: refereeSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - gender
+                - givenName
+                - familyName
+                - birthDate
+                - email
+                - noc
+                - wtfId
+              properties:
+                gender:
+                  type: string
+                  pattern: '^[MF]$'
+                givenName:
+                  type: string
+                familyName:
+                  type: string
+                birthDate:
+                  type: string
+                  pattern: '^\\d+$'
+                email:
+                  type: string
+                  format: email
+                  maxLength: 30
+                noc:
+                  type: string
+                wtfId:
+                  type: string
+            examples:
+              defaultRequest:
+                summary: 요청 예시
+                value:
+                  gender: "F"
+                  givenName: "Yuna"
+                  familyName: "Park"
+                  birthDate: "19920530"
+                  email: "yuna.park@example.org"
+                  noc: "KOR"
+                  wtfId: "YP2025"
+      responses:
+        '200':
+          description: 수정 성공
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/OK'
+              examples:
+                defaultResponse:
+                  summary: Default Example
+                  value:
+                    success: true
+                    data: null
+                    error: null
+                ITEM_NOT_FOUND:
+                  $ref: '#/components/examples/ITEM_NOT_FOUND'
+        500:
+          description: 실패
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '#/components/examples/IS_NOT_AUTHORIZED'
+
+  /competitions/{competitionSeq}/referee/search:
+    get:
+      summary: KPNP 회원 심판 검색
+      tags:
+        - 심판관리
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: search
+          in: query
+          required: true
+          description: 'kpnp id'
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 검색 결과
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        memSeq:
+                          type: string
+                        lastName:
+                          type: string
+                        firstName:
+                          type: string
+                        lastNameEn:
+                          type: string
+                        firstNameEn:
+                          type: string
+                        memId:
+                          type: string
+              examples:
+                defaultResponse:
+                  summary: Default Example
+                  value:
+                    success: true
+                    data:
+                      - memSeq: "1001"
+                        lastName: "김"
+                        firstName: "민"
+                        lastNameEn: "Min"
+                        firstNameEn: "Kim"
+                        memId: "min.kim"
+                    error: null
+        500:
+          description: 실패
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '#/components/examples/IS_NOT_AUTHORIZED'
+
+  /competitions/{competitionSeq}/referee/member:
+    post:
+      summary: KPNP Champs 회원 심판 추가
+      tags:
+        - 심판관리
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - refereeCountPerGroup
+                - headRefereeSeqList
+              properties:
+                refereeCountPerGroup:
+                  type: integer
+                  enum: [ 1, 3, 5, 7 ]
+                headRefereeSeqList:
+                  type: array
+                  items:
+                    type: integer
+            examples:
+              defaultRequest:
+                summary: 요청 예시
+                value:
+                  memberSeqList: [ 1001, 1002 ]
+      responses:
+        '200':
+          description: 추가 성공
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/OK'
+              examples:
+                defaultResponse:
+                  summary: Default Example
+                  value:
+                    success: true
+                    data: null
+                    error: null
+                INVALID_REFEREE_INVITATION:
+                  $ref: '#/components/examples/INVALID_REFEREE_INVITATION'
+                REFEREE_ALREADY_REGISTERED:
+                  $ref: '#/components/examples/INVALID_REFEREE_INVITATION'
+        500:
+          description: 실패
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '#/components/examples/IS_NOT_AUTHORIZED'
+
+  /competitions/{competitionSeq}/referee/group:
+    post:
+      summary: 심판조 만들기
+      tags:
+        - 심판관리
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - refereeCountPerGroup
+                - headRefereeSeqList
+              properties:
+                refereeCountPerGroup:
+                  type: integer
+                  enum: [ 1, 3, 5, 7 ]
+                  description: '심판수'
+                headRefereeSeqList:
+                  type: array
+                  items:
+                    type: integer
+                  description: '주심이 될 심판 seq list'
+            examples:
+              defaultRequest:
+                summary: 요청 예시
+                value:
+                  refereeCountPerGroup: 3
+                  headRefereeSeqList: [101, 102, 103]
+      responses:
+        '200':
+          description: 그룹 생성 성공
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/OK'
+              examples:
+                defaultResponse:
+                  summary: Default Example
+                  value:
+                    success: true
+                    data: null
+                    error: null
+                INVALID_HEAD_REFEREE:
+                  $ref: '#/components/examples/INVALID_HEAD_REFEREE'
+                INSUFFICIENT_REFEREES_FOR_GROUP_CREATION:
+                  $ref: '#/components/examples/INSUFFICIENT_REFEREES_FOR_GROUP_CREATION'
+        500:
+          description: 실패
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '#/components/examples/IS_NOT_AUTHORIZED'
+
 components:
   responses:
     OK:
@@ -1026,6 +1541,56 @@ components:
         error:
           message: "파일 업로드 중 네트워크 오류 발생."
           errorCode: "E010"
+    EXIST_REFEREE_GROUP:
+      value:
+        success: false
+        data: null
+        error:
+          message: "삭제하려는 심판 목록 중 일부 심판이 이미 심판조에 편성되어 있습니다."
+          errorCode: "E645"
+    REFEREE_DELETE_REQUEST_INVALID_1:
+      value:
+        success: false
+        data: null
+        error:
+          message: "삭제할 심판 목록은 비어 있을 수 없습니다."
+          errorCode: "E523"
+    ITEM_NOT_FOUND:
+      value:
+        success: false
+        data: null
+        error:
+          message: "데이터가 존재하지 않습니다."
+          errorCode: "E501"
+    INVALID_REFEREE_INVITATION:
+      value:
+        success: false
+        data: null
+        error:
+          message: "초대 대상 심판 회원 중 존재하지 않는 회원이 있습니다."
+          errorCode: "E646"
+    REFEREE_ALREADY_REGISTERED:
+      value:
+        success: false
+        data: null
+        error:
+          message: "이미 해당 대회에 심판으로 등록된 회원이 있습니다."
+          errorCode: "E649"
+    INVALID_HEAD_REFEREE:
+      value:
+        success: false
+        data: null
+        error:
+          message: "요청에 포함된 주심 중 존재하지 않는 심판이 있습니다."
+          errorCode: "E647"
+    INSUFFICIENT_REFEREES_FOR_GROUP_CREATION:
+      value:
+        success: false
+        data: null
+        error:
+          message: "심판조 생성을 위한 충분한 심판 인원이 부족합니다."
+          errorCode: "E648"
+
     # 500
     FILE_TRANSFER_TO_S3_ERROR:
       value:
@@ -1041,6 +1606,13 @@ components:
         error:
           message: "대회 중복 개최 요청"
           errorCode: "E522"
+    IS_NOT_AUTHORIZED:
+      value:
+        success: false
+        data: null
+        error:
+          message: "접근 권한이 없습니다."
+          errorCode: "E099"
     VALIDATE_WT_GRAGE_IS_EMPTY:
       value:
         success: false
