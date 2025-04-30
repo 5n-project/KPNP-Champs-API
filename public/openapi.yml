@@ -544,7 +544,7 @@ paths:
                 IS_NOT_AUTHORIZED:
                   $ref: '#/components/examples/INVALID_ARGUMENT_ERROR_FILE_SIZE'
 
-  /api/champs/ps/v1/competitions/media:
+  /competitions/media:
     post:
       summary: 파일 등록
       tags:
@@ -564,24 +564,17 @@ paths:
                   format: binary
                   description: 업로드할 파일 (MultipartFile)
                 mediaList[0].mediaCategory:
-                  $ref: '#/components/schemas/MediaType'
-                mediaList[0].sortNo:
-                  type: integer
-                  description: 파일 정렬 순서
+                  $ref: '#/components/schemas/CompetitionMediaType'
                 mediaList[1].mediaInfo:
                   type: string
                   format: binary
                   description: 업로드할 파일 (MultipartFile)
                 mediaList[1].mediaCategory:
-                  $ref: '#/components/schemas/MediaType'
-                mediaList[1].sortNo:
-                  type: integer
-                  description: 파일 정렬 순서
+                  $ref: '#/components/schemas/CompetitionMediaType'
               required:
                 - competitionSeq
                 - mediaList[0].mediaInfo
                 - mediaList[0].mediaCategory
-                - mediaList[0].sortNo
       responses:
         '200':
           description: 성공
@@ -2125,6 +2118,12 @@ components:
           type: string
           example: "(+93) Afghanistan"
     # Enums
+    CompetitionMediaType:
+      type: string
+      description: 대회 개최 미디어 구분
+      enum:
+        - M (메인사진)
+        - F (파일)
     MediaType:
       type: string
       description: 미디어 구분
