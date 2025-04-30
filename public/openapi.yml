@@ -221,7 +221,7 @@ paths:
                         example: C
                       hostMainImgList:
                         type: array
-                        description: 대회 관련 파일 리스트
+                        description: 대회 메인 사진 파일 리스트
                         items:
                           type: object
                           properties:
@@ -534,6 +534,109 @@ paths:
                     error: null
                 COMPETITION_OVERLAP:
                   $ref: '#/components/examples/COMPETITION_OVERLAP'
+        500:
+          description: 실패
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '#/components/examples/INVALID_ARGUMENT_ERROR_FILE_SIZE'
+
+  /api/champs/ps/v1/competitions/media:
+    post:
+      summary: 파일 등록
+      tags:
+        - 대회개최
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                competitionSeq:
+                  type: integer
+                  example: 2035
+                mediaList[0].mediaInfo:
+                  type: string
+                  format: binary
+                  description: 업로드할 파일 (MultipartFile)
+                mediaList[0].mediaCategory:
+                  $ref: '#/components/schemas/MediaType'
+                mediaList[0].sortNo:
+                  type: integer
+                  description: 파일 정렬 순서
+                mediaList[1].mediaInfo:
+                  type: string
+                  format: binary
+                  description: 업로드할 파일 (MultipartFile)
+                mediaList[1].mediaCategory:
+                  $ref: '#/components/schemas/MediaType'
+                mediaList[1].sortNo:
+                  type: integer
+                  description: 파일 정렬 순서
+              required:
+                - competitionSeq
+                - mediaList[0].mediaInfo
+                - mediaList[0].mediaCategory
+                - mediaList[0].sortNo
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/OK'
+              examples:
+                success:
+                  value:
+                    success: true
+                    data:
+                      competitionSeq: 2020
+                    error: null
+                INVALID_TYPE_ERROR:
+                  $ref: '#/components/examples/INVALID_TYPE_ERROR'
+                ILLEGAL_ARGUMENT_ERROR:
+                  $ref: '#/components/examples/ILLEGAL_ARGUMENT_ERROR'
+                VALIDATE_FILE_IS_OVER_MAX:
+                  $ref: '#/components/examples/VALIDATE_FILE_IS_OVER_MAX'
+                INVALID_ARGUMENT_ERROR_FILE_SIZE:
+                  $ref: '#/components/examples/INVALID_ARGUMENT_ERROR_FILE_SIZE'
+    delete:
+      summary: 파일 삭제
+      tags:
+        - 대회개최
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompetitionMediaRequest'
+      responses:
+        200:
+          description: 성공
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/OK'
+              examples:
+                success:
+                  value:
+                    success: true
+                    data:
+                      competitionSeq: 2020
+                    error: null
+        500:
+          description: 실패
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '#/components/examples/INVALID_ARGUMENT_ERROR_FILE_SIZE'
 
   /common/combo/rules:
     get:
@@ -1463,7 +1566,7 @@ paths:
                 summary: 요청 예시
                 value:
                   refereeCountPerGroup: 3
-                  headRefereeSeqList: [101, 102, 103]
+                  headRefereeSeqList: [ 101, 102, 103 ]
       responses:
         '200':
           description: 그룹 생성 성공
@@ -1634,7 +1737,13 @@ components:
         error:
           message: "참가비 항목을 입력해주세요"
           errorCode: "E701"
-
+    INVALID_ARGUMENT_ERROR_FILE_SIZE:
+      value:
+        success: false
+        data: null
+        error:
+          message: "크기가 1에서 3 사이여야 합니다"
+          errorCode: "E523"
     #400
     FILE_LOAD_FAILURE:
       value:
@@ -1643,15 +1752,22 @@ components:
         error:
           message: "불러오기를 실패했습니다. 다시 확인해주세요."
           errorCode: "E604"
-
-    # 200
-    NO_COMPETITION:
+    INVALID_TYPE_ERROR:
       value:
-        success: true
+        success: false
         data: null
         error:
-          message: "파일 업로드 중 네트워크 오류 발생."
-          errorCode: "E010"
+          message: "올바르지 않은 타입입니다."
+          errorCode: "E003"
+    ILLEGAL_ARGUMENT_ERROR:
+      value:
+        success: false
+        data: null
+        error:
+          message: "필수 파라미터가 없습니다."
+          errorCode: "E004"
+
+    # 200
     EXIST_REFEREE_GROUP:
       value:
         success: false
@@ -1715,6 +1831,13 @@ components:
         error:
           message: "CSV 파일에 심판 데이터가 포함되어 있지 않습니다."
           errorCode: "E650"
+    VALIDATE_FILE_IS_OVER_MAX:
+      value:
+        success: false
+        data: null
+        error:
+          message: "파일 등록 최대 개수를 초과하였습니다."
+          errorCode: "E702"
 
   schemas:
     getCompetitionDefaultResponse:
@@ -1978,6 +2101,20 @@ components:
               sortNo:
                 type: number
                 example: 2
+    CompetitionMediaRequest:
+      type: object
+      properties:
+        competitionSeq:
+          type: integer
+          example: 2035
+        s3MediaSeqList:
+          type: array
+          items:
+            type: integer
+          example: [ 2527, 2528 ]
+      required:
+        - competitionSeq
+        - s3MediaSeqList
     Country:
       type: object
       properties:
