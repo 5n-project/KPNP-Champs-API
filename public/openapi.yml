@@ -279,6 +279,9 @@ paths:
                               type: string
                               description: 정렬 순서
                               example: "2"
+                      poomsaeDivisionTypeList:
+                        $ref: "#/components/schemas/PoomsaeType"
+                        description: 저장한 대회 룰
                   error:
                     type: object
                     example: null
