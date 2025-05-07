@@ -798,7 +798,7 @@ paths:
                               description: 결승 복합 품새
                             compositeRateCode:
                               type: string
-                              example: 01
+                              example: "01"
                               description: |
                                 복합품새 비중 코드 
                                   - 01 (공인10:자유90)
@@ -987,54 +987,51 @@ paths:
                     properties:
                       competitionCodeUsedSeq:
                         type: integer
-                        description: 경기 종목 코드 시퀀스
                         example: 585
                       competitionDivisionUsedSeq:
                         type: integer
-                        description: 부별 분류 코드 시퀀스
+                        description: 대회사용룰코드seq
                         example: 67
                       openDepartmentName:
                         type: string
-                        description:
-                          개방된 부서 이름 (예= 남자 일반부)
+                        description: 오픈대회 부명, 오픈대회 아닌 경우 빈 문자열
                         example: ""
                       openDepartmentMinAge:
                         type: string
-                        description: 참가 가능 최소 연령 (빈 문자열이면 제한 없음)
+                        description: 오픈대회 나이 min, 오픈대회 아닌 경우 빈 문자열
                         example: ""
                       openDepartmentMaxAge:
                         type: string
-                        description: 참가 가능 최대 연령 (빈 문자열이면 제한 없음)
+                        description: 오픈대회 나이 max, 오픈대회 아닌 경우 빈 문자열
                         example: ""
                       divisionCategoryCodeList:
                         type: array
-                        description: 등록할 카테고리 코드 리스트
+                        description: 부별 정보 리스트
                         items:
                           type: object
                           properties:
                             competitionEventSeq:
                               type: integer
                               nullable: true
-                              description: 해당 카테고리의 기존 시퀀스 (신규인 경우 null)
+                              description: 세부룰저장한 Event Seq. (한번이라도 저장하면 조회할때 해당 값이 넘어가서 그걸 매핑해야함 새로운거는 그냥 null로 )
                               example: null
                             divisionCategoryCode:
                               type: string
-                              description:
-                                부별 카테고리 코드 (예= B0)
+                              description: 선택한 세부룰 코드
                               example: B0
                       delDivisionCategoryCodeList:
                         type: array
-                        description: 삭제할 카테고리 코드 리스트
+                        description: 삭제할 부별 정보 리스트
                         items:
                           type: object
                           properties:
                             divisionCategoryCode:
                               type: string
-                              description: 삭제할 부별 카테고리 코드
+                              description: 기존 저장했던거 체크되어있는거 체크해제하면 들어가는 세부룰 코드
                               example: B0
                       participateLimit:
                         type: string
-                        description: 해당 부서 참가 인원 제한
+                        description: 체급별 참가인원수
                         example: "64"
                       matchStyle:
                         type: string
@@ -1056,23 +1053,22 @@ paths:
                         example: R
                       bronzeMedalMatchYn:
                         type: string
-                        description: 동메달 결정전 여부 (Y= 있음, N= 없음)
+                        description: 3,4위전 여부
                         enum: [ Y, N ]
                         example: N
                       diffPoomsaeYn:
                         type: string
-                        description: 매 라운드마다 다른 품새 사용 여부 (Y=사용, N=동일 품새 사용)
+                        description: 양측 선수가 다른 품새 시연
                         enum: [ Y, N ]
                         example: N
                       finalCompositeYn:
                         type: string
-                        description:
-                          결승전 복합 품새 여부 (Y=복합, N= 단일 품새)
+                        description: 결승 복합 품새
                         enum: [ Y, N ]
                         example: N
                       compositeRateCode:
                         type: string
-                        example: 01
+                        example: "01"
                         description: |
                           복합품새 비중 코드 
                             - 01 (공인10:자유90)
@@ -1087,21 +1083,26 @@ paths:
                         enum: [ "01", "02", "03", "04", "05", "06", "07", "08", "09" ]
                       poomsaeOnceYn:
                         type: string
-                        description: 품새 1회만 수행 여부 (Y= 1회, N= 반복)
+                        description: 품새 1번만 시연 Yn
                         enum: [ Y, N ]
                         example: N
                       seed:
                         type: integer
-                        description: 시드 배정 수 (0이면 없음)
+                        description: |
+                          시드배정  
+                            - 50 : 50%
+                            - 25 : 25%,
+                            - 00 : 미배정
+                            - 직접입력은 숫자
                         example: 0
                       delYn:
                         type: string
-                        description: 삭제 여부 (Y= 삭제됨, N= 유지)
+                        description: 삭제 여부
                         enum: [ Y, N ]
                         example: N
                       disabledYn:
                         type: string
-                        description: 사용 불가 여부 (Y= 사용 불가, N= 사용 가능)
+                        description: 안보이게 처리
                         enum: [ Y, N ]
                         example: N
       responses:
@@ -1133,7 +1134,7 @@ paths:
               properties:
                 competitionSeq:
                   type: number
-                  description: 대회 시퀀스 (PK)
+                  description: 대회 seq
                   example: 1541
                 openDepartmentList:
                   type: array
@@ -1143,7 +1144,7 @@ paths:
                     properties:
                       competitionDivisionUsedSeq:
                         type: number
-                        description: 대회 사용 룰 코드 시퀀스
+                        description: 대회 사용 룰 코드 seq
                         example: 594
                       departmentName:
                         type: string
@@ -1159,7 +1160,7 @@ paths:
                         example: "12세 이상"
                       divisionCategoryCodeList:
                         type: array
-                        description: 선택한 세부 룰 코드 리스트
+                        description: 부별 정보 리스트
                         items:
                           type: object
                           properties:
@@ -1169,7 +1170,7 @@ paths:
                               example: "B0"
                       delDivisionCategoryCodeList:
                         type: array
-                        description: 삭제할 세부 룰 코드 리스트 (체크해제한 경우)
+                        description: 삭제할 부별 정보 리스트 (체크해제한 경우)
                         items:
                           type: object
                           properties:
@@ -1201,22 +1202,22 @@ paths:
                         example: "R"
                       bronzeMedalMatchYn:
                         type: string
-                        description: 3, 4위 동메달 결정전 여부 (Y=있음, N= 없음)
+                        description: 3, 4위 전 여부
                         enum: [ Y, N ]
                         example: "Y"
                       diffPoomsaeYn:
                         type: string
-                        description: 양측 선수가 다른 품새 시연 여부 (Y= 다름, N= 동일)
+                        description: 양측 선수가 다른 품새 시연 여부
                         enum: [ Y, N ]
                         example: "N"
                       finalCompositeYn:
                         type: string
-                        description: 결승 복합 품새 여부 (Y= 복합, N= 단일)
+                        description: 결승 복합 품새 여부
                         enum: [ Y, N ]
                         example: "N"
                       compositeRateCode:
                         type: string
-                        example: 01
+                        example: "01"
                         description: |
                           복합품새 비중 코드 
                             - 01 (공인10:자유90)
@@ -1231,7 +1232,7 @@ paths:
                         enum: [ "01", "02", "03", "04", "05", "06", "07", "08", "09" ]
                       poomsaeOnceYn:
                         type: string
-                        description: 품새 1회만 시연 여부 (Y= 1회만, N= 반복)
+                        description: 품새 1번만 시연 여부
                         enum: [ Y, N ]
                         example: "N"
                       seed:
@@ -1245,30 +1246,28 @@ paths:
                         example: "00"
                       delYn:
                         type: string
-                        description: 삭제 여부 (Y= 삭제, N= 유지)
+                        description: 삭제 여부
                         enum: [ Y, N ]
                         example: "Y"
                       disabledYn:
                         type: string
-                        description: 화면 표시 여부 (Y= 안보임, N= 보임)
+                        description: 안보이게 처리 여부
                         enum: [ Y, N ]
                         example: "Y"
       responses:
         '200':
-          description: 성공적으로 저장되었습니다.
+          description: 성공
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                    description: 처리 성공 여부
-                    example: true
-                  message:
-                    type: string
-                    description: 처리 결과 메시지
-                    example: 설정이 저장되었습니다.
+                $ref: '#/components/responses/OK'
+              examples:
+                defaultResponse:
+                  summary: Default Example
+                  value:
+                    success: true
+                    data: null
+                    error: null
 
   /competitions/range/{competitionSeq}:
     get:
@@ -1279,12 +1278,12 @@ paths:
         - name: competitionSeq
           in: path
           required: true
-          description: 대회 고유 ID
+          description: 대회 seq
           schema:
             type: integer
       responses:
         '200':
-          description: 성공 응답
+          description: 성공
           content:
             application/json:
               schema:
@@ -1364,7 +1363,6 @@ paths:
                               description: 기본 품새 리스트 구분자(',')
                             hostPoomsaeRange:
                               type: string
-                              nullable: true
                               example: 11,12
                               description: 저장된 품새 리스트 구분자(',')
               examples:
@@ -1459,6 +1457,55 @@ paths:
                           departmentNameEn: "50세 이하"
                           defaultPoomsaeRange: "C07,C08,C09,C10,C11,C12,C13,C14"
                           hostPoomsaeRange: null
+    post:
+      tags:
+        - 대회개최 - 품새 추첨 범위
+      summary: 품새 추첨 범위 설정
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - competitionSeq
+                - hostRangeList
+              properties:
+                competitionSeq:
+                  type: number
+                  description: 대회 SEQ
+                  example: 1528
+                hostRangeList:
+                  type: array
+                  description: 이벤트별 품새 범위 설정 리스트
+                  items:
+                    type: object
+                    required:
+                      - competitionEventSeq
+                      - hostPoomsaeRange
+                    properties:
+                      competitionEventSeq:
+                        type: number
+                        description: 이벤트 SEQ
+                        example: 2
+                      hostPoomsaeRange:
+                        type: string
+                        description: 저장된 품새 리스트 구분자(',')
+                        example: "C01,C07"
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/OK'
+              examples:
+                defaultResponse:
+                  summary: Default Example
+                  value:
+                    success: true
+                    data: null
+                    error: null
 
   /competitions/detail/{competitionSeq}:
     get:
@@ -1569,7 +1616,7 @@ paths:
                       matchOrderCode:
                         type: string
                         example: "01"
-                        enum: [ 01, 02, 03, 04, 05 ]
+                        enum: [ "01", "02", "03", "04", "05" ]
                         description: |
                           품새 시연 순서
                           - 01 : 청-청-홍-홍
@@ -2080,12 +2127,12 @@ paths:
                   type: string
                   format: date-time
                   example: "2025-01-10T00:00:00.000Z"
-                  description: 시작 일자
+                  description: OVR 시작 일자
                 edate:
                   type: string
                   format: date-time
                   example: "2025-02-23T23:59:00.000Z"
-                  description: 종료 일자
+                  description: OVR 종료 일자
                 differenceDate:
                   type: string
                   example: "45"
@@ -2098,7 +2145,7 @@ paths:
                   type: number
                   format: double
                   example: 956.25
-                  description: 총 결제 금액
+                  description: 총 금액
                 productSeq:
                   type: integer
                   example: 3
@@ -2178,122 +2225,7 @@ paths:
           schema:
             type: integer
             example: 2
-          description: 대회 시퀀스 (조회 대상이 되는 대회 고유 번호)
-        - name: kpnpOrdersSeq
-          in: query
-          required: false
-          schema:
-            type: integer
-            example: 816
-          description: 주문 Seq
-        - name: productSeq
-          in: query
-          required: false
-          schema:
-            type: integer
-            example: 1
-          description: |
-            서비스상품번호 
-            - OVR 대회운영: 1
-            - 상장수여: 3
-            - 종합시상: 4
-        - name: sdate
-          in: query
-          required: false
-          schema:
-            type: string
-            example: "2024-12-31 00:00:00"
-          description: 이용 시작일
-        - name: edate
-          in: query
-          required: false
-          schema:
-            type: string
-            example: "2025-01-05 23:59:00"
-          description: 이용 종료일
-        - name: periodDate
-          in: query
-          required: false
-          schema:
-            type: integer
-            example: 6
-          description: 이용일수
-        - name: amountKor
-          in: query
-          required: false
-          schema:
-            type: integer
-            example: 20000
-          description: 일일 요금 (원화)
-        - name: amountUsd
-          in: query
-          required: false
-          schema:
-            type: number
-            example: "20.0"
-          description: 일일 요금 (달러)
-        - name: fullNameKr
-          in: query
-          required: false
-          schema:
-            type: string
-            example: 짭길동
-          description: 주문자 이름 (한글)
-        - name: fullNameEn
-          in: query
-          required: false
-          schema:
-            type: string
-            example: gildongjjab
-          description: 주문자 이름 (영문)
-        - name: email
-          in: query
-          required: false
-          schema:
-            type: string
-            example: champs1@gmail.com
-          description: 주문자 이메일
-        - name: country
-          in: query
-          required: false
-          schema:
-            type: string
-            example: KR
-          description: 주문자 국적
-        - name: orderNum
-          in: query
-          required: false
-          schema:
-            type: string
-            example: O173517964341734
-          description: 주문번호
-        - name: discountKor
-          in: query
-          required: false
-          schema:
-            type: integer
-            example: 2000
-          description: 할인 금액 또는 퍼센트 (원화) - 할인타입에 따라 의미 달라짐
-        - name: discountUsd
-          in: query
-          required: false
-          schema:
-            type: number
-            example: "2.0"
-          description: 할인 금액 또는 퍼센트 (달러) - 할인타입에 따라 의미 달라짐
-        - name: discountType
-          in: query
-          required: false
-          schema:
-            type: string
-            example: A
-            enum:
-              - P
-              - A
-          description: |
-            할인 타입 
-            - P: 퍼센트
-            - A: 요금
+          description: 대회 seq
       responses:
         '200':
           description: 성공
@@ -2320,7 +2252,7 @@ paths:
                         type: integer
                         description: |
                           서비스상품번호
-                          - 1: 대회운영
+                          - 1 : OVR 대회운영
                           - 3 : 상장수여
                           - 4 : 종합시상
                         example: 1
@@ -2568,12 +2500,6 @@ paths:
         - 대회개최 - 개최 완료
       summary: 결제 완료
       parameters:
-        - name: token
-          in: header
-          required: true
-          schema:
-            type: string
-          description: 인증 토큰
         - name: orderNum
           in: query
           required: true
