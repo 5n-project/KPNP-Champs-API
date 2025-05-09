@@ -953,8 +953,8 @@ paths:
                           divisionNameKo: "오픈대회 자유품새"
                           divisionNameEn: "Open Free Style Poomsae"
                     error: null
-                ITEM_NOT_FOUND:
-                  $ref: '#/components/examples/ITEM_NOT_FOUND'
+#                ITEM_NOT_FOUND:
+#                  $ref: '#/components/examples/ITEM_NOT_FOUND'
         403:
           description: Forbidden
           content:
