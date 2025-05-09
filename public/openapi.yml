@@ -298,7 +298,7 @@ paths:
                               description: 정렬 순서
                               example: "2"
                       poomsaeDivisionTypeList:
-                        $ref: "#/components/schemas/PoomsaeType"
+                        $ref: "#/components/schemas/PoomsaeDivisionType"
                   error:
                     type: object
                     example: null
@@ -318,7 +318,7 @@ paths:
               type: object
               properties:
                 poomsaeDivisionTypeList:
-                  $ref: "#/components/schemas/PoomsaeType"
+                  $ref: "#/components/schemas/PoomsaeDivisionType"
                 competitionNameKo:
                   type: string
                   example: "품새대회 등록"
@@ -451,7 +451,7 @@ paths:
                   example: "100"
                   description: 대회 seq
                 poomsaeDivisionTypeList:
-                  $ref: "#/components/schemas/PoomsaeType"
+                  $ref: "#/components/schemas/PoomsaeDivisionType"
                 competitionNameKo:
                   type: string
                   example: "품새대회 등록"
@@ -667,12 +667,12 @@ paths:
 
   /competitions/department/{competitionSeq}:
     get:
+      summary: 부별 정보 설정 조회
       tags:
         - 대회개최 - 부별 정보
-      summary: 부별 정보 설정 (기본 값 or 유저가 입력한 값)
       parameters:
-        - name: competitionSeq
-          in: path
+        - in: path
+          name: competitionSeq
           required: true
           schema:
             type: integer
@@ -687,442 +687,283 @@ paths:
                 properties:
                   success:
                     type: boolean
-                    example: true
                   data:
                     type: object
                     properties:
-                      divisionCategoryList:
-                        description: 룰 세부 리스트
+                      codeUsedSettings:
+                        description: 룰 부 조합 리스트
                         type: array
                         items:
-                          type: object
-                          properties:
-                            divisionCategoryCode:
-                              type: string
-                              description: 룰 세부 코드
-                              example: B0
-                            divisionCategoryNameKo:
-                              type: string
-                              description: 룰 세부 이름 (한글)
-                              example: 남자 개인
-                            divisionCategoryNameEn:
-                              type: string
-                              description: 룰 세부 이름 (영문)
-                              example: Male Individual
-                      departmentList:
-                        description: 부별 리스트
-                        type: array
-                        items:
+                          required:
+                            - competitionCodeUsedSeq
+                            - competitionSeq
+                            - codeJoinSeq
+                            - competitionDivisionUsedSeq
+                            - divisionCode
+                            - divisionNameKo
+                            - divisionNameEn
+                            - departmentNameKo
+                            - departmentNameEn
                           type: object
                           properties:
                             competitionCodeUsedSeq:
                               type: integer
-                            competitionDivisionUsedSeq:
+                              description: 해당 대회 조합 고유 Seq
+                            competitionSeq:
                               type: integer
-                              description: 대회사용룰코드 seq
+                              description: 대회 Seq
                             codeJoinSeq:
                               type: integer
-                              description: 체급테이블 seq
-                            openDepartmentMinAge:
-                              type: string
-                              description: 오픈대회 최소 나이 (없으면 빈 문자열)
-                            openDepartmentMaxAge:
-                              type: string
-                              description: 오픈대회 최대 나이 (없으면 빈 문자열)
-                            divisionCategoryCodeList:
-                              type: array
-                              description: 부별 정보 리스트
-                              items:
-                                type: object
-                                properties:
-                                  competitionEventSeq:
-                                    type: string
-                                    description: 세부룰저장한 event seq
-                                  divisionCategoryCode:
-                                    type: string
-                                    description: 선택한 세부 룰 코드
+                              description: 코드 조합 Seq
+                            competitionDivisionUsedSeq:
+                              type: integer
+                              description: 해당 대회 사용 룰 Seq
                             divisionCode:
-                              type: string
-                              description: 룰 코드
+                              $ref: '#/components/schemas/PoomsaeDivisionType'
                             divisionNameKo:
                               type: string
-                              description: 룰 한글명
+                              description: 룰 국문명
                             divisionNameEn:
                               type: string
                               description: 룰 영문명
                             departmentCode:
-                              type: string
-                              description: 부 코드
+                              $ref: '#/components/schemas/PoomsaeDepartmentType'
                             departmentNameKo:
                               type: string
-                              description: 부 한글명
+                              description: 부 국문명
                             departmentNameEn:
                               type: string
                               description: 부 영문명
-                            matchStyle:
-                              type: string
-                              enum: [ T, M, C ]
-                              description: |
-                                경기 방식 
-                                - T: 토너먼트
-                                - M: 컷오프+토너먼트
-                                - C: 컷오프
-                            matchStyleName:
-                              type: string
-                              description: 경기 방식 이름
-                            participateLimit:
+                            openDepartmentMinAge:
                               type: integer
-                              description: 인원
-                            drawCode:
-                              type: string
-                              enum: [ R, H, RF ]
-                              description: |
-                                품새 추첨 방식 
-                                - R: 무작위
-                                - H: 고정선택
-                                - RF: 심판추첨
-                            bronzeMedalMatchYn:
-                              type: string
-                              enum: [ Y, N ]
-                              example: "N"
-                              description: 3,4위전
-                            diffPoomsaeYn:
-                              type: string
-                              enum: [ Y, N ]
-                              example: "N"
-                              description: 양측 선수가 다른 품새 시연
-                            finalCompositeYn:
-                              type: string
-                              enum: [ Y, N ]
-                              example: "N"
-                              description: 결승 복합 품새
-                            compositeRateCode:
-                              type: string
-                              example: "01"
-                              description: |
-                                복합품새 비중 코드 
-                                  - 01 (공인10:자유90)
-                                  - 02 (공인20:자유80)
-                                  - 03 (공인30:자유70)
-                                  - 04 (공인40:자유60)
-                                  - 05 (공인50:자유50)
-                                  - 06 (공인60:자유40)
-                                  - 07 (공인70:자유30)
-                                  - 08 (공인80:자유20)
-                                  - 09 (공인90:자유10)
-                              enum: [ "01", "02", "03", "04", "05", "06", "07", "08", "09" ]
-                            poomsaeOnceYn:
-                              type: string
-                              enum: [ Y, N ]
-                              example: N
-                              description: 품새 1번만 시연
-                            seed:
-                              type: string
-                              example: 00
-                              description: |
-                                시드 배정 
-                                - 50: 50%
-                                - 25: 25%
-                                - 00: 미배정
-                                - 직접입력 시 숫자 사용
-                            delYn:
-                              type: string
-                              enum: [ Y, N ]
-                              example: N
-                              description: 삭제여부
-                            disabledYn:
-                              type: string
-                              enum: [ Y, N ]
-                              example: N
-                              description: 안보이게 처리
-                            sortNo:
-                              type: string
-                              example: 0
-                              description: 정렬 번호
-                      openDivisionList:
+                              nullable: true
+                              description: 오픈대회 룰인경우 최소 나이
+                            openDepartmentMaxAge:
+                              type: integer
+                              nullable: true
+                              description: 오픈대회 룰인경우 최대 나이
+                            eventSettings:
+                              description: 해당 룰 부 조합에 대회유형 리스트
+                              type: array
+                              items:
+                                required:
+                                  - divisionCategoryCode
+                                  - isActive
+                                  - isSaved
+                                type: object
+                                properties:
+                                  competitionEventSeq:
+                                    type: integer
+                                    nullable: true
+                                    description: 대회 유형 Seq
+                                  divisionCategoryCode:
+                                    $ref: '#/components/schemas/PoomsaeDivisionCategoryType'
+                                  participateLimit:
+                                    type: integer
+                                    nullable: true
+                                    description: 참가 인원
+                                  matchStyleType:
+                                    $ref: '#/components/schemas/PoomsaeMatchStyleType'
+                                  drawType:
+                                    $ref: '#/components/schemas/PoomsaeDrawType'
+                                  seed:
+                                    type: string
+                                    nullable: true
+                                    description: 시드
+                                  bronzeMedalMatchYn:
+                                    type: string
+                                    nullable: true
+                                    description: 3,4위전 여부 Y, N
+                                  diffPoomsaeYn:
+                                    type: string
+                                    nullable: true
+                                    description: 양측선수 다른 품새 시연 Y, N
+                                  compositeRateType:
+                                    $ref: '#/components/schemas/PoomsaeCompositeRateType'
+                                  poomsaeOnceYn:
+                                    type: string
+                                    nullable: true
+                                    description: 품새 한번만 시연 Y, N
+                                  isActive:
+                                    type: boolean
+                                    description: true= 사용되는 대회유형 false= disabled
+                                  isSaved:
+                                    type: boolean
+                                    description: true= 저장된 거 false= 저장 안안한거
+                      divisionCategorySettings:
+                        description: 존재하는 대회유형 리스트
                         type: array
-                        description: 오픈 대회룰 리스트
                         items:
+                          required:
+                            - divisionCategoryCode
+                            - divisionCategoryNameKo
+                            - divisionCategoryNameEn
+                          type: object
+                          properties:
+                            divisionCategoryCode:
+                              $ref: '#/components/schemas/PoomsaeDivisionCategoryType'
+                            divisionCategoryNameKo:
+                              type: string
+                              description: 대회유형 국문명
+                            divisionCategoryNameEn:
+                              type: string
+                              description: 대회유형 영문명
+                      openDivisionSettings:
+                        description: 대회 기본정보 저장 시 체크한 오픈대회 리스트
+                        type: array
+                        items:
+                          required:
+                            - competitionDivisionUsedSeq
+                            - divisionCode
+                            - divisionNameKo
+                            - divisionNameEn
                           type: object
                           properties:
                             competitionDivisionUsedSeq:
                               type: integer
-                              description: 오픈대회사용룰코드 seq
+                              description: 해당 대회의 고유 룰 Seq
                             divisionCode:
-                              type: string
-                              description: 룰 코드
-                            divisionNameEn:
-                              type: string
-                              description: 룰 영문명
+                              $ref: '#/components/schemas/PoomsaeDivisionType'
                             divisionNameKo:
                               type: string
-                              description: 룰 한글명
-              examples:
-                기본값예시:
-                  summary: 기본 부서 설정 값 예시
-                  value:
-                    success: true
-                    data:
-                      departmentList:
-                        - competitionCodeUsedSeq: 585
-                          competitionDivisionUsedSeq: 67
-                          codeJoinSeq: 2
-                          divisionCode: "00"
-                          divisionCategoryCodeList: [ ]
-                          divisionNameKo: WT 공인품새룰
-                          divisionNameEn: WT Recognized Poomsae
-                          departmentCode: A00
-                          departmentNameKo: 유소년부
-                          departmentNameEn: Cadet
-                          openDepartmentMinAge: ""
-                          openDepartmentMaxAge: ""
-                          matchStyle: T
-                          matchStyleName: 토너먼트
-                          participateLimit: 64
-                          drawCode: R
-                          bronzeMedalMatchYn: N
-                          diffPoomsaeYn: N
-                          finalCompositeYn: N
-                          compositeRateCode: N
-                          poomsaeOnceYn: N
-                          seed: "0"
-                          delYn: N
-                          disabledYn: N
-                          sortNo: "1"
-                        - competitionCodeUsedSeq: 585
-                          competitionDivisionUsedSeq: 67
-                          codeJoinSeq: 3
-                          divisionCode: 00
-                          divisionCategoryCodeList: [ ]
-                          divisionNameKo: WT 공인품새룰
-                          divisionNameEn: WT Recognized Poomsae
-                          departmentCode: A01
-                          departmentNameKo: 청소년부
-                          departmentNameEn: Junior
-                          openDepartmentMinAge: ""
-                          openDepartmentMaxAge: ""
-                          matchStyle: T
-                          matchStyleName: 토너먼트
-                          participateLimit: 64
-                          drawCode: R
-                          bronzeMedalMatchYn: N
-                          diffPoomsaeYn: N
-                          finalCompositeYn: N
-                          compositeRateCode: N
-                          poomsaeOnceYn: N
-                          seed: 0
-                          delYn: N
-                          disabledYn: N
-                          sortNo: 2
-                        - competitionCodeUsedSeq: 593
-                          competitionDivisionUsedSeq: 67
-                          codeJoinSeq: 10
-                          divisionCode: "00"
-                          divisionCategoryCodeList: [ ]
-                          divisionNameKo: WT 공인품새룰
-                          divisionNameEn: WT Recognized Poomsae
-                          departmentCode: A08
-                          departmentNameKo: 60세 초과
-                          departmentNameEn: Over 60
-                          openDepartmentMinAge: ""
-                          openDepartmentMaxAge: ""
-                          matchStyle: T
-                          matchStyleName: 토너먼트
-                          participateLimit: 64
-                          drawCode: R
-                          bronzeMedalMatchYn: N
-                          diffPoomsaeYn: N
-                          finalCompositeYn: N
-                          compositeRateCode: N
-                          poomsaeOnceYn: N
-                          seed: 0
-                          delYn: N
-                          disabledYn: N
-                          sortNo: 9
-                      openDivisionList:
-                        - competitionDivisionUsedSeq: 68
-                          divisionCode: 04
-                          divisionNameEn: Open Recognized Poomsae
-                          divisionNameKo: 오픈대회 공인품새
-                      divisionCategoryList:
-                        - divisionCategoryCode: B0
-                          divisionCategoryNameKo: 남자 개인
-                          divisionCategoryNameEn: Individual male
-                        - divisionCategoryCode: B1
-                          divisionCategoryNameKo: 여자 개인
-                          divisionCategoryNameEn: Individual female
-                        - divisionCategoryCode: B2
-                          divisionCategoryNameKo: 남자단체
-                          divisionCategoryNameEn: Team male
-                        - divisionCategoryCode: B3
-                          divisionCategoryNameKo: 여자단체
-                          divisionCategoryNameEn: Team female
-                        - divisionCategoryCode: B4
-                          divisionCategoryNameKo: 복식
-                          divisionCategoryNameEn: Pair
-                        - divisionCategoryCode: B5
-                          divisionCategoryNameKo: 혼성단체전
-                          divisionCategoryNameEn: Team mixed
-
-  /competitions/department:
-    post:
-      summary: 부별 정보 설정
-      tags:
-        - 대회개최 - 부별 정보
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                competitionSeq:
-                  type: integer
-                  description: 대회 고유 식별자 (PK)
-                  example: 1682
-                hostDepartmentList:
-                  type: array
-                  description: 부별 경기 설정 리스트
-                  items:
+                              description: 오픈대회 룰 국문명
+                            divisionNameEn:
+                              type: string
+                              description: 오픈대회 룰 영문명
+                  error:
                     type: object
-                    properties:
-                      competitionCodeUsedSeq:
-                        type: integer
-                        example: 585
-                      competitionDivisionUsedSeq:
-                        type: integer
-                        description: 대회사용룰코드seq
-                        example: 67
-                      openDepartmentName:
-                        type: string
-                        description: 오픈대회 부명, 오픈대회 아닌 경우 빈 문자열
-                        example: ""
-                      openDepartmentMinAge:
-                        type: string
-                        description: 오픈대회 나이 min, 오픈대회 아닌 경우 빈 문자열
-                        example: ""
-                      openDepartmentMaxAge:
-                        type: string
-                        description: 오픈대회 나이 max, 오픈대회 아닌 경우 빈 문자열
-                        example: ""
-                      divisionCategoryCodeList:
-                        type: array
-                        description: 부별 정보 리스트
-                        items:
-                          type: object
-                          properties:
-                            competitionEventSeq:
-                              type: integer
-                              nullable: true
-                              description: 세부룰저장한 Event Seq. (한번이라도 저장하면 조회할때 해당 값이 넘어가서 그걸 매핑해야함 새로운거는 그냥 null로 )
-                              example: null
-                            divisionCategoryCode:
-                              type: string
-                              description: 선택한 세부룰 코드
-                              example: B0
-                      delDivisionCategoryCodeList:
-                        type: array
-                        description: 삭제할 부별 정보 리스트
-                        items:
-                          type: object
-                          properties:
-                            divisionCategoryCode:
-                              type: string
-                              description: 기존 저장했던거 체크되어있는거 체크해제하면 들어가는 세부룰 코드
-                              example: B0
-                      participateLimit:
-                        type: string
-                        description: 체급별 참가인원수
-                        example: "64"
-                      matchStyle:
-                        type: string
-                        description: |
-                          경기 방식 
-                          - T: 토너먼트
-                          - P: 패자부활 포함
-                          - L: 리그전)
-                        enum: [ T, P, L ]
-                        example: T
-                      drawCode:
-                        type: string
-                        description: |
-                          대진표 추첨 방식 
-                          - R: 무작위
-                          - H: 고정
-                          - RF: 심판추첨
-                        enum: [ R, H, RF ]
-                        example: R
-                      bronzeMedalMatchYn:
-                        type: string
-                        description: 3,4위전 여부
-                        enum: [ Y, N ]
-                        example: N
-                      diffPoomsaeYn:
-                        type: string
-                        description: 양측 선수가 다른 품새 시연
-                        enum: [ Y, N ]
-                        example: N
-                      finalCompositeYn:
-                        type: string
-                        description: 결승 복합 품새
-                        enum: [ Y, N ]
-                        example: N
-                      compositeRateCode:
-                        type: string
-                        example: "01"
-                        description: |
-                          복합품새 비중 코드 
-                            - 01 (공인10:자유90)
-                            - 02 (공인20:자유80)
-                            - 03 (공인30:자유70)
-                            - 04 (공인40:자유60)
-                            - 05 (공인50:자유50)
-                            - 06 (공인60:자유40)
-                            - 07 (공인70:자유30)
-                            - 08 (공인80:자유20)
-                            - 09 (공인90:자유10)
-                        enum: [ "01", "02", "03", "04", "05", "06", "07", "08", "09" ]
-                      poomsaeOnceYn:
-                        type: string
-                        description: 품새 1번만 시연 Yn
-                        enum: [ Y, N ]
-                        example: N
-                      seed:
-                        type: integer
-                        description: |
-                          시드배정  
-                            - 50 : 50%
-                            - 25 : 25%,
-                            - 00 : 미배정
-                            - 직접입력은 숫자
-                        example: 0
-                      delYn:
-                        type: string
-                        description: 삭제 여부
-                        enum: [ Y, N ]
-                        example: N
-                      disabledYn:
-                        type: string
-                        description: 안보이게 처리
-                        enum: [ Y, N ]
-                        example: N
-      responses:
-        '200':
-          description: 성공
+                    nullable: true
+              example:
+                success: true
+                data:
+                  codeUsedSettings:
+                    - competitionCodeUsedSeq: 4230
+                      competitionSeq: 2061
+                      codeJoinSeq: 2
+                      competitionDivisionUsedSeq: 767
+                      divisionCode: "WT_RECOGNIZED_POOMSAE"
+                      divisionNameKo: "WT 공인품새룰"
+                      divisionNameEn: "WT Recognized Poomsae"
+                      departmentCode: "CADET"
+                      departmentNameKo: "Cadet"
+                      departmentNameEn: "유소년부"
+                      openDepartmentMinAge: null
+                      openDepartmentMaxAge: null
+                      eventSettings:
+                          - competitionEventSeq: 1111
+                            divisionCategoryCode: "INDIVIDUAL_MALE"
+                            participateLimit: 256
+                            matchStyleType: "TOURNAMENT"
+                            drawType: "RANDOM"
+                            seed: "10"
+                            bronzeMedalMatchYn: "N"
+                            diffPoomsaeYn: "N"
+                            compositeRateType: null
+                            poomsaeOnceYn: "N"
+                            isActive: true
+                            isSaved: true
+                          - competitionEventSeq: 1112
+                            divisionCategoryCode: "INDIVIDUAL_FEMALE"
+                            participateLimit: 256
+                            matchStyleType: "TOURNAMENT"
+                            drawType: "RANDOM"
+                            seed: "10"
+                            bronzeMedalMatchYn: "N"
+                            diffPoomsaeYn: "N"
+                            compositeRateType: null
+                            poomsaeOnceYn: "N"
+                            isActive: true
+                            isSaved: true
+                          - competitionEventSeq: 1113
+                            divisionCategoryCode: "TEAM_MALE"
+                            participateLimit: 256
+                            matchStyleType: "TOURNAMENT"
+                            drawType: "RANDOM"
+                            seed: "10"
+                            bronzeMedalMatchYn: "N"
+                            diffPoomsaeYn: "N"
+                            compositeRateType: null
+                            poomsaeOnceYn: "N"
+                            isActive: true
+                            isSaved: true
+                          - competitionEventSeq: 1114
+                            divisionCategoryCode: "TEAM_FEMALE"
+                            participateLimit: 256
+                            matchStyleType: "TOURNAMENT"
+                            drawType: "RANDOM"
+                            seed: "10"
+                            bronzeMedalMatchYn: "N"
+                            diffPoomsaeYn: "N"
+                            compositeRateType: null
+                            poomsaeOnceYn: "N"
+                            isActive: true
+                            isSaved: true
+                          - competitionEventSeq: null
+                            divisionCategoryCode: "PAIR"
+                            participateLimit: null
+                            matchStyleType: null
+                            drawType: null
+                            seed: null
+                            bronzeMedalMatchYn: null
+                            diffPoomsaeYn: null
+                            compositeRateType: null
+                            poomsaeOnceYn: null
+                            isActive: true
+                            isSaved: false
+                          - competitionEventSeq: null
+                            divisionCategoryCode: "TEAM_MIXED"
+                            participateLimit: null
+                            matchStyleType: null
+                            drawType: null
+                            seed: null
+                            bronzeMedalMatchYn: null
+                            diffPoomsaeYn: null
+                            compositeRateType: null
+                            poomsaeOnceYn: null
+                            isActive: false
+                            isSaved: false
+                  divisionCategorySettings:
+                    - divisionCategoryCode: "INDIVIDUAL_MALE"
+                      divisionCategoryNameKo: "남자개인"
+                      divisionCategoryNameEn: "Individual male"
+                    - divisionCategoryCode: "INDIVIDUAL_FEMALE"
+                      divisionCategoryNameKo: "여자개인"
+                      divisionCategoryNameEn: "Individual female"
+                    - divisionCategoryCode: "TEAM_MALE"
+                      divisionCategoryNameKo: "남자단체"
+                      divisionCategoryNameEn: "Team male"
+                    - divisionCategoryCode: "TEAM_FEMALE"
+                      divisionCategoryNameKo: "여자단체"
+                      divisionCategoryNameEn: "Team female"
+                    - divisionCategoryCode: "PAIR"
+                      divisionCategoryNameKo: "복식"
+                      divisionCategoryNameEn: "Pair"
+                    - divisionCategoryCode: "TEAM_MIXED"
+                      divisionCategoryNameKo: "혼성단체전"
+                      divisionCategoryNameEn: "Team mixed"
+                  openDivisionSettings:
+                    - competitionDivisionUsedSeq: 770
+                      divisionCode: "OPEN_RECOGNIZED_POOMSAE"
+                      divisionNameKo: "오픈대회 공인품새"
+                      divisionNameEn: "Open Recognized Poomsae"
+                    - competitionDivisionUsedSeq: 771
+                      divisionCode: "OPEN_FREE_STYLE_POOMSAE"
+                      divisionNameKo: "오픈대회 자유품새"
+                      divisionNameEn: "Open Free Style Poomsae"
+                error: null
+        403:
+          description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/OK'
+                $ref: '#/components/responses/Error'
               examples:
-                defaultResponse:
-                  summary: Default Example
-                  value:
-                    success: true
-                    data: null
-                    error: null
+                IS_NOT_AUTHORIZED:
+                  $ref: '#/components/examples/IS_NOT_AUTHORIZED'
 
-  /competitions/opendepartment:
+
     post:
-      summary: 오픈대회 부별 정보 설정
+      summary: 부별 정보 설정
       tags:
         - 대회개최 - 부별 정보
       requestBody:
@@ -1132,128 +973,137 @@ paths:
             schema:
               type: object
               properties:
-                competitionSeq:
-                  type: number
-                  description: 대회 seq
-                  example: 1541
-                openDepartmentList:
+                codeUsedList:
                   type: array
-                  description: 오픈대회 부별 정보 리스트
                   items:
+                    required:
+                      - competitionDivisionUsedSeq
+                      - divisionCode
                     type: object
                     properties:
+                      competitionCodeUsedSeq:
+                        type: integer
+                        nullable: true
+                        description: 해당 대회 조합 고유 Seq
                       competitionDivisionUsedSeq:
-                        type: number
-                        description: 대회 사용 룰 코드 seq
-                        example: 594
-                      departmentName:
+                        type: integer
+                        description: 해당 대회 사용 룰 Seq
+                      divisionCode:
+                        $ref: '#/components/schemas/PoomsaeDivisionType'
+                      departmentCode:
+                        $ref: '#/components/schemas/PoomsaeDepartmentType'
+                      openDepartmentName:
                         type: string
+                        nullable: true
                         description: 오픈대회 부명
-                        example: "12세 이상"
-                      departmentMinAge:
-                        type: string
-                        description: 오픈대회 나이 최소값
-                        example: "12세 이상"
-                      departmentMaxAge:
-                        type: string
-                        description: 오픈대회 나이 최대값
-                        example: "12세 이상"
-                      divisionCategoryCodeList:
+                      openDepartmentMinAge:
+                        type: integer
+                        nullable: true
+                        description: 오픈대회 룰인경우 최소 나이
+                      openDepartmentMaxAge:
+                        type: integer
+                        nullable: true
+                        description: 오픈대회 룰인경우 최대 나이
+                      divisionCategoryList:
                         type: array
-                        description: 부별 정보 리스트
                         items:
+                          required:
+                            - divisionCategoryCode
+                            - participateLimit
+                            - matchStyleType
+                            - drawType
+                            - bronzeMedalMatchYn
+                            - diffPoomsaeYn
+                            - poomsaeOnceYn
+                            - seed
                           type: object
                           properties:
                             divisionCategoryCode:
+                              $ref: '#/components/schemas/PoomsaeDivisionCategoryType'
+                            participateLimit:
+                              type: integer
+                              description: 참가 인원
+                            matchStyleType:
+                              $ref: '#/components/schemas/PoomsaeMatchStyleType'
+                            drawType:
+                              $ref: '#/components/schemas/PoomsaeDrawType'
+                            bronzeMedalMatchYn:
                               type: string
-                              description: 선택한 세부 룰 코드
-                              example: "B0"
-                      delDivisionCategoryCodeList:
-                        type: array
-                        description: 삭제할 부별 정보 리스트 (체크해제한 경우)
-                        items:
-                          type: object
-                          properties:
-                            divisionCategoryCode:
+                              description: 3,4위전 여부 Y, N
+                            diffPoomsaeYn:
                               type: string
-                              description: 삭제할 세부 룰 코드
-                              example: "B0"
-                      participateLimit:
-                        type: string
-                        description: 체급별 참가 인원 수 제한
-                        example: "64"
-                      matchStyle:
-                        type: string
-                        description: |
-                          경기 방식 
-                          - T: 토너먼트
-                          - P: 토너먼트 + 패자부활전
-                          - L: 리그전
-                        enum: [ T, P, L ]
-                        example: "T"
-                      drawCode:
-                        type: string
-                        description: |
-                          품새 추첨 방식 
-                          - R: 무작위
-                          - H: 고정선택
-                          - RF: 심판추첨
-                        enum: [ R, H, RF ]
-                        example: "R"
-                      bronzeMedalMatchYn:
-                        type: string
-                        description: 3, 4위 전 여부
-                        enum: [ Y, N ]
-                        example: "Y"
-                      diffPoomsaeYn:
-                        type: string
-                        description: 양측 선수가 다른 품새 시연 여부
-                        enum: [ Y, N ]
-                        example: "N"
-                      finalCompositeYn:
-                        type: string
-                        description: 결승 복합 품새 여부
-                        enum: [ Y, N ]
-                        example: "N"
-                      compositeRateCode:
-                        type: string
-                        example: "01"
-                        description: |
-                          복합품새 비중 코드 
-                            - 01 (공인10:자유90)
-                            - 02 (공인20:자유80)
-                            - 03 (공인30:자유70)
-                            - 04 (공인40:자유60)
-                            - 05 (공인50:자유50)
-                            - 06 (공인60:자유40)
-                            - 07 (공인70:자유30)
-                            - 08 (공인80:자유20)
-                            - 09 (공인90:자유10)
-                        enum: [ "01", "02", "03", "04", "05", "06", "07", "08", "09" ]
-                      poomsaeOnceYn:
-                        type: string
-                        description: 품새 1번만 시연 여부
-                        enum: [ Y, N ]
-                        example: "N"
-                      seed:
-                        type: string
-                        description: |
-                          시드 배정 설정
-                          - 50: 50%
-                          - 25: 25%
-                          - 00: 미배정
-                          - 직접입력 시 숫자 사용
-                        example: "00"
-                      delYn:
-                        type: string
-                        description: 삭제 여부
-                        enum: [ Y, N ]
-                        example: "Y"
-                      disabledYn:
-                        type: string
-                        description: 안보이게 처리 여부
-                        enum: [ Y, N ]
-                        example: "Y"
+                              description: 양측선수 다른 품새 시연 Y, N
+                            compositeRateType:
+                              $ref: '#/components/schemas/PoomsaeCompositeRateType'
+                            poomsaeOnceYn:
+                              type: string
+                              description: 품새 한번만 시연 Y, N
+                            seed:
+                              type: string
+                              description: 시드
+              example:
+                codeUsedList:
+                  - competitionCodeUsedSeq: 4230
+                    competitionDivisionUsedSeq: 767
+                    divisionCode: "WT_RECOGNIZED_POOMSAE"
+                    departmentCode: "CADET"
+                    openDepartmentName: null
+                    openDepartmentMinAge: null
+                    openDepartmentMaxAge: null
+                    divisionCategoryList:
+                      - divisionCategoryCode: "INDIVIDUAL_MALE"
+                        participateLimit: 256
+                        matchStyleType: "TOURNAMENT"
+                        drawType: "RANDOM"
+                        bronzeMedalMatchYn: "N"
+                        diffPoomsaeYn: "N"
+                        compositeRateType: null
+                        poomsaeOnceYn: "N"
+                        seed: "10"
+                      - divisionCategoryCode: "INDIVIDUAL_FEMALE"
+                        participateLimit: 256
+                        matchStyleType: "TOURNAMENT"
+                        drawType: "RANDOM"
+                        bronzeMedalMatchYn: "N"
+                        diffPoomsaeYn: "N"
+                        compositeRateType: null
+                        poomsaeOnceYn: "N"
+                        seed: "10"
+                      - divisionCategoryCode: "TEAM_MALE"
+                        participateLimit: 256
+                        matchStyleType: "TOURNAMENT"
+                        drawType: "RANDOM"
+                        bronzeMedalMatchYn: "N"
+                        diffPoomsaeYn: "N"
+                        compositeRateType: null
+                        poomsaeOnceYn: "N"
+                        seed: "10"
+                  - competitionCodeUsedSeq: null
+                    competitionDivisionUsedSeq: 770
+                    divisionCode: "OPEN_RECOGNIZED_POOMSAE"
+                    departmentCode: null
+                    openDepartmentName: "Under30"
+                    openDepartmentMinAge: 14
+                    openDepartmentMaxAge: 30
+                    divisionCategoryList:
+                      - divisionCategoryCode: "INDIVIDUAL_MALE"
+                        participateLimit: 256
+                        matchStyleType: "CUTOFF"
+                        drawType: "RANDOM"
+                        bronzeMedalMatchYn: "N"
+                        diffPoomsaeYn: "N"
+                        compositeRateType: null
+                        poomsaeOnceYn: "N"
+                        seed: "10"
+                      - divisionCategoryCode: "INDIVIDUAL_FEMALE"
+                        participateLimit: 256
+                        matchStyleType: "CUTOFF"
+                        drawType: "RANDOM"
+                        bronzeMedalMatchYn: "N"
+                        diffPoomsaeYn: "N"
+                        compositeRateType: null
+                        poomsaeOnceYn: "N"
+                        seed: "10"
       responses:
         '200':
           description: 성공
@@ -1261,13 +1111,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/responses/OK'
-              examples:
-                defaultResponse:
-                  summary: Default Example
-                  value:
-                    success: true
-                    data: null
-                    error: null
 
   /competitions/range/{competitionSeq}:
     get:
@@ -3046,7 +2889,7 @@ paths:
                         wtfId: "YP2025"
                         refereeRole: "ASSISTANT_REFEREE"
                     error: null
-        500:
+        403:
           description: 실패
           content:
             application/json:
@@ -3132,7 +2975,7 @@ paths:
                     success: true
                     data: null
                     error: null
-        500:
+        403:
           description: 실패
           content:
             application/json:
@@ -3189,7 +3032,7 @@ paths:
                   $ref: '#/components/examples/EXIST_REFEREE_GROUP'
                 REFEREE_DELETE_REQUEST_INVALID_1:
                   $ref: '#/components/examples/REFEREE_DELETE_REQUEST_INVALID_1'
-        500:
+        403:
           description: 실패
           content:
             application/json:
@@ -3275,7 +3118,7 @@ paths:
                     error: null
                 ITEM_NOT_FOUND:
                   $ref: '#/components/examples/ITEM_NOT_FOUND'
-        500:
+        403:
           description: 실패
           content:
             application/json:
@@ -3342,7 +3185,7 @@ paths:
                         firstNameEn: "Kim"
                         memId: "min.kim"
                     error: null
-        500:
+        403:
           description: 실패
           content:
             application/json:
@@ -3403,7 +3246,7 @@ paths:
                   $ref: '#/components/examples/INVALID_REFEREE_INVITATION'
                 REFEREE_ALREADY_REGISTERED:
                   $ref: '#/components/examples/INVALID_REFEREE_INVITATION'
-        500:
+        403:
           description: 실패
           content:
             application/json:
@@ -3469,7 +3312,7 @@ paths:
                   $ref: '#/components/examples/INSUFFICIENT_REFEREES_FOR_GROUP_CREATION'
                 MATCH_STATE_INVALID_FOR_OPERATION:
                   $ref: '#/components/examples/MATCH_STATE_INVALID_FOR_OPERATION'
-        500:
+        403:
           description: 실패
           content:
             application/json:
@@ -3524,7 +3367,7 @@ paths:
                   $ref: '#/components/examples/MATCH_STATE_INVALID_FOR_OPERATION'
                 REFEREE_CSV_DATA_NOT_FOUND:
                   $ref: '#/components/examples/REFEREE_CSV_DATA_NOT_FOUND'
-        500:
+        403:
           description: Forbidden
           content:
             application/json:
@@ -3598,13 +3441,6 @@ components:
         error:
           message: "대회 중복 개최 요청"
           errorCode: "E522"
-    IS_NOT_AUTHORIZED:
-      value:
-        success: false
-        data: null
-        error:
-          message: "접근 권한이 없습니다."
-          errorCode: "E099"
     VALIDATE_WT_GRAGE_IS_EMPTY:
       value:
         success: false
@@ -3626,6 +3462,16 @@ components:
         error:
           message: "크기가 1에서 3 사이여야 합니다"
           errorCode: "E523"
+
+    #403
+    IS_NOT_AUTHORIZED:
+      value:
+        success: false
+        data: null
+        error:
+          message: "접근 권한이 없습니다."
+          errorCode: "E099"
+
     #400
     FILE_LOAD_FAILURE:
       value:
@@ -4238,7 +4084,7 @@ components:
         - HR (주최로고)
         - BI (베너이미지)
         - S (스폰서)
-    PoomsaeType:
+    PoomsaeDivisionType:
       type: string
       enum:
         - WT_RECOGNIZED_POOMSAE (WT 공인품새룰)
@@ -4250,3 +4096,85 @@ components:
       example:
         - WT_RECOGNIZED_POOMSAE
         - FREE_STYLE_POOMSAE
+
+    PoomsaeDepartmentType:
+      type: string
+      description: 품새 부 구분
+      enum:
+        - CADET (Cadet, 유소년부)
+        - JUNIOR (Junior, 청소년부)
+        - UNDER_30 (Under 30, 30세 이하)
+        - UNDER_40 (Under 40, 40세 이하)
+        - UNDER_50 (Under 50, 50세 이하)
+        - UNDER_60 (Under 60, 60세 이하)
+        - UNDER_65 (Under 65, 65세 이하)
+        - OVER_65 (Over 65, 65세 초과)
+        - OVER_60 (Over 60, 60세 초과)
+        - UNDER_17 (Under 17, 17세 이하)
+        - OVER_17 (Over 17, 17세 초과)
+        - AND_OVER_18 (18& Over, 18세 이상)
+        - ELEMENTARY_LOWER (Elementary Lower, 초등 저학년부)
+        - ELEMENTARY_MIDDLE (Elementary Middle, 초등 중학년부)
+        - ELEMENTARY_UPPER (Elementary Upper, 초등 고학년부)
+        - MIDDLE_1ST (Middle 1st, 중등부 1학년)
+        - MIDDLE_2ND (Middle 2nd, 중등부 2학년)
+        - MIDDLE_3ND (Middle 3nd, 중등부 3학년)
+        - HIGH_1ST (High 1st, 고등부 1학년)
+        - HIGH_2ND (High 2nd, 고등부 2학년)
+        - HIGH_3ND (High 3nd, 고등부 3학년)
+        - UNIVERSITY_1 (University 1, 대학 1부)
+        - UNIVERSITY_2 (University 2, 대학 2부)
+        - GEUMGANG_1 (Geumgang 1, 금강 1부)
+        - GEUMGANG_2 (Geumgang 2, 금강 2부)
+        - TAEBAEK_1 (Taebaek 1, 태백 1부)
+        - TAEBAEK_2 (Taebaek 2, 태백 2부)
+        - JITAE_1 (Jitae 1, 지태 1부)
+        - JITAE_2 (Jitae 2, 지태 2부)
+        - CHEONGWON (Cheongwon, 천권부)
+        - HANSU (Hansu, 한수부)
+        - MIDDLE (Middle, 중등부)
+        - HIGH (High, 고등부)
+        - UNIVERSITY (University, 대학부)
+        - ADULT (Adult, 성인부)
+        - SENIOR (Senior, 장년부)
+
+    PoomsaeDivisionCategoryType:
+      type: string
+      description: 품새 세부 종목 구분
+      enum:
+        - INDIVIDUAL_MALE (Individual male, 남자개인)
+        - INDIVIDUAL_FEMALE (Individual female, 여자개인)
+        - TEAM_MALE (Team male, 남자단체)
+        - TEAM_FEMALE (Team female, 여자단체)
+        - PAIR (Pair, 복식)
+        - TEAM_MIXED (Team mixed, 혼성단체전)
+
+    PoomsaeMatchStyleType:
+      type: string
+      description: 경기 방식
+      enum:
+        - TOURNAMENT (토너먼트)
+        - CUTOFF_TOURNAMENT (컷오프+토너먼트)
+        - CUTOFF (컷오프)
+
+    PoomsaeDrawType:
+      type: string
+      description: 품새 추첨 방식
+      enum:
+        - RANDOM (Random, 무작위)
+        - PIN_SELECT (PinSelect, 고정선택)
+        - REFEREE_SELECT (RefereeSelect, 심판추첨)
+
+    PoomsaeCompositeRateType:
+      type: string
+      description: 복합품새 비중 코드
+      enum:
+        - D0 (10:90, 공인10:자유90)
+        - D1 (20:80, 공인20:자유80)
+        - D2 (30:70, 공인30:자유70)
+        - D3 (40:60, 공인40:자유60)
+        - D4 (50:50, 공인50:자유50)
+        - D5 (60:40, 공인60:자유40)
+        - D6 (30:70, 공인70:자유30)
+        - D7 (80:20, 공인80:자유20)
+        - D8 (90:10, 공인90:자유10)
