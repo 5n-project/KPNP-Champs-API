@@ -833,124 +833,128 @@ paths:
                   error:
                     type: object
                     nullable: true
-              example:
-                success: true
-                data:
-                  codeUsedSettings:
-                    - competitionCodeUsedSeq: 4230
-                      competitionSeq: 2061
-                      codeJoinSeq: 2
-                      competitionDivisionUsedSeq: 767
-                      divisionCode: "WT_RECOGNIZED_POOMSAE"
-                      divisionNameKo: "WT 공인품새룰"
-                      divisionNameEn: "WT Recognized Poomsae"
-                      departmentCode: "CADET"
-                      departmentNameKo: "Cadet"
-                      departmentNameEn: "유소년부"
-                      openDepartmentMinAge: null
-                      openDepartmentMaxAge: null
-                      eventSettings:
-                          - competitionEventSeq: 1111
-                            divisionCategoryCode: "INDIVIDUAL_MALE"
-                            participateLimit: 256
-                            matchStyleType: "TOURNAMENT"
-                            drawType: "RANDOM"
-                            seed: "10"
-                            bronzeMedalMatchYn: "N"
-                            diffPoomsaeYn: "N"
-                            compositeRateType: null
-                            poomsaeOnceYn: "N"
-                            isActive: true
-                            isSaved: true
-                          - competitionEventSeq: 1112
-                            divisionCategoryCode: "INDIVIDUAL_FEMALE"
-                            participateLimit: 256
-                            matchStyleType: "TOURNAMENT"
-                            drawType: "RANDOM"
-                            seed: "10"
-                            bronzeMedalMatchYn: "N"
-                            diffPoomsaeYn: "N"
-                            compositeRateType: null
-                            poomsaeOnceYn: "N"
-                            isActive: true
-                            isSaved: true
-                          - competitionEventSeq: 1113
-                            divisionCategoryCode: "TEAM_MALE"
-                            participateLimit: 256
-                            matchStyleType: "TOURNAMENT"
-                            drawType: "RANDOM"
-                            seed: "10"
-                            bronzeMedalMatchYn: "N"
-                            diffPoomsaeYn: "N"
-                            compositeRateType: null
-                            poomsaeOnceYn: "N"
-                            isActive: true
-                            isSaved: true
-                          - competitionEventSeq: 1114
-                            divisionCategoryCode: "TEAM_FEMALE"
-                            participateLimit: 256
-                            matchStyleType: "TOURNAMENT"
-                            drawType: "RANDOM"
-                            seed: "10"
-                            bronzeMedalMatchYn: "N"
-                            diffPoomsaeYn: "N"
-                            compositeRateType: null
-                            poomsaeOnceYn: "N"
-                            isActive: true
-                            isSaved: true
-                          - competitionEventSeq: null
-                            divisionCategoryCode: "PAIR"
-                            participateLimit: null
-                            matchStyleType: null
-                            drawType: null
-                            seed: null
-                            bronzeMedalMatchYn: null
-                            diffPoomsaeYn: null
-                            compositeRateType: null
-                            poomsaeOnceYn: null
-                            isActive: true
-                            isSaved: false
-                          - competitionEventSeq: null
-                            divisionCategoryCode: "TEAM_MIXED"
-                            participateLimit: null
-                            matchStyleType: null
-                            drawType: null
-                            seed: null
-                            bronzeMedalMatchYn: null
-                            diffPoomsaeYn: null
-                            compositeRateType: null
-                            poomsaeOnceYn: null
-                            isActive: false
-                            isSaved: false
-                  divisionCategorySettings:
-                    - divisionCategoryCode: "INDIVIDUAL_MALE"
-                      divisionCategoryNameKo: "남자개인"
-                      divisionCategoryNameEn: "Individual male"
-                    - divisionCategoryCode: "INDIVIDUAL_FEMALE"
-                      divisionCategoryNameKo: "여자개인"
-                      divisionCategoryNameEn: "Individual female"
-                    - divisionCategoryCode: "TEAM_MALE"
-                      divisionCategoryNameKo: "남자단체"
-                      divisionCategoryNameEn: "Team male"
-                    - divisionCategoryCode: "TEAM_FEMALE"
-                      divisionCategoryNameKo: "여자단체"
-                      divisionCategoryNameEn: "Team female"
-                    - divisionCategoryCode: "PAIR"
-                      divisionCategoryNameKo: "복식"
-                      divisionCategoryNameEn: "Pair"
-                    - divisionCategoryCode: "TEAM_MIXED"
-                      divisionCategoryNameKo: "혼성단체전"
-                      divisionCategoryNameEn: "Team mixed"
-                  openDivisionSettings:
-                    - competitionDivisionUsedSeq: 770
-                      divisionCode: "OPEN_RECOGNIZED_POOMSAE"
-                      divisionNameKo: "오픈대회 공인품새"
-                      divisionNameEn: "Open Recognized Poomsae"
-                    - competitionDivisionUsedSeq: 771
-                      divisionCode: "OPEN_FREE_STYLE_POOMSAE"
-                      divisionNameKo: "오픈대회 자유품새"
-                      divisionNameEn: "Open Free Style Poomsae"
-                error: null
+              examples:
+                성공 응답:
+                  value:
+                    success: true
+                    data:
+                      codeUsedSettings:
+                        - competitionCodeUsedSeq: 4230
+                          competitionSeq: 2061
+                          codeJoinSeq: 2
+                          competitionDivisionUsedSeq: 767
+                          divisionCode: "WT_RECOGNIZED_POOMSAE"
+                          divisionNameKo: "WT 공인품새룰"
+                          divisionNameEn: "WT Recognized Poomsae"
+                          departmentCode: "CADET"
+                          departmentNameKo: "Cadet"
+                          departmentNameEn: "유소년부"
+                          openDepartmentMinAge: null
+                          openDepartmentMaxAge: null
+                          eventSettings:
+                              - competitionEventSeq: 1111
+                                divisionCategoryCode: "INDIVIDUAL_MALE"
+                                participateLimit: 256
+                                matchStyleType: "TOURNAMENT"
+                                drawType: "RANDOM"
+                                seed: "10"
+                                bronzeMedalMatchYn: "N"
+                                diffPoomsaeYn: "N"
+                                compositeRateType: null
+                                poomsaeOnceYn: "N"
+                                isActive: true
+                                isSaved: true
+                              - competitionEventSeq: 1112
+                                divisionCategoryCode: "INDIVIDUAL_FEMALE"
+                                participateLimit: 256
+                                matchStyleType: "TOURNAMENT"
+                                drawType: "RANDOM"
+                                seed: "10"
+                                bronzeMedalMatchYn: "N"
+                                diffPoomsaeYn: "N"
+                                compositeRateType: null
+                                poomsaeOnceYn: "N"
+                                isActive: true
+                                isSaved: true
+                              - competitionEventSeq: 1113
+                                divisionCategoryCode: "TEAM_MALE"
+                                participateLimit: 256
+                                matchStyleType: "TOURNAMENT"
+                                drawType: "RANDOM"
+                                seed: "10"
+                                bronzeMedalMatchYn: "N"
+                                diffPoomsaeYn: "N"
+                                compositeRateType: null
+                                poomsaeOnceYn: "N"
+                                isActive: true
+                                isSaved: true
+                              - competitionEventSeq: 1114
+                                divisionCategoryCode: "TEAM_FEMALE"
+                                participateLimit: 256
+                                matchStyleType: "TOURNAMENT"
+                                drawType: "RANDOM"
+                                seed: "10"
+                                bronzeMedalMatchYn: "N"
+                                diffPoomsaeYn: "N"
+                                compositeRateType: null
+                                poomsaeOnceYn: "N"
+                                isActive: true
+                                isSaved: true
+                              - competitionEventSeq: null
+                                divisionCategoryCode: "PAIR"
+                                participateLimit: null
+                                matchStyleType: null
+                                drawType: null
+                                seed: null
+                                bronzeMedalMatchYn: null
+                                diffPoomsaeYn: null
+                                compositeRateType: null
+                                poomsaeOnceYn: null
+                                isActive: true
+                                isSaved: false
+                              - competitionEventSeq: null
+                                divisionCategoryCode: "TEAM_MIXED"
+                                participateLimit: null
+                                matchStyleType: null
+                                drawType: null
+                                seed: null
+                                bronzeMedalMatchYn: null
+                                diffPoomsaeYn: null
+                                compositeRateType: null
+                                poomsaeOnceYn: null
+                                isActive: false
+                                isSaved: false
+                      divisionCategorySettings:
+                        - divisionCategoryCode: "INDIVIDUAL_MALE"
+                          divisionCategoryNameKo: "남자개인"
+                          divisionCategoryNameEn: "Individual male"
+                        - divisionCategoryCode: "INDIVIDUAL_FEMALE"
+                          divisionCategoryNameKo: "여자개인"
+                          divisionCategoryNameEn: "Individual female"
+                        - divisionCategoryCode: "TEAM_MALE"
+                          divisionCategoryNameKo: "남자단체"
+                          divisionCategoryNameEn: "Team male"
+                        - divisionCategoryCode: "TEAM_FEMALE"
+                          divisionCategoryNameKo: "여자단체"
+                          divisionCategoryNameEn: "Team female"
+                        - divisionCategoryCode: "PAIR"
+                          divisionCategoryNameKo: "복식"
+                          divisionCategoryNameEn: "Pair"
+                        - divisionCategoryCode: "TEAM_MIXED"
+                          divisionCategoryNameKo: "혼성단체전"
+                          divisionCategoryNameEn: "Team mixed"
+                      openDivisionSettings:
+                        - competitionDivisionUsedSeq: 770
+                          divisionCode: "OPEN_RECOGNIZED_POOMSAE"
+                          divisionNameKo: "오픈대회 공인품새"
+                          divisionNameEn: "Open Recognized Poomsae"
+                        - competitionDivisionUsedSeq: 771
+                          divisionCode: "OPEN_FREE_STYLE_POOMSAE"
+                          divisionNameKo: "오픈대회 자유품새"
+                          divisionNameEn: "Open Free Style Poomsae"
+                    error: null
+                ITEM_NOT_FOUND:
+                  $ref: '#/components/examples/ITEM_NOT_FOUND'
         403:
           description: Forbidden
           content:
@@ -1111,6 +1115,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/responses/OK'
+              examples:
+                defaultResponse:
+                  summary: Default Example
+                  value:
+                    success: true
+                    data: null
+                    error: null
+                UNSUPPORTED_CATEGORY_FOR_RULE_DEPARTMENT:
+                  $ref: '#/components/examples/UNSUPPORTED_CATEGORY_FOR_RULE_DEPARTMENT'
+                DUPLICATE_DIVISION_CATEGORY:
+                  $ref: '#/components/examples/DUPLICATE_DIVISION_CATEGORY'
+
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '#/components/examples/IS_NOT_AUTHORIZED'
 
   /competitions/range/{competitionSeq}:
     get:
@@ -3636,6 +3661,20 @@ components:
         error:
           message: "진행중인 결제가 있거나 환불요청 상태입니다. 결제 완료 또는 환불 완료 후 접근 가능합니다."
           errorCode: "E626"
+    UNSUPPORTED_CATEGORY_FOR_RULE_DEPARTMENT:
+      value:
+        success: false
+        data: null
+        error:
+          message: "선택한 품새 룰과 부 조합에 허용되지 않는 카테고리가 포함되어 있습니다."
+          errorCode: "E652"
+    DUPLICATE_DIVISION_CATEGORY:
+      value:
+        success: false
+        data: null
+        error:
+          message: "대회 유형이 중복되었습니다."
+          errorCode: "E653"
 
   schemas:
     getCompetitionDefaultResponse:
