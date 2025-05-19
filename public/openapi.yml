@@ -5,13 +5,14 @@ info:
 servers:
   - url: https://dev.kpnpglobal.com:9143/api/champs/ps/v1
 tags:
+  - name: 공통
   - name: 대회
   - name: 대회개최 - 기본 정보
   - name: 대회개최 - 부별 정보
   - name: 대회개최 - 품새 추첨 범위
   - name: 대회개최 - 세부 정보
   - name: 대회개최 - 개최 완료
-  - name: 공통
+  - name: 운영진
   - name: 심판관리
 
 paths:
@@ -252,6 +253,17 @@ paths:
                                 - F: 파일
                                 - I: 이미지
                               example: F
+                            mediaCategory:
+                              type: string
+                              description: |
+                                미디어 카테고리 
+                                - M: 메인사진
+                                - F: 파일
+                                - CR: 대회로고
+                                - HR: 주최로고
+                                - BI: 배너이미지
+                                - S: 스폰서
+                              example: M
                             originName:
                               type: string
                               description: 원본 파일명
@@ -284,6 +296,17 @@ paths:
                                 미디어 타입 
                                 - F: 파일
                                 - I: 이미지
+                              example: F
+                            mediaCategory:
+                              type: string
+                              description: |
+                                미디어 카테고리 
+                                - M: 메인사진
+                                - F: 파일
+                                - CR: 대회로고
+                                - HR: 주최로고
+                                - BI: 배너이미지
+                                - S: 스폰서
                               example: F
                             originName:
                               type: string
@@ -598,13 +621,13 @@ paths:
                   format: binary
                   description: 업로드할 파일 (MultipartFile)
                 mediaList[0].mediaCategory:
-                  $ref: '#/components/schemas/CompetitionMediaType'
+                  $ref: '#/components/schemas/CompetitionMediaCategory'
                 mediaList[1].mediaInfo:
                   type: string
                   format: binary
                   description: 업로드할 파일 (MultipartFile)
                 mediaList[1].mediaCategory:
-                  $ref: '#/components/schemas/CompetitionMediaType'
+                  $ref: '#/components/schemas/CompetitionMediaCategory'
               required:
                 - competitionSeq
                 - mediaList[0].mediaInfo
@@ -953,8 +976,8 @@ paths:
                           divisionNameKo: "오픈대회 자유품새"
                           divisionNameEn: "Open Free Style Poomsae"
                     error: null
-#                ITEM_NOT_FOUND:
-#                  $ref: '#/components/examples/ITEM_NOT_FOUND'
+                ITEM_NOT_FOUND:
+                  $ref: '#/components/examples/ITEM_NOT_FOUND'
         403:
           description: Forbidden
           content:
@@ -1139,14 +1162,14 @@ paths:
 
   /competitions/range/{competitionSeq}:
     get:
+      summary: 품새 추첨 범위 조회
       tags:
         - 대회개최 - 품새 추첨 범위
-      summary: 품새 추첨 범위 설정 (기본 값 or 유저가 입력한 값)
       parameters:
         - name: competitionSeq
           in: path
+          description: 대회 SEQ
           required: true
-          description: 대회 seq
           schema:
             type: integer
       responses:
@@ -1159,207 +1182,150 @@ paths:
                 properties:
                   success:
                     type: boolean
-                    example: true
                   data:
                     type: object
                     properties:
-                      poomsaeList:
+                      poomsaeRangeSettingList:
                         type: array
                         items:
+                          required:
+                            - divisionCode
+                            - divisionNameKo
+                            - divisionNameEn
+                            - divisionCategories
                           type: object
                           properties:
-                            code:
-                              type: string
-                              example: "C00"
-                              description: 코드
-                            nameEn:
-                              type: string
-                              example: "Taegeuk 1 Jang"
-                              description: 코드 영문명
-                            nameKo:
-                              type: string
-                              example: "태극 1장"
-                              description: 코드 한글명
-                      rangeList:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            competitionEventSeq:
-                              type: integer
-                              example: 89
-                              description: event seq
                             divisionCode:
-                              type: string
-                              example: "00"
-                              description: 룰 코드
+                              $ref: '#/components/schemas/PoomsaeDivisionType'
                             divisionNameKo:
                               type: string
-                              example: "WT 공인품새룰"
-                              description: 룰 한글
+                              description: 품새 룰 국문명
                             divisionNameEn:
                               type: string
-                              example: "WT 공인품새룰"
-                              description: 룰 영문
-                            divisionCategoryCode:
-                              type: string
-                              example: "B0"
-                              description: 세부룰 코드
-                            divisionCategoryNameKo:
-                              type: string
-                              example: "남자개인"
-                              description: 세부룰 한글명
-                            divisionCategoryNameEn:
-                              type: string
-                              example: "남자개인"
-                              description: 세부룰 영문명
-                            departmentCode:
-                              type: string
-                              example: "A00"
-                              description: 부 코드
-                            departmentNameKo:
-                              type: string
-                              example: "유소년부"
-                              description: 부 이름 한글
-                            departmentNameEn:
-                              type: string
-                              example: "Kids"
-                              description: 부 이름 영문
-                            defaultPoomsaeRange:
-                              type: string
-                              example: 11,12
-                              description: 기본 품새 리스트 구분자(',')
-                            hostPoomsaeRange:
-                              type: string
-                              example: 11,12
-                              description: 저장된 품새 리스트 구분자(',')
+                              description: 품새 룰 영문명
+                            divisionCategories:
+                              type: array
+                              items:
+                                required:
+                                  - divisionCategoryCode
+                                  - divisionCategoryNameKo
+                                  - divisionCategoryNameEn
+                                  - departments
+                                type: object
+                                properties:
+                                  divisionCategoryCode:
+                                    $ref: '#/components/schemas/PoomsaeDivisionCategoryType'
+                                  divisionCategoryNameKo:
+                                    type: string
+                                    description: 대회 유형 국문명
+                                  divisionCategoryNameEn:
+                                    type: string
+                                    description: 대회 유형 영문명
+                                  departments:
+                                    type: array
+                                    items:
+                                      required:
+                                        - competitionEventSeq
+                                        - departmentCode
+                                        - departmentNameKo
+                                        - departmentNameEn
+                                      type: object
+                                      properties:
+                                        competitionEventSeq:
+                                          type: integer
+                                          description: 이벤트 SEQ
+                                        departmentCode:
+                                          $ref: '#/components/schemas/PoomsaeDepartmentType'
+                                        departmentNameKo:
+                                          type: string
+                                          description: 부 국문명
+                                        departmentNameEn:
+                                          type: string
+                                          description: 부 영문명
+                                        defaultPoomsaeRange:
+                                          type: string
+                                          nullable: true
+                                          description: 기본 품새 리스트 (쉼표 구분)
+                                        savedPoomsaeRange:
+                                          type: string
+                                          description: 저장된 품새 리스트 (쉼표 구분)
               examples:
-                기본값예시:
-                  summary: 예시
+                성공 응답:
                   value:
                     success: true
                     data:
-                      poomsaeList:
-                        - code: C00
-                          nameEn: Taegeuk 1 Jang
-                          nameKo: 태극 1장
-                        - code: C01
-                          nameEn: Taegeuk 2 Jang
-                          nameKo: 태극 2장
-                        - code: C02
-                          nameEn: Taegeuk 3 Jang
-                          nameKo: 태극 3장
-                        - code: C03
-                          nameEn: Taegeuk 4 Jang
-                          nameKo: 태극 4장
-                        - code: C04
-                          nameEn: Taegeuk 5 Jang
-                          nameKo: 태극 5장
-                        - code: C05
-                          nameEn: Taegeuk 6 Jang
-                          nameKo: 태극 6장
-                        - code: C06
-                          nameEn: Taegeuk 7 Jang
-                          nameKo: 태극 7장
-                        - code: C07
-                          nameEn: Taegeuk 8 Jang
-                          nameKo: 태극 8장
-                      rangeList:
-                        - competitionEventSeq: 89
-                          divisionCode: "00"
-                          divisionNameKo: "WT 공인품새룰"
-                          divisionNameEn: "WT 공인품새룰"
-                          divisionCategoryCode: "B0"
-                          divisionCategoryNameKo: "남자개인"
-                          divisionCategoryNameEn: "남자개인"
-                          departmentCode: "A00"
-                          departmentNameKo: "유소년부"
-                          departmentNameEn: "유소년부"
-                          defaultPoomsaeRange: "C03,C04,C05,C06,C07,C08,C09,C10"
-                          hostPoomsaeRange: null
-                        - competitionEventSeq: 94
-                          divisionCode: "00"
-                          divisionNameKo: "WT 공인품새룰"
-                          divisionNameEn: "WT 공인품새룰"
-                          divisionCategoryCode: "B0"
-                          divisionCategoryNameKo: "남자개인"
-                          divisionCategoryNameEn: "남자개인"
-                          departmentCode: "A01"
-                          departmentNameKo: "청소년부"
-                          departmentNameEn: "청소년부"
-                          defaultPoomsaeRange: "C04,C05,C06,C07,C08,C09,C10,C11"
-                          hostPoomsaeRange: null
-                        - competitionEventSeq: 99
-                          divisionCode: "00"
-                          divisionNameKo: "WT 공인품새룰"
-                          divisionNameEn: "WT 공인품새룰"
-                          divisionCategoryCode: "B0"
-                          divisionCategoryNameKo: "남자개인"
-                          divisionCategoryNameEn: "남자개인"
-                          departmentCode: "A02"
-                          departmentNameKo: "30세 이하"
-                          departmentNameEn: "30세 이하"
-                          defaultPoomsaeRange: "C06,C07,C08,C09,C10,C11,C12,C13"
-                          hostPoomsaeRange: null
-                        - competitionEventSeq: 104
-                          divisionCode: "00"
-                          divisionNameKo: "WT 공인품새룰"
-                          divisionNameEn: "WT 공인품새룰"
-                          divisionCategoryCode: "B0"
-                          divisionCategoryNameKo: "남자개인"
-                          divisionCategoryNameEn: "남자개인"
-                          departmentCode: "A03"
-                          departmentNameKo: "40세 이하"
-                          departmentNameEn: "40세 이하"
-                          defaultPoomsaeRange: "C06,C07,C08,C09,C10,C11,C12,C13"
-                          hostPoomsaeRange: null
-                        - competitionEventSeq: 106
-                          divisionCode: "00"
+                      poomsaeRangeSettingList:
+                        - divisionCode: "WT_RECOGNIZED_POOMSAE"
                           divisionNameKo: "WT 공인품새룰"
                           divisionNameEn: "WT Recognized Poomsae"
-                          divisionCategoryCode: "B0"
-                          divisionCategoryNameKo: "남자개인"
-                          divisionCategoryNameEn: "남자개인"
-                          departmentCode: "A04"
-                          departmentNameKo: "50세 이하"
-                          departmentNameEn: "50세 이하"
-                          defaultPoomsaeRange: "C07,C08,C09,C10,C11,C12,C13,C14"
-                          hostPoomsaeRange: null
-    post:
+                          divisionCategories:
+                            - divisionCategoryCode: "INDIVIDUAL_MALE"
+                              divisionCategoryNameKo: "남자개인"
+                              divisionCategoryNameEn: "Individual male"
+                              departments:
+                                - competitionEventSeq: 89
+                                  departmentCode: "CADET"
+                                  departmentNameKo: "Cadet"
+                                  departmentNameEn: "유소년부"
+                                  defaultPoomsaeRange: "TAEGEUK_4_JANG,TAEGEUK_5_JANG,TAEGEUK_6_JANG"
+                                  savedPoomsaeRange: "TAEGEUK_4_JANG,TAEGEUK_5_JANG,TAEGEUK_6_JANG"
+                                - competitionEventSeq: 94
+                                  departmentCode: "JUNIOR"
+                                  departmentNameKo: "Junior"
+                                  departmentNameEn: "청소년부"
+                                  defaultPoomsaeRange: "TAEGEUK_5_JANG,TAEGEUK_6_JANG,TAEGEUK_7_JANG"
+                                  savedPoomsaeRange: "TAEGEUK_5_JANG,TAEGEUK_6_JANG,TAEGEUK_7_JANG"
+                    error: null
+                ITEM_NOT_FOUND:
+                  $ref: '#/components/examples/ITEM_NOT_FOUND'
+
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '#/components/examples/IS_NOT_AUTHORIZED'
+    patch:
+      summary: 품새 추첨 범위 설정
       tags:
         - 대회개최 - 품새 추첨 범위
-      summary: 품새 추첨 범위 설정
+      parameters:
+        - name: competitionSeq
+          in: path
+          description: 대회 SEQ
+          required: true
+          schema:
+            type: integer
       requestBody:
         required: true
         content:
           application/json:
             schema:
               type: object
-              required:
-                - competitionSeq
-                - hostRangeList
               properties:
-                competitionSeq:
-                  type: number
-                  description: 대회 SEQ
-                  example: 1528
-                hostRangeList:
+                poomsaeRanges:
                   type: array
-                  description: 이벤트별 품새 범위 설정 리스트
                   items:
                     type: object
                     required:
                       - competitionEventSeq
-                      - hostPoomsaeRange
+                      - poomsaeRange
                     properties:
                       competitionEventSeq:
-                        type: number
+                        type: integer
                         description: 이벤트 SEQ
-                        example: 2
-                      hostPoomsaeRange:
+                      poomsaeRange:
                         type: string
-                        description: 저장된 품새 리스트 구분자(',')
-                        example: "C01,C07"
+                        description: 선택된 품새 리스트 (쉼표 구분)
+              example:
+                poomsaeRanges:
+                  - competitionEventSeq: 1131
+                    poomsaeRange: "TAEGEUK_4_JANG,TAEGEUK_5_JANG,TAEGEUK_6_JANG"
+                  - competitionEventSeq: 1132
+                    poomsaeRange: "TAEGEUK_7_JANG,TAEGEUK_8_JANG,KORYO"
       responses:
         '200':
           description: 성공
@@ -1368,330 +1334,234 @@ paths:
               schema:
                 $ref: '#/components/responses/OK'
               examples:
-                defaultResponse:
-                  summary: Default Example
+                성공 응답:
                   value:
                     success: true
                     data: null
                     error: null
+                ITEM_NOT_FOUND:
+                  $ref: '#/components/examples/ITEM_NOT_FOUND'
+
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '#/components/examples/IS_NOT_AUTHORIZED'
+        400:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '#/components/examples/CODE_NOT_FOUND'
 
   /competitions/detail/{competitionSeq}:
     get:
-      summary: 세부 정보 설정 (유저가 입력한 값)
+      summary: 세부 정보 설정 조회
       tags:
         - 대회개최 - 세부 정보
       parameters:
-        - name: competitionSeq
-          in: path
-          required: true
+        - in: path
+          name: competitionSeq
           description: 대회 고유 식별자
+          required: true
           schema:
             type: integer
       responses:
         '200':
-          description: 성공적으로 대회 정보를 반환
+          description: 성공 또는 데이터 없음
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  utcList:
-                    type: array
-                    description: UTC 리스트
-                    items:
-                      type: object
-                      properties:
-                        code:
-                          type: string
-                          example: "KOR"
-                          description: 나라명 약어
-                        nameEn:
-                          type: string
-                          example: "Korea (Seoul)"
-                          description: 나라명
-                        subCode1:
-                          type: string
-                          nullable: true
-                          example: "(Seoul)"
-                          description: 수도 및 주요도시명
-                        exp1:
-                          type: string
-                          example: "+0900"
-                          description: UTC 시간 (넘겨줘야할값)
-                        utcInfo:
-                          type: string
-                          example: "(UTC +04:30)"
-                          description: UTC 시간 (가공한 값)
-                  matchOrderList:
-                    type: array
-                    description: 품새 경기 순서 코드 리스트
-                    items:
-                      type: object
-                      properties:
-                        code:
-                          type: string
-                          description: 코드
-                        nameEn:
-                          type: string
-                          example: "Chung-Chung-Hong-Hong"
-                          description: 영문
-                        nameKo:
-                          type: string
-                          example: "청-청-홍-홍"
-                          description: 한글
-                  hostDetailInfo:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
                     type: object
-                    description: 개최자 입력 상세 정보
+                    nullable: true
                     properties:
-                      competitionStatus:
+                      competitionSetting:
+                        type: object
+                        properties:
+                          competitionSettingSeq:
+                            type: integer
+                            description: '세팅 seq'
+                          matCount:
+                            type: integer
+                            description: '코트 수'
+                          firstMatchTime:
+                            type: string
+                            description: '첫경기시간 // 9시면 0900'
+                          lunchStime:
+                            type: string
+                            description: '점심시작시간 // 12시면 1200'
+                          lunchEtime:
+                            type: string
+                            description: '점심종료시간 // 12시면 1200'
+                          dinnerStime:
+                            type: string
+                            description: '저녁시작시간 // 12시면 1200'
+                          dinnerEtime:
+                            type: string
+                            description: '저녁종료시간 // 12시면 1200'
+                          endTime:
+                            type: string
+                            description: '종료시간 // 12시면 1200'
+                          settingDetailList:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                competitionSettingDetailSeq:
+                                  type: integer
+                                  description: '세팅 상세 seq'
+                                competitionDivisionUsedSeq:
+                                  type: integer
+                                  description: '해당 대회 사용 룰 seq'
+                                divisionCode:
+                                  $ref: "#/components/schemas/PoomsaeDivisionType"
+                                matchOrderType:
+                                  $ref: "#/components/schemas/PoomsaeMatchOrderType"
+                                matchMinTime:
+                                  type: integer
+                                  description: '시연시간(최소) 초'
+                                matchMaxTime:
+                                  type: integer
+                                  description: '시연시간(최대) 초'
+                                breakTime:
+                                  type: string
+                                  description: '휴식시간 90초면 0130 으로 반환'
+                                resultDisplayTime:
+                                  type: integer
+                                  description: '채점결과 표출 시간 초'
+                      ovrPeriodInfo:
+                        type: object
+                        required:
+                          - competitionOvrPeriodSdate
+                          - competitionOvrPeriodEdate
+                          - totalAmountKor
+                          - totalAmountUsd
+                        properties:
+                          competitionOvrPeriodSdate:
+                            type: string
+                            format: date-time
+                            description: 'ovr 이용시작시간'
+                          competitionOvrPeriodEdate:
+                            type: string
+                            format: date-time
+                            description: 'ovr 이용종료시간'
+                          totalAmountKor:
+                            type: number
+                            description: '이용금액 원화'
+                          totalAmountUsd:
+                            type: number
+                            description: '이용금액 달러'
+                      settingImageList:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            s3MediaSeq:
+                              type: integer
+                              description: 's3 media seq'
+                            s3CdnUrl:
+                              type: string
+                              description: '파일 cdn url'
+                            mediaType:
+                              $ref: '#/components/schemas/MediaType'
+                            mediaCategory:
+                              $ref: '#/components/schemas/SettingMediaCategory'
+                            originName:
+                              type: string
+                              description: '파일 원본 이름'
+                            fileSize:
+                              type: string
+                              description: '파일 크기'
+                  error:
+                    type: object
+                    nullable: true
+                    properties:
+                      message:
                         type: string
-                        example: "NN"
-                        description: |
-                          대회 현재 상태값
-                          - NN:미작성
-                          - RB:준비중(신청기간전/작성완료, 결제완료)
-                          - RA:준비중(신청기간/작성완료, 결제완료)
-                          - CA:준비중(신청기간후/개최전/작성완료)
-                          - FC:모집실패
-                          - CN:개최중
-                          - CF:대회 종료
-                      competitionStatusName:
+                      errorCode:
                         type: string
-                        example: "미작성"
-                        description: 대회 현재 상태값 설명
-                      matCount:
-                        type: string
-                        example: "20"
-                        description: 코트 수
-                      competitionSdate:
-                        type: string
-                        format: date-time
-                        example: "2024-02-20 00:00:00.0"
-                        description: 이용기간 시작
-                      competitionEdate:
-                        type: string
-                        format: date-time
-                        example: "2024-02-25 00:00:00.0"
-                        description: 이용기간 종료
-                      totalAmountKor:
-                        type: string
-                        example: "306540"
-                        description: 총 이용금액 원화
-                      totalAmountUsd:
-                        type: string
-                        example: "60"
-                        description: 총 이용금액 달러
-                      matchOrderCode:
-                        type: string
-                        example: "01"
-                        enum: [ "01", "02", "03", "04", "05" ]
-                        description: |
-                          품새 시연 순서
-                          - 01 : 청-청-홍-홍
-                          - 02 : 홍-홍-청-청
-                          - 03 : 청-홍-청-홍
-                          - 04 : 홍-청-홍-청
-                          - 05 : 함께시연
-                      matchMinTime:
-                        type: number
-                        example: 100
-                        description: 경기 시간(초)(최소)
-                      matchMaxTime:
-                        type: number
-                        example: 200
-                        description: 경기 시간(초)(최대)
-                      breakTime:
-                        type: string
-                        example: "0100"
-                        description: 휴식 시간
-                      resultDisplayTime:
-                        type: number
-                        example: 30
-                        description: 채점결과 표출 시간(초)
-                      firstMatchTime:
-                        type: string
-                        example: "0900"
-                        description: 첫 경기 시간
-                      lunchStime:
-                        type: string
-                        example: "1200"
-                        description: 점심 시간 시작
-                      lunchEtime:
-                        type: string
-                        example: "1300"
-                        description: 점심 시간 종료
-                      dinnerStime:
-                        type: string
-                        example: "1800"
-                        description: 저녁 시간 시작
-                      dinnerEtime:
-                        type: string
-                        example: "1900"
-                        description: 저녁 시간 종료
-                      endTime:
-                        type: string
-                        example: "2100"
-                        description: 종료 시간
-                  hostManagerList:
-                    type: array
-                    description: 운영자 리스트
-                    items:
-                      type: object
-                      properties:
-                        managerNumber:
-                          type: string
-                          example: "1"
-                          description: 운영자 번호
-                        memSeq:
-                          type: integer
-                          example: 30
-                          description: 유저seq
-                        lastName:
-                          type: string
-                          example: "김"
-                          description: 한글 성
-                        firstName:
-                          type: string
-                          example: "종현"
-                          description: 한글 이름
-                        lastNameEn:
-                          type: string
-                          example: "Kim"
-                          description: 영문 성
-                        firstNameEn:
-                          type: string
-                          example: "JongHyun"
-                          description: 영문 이름
-                        memId:
-                          type: string
-                          example: "member123"
-                          description: 아이디
-                  hostDetailMediaList:
-                    type: array
-                    description: 이미지 및 파일 리스트 (로고, 배너 등)
-                    items:
-                      type: object
-                      properties:
-                        s3MediaSeq:
-                          type: integer
-                          example: 209
-                          description: s3seq
-                        s3CdnUrl:
-                          type: string
-                          format: uri
-                          example: "https://cdn.kpnpglobal.com/kpnp/media/file/..."
-                          description: s3경로
-                        mediaType:
-                          type: string
-                          enum: [ I, F ]
-                          example: "F"
-                          description: "이미지: I, 파일: F"
-                        originName:
-                          type: string
-                          example: "테스트 파일.txt"
-                          description: 원본이름
-                        fileSize:
-                          type: string
-                          example: "5"
-                          description: 파일용량
-                        mediaCategory:
-                          type: string
-                          enum: [ M, F, CR, HR, BI, S, RA ]
-                          example: "S"
-                          description: |
-                            - 메인사진 : M
-                            - 파일 : F
-                            - 대회로고 : CR
-                            - 주최로고 : HR
-                            - 배너이미지 : BI
-                            - 스폰서 : S
-                            - RTDS 광고 : RA
-                        mediaCategoryName:
-                          type: string
-                          example: "스폰서 이미지"
-                          description: 카테고리 이름
-                        sortNo:
-                          type: string
-                          example: "2"
-                          description: 순서 (스폰서에만 해당)
               examples:
-                기본값예시:
-                  summary: 예시
+                success:
+                  summary: 조회 성공 예시
                   value:
                     success: true
                     data:
-                      utcList:
-                        - code: AFG
-                          nameEn: Afghanistan
-                          subCode1: null
-                          exp1: +0430
-                          utcInfo: (UTC +04:30)
-                      hostManagerList:
-                        - managerNumber: 1
-                          memSeq: 30
-                          lastName: 김
-                          firstName: 종현
-                          lastNameEn: Kim
-                          firstNameEn: JongHyun
-                          memId: member123
-                      hostDetailInfo:
-                        competitionStatus: NN
-                        competitionStatusName: 미작성
-                        matCount: 20
-                        competitionSdate: 2024-04-20 00:00:00.0
-                        competitionEdate: 2024-04-25 00:00:00.0
-                        totalAmountKor: 306540
-                        totalAmountUsd: 60
-                        matchOrderCode: 3
-                        matchMaxTime: 0200
-                        matchMinTime: 0200
-                        breakTime: 0100
-                        resultDisplayTime: 2
-                        firstMatchTime: 0900
-                        lunchStime: 1200
-                        lunchEtime: 1300
-                        dinnerStime: 1800
-                        dinnerEtime: 1900
-                        endTime: 2100
-                      hostDetailMediaList:
-                        - s3MediaSeq: 551
-                          s3CdnUrl: https://cdn.kpnpglobal.com/kpnp/media/image/champs/2024/03/6f8b729281d24a97916a1d45bb91574e.JPEG
-                          mediaType: I
-                          originName: 테스트 이미지.jpeg
-                          fileSize: 6
-                          mediaCategory: CR
-                          mediaCategoryName: 대회 로고
-                          sortNo: 0
-                        - s3MediaSeq: 552
-                          s3CdnUrl: https://cdn.kpnpglobal.com/kpnp/media/image/champs/2024/03/86e11009ba0d4e0eb823e25f282a5a7c.JPG
-                          mediaType: I
-                          originName: 테스트 이미지 2.jpg
-                          fileSize: 30
-                          mediaCategory: HR
-                          mediaCategoryName: 주최 로고
-                          sortNo: 0
-                        - s3MediaSeq: 553
-                          s3CdnUrl: https://cdn.kpnpglobal.com/kpnp/media/image/champs/2024/03/a3a50cf469734e3ea0c3657d44807bdc.JPEG
-                          mediaType: I
-                          originName: 테스트 이미지.jpeg
-                          fileSize: 6
-                          mediaCategory: BI
-                          mediaCategoryName: 배너 이미지
-                          sortNo: 0
-                        - s3MediaSeq: 554
-                          s3CdnUrl: https://cdn.kpnpglobal.com/kpnp/media/image/champs/2024/03/563dd2c8cf3d45a4be4951011ab74a8e.JPG
-                          mediaType: I
-                          originName: 테스트 이미지 2.jpg
-                          fileSize: 30
-                          mediaCategory: S
-                          mediaCategoryName: 스폰서 이미지
-                          sortNo: 0
+                      competitionSetting:
+                        competitionSettingSeq: 8
+                        matCount: 5
+                        firstMatchTime: "0900"
+                        lunchStime: "1200"
+                        lunchEtime: "1300"
+                        dinnerStime: "1800"
+                        dinnerEtime: "1900"
+                        endTime: "2100"
+                        settingDetailList:
+                          - competitionSettingDetailSeq: 3
+                            competitionDivisionUsedSeq: 14
+                            divisionCode: "WT_RECOGNIZED_POOMSAE"
+                            matchOrderType: "CHUNG_CHUNG_HONG_HONG"
+                            matchMinTime: 90
+                            matchMaxTime: 120
+                            breakTime: "0100"
+                            resultDisplayTime: 60
+                          - competitionSettingDetailSeq: 4
+                            competitionDivisionUsedSeq: 69
+                            divisionCode: "OPEN_RECOGNIZED_POOMSAE"
+                            matchOrderType: "HONG_HONG_CHUNG_CHUNG"
+                            matchMinTime: 90
+                            matchMaxTime: 120
+                            breakTime: "0100"
+                            resultDisplayTime: 60
+                      ovrPeriodInfo:
+                        competitionOvrPeriodSdate: "2025-04-30 00:00:00"
+                        competitionOvrPeriodEdate: "2025-08-12 23:59:00"
+                        totalAmountKor: 1050000.0
+                        totalAmountUsd: 1050.0
+                      settingImageList:
+                        - s3MediaSeq: 2577
+                          s3CdnUrl: "https://cdn.kpnpglobal.com/kpnp/media/image/champs/2025/05/fd66bbbae3d742b2922511f20b78e7bc.JPEG"
+                          mediaType: "I"
+                          mediaCategory: "HR"
+                          originName: "사인.jpeg"
+                          fileSize: "1736"
+                    error: null
+                ITEM_NOT_FOUND:
+                  $ref: '#/components/examples/ITEM_NOT_FOUND'
 
-  /competitions/detail/managerInvite:
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '#/components/examples/IS_NOT_AUTHORIZED'
+
     post:
+      summary: 세부 정보 설정 저장
       tags:
         - 대회개최 - 세부 정보
-      summary: 운영진 검색
+      parameters:
+        - in: path
+          name: competitionSeq
+          description: 대회 고유 식별자
+          required: true
+          schema:
+            type: integer
       requestBody:
         required: true
         content:
@@ -1699,17 +1569,254 @@ paths:
             schema:
               type: object
               properties:
-                memId:
-                  type: string
-                  example: "kpnp"
-                  description: 아이디
-                competitionSeq:
+                matCount:
                   type: integer
-                  example: 64
-                  description: 대회 Seq
+                  description: '코트 수'
+                firstMatchTime:
+                  type: string
+                  description: '첫경기시간 // 9시면 0900'
+                lunchStime:
+                  type: string
+                  description: '점심시작시간 // 12시면 1200'
+                lunchEtime:
+                  type: string
+                  description: '점심종료시간 // 12시면 1200'
+                dinnerStime:
+                  type: string
+                  description: '저녁시작시간 // 12시면 1200'
+                dinnerEtime:
+                  type: string
+                  description: '저녁종료시간 // 12시면 1200'
+                endTime:
+                  type: string
+                  description: '종료시간 // 12시면 1200'
+                competitionSettings:
+                  type: array
+                  items:
+                    required:
+                      - competitionDivisionUsedSeq
+                      - matchOrderType
+                      - matchMinTime
+                      - matchMaxTime
+                      - breakTime
+                      - resultDisplayTime
+                    type: object
+                    properties:
+                      competitionDivisionUsedSeq:
+                        type: integer
+                      matchOrderType:
+                        $ref: "#/components/schemas/PoomsaeMatchOrderType"
+                      matchMinTime:
+                        type: integer
+                        description: '시연시간(최소) 초'
+                      matchMaxTime:
+                        type: integer
+                        description: '시연시간(최대) 초'
+                      breakTime:
+                        type: integer
+                        description: '휴식시간 초 // 1분 30초면 90으로'
+                      resultDisplayTime:
+                        type: integer
+                        description: '채점결과 표출 시간 초'
               required:
-                - memId
+                - matCount
+                - competitionSettings
+                - firstMatchTime
+                - lunchStime
+                - lunchEtime
+                - dinnerStime
+                - dinnerEtime
+                - endTime
+            examples:
+              defaultRequest:
+                summary: 저장 요청 예시
+                value:
+                  matCount: 5
+                  firstMatchTime: "0900"
+                  lunchStime: "1200"
+                  lunchEtime: "1300"
+                  dinnerStime: "1800"
+                  dinnerEtime: "1900"
+                  endTime: "2100"
+                  competitionSettings:
+                    - competitionDivisionUsedSeq: 14
+                      matchOrderType: "CHUNG_CHUNG_HONG_HONG"
+                      matchMinTime: 90
+                      matchMaxTime: 120
+                      breakTime: 60
+                      resultDisplayTime: 60
+                    - competitionDivisionUsedSeq: 69
+                      matchOrderType: "HONG_HONG_CHUNG_CHUNG"
+                      matchMinTime: 90
+                      matchMaxTime: 120
+                      breakTime: 60
+                      resultDisplayTime: 60
+
+      responses:
+        '200':
+          description: 저장 성공 또는 데이터 없음
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/OK'
+              examples:
+                success:
+                  value:
+                    success: true
+                    data: null
+                    error: null
+                ITEM_NOT_FOUND:
+                  $ref: '#/components/examples/ITEM_NOT_FOUND'
+
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '#/components/examples/IS_NOT_AUTHORIZED'
+
+  /competitions/detail/{competitionSeq}/media:
+    post:
+      summary: 파일 등록
+      tags:
+        - 대회개최 - 세부 정보
+      parameters:
+        - in: path
+          name: competitionSeq
+          description: 대회 고유 식별자
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                mediaList[0].mediaInfo:
+                  type: string
+                  format: binary
+                  description: 업로드할 파일 (MultipartFile)
+                mediaList[0].mediaCategory:
+                  $ref: '#/components/schemas/SettingMediaCategory'
+                mediaList[1].mediaInfo:
+                  type: string
+                  format: binary
+                  description: 업로드할 파일 (MultipartFile)
+                mediaList[1].mediaCategory:
+                  $ref: '#/components/schemas/SettingMediaCategory'
+              required:
                 - competitionSeq
+                - mediaList[0].mediaInfo
+                - mediaList[0].mediaCategory
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/OK'
+              examples:
+                success:
+                  value:
+                    success: true
+                    data: null
+                    error: null
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '#/components/examples/IS_NOT_AUTHORIZED'
+        400:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Error'
+              examples:
+                INVALID_TYPE_ERROR:
+                  $ref: '#/components/examples/INVALID_TYPE_ERROR'
+                ILLEGAL_ARGUMENT_ERROR:
+                  $ref: '#/components/examples/ILLEGAL_ARGUMENT_ERROR'
+                CODE_NOT_FOUND:
+                  $ref: '#/components/examples/CODE_NOT_FOUND'
+    delete:
+      summary: 파일 삭제
+      tags:
+        - 대회개최 - 세부 정보
+      parameters:
+        - in: path
+          name: competitionSeq
+          description: 대회 고유 식별자
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                s3MediaSeqList:
+                  type: array
+                  items:
+                    type: integer
+                  example: [ 2527, 2528 ]
+              required:
+                - s3MediaSeqList
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/OK'
+              examples:
+                success:
+                  value:
+                    success: true
+                    data: null
+                    error: null
+                ITEM_NOT_FOUND:
+                  $ref: '#/components/examples/ITEM_NOT_FOUND'
+
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '#/components/examples/IS_NOT_AUTHORIZED'
+
+  /competitions/{competitionSeq}/managers/search:
+    get:
+      tags:
+        - 운영진
+      parameters:
+        - in: path
+          name: competitionSeq
+          description: 대회 고유 식별자
+          required: true
+          schema:
+            type: integer
+        - name: search
+          in: query
+          required: true
+          description: 'kpnp id'
+          schema:
+            type: string
+      summary: 운영진 검색
       responses:
         '200':
           description: 운영진 리스트 반환
@@ -1746,7 +1853,7 @@ paths:
                       description: 아이디
               examples:
                 기본값예시:
-                  summary: 예시
+                  summary: 성공
                   value:
                     success: true
                     data:
@@ -1763,12 +1870,107 @@ paths:
                           lastNameEn: KPNP
                           firstNameEn: Press
                           memId: kpnp_press
+                ITEM_NOT_FOUND:
+                  $ref: '#/components/examples/ITEM_NOT_FOUND'
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '#/components/examples/IS_NOT_AUTHORIZED'
 
-  /competitions/detail:
+  /competitions/{competitionSeq}/managers:
+    get:
+      tags:
+        - 운영진
+      parameters:
+        - in: path
+          name: competitionSeq
+          description: 대회 고유 식별자
+          required: true
+          schema:
+            type: integer
+      summary: 운영진 리스트 조회
+      responses:
+        '200':
+          description: 운영진 리스트 반환
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    competitionManagerSeq:
+                      type: integer
+                      example: "11"
+                      description: 운영진 Seq
+                    managerNumber:
+                      type: integer
+                      example: "11"
+                      description: 운영진 고유 번호
+                    memSeq:
+                      type: string
+                      example: "11"
+                      description: 회원 Seq
+                    lastName:
+                      type: string
+                      example: "kpnp"
+                      description: 한글 성
+                    firstName:
+                      type: string
+                      example: "kpnp"
+                      description: 한글 이름
+                    lastNameEn:
+                      type: string
+                      example: "kpnp"
+                      description: 영문 성
+                    firstNameEn:
+                      type: string
+                      example: "kpnp"
+                      description: 영문 이름
+                    memId:
+                      type: string
+                      example: "kpnpnews"
+                      description: 아이디
+              examples:
+                기본값예시:
+                  summary: 성공
+                  value:
+                    success: true
+                    data:
+                      managerList:
+                        - competitionManagerSeq: 2049
+                          managerNumber: 1
+                          memSeq: 11
+                          lastName: kpnp
+                          firstName: kpnp
+                          lastNameEn: kpnp
+                          firstNameEn: kpnp
+                          memId: kpnpnew
+                        - competitionManagerSeq: 2050
+                          managerNumber: 2
+                          memSeq: 12
+                          lastName: KPNP
+                          firstName: Press
+                          lastNameEn: KPNP
+                          firstNameEn: Press
+                          memId: kpnp_press
+
     post:
       tags:
-        - 대회개최 - 세부 정보
-      summary: 세부 정보 설정
+        - 운영진
+      parameters:
+        - in: path
+          name: competitionSeq
+          description: 대회 고유 식별자
+          required: true
+          schema:
+            type: integer
+      summary: 운영진 추가
       requestBody:
         required: true
         content:
@@ -1776,85 +1978,13 @@ paths:
             schema:
               type: object
               properties:
-                competitionSeq:
-                  type: integer
-                  example: 72
-                  description: 대회 SEQ
-                hostDetailSettingInfo:
-                  type: object
-                  description: 개최자 세부정보
-                  properties:
-                    matCount:
-                      type: string
-                      example: "20"
-                      description: 코트 수
-                    matchOrderCode:
-                      type: string
-                      enum: [ CONVENTIONAL, BESTOF3, CUSTOM ]
-                      example: "CONVENTIONAL"
-                      description: |
-                        경기 룰
-                        - 기본룰 = CONVENTIONAL
-                        - 3판2선 = BESTOF3
-                        - 커스텀 = CUSTOM
-                    matchMinTime:
-                      type: integer
-                      example: 10
-                      description: 경기 시간 최소 (초)
-                    matchMaxTime:
-                      type: integer
-                      example: 200
-                      description: 경기 시간 최대 (초)
-                    breakTime:
-                      type: string
-                      example: "0100"
-                      description: 휴식 시간
-                    resultDisplayTime:
-                      type: integer
-                      example: 10
-                      description: 채점 결과 표출 시간 (초)
-                    firstMatchTime:
-                      type: string
-                      example: "0900"
-                      description: 첫 경기 시간
-                    lunchStime:
-                      type: string
-                      example: "1200"
-                      description: 점심 시간 시작
-                    lunchEtime:
-                      type: string
-                      example: "1300"
-                      description: 점심 시간 종료
-                    dinnerStime:
-                      type: string
-                      example: "1800"
-                      description: 저녁 시간 시작
-                    dinnerEtime:
-                      type: string
-                      example: "1900"
-                      description: 저녁 시간 종료
-                    endTime:
-                      type: string
-                      example: "2100"
-                      description: 종료 시간
-                    delS3MediaSeq:
-                      type: string
-                      example: "71,72,74"
-                      description: 삭제할 이미지 및 파일의 S3 Media Seq 목록 (쉼표 구분)
-                hostManagerInviteList:
+                memSeqList:
                   type: array
-                  description: 운영자 리스트
                   items:
-                    type: object
-                    properties:
-                      managerSeq:
-                        type: integer
-                        example: 70
-                        description: 운영자 SEQ (유저 SEQ)
-                      managerNumber:
-                        type: integer
-                        example: 2
-                        description: 운영자 번호
+                    type: integer
+                  example: [ 88, 89 ]
+              required:
+                - memSeqList
       responses:
         '200':
           description: 성공
@@ -1863,17 +1993,76 @@ paths:
               schema:
                 $ref: '#/components/responses/OK'
               examples:
-                defaultResponse:
-                  summary: Default Example
+                success:
                   value:
                     success: true
                     data: null
                     error: null
+                ITEM_NOT_FOUND:
+                  $ref: '#/components/examples/ITEM_NOT_FOUND'
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '#/components/examples/IS_NOT_AUTHORIZED'
+  /competitions/{competitionSeq}/managers/{competitionManagerSeq}:
+    delete:
+      tags:
+        - 운영진
+      parameters:
+        - in: path
+          name: competitionSeq
+          description: 대회 고유 식별자
+          required: true
+          schema:
+            type: integer
+        - in: path
+          name: competitionManagerSeq
+          description: 운영진 식별자
+          required: true
+          schema:
+            type: integer
+      summary: 운영진 삭제
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/OK'
+              examples:
+                success:
+                  value:
+                    success: true
+                    data: null
+                    error: null
+                ITEM_NOT_FOUND:
+                  $ref: '#/components/examples/ITEM_NOT_FOUND'
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '#/components/examples/IS_NOT_AUTHORIZED'
 
-  /competitions/holdComplete:
+  /competitions/complete/{competitionSeq}:
     post:
       tags:
         - 대회개최 - 개최 완료
+      parameters:
+        - in: path
+          name: competitionSeq
+          description: 대회 고유 식별자
+          required: true
+          schema:
+            type: integer
       summary: 개최 완료
       requestBody:
         required: true
@@ -1917,6 +2106,10 @@ paths:
                     - M: 무통장
                     - P: 페이팔
                     - K: KPNP
+                orderNum:
+                  type: string
+                  example: "O231234223"
+                  description: 주문 번호
       responses:
         '200':
           description: 성공
@@ -3519,6 +3712,13 @@ components:
         error:
           message: "필수 파라미터가 없습니다."
           errorCode: "E004"
+    CODE_NOT_FOUND:
+      value:
+        success: false
+        data: null
+        error:
+          message: "The code does not exist. (동적으로 바뀔 수 있음 사용자에게 보여질 에러메시지는 아님)"
+          errorCode: "E006"
 
     # 200
     EXIST_REFEREE_GROUP:
@@ -4107,13 +4307,19 @@ components:
           description: 은행본점 (우편번호)
 
     # Enums
-    CompetitionMediaType:
+    CompetitionMediaCategory:
       type: string
       description: 대회 개최 미디어 구분
       enum:
         - M (메인사진)
         - F (파일)
-    MediaType:
+    SettingMediaCategory:
+      type: string
+      description: 미디어 구분
+      enum:
+        - CR (대회로고)
+        - HR (주최로고)
+    MediaCategory:
       type: string
       description: 미디어 구분
       enum:
@@ -4123,6 +4329,12 @@ components:
         - HR (주최로고)
         - BI (베너이미지)
         - S (스폰서)
+    MediaType:
+      type: string
+      description: 미디어 타입
+      enum:
+        - I (이미지)
+        - F (파일)
     PoomsaeDivisionType:
       type: string
       enum:
@@ -4217,3 +4429,12 @@ components:
         - D6 (30:70, 공인70:자유30)
         - D7 (80:20, 공인80:자유20)
         - D8 (90:10, 공인90:자유10)
+    PoomsaeMatchOrderType:
+      type: string
+      description: 품새 시연 순서 타입
+      enum:
+        - CHUNG_CHUNG_HONG_HONG (Chung-Chung-Hong-Hong, 청-청-홍-홍)
+        - HONG_HONG_CHUNG_CHUNG (Hong-Hong-Chung-Chung, 홍-홍-청-청)
+        - CHUNG_HONG_CHUNG_HONG (Chung-Hong-Chung-Hong, 청-홍-청-홍)
+        - HONG_CHUNG_HONG_CHUNG (Hong-Chung-Hong-Chung, 홍-청-홍-청)
+        - TOGETHER (Together, 함께시연)
