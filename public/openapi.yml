@@ -14,6 +14,7 @@ tags:
   - name: 대회개최 - 개최 완료
   - name: 운영진
   - name: 심판관리
+  - name: 일정
 
 paths:
   /competitions/host:
@@ -875,78 +876,78 @@ paths:
                           openDepartmentMinAge: null
                           openDepartmentMaxAge: null
                           eventSettings:
-                              - competitionEventSeq: 1111
-                                divisionCategoryCode: "INDIVIDUAL_MALE"
-                                participateLimit: 256
-                                matchStyleType: "TOURNAMENT"
-                                drawType: "RANDOM"
-                                seed: "10"
-                                bronzeMedalMatchYn: "N"
-                                diffPoomsaeYn: "N"
-                                compositeRateType: null
-                                poomsaeOnceYn: "N"
-                                isActive: true
-                                isSaved: true
-                              - competitionEventSeq: 1112
-                                divisionCategoryCode: "INDIVIDUAL_FEMALE"
-                                participateLimit: 256
-                                matchStyleType: "TOURNAMENT"
-                                drawType: "RANDOM"
-                                seed: "10"
-                                bronzeMedalMatchYn: "N"
-                                diffPoomsaeYn: "N"
-                                compositeRateType: null
-                                poomsaeOnceYn: "N"
-                                isActive: true
-                                isSaved: true
-                              - competitionEventSeq: 1113
-                                divisionCategoryCode: "TEAM_MALE"
-                                participateLimit: 256
-                                matchStyleType: "TOURNAMENT"
-                                drawType: "RANDOM"
-                                seed: "10"
-                                bronzeMedalMatchYn: "N"
-                                diffPoomsaeYn: "N"
-                                compositeRateType: null
-                                poomsaeOnceYn: "N"
-                                isActive: true
-                                isSaved: true
-                              - competitionEventSeq: 1114
-                                divisionCategoryCode: "TEAM_FEMALE"
-                                participateLimit: 256
-                                matchStyleType: "TOURNAMENT"
-                                drawType: "RANDOM"
-                                seed: "10"
-                                bronzeMedalMatchYn: "N"
-                                diffPoomsaeYn: "N"
-                                compositeRateType: null
-                                poomsaeOnceYn: "N"
-                                isActive: true
-                                isSaved: true
-                              - competitionEventSeq: null
-                                divisionCategoryCode: "PAIR"
-                                participateLimit: null
-                                matchStyleType: null
-                                drawType: null
-                                seed: null
-                                bronzeMedalMatchYn: null
-                                diffPoomsaeYn: null
-                                compositeRateType: null
-                                poomsaeOnceYn: null
-                                isActive: true
-                                isSaved: false
-                              - competitionEventSeq: null
-                                divisionCategoryCode: "TEAM_MIXED"
-                                participateLimit: null
-                                matchStyleType: null
-                                drawType: null
-                                seed: null
-                                bronzeMedalMatchYn: null
-                                diffPoomsaeYn: null
-                                compositeRateType: null
-                                poomsaeOnceYn: null
-                                isActive: false
-                                isSaved: false
+                            - competitionEventSeq: 1111
+                              divisionCategoryCode: "INDIVIDUAL_MALE"
+                              participateLimit: 256
+                              matchStyleType: "TOURNAMENT"
+                              drawType: "RANDOM"
+                              seed: "10"
+                              bronzeMedalMatchYn: "N"
+                              diffPoomsaeYn: "N"
+                              compositeRateType: null
+                              poomsaeOnceYn: "N"
+                              isActive: true
+                              isSaved: true
+                            - competitionEventSeq: 1112
+                              divisionCategoryCode: "INDIVIDUAL_FEMALE"
+                              participateLimit: 256
+                              matchStyleType: "TOURNAMENT"
+                              drawType: "RANDOM"
+                              seed: "10"
+                              bronzeMedalMatchYn: "N"
+                              diffPoomsaeYn: "N"
+                              compositeRateType: null
+                              poomsaeOnceYn: "N"
+                              isActive: true
+                              isSaved: true
+                            - competitionEventSeq: 1113
+                              divisionCategoryCode: "TEAM_MALE"
+                              participateLimit: 256
+                              matchStyleType: "TOURNAMENT"
+                              drawType: "RANDOM"
+                              seed: "10"
+                              bronzeMedalMatchYn: "N"
+                              diffPoomsaeYn: "N"
+                              compositeRateType: null
+                              poomsaeOnceYn: "N"
+                              isActive: true
+                              isSaved: true
+                            - competitionEventSeq: 1114
+                              divisionCategoryCode: "TEAM_FEMALE"
+                              participateLimit: 256
+                              matchStyleType: "TOURNAMENT"
+                              drawType: "RANDOM"
+                              seed: "10"
+                              bronzeMedalMatchYn: "N"
+                              diffPoomsaeYn: "N"
+                              compositeRateType: null
+                              poomsaeOnceYn: "N"
+                              isActive: true
+                              isSaved: true
+                            - competitionEventSeq: null
+                              divisionCategoryCode: "PAIR"
+                              participateLimit: null
+                              matchStyleType: null
+                              drawType: null
+                              seed: null
+                              bronzeMedalMatchYn: null
+                              diffPoomsaeYn: null
+                              compositeRateType: null
+                              poomsaeOnceYn: null
+                              isActive: true
+                              isSaved: false
+                            - competitionEventSeq: null
+                              divisionCategoryCode: "TEAM_MIXED"
+                              participateLimit: null
+                              matchStyleType: null
+                              drawType: null
+                              seed: null
+                              bronzeMedalMatchYn: null
+                              diffPoomsaeYn: null
+                              compositeRateType: null
+                              poomsaeOnceYn: null
+                              isActive: false
+                              isSaved: false
                       divisionCategorySettings:
                         - divisionCategoryCode: "INDIVIDUAL_MALE"
                           divisionCategoryNameKo: "남자개인"
@@ -3603,6 +3604,63 @@ paths:
               examples:
                 FILE_LOAD_FAILURE:
                   $ref: '#/components/examples/FILE_LOAD_FAILURE'
+
+  /schedule/{competitionSeq}/progress:
+    post:
+      summary: 일정타입
+      tags:
+        - 일정
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    required:
+                      - progress
+                      - isInit
+                    properties:
+                      progress:
+                        type: string
+                        enum: [ D,R,C,CT ]
+                        description: '일정 타입, 초기값은 D<br>D: 기본 / R:랜덤 / C:커스텀 / CT:커스텀 임시저장'
+                      isInit:
+                        type: boolean
+                        description: '저장된 일정이 있는지 여부(기본,랜덤)<br>커스텀 및 임시저장은 무조건 true'
+                  error:
+                    type: string
+                    nullable: true
+                    example: null
+              examples:
+                defaultResponse:
+                  summary: Default Example
+                  value:
+                    success: true
+                    data:
+                      progress: "D"
+                      isInit: false
+                    error: null
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '#/components/examples/IS_NOT_AUTHORIZED'
 components:
   responses:
     OK:
