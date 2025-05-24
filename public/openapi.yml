@@ -3661,6 +3661,200 @@ paths:
               examples:
                 IS_NOT_AUTHORIZED:
                   $ref: '#/components/examples/IS_NOT_AUTHORIZED'
+
+  /schedule/{competitionSeq}/init-data:
+    post:
+      summary: 기본 일정 만들기
+      tags:
+        - 일정
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    properties:
+                      schedules:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            sessions:
+                              type: array
+                              items:
+                                type: object
+                                required: 
+                                  - startTime
+                                  - endTime
+                                  - isBreakTime
+                                properties:
+                                  sessionGroup:
+                                    type: integer
+                                    example: 1
+                                    description: 세션 그룹
+                                  startTime:
+                                    type: string
+                                    example: "0900"
+                                    description: 세션 시작 시간
+                                  endTime:
+                                    type: string
+                                    example: "0920"
+                                    description: 세션 종료 시간
+                                  isBreakTime:
+                                    type: boolean
+                                    example: false
+                                    description: breaktime 여부
+                                  breakTimeTitle:
+                                    type: string
+                                    example: lunch
+                                    description: breaktime 이름
+                                  events:
+                                    type: array
+                                    description: 세션에 있는 종목
+                                    items:
+                                      type: object
+                                      required:
+                                        - competitionEventSeq
+                                        - divisionKo
+                                        - divisionEn
+                                        - departmentKo
+                                        - departmentEn
+                                        - divisionCategoryKo
+                                        - divisionCategoryEn
+                                        - matchStyleKo
+                                        - matchStyleEn
+                                        - existMatchCount
+                                        - endMatchCount
+                                        - session
+                                        - phase
+                                      properties:
+                                        competitionEventSeq:
+                                          type: integer
+                                          example: 1169
+                                          description: 종목 seq
+                                        divisionKo:
+                                          type: string
+                                          example: "WT 공인품새룰"
+                                          description: 룰 이름
+                                        divisionEn:
+                                          type: string
+                                          example: "WT Recognized Poomsae"
+                                          description: 룰 이름
+                                        departmentKo:
+                                          type: string
+                                          example: "Under 30"
+                                          description: 부 이름
+                                        departmentEn:
+                                          type: string
+                                          example: "30세 이하"
+                                          description: 부 이름
+                                        divisionCategoryKo:
+                                          type: string
+                                          example: "남자단체"
+                                          description: 룰 유형 이름
+                                        divisionCategoryEn:
+                                          type: string
+                                          example: "Team male"
+                                          description: 룰 유형 이름
+                                        matchStyleKo:
+                                          type: string
+                                          example: "컷오프+토너먼트"
+                                          description: 매치 유형
+                                        matchStyleEn:
+                                          type: string
+                                          example: "Cutoff+Tournament"
+                                          description: 매치 유형
+                                        existMatchCount:
+                                          type: integer
+                                          example: 0
+                                          description: 종목 경기 갯수
+                                        endMatchCount:
+                                          type: integer
+                                          example: 0
+                                          description: 종목에서 끝난 경기 갯수
+                                        session:
+                                          type: integer
+                                          example: 101
+                                          description: 세션 번호
+                                        phase:
+                                          type: string
+                                          example: "SF-A"
+                                          description: phase
+                  error:
+                    nullable: true
+                    example: null
+              examples:
+                defaultResponse:
+                  summary: Default Example
+                  value:
+                    success: true
+                    data:
+                      schedules:
+                        - sessions:
+                            - sessionGroup: 1
+                              startTime: "0900"
+                              endTime: "0920"
+                              isBreakTime: false
+                              events:
+                                - competitionEventSeq: 1169
+                                  divisionKo: "WT 공인품새룰"
+                                  divisionEn: "WT Recognized Poomsae"
+                                  departmentKo: "Under 30"
+                                  departmentEn: "30세 이하"
+                                  divisionCategoryKo: "남자단체"
+                                  divisionCategoryEn: "Team male"
+                                  matchStyleKo: "컷오프+토너먼트"
+                                  matchStyleEn: "Cutoff+Tournament"
+                                  existMatchCount: 0
+                                  endMatchCount: 0
+                                  session: 101
+                                  phase: "SF-A"
+                            - sessionGroup: 2
+                              startTime: "0920"
+                              endTime: "0925"
+                              isBreakTime: false
+                              events:
+                                - competitionEventSeq: 1169
+                                  divisionKo: "WT 공인품새룰"
+                                  divisionEn: "WT Recognized Poomsae"
+                                  departmentKo: "Under 30"
+                                  departmentEn: "30세 이하"
+                                  divisionCategoryKo: "남자단체"
+                                  divisionCategoryEn: "Team male"
+                                  matchStyleKo: "컷오프+토너먼트"
+                                  matchStyleEn: "Cutoff+Tournament"
+                                  existMatchCount: 0
+                                  endMatchCount: 0
+                                  session: 201
+                                  phase: "QF"
+                            - startTime: "1200"
+                              endTime: "1300"
+                              isBreakTime: true
+                              breakTimeTitle: lunch
+
+                    error: null
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '#/components/examples/IS_NOT_AUTHORIZED'
 components:
   responses:
     OK:
