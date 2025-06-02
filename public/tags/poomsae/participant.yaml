@@ -1,0 +1,668 @@
+paths:
+  /competitions/{competitionSeq}/participants:
+    get:
+      summary: 참가자 목록 조회
+      tags:
+        - 운영 - 참가자
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 조회할 대회의 고유 시퀀스
+        - name: payStatusCode
+          in: query
+          schema:
+            type: string
+          description: 결제 상태 코드
+        - name: applicationPathType
+          in: query
+          schema:
+            type: string
+            enum: [C, I, A]
+          description: '신청 경로 타입 (C: CSV 추가, I: 온라인, A: 관리자 추가)'
+        - name: country
+          in: query
+          schema:
+            type: string
+          description: NOC 국가 코드
+        - name: divisionType
+          in: query
+          schema:
+            type: string
+            enum: [WT_RECOGNIZED_POOMSAE, FREE_STYLE_POOMSAE, MIXED_POOMSAE, KVR_RECOGNIZED_POOMSAE, OPEN_RECOGNIZED_POOMSAE, OPEN_FREE_STYLE_POOMSAE]
+          description: 품새 종류 코드
+        - name: departmentType
+          in: query
+          schema:
+            type: string
+          description: 부(department) 코드
+        - name: divisionCategoryType
+          in: query
+          schema:
+            type: string
+            enum: [INDIVIDUAL_MALE, INDIVIDUAL_FEMALE, TEAM_MALE, TEAM_FEMALE, PAIR, TEAM_MIXED]
+          description: 대회 유형 코드
+        - name: name
+          in: query
+          schema:
+            type: string
+          description: 참가자 이름 검색 키워드
+        - name: failYn
+          in: query
+          schema:
+            type: string
+            enum: [Y, N]
+            default: N
+          description: '참가자 확정 눌렀을때 이후 참가 실패 탭 여부 (Y: 확정, N: 실패)'
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      required:
+                        - participantSeq
+                        - applicationPath
+                        - depositYn
+                        - participantInfoList
+                        - country
+                        - divisionCode
+                        - divisionNameKo
+                        - divisionNameEn
+                        - departmentCode
+                        - departmentNameEn
+                        - departmentNameKo
+                        - divisionCategoryCode
+                        - divisionCategoryNameEn
+                        - divisionCategoryNameKo
+                        - ranking
+                        - team
+                        - createdDate
+                      type: object
+                      properties:
+                        participantSeq:
+                          type: integer
+                          description: '대회 유형이 개인 관련된거면 참가자 seq, 팀 관련된거면 leader의 seq'
+                        teamSeq:
+                          type: integer
+                          nullable: true
+                          description: '대회 유형이 팀전인 애들의 팀 Seq'
+                        competitorPsSeq:
+                          type: integer
+                          description: '참가자 확정 됐을때 참가자들이 부여 받은 선수 번호의 seq'
+                        competitor:
+                          type: integer
+                          description: '참가자 확정 됐을때 참가자들이 부여 받은 선수의 순차 번호 (화면엔 이거 보여주면 댐)'
+                        applicationPath:
+                          type: string
+                          enum : ['C', 'I', 'A']
+                          description: 'C : CSV 추가, I : 온라인, A : 관리자 추가'
+                        statusCode:
+                          type: string
+                          nullable: true
+                          description: '결제 상태 코드로 온라인 참가 신청한 사람만 존재함'
+                        status:
+                          type: string
+                          nullable: true
+                          description: '결제 상태 이름으로 온라인 참가 신청한 사람만 존재함'
+                        depositYn:
+                          type: string
+                          description: '온라인 제외한 관리자, csv 추가한 참가자만 이부분으로 결제 상태 체크하면됨 Y, N'
+                        depositorName:
+                          type: string
+                          nullable: true
+                          description: '입금자 명'
+                        participantInfoList:
+                          type: array
+                          items:
+                            required:
+                              - participantSeq
+                              - givenNameEn
+                              - familyNameEn
+                              - gender
+                              - leaderYn
+                            type: object
+                            properties:
+                              participantSeq:
+                                type: integer
+                                description: '참가자 seq'
+                              givenNameEn:
+                                type: string
+                                description: '이름'
+                              familyNameEn:
+                                type: string
+                                description: '성'
+                              gender:
+                                type: string
+                                description: '성별'
+                              leaderYn:
+                                type: string
+                                description: '팀전인 경우 leader 가 Y인 에가 최소최대 한명 존재함 나머진 다 N'
+                        country:
+                          type: string
+                          description: 'NOC 코드'
+                        divisionCode:
+                          type: string
+                          description: '룰코드'
+                        divisionNameKo:
+                          type: string
+                          description: '룰 한글명'
+                        divisionNameEn:
+                          type: string
+                          description: '룰 영문명'
+                        departmentCode:
+                          type: string
+                          description: '부 코드'
+                        departmentNameKo:
+                          type: string
+                          description: '부 한글명'
+                        departmentNameEn:
+                          type: string
+                          description: '부 영문명'
+                        divisionCategoryCode:
+                          type: string
+                          description: '대회 유형 코드'
+                        divisionCategoryNameKo:
+                          type: string
+                          description: '대회 유형 한글명'
+                        divisionCategoryNameEn:
+                          type: string
+                          description: '대회 유형 영문명'
+                        ranking:
+                          type: integer
+                          nullable: true
+                          description: '랭킹'
+                        team:
+                          type: string
+                          description: '소속명'
+                        createdDate:
+                          type: string
+                          description: '생성일'
+                        modifiedDate:
+                          type: string
+                          description: '수정일'
+                  error:
+                    type: string
+                    nullable: true
+              examples:
+                defaultResponse:
+                  summary: 성공 응답
+                  value:
+                    success: true
+                    data:
+                      - participantSeq: 63234
+                        teamSeq: null
+                        competitorPsSeq: 28
+                        applicationPath: "I"
+                        statusCode: "02"
+                        status: "입금 확인"
+                        depositYn: "Y"
+                        depositorName: "박정수52256"
+                        participantInfoList:
+                          - participantSeq: 63234
+                            givenNameEn: "Gildong"
+                            familyNameEn: "Hong"
+                            gender: "F"
+                            leaderYn: "N"
+                        country: "CHN"
+                        divisionCode: "WT_RECOGNIZED_POOMSAE"
+                        divisionNameKo: "WT 공인품새룰"
+                        divisionNameEn: "WT Recognized Poomsae"
+                        departmentCode: "UNDER_30"
+                        departmentNameKo: "30세 이하"
+                        departmentNameEn: "Under 30"
+                        divisionCategoryCode: "INDIVIDUAL_FEMALE"
+                        divisionCategoryNameKo: "여자개인"
+                        divisionCategoryNameEn: "Individual female"
+                        ranking: null
+                        team: "홍길동팀"
+                        createdDate: "2025-02-24 05:50:46.0"
+                        modifiedDate: "2025-02-24 05:50:46.0"
+                      - participantSeq: 54671
+                        teamSeq: 12
+                        competitorPsSeq: 26
+                        applicationPath: "C"
+                        statusCode: null
+                        status: null
+                        depositYn: "Y"
+                        depositorName: null
+                        participantInfoList:
+                          - participantSeq: 54671
+                            givenNameEn: "William"
+                            familyNameEn: "Garcia"
+                            gender: "M"
+                            leaderYn: "Y"
+                        country: "CHN"
+                        divisionCode: "WT_RECOGNIZED_POOMSAE"
+                        divisionNameKo: "WT 공인품새룰"
+                        divisionNameEn: "WT Recognized Poomsae"
+                        departmentCode: "UNDER_50"
+                        departmentNameKo: "50세 이하"
+                        departmentNameEn: "Under 50"
+                        divisionCategoryCode: "PAIR"
+                        divisionCategoryNameKo: "복식"
+                        divisionCategoryNameEn: "Pair"
+                        ranking: null
+                        team: "백엔드복식팀"
+                        createdDate: "2025-02-24 05:50:50.0"
+                        modifiedDate: "2025-02-24 05:50:50.0"
+                    error: null
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml/#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+
+    post:
+      summary: 인원 추가
+      tags:
+        - 운영 - 참가자
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 대회의 고유 시퀀스
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - divisionType
+                - departmentType
+                - divisionCategoryType
+                - teamName
+                - telCountryCode
+                - telNo
+                - country
+                - ranking
+                - participantList
+              properties:
+                divisionType:
+                  type: string
+                  enum:
+                    - WT_RECOGNIZED_POOMSAE
+                    - FREE_STYLE_POOMSAE
+                    - MIXED_POOMSAE
+                    - KVR_RECOGNIZED_POOMSAE
+                    - OPEN_RECOGNIZED_POOMSAE
+                    - OPEN_FREE_STYLE_POOMSAE
+                  description: 품새 종류 코드
+                departmentType:
+                  type: string
+                  description: 부(department) 코드
+                divisionCategoryType:
+                  type: string
+                  enum:
+                    - INDIVIDUAL_MALE
+                    - INDIVIDUAL_FEMALE
+                    - TEAM_MALE
+                    - TEAM_FEMALE
+                    - PAIR
+                  description: 대회 유형 코드
+                teamName:
+                  type: string
+                  description: 소속명
+                telCountryCode:
+                  type: string
+                  description: 연락처 국가코드
+                telNo:
+                  type: string
+                  description: 연락처
+                country:
+                  type: string
+                  description: 국가 코드
+                ranking:
+                  type: integer
+                  description: 랭킹 (0 이상)
+                participantList:
+                  type: array
+                  minItems: 1
+                  items:
+                    type: object
+                    required:
+                      - isLeader
+                      - givenName
+                      - familyName
+                      - birthDate
+                      - email
+                      - gender
+                    properties:
+                      isLeader:
+                        type: boolean
+                        description: 리더 여부
+                      givenName:
+                        type: string
+                        description: 이름
+                      familyName:
+                        type: string
+                        description: 성
+                      birthDate:
+                        type: string
+                        description:
+                          생년월일 (예: yyyyMMdd)
+                      email:
+                        type: string
+                        description: 이메일
+                      gender:
+                        type: string
+                        description: 성별
+            example:
+              divisionType: WT_RECOGNIZED_POOMSAE
+              departmentType: UNDER_30
+              divisionCategoryType: INDIVIDUAL_MALE
+              teamName: Taekwondo Tigers
+              telCountryCode: KR
+              telNo: "1234567890"
+              country: USA
+              ranking: 1
+              participantList:
+                - isLeader: false
+                  givenName: Aane
+                  familyName: Zmith
+                  birthDate: "19920510"
+                  email: Zanesmith@example.com
+                  gender: M
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: boolean
+                  error:
+                    type: string
+                    nullable: true
+              examples:
+                defaultResponse:
+                  summary: 성공 응답
+                  value:
+                    success: true
+                    data: true
+                    error: null
+                DUPLICATE_EMAIL:
+                  $ref: '../../openapi.yml/#/components/examples/DUPLICATE_EMAIL'
+                NOT_EXIST_PARTICIPANTS_IN_DIVISION_CATEGORY:
+                  $ref: '../../openapi.yml/#/components/examples/NOT_EXIST_PARTICIPANTS_IN_DIVISION_CATEGORY'
+                COMPETITION_PARTICIPATE_LIMIT_OVER:
+                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_PARTICIPATE_LIMIT_OVER'
+                COMPETITION_MATCH_PROGRESS_NOT_ADD:
+                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_PROGRESS_NOT_ADD'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml/#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+
+  /competitions/{competitionSeq}/participants/deposit-confirm:
+    patch:
+      summary: 입금 확인
+      tags:
+        - 운영 - 참가자
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 대회의 고유 시퀀스
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                participantSeqList:
+                  type: array
+                  items:
+                    type: integer
+                  description: 입금 확인할 참가자 시퀀스 목록
+                teamSeqList:
+                  type: array
+                  items:
+                    type: integer
+                  description: 입금 확인할 팀 시퀀스 목록
+            example:
+              participantSeqList: [ 54633, 54634 ]
+              teamSeqList: [ 27, 15 ]
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: boolean
+                  error:
+                    type: string
+                    nullable: true
+              examples:
+                defaultResponse:
+                  summary: 성공 응답
+                  value:
+                    success: true
+                    data: true
+                    error: null
+                CONFIRM_PARTICIPANT_COMPETITION:
+                  $ref: '../../openapi.yml/#/components/examples/CONFIRM_PARTICIPANT_COMPETITION'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml/#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+
+  /competitions/{competitionSeq}/participants/deposit-cancel:
+    patch:
+      summary: 입금 확인 취소
+      tags:
+        - 운영 - 참가자
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 대회의 고유 시퀀스
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                participantSeqList:
+                  type: array
+                  items:
+                    type: integer
+                  description: 입금 확인 취소할 참가자 시퀀스 목록
+                teamSeqList:
+                  type: array
+                  items:
+                    type: integer
+                  description: 입금 확인 취소할 팀 시퀀스 목록
+            example:
+              participantSeqList: [ 54633, 54634 ]
+              teamSeqList: [ 27, 15 ]
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: boolean
+                  error:
+                    type: string
+                    nullable: true
+              examples:
+                defaultResponse:
+                  summary: 성공 응답
+                  value:
+                    success: true
+                    data: true
+                    error: null
+                CONFIRM_PARTICIPANT_COMPETITION:
+                  $ref: '../../openapi.yml/#/components/examples/CONFIRM_PARTICIPANT_COMPETITION'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml/#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+
+  /competitions/{competitionSeq}/participants/confirm:
+    post:
+      summary: 참가자 확정
+      tags:
+        - 운영 - 참가자
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 대회의 고유 시퀀스
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: boolean
+                  error:
+                    type: string
+                    nullable: true
+              examples:
+                defaultResponse:
+                  summary: 성공 응답
+                  value:
+                    success: true
+                    data: true
+                    error: null
+                CONFIRM_PARTICIPANT_COMPETITION:
+                  $ref: '../../openapi.yml/#/components/examples/CONFIRM_PARTICIPANT_COMPETITION'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml/#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+
+  /competitions/{competitionSeq}/participants/csv:
+    post:
+      summary: CSV 파일로 참가자 밀어 넣기
+      tags:
+        - 운영 - 참가자
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - file
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: '업로드할 CSV 파일'
+            encoding:
+              file:
+                contentType: text/csv
+      responses:
+        '200':
+          description: 참가자 CSV 등록 성공
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml/#/components/responses/OK'
+              examples:
+                defaultResponse:
+                  summary: 성공 응답 예시
+                  value:
+                    success: true
+                    data: null
+                    error: null
+                CONFIRM_PARTICIPANT_COMPETITION:
+                  $ref: '../../openapi.yml/#/components/examples/CONFIRM_PARTICIPANT_COMPETITION'
+                INVALID_PAIR_MEMBER_COUNT:
+                  $ref: '../../openapi.yml/#/components/examples/INVALID_PAIR_MEMBER_COUNT'
+                INVALID_GROUP_MEMBER_COUNT:
+                  $ref: '../../openapi.yml/#/components/examples/INVALID_GROUP_MEMBER_COUNT'
+                NOT_SAVE:
+                  $ref: '../../openapi.yml/#/components/examples/NOT_SAVE'
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml/#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml/#/components/responses/Error'
+              examples:
+                FILE_LOAD_FAILURE:
+                  $ref: '../../openapi.yml/#/components/examples/FILE_LOAD_FAILURE'
+                PARTICIPANT_RULE_MISMATCH:
+                  $ref: '../../openapi.yml/#/components/examples/PARTICIPANT_RULE_MISMATCH'
