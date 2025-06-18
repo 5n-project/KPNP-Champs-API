@@ -15,6 +15,7 @@ tags:
   - name: 운영진
   - name: 심판관리
   - name: 운영 - 참가자
+  - name: 운영 - 경기
   - name: 일정
 
 paths:
@@ -3076,6 +3077,366 @@ paths:
                     nullable: true
                     example: null
 
+  /competition/{competitionSeq}/all-event-filter":
+    get:
+      summary: 참여 선수 상관없이 저장한 경기의 부 별 정보의 필터
+      tags:
+        - 공통
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        key:
+                          type: string
+                          description: 계층 키
+                          example: divisionCode
+                        code:
+                          type: string
+                          description: 코드 값
+                          example: OPEN_RECOGNIZED_POOMSAE
+                        name:
+                          type: string
+                          description: 이름(영문|한글)
+                          example: Open Recognized Poomsae|오픈대회 공인품새
+                        nextDepth:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              key:
+                                type: string
+                                description: 다음 계층 키
+                                example: departmentCode
+                              code:
+                                type: string
+                                description: 코드 값
+                                example: Under30
+                              name:
+                                type: string
+                                description: 이름
+                                example: Under30
+                              nextDepth:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    key:
+                                      type: string
+                                      description: 다음 계층 키
+                                      example: divisionCategoryCode
+                                    code:
+                                      type: string
+                                      description: 코드 값
+                                      example: INDIVIDUAL_MALE
+                                    name:
+                                      type: string
+                                      description: 이름(영문|한글)
+                                      example: Individual male|남자개인
+                                  example:
+                                    - key: divisionCategoryCode
+                                      code: INDIVIDUAL_MALE
+                                      name: Individual male|남자개인
+                                    - key: divisionCategoryCode
+                                      code: INDIVIDUAL_FEMALE
+                                      name: Individual female|여자개인
+                            example:
+                              - key: departmentCode
+                                code: Under30
+                                name: Under30
+                                nextDepth:
+                                  - key: divisionCategoryCode
+                                    code: INDIVIDUAL_MALE
+                                    name: Individual male|남자개인
+                                  - key: divisionCategoryCode
+                                    code: INDIVIDUAL_FEMALE
+                                    name: Individual female|남자개인
+                      example:
+                        - key: divisionCode
+                          code: OPEN_RECOGNIZED_POOMSAE
+                          name: Open Recognized Poomsae|오픈대회 공인품새
+                          nextDepth:
+                            - key: departmentCode
+                              code: Under30
+                              name: Under30
+                              nextDepth:
+                                - key: divisionCategoryCode
+                                  code: INDIVIDUAL_MALE
+                                  name: Individual male|남자개인
+                                - key: divisionCategoryCode
+                                  code: INDIVIDUAL_FEMALE
+                                  name: Individual female|여자개인
+                        - key: divisionCode
+                          code: WT_RECOGNIZED_POOMSAE
+                          name: WT Recognized Poomsae|WT 공인품새룰
+                          nextDepth:
+                            - key: departmentCode
+                              code: UNDER_30
+                              name: Under 30|30세 이하
+                              nextDepth:
+                                - key: divisionCategoryCode
+                                  code: INDIVIDUAL_MALE
+                                  name: Individual male|남자개인
+                                - key: divisionCategoryCode
+                                  code: INDIVIDUAL_FEMALE
+                                  name: Individual female|남자개인
+                                - key: divisionCategoryCode
+                                  code: TEAM_MALE
+                                  name: Team male|남자단체
+                  error:
+                    type: object
+                    nullable: true
+                    example: null
+
+  /competition/{competitionSeq}/event-filter":
+    get:
+      summary: 선수가 참여한 경기의 부 별 정보의 필터
+      tags:
+        - 공통
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        key:
+                          type: string
+                          description: 계층 키
+                          example: divisionCode
+                        code:
+                          type: string
+                          description: 코드 값
+                          example: OPEN_RECOGNIZED_POOMSAE
+                        name:
+                          type: string
+                          description: 이름(영문|한글)
+                          example: Open Recognized Poomsae|오픈대회 공인품새
+                        nextDepth:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              key:
+                                type: string
+                                description: 다음 계층 키
+                                example: departmentCode
+                              code:
+                                type: string
+                                description: 코드 값
+                                example: Under30
+                              name:
+                                type: string
+                                description: 이름
+                                example: Under30
+                              nextDepth:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    key:
+                                      type: string
+                                      description: 다음 계층 키
+                                      example: divisionCategoryCode
+                                    code:
+                                      type: string
+                                      description: 코드 값
+                                      example: INDIVIDUAL_MALE
+                                    name:
+                                      type: string
+                                      description: 이름(영문|한글)
+                                      example: Individual male|남자개인
+                                  example:
+                                    - key: divisionCategoryCode
+                                      code: INDIVIDUAL_MALE
+                                      name: Individual male|남자개인
+                                    - key: divisionCategoryCode
+                                      code: INDIVIDUAL_FEMALE
+                                      name: Individual female|여자개인
+                            example:
+                              - key: departmentCode
+                                code: Under30
+                                name: Under30
+                                nextDepth:
+                                  - key: divisionCategoryCode
+                                    code: INDIVIDUAL_MALE
+                                    name: Individual male|남자개인
+                                  - key: divisionCategoryCode
+                                    code: INDIVIDUAL_FEMALE
+                                    name: Individual female|남자개인
+                      example:
+                        - key: divisionCode
+                          code: OPEN_RECOGNIZED_POOMSAE
+                          name: Open Recognized Poomsae|오픈대회 공인품새
+                          nextDepth:
+                            - key: departmentCode
+                              code: Under30
+                              name: Under30
+                              nextDepth:
+                                - key: divisionCategoryCode
+                                  code: INDIVIDUAL_MALE
+                                  name: Individual male|남자개인
+                                - key: divisionCategoryCode
+                                  code: INDIVIDUAL_FEMALE
+                                  name: Individual female|여자개인
+                        - key: divisionCode
+                          code: WT_RECOGNIZED_POOMSAE
+                          name: WT Recognized Poomsae|WT 공인품새룰
+                          nextDepth:
+                            - key: departmentCode
+                              code: UNDER_30
+                              name: Under 30|30세 이하
+                              nextDepth:
+                                - key: divisionCategoryCode
+                                  code: INDIVIDUAL_MALE
+                                  name: Individual male|남자개인
+                                - key: divisionCategoryCode
+                                  code: INDIVIDUAL_FEMALE
+                                  name: Individual female|남자개인
+                                - key: divisionCategoryCode
+                                  code: TEAM_MALE
+                                  name: Team male|남자단체
+                  error:
+                    type: object
+                    nullable: true
+                    example: null
+
+  /common/competition/{competitionSeq}/operation/match-filter:
+    get:
+      summary: 운영 경기에 해당하는 필터
+      tags:
+        - 공통
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    properties:
+                      departments:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            departmentCode:
+                              type: string
+                              description: 부 코드
+                              example: CADET
+                            nameEn:
+                              type: string
+                              description: 부 영문명
+                              example: Cadet
+                            nameKo:
+                              type: string
+                              description: 부 한글명
+                              example: 유소년부
+                      refereeGroupNames:
+                        type: array
+                        items:
+                          type: string
+                          description: 심판 그룹명
+                          example: A
+                      matNumbers:
+                        type: array
+                        items:
+                          type: string
+                          description: 코트 번호
+                          example: "1"
+                  error:
+                    type: object
+                    nullable: true
+                    example: null
+              examples:
+                defaultResponse:
+                  summary: 성공 응답 예시
+                  value:
+                    success: true
+                    data:
+                      departments:
+                        - departmentCode: CADET
+                          nameEn: Cadet
+                          nameKo: 유소년부
+                        - departmentCode: JUNIOR
+                          nameEn: Junior
+                          nameKo: 청소년부
+                        - departmentCode: UNDER_30
+                          nameEn: Under 30
+                          nameKo: 30세 이하
+                        - departmentCode: OVER_65
+                          nameEn: Over 65
+                          nameKo: 65세 초과
+                      refereeGroupNames:
+                        - A
+                        - B
+                        - C
+                        - D
+                      matNumbers:
+                        - "1"
+                        - "2"
+                        - "3"
+                    error: null
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+              examples:
+                IS_NOT_AUTHORIZED:
+                  value:
+                    code: IS_NOT_AUTHORIZED
+                    message: 권한이 없습니다.
+
   /competitions/{competitionSeq}/referees:
     get:
       summary: 심판 리스트 조회
@@ -3675,6 +4036,10 @@ paths:
 
   /schedule/{competitionSeq}/init-data:
     $ref: './tags/poomsae/schedule.yaml#/paths/~1schedule~1{competitionSeq}~1init-data'
+
+  /competitions/{competitionSeq}/operation/completed-matches:
+    $ref: './tags/poomsae/operation.yaml#/paths/~1competitions~1{competitionSeq}~1operation~1completed-matches'
+
 components:
   responses:
     OK:
