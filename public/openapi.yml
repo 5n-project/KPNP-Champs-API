@@ -4040,6 +4040,12 @@ paths:
   /competitions/{competitionSeq}/operation/completed-matches:
     $ref: './tags/poomsae/operation.yaml#/paths/~1competitions~1{competitionSeq}~1operation~1completed-matches'
 
+  /competitions/{competitionSeq}/operation/start-day/{day}:
+    $ref: './tags/poomsae/operation.yaml#/paths/~1competitions~1{competitionSeq}~1operation~1start-day~1{day}'
+
+  /competitions/{competitionSeq}/operation/end-day/{day}:
+    $ref: './tags/poomsae/operation.yaml#/paths/~1competitions~1{competitionSeq}~1operation~1end-day~1{day}'
+
 components:
   responses:
     OK:
@@ -4163,6 +4169,34 @@ components:
         error:
           message: "룰이 일치하지 않습니다. 대회 운영룰과 일치하는 파일을 올려주세요."
           errorCode: "E603"
+    COMPETITION_DAY_START_ORDER_INVALID:
+      value:
+        success: false
+        data: null
+        error:
+          message: "대회 일차는 이전 일차가 완료된 후에 순차적으로 시작할 수 있습니다."
+          errorCode: "E705"
+    COMPETITION_CURRENT_DAY_IS_ALREADY_START:
+      value:
+        success: false
+        data: null
+        error:
+          message: "해당 일차 대회가 이미 시작되었습니다."
+          errorCode: "E611"
+    COMPETITION_CURRENT_DAY_IS_NOT_START:
+      value:
+        success: false
+        data: null
+        error:
+          message: "해당 일차 대회가 시작되지 않았습니다."
+          errorCode: "E610"
+    COMPETITION_CURRENT_DAY_IS_END:
+      value:
+        success: false
+        data: null
+        error:
+          message: "해당 일차 대회가 종료되었습니다."
+          errorCode: "E609"
 
 
     # 200
@@ -4376,6 +4410,35 @@ components:
         error:
           message: "저장 실패했습니다."
           errorCode: "E507"
+    SCHEDULE_IS_TEMPORARY_SAVE:
+      value:
+        success: false
+        data: null
+        error:
+          message: "일정이 임시 저장 상태입니다. \n 일정을 저장해 주세요."
+          errorCode: "E630"
+    NO_REMAINING_MATCHES:
+      value:
+        success: false
+        data: null
+        error:
+          message: "남은 경기가 없습니다."
+          errorCode: "E615"
+    COURT_VIEWER_MAX_PER_COURT:
+      value:
+        success: false
+        data: null
+        error:
+          message: "코트 별 최대 경기 수를 초과했습니다."
+          errorCode: "E644"
+    COMPETITION_IS_STILL_ONGOING:
+      value:
+        success: false
+        data: null
+        error:
+          message: "경기가 아직 진행중입니다."
+          errorCode: "E614"
+
 
 
   schemas:

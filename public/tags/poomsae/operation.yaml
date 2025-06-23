@@ -253,3 +253,135 @@ paths:
               examples:
                 IS_NOT_AUTHORIZED:
                   $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+  /competitions/{competitionSeq}/operation/start-day/{day}:
+    post:
+      summary: 일차 별 대회 시작 (notion 실시간 응답 데이터 문서 확인)
+      tags:
+        - 운영 - 경기
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 대회의 고유 시퀀스
+        - name: day
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 일차 데이터
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: string
+                  error:
+                    type: string
+                    nullable: true
+              examples:
+                defaultResponse:
+                  summary: 성공 응답
+                  value:
+                    success: true
+                    data: null
+                    error: null
+                ITEM_NOT_FOUND:
+                  $ref: '../../openapi.yml/#/components/examples/ITEM_NOT_FOUND'
+                SCHEDULE_IS_TEMPORARY_SAVE:
+                  $ref: '../../openapi.yml/#/components/examples/SCHEDULE_IS_TEMPORARY_SAVE'
+                NO_REMAINING_MATCHES:
+                  $ref: '../../openapi.yml/#/components/examples/NO_REMAINING_MATCHES'
+                COURT_VIEWER_MAX_PER_COURT:
+                  $ref: '../../openapi.yml/#/components/examples/COURT_VIEWER_MAX_PER_COURT'
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml/#/components/responses/Error'
+              examples:
+                COMPETITION_DAY_START_ORDER_INVALID:
+                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_DAY_START_ORDER_INVALID'
+                COMPETITION_CURRENT_DAY_IS_ALREADY_START:
+                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_CURRENT_DAY_IS_ALREADY_START'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml/#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+  /competitions/{competitionSeq}/operation/end-day/{day}:
+    patch:
+      summary: 일차 별 대회 종료 (notion 실시간 응답 데이터 문서 확인)
+      tags:
+        - 운영 - 경기
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 대회의 고유 시퀀스
+        - name: day
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 일차 데이터
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: string
+                  error:
+                    type: string
+                    nullable: true
+              examples:
+                defaultResponse:
+                  summary: 성공 응답
+                  value:
+                    success: true
+                    data: null
+                    error: null
+                ITEM_NOT_FOUND:
+                  $ref: '../../openapi.yml/#/components/examples/ITEM_NOT_FOUND'
+                COMPETITION_IS_STILL_ONGOING:
+                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_IS_STILL_ONGOING'
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml/#/components/responses/Error'
+              examples:
+                COMPETITION_CURRENT_DAY_IS_NOT_START:
+                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_CURRENT_DAY_IS_NOT_START'
+                COMPETITION_CURRENT_DAY_IS_END:
+                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_CURRENT_DAY_IS_END'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml/#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
