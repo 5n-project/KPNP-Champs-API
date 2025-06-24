@@ -47,7 +47,7 @@ paths:
                         - divisionCategoryCode
                         - divisionCategoryNameKo
                         - divisionCategoryNameEn
-                        - gameNumber
+                        - matchNumber
                         - matchStyleType
                         - resultDecision
                         - matchCompetitorList
@@ -93,9 +93,9 @@ paths:
                           type: string
                           nullable: true
                           description: 심판 그룹명 (없으면 null)
-                        gameNumber:
-                          type: string
-                          description: '경기 번호 (예: R64-1)'
+                        matchNumber:
+                          type: integer
+                          description: '경기 번호 (예: 1001)'
                         matchStyleType:
                           type: string
                           description: 경기 유형 (TOURNAMENT, CUTOFF)
@@ -169,7 +169,7 @@ paths:
                         divisionCategoryNameEn: "Individual male"
                         cutoffGroupName: null
                         refereeGroupName: null
-                        gameNumber: "R64-28"
+                        matchNumber: "1001"
                         matchStyleType: "TOURNAMENT"
                         resultDecision: "BYE"
                         matchCompetitorList:
@@ -195,7 +195,7 @@ paths:
                         divisionCategoryNameEn: "Individual male"
                         cutoffGroupName: null
                         refereeGroupName: null
-                        gameNumber: "R64-32"
+                        matchNumber: "1002"
                         matchStyleType: "TOURNAMENT"
                         resultDecision: "BYE"
                         matchCompetitorList:
@@ -221,7 +221,7 @@ paths:
                         divisionCategoryNameEn: "Individual male"
                         cutoffGroupName: null
                         refereeGroupName: null
-                        gameNumber: "R64-2"
+                        matchNumber: "1003"
                         matchStyleType: "TOURNAMENT"
                         resultDecision: "RSC"
                         matchCompetitorList:
@@ -253,6 +253,7 @@ paths:
               examples:
                 IS_NOT_AUTHORIZED:
                   $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+
   /competitions/{competitionSeq}/operation/start-day/{day}:
     post:
       summary: 일차 별 대회 시작 (notion 실시간 응답 데이터 문서 확인)
@@ -321,6 +322,7 @@ paths:
               examples:
                 IS_NOT_AUTHORIZED:
                   $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+
   /competitions/{competitionSeq}/operation/end-day/{day}:
     patch:
       summary: 일차 별 대회 종료 (notion 실시간 응답 데이터 문서 확인)
@@ -376,6 +378,214 @@ paths:
                   $ref: '../../openapi.yml/#/components/examples/COMPETITION_CURRENT_DAY_IS_NOT_START'
                 COMPETITION_CURRENT_DAY_IS_END:
                   $ref: '../../openapi.yml/#/components/examples/COMPETITION_CURRENT_DAY_IS_END'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml/#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+
+  /competitions/{competitionSeq}/operation/ongoing-matches/{day}:
+    get:
+      summary: 운영중인 경기 리스트 조회
+      tags:
+        - 운영 - 경기
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 조회할 대회의 고유 시퀀스
+        - name: day
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 현재 진행중인 경기 일차 (1일차 시작한경우 1)
+        - name: category
+          in: query
+          schema:
+            type: string
+          description: '전체 : 값 없이, 부 : DEPARTMENT, 심판 그룹 : REFEREE_GROUP, 코트 번호 : MAT_NUMBER'
+        - name: keyword
+          in: query
+          schema:
+            type: string
+          description: '해당 대분류 선택한 거 에 대한 소분류 선택한 값'
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                        - competitionMatchPsSeq
+                        - matNumber
+                        - divisionCode
+                        - divisionNameKo
+                        - divisionNameEn
+                        - departmentCode
+                        - departmentNameKo
+                        - departmentNameEn
+                        - divisionCategoryCode
+                        - divisionCategoryNameKo
+                        - divisionCategoryNameEn
+                        - matchNumber
+                        - matchMinTime
+                        - matchMaxTime
+                        - matchStyleType
+                        - resultDecision
+                        - matchCompetitorList
+                      properties:
+                        competitionMatchPsSeq:
+                          type: integer
+                          description: 대회 경기 식별자
+                        matNumber:
+                          type: integer
+                          description: 경기 진행 코트 번호
+                        divisionCode:
+                          type: string
+                          description: 품새 룰 코드
+                        divisionNameKo:
+                          type: string
+                          description: 품새 룰 한글명
+                        divisionNameEn:
+                          type: string
+                          description: 품새 룰 영문명
+                        departmentCode:
+                          type: string
+                          description: 부(department) 코드
+                        departmentNameKo:
+                          type: string
+                          description: 부 한글명
+                        departmentNameEn:
+                          type: string
+                          description: 부 영문명
+                        divisionCategoryCode:
+                          type: string
+                          description: 대회 유형 코드
+                        divisionCategoryNameKo:
+                          type: string
+                          description: 대회 유형 한글명
+                        divisionCategoryNameEn:
+                          type: string
+                          description: 대회 유형 영문명
+                        cutoffGroupName:
+                          type: string
+                          nullable: true
+                          description: 컷오프 조명 (없으면 null)
+                        refereeGroupName:
+                          type: string
+                          nullable: true
+                          description: 심판 그룹명 (없으면 null)
+                        matchNumber:
+                          type: integer
+                          description: '경기 번호 (예: 1001)'
+                        matchMinTime:
+                          type: integer
+                          description: '최소 시연시간 (초) -> 이건 설정에서 설정한 기본 값으로 흐르고 있는 실시간 값은 진행중인 경기의 FOP 에서 받아서 실시간으로 표현해줘야함 (라운드 표기도 위와동일)'
+                        matchMaxTime:
+                          type: integer
+                          description: '최대 시연시간 (초) -> 이건 설정에서 설정한 기본 값으로 흐르고 있는 실시간 값은 진행중인 경기의 FOP 에서 받아서 실시간으로 표현해줘야함 (라운드 표기도 위와동일)'
+                        matchStyleType:
+                          type: string
+                          description: 경기 유형 (TOURNAMENT, CUTOFF)
+                        resultDecision:
+                          type: string
+                          description: '경기 결과 코드 (토너먼트 : BYE, RSC 등, 컷오프 : 등수 or FAIL)'
+                        matchCompetitorList:
+                          type: array
+                          items:
+                            type: object
+                            required:
+                              - matchCompetitorDetailSeq
+                              - competitor
+                              - competitorName
+                              - countryCode
+                              - matchSideType
+                            properties:
+                              matchCompetitorDetailSeq:
+                                type: integer
+                                description: 매치별 참가자 상세 식별자
+                              competitor:
+                                type: integer
+                                description: 선수 번호
+                              competitorName:
+                                type: string
+                                description: 선수 이름 (팀전은 팀명)
+                              countryCode:
+                                type: string
+                                description: 소속 국가 NOC 코드
+                              firstPoomsaeAverageScore:
+                                type: number
+                                format: double
+                                nullable: true
+                                description: 첫 번째 품새 평균 점수
+                              secondPoomsaeAverageScore:
+                                type: number
+                                format: double
+                                nullable: true
+                                description: 두 번째 품새 평균 점수
+                              poomsaeTotalScore:
+                                type: number
+                                format: double
+                                nullable: true
+                                description: 품새 총점
+                              matchSideType:
+                                type: string
+                                description: 경기 사이드 (HOME, AWAY, CUTOFF)
+                  error:
+                    type: string
+                    nullable: true
+              examples:
+                defaultResponse:
+                  summary: 성공 응답
+                  value:
+                    success: true
+                    data:
+                      - competitionMatchPsSeq: 16985
+                        matNumber: 2
+                        divisionCode: "WT_RECOGNIZED_POOMSAE"
+                        divisionNameKo: "WT 공인품새룰"
+                        divisionNameEn: "WT Recognized Poomsae"
+                        departmentCode: "UNDER_30"
+                        departmentNameKo: "30세 이하"
+                        departmentNameEn: "Under 30"
+                        divisionCategoryCode: "INDIVIDUAL_MALE"
+                        divisionCategoryNameKo: "남자개인"
+                        divisionCategoryNameEn: "Individual male"
+                        cutoffGroupName: 'A'
+                        refereeGroupName: 'C'
+                        matchNumber: 2001
+                        matchMinTime: 90
+                        matchMaxTime: 200
+                        matchStyleType: "CUTOFF"
+                        resultDecision: "BYE"
+                        matchCompetitorList:
+                          - matchCompetitorDetailSeq: 4899
+                            competitor: 1
+                            competitorName: "M. DAM"
+                            countryCode: "KOR"
+                            firstPoomsaeAverageScore: null
+                            secondPoomsaeAverageScore: null
+                            poomsaeTotalScore: null
+                            matchSideType: "CUTOFF"
+                    error: null
+                ITEM_NOT_FOUND:
+                  $ref: '../../openapi.yml/#/components/examples/ITEM_NOT_FOUND'
+
         '403':
           description: Forbidden
           content:
