@@ -4016,6 +4016,7 @@ paths:
                 FILE_LOAD_FAILURE:
                   $ref: '#/components/examples/FILE_LOAD_FAILURE'
 
+ # 참가자
   /competitions/{competitionSeq}/participants:
     $ref: './tags/poomsae/participant.yaml#/paths/~1competitions~1{competitionSeq}~1participants'
 
@@ -4031,14 +4032,19 @@ paths:
   /competitions/{competitionSeq}/participants/csv:
     $ref: './tags/poomsae/participant.yaml#/paths/~1competitions~1{competitionSeq}~1participants~1csv'
 
+  # 일정
   /schedule/{competitionSeq}/progress:
     $ref: './tags/poomsae/schedule.yaml#/paths/~1schedule~1{competitionSeq}~1progress'
 
   /schedule/{competitionSeq}/init-data:
     $ref: './tags/poomsae/schedule.yaml#/paths/~1schedule~1{competitionSeq}~1init-data'
 
+ # 운영
   /competitions/{competitionSeq}/operation/completed-matches:
     $ref: './tags/poomsae/operation.yaml#/paths/~1competitions~1{competitionSeq}~1operation~1completed-matches'
+
+  /competitions/{competitionSeq}/operation/ongoing-matches/{day}:
+    $ref: './tags/poomsae/operation.yaml#/paths/~1competitions~1{competitionSeq}~1operation~1ongoing-matches~1{day}'
 
   /competitions/{competitionSeq}/operation/start-day/{day}:
     $ref: './tags/poomsae/operation.yaml#/paths/~1competitions~1{competitionSeq}~1operation~1start-day~1{day}'
@@ -4046,6 +4052,7 @@ paths:
   /competitions/{competitionSeq}/operation/end-day/{day}:
     $ref: './tags/poomsae/operation.yaml#/paths/~1competitions~1{competitionSeq}~1operation~1end-day~1{day}'
 
+  # 심판 점수 채점
   /competitions/{competitionSeq}/matches/{matchSeq}:
     $ref: './tags/poomsae/score.yaml#/paths/~1competitions~1{competitionSeq}~1matches~1{matchSeq}'
 
