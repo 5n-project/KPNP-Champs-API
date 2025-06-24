@@ -314,11 +314,6 @@ paths:
           required: true
           schema:
             type: integer
-        - name: poomsaeStyleType
-          in: query
-          required: true
-          schema:
-            type: string
         - name: poomsaeSequenceType
           in: query
           required: true
