@@ -721,3 +721,354 @@ paths:
               examples:
                 IS_NOT_AUTHORIZED:
                   $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+
+  /competitions/{competitionSeq}/matches/{matchSeq}/competitors/{competitorSeq}/scores/deduct:
+    get:
+      summary: 심판 채점 감점
+      tags:
+        - 채점
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: matchSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: competitorSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: poomsaeSequenceType
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [P1, P2]
+          description: 품새 시퀀스 타입
+        - name: poomsaeMatchSideType
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [HOME, AWAY, CUTOFF]
+          description: 경기 사이드 타입
+        - name: deltaScore
+          in: query
+          required: true
+          schema:
+            type: number
+            format: float
+          description: 점수 증감 값
+        - name: remainTime
+          in: query
+          required: true
+          schema:
+            type: string
+            example: "01:20"
+          description: 남은 시간 (MM:SS)
+        - name: timestamp
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date-time
+            example: "2024-06-24T16:57:23Z"
+          description: 기록 시각 (ISO8601)
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    required:
+                      - competitionSeq
+                      - competitionMatchPsSeq
+                      - matchCompetitorDetailSeq
+                      - totalScore
+                      - deductionCount
+                      - criteriaTotalScores
+                    properties:
+                      competitionSeq:
+                        type: integer
+                        example: 2131
+                        description: 대회 seq
+                      competitionMatchPsSeq:
+                        type: integer
+                        example: 20024
+                        description: 대회 경기 seq
+                      matchCompetitorDetailSeq:
+                        type: integer
+                        example: 5298
+                        description: 경기 선수 상세 seq
+                      totalScore:
+                        type: number
+                        example: 7
+                        description: 총 점수
+                      deductionCount:
+                        type: integer
+                        example: 2
+                        description: 감점 횟수
+                      criteriaTotalScores:
+                        type: array
+                        description: 채점 항목별 총점 목록
+                        items:
+                          type: object
+                          required:
+                            - criteriaType
+                            - nameEn
+                            - nameKo
+                            - sortNo
+                            - score
+                          properties:
+                            criteriaType:
+                              type: string
+                              enum: [ACCURACY, PRESENTATION, SCORE_DEDUCTION]
+                              example: "ACCURACY"
+                              description: 채점 항목 타입
+                            nameEn:
+                              type: string
+                              example: "accuracy"
+                              description: 채점 항목명(영문)
+                            nameKo:
+                              type: string
+                              example: "정확도"
+                              description: 채점 항목명(한글)
+                            sortNo:
+                              type: integer
+                              example: 1
+                              description: 정렬 번호
+                            score:
+                              type: number
+                              example: 3.4
+                              description: 항목별 점수
+                  error:
+                    type: object
+                    nullable: true
+                    description: 에러 상세 정보
+                    example: null
+              examples:
+                defaultResponse:
+                  summary: 성공 응답
+                  value:
+                    success: true
+                    data:
+                      competitionSeq: 2131
+                      competitionMatchPsSeq: 20024
+                      matchCompetitorDetailSeq: 5298
+                      totalScore: 7
+                      deductionCount: 2
+                      criteriaTotalScores:
+                        - criteriaType: "ACCURACY"
+                          nameEn: "accuracy"
+                          nameKo: "정확도"
+                          sortNo: 1
+                          score: 3.4
+                        - criteriaType: "PRESENTATION"
+                          nameEn: "presentation"
+                          nameKo: "표현력"
+                          sortNo: 2
+                          score: 3.6
+                        - criteriaType: "SCORE_DEDUCTION"
+                          nameEn: "score deduction"
+                          nameKo: "감점"
+                          sortNo: 3
+                          score: 0.6
+                    error: null
+                COMPETITION_MATCH_NOT_FOUND:
+                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+                COMPETITION_MATCH_REFEREE_NOT_ASSIGNED:
+                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_REFEREE_NOT_ASSIGNED'
+                INSUFFICIENT_SCORE_FOR_DEDUCTION:
+                  $ref: '../../openapi.yml/#/components/examples/INSUFFICIENT_SCORE_FOR_DEDUCTION'
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml/#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+
+  /competitions/{competitionSeq}/matches/{matchSeq}/competitors/{competitorSeq}/scores/deduct/undo:
+    get:
+      summary: 심판 채점 감점 되돌리기
+      tags:
+        - 채점
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: matchSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: competitorSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: poomsaeSequenceType
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [P1, P2]
+          description: 품새 시퀀스 타입
+        - name: poomsaeMatchSideType
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [HOME, AWAY, CUTOFF]
+          description: 경기 사이드 타입
+        - name: remainTime
+          in: query
+          required: true
+          schema:
+            type: string
+            example: "01:20"
+          description: 남은 시간 (MM:SS)
+        - name: timestamp
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date-time
+            example: "2024-06-24T16:57:23Z"
+          description: 기록 시각 (ISO8601)
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    required:
+                      - competitionSeq
+                      - competitionMatchPsSeq
+                      - matchCompetitorDetailSeq
+                      - totalScore
+                      - deductionCount
+                      - criteriaTotalScores
+                    properties:
+                      competitionSeq:
+                        type: integer
+                        example: 2131
+                        description: 대회 seq
+                      competitionMatchPsSeq:
+                        type: integer
+                        example: 20024
+                        description: 대회 경기 seq
+                      matchCompetitorDetailSeq:
+                        type: integer
+                        example: 5298
+                        description: 경기 선수 상세 seq
+                      totalScore:
+                        type: number
+                        example: 7
+                        description: 총 점수
+                      deductionCount:
+                        type: integer
+                        example: 2
+                        description: 감점 횟수
+                      criteriaTotalScores:
+                        type: array
+                        description: 채점 항목별 총점 목록
+                        items:
+                          type: object
+                          required:
+                            - criteriaType
+                            - nameEn
+                            - nameKo
+                            - sortNo
+                            - score
+                          properties:
+                            criteriaType:
+                              type: string
+                              enum: [ACCURACY, PRESENTATION, SCORE_DEDUCTION]
+                              example: "ACCURACY"
+                              description: 채점 항목 타입
+                            nameEn:
+                              type: string
+                              example: "accuracy"
+                              description: 채점 항목명(영문)
+                            nameKo:
+                              type: string
+                              example: "정확도"
+                              description: 채점 항목명(한글)
+                            sortNo:
+                              type: integer
+                              example: 1
+                              description: 정렬 번호
+                            score:
+                              type: number
+                              example: 3.4
+                              description: 항목별 점수
+                  error:
+                    type: object
+                    nullable: true
+                    description: 에러 상세 정보
+                    example: null
+              examples:
+                defaultResponse:
+                  summary: 성공 응답
+                  value:
+                    success: true
+                    data:
+                      competitionSeq: 2131
+                      competitionMatchPsSeq: 20024
+                      matchCompetitorDetailSeq: 5298
+                      totalScore: 7
+                      deductionCount: 2
+                      criteriaTotalScores:
+                        - criteriaType: "ACCURACY"
+                          nameEn: "accuracy"
+                          nameKo: "정확도"
+                          sortNo: 1
+                          score: 3.4
+                        - criteriaType: "PRESENTATION"
+                          nameEn: "presentation"
+                          nameKo: "표현력"
+                          sortNo: 2
+                          score: 3.6
+                        - criteriaType: "SCORE_DEDUCTION"
+                          nameEn: "score deduction"
+                          nameKo: "감점"
+                          sortNo: 3
+                          score: 0.6
+                    error: null
+                COMPETITION_MATCH_NOT_FOUND:
+                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+                COMPETITION_MATCH_REFEREE_NOT_ASSIGNED:
+                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_REFEREE_NOT_ASSIGNED'
+                NO_DEDUCTION_TO_UNDO:
+                  $ref: '../../openapi.yml/#/components/examples/NO_DEDUCTION_TO_UNDO'
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml/#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'

@@ -4062,6 +4062,12 @@ paths:
   /competitions/{competitionSeq}/matches/{matchSeq}/scores:
     $ref: './tags/poomsae/score.yaml#/paths/~1competitions~1{competitionSeq}~1matches~1{matchSeq}~1scores'
 
+  /competitions/{competitionSeq}/matches/{matchSeq}/competitors/{competitorSeq}/scores/deduct:
+    $ref: './tags/poomsae/score.yaml#/paths/~1competitions~1{competitionSeq}~1matches~1{matchSeq}~1competitors~1{competitorSeq}~1scores~1deduct'
+
+  /competitions/{competitionSeq}/matches/{matchSeq}/competitors/{competitorSeq}/scores/deduct/undo:
+    $ref: './tags/poomsae/score.yaml#/paths/~1competitions~1{competitionSeq}~1matches~1{matchSeq}~1competitors~1{competitorSeq}~1scores~1deduct~1undo'
+
 components:
   responses:
     OK:
@@ -4468,6 +4474,20 @@ components:
         error:
           message: "해당 경기에 심판으로 배정되지 않았습니다."
           errorCode: "E707"
+    INSUFFICIENT_SCORE_FOR_DEDUCTION:
+      value:
+        success: false
+        data: null
+        error:
+          message: "현재 점수가 더 작아 감점할 수 없습니다."
+          errorCode: "E709"
+    NO_DEDUCTION_TO_UNDO:
+      value:
+        success: false
+        data: null
+        error:
+          message: "감점이 없어 되돌릴 수 없습니다."
+          errorCode: "E710"
 
 
   schemas:
