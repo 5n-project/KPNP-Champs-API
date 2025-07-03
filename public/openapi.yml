@@ -4068,6 +4068,9 @@ paths:
   /competitions/{competitionSeq}/matches/{matchSeq}/competitors/{competitorSeq}/scores/deduct/undo:
     $ref: './tags/poomsae/score.yaml#/paths/~1competitions~1{competitionSeq}~1matches~1{matchSeq}~1competitors~1{competitorSeq}~1scores~1deduct~1undo'
 
+  /competitions/{competitionSeq}/matches/{matchSeq}/competitors/{competitorSeq}/scores/update:
+    $ref: './tags/poomsae/score.yaml#/paths/~1competitions~1{competitionSeq}~1matches~1{matchSeq}~1competitors~1{competitorSeq}~1scores~1update'
+
 components:
   responses:
     OK:
