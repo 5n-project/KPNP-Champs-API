@@ -17,6 +17,8 @@ tags:
   - name: 운영 - 참가자
   - name: 운영 - 경기
   - name: 일정
+  - name: 심판조 스케줄
+  - name: 채점
 
 paths:
   /competitions/host:
@@ -4039,6 +4041,22 @@ paths:
   /schedule/{competitionSeq}/init-data:
     $ref: './tags/poomsae/schedule.yaml#/paths/~1schedule~1{competitionSeq}~1init-data'
 
+  # 심판조 스케줄
+  /competitions/{competitionSeq}/referee-groups:
+    $ref: './tags/poomsae/referee-schedule.yaml#/paths/~1competitions~1{competitionSeq}~1referee-groups'
+
+  /competitions/{competitionSeq}/schedule/referee-groups:
+    $ref: './tags/poomsae/referee-schedule.yaml#/paths/~1competitions~1{competitionSeq}~1schedule~1referee-groups'
+
+  /competitions/{competitionSeq}/schedule/referee-groups/detail/{scheduleSeq}:
+    $ref: './tags/poomsae/referee-schedule.yaml#/paths/~1competitions~1{competitionSeq}~1schedule~1referee-groups~1detail~1{scheduleSeq}'
+
+  /competitions/{competitionSeq}/schedule/referee-groups/detail/group/{scheduleSeq}:
+    $ref: './tags/poomsae/referee-schedule.yaml#/paths/~1competitions~1{competitionSeq}~1schedule~1referee-groups~1detail~1group~1{scheduleSeq}'
+
+  /competitions/{competitionSeq}/schedule/referee-groups/detail/referee/{scheduleSeq}:
+    $ref: './tags/poomsae/referee-schedule.yaml#/paths/~1competitions~1{competitionSeq}~1schedule~1referee-groups~1detail~1referee~1{scheduleSeq}'
+
  # 운영
   /competitions/{competitionSeq}/operation/completed-matches:
     $ref: './tags/poomsae/operation.yaml#/paths/~1competitions~1{competitionSeq}~1operation~1completed-matches'
@@ -4222,6 +4240,34 @@ components:
         error:
           message: "해당 일차 대회가 종료되었습니다."
           errorCode: "E609"
+    REFEREE_GROUP_IS_NOT_EXISTS:
+      value:
+        success: false
+        data: null
+        error:
+          message: "심판 그룹이 존재하지 않습니다."
+          errorCode: "E655"
+    WRONG_SCHEDULE_MATCH:
+      value:
+        success: false
+        data: null
+        error:
+          message: "잘못된 매치입니다."
+          errorCode: "E658"
+    DENY_CHANGE_REFEREE_WRONG_SEQ:
+      value:
+        success: false
+        data: null
+        error:
+          message: "잘못된 파라미터입니다."
+          errorCode: "E661"
+    DENY_CHANGE_REFEREE_WRONG_REFEREE_SEQ:
+      value:
+        success: false
+        data: null
+        error:
+          message: "존재하지 않는 심판입니다."
+          errorCode: "E662"
 
 
     # 200
@@ -4491,6 +4537,41 @@ components:
         error:
           message: "감점이 없어 되돌릴 수 없습니다."
           errorCode: "E710"
+    DENY_CHANGE_REFEREE_GROUP_SESSION_IS_START:
+      value:
+        success: false
+        data: null
+        error:
+          message: "세션이 시작되어 심판조를 변경할 수 없습니다."
+          errorCode: "E656"
+    DENY_CHANGE_REFEREE_GROUP_OVERLAP:
+      value:
+        success: false
+        data: null
+        error:
+          message: "같은 심판조로는 변경할 수 없습니다."
+          errorCode: "E657"
+    DENY_CHANGE_REFEREE_GROUP_SAME_SESSION:
+      value:
+        success: false
+        data: null
+        error:
+          message: "이미 같은 세션에 배정된 심판조입니다."
+          errorCode: "E657"
+    DENY_CHANGE_REFEREE_MATCH_IS_NOT_WAITING:
+      value:
+        success: false
+        data: null
+        error:
+          message: "진행중이거나 종료된 경기의 심판은 바꿀 수 없습니다."
+          errorCode: "E659"
+    ALREADY_EXIST_REFEREE:
+      value:
+        success: false
+        data: null
+        error:
+          message: "이미 배정된 심판입니다."
+          errorCode: "E660"
 
 
   schemas:

@@ -1,0 +1,731 @@
+paths:
+  /competitions/{competitionSeq}/referee-groups:
+    get:
+      summary: 심판 조 리스트
+      tags:
+        - 심판조 스케줄
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    required:
+                      - refereeGroups
+                    properties:
+                      refereeGroups:
+                        type: array
+                        items:
+                          type: object
+                          required:
+                            - refereeGroupingSeq
+                            - groupName
+                            - referees
+                          properties:
+                            refereeGroupingSeq:
+                              type: integer
+                              description: '심판 그룹 식별자'
+                              required: true
+                            groupName:
+                              type: string
+                              description: '그룹 이름'
+                              required: true
+                            referees:
+                              type: array
+                              items:
+                                type: object
+                                required:
+                                  - refereeSeq
+                                  - roleType
+                                properties:
+                                  refereeSeq:
+                                    type: integer
+                                    description: '심판 식별자'
+                                    required: true
+                                  givenName:
+                                    type: string
+                                    description: '이름'
+                                  familyName:
+                                    type: string
+                                    description: '성'
+                                  roleType:
+                                    type: string
+                                    required: true
+                                    enum:
+                                      - HEAD_REFEREE
+                                      - ASSISTANT_REFEREE
+                                    description: '역할 유형<br>- HEAD_REFEREE:주심<br>- ASSISTANT_REFEREE:부심'
+                  error:
+                    type: string
+                    nullable: true
+                    example: null
+              examples:
+                defaultResponse:
+                  summary: Default Example
+                  value:
+                    success: true
+                    data:
+                      refereeGroups:
+                        - refereeGroupingSeq: 28
+                          groupName: "A"
+                          referees:
+                            - refereeSeq: 6817
+                              givenName: "Agboton"
+                              familyName: "Engelbert"
+                              roleType: "HEAD_REFEREE"
+                            - refereeSeq: 6809
+                              givenName: "Belmir"
+                              familyName: "BERBEROVIC"
+                              roleType: "ASSISTANT_REFEREE"
+                            - refereeSeq: 6810
+                              givenName: "Renata"
+                              familyName: "Bukovac"
+                              roleType: "ASSISTANT_REFEREE"
+                    error: null
+
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml/#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+
+  /competitions/{competitionSeq}/schedule/referee-groups:
+    get:
+      summary: 심판 조 스케줄 상세
+      tags:
+        - 심판조 스케줄
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    required:
+                      - schedules
+                    properties:
+                      schedules:
+                        type: array
+                        items:
+                          type: object
+                          required:
+                            - competitionDay
+                            - sessionGroup
+                            - startTime
+                            - sessions
+                          properties:
+                            competitionDay:
+                              type: integer
+                              description: '대회 일차'
+                            sessionGroup:
+                              type: integer
+                              description: '세션 그룹 번호'
+                            startTime:
+                              type: string
+                              description: '시작 시간'
+                            sessions:
+                              type: array
+                              items:
+                                type: object
+                                required:
+                                  - competitionScheduleDetailSeq
+                                  - divisionEn
+                                  - divisionKo
+                                  - divisionCategoryEn
+                                  - divisionCategoryKo
+                                  - departmentEn
+                                  - departmentKo
+                                  - matchStyleTypeEn
+                                  - matchStyleTypeKo
+                                  - phase
+                                  - session
+                                  - endMatchCount
+                                  - gameCount
+                                  - refereeGroupName
+                                properties:
+                                  competitionScheduleDetailSeq:
+                                    type: integer
+                                    description: '경기 일정 상세 시퀀스'
+                                  divisionEn:
+                                    type: string
+                                    description: '부문 영어명'
+                                  divisionKo:
+                                    type: string
+                                    description: '부문 한글명'
+                                  divisionCategoryEn:
+                                    type: string
+                                    description: '부문 카테고리 영어명'
+                                  divisionCategoryKo:
+                                    type: string
+                                    description: '부문 카테고리 한글명'
+                                  departmentEn:
+                                    type: string
+                                    description: '부서 영어명'
+                                  departmentKo:
+                                    type: string
+                                    description: '부서 한글명'
+                                  matchStyleTypeEn:
+                                    type: string
+                                    description: '경기 방식 영어명'
+                                  matchStyleTypeKo:
+                                    type: string
+                                    description: '경기 방식 한글명'
+                                  phase:
+                                    type: string
+                                    description: '경기 단계'
+                                  session:
+                                    type: integer
+                                    description: '세션 번호'
+                                  endMatchCount:
+                                    type: integer
+                                    description: '종료된 경기 개수'
+                                  gameCount:
+                                    type: integer
+                                    description: '전체 경기 개수'
+                                  refereeGroupName:
+                                    type: string
+                                    description: '심판 그룹 이름'
+                  error:
+                    type: string
+                    nullable: true
+                    example: null
+              examples:
+                defaultResponse:
+                  summary: Default Example
+                  value:
+                    success: true
+                    data:
+                      schedules:
+                        - competitionDay: 1
+                          sessionGroup: 1
+                          startTime: ""
+                          sessions:
+                            - competitionScheduleDetailSeq: 4529
+                              divisionEn: "WT Recognized Poomsae"
+                              divisionKo: "WT 공인품새룰"
+                              divisionCategoryEn: "Individual female"
+                              divisionCategoryKo: "여자개인"
+                              departmentEn: "Under 30"
+                              departmentKo: "30세 이하"
+                              matchStyleTypeEn: "Cutoff"
+                              matchStyleTypeKo: "컷오프"
+                              phase: "SF-A"
+                              session: 101
+                              endMatchCount: 0
+                              gameCount: 17
+                              refereeGroupName: "C"
+                        - competitionDay: 2
+                          sessionGroup: 1
+                          startTime: ""
+                          sessions:
+                            - competitionScheduleDetailSeq: 4542
+                              divisionEn: "WT Recognized Poomsae"
+                              divisionKo: "WT 공인품새룰"
+                              divisionCategoryEn: "Team male"
+                              divisionCategoryKo: "남자단체"
+                              departmentEn: "Under 30"
+                              departmentKo: "30세 이하"
+                              matchStyleTypeEn: "Cutoff+Tournament"
+                              matchStyleTypeKo: "컷오프+토너먼트"
+                              phase: "SF-A"
+                              session: 101
+                              endMatchCount: 0
+                              gameCount: 11
+                              refereeGroupName: "B"
+                    error: null
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml/#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+
+  /competitions/{competitionSeq}/schedule/referee-groups/detail/{scheduleSeq}:
+    get:
+      summary: 심판 조 스케줄
+      tags:
+        - 심판조 스케줄
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: scheduleSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 심판 조 스케줄 상세 API의 competitionScheduleDetailSeq
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PsRefereeGroupScheduleDetailResponseDTO'
+              examples:
+                defaultResponse:
+                  $ref: '#/components/examples/PsRefereeGroupScheduleDetailResponseDTO'
+
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml/#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+
+  /competitions/{competitionSeq}/schedule/referee-groups/detail/group/{scheduleSeq}:
+    put:
+      summary: 스케줄 심판 조 수정
+      tags:
+        - 심판조 스케줄
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: scheduleSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 심판 조 스케줄 상세 API의 competitionScheduleDetailSeq
+      requestBody:
+        description: 요청 페이로드
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - refereeGroupSeq
+              properties:
+                refereeGroupSeq:
+                  type: integer
+                  description: '심판 그룹 시퀀스'
+            examples:
+              defaultRequest:
+                summary: Default Request
+                value:
+                  refereeGroupSeq: 1
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PsRefereeGroupScheduleDetailResponseDTO'
+              examples:
+                defaultResponse:
+                  $ref: '#/components/examples/PsRefereeGroupScheduleDetailResponseDTO'
+
+                DENY_CHANGE_REFEREE_GROUP_SESSION_IS_START:
+                  $ref: '../../openapi.yml/#/components/examples/DENY_CHANGE_REFEREE_GROUP_SESSION_IS_START'
+                DENY_CHANGE_REFEREE_GROUP_OVERLAP:
+                  $ref: '../../openapi.yml/#/components/examples/DENY_CHANGE_REFEREE_GROUP_OVERLAP'
+                DENY_CHANGE_REFEREE_GROUP_SAME_SESSION:
+                  $ref: '../../openapi.yml/#/components/examples/DENY_CHANGE_REFEREE_GROUP_SAME_SESSION'
+                DENY_CHANGE_REFEREE_MATCH_IS_NOT_WAITING:
+                  $ref: '../../openapi.yml/#/components/examples/DENY_CHANGE_REFEREE_MATCH_IS_NOT_WAITING'
+                ITEM_NOT_FOUND:
+                  $ref: '../../openapi.yml/#/components/examples/ITEM_NOT_FOUND'
+                COMPETITION_MATCH_NOT_FOUND:
+                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml/#/components/responses/Error'
+              examples:
+                REFEREE_GROUP_IS_NOT_EXISTS:
+                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+
+
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml/#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+
+
+  /competitions/{competitionSeq}/schedule/referee-groups/detail/referee/{scheduleSeq}:
+    patch:
+      summary: 매치 심판 수정
+      tags:
+        - 심판조 스케줄
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: scheduleSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 심판 조 스케줄 상세 API의 competitionScheduleDetailSeq
+      requestBody:
+        description: 요청 페이로드
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - matches
+              properties:
+                matches:
+                  type: array
+                  description: '매치 및 심판 매핑 목록'
+                  items:
+                    type: object
+                    required:
+                      - competitionMatchSeq
+                      - refereeMappings
+                    properties:
+                      competitionMatchSeq:
+                        type: integer
+                        description: '경기 시퀀스'
+                      refereeMappings:
+                        type: array
+                        description: '매치-심판 매핑 정보'
+                        items:
+                          type: object
+                          required:
+                            - matchRefereeMappingSeq
+                            - refereeSeq
+                          properties:
+                            matchRefereeMappingSeq:
+                              type: integer
+                              description: '매치-심판 매핑 시퀀스'
+                            refereeSeq:
+                              type: integer
+                              description: '심판 시퀀스'
+            examples:
+              defaultRequest:
+                summary: Default Request
+                value:
+                  matches:
+                    - competitionMatchSeq: 20087
+                      refereeMappings:
+                        - matchRefereeMappingSeq: 1106
+                          refereeSeq: 6818
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PsRefereeGroupScheduleDetailResponseDTO'
+
+
+              examples:
+                  defaultResponse:
+                    $ref: '#/components/examples/PsRefereeGroupScheduleDetailResponseDTO'
+                  ITEM_NOT_FOUND:
+                    $ref: '../../openapi.yml/#/components/examples/ITEM_NOT_FOUND'
+                  COMPETITION_MATCH_NOT_FOUND:
+                    $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+                  DENY_CHANGE_REFEREE_MATCH_IS_NOT_WAITING:
+                    $ref: '../../openapi.yml/#/components/examples/DENY_CHANGE_REFEREE_MATCH_IS_NOT_WAITING'
+                  ALREADY_EXIST_REFEREE:
+                    $ref: '../../openapi.yml/#/components/examples/ALREADY_EXIST_REFEREE'
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                WRONG_SCHEDULE_MATCH:
+                  $ref: '../../openapi.yml/#/components/examples/WRONG_SCHEDULE_MATCH'
+                DENY_CHANGE_REFEREE_WRONG_SEQ:
+                  $ref: '../../openapi.yml/#/components/examples/DENY_CHANGE_REFEREE_WRONG_SEQ'
+                DENY_CHANGE_REFEREE_WRONG_REFEREE_SEQ:
+                  $ref: '../../openapi.yml/#/components/examples/DENY_CHANGE_REFEREE_WRONG_REFEREE_SEQ'
+
+components:
+  schemas:
+    PsRefereeGroupScheduleDetailResponseDTO:
+      type: object
+      properties:
+        success:
+          type: boolean
+        data:
+          type: object
+          required:
+            - refereesPerGroup
+            - refereeTypes
+            - scheduleDetail
+            - matches
+          properties:
+            refereesPerGroup:
+              type: integer
+              description: '그룹당 심판 수'
+            refereeTypes:
+              type: array
+              description: '할당 가능한 심판 타입 목록<br>그룹 당 심판 수만큼 아래 배열에서 가져온다.(순서 보장)'
+              items:
+                type: string
+                enum:
+                  - REF_CR
+                  - REF_J1
+                  - REF_J2
+                  - REF_J3
+                  - REF_J4
+                  - REF_J5
+                  - REF_J6
+            scheduleDetail:
+              type: object
+              required:
+                - sessionGroup
+                - competitionDay
+                - courtCount
+                - refereeGroupSeq
+                - startTime
+                - departmentEn
+                - departmentKo
+                - divisionCategoryEn
+                - divisionCategoryKo
+                - matchStyleTypeEn
+                - matchStyleTypeKo
+                - matchStyleTypeForPhase
+                - phase
+              properties:
+                sessionGroup:
+                  type: integer
+                  description: '세션 그룹 번호'
+                competitionDay:
+                  type: integer
+                  description: '대회 일차'
+                courtCount:
+                  type: integer
+                  description: '코트 수'
+                refereeGroupSeq:
+                  type: integer
+                  description: '심판 그룹 시퀀스'
+                startTime:
+                  type: string
+                  description: '시작 시간'
+                departmentEn:
+                  type: string
+                  description: '부서 영어명'
+                departmentKo:
+                  type: string
+                  description: '부서 한글명'
+                divisionCategoryEn:
+                  type: string
+                  description: '부문 카테고리 영어명'
+                divisionCategoryKo:
+                  type: string
+                  description: '부문 카테고리 한글명'
+                matchStyleTypeEn:
+                  type: string
+                  description: '경기 방식 영어명'
+                matchStyleTypeKo:
+                  type: string
+                  description: '경기 방식 한글명'
+                matchStyleTypeForPhase:
+                  type: string
+                  description: '단계별 경기 방식 코드'
+                phase:
+                  type: string
+                  description: '경기 단계'
+            matches:
+              type: array
+              description: '매치 목록'
+              items:
+                type: object
+                required:
+                  - competitionMatchSeq
+                  - matchNumber
+                  - court
+                  - departmentEn
+                  - departmentKo
+                  - matchStyleTypeEn
+                  - matchStyleTypeKo
+                  - matchStatus
+                  - competitors
+                  - referees
+                properties:
+                  competitionMatchSeq:
+                    type: integer
+                    description: '경기 시퀀스'
+                  matchNumber:
+                    type: integer
+                    description: '매치 번호'
+                  court:
+                    type: integer
+                    description: '코트 번호'
+                  departmentEn:
+                    type: string
+                    description: '부서 영어명'
+                  departmentKo:
+                    type: string
+                    description: '부서 한글명'
+                  matchStyleTypeEn:
+                    type: string
+                    description: '경기 방식 영어명'
+                  matchStyleTypeKo:
+                    type: string
+                    description: '경기 방식 한글명'
+                  matchStatus:
+                    type: string
+                    description: '매치 상태'
+                  competitors:
+                    type: array
+                    description: '참가자 목록'
+                    items:
+                      type: object
+                      required:
+                        - matchSideType
+                        - country
+                        - givenName
+                        - familyName
+                      properties:
+                        matchSideType:
+                          type: string
+                          description: '매치 측 타입'
+                        country:
+                          type: string
+                          description: '국가 코드'
+                        givenName:
+                          type: string
+                          description: '이름'
+                        familyName:
+                          type: string
+                          description: '성'
+                  referees:
+                    type: object
+                    description: '매치별 심판 배정<br><b>키값은 refereeTypes 값이 들어간다</b>'
+                    properties:
+                      <refereeTypes>:
+                        type: object
+                        required:
+                          - matchRefereeMappingSeq
+                          - refereeSeq
+                          - groupName
+                          - givenName
+                          - familyName
+                          - refereeType
+                        properties:
+                          matchRefereeMappingSeq:
+                            type: integer
+                            description: '매치-심판 매핑 시퀀스'
+                          refereeSeq:
+                            type: integer
+                            description: '심판 시퀀스'
+                          groupName:
+                            type: string
+                            description: '그룹 이름'
+                          givenName:
+                            type: string
+                            description: '이름'
+                          familyName:
+                            type: string
+                            description: '성'
+                          refereeType:
+                            type: string
+                            description: '심판 타입'
+        error:
+          type: string
+          nullable: true
+          example: null
+  examples:
+    PsRefereeGroupScheduleDetailResponseDTO:
+      summary: Default Example
+      value:
+        success: true
+        data:
+          refereesPerGroup: 3
+          refereeTypes: [ "REF_CR", "REF_J1", "REF_J2" ]
+          scheduleDetail:
+            sessionGroup: 11
+            competitionDay: 1
+            courtCount: 5
+            refereeGroupSeq: 31
+            startTime: ""
+            departmentEn: "Under 30"
+            departmentKo: "30세 이하"
+            divisionCategoryEn: "Individual female"
+            divisionCategoryKo: "여자개인"
+            matchStyleTypeEn: "Cutoff"
+            matchStyleTypeKo: "컷오프"
+            matchStyleTypeForPhase: "CUTOFF"
+            phase: "Pre-A"
+          matches:
+            - competitionMatchSeq: 20087
+              matchNumber: 2001
+              court: 2
+              departmentEn: "Under 30"
+              departmentKo: "30세 이하"
+              matchStyleTypeEn: "Cutoff"
+              matchStyleTypeKo: "컷오프"
+              matchStatus: "WAITING"
+              competitors:
+                - matchSideType: "CUTOFF"
+                  country: "CHN"
+                  givenName: "Min-seo"
+                  familyName: "NAM"
+              referees:
+                REF_J2:
+                  matchRefereeMappingSeq: 1106
+                  refereeSeq: 6812
+                  groupName: "D"
+                  givenName: "Olivia"
+                  familyName: "Ortiz"
+                  refereeType: "REF_J2"
+                REF_J1:
+                  matchRefereeMappingSeq: 1105
+                  refereeSeq: 6803
+                  groupName: "D"
+                  givenName: "May Mohamed"
+                  familyName: "El Sayed"
+                  refereeType: "REF_J1"
+                REF_CR:
+                  matchRefereeMappingSeq: 1104
+                  refereeSeq: 6815
+                  groupName: "D"
+                  givenName: "Ari Krister"
+                  familyName: "Lindroos"
+                  refereeType: "REF_CR"
+        error: null
