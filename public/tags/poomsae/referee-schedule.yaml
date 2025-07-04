@@ -81,6 +81,7 @@ paths:
                   value:
                     success: true
                     data:
+                      refereesPerGroup: 3
                       refereeGroups:
                         - refereeGroupingSeq: 28
                           groupName: "A"
