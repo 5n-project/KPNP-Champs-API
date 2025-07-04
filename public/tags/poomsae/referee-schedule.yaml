@@ -23,8 +23,12 @@ paths:
                   data:
                     type: object
                     required:
+                      - refereesPerGroup
                       - refereeGroups
                     properties:
+                      refereesPerGroup:
+                        type: integer
+                        description: '그룹당 심판 수'
                       refereeGroups:
                         type: array
                         items:
@@ -107,7 +111,7 @@ paths:
 
   /competitions/{competitionSeq}/schedule/referee-groups:
     get:
-      summary: 심판 조 스케줄 상세
+      summary: 심판 조 스케줄
       tags:
         - 심판조 스케줄
       parameters:
@@ -272,7 +276,7 @@ paths:
 
   /competitions/{competitionSeq}/schedule/referee-groups/detail/{scheduleSeq}:
     get:
-      summary: 심판 조 스케줄
+      summary: 심판 조 스케줄 상세
       tags:
         - 심판조 스케줄
       parameters:
@@ -286,7 +290,7 @@ paths:
           required: true
           schema:
             type: integer
-          description: 심판 조 스케줄 상세 API의 competitionScheduleDetailSeq
+          description: 심판 조 스케줄 API의 competitionScheduleDetailSeq
       responses:
         '200':
           description: 성공
@@ -324,7 +328,7 @@ paths:
           required: true
           schema:
             type: integer
-          description: 심판 조 스케줄 상세 API의 competitionScheduleDetailSeq
+          description: 심판 조 스케줄 API의 competitionScheduleDetailSeq
       requestBody:
         description: 요청 페이로드
         required: true
@@ -404,7 +408,7 @@ paths:
           required: true
           schema:
             type: integer
-          description: 심판 조 스케줄 상세 API의 competitionScheduleDetailSeq
+          description: 심판 조 스케줄 API의 competitionScheduleDetailSeq
       requestBody:
         description: 요청 페이로드
         required: true
@@ -628,12 +632,9 @@ components:
                         country:
                           type: string
                           description: '국가 코드'
-                        givenName:
+                        name:
                           type: string
-                          description: '이름'
-                        familyName:
-                          type: string
-                          description: '성'
+                          description: '이름, 팀전의 경우 팀 이름'
                   referees:
                     type: object
                     description: '매치별 심판 배정<br><b>키값은 refereeTypes 값이 들어간다</b>'
@@ -704,8 +705,7 @@ components:
               competitors:
                 - matchSideType: "CUTOFF"
                   country: "CHN"
-                  givenName: "Min-seo"
-                  familyName: "NAM"
+                  name: "Min-seo NAM"
               referees:
                 REF_J2:
                   matchRefereeMappingSeq: 1106
