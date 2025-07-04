@@ -101,7 +101,7 @@ paths:
                           description: 경기 유형 (TOURNAMENT, CUTOFF)
                         resultDecision:
                           type: string
-                          description: '경기 결과 코드 (토너먼트 : BYE, RSC 등, 컷오프 : 등수 or FAIL)'
+                          description: '경기 결과 코드 (토너먼트 : BYE, RSC 등, 컷오프 : PASS or FAIL)'
                         matchCompetitorList:
                           type: array
                           items:
@@ -146,7 +146,7 @@ paths:
                                 description: 경기 사이드 (HOME, AWAY, CUTOFF)
                               resultType:
                                 type: string
-                                description: '경기 결과 (토너먼트 : WIN, LOSS 컷오프 : 랭킹 or FAIL)'
+                                description: '경기 결과 (토너먼트 : WIN, LOSS 컷오프 : 등수)'
                   error:
                     type: string
                     nullable: true
@@ -504,7 +504,7 @@ paths:
                           description: 경기 유형 (TOURNAMENT, CUTOFF)
                         resultDecision:
                           type: string
-                          description: '경기 결과 코드 (토너먼트 : BYE, RSC 등, 컷오프 : 등수 or FAIL)'
+                          description: '경기 결과 코드 (토너먼트 : BYE, RSC 등, 컷오프 : PASS or FAIL)'
                         matchCompetitorList:
                           type: array
                           items:
@@ -572,7 +572,7 @@ paths:
                         matchMinTime: 90
                         matchMaxTime: 200
                         matchStyleType: "CUTOFF"
-                        resultDecision: "BYE"
+                        resultDecision: "PASS"
                         matchCompetitorList:
                           - matchCompetitorDetailSeq: 4899
                             competitor: 1
@@ -595,3 +595,1404 @@ paths:
               examples:
                 IS_NOT_AUTHORIZED:
                   $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+
+  /competitions/{competitionSeq}/operation/matches/{competitionMatchPsSeq}/scores:
+    get:
+      summary: 운영에 해당 경기 선수별 점수 상세 조회
+      tags:
+        - 운영 - 경기
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 대회의 고유 시퀀스
+        - name: competitionMatchPsSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 경기의 고유 시퀀스
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    required:
+                      - competitionMatchPsSeq
+                      - matNumber
+                      - matchNumber
+                      - divisionCode
+                      - divisionNameKo
+                      - divisionNameEn
+                      - departmentCode
+                      - departmentNameKo
+                      - departmentNameEn
+                      - divisionCategoryCode
+                      - divisionCategoryNameKo
+                      - divisionCategoryNameEn
+                      - matchStyleCode
+                      - matchStyleNameKo
+                      - matchStyleNameEn
+                      - phase
+                      - phaseLabel
+                      - resultDecision
+                      - matchCompetitorList
+                    properties:
+                      competitionMatchPsSeq:
+                        type: integer
+                        description: 경기 고유 식별자
+                      firstPoomsaeType:
+                        type: string
+                        description: 첫 번째 품새 코드
+                      firstPoomsaeNameKo:
+                        type: string
+                        description: 첫 번째 품새 한글명
+                      firstPoomsaeNameEn:
+                        type: string
+                        description: 첫 번째 품새 영문명
+                      secondPoomsaeType:
+                        type: string
+                        description: 두 번째 품새 코드
+                      secondPoomsaeNameKo:
+                        type: string
+                        description: 두 번째 품새 한글명
+                      secondPoomsaeNameEn:
+                        type: string
+                        description: 두 번째 품새 영문명
+                      matNumber:
+                        type: integer
+                        description: 코트 번호
+                      matchNumber:
+                        type: integer
+                        description: 경기 번호
+                      divisionCode:
+                        type: string
+                        description: 품새 룰 코드
+                      divisionNameKo:
+                        type: string
+                        description: 품새 룰 한글명
+                      divisionNameEn:
+                        type: string
+                        description: 품새 룰 영문명
+                      departmentCode:
+                        type: string
+                        description: 부 코드
+                      departmentNameKo:
+                        type: string
+                        description: 부 한글명
+                      departmentNameEn:
+                        type: string
+                        description: 부 영문명
+                      divisionCategoryCode:
+                        type: string
+                        description: 대회 유형 코드
+                      divisionCategoryNameKo:
+                        type: string
+                        description: 대회 유형 한글명
+                      divisionCategoryNameEn:
+                        type: string
+                        description: 대회 유형 영문명
+                      matchStyleCode:
+                        type: string
+                        description: 경기 방식 코드 (TOURNAMENT, CUTOFF)
+                      matchStyleNameKo:
+                        type: string
+                        description: 경기 방식 한글명
+                      matchStyleNameEn:
+                        type: string
+                        description: 경기 방식 영문명
+                      phase:
+                        type: string
+                        description:
+                          '경기 단계 (예: R64)'
+                      phaseLabel:
+                        type: string
+                        description:
+                          '경기 단계 라벨 (예: R64-2)'
+                      resultDecision:
+                        type: string
+                        description: 경기 결과
+                      matchCompetitorList:
+                        type: array
+                        items:
+                          type: object
+                          required:
+                            - matchCompetitorDetailSeq
+                            - competitor
+                            - competitorName
+                            - countryCode
+                            - matchSideType
+                            - resultType
+                            - poomsaeSequenceScores
+                            - poomsaeSequenceTotalScore
+                          properties:
+                            matchCompetitorDetailSeq:
+                              type: integer
+                              description: 경기별 선수 상세 시퀀스
+                            competitor:
+                              type: integer
+                              description: 선수 번호
+                            competitorName:
+                              type: string
+                              description: 선수명 (또는 팀명)
+                            countryCode:
+                              type: string
+                              description: 국가 코드
+                            matchSideType:
+                              type: string
+                              description: 경기 사이드 (HOME, AWAY, CUTOFF)
+                            penalty:
+                              type: number
+                              format: double
+                              nullable: true
+                              description: 감점 (없으면 null)
+                            resultType:
+                              type: string
+                              description: 경기 결과 타입 (WIN, LOSS, 등수)
+                            cutoffRanking:
+                              type: integer
+                              nullable: true
+                              description: 컷오프 랭킹 (없으면 null)
+                            poomsaeSequenceScores:
+                              type: array
+                              description: 품새 시퀀스별 점수
+                              items:
+                                type: object
+                                required:
+                                  - poomsaeSequenceType
+                                  - scoringCriteriaScores
+                                properties:
+                                  poomsaeSequenceType:
+                                    type: string
+                                    description: 품새 시퀀스 타입 (P1, P2)
+                                  scoringCriteriaScores:
+                                    type: array
+                                    description: 심사 기준별 점수 목록
+                                    items:
+                                      type: object
+                                      required:
+                                        - poomsaeScoringCriteriaType
+                                      properties:
+                                        poomsaeScoringCriteriaType:
+                                          type: string
+                                          description: '심사 기준 타입 (공인 : ACCURACY, PRESENTATION, 자유 :TECHNICAL_SKILLS, PRESENTATION_FREESTYLE)'
+                                        score:
+                                          type: number
+                                          format: double
+                                          description: 점수
+                                  totalScore:
+                                    type: number
+                                    format: double
+                                    description: 품새 시퀀스별 총점
+                                  totalAverageScore:
+                                    type: number
+                                    format: double
+                                    description: 품새 시퀀스별 평균 점수
+                            poomsaeSequenceTotalScore:
+                              type: object
+                              description: 선수별 품새 시퀀스 총점
+                              required:
+                                - scoringCriteriaScores
+                              properties:
+                                scoringCriteriaScores:
+                                  type: array
+                                  items:
+                                    type: object
+                                    required:
+                                      - poomsaeScoringCriteriaType
+                                    properties:
+                                      poomsaeScoringCriteriaType:
+                                        type: string
+                                        description: '심사 기준 타입 (공인 : ACCURACY, PRESENTATION, 자유 :TECHNICAL_SKILLS, PRESENTATION_FREESTYLE)'
+                                      score:
+                                        type: number
+                                        format: double
+                                        description: 점수
+                                totalScore:
+                                  type: number
+                                  format: double
+                                  description: 총점
+                                totalAverageScore:
+                                  type: number
+                                  format: double
+                                  description: 평균 점수
+                  error:
+                    type: string
+                    nullable: true
+              examples:
+                defaultResponse:
+                  summary: 성공 응답
+                  value:
+                    success: true
+                    data:
+                      competitionMatchPsSeq: 20024
+                      firstPoomsaeType: "TAEGEUK_7_JANG"
+                      firstPoomsaeNameKo: "태극 7장"
+                      firstPoomsaeNameEn: "Taegeuk 7 Jang"
+                      secondPoomsaeType: "TAEGEUK_8_JANG"
+                      secondPoomsaeNameKo: "태극 8장"
+                      secondPoomsaeNameEn: "Taegeuk 8 Jang"
+                      matNumber: 1
+                      matchNumber: 1001
+                      divisionCode: "WT_RECOGNIZED_POOMSAE"
+                      divisionNameKo: "WT 공인품새룰"
+                      divisionNameEn: "WT Recognized Poomsae"
+                      departmentCode: "UNDER_30"
+                      departmentNameKo: "30세 이하"
+                      departmentNameEn: "Under 30"
+                      divisionCategoryCode: "INDIVIDUAL_MALE"
+                      divisionCategoryNameKo: "남자개인"
+                      divisionCategoryNameEn: "Individual male"
+                      matchStyleCode: "TOURNAMENT"
+                      matchStyleNameKo: "토너먼트"
+                      matchStyleNameEn: "Tournament"
+                      phase: "R64"
+                      phaseLabel: "R64-2"
+                      resultDecision: "RSC"
+                      matchCompetitorList:
+                        - matchCompetitorDetailSeq: 5299
+                          competitor: 118
+                          competitorName: "NAM Min-seo"
+                          countryCode: "KOR"
+                          matchSideType: "HOME"
+                          penalty: null
+                          resultType: "LOSS"
+                          cutoffRanking: null
+                          poomsaeSequenceScores:
+                            - poomsaeSequenceType: "P1"
+                              scoringCriteriaScores:
+                                - poomsaeScoringCriteriaType: "ACCURACY"
+                                  score: 3.433
+                                - poomsaeScoringCriteriaType: "PRESENTATION"
+                                  score: 4.000
+                              totalScore: 21.400
+                              totalAverageScore: 7.133
+                            - poomsaeSequenceType: "P2"
+                              scoringCriteriaScores:
+                                - poomsaeScoringCriteriaType: "ACCURACY"
+                                  score: 3.400
+                                - poomsaeScoringCriteriaType: "PRESENTATION"
+                                  score: 3.666
+                              totalScore: 20.300
+                              totalAverageScore: 6.766
+                          poomsaeSequenceTotalScore:
+                            scoringCriteriaScores:
+                              - poomsaeScoringCriteriaType: "ACCURACY"
+                                score: 6.833
+                              - poomsaeScoringCriteriaType: "PRESENTATION"
+                                score: 7.666
+                            totalScore: 41.700
+                            totalAverageScore: 13.899
+                        - matchCompetitorDetailSeq: 5298
+                          competitor: 144
+                          competitorName: "DAM Min-seo"
+                          countryCode: "KOR"
+                          matchSideType: "AWAY"
+                          penalty: null
+                          resultType: "WIN"
+                          cutoffRanking: null
+                          poomsaeSequenceScores:
+                            - poomsaeSequenceType: "P1"
+                              scoringCriteriaScores:
+                                - poomsaeScoringCriteriaType: "ACCURACY"
+                                  score: 3.566
+                                - poomsaeScoringCriteriaType: "PRESENTATION"
+                                  score: 4.066
+                              totalScore: 21.100
+                              totalAverageScore: 7.032
+                            - poomsaeSequenceType: "P2"
+                              scoringCriteriaScores:
+                                - poomsaeScoringCriteriaType: "ACCURACY"
+                                  score: 3.633
+                                - poomsaeScoringCriteriaType: "PRESENTATION"
+                                  score: 4.033
+                              totalScore: 23.000
+                              totalAverageScore: 7.666
+                          poomsaeSequenceTotalScore:
+                            scoringCriteriaScores:
+                              - poomsaeScoringCriteriaType: "ACCURACY"
+                                score: 7.199
+                              - poomsaeScoringCriteriaType: "PRESENTATION"
+                                score: 8.099
+                            totalScore: 44.100
+                            totalAverageScore: 14.698
+                    error: null
+                ITEM_NOT_FOUND:
+                  $ref: '../../openapi.yml/#/components/examples/ITEM_NOT_FOUND'
+                MATCH_COMPETITOR_DETAIL_NOT_FOUND:
+                  $ref: '../../openapi.yml/#/components/examples/MATCH_COMPETITOR_DETAIL_NOT_FOUND'
+                COMPETITION_MATCH_NOT_FOUND:
+                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml/#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml/#/components/responses/Error'
+              examples:
+                INVALID_TYPE_ERROR:
+                  $ref: '../../openapi.yml#/components/examples/INVALID_TYPE_ERROR'
+
+  /competitions/{competitionSeq}/operation/matches/{competitionMatchPsSeq}/completed-match/referee/scores:
+    get:
+      summary: 운영에 완료된 경기에 해당하는 심판별 점수 진행 조회
+      tags:
+        - 운영 - 경기
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 대회의 고유 시퀀스
+        - name: competitionMatchPsSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 경기의 고유 시퀀스
+        - name: poomsaeSequence
+          in: query
+          required: false
+          schema:
+            type: string
+            default: "P2"
+          description:
+            '품새 시퀀스 타입 (예: P1, P2) 최초 페이지 들어왔을때는 P2 보내야함'
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    required:
+                      - competitionMatchPsSeq
+                      - poomsaeSequenceType
+                      - poomsaeType
+                      - poomsaeNameKo
+                      - poomsaeNameEn
+                      - matchRefereeList
+                      - scoringCriteriaList
+                      - matchCompetitorList
+                    properties:
+                      competitionMatchPsSeq:
+                        type: integer
+                        description: 경기 고유 시퀀스
+                      poomsaeSequenceType:
+                        type: string
+                        description: 품새 시퀀스 타입 (P1, P2)
+                      poomsaeType:
+                        type: string
+                        description: 품새 코드
+                      poomsaeNameKo:
+                        type: string
+                        description: 품새 한글명
+                      poomsaeNameEn:
+                        type: string
+                        description: 품새 영문명
+                      matchRefereeList:
+                        type: array
+                        description: 심판 목록
+                        items:
+                          type: object
+                          required:
+                            - matchRefereeMappingSeq
+                            - refereeType
+                          properties:
+                            matchRefereeMappingSeq:
+                              type: integer
+                              description: 경기 심판 매핑 시퀀스
+                            refereeType:
+                              type: string
+                              description: 심판 유형 (REF_CR, REF_J1, REF_J2 등)
+                      scoringCriteriaList:
+                        type: array
+                        description: 심사 기준 목록
+                        items:
+                          type: object
+                          required:
+                            - poomsaeScoringCriteriaType
+                          properties:
+                            poomsaeScoringCriteriaType:
+                              type: string
+                              description: '심사 기준 타입 (공인 : ACCURACY, PRESENTATION, 자유 :TECHNICAL_SKILLS, PRESENTATION_FREESTYLE)'
+                      matchCompetitorList:
+                        type: array
+                        description: 선수별 점수 목록
+                        items:
+                          type: object
+                          required:
+                            - matchCompetitorDetailSeq
+                            - competitor
+                            - matchSideType
+                            - poomsaeScoringCriteriaScores
+                            - poomsaeScoringCriteriaTotalScore
+                          properties:
+                            matchCompetitorDetailSeq:
+                              type: integer
+                              description: 경기별 선수 상세 시퀀스
+                            competitor:
+                              type: integer
+                              description: 선수 번호
+                            matchSideType:
+                              type: string
+                              description: 경기 사이드 (HOME, AWAY, CUTOFF)
+                            poomsaeScoringCriteriaScores:
+                              type: array
+                              description: 심사 기준별 점수 목록
+                              items:
+                                type: object
+                                required:
+                                  - poomsaeScoringCriteriaType
+                                  - refereeScores
+                                properties:
+                                  poomsaeScoringCriteriaType:
+                                    type: string
+                                    description: 심사 기준 타입
+                                  refereeScores:
+                                    type: array
+                                    description: 심판별 점수 목록
+                                    items:
+                                      type: object
+                                      required:
+                                        - matchRefereeMappingSeq
+                                        - refereeType
+                                      properties:
+                                        matchRefereeMappingSeq:
+                                          type: integer
+                                          description: 경기 심판 매핑 시퀀스
+                                        refereeType:
+                                          type: string
+                                          description: 심판 유형 (REF_CR, REF_J1, REF_J2 등)
+                                        score:
+                                          type: number
+                                          format: double
+                                          description: 심판 점수
+                                  totalScore:
+                                    type: number
+                                    format: double
+                                    description: 심사 기준별 총점
+                                  totalAverageScore:
+                                    type: number
+                                    format: double
+                                    description: 심사 기준별 평균 점수
+                            poomsaeScoringCriteriaTotalScore:
+                              type: object
+                              required:
+                                - refereeScores
+                              properties:
+                                refereeScores:
+                                  type: array
+                                  description: 심판별 총점 목록
+                                  items:
+                                    type: object
+                                    required:
+                                      - matchRefereeMappingSeq
+                                      - refereeType
+                                    properties:
+                                      matchRefereeMappingSeq:
+                                        type: integer
+                                        description: 경기 심판 매핑 시퀀스
+                                      refereeType:
+                                        type: string
+                                        description: 심판 유형 (REF_CR, REF_J1, REF_J2 등)
+                                      score:
+                                        type: number
+                                        format: double
+                                        description: 심판별 점수
+                                totalScore:
+                                  type: number
+                                  format: double
+                                  description: 총점
+                                totalAverageScore:
+                                  type: number
+                                  format: double
+                                  description: 평균 점수
+                                deductionScore:
+                                  type: number
+                                  format: double
+                                  description: 감점
+                                score:
+                                  type: number
+                                  format: double
+                                  nullable: true
+                                  description: 최종 점수
+                  error:
+                    type: string
+                    nullable: true
+              examples:
+                successResponse:
+                  summary: 성공 응답
+                  value:
+                    success: true
+                    data: {
+                      "competitionMatchPsSeq": 20024,
+                      "poomsaeSequenceType": "P1",
+                      "poomsaeType": "TAEGEUK_7_JANG",
+                      "poomsaeNameKo": "태극 7장",
+                      "poomsaeNameEn": "Taegeuk 7 Jang",
+                      "matchRefereeList": [
+                        {
+                          "matchRefereeMappingSeq": 915,
+                          "refereeType": "REF_CR"
+                        },
+                        {
+                          "matchRefereeMappingSeq": 916,
+                          "refereeType": "REF_J1"
+                        },
+                        {
+                          "matchRefereeMappingSeq": 917,
+                          "refereeType": "REF_J2"
+                        }
+                      ],
+                      "scoringCriteriaList": [
+                        {
+                          "poomsaeScoringCriteriaType": "ACCURACY"
+                        },
+                        {
+                          "poomsaeScoringCriteriaType": "PRESENTATION"
+                        }
+                      ],
+                      "matchCompetitorList": [
+                        {
+                          "matchCompetitorDetailSeq": 5299,
+                          "competitor": 118,
+                          "matchSideType": "HOME",
+                          "poomsaeScoringCriteriaScores": [
+                            {
+                              "poomsaeScoringCriteriaType": "ACCURACY",
+                              "refereeScores": [
+                                {
+                                  "matchRefereeMappingSeq": 915,
+                                  "refereeType": "REF_CR",
+                                  "score": 3.700
+                                },
+                                {
+                                  "matchRefereeMappingSeq": 916,
+                                  "refereeType": "REF_J1",
+                                  "score": 3.400
+                                },
+                                {
+                                  "matchRefereeMappingSeq": 917,
+                                  "refereeType": "REF_J2",
+                                  "score": 3.200
+                                }
+                              ],
+                              "totalScore": 10.300,
+                              "totalAverageScore": 3.433
+                            },
+                            {
+                              "poomsaeScoringCriteriaType": "PRESENTATION",
+                              "refereeScores": [
+                                {
+                                  "matchRefereeMappingSeq": 915,
+                                  "refereeType": "REF_CR",
+                                  "score": 4.200
+                                },
+                                {
+                                  "matchRefereeMappingSeq": 916,
+                                  "refereeType": "REF_J1",
+                                  "score": 4.300
+                                },
+                                {
+                                  "matchRefereeMappingSeq": 917,
+                                  "refereeType": "REF_J2",
+                                  "score": 3.500
+                                }
+                              ],
+                              "totalScore": 12.000,
+                              "totalAverageScore": 4.000
+                            }
+                          ],
+                          "poomsaeScoringCriteriaTotalScore": {
+                            "refereeScores": [
+                              {
+                                "matchRefereeMappingSeq": 915,
+                                "refereeType": "REF_CR",
+                                "score": 7.900
+                              },
+                              {
+                                "matchRefereeMappingSeq": 916,
+                                "refereeType": "REF_J1",
+                                "score": 7.700
+                              },
+                              {
+                                "matchRefereeMappingSeq": 917,
+                                "refereeType": "REF_J2",
+                                "score": 6.700
+                              }
+                            ],
+                            "totalScore": 22.300,
+                            "totalAverageScore": 7.433,
+                            "deductionScore": 0.300,
+                            "score": 7.133
+                          }
+                        },
+                        {
+                          "matchCompetitorDetailSeq": 5298,
+                          "competitor": 144,
+                          "matchSideType": "AWAY",
+                          "poomsaeScoringCriteriaScores": [
+                            {
+                              "poomsaeScoringCriteriaType": "ACCURACY",
+                              "refereeScores": [
+                                {
+                                  "matchRefereeMappingSeq": 915,
+                                  "refereeType": "REF_CR",
+                                  "score": 3.400
+                                },
+                                {
+                                  "matchRefereeMappingSeq": 916,
+                                  "refereeType": "REF_J1",
+                                  "score": 3.700
+                                },
+                                {
+                                  "matchRefereeMappingSeq": 917,
+                                  "refereeType": "REF_J2",
+                                  "score": 3.600
+                                }
+                              ],
+                              "totalScore": 10.700,
+                              "totalAverageScore": 3.566
+                            },
+                            {
+                              "poomsaeScoringCriteriaType": "PRESENTATION",
+                              "refereeScores": [
+                                {
+                                  "matchRefereeMappingSeq": 915,
+                                  "refereeType": "REF_CR",
+                                  "score": 4.300
+                                },
+                                {
+                                  "matchRefereeMappingSeq": 916,
+                                  "refereeType": "REF_J1",
+                                  "score": 4.000
+                                },
+                                {
+                                  "matchRefereeMappingSeq": 917,
+                                  "refereeType": "REF_J2",
+                                  "score": 3.900
+                                }
+                              ],
+                              "totalScore": 12.200,
+                              "totalAverageScore": 4.066
+                            }
+                          ],
+                          "poomsaeScoringCriteriaTotalScore": {
+                            "refereeScores": [
+                              {
+                                "matchRefereeMappingSeq": 915,
+                                "refereeType": "REF_CR",
+                                "score": 7.700
+                              },
+                              {
+                                "matchRefereeMappingSeq": 916,
+                                "refereeType": "REF_J1",
+                                "score": 7.700
+                              },
+                              {
+                                "matchRefereeMappingSeq": 917,
+                                "refereeType": "REF_J2",
+                                "score": 7.500
+                              }
+                            ],
+                            "totalScore": 22.900,
+                            "totalAverageScore": 7.632,
+                            "deductionScore": 0.600,
+                            "score": 7.032
+                          }
+                        }
+                      ]
+                    }
+                    error: null
+                ITEM_NOT_FOUND:
+                  $ref: '../../openapi.yml/#/components/examples/ITEM_NOT_FOUND'
+                MATCH_COMPETITOR_DETAIL_NOT_FOUND:
+                  $ref: '../../openapi.yml/#/components/examples/MATCH_COMPETITOR_DETAIL_NOT_FOUND'
+                COMPETITION_MATCH_NOT_FOUND:
+                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml#/components/responses/Error'
+              examples:
+                INVALID_TYPE_ERROR:
+                  $ref: '../../openapi.yml#/components/examples/INVALID_TYPE_ERROR'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+
+  /competitions/{competitionSeq}/operation/matches/{competitionMatchPsSeq}/ongoing-match/referee/scores:
+    get:
+      summary: '운영에 운영중인 경기에 해당하는 심판별 점수 진행 조회 (TODO: 심판 실시간 입장과 FOP 에서 현재 진행중인 품새 redis 구현 되면 해당 부분 추가해서 재 구현 해야함)'
+      tags:
+        - 운영 - 경기
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 대회의 고유 시퀀스
+        - name: competitionMatchPsSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 경기의 고유 시퀀스
+        - name: poomsaeSequence
+          in: query
+          required: false
+          schema:
+            type: string
+            default: "P2"
+          description:
+            '품새 시퀀스 타입 (예: P1, P2) 최초 페이지 들어왔을때는 P2 보내야함'
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    required:
+                      - competitionMatchPsSeq
+                      - poomsaeSequenceType
+                      - poomsaeType
+                      - poomsaeNameKo
+                      - poomsaeNameEn
+                      - matchRefereeList
+                      - scoringCriteriaList
+                      - matchCompetitorList
+                    properties:
+                      competitionMatchPsSeq:
+                        type: integer
+                        description: 경기 고유 시퀀스
+                      poomsaeSequenceType:
+                        type: string
+                        description: 품새 시퀀스 타입 (P1, P2)
+                      poomsaeType:
+                        type: string
+                        description: 품새 코드
+                      poomsaeNameKo:
+                        type: string
+                        description: 품새 한글명
+                      poomsaeNameEn:
+                        type: string
+                        description: 품새 영문명
+                      matchRefereeList:
+                        type: array
+                        description: 심판 목록
+                        items:
+                          type: object
+                          required:
+                            - matchRefereeMappingSeq
+                            - refereeType
+                            - isEnter
+                          properties:
+                            matchRefereeMappingSeq:
+                              type: integer
+                              description: 경기 심판 매핑 시퀀스
+                            refereeType:
+                              type: string
+                              description: 심판 유형 (REF_CR, REF_J1, REF_J2 등)
+                            isEnter:
+                              type: boolean
+                              description: 해당 심판이 입장했는지 안했는지 여부
+                      scoringCriteriaList:
+                        type: array
+                        description: 심사 기준 목록
+                        items:
+                          type: object
+                          required:
+                            - poomsaeScoringCriteriaType
+                          properties:
+                            poomsaeScoringCriteriaType:
+                              type: string
+                              description: '심사 기준 타입 (공인 : ACCURACY, PRESENTATION, 자유 :TECHNICAL_SKILLS, PRESENTATION_FREESTYLE)'
+                      matchCompetitorList:
+                        type: array
+                        description: 선수별 점수 목록
+                        items:
+                          type: object
+                          required:
+                            - matchCompetitorDetailSeq
+                            - competitor
+                            - matchSideType
+                            - poomsaeScoringCriteriaScores
+                            - poomsaeScoringCriteriaTotalScore
+                          properties:
+                            matchCompetitorDetailSeq:
+                              type: integer
+                              description: 경기별 선수 상세 시퀀스
+                            competitor:
+                              type: integer
+                              description: 선수 번호
+                            matchSideType:
+                              type: string
+                              description: 경기 사이드 (HOME, AWAY, CUTOFF)
+                            poomsaeScoringCriteriaScores:
+                              type: array
+                              description: 심사 기준별 점수 목록
+                              items:
+                                type: object
+                                required:
+                                  - poomsaeScoringCriteriaType
+                                  - refereeScores
+                                properties:
+                                  poomsaeScoringCriteriaType:
+                                    type: string
+                                    description: 심사 기준 타입
+                                  refereeScores:
+                                    type: array
+                                    description: 심판별 점수 목록
+                                    items:
+                                      type: object
+                                      required:
+                                        - matchRefereeMappingSeq
+                                        - refereeType
+                                      properties:
+                                        matchRefereeMappingSeq:
+                                          type: integer
+                                          description: 경기 심판 매핑 시퀀스
+                                        refereeType:
+                                          type: string
+                                          description: 심판 유형 (REF_CR, REF_J1, REF_J2 등)
+                                        score:
+                                          type: number
+                                          format: double
+                                          description: 심판 점수
+                                  totalScore:
+                                    type: number
+                                    format: double
+                                    description: 심사 기준별 총점
+                                  totalAverageScore:
+                                    type: number
+                                    format: double
+                                    description: 심사 기준별 평균 점수
+                            poomsaeScoringCriteriaTotalScore:
+                              type: object
+                              required:
+                                - refereeScores
+                              properties:
+                                refereeScores:
+                                  type: array
+                                  description: 심판별 총점 목록
+                                  items:
+                                    type: object
+                                    required:
+                                      - matchRefereeMappingSeq
+                                      - refereeType
+                                    properties:
+                                      matchRefereeMappingSeq:
+                                        type: integer
+                                        description: 경기 심판 매핑 시퀀스
+                                      refereeType:
+                                        type: string
+                                        description: 심판 유형 (REF_CR, REF_J1, REF_J2 등)
+                                      score:
+                                        type: number
+                                        format: double
+                                        description: 심판별 점수
+                                totalScore:
+                                  type: number
+                                  format: double
+                                  description: 총점
+                                totalAverageScore:
+                                  type: number
+                                  format: double
+                                  description: 평균 점수
+                                deductionScore:
+                                  type: number
+                                  format: double
+                                  description: 감점
+                                score:
+                                  type: number
+                                  format: double
+                                  nullable: true
+                                  description: 최종 점수
+                  error:
+                    type: string
+                    nullable: true
+              examples:
+                successResponse:
+                  summary: 성공 응답
+                  value:
+                    success: true
+                    data: {
+                      "competitionMatchPsSeq": 20024,
+                      "poomsaeSequenceType": "P1",
+                      "poomsaeType": "TAEGEUK_7_JANG",
+                      "poomsaeNameKo": "태극 7장",
+                      "poomsaeNameEn": "Taegeuk 7 Jang",
+                      "matchRefereeList": [
+                        {
+                          "matchRefereeMappingSeq": 915,
+                          "refereeType": "REF_CR",
+                          "isEnter": true
+                        },
+                        {
+                          "matchRefereeMappingSeq": 916,
+                          "refereeType": "REF_J1",
+                          "isEnter": true
+                        },
+                        {
+                          "matchRefereeMappingSeq": 917,
+                          "refereeType": "REF_J2",
+                          "isEnter": true
+                        }
+                      ],
+                      "scoringCriteriaList": [
+                        {
+                          "poomsaeScoringCriteriaType": "ACCURACY"
+                        },
+                        {
+                          "poomsaeScoringCriteriaType": "PRESENTATION"
+                        }
+                      ],
+                      "matchCompetitorList": [
+                        {
+                          "matchCompetitorDetailSeq": 5299,
+                          "competitor": 118,
+                          "matchSideType": "HOME",
+                          "poomsaeScoringCriteriaScores": [
+                            {
+                              "poomsaeScoringCriteriaType": "ACCURACY",
+                              "refereeScores": [
+                                {
+                                  "matchRefereeMappingSeq": 915,
+                                  "refereeType": "REF_CR",
+                                  "score": 3.700
+                                },
+                                {
+                                  "matchRefereeMappingSeq": 916,
+                                  "refereeType": "REF_J1",
+                                  "score": 3.400
+                                },
+                                {
+                                  "matchRefereeMappingSeq": 917,
+                                  "refereeType": "REF_J2",
+                                  "score": 3.200
+                                }
+                              ],
+                              "totalScore": 10.300,
+                              "totalAverageScore": 3.433
+                            },
+                            {
+                              "poomsaeScoringCriteriaType": "PRESENTATION",
+                              "refereeScores": [
+                                {
+                                  "matchRefereeMappingSeq": 915,
+                                  "refereeType": "REF_CR",
+                                  "score": 4.200
+                                },
+                                {
+                                  "matchRefereeMappingSeq": 916,
+                                  "refereeType": "REF_J1",
+                                  "score": 4.300
+                                },
+                                {
+                                  "matchRefereeMappingSeq": 917,
+                                  "refereeType": "REF_J2",
+                                  "score": 3.500
+                                }
+                              ],
+                              "totalScore": 12.000,
+                              "totalAverageScore": 4.000
+                            }
+                          ],
+                          "poomsaeScoringCriteriaTotalScore": {
+                            "refereeScores": [
+                              {
+                                "matchRefereeMappingSeq": 915,
+                                "refereeType": "REF_CR",
+                                "score": 7.900
+                              },
+                              {
+                                "matchRefereeMappingSeq": 916,
+                                "refereeType": "REF_J1",
+                                "score": 7.700
+                              },
+                              {
+                                "matchRefereeMappingSeq": 917,
+                                "refereeType": "REF_J2",
+                                "score": 6.700
+                              }
+                            ],
+                            "totalScore": 22.300,
+                            "totalAverageScore": 7.433,
+                            "deductionScore": 0.300,
+                            "score": 7.133
+                          }
+                        },
+                        {
+                          "matchCompetitorDetailSeq": 5298,
+                          "competitor": 144,
+                          "matchSideType": "AWAY",
+                          "poomsaeScoringCriteriaScores": [
+                            {
+                              "poomsaeScoringCriteriaType": "ACCURACY",
+                              "refereeScores": [
+                                {
+                                  "matchRefereeMappingSeq": 915,
+                                  "refereeType": "REF_CR",
+                                  "score": 3.400
+                                },
+                                {
+                                  "matchRefereeMappingSeq": 916,
+                                  "refereeType": "REF_J1",
+                                  "score": 3.700
+                                },
+                                {
+                                  "matchRefereeMappingSeq": 917,
+                                  "refereeType": "REF_J2",
+                                  "score": 3.600
+                                }
+                              ],
+                              "totalScore": 10.700,
+                              "totalAverageScore": 3.566
+                            },
+                            {
+                              "poomsaeScoringCriteriaType": "PRESENTATION",
+                              "refereeScores": [
+                                {
+                                  "matchRefereeMappingSeq": 915,
+                                  "refereeType": "REF_CR",
+                                  "score": 4.300
+                                },
+                                {
+                                  "matchRefereeMappingSeq": 916,
+                                  "refereeType": "REF_J1",
+                                  "score": 4.000
+                                },
+                                {
+                                  "matchRefereeMappingSeq": 917,
+                                  "refereeType": "REF_J2",
+                                  "score": 3.900
+                                }
+                              ],
+                              "totalScore": 12.200,
+                              "totalAverageScore": 4.066
+                            }
+                          ],
+                          "poomsaeScoringCriteriaTotalScore": {
+                            "refereeScores": [
+                              {
+                                "matchRefereeMappingSeq": 915,
+                                "refereeType": "REF_CR",
+                                "score": 7.700
+                              },
+                              {
+                                "matchRefereeMappingSeq": 916,
+                                "refereeType": "REF_J1",
+                                "score": 7.700
+                              },
+                              {
+                                "matchRefereeMappingSeq": 917,
+                                "refereeType": "REF_J2",
+                                "score": 7.500
+                              }
+                            ],
+                            "totalScore": 22.900,
+                            "totalAverageScore": 7.632,
+                            "deductionScore": 0.600,
+                            "score": 7.032
+                          }
+                        }
+                      ]
+                    }
+                    error: null
+                ITEM_NOT_FOUND:
+                  $ref: '../../openapi.yml/#/components/examples/ITEM_NOT_FOUND'
+                MATCH_COMPETITOR_DETAIL_NOT_FOUND:
+                  $ref: '../../openapi.yml/#/components/examples/MATCH_COMPETITOR_DETAIL_NOT_FOUND'
+                COMPETITION_MATCH_NOT_FOUND:
+                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml#/components/responses/Error'
+              examples:
+                INVALID_TYPE_ERROR:
+                  $ref: '../../openapi.yml#/components/examples/INVALID_TYPE_ERROR'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+
+  /competitions/{competitionSeq}/operation/matches/{competitionMatchPsSeq}/competitor/{matchCompetitorDetailSeq}/deduction:
+    post:
+      summary: 운영에 해당 경기 중 해당 라운드에 감점 부여 (notion 실시간 응답 데이터 문서 확인)
+      tags:
+        - 운영 - 경기
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 대회 고유 시퀀스
+        - name: competitionMatchPsSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 경기 고유 시퀀스
+        - name: matchCompetitorDetailSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 경기별 선수 상세 시퀀스
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - poomsaeSequenceType
+                - deltaType
+              properties:
+                poomsaeSequenceType:
+                  type: string
+                  description:
+                    '감점할 품새 라운드 (예: P1, P2)'
+                  example: "P1"
+                deltaType:
+                  type: string
+                  description: 감점 부호 (+ or -)
+                  enum:
+                    - PLUS
+                    - MINUS
+                  example: "MINUS"
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    required:
+                      - competitionMatchPsSeq
+                      - matchCompetitorDetailSeq
+                      - deductionScore
+                      - matchSideType
+                      - poomsaeSequenceScores
+                      - poomsaeSequenceTotalScore
+                    properties:
+                      competitionMatchPsSeq:
+                        type: integer
+                        description: 경기 고유 시퀀스
+                      matchCompetitorDetailSeq:
+                        type: integer
+                        description: 경기별 선수 상세 시퀀스
+                      deductionScore:
+                        type: number
+                        format: double
+                        description: 적용된 감점
+                      matchSideType:
+                        type: string
+                        description: 경기 사이드 (HOME, AWAY, CUTOFF)
+                      poomsaeSequenceScores:
+                        type: array
+                        description: 품새 라운드별 점수 목록
+                        items:
+                          type: object
+                          required:
+                            - poomsaeSequenceType
+                            - scoringCriteriaScores
+                          properties:
+                            poomsaeSequenceType:
+                              type: string
+                              description: 품새 라운드 (P1, P2)
+                            scoringCriteriaScores:
+                              type: array
+                              description: 심사 기준별 점수 목록
+                              items:
+                                type: object
+                                required:
+                                  - poomsaeScoringCriteriaType
+                                properties:
+                                  poomsaeScoringCriteriaType:
+                                    type: string
+                                    description: '심사 기준 타입 (공인 : ACCURACY, PRESENTATION, 자유 :TECHNICAL_SKILLS, PRESENTATION_FREESTYLE)'
+                                  score:
+                                    type: number
+                                    format: double
+                                    description: 점수
+                            totalScore:
+                              type: number
+                              format: double
+                              description: 해당 라운드 총점
+                            totalAverageScore:
+                              type: number
+                              format: double
+                              description: 해당 라운드 평균 점수
+                      poomsaeSequenceTotalScore:
+                        type: object
+                        required:
+                          - scoringCriteriaScores
+                        properties:
+                          scoringCriteriaScores:
+                            type: array
+                            description: 전체 심사 기준별 합산 점수
+                            items:
+                              type: object
+                              required:
+                                - poomsaeScoringCriteriaType
+                              properties:
+                                poomsaeScoringCriteriaType:
+                                  type: string
+                                  description: '심사 기준 타입 (공인 : ACCURACY, PRESENTATION, 자유 :TECHNICAL_SKILLS, PRESENTATION_FREESTYLE)'
+                                score:
+                                  type: number
+                                  format: double
+                                  description: 점수
+                          totalScore:
+                            type: number
+                            format: double
+                            description: 전체 총점
+                          totalAverageScore:
+                            type: number
+                            format: double
+                            description: 전체 평균 점수
+                  error:
+                    type: string
+                    nullable: true
+              examples:
+                successResponse:
+                  summary: 성공 응답 예시
+                  value:
+                    success: true
+                    data:
+                      {
+                        "competitionMatchPsSeq": 20024,
+                        "matchCompetitorDetailSeq": 5298,
+                        "deductionScore": 0.3,
+                        "matchSideType": "AWAY",
+                        "poomsaeSequenceScores": [
+                          {
+                            "poomsaeSequenceType": "P1",
+                            "scoringCriteriaScores": [
+                              {
+                                "poomsaeScoringCriteriaType": "ACCURACY",
+                                "score": 3.566
+                              },
+                              {
+                                "poomsaeScoringCriteriaType": "PRESENTATION",
+                                "score": 4.066
+                              }
+                            ],
+                            "totalScore": 21.100,
+                            "totalAverageScore": 7.032
+                          },
+                          {
+                            "poomsaeSequenceType": "P2",
+                            "scoringCriteriaScores": [
+                              {
+                                "poomsaeScoringCriteriaType": "ACCURACY",
+                                "score": 3.633
+                              },
+                              {
+                                "poomsaeScoringCriteriaType": "PRESENTATION",
+                                "score": 4.033
+                              }
+                            ],
+                            "totalScore": 23.000,
+                            "totalAverageScore": 7.666
+                          }
+                        ],
+                        "poomsaeSequenceTotalScore": {
+                          "scoringCriteriaScores": [
+                            {
+                              "poomsaeScoringCriteriaType": "ACCURACY",
+                              "score": 7.199
+                            },
+                            {
+                              "poomsaeScoringCriteriaType": "PRESENTATION",
+                              "score": 8.099
+                            }
+                          ],
+                          "totalScore": 44.100,
+                          "totalAverageScore": 14.698
+                        }
+                      }
+                    error: null
+                ITEM_NOT_FOUND:
+                  $ref: '../../openapi.yml/#/components/examples/ITEM_NOT_FOUND'
+                MATCH_COMPETITOR_DETAIL_NOT_FOUND:
+                  $ref: '../../openapi.yml/#/components/examples/MATCH_COMPETITOR_DETAIL_NOT_FOUND'
+                COMPETITION_MATCH_NOT_FOUND:
+                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+                END_OR_WAITING_MATCH_INVALID_FOR_OPERATION:
+                  $ref: '../../openapi.yml/#/components/examples/END_OR_WAITING_MATCH_INVALID_FOR_OPERATION'
+                CANNOT_APPLY_DEDUCTION:
+                  $ref: '../../openapi.yml/#/components/examples/CANNOT_APPLY_DEDUCTION'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml#/components/responses/Error'
+              examples:
+                INVALID_TYPE_ERROR:
+                  $ref: '../../openapi.yml#/components/examples/INVALID_TYPE_ERROR'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'

@@ -4070,6 +4070,18 @@ paths:
   /competitions/{competitionSeq}/operation/end-day/{day}:
     $ref: './tags/poomsae/operation.yaml#/paths/~1competitions~1{competitionSeq}~1operation~1end-day~1{day}'
 
+  /competitions/{competitionSeq}/operation/matches/{competitionMatchPsSeq}/scores:
+    $ref: './tags/poomsae/operation.yaml#/paths/~1competitions~1{competitionSeq}~1operation~1matches~1{competitionMatchPsSeq}~1scores'
+
+  /competitions/{competitionSeq}/operation/matches/{competitionMatchPsSeq}/completed-match/referee/scores:
+    $ref: './tags/poomsae/operation.yaml#/paths/~1competitions~1{competitionSeq}~1operation~1matches~1{competitionMatchPsSeq}~1completed-match~1referee~1scores'
+
+  /competitions/{competitionSeq}/operation/matches/{competitionMatchPsSeq}/ongoing-match/referee/scores:
+    $ref: './tags/poomsae/operation.yaml#/paths/~1competitions~1{competitionSeq}~1operation~1matches~1{competitionMatchPsSeq}~1ongoing-match~1referee~1scores'
+
+  /competitions/{competitionSeq}/operation/matches/{competitionMatchPsSeq}/competitor/{matchCompetitorDetailSeq}/deduction:
+    $ref: './tags/poomsae/operation.yaml#/paths/~1competitions~1{competitionSeq}~1operation~1matches~1{competitionMatchPsSeq}~1competitor~1{matchCompetitorDetailSeq}~1deduction'
+
   # 심판 점수 채점
   /competitions/{competitionSeq}/matches/{matchSeq}:
     $ref: './tags/poomsae/score.yaml#/paths/~1competitions~1{competitionSeq}~1matches~1{matchSeq}'
@@ -4572,7 +4584,27 @@ components:
         error:
           message: "이미 배정된 심판입니다."
           errorCode: "E660"
-
+    MATCH_COMPETITOR_DETAIL_NOT_FOUND:
+      value:
+        success: false
+        data: null
+        error:
+          message: "해당 경기의 선수를 찾을 수 없습니다."
+          errorCode: "E708"
+    END_OR_WAITING_MATCH_INVALID_FOR_OPERATION:
+      value:
+        success: false
+        data: null
+        error:
+          message: "경기가 시작 전이거나 종료되어 해당 작업을 수행할 수 없습니다."
+          errorCode: "E714"
+    CANNOT_APPLY_DEDUCTION:
+      value:
+        success: false
+        data: null
+        error:
+          message: "더 이상 감점을 뺼 수 없습니다."
+          errorCode: "E713"
 
   schemas:
     getCompetitionDefaultResponse:
