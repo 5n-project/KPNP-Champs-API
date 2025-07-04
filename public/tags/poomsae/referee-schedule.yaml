@@ -98,6 +98,8 @@ paths:
                               familyName: "Bukovac"
                               roleType: "ASSISTANT_REFEREE"
                     error: null
+                ITEM_NOT_FOUND:
+                  $ref: '../../openapi.yml/#/components/examples/ITEM_NOT_FOUND'
 
         403:
           description: Forbidden
@@ -623,8 +625,7 @@ components:
                       required:
                         - matchSideType
                         - country
-                        - givenName
-                        - familyName
+                        - name
                       properties:
                         matchSideType:
                           type: string
