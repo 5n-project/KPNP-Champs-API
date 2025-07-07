@@ -4070,6 +4070,9 @@ paths:
   /competitions/{competitionSeq}/operation/end-day/{day}:
     $ref: './tags/poomsae/operation.yaml#/paths/~1competitions~1{competitionSeq}~1operation~1end-day~1{day}'
 
+  /competitions/{competitionSeq}/operation/day-status:
+    $ref: './tags/poomsae/operation.yaml#/paths/~1competitions~1{competitionSeq}~1operation~1day-status'
+
   /competitions/{competitionSeq}/operation/matches/{competitionMatchPsSeq}/scores:
     $ref: './tags/poomsae/operation.yaml#/paths/~1competitions~1{competitionSeq}~1operation~1matches~1{competitionMatchPsSeq}~1scores'
 

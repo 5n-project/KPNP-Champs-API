@@ -388,6 +388,64 @@ paths:
                 IS_NOT_AUTHORIZED:
                   $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
 
+  /competitions/{competitionSeq}/operation/day-status:
+    get:
+      summary: 현재 일차 정보 조회
+      tags:
+        - 운영 - 경기
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 대회 고유 시퀀스
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    required:
+                      - competitionDay
+                      - competitionDayStatus
+                    properties:
+                      competitionDay:
+                        type: integer
+                        description: 현재 일차
+                      competitionDayStatus:
+                        type: string
+                        description: 현재 일차 상태 (START, END)
+                  error:
+                    type: string
+                    nullable: true
+              examples:
+                successResponse:
+                  summary: 성공 응답 예시
+                  value:
+                    success: true
+                    data:
+                      {
+                        "competitionDay": 1,
+                        "competitionDayStatus": "START"
+                      }
+                    error: null
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+
   /competitions/{competitionSeq}/operation/ongoing-matches/{day}:
     get:
       summary: 운영중인 경기 리스트 조회
