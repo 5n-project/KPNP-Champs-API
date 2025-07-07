@@ -754,7 +754,6 @@ paths:
                 - poomsaeMatchSideType
                 - deltaScore
                 - remainTime
-                - timestamp
               properties:
                 poomsaeSequenceType:
                   type: string
@@ -775,11 +774,6 @@ paths:
                   type: string
                   example: "01:20"
                   description: 남은 시간 (MM:SS)
-                timestamp:
-                  type: string
-                  format: date-time
-                  example: "2024-06-24T16:57:23Z"
-                  description: 기록 시각 (ISO8601)
       responses:
         '200':
           description: 성공
@@ -892,6 +886,8 @@ paths:
                   $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_REFEREE_NOT_ASSIGNED'
                 INSUFFICIENT_SCORE_FOR_DEDUCTION:
                   $ref: '../../openapi.yml/#/components/examples/INSUFFICIENT_SCORE_FOR_DEDUCTION'
+                SCORING_ALREADY_FINISHED:
+                  $ref: '../../openapi.yml/#/components/examples/SCORING_ALREADY_FINISHED'
         403:
           description: Forbidden
           content:
@@ -934,7 +930,6 @@ paths:
                 - poomsaeMatchSideType
                 - deltaScore
                 - remainTime
-                - timestamp
               properties:
                 poomsaeSequenceType:
                   type: string
@@ -955,11 +950,6 @@ paths:
                   type: string
                   example: "01:20"
                   description: 남은 시간 (MM:SS)
-                timestamp:
-                  type: string
-                  format: date-time
-                  example: "2024-06-24T16:57:23Z"
-                  description: 기록 시각 (ISO8601)
       responses:
         '200':
           description: 성공
@@ -1072,6 +1062,8 @@ paths:
                   $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_REFEREE_NOT_ASSIGNED'
                 NO_DEDUCTION_TO_UNDO:
                   $ref: '../../openapi.yml/#/components/examples/NO_DEDUCTION_TO_UNDO'
+                SCORING_ALREADY_FINISHED:
+                  $ref: '../../openapi.yml/#/components/examples/SCORING_ALREADY_FINISHED'
         403:
           description: Forbidden
           content:
@@ -1113,7 +1105,6 @@ paths:
                 - poomsaeSequenceType
                 - poomsaeMatchSideType
                 - remainTime
-                - timestamp
                 - criteriaScores
               properties:
                 poomsaeSequenceType:
@@ -1130,11 +1121,6 @@ paths:
                   type: string
                   example: "01:30"
                   description: 남은 시간 (MM:SS)
-                timestamp:
-                  type: string
-                  format: date-time
-                  example: "2024-06-24T16:53:11Z"
-                  description: 기록 시각 (ISO8601)
                 criteriaScores:
                   type: array
                   description: 채점 항목별 점수 목록
@@ -1587,6 +1573,529 @@ paths:
                   $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_NOT_FOUND'
                 COMPETITION_MATCH_REFEREE_NOT_ASSIGNED:
                   $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_REFEREE_NOT_ASSIGNED'
+                OUT_OF_SCORE_SCALE:
+                  $ref: '../../openapi.yml/#/components/examples/OUT_OF_SCORE_SCALE'
+                REQUIRED_TYPE_NOT_SCORED:
+                  $ref: '../../openapi.yml/#/components/examples/REQUIRED_TYPE_NOT_SCORED'
+                SCORING_ALREADY_FINISHED:
+                  $ref: '../../openapi.yml/#/components/examples/SCORING_ALREADY_FINISHED'
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml/#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+
+  /competitions/{competitionSeq}/matches/{matchSeq}/scores/send:
+    get:
+      summary: 심판 채점 완료
+      tags:
+        - 채점
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: matchSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - poomsaeSequenceType
+                - scoresEachCompetitor
+              properties:
+                poomsaeSequenceType:
+                  type: string
+                  enum: [P1, P2]
+                  example: "P1"
+                  description: 품새 시퀀스 타입
+                scoresEachCompetitor:
+                  type: array
+                  description: 각 선수별 점수 목록
+                  items:
+                    type: object
+                    required:
+                      - matchCompetitorDetailSeq
+                      - poomsaeMatchSideType
+                      - criteriaScores
+                    properties:
+                      matchCompetitorDetailSeq:
+                        type: integer
+                        example: 5207
+                        description: 경기 참가자 상세 seq
+                      poomsaeMatchSideType:
+                        type: string
+                        enum: [HOME, AWAY, CUTOFF]
+                        example: "CUTOFF"
+                        description: 경기 사이드 타입
+                      criteriaScores:
+                        type: array
+                        description: 채점 항목별 점수 목록
+                        items:
+                          type: object
+                          required:
+                            - criteriaType
+                            - score
+                            - criteriaDetailTypes
+                          properties:
+                            criteriaType:
+                              type: string
+                              enum: [ACCURACY, PRESENTATION, TECHNICAL_SKILLS, PRESENTATION_FREESTYLE]
+                              example: "TECHNICAL_SKILLS"
+                              description: 채점 항목 타입
+                            score:
+                              type: number
+                              nullable: true
+                              example: null
+                              description: 항목별 점수
+                            criteriaDetailTypes:
+                              type: array
+                              description: 상세 항목 목록
+                              items:
+                                type: object
+                                required:
+                                  - criteriaDetailType
+                                  - score
+                                  - criteriaDetailSubTypes
+                                properties:
+                                  criteriaDetailType:
+                                    type: string
+                                    enum: [SPEED_AND_POWER, RHYTHM_AND_TEMPO, EXPRESSION_OF_ENERGY, FOOT_TECHNIQUES_LEVEL, BASIC_MOVEMENTS_AND_PRACTICABILITY, CREATIVENESS, HARMONY, EXPRESSION_OF_ENERGY_FREESTYLE, MUSIC_AND_CHOREOGRAPHY]
+                                    example: "FOOT_TECHNIQUES_LEVEL"
+                                    description: 채점 항목 상세 타입
+                                  score:
+                                    type: number
+                                    nullable: true
+                                    example: 0.2
+                                    description: 상세 항목 점수
+                                  criteriaDetailSubTypes:
+                                    type: array
+                                    description: 상세 서브 항목 목록
+                                    items:
+                                      type: object
+                                      required:
+                                        - criteriaDetailSubType
+                                        - score
+                                      properties:
+                                        criteriaDetailSubType:
+                                          type: string
+                                          enum: [JUMPING_SIDE_KICK, MULTIPLE_KICKS_IN_A_JUMP, GRADIENT_OF_SPINS_IN_A_SPIN_KICK, KYORUGI_STYLE_CONSECUTIVE_KICKS, ACROBATIC_KICKING_TECHNIQUE]
+                                          example: "JUMPING_SIDE_KICK"
+                                          description: 채점 항목 상세 서브 타입
+                                        score:
+                                          type: number
+                                          example: 0.2
+                                          description: 서브 항목 점수
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    description: 요청 성공 여부
+                  data:
+                    type: object
+                    required:
+                      - competitionSeq
+                      - competitionMatchPsSeq
+                      - refereeSeq
+                      - poomsaeMatchStyleType
+                      - poomsaeStyleType
+                      - poomsaeSequenceType
+                      - scoresEachCompetitor
+                    properties:
+                      competitionSeq:
+                        type: integer
+                        example: 2131
+                        description: 대회 seq
+                      competitionMatchPsSeq:
+                        type: integer
+                        example: 16985
+                        description: 대회 경기 seq
+                      refereeSeq:
+                        type: integer
+                        example: 6805
+                        description: 심판 seq
+                      poomsaeMatchStyleType:
+                        type: string
+                        enum: [CUTOFF, TOURNAMENT, CUTOFF_TOURNAMENT]
+                        description: 경기 스타일 타입
+                      poomsaeStyleType:
+                        type: string
+                        enum: [RECOGNIZED_POOMSAE, FREESTYLE]
+                        description: 품새 스타일 타입
+                      poomsaeSequenceType:
+                        type: string
+                        enum: [P1, P2]
+                        description: 품새 시퀀스 타입
+                      scoresEachCompetitor:
+                        type: array
+                        description: 각 참가자 점수 목록
+                        items:
+                          type: object
+                          required:
+                            - matchCompetitorDetailSeq
+                            - scoreDeductionCount
+                            - totalScore
+                            - deductionScore
+                            - criteriaTotalScores
+                            - criteriaTypes
+                          properties:
+                            matchCompetitorDetailSeq:
+                              type: integer
+                              example: 4899
+                              description: 경기 참가자 상세 seq
+                            scoreDeductionCount:
+                              type: integer
+                              example: 2
+                              description: 감점 횟수
+                            totalScore:
+                              type: number
+                              format: float
+                              example: 2.1
+                              description: 총점
+                            deductionScore:
+                              type: number
+                              format: float
+                              example: 0.4
+                              description: 감점
+                            criteriaTotalScores:
+                              type: array
+                              description: 평가 항목별 총점 목록
+                              items:
+                                type: object
+                                required:
+                                  - criteriaType
+                                  - poomsaeScoringType
+                                  - totalScore
+                                properties:
+                                  criteriaType:
+                                    type: string
+                                    enum: [ACCURACY, PRESENTATION, TECHNICAL_SKILLS, PRESENTATION_FREESTYLE]
+                                    description: 채점 항목 타입
+                                  poomsaeScoringType:
+                                    type: object
+                                    required:
+                                      - nameEn
+                                      - nameKo
+                                      - sortNo
+                                    properties:
+                                      nameEn:
+                                        type: string
+                                        example: "technical skills"
+                                        description: 채점 항목명 (영문)
+                                      nameKo:
+                                        type: string
+                                        example: "기술력"
+                                        description: 채점 항목명 (한글)
+                                      sortNo:
+                                        type: integer
+                                        example: 1
+                                        description: 정렬 번호
+                                  totalScore:
+                                    type: number
+                                    format: float
+                                    example: 1.2
+                                    description: 채점 항목 총점
+                            criteriaTypes:
+                              type: array
+                              description: 채점 항목 타입 목록
+                              items:
+                                type: object
+                                required:
+                                  - matchScoreLogSeq
+                                  - criteriaType
+                                  - poomsaeScoringType
+                                  - score
+                                  - criteriaDetailTypes
+                                properties:
+                                  matchScoreLogSeq:
+                                    type: integer
+                                    nullable: true
+                                    example: null
+                                    description: 경기 점수 로그 seq
+                                  criteriaType:
+                                    type: string
+                                    example: "TECHNICAL_SKILLS"
+                                    description: 채점 항목 타입
+                                  poomsaeScoringType:
+                                    type: object
+                                    required:
+                                      - nameEn
+                                      - nameKo
+                                      - sortNo
+                                    properties:
+                                      nameEn:
+                                        type: string
+                                        example: "technical skills"
+                                        description: 채점 항목명 (영문)
+                                      nameKo:
+                                        type: string
+                                        example: "기술력"
+                                        description: 채점 항목명 (한글)
+                                      sortNo:
+                                        type: integer
+                                        example: 1
+                                        description: 정렬 번호
+                                  score:
+                                    type: number
+                                    nullable: true
+                                    format: float
+                                    example: null
+                                    description: 점수
+                                  criteriaDetailTypes:
+                                    type: array
+                                    description: 상세 평가 항목 타입 목록
+                                    nullable: true
+                                    items:
+                                      type: object
+                                      required:
+                                        - matchScoreLogSeq
+                                        - criteriaDetailType
+                                        - poomsaeScoringType
+                                        - score
+                                        - criteriaDetailSubTypes
+                                      properties:
+                                        matchScoreLogSeq:
+                                          type: integer
+                                          nullable: true
+                                          example: null
+                                          description: 경기 점수 로그 seq
+                                        criteriaDetailType:
+                                          type: string
+                                          enum: [SPEED_AND_POWER, RHYTHM_AND_TEMPO, EXPRESSION_OF_ENERGY, FOOT_TECHNIQUES_LEVEL, BASIC_MOVEMENTS_AND_PRACTICABILITY, CREATIVENESS, HARMONY, EXPRESSION_OF_ENERGY_FREESTYLE, MUSIC_AND_CHOREOGRAPHY]
+                                          description: 상세 채점 항목 타입
+                                        poomsaeScoringType:
+                                          type: object
+                                          required:
+                                            - nameEn
+                                            - nameKo
+                                            - sortNo
+                                          properties:
+                                            nameEn:
+                                              type: string
+                                              example: "Basic movements & Practicability"
+                                              description: 상세 채점 항목명 (영문)
+                                            nameKo:
+                                              type: string
+                                              example: "기본 동작 및 실용성"
+                                              description: 상세 채점 항목명 (한글)
+                                            sortNo:
+                                              type: integer
+                                              example: 2
+                                              description: 정렬 번호
+                                        score:
+                                          type: number
+                                          format: float
+                                          example: 0
+                                          description: 점수
+                                        criteriaDetailSubTypes:
+                                          type: array
+                                          nullable: true
+                                          description: 상세 채점 항목 서브 타입 목록
+                                          items:
+                                            type: object
+                                            required:
+                                              - matchScoreLogSeq
+                                              - criteriaSubType
+                                              - poomsaeScoringType
+                                              - score
+                                            properties:
+                                              matchScoreLogSeq:
+                                                type: integer
+                                                nullable: true
+                                                example: 34
+                                                description: 경기 점수 로그 seq
+                                              criteriaSubType:
+                                                type: string
+                                                enum: [JUMPING_SIDE_KICK, MULTIPLE_KICKS_IN_A_JUMP, GRADIENT_OF_SPINS_IN_A_SPIN_KICK, KYORUGI_STYLE_CONSECUTIVE_KICKS, ACROBATIC_KICKING_TECHNIQUE]
+                                                description: 상세 채점 항목 서브 타입
+                                              poomsaeScoringType:
+                                                type: object
+                                                required:
+                                                  - nameEn
+                                                  - nameKo
+                                                  - sortNo
+                                                properties:
+                                                  nameEn:
+                                                    type: string
+                                                    example: "Jumping side Kick"
+                                                    description: 상세 평가 하위 기준명 (영문)
+                                                  nameKo:
+                                                    type: string
+                                                    example: "뛰어 옆차기"
+                                                    description: 상세 평가 하위 기준명 (한글)
+                                                  sortNo:
+                                                    type: integer
+                                                    example: 1
+                                                    description: 정렬 번호
+                                              score:
+                                                type: number
+                                                format: float
+                                                example: 0.3
+                                                description: 점수
+                      error:
+                        type: object
+                        nullable: true
+                        description: 에러 상세 정보
+                        example: null
+              examples:
+                defaultResponse:
+                  summary: 성공 응답
+                  value:
+                    success: true
+                    data:
+                      competitionSeq: 2131
+                      competitionMatchPsSeq: 16985
+                      refereeSeq: 6805
+                      poomsaeMatchStyleType: "CUTOFF"
+                      poomsaeStyleType: "FREESTYLE"
+                      poomsaeSequenceType: "P1"
+                      scoresEachCompetitor:
+                        - matchCompetitorDetailSeq: 4899
+                          scoreDeductionCount: 2
+                          totalScore: 2.1
+                          deductionScore: 0.4
+                          criteriaTotalScores:
+                            - criteriaType: "TECHNICAL_SKILLS"
+                              poomsaeScoringType:
+                                nameEn: "technical skills"
+                                nameKo: "기술력"
+                                sortNo: 1
+                              totalScore: 1.2
+                            - criteriaType: "PRESENTATION_FREESTYLE"
+                              poomsaeScoringType:
+                                nameEn: "presentation"
+                                nameKo: "표현력"
+                                sortNo: 2
+                              totalScore: 1.3
+                          criteriaTypes:
+                            - matchScoreLogSeq: null
+                              criteriaType: "TECHNICAL_SKILLS"
+                              poomsaeScoringType:
+                                nameEn: "technical skills"
+                                nameKo: "기술력"
+                                sortNo: 1
+                              score: null
+                              criteriaDetailTypes:
+                                - matchScoreLogSeq: null
+                                  criteriaDetailType: "BASIC_MOVEMENTS_AND_PRACTICABILITY"
+                                  poomsaeScoringType:
+                                    nameEn: "Basic movements & Practicability"
+                                    nameKo: "기본 동작 및 실용성"
+                                    sortNo: 2
+                                  score: 0
+                                  criteriaDetailSubTypes: null
+                                - matchScoreLogSeq: null
+                                  criteriaDetailType: "FOOT_TECHNIQUES_LEVEL"
+                                  poomsaeScoringType:
+                                    nameEn: "Level of difficulty of foot techniques"
+                                    nameKo: "발차기 난이도"
+                                    sortNo: 1
+                                  score: null
+                                  criteriaDetailSubTypes:
+                                    - matchScoreLogSeq: 34
+                                      criteriaSubType: "JUMPING_SIDE_KICK"
+                                      poomsaeScoringType:
+                                        nameEn: "Jumping side Kick"
+                                        nameKo: "뛰어 옆차기"
+                                        sortNo: 1
+                                      score: 0.3
+                                    - matchScoreLogSeq: 39
+                                      criteriaSubType: "MULTIPLE_KICKS_IN_A_JUMP"
+                                      poomsaeScoringType:
+                                        nameEn: "Multiple kicks in a jump"
+                                        nameKo: "뛰어 찬 발차기 수"
+                                        sortNo: 2
+                                      score: 0.3
+                                    - matchScoreLogSeq: 40
+                                      criteriaSubType: "GRADIENT_OF_SPINS_IN_A_SPIN_KICK"
+                                      poomsaeScoringType:
+                                        nameEn: "Gradient of spins in a spin kick"
+                                        nameKo: "회전 수"
+                                        sortNo: 3
+                                      score: 0.6
+                                    - matchScoreLogSeq: null
+                                      criteriaSubType: "KYORUGI_STYLE_CONSECUTIVE_KICKS"
+                                      poomsaeScoringType:
+                                        nameEn: "Kyorugi style consecutive kicks"
+                                        nameKo: "겨루기방식 연속 발차기"
+                                        sortNo: 4
+                                      score: 0
+                                    - matchScoreLogSeq: null
+                                      criteriaSubType: "ACROBATIC_KICKING_TECHNIQUE"
+                                      poomsaeScoringType:
+                                        nameEn: "Acrobatic kicking technique"
+                                        nameKo: "아크로바틱 발차기 기술"
+                                        sortNo: 5
+                                      score: 0
+                            - matchScoreLogSeq: null
+                              criteriaType: "PRESENTATION_FREESTYLE"
+                              poomsaeScoringType:
+                                nameEn: "presentation"
+                                nameKo: "표현력"
+                                sortNo: 2
+                              score: null
+                              criteriaDetailTypes:
+                                - matchScoreLogSeq: null
+                                  criteriaDetailType: "CREATIVENESS"
+                                  poomsaeScoringType:
+                                    nameEn: "Creativeness"
+                                    nameKo: "창의성"
+                                    sortNo: 1
+                                  score: 0
+                                  criteriaDetailSubTypes: null
+                                - matchScoreLogSeq: null
+                                  criteriaDetailType: "HARMONY"
+                                  poomsaeScoringType:
+                                    nameEn: "Harmony"
+                                    nameKo: "조화"
+                                    sortNo: 2
+                                  score: 0
+                                  criteriaDetailSubTypes: null
+                                - matchScoreLogSeq: 37
+                                  criteriaDetailType: "EXPRESSION_OF_ENERGY_FREESTYLE"
+                                  poomsaeScoringType:
+                                    nameEn: "Expression of energy"
+                                    nameKo: "기의 표현"
+                                    sortNo: 3
+                                  score: 0.6
+                                  criteriaDetailSubTypes: null
+                                - matchScoreLogSeq: 38
+                                  criteriaDetailType: "MUSIC_AND_CHOREOGRAPHY"
+                                  poomsaeScoringType:
+                                    nameEn: "Music & choreography"
+                                    nameKo: "음악 및 안무"
+                                    sortNo: 4
+                                  score: 0.7
+                                  criteriaDetailSubTypes: null
+                      error: null
+                COMPETITION_MATCH_NOT_FOUND:
+                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+                COMPETITION_MATCH_REFEREE_NOT_ASSIGNED:
+                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_REFEREE_NOT_ASSIGNED'
+                OUT_OF_SCORE_SCALE:
+                  $ref: '../../openapi.yml/#/components/examples/OUT_OF_SCORE_SCALE'
+                REQUIRED_TYPE_NOT_SCORED:
+                  $ref: '../../openapi.yml/#/components/examples/REQUIRED_TYPE_NOT_SCORED'
+                SCORING_ALREADY_FINISHED:
+                  $ref: '../../openapi.yml/#/components/examples/SCORING_ALREADY_FINISHED'
         403:
           description: Forbidden
           content:

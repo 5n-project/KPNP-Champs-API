@@ -4101,6 +4101,9 @@ paths:
   /competitions/{competitionSeq}/matches/{matchSeq}/competitors/{competitorSeq}/scores/update:
     $ref: './tags/poomsae/score.yaml#/paths/~1competitions~1{competitionSeq}~1matches~1{matchSeq}~1competitors~1{competitorSeq}~1scores~1update'
 
+  /competitions/{competitionSeq}/matches/{matchSeq}/scores/send:
+    $ref: './tags/poomsae/score.yaml#/paths/~1competitions~1{competitionSeq}~1matches~1{matchSeq}~1scores~1send'
+
 components:
   responses:
     OK:
@@ -4178,6 +4181,13 @@ components:
         error:
           message: "크기가 1에서 3 사이여야 합니다"
           errorCode: "E523"
+    UNSUPPORTED_OPERATION:
+      value:
+        success: false
+        data: null
+        error:
+          message: "지원하지 않는 메소드입니다."
+          errorCode: "E011"
 
     #403
     IS_NOT_AUTHORIZED:
@@ -4591,13 +4601,6 @@ components:
         error:
           message: "해당 경기의 선수를 찾을 수 없습니다."
           errorCode: "E708"
-    END_OR_WAITING_MATCH_INVALID_FOR_OPERATION:
-      value:
-        success: false
-        data: null
-        error:
-          message: "경기가 시작 전이거나 종료되어 해당 작업을 수행할 수 없습니다."
-          errorCode: "E714"
     CANNOT_APPLY_DEDUCTION:
       value:
         success: false
@@ -4605,6 +4608,35 @@ components:
         error:
           message: "더 이상 감점을 뺼 수 없습니다."
           errorCode: "E713"
+    END_OR_WAITING_MATCH_INVALID_FOR_OPERATION:
+      value:
+        success: false
+        data: null
+        error:
+          message: "경기가 시작 전이거나 종료되어 해당 작업을 수행할 수 없습니다."
+          errorCode: "E714"
+    OUT_OF_SCORE_SCALE:
+      value:
+        success: false
+        data: null
+        error:
+          message: "가능한 범위를 벗어나는 점수가 있습니다."
+          errorCode: "E715"
+    REQUIRED_TYPE_NOT_SCORED:
+      value:
+        success: false
+        data: null
+        error:
+          message: "누락된 채점이 존재합니다."
+          errorCode: "E716"
+    SCORING_ALREADY_FINISHED:
+      value:
+        success: false
+        data: null
+        error:
+          message: "이미 채점이 완료되었습니다."
+          errorCode: "E717"
+
 
   schemas:
     getCompetitionDefaultResponse:
