@@ -25,6 +25,7 @@ paths:
                     required:
                       - refereesPerGroup
                       - refereeGroups
+                      - spareReferees
                     properties:
                       refereesPerGroup:
                         type: integer
@@ -71,6 +72,31 @@ paths:
                                       - HEAD_REFEREE
                                       - ASSISTANT_REFEREE
                                     description: '역할 유형<br>- HEAD_REFEREE:주심<br>- ASSISTANT_REFEREE:부심'
+                      spareReferees:
+                        type: array
+                        items:
+                          type: object
+                          required:
+                            - refereeSeq
+                            - roleType
+                          properties:
+                            refereeSeq:
+                              type: integer
+                              description: '심판 식별자'
+                              required: true
+                            givenName:
+                              type: string
+                              description: '이름'
+                            familyName:
+                              type: string
+                              description: '성'
+                            roleType:
+                              type: string
+                              required: true
+                              enum:
+                                - HEAD_REFEREE
+                                - ASSISTANT_REFEREE
+                              description: '역할 유형<br>- HEAD_REFEREE:주심<br>- ASSISTANT_REFEREE:부심'
                   error:
                     type: string
                     nullable: true
@@ -79,26 +105,65 @@ paths:
                 defaultResponse:
                   summary: Default Example
                   value:
-                    success: true
-                    data:
-                      refereesPerGroup: 3
-                      refereeGroups:
-                        - refereeGroupingSeq: 28
-                          groupName: "A"
-                          referees:
-                            - refereeSeq: 6817
-                              givenName: "Agboton"
-                              familyName: "Engelbert"
-                              roleType: "HEAD_REFEREE"
-                            - refereeSeq: 6809
-                              givenName: "Belmir"
-                              familyName: "BERBEROVIC"
-                              roleType: "ASSISTANT_REFEREE"
-                            - refereeSeq: 6810
-                              givenName: "Renata"
-                              familyName: "Bukovac"
-                              roleType: "ASSISTANT_REFEREE"
-                    error: null
+                    {
+                      "success": true,
+                      "data": {
+                        "refereesPerGroup": 3,
+                        "refereeGroups": [
+                          {
+                            "refereeGroupingSeq": 28,
+                            "groupName": "A",
+                            "referees": [
+                              {
+                                "refereeSeq": 6817,
+                                "givenName": "Agboton",
+                                "familyName": "Engelbert",
+                                "roleType": "HEAD_REFEREE"
+                              },
+                              {
+                                "refereeSeq": 6809,
+                                "givenName": "Belmir",
+                                "familyName": "BERBEROVIC",
+                                "roleType": "ASSISTANT_REFEREE"
+                              },
+                              {
+                                "refereeSeq": 6810,
+                                "givenName": "Renata",
+                                "familyName": "Bukovac",
+                                "roleType": "ASSISTANT_REFEREE"
+                              }
+                            ]
+                          }
+                        ],
+                        "spareReferees": [
+                          {
+                            "refereeSeq": 6804,
+                            "givenName": "Soo Kyung",
+                            "familyName": "Park",
+                            "roleType": "ASSISTANT_REFEREE"
+                          },
+                          {
+                            "refereeSeq": 6808,
+                            "givenName": "Hassan",
+                            "familyName": "Sadeghi",
+                            "roleType": "ASSISTANT_REFEREE"
+                          },
+                          {
+                            "refereeSeq": 6811,
+                            "givenName": "Masoumeh",
+                            "familyName": "Majidivash",
+                            "roleType": "ASSISTANT_REFEREE"
+                          },
+                          {
+                            "refereeSeq": 6816,
+                            "givenName": "Serge",
+                            "familyName": "Sembona",
+                            "roleType": "ASSISTANT_REFEREE"
+                          }
+                        ]
+                      },
+                      "error": null
+                    }
                 ITEM_NOT_FOUND:
                   $ref: '../../openapi.yml/#/components/examples/ITEM_NOT_FOUND'
 
@@ -677,57 +742,75 @@ components:
     PsRefereeGroupScheduleDetailResponseDTO:
       summary: Default Example
       value:
-        success: true
-        data:
-          refereesPerGroup: 3
-          refereeTypes: [ "REF_CR", "REF_J1", "REF_J2" ]
-          scheduleDetail:
-            sessionGroup: 11
-            competitionDay: 1
-            courtCount: 5
-            refereeGroupSeq: 31
-            startTime: ""
-            departmentEn: "Under 30"
-            departmentKo: "30세 이하"
-            divisionCategoryEn: "Individual female"
-            divisionCategoryKo: "여자개인"
-            matchStyleTypeEn: "Cutoff"
-            matchStyleTypeKo: "컷오프"
-            matchStyleTypeForPhase: "CUTOFF"
-            phase: "Pre-A"
-          matches:
-            - competitionMatchSeq: 20087
-              matchNumber: 2001
-              court: 2
-              departmentEn: "Under 30"
-              departmentKo: "30세 이하"
-              matchStyleTypeEn: "Cutoff"
-              matchStyleTypeKo: "컷오프"
-              matchStatus: "WAITING"
-              competitors:
-                - matchSideType: "CUTOFF"
-                  country: "CHN"
-                  name: "Min-seo NAM"
-              referees:
-                REF_J2:
-                  matchRefereeMappingSeq: 1106
-                  refereeSeq: 6812
-                  groupName: "D"
-                  givenName: "Olivia"
-                  familyName: "Ortiz"
-                  refereeType: "REF_J2"
-                REF_J1:
-                  matchRefereeMappingSeq: 1105
-                  refereeSeq: 6803
-                  groupName: "D"
-                  givenName: "May Mohamed"
-                  familyName: "El Sayed"
-                  refereeType: "REF_J1"
-                REF_CR:
-                  matchRefereeMappingSeq: 1104
-                  refereeSeq: 6815
-                  groupName: "D"
-                  givenName: "Ari Krister"
-                  familyName: "Lindroos"
-                  refereeType: "REF_CR"
-        error: null
+        {
+          "success": true,
+          "data": {
+            "refereesPerGroup": 3,
+            "refereeTypes": [
+              "REF_CR",
+              "REF_J1",
+              "REF_J2"
+            ],
+            "scheduleDetail": {
+              "sessionGroup": 11,
+              "competitionDay": 1,
+              "courtCount": 5,
+              "refereeGroupSeq": 31,
+              "startTime": "",
+              "departmentEn": "Under 30",
+              "departmentKo": "30세 이하",
+              "divisionCategoryEn": "Individual female",
+              "divisionCategoryKo": "여자개인",
+              "matchStyleTypeEn": "Cutoff",
+              "matchStyleTypeKo": "컷오프",
+              "matchStyleTypeForPhase": "CUTOFF",
+              "phase": "Pre-A"
+            },
+            "matches": [
+              {
+                "competitionMatchSeq": 20087,
+                "matchNumber": 2001,
+                "court": 2,
+                "departmentEn": "Under 30",
+                "departmentKo": "30세 이하",
+                "matchStyleTypeEn": "Cutoff",
+                "matchStyleTypeKo": "컷오프",
+                "matchStatus": "WAITING",
+                "competitors": [
+                  {
+                    "matchSideType": "CUTOFF",
+                    "country": "KOR",
+                    "name": "DAM Min-seo"
+                  }
+                ],
+                "referees": {
+                  "REF_CR": {
+                    "matchRefereeMappingSeq": 1104,
+                    "refereeSeq": 6814,
+                    "groupName": "A",
+                    "givenName": "Amal",
+                    "familyName": "Grati",
+                    "refereeType": "REF_CR"
+                  },
+                  "REF_J2": {
+                    "matchRefereeMappingSeq": 1106,
+                    "refereeSeq": 6813,
+                    "groupName": "A",
+                    "givenName": "Ana Luisa",
+                    "familyName": "Lopez Boluda",
+                    "refereeType": "REF_J2"
+                  },
+                  "REF_J1": {
+                    "matchRefereeMappingSeq": 1105,
+                    "refereeSeq": 6810,
+                    "groupName": "B",
+                    "givenName": "Renata",
+                    "familyName": "Bukovac",
+                    "refereeType": "REF_J1"
+                  }
+                }
+              }
+            ]
+          },
+          "error": null
+        }
