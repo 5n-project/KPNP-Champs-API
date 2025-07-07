@@ -2054,3 +2054,105 @@ paths:
               examples:
                 IS_NOT_AUTHORIZED:
                   $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+
+
+  /competitions/{competitionSeq}/operation/draw-match/completed:
+    get:
+      summary: draw match 완료되었는지 확인
+      tags:
+        - 운영 - 경기
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 대회 고유 시퀀스
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    required:
+                      - isCompleted
+                    properties:
+                      isCompleted:
+                        type: boolean
+                        description: draw match 완료되었는지 여부
+                  error:
+                    type: string
+                    nullable: true
+              examples:
+                successResponse:
+                  summary: 성공 응답 예시
+                  value:
+                    {
+                      "success": true,
+                      "data": {
+                        "isCompleted": true
+                      },
+                      "error": null
+                    }
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+
+  /competitions/{competitionSeq}/operation/draw-match:
+    post:
+      summary: draw match
+      tags:
+        - 운영 - 경기
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 대회 고유 시퀀스
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    nullable: true
+                  error:
+                    type: string
+                    nullable: true
+              examples:
+                successResponse:
+                  summary: 성공 응답 예시
+                  value:
+                    {
+                      "success": true,
+                      "data": null,
+                      "error": null
+                    }
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'

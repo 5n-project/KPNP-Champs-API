@@ -4085,6 +4085,12 @@ paths:
   /competitions/{competitionSeq}/operation/matches/{competitionMatchPsSeq}/competitor/{matchCompetitorDetailSeq}/deduction:
     $ref: './tags/poomsae/operation.yaml#/paths/~1competitions~1{competitionSeq}~1operation~1matches~1{competitionMatchPsSeq}~1competitor~1{matchCompetitorDetailSeq}~1deduction'
 
+  /competitions/{competitionSeq}/operation/draw-match/completed:
+    $ref: './tags/poomsae/operation.yaml#/paths/~1competitions~1{competitionSeq}~1operation~1draw-match~1completed'
+
+  /competitions/{competitionSeq}/operation/draw-match:
+    $ref: './tags/poomsae/operation.yaml#/paths/~1competitions~1{competitionSeq}~1operation~1draw-match'
+
   # 심판 점수 채점
   /competitions/{competitionSeq}/matches/{matchSeq}:
     $ref: './tags/poomsae/score.yaml#/paths/~1competitions~1{competitionSeq}~1matches~1{matchSeq}'
