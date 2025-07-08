@@ -803,6 +803,25 @@ paths:
                       resultDecision:
                         type: string
                         description: 경기 결과
+                      poomsaeTypes:
+                        type: array
+                        description: 설정한 품새 타입 리스트 (자유품새는 비어있음)
+                        items:
+                          type: object
+                          required:
+                            - matchRefereeMappingSeq
+                            - refereeType
+                            - isEnter
+                          properties:
+                            poomsaeTypeCode:
+                              type: string
+                              description: 품새 코드
+                            poomsaeTypeNameKo:
+                              type: string
+                              description: 품새 국문명
+                            poomsaeTypeNameEn:
+                              type: string
+                              description: 품새 영문명
                       matchCompetitorList:
                         type: array
                         items:
@@ -940,6 +959,16 @@ paths:
                       phase: "R64"
                       phaseLabel: "R64-2"
                       resultDecision: "RSC"
+                      poomsaeTypes:
+                        - poomsaeTypeCode: "TAEGEUK_8_JANG"
+                          poomsaeTypeNameKo: "태극 8장"
+                          poomsaeTypeNameEn: "Taegeuk 8 Jang"
+                        - poomsaeTypeCode: "KORYO"
+                          poomsaeTypeNameKo: "고려"
+                          poomsaeTypeNameEn: "Koryo"
+                        - poomsaeTypeCode: "TAEBACK"
+                          poomsaeTypeNameKo: "태백"
+                          poomsaeTypeNameEn: "Taeback"
                       matchCompetitorList:
                         - matchCompetitorDetailSeq: 5299
                           competitor: 118
