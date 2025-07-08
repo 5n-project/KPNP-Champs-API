@@ -3377,18 +3377,36 @@ paths:
                               type: string
                               description: 부 한글명
                               example: 유소년부
+                      departmentKo:
+                        type: string
+                        description: 부 대분류 한글명
+                      departmentEn:
+                        type: string
+                        description: 부 대분류 영문명
                       refereeGroupNames:
                         type: array
                         items:
                           type: string
                           description: 심판 그룹명
                           example: A
+                      refereeGroupNameKo:
+                        type: string
+                        description: 심판조 대분류 한글명
+                      refereeGroupNameEn:
+                        type: string
+                        description: 심판조 대분류 영문명
                       matNumbers:
                         type: array
                         items:
                           type: string
                           description: 코트 번호
                           example: "1"
+                      matNumberKo:
+                        type: string
+                        description: 코트 대분류 한글명
+                      matNumberEn:
+                        type: string
+                        description: 코트 대분류 영문명
                   error:
                     type: object
                     nullable: true
@@ -3412,15 +3430,21 @@ paths:
                         - departmentCode: OVER_65
                           nameEn: Over 65
                           nameKo: 65세 초과
+                      departmentKo: 부
+                      departmentEn: Department
                       refereeGroupNames:
                         - A
                         - B
                         - C
                         - D
+                      refereeGroupNameKo: 심판 그룹
+                      refereeGroupNameEn: Referee Group
                       matNumbers:
                         - "1"
                         - "2"
                         - "3"
+                      matNumberKo: 코트 번호
+                      matNumberEn: Mat Number
                     error: null
         '403':
           description: Forbidden
