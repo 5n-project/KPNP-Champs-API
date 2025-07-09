@@ -2209,3 +2209,99 @@ paths:
               examples:
                 IS_NOT_AUTHORIZED:
                   $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+
+  /competitions/{competitionSeq}/operation/matches/{competitionMatchPsSeq}/result:
+    patch:
+      summary: 운영에 완료된 경기에 승자 및 경기 결과 수정 (notion 실시간 응답 데이터 문서 확인)
+      description: 운영자가 특정 경기의 승자 및 경기 결과(판정승, 실격승 등)를 수정하는 API
+      tags:
+        - 운영 - 경기
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 대회 고유 시퀀스
+        - name: competitionMatchPsSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 경기 고유 시퀀스
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - winner
+                - resultDecision
+              properties:
+                winner:
+                  type: string
+                  enum:
+                    - HOME
+                    - AWAY
+                  description: 경기 승자 사이드
+                  example: "HOME"
+                resultDecision:
+                  type: string
+                  enum:
+                    - WBS (판정승)
+                    - RSC (주심직권승)
+                    - WDR (기권승)
+                    - DSQ (실격승)
+                    - PUN (감점승)
+                  description: 경기 결과 결정
+                  example: "DSQ"
+      responses:
+        '200':
+          description: 경기 결과 수정 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    nullable: true
+                  error:
+                    type: string
+                    nullable: true
+              examples:
+                success:
+                  summary: 성공 응답 예시
+                  value:
+                    success: true
+                    data: null
+                    error: null
+                COMPETITION_MATCH_NOT_FOUND:
+                  $ref: '../../openapi.yml#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+                MATCH_COMPETITOR_DETAIL_NOT_FOUND:
+                  $ref: '../../openapi.yml#/components/examples/MATCH_COMPETITOR_DETAIL_NOT_FOUND'
+                MATCH_WINNER_NOT_FOUND:
+                  $ref: '../../openapi.yml#/components/examples/MATCH_WINNER_NOT_FOUND'
+                ONLY_TOURNAMENT_MATCH_CAN_UPDATE_RESULT:
+                  $ref: '../../openapi.yml#/components/examples/ONLY_TOURNAMENT_MATCH_CAN_UPDATE_RESULT'
+                IS_BYE_MATCH:
+                  $ref: '../../openapi.yml#/components/examples/IS_BYE_MATCH'
+                MATCH_RESULT_ALREADY_UP_TO_DATE:
+                  $ref: '../../openapi.yml#/components/examples/MATCH_RESULT_ALREADY_UP_TO_DATE'
+                NO_PLAYER_ADVANCED_TO_NEXT_ROUND:
+                  $ref: '../../openapi.yml#/components/examples/NO_PLAYER_ADVANCED_TO_NEXT_ROUND'
+                MATCH_RESULT_CANNOT_BE_UPDATED_AFTER_NEXT_ROUND:
+                  $ref: '../../openapi.yml#/components/examples/MATCH_RESULT_CANNOT_BE_UPDATED_AFTER_NEXT_ROUND'
+        '403':
+          description: 권한 없음
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
