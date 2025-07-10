@@ -1,0 +1,253 @@
+paths:
+  /competitions/{competitionSeq}/managers/search:
+    get:
+      tags:
+        - 운영진
+      parameters:
+        - in: path
+          name: competitionSeq
+          description: 대회 고유 식별자
+          required: true
+          schema:
+            type: integer
+        - name: search
+          in: query
+          required: true
+          description: 'kpnp id'
+          schema:
+            type: string
+      summary: 운영진 검색
+      responses:
+        '200':
+          description: 운영진 리스트 반환
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    memSeq:
+                      type: string
+                      example: "11"
+                      description: 회원 Seq
+                    lastName:
+                      type: string
+                      example: "kpnp"
+                      description: 한글 성
+                    firstName:
+                      type: string
+                      example: "kpnp"
+                      description: 한글 이름
+                    lastNameEn:
+                      type: string
+                      example: "kpnp"
+                      description: 영문 성
+                    firstNameEn:
+                      type: string
+                      example: "kpnp"
+                      description: 영문 이름
+                    memId:
+                      type: string
+                      example: "kpnpnews"
+                      description: 아이디
+              examples:
+                기본값예시:
+                  summary: 성공
+                  value:
+                    success: true
+                    data:
+                      managerList:
+                        - memSeq: 11
+                          lastName: kpnp
+                          firstName: kpnp
+                          lastNameEn: kpnp
+                          firstNameEn: kpnp
+                          memId: kpnpnew
+                        - memSeq: 10
+                          lastName: KPNP
+                          firstName: Press
+                          lastNameEn: KPNP
+                          firstNameEn: Press
+                          memId: kpnp_press
+                ITEM_NOT_FOUND:
+                  $ref: '../../openapi.yml#/components/examples/ITEM_NOT_FOUND'
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+
+  /competitions/{competitionSeq}/managers:
+    get:
+      tags:
+        - 운영진
+      parameters:
+        - in: path
+          name: competitionSeq
+          description: 대회 고유 식별자
+          required: true
+          schema:
+            type: integer
+      summary: 운영진 리스트 조회
+      responses:
+        '200':
+          description: 운영진 리스트 반환
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    competitionManagerSeq:
+                      type: integer
+                      example: "11"
+                      description: 운영진 Seq
+                    managerNumber:
+                      type: integer
+                      example: "11"
+                      description: 운영진 고유 번호
+                    memSeq:
+                      type: string
+                      example: "11"
+                      description: 회원 Seq
+                    lastName:
+                      type: string
+                      example: "kpnp"
+                      description: 한글 성
+                    firstName:
+                      type: string
+                      example: "kpnp"
+                      description: 한글 이름
+                    lastNameEn:
+                      type: string
+                      example: "kpnp"
+                      description: 영문 성
+                    firstNameEn:
+                      type: string
+                      example: "kpnp"
+                      description: 영문 이름
+                    memId:
+                      type: string
+                      example: "kpnpnews"
+                      description: 아이디
+              examples:
+                기본값예시:
+                  summary: 성공
+                  value:
+                    success: true
+                    data:
+                      managerList:
+                        - competitionManagerSeq: 2049
+                          managerNumber: 1
+                          memSeq: 11
+                          lastName: kpnp
+                          firstName: kpnp
+                          lastNameEn: kpnp
+                          firstNameEn: kpnp
+                          memId: kpnpnew
+                        - competitionManagerSeq: 2050
+                          managerNumber: 2
+                          memSeq: 12
+                          lastName: KPNP
+                          firstName: Press
+                          lastNameEn: KPNP
+                          firstNameEn: Press
+                          memId: kpnp_press
+
+    post:
+      tags:
+        - 운영진
+      parameters:
+        - in: path
+          name: competitionSeq
+          description: 대회 고유 식별자
+          required: true
+          schema:
+            type: integer
+      summary: 운영진 추가
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                memSeqList:
+                  type: array
+                  items:
+                    type: integer
+                  example: [ 88, 89 ]
+              required:
+                - memSeqList
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml#/components/responses/OK'
+              examples:
+                success:
+                  value:
+                    success: true
+                    data: null
+                    error: null
+                ITEM_NOT_FOUND:
+                  $ref: '../../openapi.yml#/components/examples/ITEM_NOT_FOUND'
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+  /competitions/{competitionSeq}/managers/{competitionManagerSeq}:
+    delete:
+      tags:
+        - 운영진
+      parameters:
+        - in: path
+          name: competitionSeq
+          description: 대회 고유 식별자
+          required: true
+          schema:
+            type: integer
+        - in: path
+          name: competitionManagerSeq
+          description: 운영진 식별자
+          required: true
+          schema:
+            type: integer
+      summary: 운영진 삭제
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml#/components/responses/OK'
+              examples:
+                success:
+                  value:
+                    success: true
+                    data: null
+                    error: null
+                ITEM_NOT_FOUND:
+                  $ref: '../../openapi.yml#/components/examples/ITEM_NOT_FOUND'
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'

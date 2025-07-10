@@ -1,0 +1,530 @@
+paths:
+  /competitions/complete/{competitionSeq}:
+    post:
+      tags:
+        - 대회개최 - 개최 완료
+      parameters:
+        - in: path
+          name: competitionSeq
+          description: 대회 고유 식별자
+          required: true
+          schema:
+            type: integer
+      summary: 개최 완료
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                competitionNameKo:
+                  type: string
+                  example: "테스트 수정제목입니다232323"
+                  description: 대회 명 (국문)
+                competitionNameEn:
+                  type: string
+                  example: "New Test"
+                  description: 대회 명 (영문)
+                competitionSdate:
+                  type: string
+                  format: date-time
+                  example: "2024-04-20 00:00:00.0"
+                  description: 대회 시작일
+                competitionEdate:
+                  type: string
+                  format: date-time
+                  example: "2024-04-20 00:00:00.0"
+                  description: 대회 종료일
+                competitionStatus:
+                  type: string
+                  example: "NN"
+                  description: 대회 상태
+                orderStatus:
+                  type: string
+                  example: "입금 전"
+                  description: 결제 상태 ("입금 전", "입금 확인", "결제 완료" 상태 일때만 조건 걸어주기)
+                payType:
+                  type: string
+                  example: "M"
+                  enum: [ M, P, K ]
+                  description: |
+                    결제 방식 
+                    - M: 무통장
+                    - P: 페이팔
+                    - K: KPNP
+                orderNum:
+                  type: string
+                  example: "O231234223"
+                  description: 주문 번호
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml#/components/responses/OK'
+              examples:
+                defaultResponse:
+                  summary: Default Example
+                  value:
+                    success: true
+                    data: null
+                    error: null
+
+  /temp:
+    post:
+      tags:
+        - 대회개최 - 개최 완료
+      summary: 개최 완료 (결제하기 버튼 시)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                competitionSeq:
+                  type: integer
+                  format: int64
+                  example: 44
+                  description: 대회 seq
+              required:
+                - competitionSeq
+      responses:
+        200:
+          description: 성공
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml#/components/responses/OK'
+              examples:
+                success:
+                  value:
+                    success: true
+                    data:
+                      competitionSeq: 44
+                    error: null
+
+  /finish:
+    post:
+      tags:
+        - 대회개최 - 개최 완료
+      summary: 개최자 결제
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                payType:
+                  type: string
+                  example: "PAYPAL"
+                  description: 결제 방식 (무통장, PAYPAL)
+                kpnpOrdersSeq:
+                  type: string
+                  example: "904"
+                  description: 주문 seq
+                competitionSeq:
+                  type: integer
+                  format: int64
+                  example: 1327
+                  description: 대회 seq
+                sdate:
+                  type: string
+                  format: date-time
+                  example: "2025-01-10T00:00:00.000Z"
+                  description: OVR 시작 일자
+                edate:
+                  type: string
+                  format: date-time
+                  example: "2025-02-23T23:59:00.000Z"
+                  description: OVR 종료 일자
+                differenceDate:
+                  type: string
+                  example: "45"
+                  description: 총 일수
+                unit:
+                  type: string
+                  example: "usd"
+                  description: 원화(kor), 달러(usd)
+                totalAmount:
+                  type: number
+                  format: double
+                  example: 956.25
+                  description: 총 금액
+                productSeq:
+                  type: integer
+                  example: 3
+                  description: |
+                    서비스상품번호 
+                    - 1: 대회운영
+                    - 3: 상장수여
+                    - 4: 종합시상
+                additionYn:
+                  type: string
+                  example: "N"
+                  enum: [ Y, N ]
+                  description: 기한 연장 여부
+              required:
+                - payType
+                - kpnpOrdersSeq
+                - competitionSeq
+                - sdate
+                - edate
+                - differenceDate
+                - unit
+                - totalAmount
+                - productSeq
+                - additionYn
+      responses:
+        '200':
+          description: 결제 요청 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: string
+                    example: "O171136831055320"
+                    description: PAYPAL URL 또는 무통장 주문번호
+                  error:
+                    type: string
+                    nullable: true
+                    example: null
+              examples:
+                success:
+                  value:
+                    success: true
+                    data:
+                      competitionSeq: https://www.sandbox.paypal.com/checkoutnow?token=13B720637N5657644
+                    error: null
+                FAILD_PAYPAL:
+                  $ref: '../../openapi.yml#/components/examples/FAILD_PAYPAL'
+                PAYMENT_METHOD_ERROR:
+                  $ref: '../../openapi.yml#/components/examples/PAYMENT_METHOD_ERROR'
+                PAYMENT_DENIED:
+                  $ref: '../../openapi.yml#/components/examples/PAYMENT_DENIED'
+                PAYER_CANNOT_PAY:
+                  $ref: '../../openapi.yml#/components/examples/PAYER_CANNOT_PAY'
+                PAYPAL_INTERNAL_SERVER_ERROR:
+                  $ref: '../../openapi.yml#/components/examples/PAYPAL_INTERNAL_SERVER_ERROR'
+                NOT_DIFFERENCE_DATE:
+                  $ref: '../../openapi.yml#/components/examples/NOT_DIFFERENCE_DATE'
+                DIFFERENT_PAYMENT:
+                  $ref: '../../openapi.yml#/components/examples/DIFFERENT_PAYMENT'
+                USER_STUDING_PRODUCT:
+                  $ref: '../../openapi.yml#/components/examples/USER_STUDING_PRODUCT'
+
+  /orderSheet/{competitionSeq}:
+    get:
+      tags:
+        - 대회개최 - 개최 완료
+      summary: 결제페이지 정보 조회
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 2
+          description: 대회 seq
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    properties:
+                      kpnpOrdersSeq:
+                        type: integer
+                        description: 주문 Seq
+                        example: 816
+                      competitionSeq:
+                        type: integer
+                        description: 대회 시퀀스
+                        example: 1311
+                      productSeq:
+                        type: integer
+                        description: |
+                          서비스상품번호
+                          - 1 : OVR 대회운영
+                          - 3 : 상장수여
+                          - 4 : 종합시상
+                        example: 1
+                      sdate:
+                        type: string
+                        description: 이용 시작일
+                        example: "2024-12-31 00:00:00"
+                      edate:
+                        type: string
+                        description: 이용 종료일
+                        example: "2025-01-05 23:59:00"
+                      periodDate:
+                        type: integer
+                        description: 이용일수
+                        example: 6
+                      amountKor:
+                        type: integer
+                        description: 일일 요금 (원화)
+                        example: 20000
+                      amountUsd:
+                        type: number
+                        description: 일일 요금 (달러)
+                        example: 20.5
+                      fullNameKr:
+                        type: string
+                        description: 주문자 이름 (한글)
+                        example: 짭길동
+                      fullNameEn:
+                        type: string
+                        description: 주문자 이름 (영문)
+                        example: gildongjjab
+                      email:
+                        type: string
+                        description: 주문자 이메일
+                        example: champs1@gmail.com
+                      country:
+                        type: string
+                        description: 주문자 국적
+                        example: BF
+                      orderNum:
+                        type: string
+                        description: 주문번호
+                        example: O173517964341734
+                      discountKor:
+                        type: integer
+                        description: |
+                          할인 금액 또는 퍼센트 (원화)
+                          - discountType = P 이면 퍼센트이고 해당 필드에 퍼센트값 들어감
+                          - discountType = A 이면 요금이고 해당 필드에 원화 할인요금값 들어감
+                        example: 2000
+                      discountUsd:
+                        type: number
+                        description: |
+                          할인 금액 또는 퍼센트 (달러)
+                          - discountType = P 이면 퍼센트이고 해당 필드에 퍼센트값 들어감
+                          - discountType = A 이면 요금이고 해당 필드에 원화 할인요금값 들어감
+                        example: 2.5
+                      discountType:
+                        type: string
+                        description: |
+                          할인 타입 
+                          - P: 퍼센트
+                          - A: 요금
+                        example: A
+                      products:
+                        type: array
+                        description: 상품 목록
+                        items:
+                          type: object
+                          properties:
+                            productSeq:
+                              type: integer
+                              description: |
+                                서비스상품번호
+                                - 1: 대회운영
+                                - 3 : 상장수여
+                                - 4 : 종합시상
+                              example: 1
+                            productName:
+                              type: string
+                              description: 서비스상품명
+                              example: OVR 대회 운영
+                            amountKor:
+                              type: integer
+                              description: 일일 요금 (원화)
+                              example: 20000
+                            amountUsd:
+                              type: number
+                              description: 일일 요금 (달러)
+                              example: 20.5
+                            discountType:
+                              type: string
+                              description: |
+                                할인 타입 
+                                - P: 퍼센트
+                                - A: 요금
+                              example: A
+                            discountKor:
+                              type: integer
+                              description: 할인 금액 또는 퍼센트 (원화)
+                              example: 2000
+                            discountUsd:
+                              type: number
+                              description: 할인 금액 또는 퍼센트 (달러)
+                              example: 2.5
+                          required:
+                            - productSeq
+                            - productName
+                            - amountKor
+                            - amountUsd
+                            - discountKor
+                            - discountUsd
+                            - discountType
+                    required:
+                      - kpnpOrdersSeq
+                      - competitionSeq
+                      - productSeq
+                      - sdate
+                      - edate
+                      - periodDate
+                      - amountKor
+                      - amountUsd
+                      - email
+                      - orderNum
+                      - discountKor
+                      - discountUsd
+                      - discountType
+              examples:
+                success:
+                  value:
+                    success: true
+                    data:
+                      kpnpOrdersSeq: 81
+                      competitionSeq: 131
+                      productSeq:
+                      sdate: 2024-12-31 00:00:00.0
+                      edate: 2025-01-05 23:59:00.0
+                      periodDate: 6
+                      amountKor: 20000
+                      amountUsd: 20.0
+                      fullNamekr: 짭길동
+                      fullNameEn: gildongjjab
+                      email: champs1@gmail.com
+                      country: BF
+                      orderNum: O173517964341734
+                      discountKor: 2000
+                      discountUsd: 2.5
+                      discountType: A
+                      products:
+                        - productSeq: 1
+                          productName: OVR 대회 운영
+                          amountKor: 20000
+                          amountUsd: 20.5
+                          discountType: A
+                          discountKor: 2000
+                          discountUsd: 2.5
+                        - productSeq: 3
+                          productName: 상장 수여
+                          amountKor: 25000
+                          amountUsd: 25.5
+                          discountType: P
+                          discountKor: 15
+                          discountUsd: 15.5
+                        - productSeq: 4,
+                          productName: 종합 시상
+                          amountKor: 30000
+                          amountUsd: 30.5
+                          discountType: P
+                          discountKor: 10
+                          discountUsd: 10.5
+                    error: null
+                PENDING_PAYMENT_IN_PROGRESS:
+                  $ref: '../../openapi.yml#/components/examples/PENDING_PAYMENT_IN_PROGRESS'
+                NEXT_ROUND_IS_START:
+                  $ref: '../../openapi.yml#/components/examples/NEXT_ROUND_IS_START'
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+
+  /paypalCapture:
+    get:
+      tags:
+        - 대회개최 - 개최 완료
+      summary: 페이팔 실결제 (캡처)
+      parameters:
+        - name: orderNum
+          in: query
+          required: true
+          schema:
+            type: string
+            example: O171040237276559
+          description: 주문번호
+        - name: token
+          in: query
+          required: true
+          schema:
+            type: string
+            example: 9A872064J2412380G
+          description: 페이팔 토큰
+        - name: PayerID
+          in: query
+          required: true
+          schema:
+            type: string
+            example: FWTDF4JC8SE5U
+          description: 페이팔 ID
+      responses:
+        '200':
+          description: 결제 요청 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: string
+                    example: "O171136831055320"
+                    description: PAYPAL URL 또는 무통장 주문번호
+                  error:
+                    type: string
+                    nullable: true
+                    example: null
+              examples:
+                success:
+                  value:
+                    success: true
+                    data: "결제 성공"
+                    error: null
+                FAILD_PAYPAL:
+                  $ref: '../../openapi.yml#/components/examples/FAILD_PAYPAL'
+                PAYMENT_DENIED:
+                  $ref: '../../openapi.yml#/components/examples/PAYMENT_DENIED'
+                PAYER_CANNOT_PAY:
+                  $ref: '../../openapi.yml#/components/examples/PAYER_CANNOT_PAY'
+                PAYPAL_INTERNAL_SERVER_ERROR:
+                  $ref: '../../openapi.yml#/components/examples/PAYPAL_INTERNAL_SERVER_ERROR'
+                USER_STUDING_PRODUCT:
+                  $ref: '../../openapi.yml#/components/examples/USER_STUDING_PRODUCT'
+
+  /payFinish:
+    get:
+      tags:
+        - 대회개최 - 개최 완료
+      summary: 결제 완료
+      parameters:
+        - name: orderNum
+          in: query
+          required: true
+          schema:
+            type: string
+            example: O171076198291887
+          description: 주문 번호
+      responses:
+        '200':
+          description: 결제 정보 반환
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  payment:
+                    oneOf:
+                      - $ref: '../../openapi.yml#/components/schemas/PaypalPayment'
+                      - $ref: '../../openapi.yml#/components/schemas/MTJPayment'
+

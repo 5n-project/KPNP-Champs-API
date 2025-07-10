@@ -1,0 +1,201 @@
+paths:
+  /competitions/range/{competitionSeq}:
+    get:
+      summary: 품새 추첨 범위 조회
+      tags:
+        - 대회개최 - 품새 추첨 범위
+      parameters:
+        - name: competitionSeq
+          in: path
+          description: 대회 SEQ
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      poomsaeRangeSettingList:
+                        type: array
+                        items:
+                          required:
+                            - divisionCode
+                            - divisionNameKo
+                            - divisionNameEn
+                            - divisionCategories
+                          type: object
+                          properties:
+                            divisionCode:
+                              $ref: '../../openapi.yml#/components/schemas/PoomsaeDivisionType'
+                            divisionNameKo:
+                              type: string
+                              description: 품새 룰 국문명
+                            divisionNameEn:
+                              type: string
+                              description: 품새 룰 영문명
+                            divisionCategories:
+                              type: array
+                              items:
+                                required:
+                                  - divisionCategoryCode
+                                  - divisionCategoryNameKo
+                                  - divisionCategoryNameEn
+                                  - departments
+                                type: object
+                                properties:
+                                  divisionCategoryCode:
+                                    $ref: '../../openapi.yml#/components/schemas/PoomsaeDivisionCategoryType'
+                                  divisionCategoryNameKo:
+                                    type: string
+                                    description: 대회 유형 국문명
+                                  divisionCategoryNameEn:
+                                    type: string
+                                    description: 대회 유형 영문명
+                                  departments:
+                                    type: array
+                                    items:
+                                      required:
+                                        - competitionEventSeq
+                                        - departmentCode
+                                        - departmentNameKo
+                                        - departmentNameEn
+                                      type: object
+                                      properties:
+                                        competitionEventSeq:
+                                          type: integer
+                                          description: 이벤트 SEQ
+                                        departmentCode:
+                                          $ref: '../../openapi.yml#/components/schemas/PoomsaeDepartmentType'
+                                        departmentNameKo:
+                                          type: string
+                                          description: 부 국문명
+                                        departmentNameEn:
+                                          type: string
+                                          description: 부 영문명
+                                        defaultPoomsaeRange:
+                                          type: string
+                                          nullable: true
+                                          description: 기본 품새 리스트 (쉼표 구분)
+                                        savedPoomsaeRange:
+                                          type: string
+                                          description: 저장된 품새 리스트 (쉼표 구분)
+              examples:
+                성공 응답:
+                  value:
+                    success: true
+                    data:
+                      poomsaeRangeSettingList:
+                        - divisionCode: "WT_RECOGNIZED_POOMSAE"
+                          divisionNameKo: "WT 공인품새룰"
+                          divisionNameEn: "WT Recognized Poomsae"
+                          divisionCategories:
+                            - divisionCategoryCode: "INDIVIDUAL_MALE"
+                              divisionCategoryNameKo: "남자개인"
+                              divisionCategoryNameEn: "Individual male"
+                              departments:
+                                - competitionEventSeq: 89
+                                  departmentCode: "CADET"
+                                  departmentNameKo: "Cadet"
+                                  departmentNameEn: "유소년부"
+                                  defaultPoomsaeRange: "TAEGEUK_4_JANG,TAEGEUK_5_JANG,TAEGEUK_6_JANG"
+                                  savedPoomsaeRange: "TAEGEUK_4_JANG,TAEGEUK_5_JANG,TAEGEUK_6_JANG"
+                                - competitionEventSeq: 94
+                                  departmentCode: "JUNIOR"
+                                  departmentNameKo: "Junior"
+                                  departmentNameEn: "청소년부"
+                                  defaultPoomsaeRange: "TAEGEUK_5_JANG,TAEGEUK_6_JANG,TAEGEUK_7_JANG"
+                                  savedPoomsaeRange: "TAEGEUK_5_JANG,TAEGEUK_6_JANG,TAEGEUK_7_JANG"
+                    error: null
+                ITEM_NOT_FOUND:
+                  $ref: '../../openapi.yml#/components/examples/ITEM_NOT_FOUND'
+
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+    patch:
+      summary: 품새 추첨 범위 설정
+      tags:
+        - 대회개최 - 품새 추첨 범위
+      parameters:
+        - name: competitionSeq
+          in: path
+          description: 대회 SEQ
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                poomsaeRanges:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                      - competitionEventSeq
+                      - poomsaeRange
+                    properties:
+                      competitionEventSeq:
+                        type: integer
+                        description: 이벤트 SEQ
+                      poomsaeRange:
+                        type: string
+                        description: 선택된 품새 리스트 (쉼표 구분)
+              example:
+                poomsaeRanges:
+                  - competitionEventSeq: 1131
+                    poomsaeRange: "TAEGEUK_4_JANG,TAEGEUK_5_JANG,TAEGEUK_6_JANG"
+                  - competitionEventSeq: 1132
+                    poomsaeRange: "TAEGEUK_7_JANG,TAEGEUK_8_JANG,KORYO"
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml#/components/responses/OK'
+              examples:
+                성공 응답:
+                  value:
+                    success: true
+                    data: null
+                    error: null
+                ITEM_NOT_FOUND:
+                  $ref: '../../openapi.yml#/components/examples/ITEM_NOT_FOUND'
+
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+        400:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml#/components/examples/CODE_NOT_FOUND'
