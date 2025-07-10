@@ -2305,3 +2305,90 @@ paths:
               examples:
                 IS_NOT_AUTHORIZED:
                   $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+
+  /competitions/{competitionSeq}/operation/matches/{competitionMatchPsSeq}/competitor/{matchCompetitorDetailSeq}/penalty:
+    patch:
+      summary: 운영에 해당 경기 중 선수에게 패널티 부여 (notion 실시간 응답 데이터 문서 확인)
+      description: 운영자가 경기 중 특정 선수에게 패널티를 부여하거나 제거(감점 복구)하는 API
+      tags:
+        - 운영 - 경기
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 대회 고유 시퀀스
+        - name: competitionMatchPsSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 경기 고유 시퀀스
+        - name: matchCompetitorDetailSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 경기별 선수 상세 고유 시퀀스
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - deltaType
+              properties:
+                deltaType:
+                  type: string
+                  enum:
+                    - PLUS
+                    - MINUS
+                  description:
+                    '패널티 부호 (PLUS: 패널티 1 부여, MINUS: 패널티 1 제거)'
+                  example: "MINUS"
+      responses:
+        '200':
+          description: 패널티 부여 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: boolean
+                    nullable: true
+                  error:
+                    type: string
+                    nullable: true
+                    example: null
+              examples:
+                success:
+                  summary: 성공 응답 예시
+                  value:
+                    success: true
+                    data: null
+                    error: null
+                COMPETITION_MATCH_NOT_FOUND:
+                  $ref: '../../openapi.yml#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+                MATCH_COMPETITOR_DETAIL_NOT_FOUND:
+                  $ref: '../../openapi.yml#/components/examples/MATCH_COMPETITOR_DETAIL_NOT_FOUND'
+                END_OR_WAITING_MATCH_INVALID_FOR_OPERATION:
+                  $ref: '../../openapi.yml#/components/examples/END_OR_WAITING_MATCH_INVALID_FOR_OPERATION'
+                CANNOT_DEDUCT_ZERO_PENALTY:
+                  $ref: '../../openapi.yml#/components/examples/CANNOT_DEDUCT_ZERO_PENALTY'
+                CANNOT_APPLY_PENALTY_WHEN_SCORE_IS_TWO:
+                  $ref: '../../openapi.yml#/components/examples/CANNOT_APPLY_PENALTY_WHEN_SCORE_IS_TWO'
+        '403':
+          description: 권한 없음
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'

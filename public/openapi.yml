@@ -4118,6 +4118,8 @@ paths:
   /competitions/{competitionSeq}/operation/matches/{competitionMatchPsSeq}/result:
     $ref: './tags/poomsae/operation.yaml#/paths/~1competitions~1{competitionSeq}~1operation~1matches~1{competitionMatchPsSeq}~1result'
 
+  /competitions/{competitionSeq}/operation/matches/{competitionMatchPsSeq}/competitor/{matchCompetitorDetailSeq}/penalty:
+    $ref: './tags/poomsae/operation.yaml#/paths/~1competitions~1{competitionSeq}~1operation~1matches~1{competitionMatchPsSeq}~1competitor~1{matchCompetitorDetailSeq}~1penalty'
   # 심판 점수 채점
   /competitions/{competitionSeq}/matches/{matchSeq}:
     $ref: './tags/poomsae/score.yaml#/paths/~1competitions~1{competitionSeq}~1matches~1{matchSeq}'
@@ -4727,6 +4729,20 @@ components:
         error:
           message: "부전승 경기는 변경할 수 없습니다."
           errorCode: "E620-2"
+    CANNOT_DEDUCT_ZERO_PENALTY:
+      value:
+        success: false
+        data: null
+        error:
+          message: "현재 패널티 점수가 0점이어서 차감할 수 없습니다."
+          errorCode: "E711"
+    CANNOT_APPLY_PENALTY_WHEN_SCORE_IS_TWO:
+      value:
+        success: false
+        data: null
+        error:
+          message: "현재 패널티 점수가 2점이라 패널티를 부여할 수 없습니다."
+          errorCode: "E712"
 
   schemas:
     getCompetitionDefaultResponse:
