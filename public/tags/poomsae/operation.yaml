@@ -2392,3 +2392,81 @@ paths:
               examples:
                 IS_NOT_AUTHORIZED:
                   $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+
+  /competitions/{competitionSeq}/operation/matches/{competitionMatchPsSeq}/poomsae:
+    patch:
+      summary: 운영에 진행중 또는 대기중인 경기 라운드별 품새 수정 (notion 실시간 응답 데이터 문서 확인)
+      description: 운영자가 진행중이거나 대기중인 경기의 라운드별 품새(1품, 2품)를 수정하는 API
+      tags:
+        - 운영 - 경기
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 대회 고유 시퀀스
+        - name: competitionMatchPsSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 경기 고유 시퀀스
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                firstPoomsae:
+                  type: string
+                  nullable: true
+                  description: '수정할 1품 품새 (null일 경우 미수정) - 자유 : x, 공인 : o 복합(P1 - 공인) : o'
+                  example: "TAEGEUK_8_JANG"
+                secondPoomsae:
+                  type: string
+                  nullable: true
+                  description: '수정할 2품 품새 (null일 경우 미수정) - 자유 : x, 공인 : o 복합(P2 - 자유) : x'
+                  example: "KORYO"
+      responses:
+        '200':
+          description: 경기 품새 수정 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: boolean
+                    nullable: true
+                    example: null
+                  error:
+                    type: string
+                    nullable: true
+                    example: null
+              examples:
+                success:
+                  summary: 성공 응답 예시
+                  value:
+                    success: true
+                    data: null
+                    error: null
+                MATCH_STATE_INVALID_FOR_OPERATION:
+                  $ref: '../../openapi.yml#/components/examples/MATCH_STATE_INVALID_FOR_OPERATION'
+                INVALID_POOMSAE_FOR_MATCH:
+                  $ref: '../../openapi.yml#/components/examples/INVALID_POOMSAE_FOR_MATCH'
+                COMPETITION_MATCH_NOT_FOUND:
+                  $ref: '../../openapi.yml#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+        '403':
+          description: 권한 없음
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'

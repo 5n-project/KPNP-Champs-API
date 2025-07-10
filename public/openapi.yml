@@ -4120,6 +4120,10 @@ paths:
 
   /competitions/{competitionSeq}/operation/matches/{competitionMatchPsSeq}/competitor/{matchCompetitorDetailSeq}/penalty:
     $ref: './tags/poomsae/operation.yaml#/paths/~1competitions~1{competitionSeq}~1operation~1matches~1{competitionMatchPsSeq}~1competitor~1{matchCompetitorDetailSeq}~1penalty'
+
+  /competitions/{competitionSeq}/operation/matches/{competitionMatchPsSeq}/poomsae:
+    $ref: './tags/poomsae/operation.yaml#/paths/~1competitions~1{competitionSeq}~1operation~1matches~1{competitionMatchPsSeq}~1poomsae'
+
   # 심판 점수 채점
   /competitions/{competitionSeq}/matches/{matchSeq}:
     $ref: './tags/poomsae/score.yaml#/paths/~1competitions~1{competitionSeq}~1matches~1{matchSeq}'
@@ -4743,6 +4747,13 @@ components:
         error:
           message: "현재 패널티 점수가 2점이라 패널티를 부여할 수 없습니다."
           errorCode: "E712"
+    INVALID_POOMSAE_FOR_MATCH:
+      value:
+        success: false
+        data: null
+        error:
+          message: "해당 매치에서 허용되지 않은 품새는 저장할 수 없습니다."
+          errorCode: "E724"
 
   schemas:
     getCompetitionDefaultResponse:
