@@ -107,6 +107,9 @@ paths:
                         items:
                           type: object
                           properties:
+                            competitionDivisionUsedSeq:
+                              type: integer
+                              description: '사용 룰 Seq'
                             divisionCode:
                               type: string
                               description: '사용중인 룰 코드'
@@ -183,6 +186,7 @@ paths:
                         totalAmountKor: 1050000.0
                         totalAmountUsd: 1050.0
                       usedDivisionList:
+                        competitionDivisionUsedSeq : 69
                         divisionCode: "WT_RECOGNIZED_POOMSAE"
                         divisionNameKo: "WT 공인품새룰"
                         divisionNameEn: "WT Recognized Poomsae"

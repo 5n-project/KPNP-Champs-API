@@ -2360,8 +2360,14 @@ paths:
                     type: boolean
                     example: true
                   data:
-                    type: boolean
+                    type: object
                     nullable: true
+                    required:
+                      - matchStatus
+                    properties:
+                      matchStatus:
+                        type: string
+                        description: "ONGOING : 경기 결과 안나옴 , END : 패널티 2점으로 결과 나옴"
                   error:
                     type: string
                     nullable: true
@@ -2371,7 +2377,9 @@ paths:
                   summary: 성공 응답 예시
                   value:
                     success: true
-                    data: null
+                    data: {
+                        "matchStatus" : "ONGOING"
+                    }
                     error: null
                 COMPETITION_MATCH_NOT_FOUND:
                   $ref: '../../openapi.yml#/components/examples/COMPETITION_MATCH_NOT_FOUND'
