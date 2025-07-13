@@ -75,8 +75,8 @@ paths:
                                   type: integer
                                   description: '시연시간(최대) 초'
                                 breakTime:
-                                  type: string
-                                  description: '휴식시간 90초면 0130 으로 반환'
+                                  type: integer
+                                  description: '휴식시간 초'
                                 resultDisplayTime:
                                   type: integer
                                   description: '채점결과 표출 시간 초'
@@ -170,7 +170,7 @@ paths:
                             matchOrderType: "CHUNG_CHUNG_HONG_HONG"
                             matchMinTime: 90
                             matchMaxTime: 120
-                            breakTime: "0100"
+                            breakTime: 100
                             resultDisplayTime: 60
                           - competitionSettingDetailSeq: 4
                             competitionDivisionUsedSeq: 69
@@ -178,7 +178,7 @@ paths:
                             matchOrderType: "HONG_HONG_CHUNG_CHUNG"
                             matchMinTime: 90
                             matchMaxTime: 120
-                            breakTime: "0100"
+                            breakTime: 80
                             resultDisplayTime: 60
                       ovrPeriodInfo:
                         competitionOvrPeriodSdate: "2025-04-30 00:00:00"
