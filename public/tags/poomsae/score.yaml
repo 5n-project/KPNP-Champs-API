@@ -2294,7 +2294,6 @@ paths:
                 IS_NOT_AUTHORIZED:
                   $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
 
-
   /competitions/{competitionSeq}/days/{competitionDay}/schedules/{competitionScheduleDetailSeq}/referees:
     get:
       summary: 심판 스케줄표 일정별 경기 목록 조회
@@ -2491,6 +2490,90 @@ paths:
                     error: null
                 NO_MATCH_ASSIGNED_TO_REFEREE:
                   $ref: '../../openapi.yml/#/components/examples/NO_MATCH_ASSIGNED_TO_REFEREE'
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml/#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+
+  /competitions/{competitionSeq}/matches/{matchSeq}/referees/{refereeSeq}/join:
+    get:
+      summary: 심판 입장
+      tags:
+        - 채점
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 대회 seq
+        - name: matchSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 대회 경기 seq
+        - name: refereeSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 심판 seq
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    description: 요청 성공 여부
+                  data:
+                    type: object
+                    required:
+                      - competitionMatchPsSeq
+                      - refereeSeq
+                      - matchStatus
+                    properties:
+                      competitionMatchPsSeq:
+                        type: integer
+                        example: 20087
+                        description: 대회 경기 seq
+                      refereeSeq:
+                        type: integer
+                        example: 6814
+                        description: 심판 seq
+                      matchStatus:
+                        type: string
+                        example: "ready"
+                        description: 경기 상태
+                  error:
+                    type: object
+                    nullable: true
+                    description: 에러 상세 정보
+                    example: null
+              examples:
+                defaultResponse:
+                  summary: 성공 응답
+                  value:
+                    success: true
+                    data:
+                      competitionMatchPsSeq: 20087
+                      refereeSeq: 6814
+                      matchStatus: "ready"
+                    error: null
+                COMPETITION_MATCH_REFEREE_NOT_ASSIGNED:
+                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_REFEREE_NOT_ASSIGNED'
+                REFEREE_MISMATCH:
+                  $ref: '../../openapi.yml/#/components/examples/REFEREE_MISMATCH'
         403:
           description: Forbidden
           content:

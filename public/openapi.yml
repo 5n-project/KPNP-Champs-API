@@ -208,6 +208,8 @@ paths:
     $ref: './tags/poomsae/score.yaml#/paths/~1competitions~1{competitionSeq}~1days~1{competitionDay}~1schedules'
   /competitions/{competitionSeq}/days/{competitionDay}/schedules/{competitionScheduleDetailSeq}/referees:
     $ref: './tags/poomsae/score.yaml#/paths/~1competitions~1{competitionSeq}~1days~1{competitionDay}~1schedules~1{competitionScheduleDetailSeq}~1referees'
+  /competitions/{competitionSeq}/matches/{matchSeq}/referees/{refereeSeq}/join:
+    $ref: './tags/poomsae/score.yaml#/paths/~1competitions~1{competitionSeq}~1matches~1{matchSeq}~1referees~1{refereeSeq}~1join'
 
 
 
@@ -815,6 +817,13 @@ components:
         error:
           message: "해당 매치에서 허용되지 않은 품새는 저장할 수 없습니다."
           errorCode: "E724"
+    REFEREE_MISMATCH:
+      value:
+        success: false
+        data: null
+        error:
+          message: "경기에 배정받은 심판과 사용자가 일치하지 않습니다."
+          errorCode: "E725"
 
   schemas:
     getCompetitionDefaultResponse:
