@@ -373,7 +373,7 @@ paths:
                           type: object
                           required:
                             - matchCompetitorDetailSeq
-                            - scoreDeductionCount
+                            - scoreDeductionCounts
                             - totalScore
                             - deductionScore
                             - criteriaTotalScores
@@ -383,10 +383,24 @@ paths:
                               type: integer
                               example: 4899
                               description: 경기 참가자 상세 seq
-                            scoreDeductionCount:
-                              type: integer
-                              example: 2
-                              description: 감점 횟수
+                            scoreDeductionCounts:
+                              type: array
+                              description: 감점 횟수 목록
+                              items:
+                                type: object
+                                required:
+                                  - deltaType
+                                  - count
+                                properties:
+                                  deltaType:
+                                    type: number
+                                    format: float
+                                    example: 0.3
+                                    description: 감점 단위
+                                  count:
+                                    type: integer
+                                    example: 1
+                                    description: 감점 횟수
                             totalScore:
                               type: number
                               format: float
@@ -591,7 +605,11 @@ paths:
                       poomsaeSequenceType: "P1"
                       scoresEachCompetitor:
                         - matchCompetitorDetailSeq: 4899
-                          scoreDeductionCount: 2
+                          scoreDeductionCounts:
+                            - deltaType: 0.300
+                              count: 1
+                            - deltaType: 0.1
+                              count: 0
                           totalScore: 2.1
                           deductionScore: 0.4
                           criteriaTotalScores:
@@ -791,7 +809,7 @@ paths:
                       - competitionMatchPsSeq
                       - matchCompetitorDetailSeq
                       - totalScore
-                      - deductionCount
+                      - scoreDeductionCounts
                       - criteriaTotalScores
                     properties:
                       competitionSeq:
@@ -810,10 +828,24 @@ paths:
                         type: number
                         example: 7
                         description: 총 점수
-                      deductionCount:
-                        type: integer
-                        example: 2
-                        description: 감점 횟수
+                      scoreDeductionCounts:
+                        type: array
+                        description: 감점 횟수 목록
+                        items:
+                          type: object
+                          required:
+                            - deltaType
+                            - count
+                          properties:
+                            deltaType:
+                              type: number
+                              format: float
+                              example: 0.3
+                              description: 감점 단위
+                            count:
+                              type: integer
+                              example: 1
+                              description: 감점 횟수
                       criteriaTotalScores:
                         type: array
                         description: 채점 항목별 총점 목록
@@ -862,7 +894,11 @@ paths:
                       competitionMatchPsSeq: 20024
                       matchCompetitorDetailSeq: 5298
                       totalScore: 7
-                      deductionCount: 2
+                      scoreDeductionCounts:
+                        - deltaType: 0.3
+                          count: 1
+                        - deltaType: 0.1
+                          count: 0
                       criteriaTotalScores:
                         - criteriaType: "ACCURACY"
                           nameEn: "accuracy"
@@ -967,7 +1003,7 @@ paths:
                       - competitionMatchPsSeq
                       - matchCompetitorDetailSeq
                       - totalScore
-                      - deductionCount
+                      - scoreDeductionCounts
                       - criteriaTotalScores
                     properties:
                       competitionSeq:
@@ -986,10 +1022,24 @@ paths:
                         type: number
                         example: 7
                         description: 총 점수
-                      deductionCount:
-                        type: integer
-                        example: 2
-                        description: 감점 횟수
+                      scoreDeductionCounts:
+                        type: array
+                        description: 감점 횟수 목록
+                        items:
+                          type: object
+                          required:
+                            - deltaType
+                            - count
+                          properties:
+                            deltaType:
+                              type: number
+                              format: float
+                              example: 0.3
+                              description: 감점 단위
+                            count:
+                              type: integer
+                              example: 1
+                              description: 감점 횟수
                       criteriaTotalScores:
                         type: array
                         description: 채점 항목별 총점 목록
@@ -1038,7 +1088,11 @@ paths:
                       competitionMatchPsSeq: 20024
                       matchCompetitorDetailSeq: 5298
                       totalScore: 7
-                      deductionCount: 2
+                      scoreDeductionCounts:
+                        - deltaType: 0.3
+                          count: 1
+                        - deltaType: 0.1
+                          count: 0
                       criteriaTotalScores:
                         - criteriaType: "ACCURACY"
                           nameEn: "accuracy"
@@ -1201,7 +1255,7 @@ paths:
                       - poomsaeStyleType
                       - poomsaeSequenceType
                       - matchCompetitorDetailSeq
-                      - scoreDeductionCount
+                      - scoreDeductionCounts
                       - totalScore
                       - deductionScore
                       - criteriaTotalScores
@@ -1238,10 +1292,24 @@ paths:
                         type: integer
                         example: 5207
                         description: 경기 선수 상세 seq
-                      scoreDeductionCount:
-                        type: integer
-                        example: 1
-                        description: 감점 횟수
+                      scoreDeductionCounts:
+                        type: array
+                        description: 감점 횟수 목록
+                        items:
+                          type: object
+                          required:
+                            - deltaType
+                            - count
+                          properties:
+                            deltaType:
+                              type: number
+                              format: float
+                              example: 0.3
+                              description: 감점 단위
+                            count:
+                              type: integer
+                              example: 1
+                              description: 감점 횟수
                       totalScore:
                         type: number
                         format: float
@@ -1446,7 +1514,11 @@ paths:
                       poomsaeStyleType: "FREESTYLE"
                       poomsaeSequenceType: "P2"
                       matchCompetitorDetailSeq: 5207
-                      scoreDeductionCount: 1
+                      scoreDeductionCounts:
+                        - deltaType: 0.3
+                          count: 1
+                        - deltaType: 0.1
+                          count: 0
                       totalScore: 3.9
                       deductionScore: 0.1
                       criteriaTotalScores:
@@ -1751,7 +1823,7 @@ paths:
                           type: object
                           required:
                             - matchCompetitorDetailSeq
-                            - scoreDeductionCount
+                            - scoreDeductionCounts
                             - totalScore
                             - deductionScore
                             - criteriaTotalScores
@@ -1761,10 +1833,24 @@ paths:
                               type: integer
                               example: 4899
                               description: 경기 참가자 상세 seq
-                            scoreDeductionCount:
-                              type: integer
-                              example: 2
-                              description: 감점 횟수
+                            scoreDeductionCounts:
+                              type: array
+                              description: 감점 횟수 목록
+                              items:
+                                type: object
+                                required:
+                                  - deltaType
+                                  - count
+                                properties:
+                                  deltaType:
+                                    type: number
+                                    format: float
+                                    example: 0.3
+                                    description: 감점 단위
+                                  count:
+                                    type: integer
+                                    example: 1
+                                    description: 감점 횟수
                             totalScore:
                               type: number
                               format: float
@@ -1969,7 +2055,11 @@ paths:
                       poomsaeSequenceType: "P1"
                       scoresEachCompetitor:
                         - matchCompetitorDetailSeq: 4899
-                          scoreDeductionCount: 2
+                          scoreDeductionCounts:
+                            - deltaType: 0.3
+                              count: 1
+                            - deltaType: 0.1
+                              count: 0
                           totalScore: 2.1
                           deductionScore: 0.4
                           criteriaTotalScores:
