@@ -52,6 +52,8 @@ paths:
 
 
   # 대회
+  /competitions:
+    $ref: './tags/poomsae/competition.yaml#/paths/~1competitions'
   /competitions/host:
     $ref: './tags/poomsae/competition.yaml#/paths/~1competitions~1host'
 

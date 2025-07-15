@@ -2592,7 +2592,7 @@ paths:
 
   /competitions/{competitionSeq}/matches/{matchSeq}/referees/{refereeSeq}/join:
     get:
-      summary: 심판 입장
+      summary: 심판 입장 (notion 실시간 응답 데이터 문서 확인)
       tags:
         - 채점
       parameters:
