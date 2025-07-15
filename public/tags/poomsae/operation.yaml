@@ -721,6 +721,7 @@ paths:
                       - divisionCategoryCode
                       - divisionCategoryNameKo
                       - divisionCategoryNameEn
+                      - isMixed
                       - matchStyleCode
                       - matchStyleNameKo
                       - matchStyleNameEn
@@ -783,6 +784,9 @@ paths:
                       divisionCategoryNameEn:
                         type: string
                         description: 대회 유형 영문명
+                      isMixed:
+                        type: boolean
+                        description: 복합룰인지 아닌지
                       matchStyleCode:
                         type: string
                         description: 경기 방식 코드 (TOURNAMENT, CUTOFF)
@@ -953,6 +957,7 @@ paths:
                       divisionCategoryCode: "INDIVIDUAL_MALE"
                       divisionCategoryNameKo: "남자개인"
                       divisionCategoryNameEn: "Individual male"
+                      isMixed: false
                       matchStyleCode: "TOURNAMENT"
                       matchStyleNameKo: "토너먼트"
                       matchStyleNameEn: "Tournament"
@@ -2109,7 +2114,7 @@ paths:
                   $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
 
 
-  /competitions/{competitionSeq}/operation/draw-match/completed:
+  /competitions/{competitionSeq}/operation/matches/completed:
     get:
       summary: draw match 완료되었는지 확인
       tags:
@@ -2163,7 +2168,7 @@ paths:
                 IS_NOT_AUTHORIZED:
                   $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
 
-  /competitions/{competitionSeq}/operation/draw-match:
+  /competitions/{competitionSeq}/operation/matches:
     post:
       summary: draw match
       tags:
@@ -2478,3 +2483,410 @@ paths:
               examples:
                 IS_NOT_AUTHORIZED:
                   $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+
+  /competitions/{competitionSeq}/operation/draw:
+    get:
+      summary: 운영 대진표 조회 (draw 버튼)
+      description: 품새 대진표(토너먼트/컷오프/컷오프+토너먼트)를 조회한다.
+      tags:
+        - 운영 - 경기
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 대회의 고유 시퀀스
+        - name: division
+          in: query
+          required: true
+          schema:
+            type: string
+          description:
+            '룰 코드 (예: WT_RECOGNIZED_POOMSAE, WT_FREESTYLE_POOMSAE)'
+        - name: department
+          in: query
+          required: true
+          schema:
+            type: string
+          description:
+            '부 코드 (예: UNDER_30)'
+        - name: divisionCategory
+          in: query
+          required: true
+          schema:
+            type: string
+          description:
+            '대회 유형 코드 (예: INDIVIDUAL_MALE)'
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    required:
+                      - competitionEventSeq
+                      - matchStyleType
+                    type: object
+                    properties:
+                      competitionEventSeq:
+                        type: integer
+                        description: 대회 이벤트 시퀀스
+                        example: 1169
+                      matchStyleType:
+                        type: string
+                        description: 경기 방식 (CUTOFF -> cutoffDraws에 값 채워짐, TOURNAMENT -> tournamentDraws에 값 채워짐, CUTOFF_TOURNAMENT -> cutoffDraws,tournamentDraws 둘다 채워지거나 tournamentDraws에만 값 채워짐)
+                        example: CUTOFF_TOURNAMENT
+                      finalWinner:
+                        type: object
+                        description: 결승 우승자 정보 (우승자 안나올시 각필드 null)
+                        properties:
+                          team:
+                            type: string
+                            nullable: true
+                            description: 소속명
+                          name:
+                            type: string
+                            nullable: true
+                            description: 선수명
+                          country:
+                            type: string
+                            nullable: true
+                            description: noc국가코드
+                          profileImageUrl:
+                            type: string
+                            nullable: true
+                            description: 선수 프로필 이미지 url
+                      cutoffDraws:
+                        type: array
+                        description: 컷오프 대진표 리스트
+                        items:
+                          type: object
+                          properties:
+                            phaseType:
+                              type: string
+                              description: 컷오프 강수+조 타입
+                              example: SF_A
+                            phase:
+                              type: string
+                              description: 컷오프 강수
+                              example: SF
+                            group:
+                              type: string
+                              description: 해당 강수의 조
+                              example: A
+                            competitors:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  competitionMatchPsSeq:
+                                    type: integer
+                                    description: 경기 시퀀스
+                                    example: 20191
+                                  team:
+                                    type: string
+                                    description: 팀명
+                                    example: team1
+                                  name:
+                                    type: string
+                                    description: 선수명
+                                    example: team1
+                                  country:
+                                    type: string
+                                    description: 국가 코드
+                                    example: KOR
+                                  ranking:
+                                    type: integer
+                                    nullable: true
+                                    description: 조 랭킹
+                                  resultDecision:
+                                    type: string
+                                    nullable: true
+                                    description: 경기 결과 (PASS or FAIL)
+                      tournamentDraws:
+                        type: array
+                        description: 토너먼트 대진표 리스트
+                        items:
+                          type: object
+                          properties:
+                            competitionMatchPsSeq:
+                              type: integer
+                              description: 경기 시퀀스
+                              example: 20202
+                            phase:
+                              type: string
+                              description: 강수
+                              example: QF
+                            playingRound:
+                              type: integer
+                              description: 라운드 (프론트는 이거 이용할 거 없을 듯)
+                              example: 2
+                            competitors:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  matchCompetitorDetailSeq:
+                                    type: integer
+                                    nullable: true
+                                    description: 경기에 배정된 선수 고유 Seq
+                                  competitor:
+                                    type: integer
+                                    nullable: true
+                                    description: 해당 대회에 선수 번호
+                                  competitorName:
+                                    type: string
+                                    nullable: true
+                                    description: 선수명
+                                  country:
+                                    type: string
+                                    nullable: true
+                                    description: noc 국가코드
+                                  matchSideType:
+                                    type: string
+                                    nullable: true
+                                    description: HOME or AWAY
+                  error:
+                    type: string
+                    nullable: true
+              examples:
+                successResponse:
+                  summary: 성공 응답 예시
+                  value:
+                    success: true
+                    data:
+                      {
+                        "competitionEventSeq": 1169,
+                        "matchStyleType": "CUTOFF_TOURNAMENT",
+                        "finalWinner": {
+                          "team": null,
+                          "name": null,
+                          "country": null,
+                          "profileImageUrl": null
+                        },
+                        "cutoffDraws": [
+                          {
+                            "phaseType": "SF_A",
+                            "phase": "SF",
+                            "group": "A",
+                            "competitors": [
+                              {
+                                "competitionMatchPsSeq": 20191,
+                                "team": "team1",
+                                "name": "team1",
+                                "country": "KOR",
+                                "ranking": null,
+                                "resultDecision": null
+                              },
+                              {
+                                "competitionMatchPsSeq": 20192,
+                                "team": "team10",
+                                "name": "team10",
+                                "country": "KOR",
+                                "ranking": null,
+                                "resultDecision": null
+                              },
+                              {
+                                "competitionMatchPsSeq": 20193,
+                                "team": "team8",
+                                "name": "team8",
+                                "country": "KOR",
+                                "ranking": null,
+                                "resultDecision": null
+                              },
+                              {
+                                "competitionMatchPsSeq": 20194,
+                                "team": "team5",
+                                "name": "team5",
+                                "country": "KOR",
+                                "ranking": null,
+                                "resultDecision": null
+                              },
+                              {
+                                "competitionMatchPsSeq": 20195,
+                                "team": "team2",
+                                "name": "team2",
+                                "country": "KOR",
+                                "ranking": null,
+                                "resultDecision": null
+                              },
+                              {
+                                "competitionMatchPsSeq": 20196,
+                                "team": "team11",
+                                "name": "team11",
+                                "country": "KOR",
+                                "ranking": null,
+                                "resultDecision": null
+                              },
+                              {
+                                "competitionMatchPsSeq": 20197,
+                                "team": "team9",
+                                "name": "team9",
+                                "country": "KOR",
+                                "ranking": null,
+                                "resultDecision": null
+                              },
+                              {
+                                "competitionMatchPsSeq": 20198,
+                                "team": "team6",
+                                "name": "team6",
+                                "country": "KOR",
+                                "ranking": null,
+                                "resultDecision": null
+                              },
+                              {
+                                "competitionMatchPsSeq": 20199,
+                                "team": "team3",
+                                "name": "team3",
+                                "country": "KOR",
+                                "ranking": null,
+                                "resultDecision": null
+                              },
+                              {
+                                "competitionMatchPsSeq": 20200,
+                                "team": "team7",
+                                "name": "team7",
+                                "country": "KOR",
+                                "ranking": null,
+                                "resultDecision": null
+                              },
+                              {
+                                "competitionMatchPsSeq": 20201,
+                                "team": "team4",
+                                "name": "team4",
+                                "country": "KOR",
+                                "ranking": null,
+                                "resultDecision": null
+                              }
+                            ]
+                          }
+                        ],
+                        "tournamentDraws": [
+                          {
+                            "competitionMatchPsSeq": 20202,
+                            "phase": "QF",
+                            "playingRound": 2,
+                            "competitors": [
+                              {
+                                "matchCompetitorDetailSeq": null,
+                                "competitor": null,
+                                "competitorName": null,
+                                "country": null,
+                                "matchSideType": null
+                              }
+                            ]
+                          },
+                          {
+                            "competitionMatchPsSeq": 20203,
+                            "phase": "QF",
+                            "playingRound": 2,
+                            "competitors": [
+                              {
+                                "matchCompetitorDetailSeq": null,
+                                "competitor": null,
+                                "competitorName": null,
+                                "country": null,
+                                "matchSideType": null
+                              }
+                            ]
+                          },
+                          {
+                            "competitionMatchPsSeq": 20204,
+                            "phase": "QF",
+                            "playingRound": 2,
+                            "competitors": [
+                              {
+                                "matchCompetitorDetailSeq": null,
+                                "competitor": null,
+                                "competitorName": null,
+                                "country": null,
+                                "matchSideType": null
+                              }
+                            ]
+                          },
+                          {
+                            "competitionMatchPsSeq": 20205,
+                            "phase": "QF",
+                            "playingRound": 2,
+                            "competitors": [
+                              {
+                                "matchCompetitorDetailSeq": null,
+                                "competitor": null,
+                                "competitorName": null,
+                                "country": null,
+                                "matchSideType": null
+                              }
+                            ]
+                          },
+                          {
+                            "competitionMatchPsSeq": 20206,
+                            "phase": "SF",
+                            "playingRound": 3,
+                            "competitors": [
+                              {
+                                "matchCompetitorDetailSeq": null,
+                                "competitor": null,
+                                "competitorName": null,
+                                "country": null,
+                                "matchSideType": null
+                              }
+                            ]
+                          },
+                          {
+                            "competitionMatchPsSeq": 20207,
+                            "phase": "SF",
+                            "playingRound": 3,
+                            "competitors": [
+                              {
+                                "matchCompetitorDetailSeq": null,
+                                "competitor": null,
+                                "competitorName": null,
+                                "country": null,
+                                "matchSideType": null
+                              }
+                            ]
+                          },
+                          {
+                            "competitionMatchPsSeq": 20208,
+                            "phase": "BRZ",
+                            "playingRound": 4,
+                            "competitors": [
+                              {
+                                "matchCompetitorDetailSeq": null,
+                                "competitor": null,
+                                "competitorName": null,
+                                "country": null,
+                                "matchSideType": null
+                              }
+                            ]
+                          },
+                          {
+                            "competitionMatchPsSeq": 20209,
+                            "phase": "F",
+                            "playingRound": 5,
+                            "competitors": [
+                              {
+                                "matchCompetitorDetailSeq": null,
+                                "competitor": null,
+                                "competitorName": null,
+                                "country": null,
+                                "matchSideType": null
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    error: null
+                ITEM_NOT_FOUND:
+                  $ref: '../../openapi.yml/#/components/examples/ITEM_NOT_FOUND'
+                MATCH_COMPETITOR_DETAIL_NOT_FOUND:
+                  $ref: '../../openapi.yml/#/components/examples/MATCH_COMPETITOR_DETAIL_NOT_FOUND'
+                COMPETITION_MATCH_NOT_FOUND:
+                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_NOT_FOUND'
