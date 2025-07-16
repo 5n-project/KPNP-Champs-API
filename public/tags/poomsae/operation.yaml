@@ -477,17 +477,17 @@ paths:
           required: true
           schema:
             type: integer
-          description: 현재 진행중인 경기 일차 (1일차 시작한경우 1)
+          description: 현재 진행중인 경기 일차 (1일차 시작한 경우 1)
         - name: category
           in: query
           schema:
             type: string
-          description: '전체 : 값 없이, 부 : DEPARTMENT, 심판 그룹 : REFEREE_GROUP, 코트 번호 : MAT_NUMBER'
+          description: '전체: 값 없이, 부: DEPARTMENT, 심판 그룹: REFEREE_GROUP, 코트 번호: MAT_NUMBER'
         - name: keyword
           in: query
           schema:
             type: string
-          description: '해당 대분류 선택한 거 에 대한 소분류 선택한 값'
+          description: '해당 대분류 선택 시 소분류로 선택한 값'
       responses:
         '200':
           description: 성공
@@ -499,133 +499,142 @@ paths:
                   success:
                     type: boolean
                   data:
-                    type: array
-                    items:
-                      type: object
-                      required:
-                        - competitionMatchPsSeq
-                        - matNumber
-                        - divisionCode
-                        - divisionNameKo
-                        - divisionNameEn
-                        - departmentCode
-                        - departmentNameKo
-                        - departmentNameEn
-                        - divisionCategoryCode
-                        - divisionCategoryNameKo
-                        - divisionCategoryNameEn
-                        - phase
-                        - matchNumber
-                        - matchMinTime
-                        - matchMaxTime
-                        - matchStyleType
-                        - resultDecision
-                        - matchStatus
-                        - matchCompetitorList
-                      properties:
-                        competitionMatchPsSeq:
-                          type: integer
-                          description: 대회 경기 식별자
-                        matNumber:
-                          type: integer
-                          description: 경기 진행 코트 번호
-                        divisionCode:
-                          type: string
-                          description: 품새 룰 코드
-                        divisionNameKo:
-                          type: string
-                          description: 품새 룰 한글명
-                        divisionNameEn:
-                          type: string
-                          description: 품새 룰 영문명
-                        departmentCode:
-                          type: string
-                          description: 부(department) 코드
-                        departmentNameKo:
-                          type: string
-                          description: 부 한글명
-                        departmentNameEn:
-                          type: string
-                          description: 부 영문명
-                        divisionCategoryCode:
-                          type: string
-                          description: 대회 유형 코드
-                        divisionCategoryNameKo:
-                          type: string
-                          description: 대회 유형 한글명
-                        divisionCategoryNameEn:
-                          type: string
-                          description: 대회 유형 영문명
-                        phase:
-                          type: string
-                          description: 강수
-                        cutoffGroupName:
-                          type: string
-                          nullable: true
-                          description: 컷오프 조명 (없으면 null)
-                        refereeGroupName:
-                          type: string
-                          nullable: true
-                          description: 심판 그룹명 (없으면 null)
-                        matchNumber:
-                          type: integer
-                          description: '경기 번호 (예: 1001)'
-                        matchMinTime:
-                          type: integer
-                          description: '최소 시연시간 (초) -> 이건 설정에서 설정한 기본 값으로 흐르고 있는 실시간 값은 진행중인 경기의 FOP 에서 받아서 실시간으로 표현해줘야함 (라운드 표기도 위와동일)'
-                        matchMaxTime:
-                          type: integer
-                          description: '최대 시연시간 (초) -> 이건 설정에서 설정한 기본 값으로 흐르고 있는 실시간 값은 진행중인 경기의 FOP 에서 받아서 실시간으로 표현해줘야함 (라운드 표기도 위와동일)'
-                        matchStyleType:
-                          type: string
-                          description: 경기 유형 (TOURNAMENT, CUTOFF)
-                        resultDecision:
-                          type: string
-                          description: '경기 결과 코드 (토너먼트 : BYE, RSC 등, 컷오프 : PASS or FAIL)'
-                        matchStatus:
-                          type: string
-                          description: '매치 상태 (WAITING, ONGOING, END)'
-                        matchCompetitorList:
-                          type: array
-                          items:
-                            type: object
-                            required:
-                              - matchCompetitorDetailSeq
-                              - competitor
-                              - competitorName
-                              - countryCode
-                              - matchSideType
-                            properties:
-                              matchCompetitorDetailSeq:
-                                type: integer
-                                description: 매치별 참가자 상세 식별자
-                              competitor:
-                                type: integer
-                                description: 선수 번호
-                              competitorName:
-                                type: string
-                                description: 선수 이름 (팀전은 팀명)
-                              countryCode:
-                                type: string
-                                description: 소속 국가 NOC 코드
-                              firstPoomsaeAverageScore:
-                                type: number
-                                format: double
-                                nullable: true
-                                description: 첫 번째 품새 평균 점수
-                              secondPoomsaeAverageScore:
-                                type: number
-                                format: double
-                                nullable: true
-                                description: 두 번째 품새 평균 점수
-                              poomsaeTotalScore:
-                                type: number
-                                format: double
-                                nullable: true
-                                description: 품새 총점
-                              matchSideType:
-                                type: string
-                                description: 경기 사이드 (HOME, AWAY, CUTOFF)
+                    type: object
+                    properties:
+                      competitionName:
+                        type: string
+                        description: 대회 이름
+                      ongoingMatches:
+                        type: array
+                        description: 현재 진행중인 경기 리스트
+                        items:
+                          type: object
+                          required:
+                            - competitionMatchPsSeq
+                            - matNumber
+                            - divisionCode
+                            - divisionNameKo
+                            - divisionNameEn
+                            - departmentCode
+                            - departmentNameKo
+                            - departmentNameEn
+                            - divisionCategoryCode
+                            - divisionCategoryNameKo
+                            - divisionCategoryNameEn
+                            - phase
+                            - matchNumber
+                            - matchMinTime
+                            - matchMaxTime
+                            - matchStyleType
+                            - resultDecision
+                            - matchStatus
+                            - matchCompetitorList
+                          properties:
+                            competitionMatchPsSeq:
+                              type: integer
+                              description: 대회 경기 식별자
+                            matNumber:
+                              type: integer
+                              description: 경기 진행 코트 번호
+                            divisionCode:
+                              type: string
+                              description: 품새 룰 코드
+                            divisionNameKo:
+                              type: string
+                              description: 품새 룰 한글명
+                            divisionNameEn:
+                              type: string
+                              description: 품새 룰 영문명
+                            departmentCode:
+                              type: string
+                              description: 부(department) 코드
+                            departmentNameKo:
+                              type: string
+                              description: 부 한글명
+                            departmentNameEn:
+                              type: string
+                              description: 부 영문명
+                            divisionCategoryCode:
+                              type: string
+                              description: 대회 유형 코드
+                            divisionCategoryNameKo:
+                              type: string
+                              description: 대회 유형 한글명
+                            divisionCategoryNameEn:
+                              type: string
+                              description: 대회 유형 영문명
+                            phase:
+                              type: string
+                              description: 강수(라운드)
+                            cutoffGroupName:
+                              type: string
+                              nullable: true
+                              description: 컷오프 조명 (없으면 null)
+                            refereeGroupName:
+                              type: string
+                              nullable: true
+                              description: 심판 그룹명 (없으면 null)
+                            matchNumber:
+                              type: integer
+                              description: "경기 번호 (예: 1001)"
+                            matchMinTime:
+                              type: integer
+                              description: 최소 시연시간(초), 진행 중인 FOP에서 실시간 반영 필요
+                            matchMaxTime:
+                              type: integer
+                              description: 최대 시연시간(초), 진행 중인 FOP에서 실시간 반영 필요
+                            matchStyleType:
+                              type: string
+                              description: 경기 유형 (TOURNAMENT, CUTOFF)
+                            resultDecision:
+                              type: string
+                              nullable: true
+                              description: "경기 결과 코드 (토너먼트: BYE, RSC 등 / 컷오프: PASS, FAIL)"
+                            matchStatus:
+                              type: string
+                              description: 매치 상태 (WAITING, ONGOING, END)
+                            matchCompetitorList:
+                              type: array
+                              description: 경기 참가자 리스트
+                              items:
+                                type: object
+                                required:
+                                  - matchCompetitorDetailSeq
+                                  - competitor
+                                  - competitorName
+                                  - countryCode
+                                  - matchSideType
+                                properties:
+                                  matchCompetitorDetailSeq:
+                                    type: integer
+                                    description: 매치별 참가자 상세 식별자
+                                  competitor:
+                                    type: integer
+                                    description: 선수 번호
+                                  competitorName:
+                                    type: string
+                                    description: 선수 이름(또는 팀명)
+                                  countryCode:
+                                    type: string
+                                    description: 소속 국가 NOC 코드
+                                  firstPoomsaeAverageScore:
+                                    type: number
+                                    format: double
+                                    nullable: true
+                                    description: 첫 번째 품새 평균 점수
+                                  secondPoomsaeAverageScore:
+                                    type: number
+                                    format: double
+                                    nullable: true
+                                    description: 두 번째 품새 평균 점수
+                                  poomsaeTotalScore:
+                                    type: number
+                                    format: double
+                                    nullable: true
+                                    description: 품새 총점
+                                  matchSideType:
+                                    type: string
+                                    description: 경기 사이드 (HOME, AWAY, CUTOFF)
                   error:
                     type: string
                     nullable: true
@@ -635,41 +644,196 @@ paths:
                   value:
                     success: true
                     data:
-                      - competitionMatchPsSeq: 16985
-                        matNumber: 2
-                        divisionCode: "WT_RECOGNIZED_POOMSAE"
-                        divisionNameKo: "WT 공인품새룰"
-                        divisionNameEn: "WT Recognized Poomsae"
-                        departmentCode: "UNDER_30"
-                        departmentNameKo: "30세 이하"
-                        departmentNameEn: "Under 30"
-                        divisionCategoryCode: "INDIVIDUAL_MALE"
-                        divisionCategoryNameKo: "남자개인"
-                        divisionCategoryNameEn: "Individual male"
-                        phase: "R128"
-                        cutoffGroupName: 'A'
-                        refereeGroupName: 'C'
-                        matchNumber: 2001
-                        matchMinTime: 90
-                        matchMaxTime: 200
-                        matchStyleType: "CUTOFF"
-                        resultDecision: "PASS"
-                        matchStatus: "END"
-                        matchCompetitorList:
-                          - matchCompetitorDetailSeq: 4899
-                            competitor: 1
-                            competitorName: "M. DAM"
-                            countryCode: "KOR"
-                            firstPoomsaeAverageScore: null
-                            secondPoomsaeAverageScore: null
-                            poomsaeTotalScore: null
-                            matchSideType: "CUTOFF"
+                      {
+                        "competitionName": "20250522 ㅇㅈ품새s",
+                        "ongoingMatches": [
+                          {
+                            "competitionMatchPsSeq": 20087,
+                            "matNumber": 2,
+                            "divisionCode": "WT_RECOGNIZED_POOMSAE",
+                            "divisionNameKo": "WT 공인품새룰",
+                            "divisionNameEn": "WT Recognized Poomsae",
+                            "departmentCode": "UNDER_30",
+                            "departmentNameKo": "30세 이하",
+                            "departmentNameEn": "Under 30",
+                            "divisionCategoryCode": "INDIVIDUAL_FEMALE",
+                            "divisionCategoryNameKo": "여자개인",
+                            "divisionCategoryNameEn": "Individual female",
+                            "phase": "Pre-A",
+                            "cutoffGroupName": "A",
+                            "refereeGroupName": "D",
+                            "matchNumber": 2001,
+                            "matchMinTime": 90,
+                            "matchMaxTime": 200,
+                            "matchStyleType": "CUTOFF",
+                            "resultDecision": null,
+                            "matchStatus": "ONGOING",
+                            "matchCompetitorList": [
+                              {
+                                "matchCompetitorDetailSeq": 5207,
+                                "competitor": 1,
+                                "competitorName": "M. DAM",
+                                "countryCode": "KOR",
+                                "firstPoomsaeAverageScore": 1.600,
+                                "secondPoomsaeAverageScore": null,
+                                "poomsaeTotalScore": 1.600,
+                                "matchSideType": "CUTOFF"
+                              }
+                            ]
+                          },
+                          {
+                            "competitionMatchPsSeq": 20024,
+                            "matNumber": 1,
+                            "divisionCode": "WT_RECOGNIZED_POOMSAE",
+                            "divisionNameKo": "WT 공인품새룰",
+                            "divisionNameEn": "WT Recognized Poomsae",
+                            "departmentCode": "UNDER_30",
+                            "departmentNameKo": "30세 이하",
+                            "departmentNameEn": "Under 30",
+                            "divisionCategoryCode": "INDIVIDUAL_MALE",
+                            "divisionCategoryNameKo": "남자개인",
+                            "divisionCategoryNameEn": "Individual male",
+                            "phase": "R64",
+                            "cutoffGroupName": null,
+                            "refereeGroupName": "A",
+                            "matchNumber": 1001,
+                            "matchMinTime": 90,
+                            "matchMaxTime": 200,
+                            "matchStyleType": "TOURNAMENT",
+                            "resultDecision": null,
+                            "matchStatus": "ONGOING",
+                            "matchCompetitorList": [
+                              {
+                                "matchCompetitorDetailSeq": 5299,
+                                "competitor": 118,
+                                "competitorName": "M. NAM",
+                                "countryCode": "KOR",
+                                "firstPoomsaeAverageScore": 6.000,
+                                "secondPoomsaeAverageScore": 6.166,
+                                "poomsaeTotalScore": 30.500,
+                                "matchSideType": "HOME"
+                              },
+                              {
+                                "matchCompetitorDetailSeq": 5298,
+                                "competitor": 144,
+                                "competitorName": "M. DAM",
+                                "countryCode": "KOR",
+                                "firstPoomsaeAverageScore": 7.000,
+                                "secondPoomsaeAverageScore": 6.733,
+                                "poomsaeTotalScore": 34.200,
+                                "matchSideType": "AWAY"
+                              }
+                            ]
+                          },
+                          {
+                            "competitionMatchPsSeq": 20088,
+                            "matNumber": 2,
+                            "divisionCode": "WT_RECOGNIZED_POOMSAE",
+                            "divisionNameKo": "WT 공인품새룰",
+                            "divisionNameEn": "WT Recognized Poomsae",
+                            "departmentCode": "UNDER_30",
+                            "departmentNameKo": "30세 이하",
+                            "departmentNameEn": "Under 30",
+                            "divisionCategoryCode": "INDIVIDUAL_FEMALE",
+                            "divisionCategoryNameKo": "여자개인",
+                            "divisionCategoryNameEn": "Individual female",
+                            "phase": "Pre-A",
+                            "cutoffGroupName": "A",
+                            "refereeGroupName": "D",
+                            "matchNumber": 2002,
+                            "matchMinTime": 90,
+                            "matchMaxTime": 200,
+                            "matchStyleType": "CUTOFF",
+                            "resultDecision": null,
+                            "matchStatus": "ONGOING",
+                            "matchCompetitorList": [
+                              {
+                                "matchCompetitorDetailSeq": 5208,
+                                "competitor": 2,
+                                "competitorName": "M. DAM",
+                                "countryCode": "KOR",
+                                "firstPoomsaeAverageScore": 7.800,
+                                "secondPoomsaeAverageScore": null,
+                                "poomsaeTotalScore": 15.600,
+                                "matchSideType": "CUTOFF"
+                              }
+                            ]
+                          },
+                          {
+                            "competitionMatchPsSeq": 20089,
+                            "matNumber": 2,
+                            "divisionCode": "WT_RECOGNIZED_POOMSAE",
+                            "divisionNameKo": "WT 공인품새룰",
+                            "divisionNameEn": "WT Recognized Poomsae",
+                            "departmentCode": "UNDER_30",
+                            "departmentNameKo": "30세 이하",
+                            "departmentNameEn": "Under 30",
+                            "divisionCategoryCode": "INDIVIDUAL_FEMALE",
+                            "divisionCategoryNameKo": "여자개인",
+                            "divisionCategoryNameEn": "Individual female",
+                            "phase": "Pre-A",
+                            "cutoffGroupName": "A",
+                            "refereeGroupName": "D",
+                            "matchNumber": 2003,
+                            "matchMinTime": 90,
+                            "matchMaxTime": 200,
+                            "matchStyleType": "CUTOFF",
+                            "resultDecision": null,
+                            "matchStatus": "WAITING",
+                            "matchCompetitorList": [
+                              {
+                                "matchCompetitorDetailSeq": 5209,
+                                "competitor": 3,
+                                "competitorName": "M. DAM",
+                                "countryCode": "KOR",
+                                "firstPoomsaeAverageScore": null,
+                                "secondPoomsaeAverageScore": null,
+                                "poomsaeTotalScore": null,
+                                "matchSideType": "CUTOFF"
+                              }
+                            ]
+                          },
+                          {
+                            "competitionMatchPsSeq": 20091,
+                            "matNumber": 2,
+                            "divisionCode": "WT_RECOGNIZED_POOMSAE",
+                            "divisionNameKo": "WT 공인품새룰",
+                            "divisionNameEn": "WT Recognized Poomsae",
+                            "departmentCode": "UNDER_30",
+                            "departmentNameKo": "30세 이하",
+                            "departmentNameEn": "Under 30",
+                            "divisionCategoryCode": "INDIVIDUAL_FEMALE",
+                            "divisionCategoryNameKo": "여자개인",
+                            "divisionCategoryNameEn": "Individual female",
+                            "phase": "Pre-A",
+                            "cutoffGroupName": "A",
+                            "refereeGroupName": "D",
+                            "matchNumber": 2005,
+                            "matchMinTime": 90,
+                            "matchMaxTime": 200,
+                            "matchStyleType": "CUTOFF",
+                            "resultDecision": null,
+                            "matchStatus": "WAITING",
+                            "matchCompetitorList": [
+                              {
+                                "matchCompetitorDetailSeq": 5211,
+                                "competitor": 5,
+                                "competitorName": "M. DAM",
+                                "countryCode": "KOR",
+                                "firstPoomsaeAverageScore": null,
+                                "secondPoomsaeAverageScore": null,
+                                "poomsaeTotalScore": null,
+                                "matchSideType": "CUTOFF"
+                              }
+                            ]
+                          }
+                        ]
+                      }
                     error: null
                 ITEM_NOT_FOUND:
                   $ref: '../../openapi.yml/#/components/examples/ITEM_NOT_FOUND'
-
         '403':
-          description: Forbidden
+          description: 권한 없음
           content:
             application/json:
               schema:
