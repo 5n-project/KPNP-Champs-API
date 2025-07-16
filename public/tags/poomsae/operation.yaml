@@ -237,7 +237,7 @@ paths:
                         matchNumber: "1003"
                         matchStyleType: "TOURNAMENT"
                         resultDecision: "RSC"
-                        matchStatus : "WAITING"
+                        matchStatus: "WAITING"
                         matchCompetitorList:
                           - matchCompetitorDetailSeq: 2407
                             competitor: 128
@@ -2383,7 +2383,7 @@ paths:
                   value:
                     success: true
                     data: {
-                        "matchStatus" : "ONGOING"
+                      "matchStatus": "ONGOING"
                     }
                     error: null
                 COMPETITION_MATCH_NOT_FOUND:
@@ -2590,6 +2590,10 @@ paths:
                                     type: integer
                                     description: 경기 시퀀스
                                     example: 20191
+                                  matchCompetitorDetailSeq:
+                                    type: integer
+                                    description: 경기에 해당하는 선수 고유 Seq
+                                    example: 2323
                                   team:
                                     type: string
                                     description: 팀명
@@ -2641,7 +2645,7 @@ paths:
                                     type: integer
                                     nullable: true
                                     description: 해당 대회에 선수 번호
-                                  competitorName:
+                                  name:
                                     type: string
                                     nullable: true
                                     description: 선수명
@@ -2679,6 +2683,7 @@ paths:
                             "competitors": [
                               {
                                 "competitionMatchPsSeq": 20191,
+                                "matchCompetitorDetailSeq" : 2311,
                                 "team": "team1",
                                 "name": "team1",
                                 "country": "KOR",
@@ -2687,6 +2692,7 @@ paths:
                               },
                               {
                                 "competitionMatchPsSeq": 20192,
+                                "matchCompetitorDetailSeq" : 2312,
                                 "team": "team10",
                                 "name": "team10",
                                 "country": "KOR",
@@ -2695,72 +2701,9 @@ paths:
                               },
                               {
                                 "competitionMatchPsSeq": 20193,
+                                "matchCompetitorDetailSeq" : 2313,
                                 "team": "team8",
                                 "name": "team8",
-                                "country": "KOR",
-                                "ranking": null,
-                                "resultDecision": null
-                              },
-                              {
-                                "competitionMatchPsSeq": 20194,
-                                "team": "team5",
-                                "name": "team5",
-                                "country": "KOR",
-                                "ranking": null,
-                                "resultDecision": null
-                              },
-                              {
-                                "competitionMatchPsSeq": 20195,
-                                "team": "team2",
-                                "name": "team2",
-                                "country": "KOR",
-                                "ranking": null,
-                                "resultDecision": null
-                              },
-                              {
-                                "competitionMatchPsSeq": 20196,
-                                "team": "team11",
-                                "name": "team11",
-                                "country": "KOR",
-                                "ranking": null,
-                                "resultDecision": null
-                              },
-                              {
-                                "competitionMatchPsSeq": 20197,
-                                "team": "team9",
-                                "name": "team9",
-                                "country": "KOR",
-                                "ranking": null,
-                                "resultDecision": null
-                              },
-                              {
-                                "competitionMatchPsSeq": 20198,
-                                "team": "team6",
-                                "name": "team6",
-                                "country": "KOR",
-                                "ranking": null,
-                                "resultDecision": null
-                              },
-                              {
-                                "competitionMatchPsSeq": 20199,
-                                "team": "team3",
-                                "name": "team3",
-                                "country": "KOR",
-                                "ranking": null,
-                                "resultDecision": null
-                              },
-                              {
-                                "competitionMatchPsSeq": 20200,
-                                "team": "team7",
-                                "name": "team7",
-                                "country": "KOR",
-                                "ranking": null,
-                                "resultDecision": null
-                              },
-                              {
-                                "competitionMatchPsSeq": 20201,
-                                "team": "team4",
-                                "name": "team4",
                                 "country": "KOR",
                                 "ranking": null,
                                 "resultDecision": null
@@ -2777,7 +2720,7 @@ paths:
                               {
                                 "matchCompetitorDetailSeq": null,
                                 "competitor": null,
-                                "competitorName": null,
+                                "name": null,
                                 "country": null,
                                 "matchSideType": null
                               }
@@ -2791,7 +2734,7 @@ paths:
                               {
                                 "matchCompetitorDetailSeq": null,
                                 "competitor": null,
-                                "competitorName": null,
+                                "name": null,
                                 "country": null,
                                 "matchSideType": null
                               }
@@ -2805,7 +2748,7 @@ paths:
                               {
                                 "matchCompetitorDetailSeq": null,
                                 "competitor": null,
-                                "competitorName": null,
+                                "name": null,
                                 "country": null,
                                 "matchSideType": null
                               }
@@ -2819,7 +2762,7 @@ paths:
                               {
                                 "matchCompetitorDetailSeq": null,
                                 "competitor": null,
-                                "competitorName": null,
+                                "name": null,
                                 "country": null,
                                 "matchSideType": null
                               }
@@ -2833,7 +2776,7 @@ paths:
                               {
                                 "matchCompetitorDetailSeq": null,
                                 "competitor": null,
-                                "competitorName": null,
+                                "name": null,
                                 "country": null,
                                 "matchSideType": null
                               }
@@ -2847,7 +2790,7 @@ paths:
                               {
                                 "matchCompetitorDetailSeq": null,
                                 "competitor": null,
-                                "competitorName": null,
+                                "name": null,
                                 "country": null,
                                 "matchSideType": null
                               }
@@ -2861,7 +2804,7 @@ paths:
                               {
                                 "matchCompetitorDetailSeq": null,
                                 "competitor": null,
-                                "competitorName": null,
+                                "name": null,
                                 "country": null,
                                 "matchSideType": null
                               }
@@ -2875,7 +2818,7 @@ paths:
                               {
                                 "matchCompetitorDetailSeq": null,
                                 "competitor": null,
-                                "competitorName": null,
+                                "name": null,
                                 "country": null,
                                 "matchSideType": null
                               }
@@ -2899,3 +2842,485 @@ paths:
               examples:
                 INVALID_TYPE_ERROR:
                   $ref: '../../openapi.yml#/components/examples/INVALID_TYPE_ERROR'
+
+  /competitions/{competitionSeq}/operation/matches/random:
+    put:
+      summary: 랜덤 매치 생성 (notion 실시간 응답 데이터 문서 확인)
+      description: |
+        랜덤 매치를 생성합니다.
+      tags:
+        - 운영 - 경기
+      parameters:
+        - in: path
+          name: competitionSeq
+          required: true
+          schema:
+            type: integer
+          description: 대회의 고유 시퀀스
+        - in: query
+          name: division
+          required: true
+          schema:
+            type: string
+          description: '룰 코드 (예: WT_RECOGNIZED_POOMSAE, WT_FREESTYLE_POOMSAE)'
+        - in: query
+          name: department
+          required: true
+          schema:
+            type: string
+          description: '부 코드 (예: UNDER_30)'
+        - in: query
+          name: divisionCategory
+          required: true
+          schema:
+            type: string
+          description: '대회 유형 코드 (예: INDIVIDUAL_MALE)'
+      responses:
+        '200':
+          description: 성공 응답
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: boolean
+                    nullable: true
+                    example: null
+                  error:
+                    type: string
+                    nullable: true
+                    example: null
+              examples:
+                success:
+                  summary: 성공 응답 예시
+                  value:
+                    success: true
+                    data: null
+                    error: null
+                ITEM_NOT_FOUND:
+                  $ref: '../../openapi.yml#/components/examples/ITEM_NOT_FOUND'
+                MATCH_STATE_INVALID_FOR_OPERATION:
+                  $ref: '../../openapi.yml#/components/examples/MATCH_STATE_INVALID_FOR_OPERATION'
+                COMPETITION_MATCH_NOT_FOUND:
+                  $ref: '../../openapi.yml#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+                ONLY_TOURNAMENT_RANDOM_MATCH:
+                  $ref: '../../openapi.yml#/components/examples/ONLY_TOURNAMENT_RANDOM_MATCH'
+                NO_PLAYER_ADVANCED_TO_NEXT_ROUND:
+                  $ref: '../../openapi.yml#/components/examples/NO_PLAYER_ADVANCED_TO_NEXT_ROUND'
+        '403':
+          description: 권한 없음
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+
+  /competitions/{competitionSeq}/operation/matches/first-round:
+    get:
+      summary: 운영 - 매치생성 버튼 1라운드 대진표 조회
+      description: |
+        매치 생성 버튼에 대진표출 누른경우 1라운드에 해당하는 대진표를 조회한다.
+        - 토너먼트(Tournament), 컷오프(Cutoff), 컷오프+토너먼트(Cutoff_Tournament) 방식 모두 대응
+      tags:
+        - 운영 - 경기
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 대회의 고유 시퀀스
+        - name: division
+          in: query
+          required: true
+          schema:
+            type: string
+          description:
+            '룰 코드 (예: WT_RECOGNIZED_POOMSAE)'
+        - name: department
+          in: query
+          required: true
+          schema:
+            type: string
+          description:
+            '부 코드 (예: UNDER_30)'
+        - name: divisionCategory
+          in: query
+          required: true
+          schema:
+            type: string
+          description:
+            '대회 유형 코드 (예: INDIVIDUAL_MALE)'
+      responses:
+        '200':
+          description: 성공적으로 1라운드 대진표를 조회한 경우
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    required:
+                      - competitionEventSeq
+                      - matchStyleType
+                      - existOngoingOrEndMatch
+                    type: object
+                    properties:
+                      competitionEventSeq:
+                        type: integer
+                        description: 대회 이벤트 시퀀스
+                        example: 1167
+                      matchStyleType:
+                        type: string
+                        description: "경기 방식 (CUTOFF (컷오프만), TOURNAMENT(토너먼트만), CUTOFF_TOURNAMENT (컷오프 또는 토너먼트만 나옴)"
+                      existOngoingOrEndMatch:
+                        type: boolean
+                        description: 이미 진행 중이거나 완료된 매치 존재 여부
+                        example: true
+                      cutoffDraws:
+                        type: array
+                        description: 컷오프 대진표 리스트
+                        items:
+                          type: object
+                          properties:
+                            phaseType:
+                              type: string
+                              description:
+                                "라운드 및 조 구분 (예: PRE_A)"
+                            phase:
+                              type: string
+                              description:
+                                "라운드 단계 (예: PRE)"
+                            group:
+                              type: string
+                              description:
+                                "조 구분 (예: A)"
+                            competitors:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  competitionMatchPsSeq:
+                                    type: integer
+                                    description: 경기 시퀀스
+                                  matchCompetitorDetailSeq:
+                                    type: integer
+                                    description: 경기 선수 상세 시퀀스
+                                  name:
+                                    type: string
+                                    description: 선수명
+                                  country:
+                                    type: string
+                                    description: 국가 코드
+                                  resultDecision:
+                                    type: string
+                                    nullable: true
+                                    description: PASS / FAIL 여부
+                      tournamentDraws:
+                        type: array
+                        description: 토너먼트 대진표 리스트
+                        items:
+                          type: object
+                          properties:
+                            competitionMatchPsSeq:
+                              type: integer
+                              description: 경기 시퀀스
+                            phase:
+                              type: string
+                              description:
+                                "라운드 단계 (예: R64)"
+                            phaseLabel:
+                              type: string
+                              description:
+                                "라운드 단계 + 순서 (예: R64-1)"
+                            playingRound:
+                              type: integer
+                              description: 라운드 번호
+                            competitors:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  matchCompetitorDetailSeq:
+                                    type: integer
+                                    description: 경기 선수 상세 시퀀스
+                                  competitor:
+                                    type: integer
+                                    description: 선수 번호
+                                  name:
+                                    type: string
+                                    description: 선수명
+                                  country:
+                                    type: string
+                                    description: 국가 코드
+                                  matchSideType:
+                                    type: string
+                                    description: "HOME / AWAY"
+                  error:
+                    type: string
+                    nullable: true
+              examples:
+                TOURNAMENT_예시:
+                  summary: TOURNAMENT 방식 1라운드 대진표 예시
+                  value: {
+                    "success": true,
+                    "data": {
+                      "competitionEventSeq": 1167,
+                      "matchStyleType": "TOURNAMENT",
+                      "existOngoingOrEndMatch": true,
+                      "cutoffDraws": [ ],
+                      "tournamentDraws": [
+                        {
+                          "competitionMatchPsSeq": 20023,
+                          "phase": "R64",
+                          "phaseLabel": "R64-1",
+                          "playingRound": 1,
+                          "competitors": [
+                            {
+                              "matchCompetitorDetailSeq": 5297,
+                              "competitor": 119,
+                              "name": "M. GAM",
+                              "country": "KOR",
+                              "matchSideType": "HOME"
+                            }
+                          ]
+                        },
+                        {
+                          "competitionMatchPsSeq": 20024,
+                          "phase": "R64",
+                          "phaseLabel": "R64-2",
+                          "playingRound": 1,
+                          "competitors": [
+                            {
+                              "matchCompetitorDetailSeq": 5299,
+                              "competitor": 118,
+                              "name": "M. NAM",
+                              "country": "KOR",
+                              "matchSideType": "HOME"
+                            },
+                            {
+                              "matchCompetitorDetailSeq": 5298,
+                              "competitor": 144,
+                              "name": "M. DAM",
+                              "country": "KOR",
+                              "matchSideType": "AWAY"
+                            }
+                          ]
+                        },
+                        {
+                          "competitionMatchPsSeq": 20025,
+                          "phaseLabel": "R64-3",
+                          "playingRound": 1,
+                          "competitors": [
+                            {
+                              "matchCompetitorDetailSeq": 5301,
+                              "competitor": 129,
+                              "name": "M. DAM",
+                              "country": "KOR",
+                              "matchSideType": "HOME"
+                            },
+                            {
+                              "matchCompetitorDetailSeq": 5300,
+                              "competitor": 141,
+                              "name": "M. DAM",
+                              "country": "KOR",
+                              "matchSideType": "AWAY"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "error": null
+                  }
+                CUTOFF_예시:
+                  summary: CUTOFF 방식 1라운드 대진표 예시
+                  value: {
+                    "success": true,
+                    "data": {
+                      "competitionEventSeq": 1168,
+                      "matchStyleType": "CUTOFF",
+                      "existOngoingOrEndMatch": true,
+                      "cutoffDraws": [
+                        {
+                          "phaseType": "PRE_A",
+                          "phase": "PRE",
+                          "group": "A",
+                          "competitors": [
+                            {
+                              "competitionMatchPsSeq": 20087,
+                              "matchCompetitorDetailSeq": 5207,
+                              "name": "M. DAM",
+                              "country": "KOR",
+                              "resultDecision": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20088,
+                              "matchCompetitorDetailSeq": 5208,
+                              "name": "M. DAM",
+                              "country": "KOR",
+                              "resultDecision": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20089,
+                              "matchCompetitorDetailSeq": 5209,
+                              "name": "M. DAM",
+                              "country": "KOR",
+                              "resultDecision": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20090,
+                              "matchCompetitorDetailSeq": 5210,
+                              "name": "M. DAM",
+                              "country": "KOR",
+                              "resultDecision": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20091,
+                              "matchCompetitorDetailSeq": 5211,
+                              "name": "M. DAM",
+                              "country": "KOR",
+                              "resultDecision": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20092,
+                              "matchCompetitorDetailSeq": 5212,
+                              "name": "M. DAM",
+                              "country": "KOR",
+                              "resultDecision": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20093,
+                              "matchCompetitorDetailSeq": 5213,
+                              "name": "M. DAM",
+                              "country": "KOR",
+                              "resultDecision": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20094,
+                              "matchCompetitorDetailSeq": 5214,
+                              "name": "M. DAM",
+                              "country": "KOR",
+                              "resultDecision": null
+                            }
+                          ]
+                        },
+                        {
+                          "phaseType": "PRE_B",
+                          "phase": "PRE",
+                          "group": "B",
+                          "competitors": [
+                            {
+                              "competitionMatchPsSeq": 20108,
+                              "matchCompetitorDetailSeq": 5228,
+                              "name": "M. DAM",
+                              "country": "KOR",
+                              "resultDecision": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20109,
+                              "matchCompetitorDetailSeq": 5229,
+                              "name": "M. DAM",
+                              "country": "KOR",
+                              "resultDecision": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20110,
+                              "matchCompetitorDetailSeq": 5230,
+                              "name": "M. DAM",
+                              "country": "KOR",
+                              "resultDecision": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20111,
+                              "matchCompetitorDetailSeq": 5231,
+                              "name": "M. DAM",
+                              "country": "KOR",
+                              "resultDecision": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20112,
+                              "matchCompetitorDetailSeq": 5232,
+                              "name": "M. DAM",
+                              "country": "KOR",
+                              "resultDecision": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20113,
+                              "matchCompetitorDetailSeq": 5233,
+                              "name": "M. DAM",
+                              "country": "KOR",
+                              "resultDecision": null
+                            }
+                          ]
+                        },
+                        {
+                          "phaseType": "PRE_C",
+                          "phase": "PRE",
+                          "group": "C",
+                          "competitors": [
+                            {
+                              "competitionMatchPsSeq": 20129,
+                              "matchCompetitorDetailSeq": 5249,
+                              "name": "M. DAM",
+                              "country": "KOR",
+                              "resultDecision": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20130,
+                              "matchCompetitorDetailSeq": 5250,
+                              "name": "M. DAM",
+                              "country": "KOR",
+                              "resultDecision": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20131,
+                              "matchCompetitorDetailSeq": 5251,
+                              "name": "M. DAM",
+                              "country": "KOR",
+                              "resultDecision": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20132,
+                              "matchCompetitorDetailSeq": 5252,
+                              "name": "M. DAM",
+                              "country": "KOR",
+                              "resultDecision": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20133,
+                              "matchCompetitorDetailSeq": 5253,
+                              "name": "M. DAM",
+                              "country": "KOR",
+                              "resultDecision": null
+                            }
+                          ]
+                        }
+                      ],
+                      "tournamentDraws": [ ]
+                    },
+                    "error": null
+                  }
+                ITEM_NOT_FOUND:
+                  $ref: '../../openapi.yml#/components/examples/ITEM_NOT_FOUND'
+                COMPETITION_MATCH_NOT_FOUND:
+                  $ref: '../../openapi.yml#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+                MATCH_COMPETITOR_DETAIL_NOT_FOUND:
+                  $ref: '../../openapi.yml#/components/examples/MATCH_COMPETITOR_DETAIL_NOT_FOUND'
+        '403':
+          description: 권한 없음
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'

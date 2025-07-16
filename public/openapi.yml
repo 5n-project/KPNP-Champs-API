@@ -191,6 +191,11 @@ paths:
     $ref: './tags/poomsae/operation.yaml#/paths/~1competitions~1{competitionSeq}~1operation~1matches~1{competitionMatchPsSeq}~1poomsae'
   /competitions/{competitionSeq}/operation/draw:
     $ref: './tags/poomsae/operation.yaml#/paths/~1competitions~1{competitionSeq}~1operation~1draw'
+  /competitions/{competitionSeq}/operation/matches/random:
+    $ref: './tags/poomsae/operation.yaml#/paths/~1competitions~1{competitionSeq}~1operation~1matches~1random'
+  /competitions/{competitionSeq}/operation/matches/first-round:
+    $ref: './tags/poomsae/operation.yaml#/paths/~1competitions~1{competitionSeq}~1operation~1matches~1first-round'
+
 
 
   # 심판 점수 채점
@@ -828,6 +833,13 @@ components:
         error:
           message: "경기에 배정받은 심판과 사용자가 일치하지 않습니다."
           errorCode: "E725"
+    ONLY_TOURNAMENT_RANDOM_MATCH:
+      value:
+        success: false
+        data: null
+        error:
+          message: "랜덤 매치 생성은는 토너먼트 경기에서만 변경할 수 있습니다."
+          errorCode: "E728"
 
   schemas:
     getCompetitionDefaultResponse:
