@@ -199,6 +199,10 @@ paths:
 
 
   # 심판 점수 채점
+  /competitions/{competitionSeq}/days/{competitionDay}/schedules/referees:
+    $ref: './tags/poomsae/score.yaml#/paths/~1competitions~1{competitionSeq}~1days~1{competitionDay}~1schedules~1referees'
+  /competitions/{competitionSeq}/matches/{matchSeq}/referees/{refereeSeq}/join:
+    $ref: './tags/poomsae/score.yaml#/paths/~1competitions~1{competitionSeq}~1matches~1{matchSeq}~1referees~1{refereeSeq}~1join'
   /competitions/{competitionSeq}/matches/{matchSeq}:
     $ref: './tags/poomsae/score.yaml#/paths/~1competitions~1{competitionSeq}~1matches~1{matchSeq}'
   /competitions/{competitionSeq}/matches/{matchSeq}/competitors:
@@ -213,12 +217,6 @@ paths:
     $ref: './tags/poomsae/score.yaml#/paths/~1competitions~1{competitionSeq}~1matches~1{matchSeq}~1competitors~1{competitorSeq}~1scores~1update'
   /competitions/{competitionSeq}/matches/{matchSeq}/scores/send:
     $ref: './tags/poomsae/score.yaml#/paths/~1competitions~1{competitionSeq}~1matches~1{matchSeq}~1scores~1send'
-  /competitions/{competitionSeq}/days/{competitionDay}/schedules:
-    $ref: './tags/poomsae/score.yaml#/paths/~1competitions~1{competitionSeq}~1days~1{competitionDay}~1schedules'
-  /competitions/{competitionSeq}/days/{competitionDay}/schedules/{competitionScheduleDetailSeq}/referees:
-    $ref: './tags/poomsae/score.yaml#/paths/~1competitions~1{competitionSeq}~1days~1{competitionDay}~1schedules~1{competitionScheduleDetailSeq}~1referees'
-  /competitions/{competitionSeq}/matches/{matchSeq}/referees/{refereeSeq}/join:
-    $ref: './tags/poomsae/score.yaml#/paths/~1competitions~1{competitionSeq}~1matches~1{matchSeq}~1referees~1{refereeSeq}~1join'
 
 
 
