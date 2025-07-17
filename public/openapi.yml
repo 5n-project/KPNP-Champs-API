@@ -195,6 +195,8 @@ paths:
     $ref: './tags/poomsae/operation.yaml#/paths/~1competitions~1{competitionSeq}~1operation~1matches~1random'
   /competitions/{competitionSeq}/operation/matches/first-round:
     $ref: './tags/poomsae/operation.yaml#/paths/~1competitions~1{competitionSeq}~1operation~1matches~1first-round'
+  /competitions/{competitionSeq}/operation/matches/rtds:
+    $ref: './tags/poomsae/operation.yaml#/paths/~1competitions~1{competitionSeq}~1operation~1matches~1rtds'
 
 
 

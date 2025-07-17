@@ -3488,3 +3488,514 @@ paths:
               examples:
                 IS_NOT_AUTHORIZED:
                   $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+
+  /competitions/{competitionSeq}/operation/matches/rtds:
+    get:
+      summary: 운영 - RTDS 조회
+      description: |
+        실시간 경기 운영용 RTDS 데이터를 조회한다.
+      tags:
+        - 운영 - 경기
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 대회 고유 시퀀스
+      responses:
+        '200':
+          description: RTDS 데이터를 성공적으로 조회한 경우
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    required:
+                      - competitionName
+                      - competitionTimezone
+                      - competitionLocation
+                      - matList
+                    properties:
+                      competitionName:
+                        type: string
+                        description: 대회명
+                      competitionTimezone:
+                        type: string
+                        description: 대회 타임존
+                      hostLogoUrl:
+                        type: string
+                        nullable: true
+                        description: 주최 로고 URL
+                      competitionLogUrl:
+                        type: string
+                        nullable: true
+                        description: 대회 로고 URL
+                      competitionLocation:
+                        type: string
+                        description: 대회 개최 장소
+                      matList:
+                        type: array
+                        description: 코트 번호 리스트
+                        items:
+                          type: integer
+                      ongoingMatches:
+                        type: array
+                        description: 현재 진행 중인 경기 리스트
+                        items:
+                          type: object
+                          properties:
+                            competitionMatchPsSeq:
+                              type: integer
+                              description: 경기 시퀀스
+                            matNumber:
+                              type: integer
+                              description: 코트 번호
+                            matchNumber:
+                              type: integer
+                              description: 매치 번호
+                            phase:
+                              type: string
+                              description: 경기 강수
+                            divisionCode:
+                              type: string
+                              description: 룰 코드
+                            divisionNameKo:
+                              type: string
+                              description: 룰 이름(국문)
+                            divisionNameEn:
+                              type: string
+                              description: 룰 이름(영문)
+                            departmentCode:
+                              type: string
+                              description: 부 코드
+                            departmentNameKo:
+                              type: string
+                              description: 부 이름(국문)
+                            departmentNameEn:
+                              type: string
+                              description: 부 이름(영문)
+                            divisionCategoryCode:
+                              type: string
+                              description: 대회 유형 코드
+                            divisionCategoryNameKo:
+                              type: string
+                              description: 대회 유형 이름(국문)
+                            divisionCategoryNameEn:
+                              type: string
+                              description: 대회 유형 이름(영문)
+                            matchMinTime:
+                              type: integer
+                              description: 경기 최소 진행 시간(초)
+                            matchMaxTime:
+                              type: integer
+                              description: 경기 최대 진행 시간(초)
+                            matchStatus:
+                              type: string
+                              description: 경기 상태 (ONGOING, WAITING)
+                            matchCompetitorList:
+                              type: array
+                              description: 경기 참여 선수 목록
+                              items:
+                                type: object
+                                properties:
+                                  matchCompetitorDetailSeq:
+                                    type: integer
+                                    description: 경기 선수 상세 시퀀스
+                                  competitor:
+                                    type: integer
+                                    description: 선수 번호
+                                  name:
+                                    type: string
+                                    description: 선수 이름
+                                  country:
+                                    type: string
+                                    description: 국가 코드
+                                  firstPoomsaeAverageScore:
+                                    type: number
+                                    format: double
+                                    nullable: true
+                                    description: 첫 번째 품새 평균 점수
+                                  secondPoomsaeAverageScore:
+                                    type: number
+                                    format: double
+                                    nullable: true
+                                    description: 두 번째 품새 평균 점수
+                                  poomsaeTotalScore:
+                                    type: number
+                                    format: double
+                                    nullable: true
+                                    description: 총 품새 점수
+                                  matchSideType:
+                                    type: string
+                                    description: HOME / AWAY / CUTOFF
+                      waitingMatches:
+                        type: array
+                        description: 코트별 대기 중인 경기 리스트 (코트별로 가장 먼저 시작할 매치 최대 3개 가져옴)
+                        items:
+                          type: object
+                          properties:
+                            matNumber:
+                              type: integer
+                              description: 코트 번호
+                              example: 1
+                            matches:
+                              type: array
+                              description: 해당 코트 대기 경기 리스트
+                              items:
+                                type: object
+                                properties:
+                                  competitionMatchPsSeq:
+                                    type: integer
+                                    description: 경기 시퀀스
+                                  matchNumber:
+                                    type: integer
+                                    description: 매치 번호
+                                  phase:
+                                    type: string
+                                    description: 경기 강수
+                                  divisionCode:
+                                    type: string
+                                    description: 룰 코드
+                                  divisionNameKo:
+                                    type: string
+                                    description: 룰 이름(국문)
+                                  divisionNameEn:
+                                    type: string
+                                    description: 룰 이름(영문)
+                                  departmentCode:
+                                    type: string
+                                    description: 부 코드
+                                  departmentNameKo:
+                                    type: string
+                                    description: 부 이름(국문)
+                                  departmentNameEn:
+                                    type: string
+                                    description: 부 이름(영문)
+                                  divisionCategoryCode:
+                                    type: string
+                                    description: 대회 유형 코드
+                                  divisionCategoryNameKo:
+                                    type: string
+                                    description: 대회 유형 이름(국문)
+                                  divisionCategoryNameEn:
+                                    type: string
+                                    description: 대회 유형 이름(영문)
+                                  sortNo:
+                                    type: integer
+                                    description: 경기 정렬 번호
+                                  matchCompetitorList:
+                                    type: array
+                                    description: 매치별 선수 목록
+                                    items:
+                                      type: object
+                                      properties:
+                                        matchCompetitorDetailSeq:
+                                          type: integer
+                                          description: 경기 선수 상세 시퀀스
+                                        competitor:
+                                          type: integer
+                                          description: 선수 번호
+                                        name:
+                                          type: string
+                                          description: 선수 이름
+                                        country:
+                                          type: string
+                                          description: 국가 코드
+                                        matchSideType:
+                                          type: string
+                                          description: HOME / AWAY / CUTOFF
+                  error:
+                    type: string
+                    nullable: true
+              examples:
+                successResponse:
+                  summary: 성공응답
+                  value:
+                    success: true
+                    data:
+                      {
+                        "competitionName": "20250522 ㅇㅈ품새s",
+                        "competitionTimezone": "Asia/Seoul",
+                        "hostLogoUrl": null,
+                        "competitionLogUrl": null,
+                        "competitionLocation": "부산s",
+                        "matList": [
+                          1,
+                          2,
+                          3,
+                          4,
+                          5
+                        ],
+                        "ongoingMatches": [
+                          {
+                            "competitionMatchPsSeq": 20024,
+                            "matNumber": 1,
+                            "matchNumber": 1001,
+                            "phase": "R64",
+                            "divisionCode": "WT_RECOGNIZED_POOMSAE",
+                            "divisionNameKo": "WT 공인품새룰",
+                            "divisionNameEn": "WT Recognized Poomsae",
+                            "departmentCode": "UNDER_30",
+                            "departmentNameKo": "30세 이하",
+                            "departmentNameEn": "Under 30",
+                            "divisionCategoryCode": "INDIVIDUAL_MALE",
+                            "divisionCategoryNameKo": "남자개인",
+                            "divisionCategoryNameEn": "Individual male",
+                            "matchMinTime": 90,
+                            "matchMaxTime": 200,
+                            "matchStatus": "ONGOING",
+                            "matchCompetitorList": [
+                              {
+                                "matchCompetitorDetailSeq": 5299,
+                                "competitor": 118,
+                                "name": "NAM Min-seo",
+                                "country": "KOR",
+                                "firstPoomsaeAverageScore": 6.000,
+                                "secondPoomsaeAverageScore": 6.166,
+                                "poomsaeTotalScore": 30.500,
+                                "matchSideType": "HOME"
+                              },
+                              {
+                                "matchCompetitorDetailSeq": 5298,
+                                "competitor": 144,
+                                "name": "DAM Min-seo",
+                                "country": "KOR",
+                                "firstPoomsaeAverageScore": 7.000,
+                                "secondPoomsaeAverageScore": 6.733,
+                                "poomsaeTotalScore": 34.200,
+                                "matchSideType": "AWAY"
+                              }
+                            ]
+                          },
+                          {
+                            "competitionMatchPsSeq": 20087,
+                            "matNumber": 2,
+                            "matchNumber": 2001,
+                            "phase": "Pre-A",
+                            "divisionCode": "WT_RECOGNIZED_POOMSAE",
+                            "divisionNameKo": "WT 공인품새룰",
+                            "divisionNameEn": "WT Recognized Poomsae",
+                            "departmentCode": "UNDER_30",
+                            "departmentNameKo": "30세 이하",
+                            "departmentNameEn": "Under 30",
+                            "divisionCategoryCode": "INDIVIDUAL_FEMALE",
+                            "divisionCategoryNameKo": "여자개인",
+                            "divisionCategoryNameEn": "Individual female",
+                            "matchMinTime": 90,
+                            "matchMaxTime": 200,
+                            "matchStatus": "ONGOING",
+                            "matchCompetitorList": [
+                              {
+                                "matchCompetitorDetailSeq": 5207,
+                                "competitor": 1,
+                                "name": "DAM Min-seo",
+                                "country": "KOR",
+                                "firstPoomsaeAverageScore": 1.600,
+                                "secondPoomsaeAverageScore": null,
+                                "poomsaeTotalScore": 1.600,
+                                "matchSideType": "CUTOFF"
+                              }
+                            ]
+                          }
+                        ],
+                        "waitingMatches": [
+                          {
+                            "matNumber": 1,
+                            "matches": [
+                              {
+                                "competitionMatchPsSeq": 20028,
+                                "matchNumber": 1004,
+                                "phase": "R64",
+                                "divisionCode": "WT_RECOGNIZED_POOMSAE",
+                                "divisionNameKo": "WT 공인품새룰",
+                                "divisionNameEn": "WT Recognized Poomsae",
+                                "departmentCode": "UNDER_30",
+                                "departmentNameKo": "30세 이하",
+                                "departmentNameEn": "Under 30",
+                                "divisionCategoryCode": "INDIVIDUAL_MALE",
+                                "divisionCategoryNameKo": "남자개인",
+                                "divisionCategoryNameEn": "Individual male",
+                                "sortNo": 6,
+                                "matchCompetitorList": [
+                                  {
+                                    "matchCompetitorDetailSeq": 5305,
+                                    "competitor": 126,
+                                    "name": "DAM Min-seo",
+                                    "country": "KOR",
+                                    "matchSideType": "AWAY"
+                                  },
+                                  {
+                                    "matchCompetitorDetailSeq": 5306,
+                                    "competitor": 120,
+                                    "name": "DAM Min-seo",
+                                    "country": "KOR",
+                                    "matchSideType": "HOME"
+                                  }
+                                ]
+                              },
+                              {
+                                "competitionMatchPsSeq": 20032,
+                                "matchNumber": 1006,
+                                "phase": "R64",
+                                "divisionCode": "WT_RECOGNIZED_POOMSAE",
+                                "divisionNameKo": "WT 공인품새룰",
+                                "divisionNameEn": "WT Recognized Poomsae",
+                                "departmentCode": "UNDER_30",
+                                "departmentNameKo": "30세 이하",
+                                "departmentNameEn": "Under 30",
+                                "divisionCategoryCode": "INDIVIDUAL_MALE",
+                                "divisionCategoryNameKo": "남자개인",
+                                "divisionCategoryNameEn": "Individual male",
+                                "sortNo": 10,
+                                "matchCompetitorList": [
+                                  {
+                                    "matchCompetitorDetailSeq": 5312,
+                                    "competitor": 145,
+                                    "name": "DAM Min-seo",
+                                    "country": "KOR",
+                                    "matchSideType": "HOME"
+                                  },
+                                  {
+                                    "matchCompetitorDetailSeq": 5311,
+                                    "competitor": 149,
+                                    "name": "DAM Min-seo",
+                                    "country": "KOR",
+                                    "matchSideType": "AWAY"
+                                  }
+                                ]
+                              },
+                              {
+                                "competitionMatchPsSeq": 20033,
+                                "matchNumber": 1007,
+                                "phase": "R64",
+                                "divisionCode": "WT_RECOGNIZED_POOMSAE",
+                                "divisionNameKo": "WT 공인품새룰",
+                                "divisionNameEn": "WT Recognized Poomsae",
+                                "departmentCode": "UNDER_30",
+                                "departmentNameKo": "30세 이하",
+                                "departmentNameEn": "Under 30",
+                                "divisionCategoryCode": "INDIVIDUAL_MALE",
+                                "divisionCategoryNameKo": "남자개인",
+                                "divisionCategoryNameEn": "Individual male",
+                                "sortNo": 11,
+                                "matchCompetitorList": [
+                                  {
+                                    "matchCompetitorDetailSeq": 5313,
+                                    "competitor": 152,
+                                    "name": "DAM Min-seo",
+                                    "country": "KOR",
+                                    "matchSideType": "AWAY"
+                                  },
+                                  {
+                                    "matchCompetitorDetailSeq": 5314,
+                                    "competitor": 130,
+                                    "name": "DAM Min-seo",
+                                    "country": "KOR",
+                                    "matchSideType": "HOME"
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "matNumber": 2,
+                            "matches": [
+                              {
+                                "competitionMatchPsSeq": 20089,
+                                "matchNumber": 2003,
+                                "phase": "Pre-A",
+                                "divisionCode": "WT_RECOGNIZED_POOMSAE",
+                                "divisionNameKo": "WT 공인품새룰",
+                                "divisionNameEn": "WT Recognized Poomsae",
+                                "departmentCode": "UNDER_30",
+                                "departmentNameKo": "30세 이하",
+                                "departmentNameEn": "Under 30",
+                                "divisionCategoryCode": "INDIVIDUAL_FEMALE",
+                                "divisionCategoryNameKo": "여자개인",
+                                "divisionCategoryNameEn": "Individual female",
+                                "sortNo": 3,
+                                "matchCompetitorList": [
+                                  {
+                                    "matchCompetitorDetailSeq": 5209,
+                                    "competitor": 3,
+                                    "name": "DAM Min-seo",
+                                    "country": "KOR",
+                                    "matchSideType": "CUTOFF"
+                                  }
+                                ]
+                              },
+                              {
+                                "competitionMatchPsSeq": 20091,
+                                "matchNumber": 2005,
+                                "phase": "Pre-A",
+                                "divisionCode": "WT_RECOGNIZED_POOMSAE",
+                                "divisionNameKo": "WT 공인품새룰",
+                                "divisionNameEn": "WT Recognized Poomsae",
+                                "departmentCode": "UNDER_30",
+                                "departmentNameKo": "30세 이하",
+                                "departmentNameEn": "Under 30",
+                                "divisionCategoryCode": "INDIVIDUAL_FEMALE",
+                                "divisionCategoryNameKo": "여자개인",
+                                "divisionCategoryNameEn": "Individual female",
+                                "sortNo": 5,
+                                "matchCompetitorList": [
+                                  {
+                                    "matchCompetitorDetailSeq": 5211,
+                                    "competitor": 5,
+                                    "name": "DAM Min-seo",
+                                    "country": "KOR",
+                                    "matchSideType": "CUTOFF"
+                                  }
+                                ]
+                              },
+                              {
+                                "competitionMatchPsSeq": 20092,
+                                "matchNumber": 2006,
+                                "phase": "Pre-A",
+                                "divisionCode": "WT_RECOGNIZED_POOMSAE",
+                                "divisionNameKo": "WT 공인품새룰",
+                                "divisionNameEn": "WT Recognized Poomsae",
+                                "departmentCode": "UNDER_30",
+                                "departmentNameKo": "30세 이하",
+                                "departmentNameEn": "Under 30",
+                                "divisionCategoryCode": "INDIVIDUAL_FEMALE",
+                                "divisionCategoryNameKo": "여자개인",
+                                "divisionCategoryNameEn": "Individual female",
+                                "sortNo": 6,
+                                "matchCompetitorList": [
+                                  {
+                                    "matchCompetitorDetailSeq": 5212,
+                                    "competitor": 6,
+                                    "name": "DAM Min-seo",
+                                    "country": "KOR",
+                                    "matchSideType": "CUTOFF"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    error: null
+                ITEM_NOT_FOUND:
+                  $ref: '../../openapi.yml#/components/examples/ITEM_NOT_FOUND'
+                COMPETITION_MATCH_NOT_FOUND:
+                  $ref: '../../openapi.yml#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+                MATCH_COMPETITOR_DETAIL_NOT_FOUND:
+                  $ref: '../../openapi.yml#/components/examples/MATCH_COMPETITOR_DETAIL_NOT_FOUND'
+
+        '403':
+          description: 권한 없음
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
