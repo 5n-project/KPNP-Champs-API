@@ -455,13 +455,13 @@ paths:
                               items:
                                 type: object
                                 required:
-                                  - matchScoreLogSeq
+                                  - matchScoreSeq
                                   - criteriaType
                                   - poomsaeScoringType
                                   - score
                                   - criteriaDetailTypes
                                 properties:
-                                  matchScoreLogSeq:
+                                  matchScoreSeq:
                                     type: integer
                                     nullable: true
                                     example: null
@@ -502,13 +502,13 @@ paths:
                                     items:
                                       type: object
                                       required:
-                                        - matchScoreLogSeq
+                                        - matchScoreSeq
                                         - criteriaDetailType
                                         - poomsaeScoringType
                                         - score
                                         - criteriaDetailSubTypes
                                       properties:
-                                        matchScoreLogSeq:
+                                        matchScoreSeq:
                                           type: integer
                                           nullable: true
                                           example: null
@@ -548,12 +548,12 @@ paths:
                                           items:
                                             type: object
                                             required:
-                                              - matchScoreLogSeq
+                                              - matchScoreSeq
                                               - criteriaSubType
                                               - poomsaeScoringType
                                               - score
                                             properties:
-                                              matchScoreLogSeq:
+                                              matchScoreSeq:
                                                 type: integer
                                                 nullable: true
                                                 example: 34
@@ -626,7 +626,7 @@ paths:
                                 sortNo: 2
                               totalScore: 1.3
                           criteriaTypes:
-                            - matchScoreLogSeq: null
+                            - matchScoreSeq: null
                               criteriaType: "TECHNICAL_SKILLS"
                               poomsaeScoringType:
                                 nameEn: "technical skills"
@@ -634,7 +634,7 @@ paths:
                                 sortNo: 1
                               score: null
                               criteriaDetailTypes:
-                                - matchScoreLogSeq: null
+                                - matchScoreSeq: null
                                   criteriaDetailType: "BASIC_MOVEMENTS_AND_PRACTICABILITY"
                                   poomsaeScoringType:
                                     nameEn: "Basic movements & Practicability"
@@ -642,7 +642,7 @@ paths:
                                     sortNo: 2
                                   score: 0
                                   criteriaDetailSubTypes: null
-                                - matchScoreLogSeq: null
+                                - matchScoreSeq: null
                                   criteriaDetailType: "FOOT_TECHNIQUES_LEVEL"
                                   poomsaeScoringType:
                                     nameEn: "Level of difficulty of foot techniques"
@@ -650,42 +650,42 @@ paths:
                                     sortNo: 1
                                   score: null
                                   criteriaDetailSubTypes:
-                                    - matchScoreLogSeq: 34
+                                    - matchScoreSeq: 34
                                       criteriaSubType: "JUMPING_SIDE_KICK"
                                       poomsaeScoringType:
                                         nameEn: "Jumping side Kick"
                                         nameKo: "뛰어 옆차기"
                                         sortNo: 1
                                       score: 0.3
-                                    - matchScoreLogSeq: 39
+                                    - matchScoreSeq: 39
                                       criteriaSubType: "MULTIPLE_KICKS_IN_A_JUMP"
                                       poomsaeScoringType:
                                         nameEn: "Multiple kicks in a jump"
                                         nameKo: "뛰어 찬 발차기 수"
                                         sortNo: 2
                                       score: 0.3
-                                    - matchScoreLogSeq: 40
+                                    - matchScoreSeq: 40
                                       criteriaSubType: "GRADIENT_OF_SPINS_IN_A_SPIN_KICK"
                                       poomsaeScoringType:
                                         nameEn: "Gradient of spins in a spin kick"
                                         nameKo: "회전 수"
                                         sortNo: 3
                                       score: 0.6
-                                    - matchScoreLogSeq: null
+                                    - matchScoreSeq: null
                                       criteriaSubType: "KYORUGI_STYLE_CONSECUTIVE_KICKS"
                                       poomsaeScoringType:
                                         nameEn: "Kyorugi style consecutive kicks"
                                         nameKo: "겨루기방식 연속 발차기"
                                         sortNo: 4
                                       score: 0
-                                    - matchScoreLogSeq: null
+                                    - matchScoreSeq: null
                                       criteriaSubType: "ACROBATIC_KICKING_TECHNIQUE"
                                       poomsaeScoringType:
                                         nameEn: "Acrobatic kicking technique"
                                         nameKo: "아크로바틱 발차기 기술"
                                         sortNo: 5
                                       score: 0
-                            - matchScoreLogSeq: null
+                            - matchScoreSeq: null
                               criteriaType: "PRESENTATION_FREESTYLE"
                               poomsaeScoringType:
                                 nameEn: "presentation"
@@ -693,7 +693,7 @@ paths:
                                 sortNo: 2
                               score: null
                               criteriaDetailTypes:
-                                - matchScoreLogSeq: null
+                                - matchScoreSeq: null
                                   criteriaDetailType: "CREATIVENESS"
                                   poomsaeScoringType:
                                     nameEn: "Creativeness"
@@ -701,7 +701,7 @@ paths:
                                     sortNo: 1
                                   score: 0
                                   criteriaDetailSubTypes: null
-                                - matchScoreLogSeq: null
+                                - matchScoreSeq: null
                                   criteriaDetailType: "HARMONY"
                                   poomsaeScoringType:
                                     nameEn: "Harmony"
@@ -709,7 +709,7 @@ paths:
                                     sortNo: 2
                                   score: 0
                                   criteriaDetailSubTypes: null
-                                - matchScoreLogSeq: 37
+                                - matchScoreSeq: 37
                                   criteriaDetailType: "EXPRESSION_OF_ENERGY_FREESTYLE"
                                   poomsaeScoringType:
                                     nameEn: "Expression of energy"
@@ -717,7 +717,7 @@ paths:
                                     sortNo: 3
                                   score: 0.6
                                   criteriaDetailSubTypes: null
-                                - matchScoreLogSeq: 38
+                                - matchScoreSeq: 38
                                   criteriaDetailType: "MUSIC_AND_CHOREOGRAPHY"
                                   poomsaeScoringType:
                                     nameEn: "Music & choreography"
@@ -1365,13 +1365,13 @@ paths:
                         items:
                           type: object
                           required:
-                            - matchScoreLogSeq
+                            - matchScoreSeq
                             - criteriaType
                             - scoringType
                             - score
                             - criteriaDetailTypes
                           properties:
-                            matchScoreLogSeq:
+                            matchScoreSeq:
                               type: integer
                               nullable: true
                               example: null
@@ -1411,13 +1411,13 @@ paths:
                               items:
                                 type: object
                                 required:
-                                  - matchScoreLogSeq
+                                  - matchScoreSeq
                                   - criteriaDetailType
                                   - scoringType
                                   - score
                                   - criteriaDetailSubTypes
                                 properties:
-                                  matchScoreLogSeq:
+                                  matchScoreSeq:
                                     type: integer
                                     nullable: true
                                     example: 204
@@ -1458,12 +1458,12 @@ paths:
                                     items:
                                       type: object
                                       required:
-                                        - matchScoreLogSeq
+                                        - matchScoreSeq
                                         - criteriaSubType
                                         - scoringType
                                         - score
                                       properties:
-                                        matchScoreLogSeq:
+                                        matchScoreSeq:
                                           type: integer
                                           nullable: true
                                           example: 205
@@ -1541,7 +1541,7 @@ paths:
                             sortNo: 1
                           totalScore: 1.0
                       criteriaTypes:
-                        - matchScoreLogSeq: null
+                        - matchScoreSeq: null
                           criteriaType: "TECHNICAL_SKILLS"
                           scoringType:
                             nameEn: "technical skills"
@@ -1549,7 +1549,7 @@ paths:
                             sortNo: 1
                           score: null
                           criteriaDetailTypes:
-                            - matchScoreLogSeq: 204
+                            - matchScoreSeq: 204
                               criteriaDetailType: "BASIC_MOVEMENTS_AND_PRACTICABILITY"
                               scoringType:
                                 nameEn: "Basic movements & Practicability"
@@ -1557,7 +1557,7 @@ paths:
                                 sortNo: 2
                               score: 0.1
                               criteriaDetailSubTypes: null
-                            - matchScoreLogSeq: null
+                            - matchScoreSeq: null
                               criteriaDetailType: "FOOT_TECHNIQUES_LEVEL"
                               scoringType:
                                 nameEn: "Level of difficulty of foot techniques"
@@ -1565,42 +1565,42 @@ paths:
                                 sortNo: 1
                               score: null
                               criteriaDetailSubTypes:
-                                - matchScoreLogSeq: 205
+                                - matchScoreSeq: 205
                                   criteriaSubType: "JUMPING_SIDE_KICK"
                                   scoringType:
                                     nameEn: "Jumping side Kick"
                                     nameKo: "뛰어 옆차기"
                                     sortNo: 1
                                   score: 0.2
-                                - matchScoreLogSeq: 206
+                                - matchScoreSeq: 206
                                   criteriaSubType: "MULTIPLE_KICKS_IN_A_JUMP"
                                   scoringType:
                                     nameEn: "Multiple kicks in a jump"
                                     nameKo: "뛰어 찬 발차기 수"
                                     sortNo: 2
                                   score: 0.3
-                                - matchScoreLogSeq: 207
+                                - matchScoreSeq: 207
                                   criteriaSubType: "GRADIENT_OF_SPINS_IN_A_SPIN_KICK"
                                   scoringType:
                                     nameEn: "Gradient of spins in a spin kick"
                                     nameKo: "회전 수"
                                     sortNo: 3
                                   score: 0.4
-                                - matchScoreLogSeq: null
+                                - matchScoreSeq: null
                                   criteriaSubType: "KYORUGI_STYLE_CONSECUTIVE_KICKS"
                                   scoringType:
                                     nameEn: "Kyorugi style consecutive kicks"
                                     nameKo: "겨루기방식 연속 발차기"
                                     sortNo: 4
                                   score: 0
-                                - matchScoreLogSeq: null
+                                - matchScoreSeq: null
                                   criteriaSubType: "ACROBATIC_KICKING_TECHNIQUE"
                                   scoringType:
                                     nameEn: "Acrobatic kicking technique"
                                     nameKo: "아크로바틱 발차기 기술"
                                     sortNo: 5
                                   score: 0
-                        - matchScoreLogSeq: null
+                        - matchScoreSeq: null
                           criteriaType: "PRESENTATION_FREESTYLE"
                           scoringType:
                             nameEn: "presentation"
@@ -1608,7 +1608,7 @@ paths:
                             sortNo: 2
                           score: null
                           criteriaDetailTypes:
-                            - matchScoreLogSeq: 208
+                            - matchScoreSeq: 208
                               criteriaDetailType: "CREATIVENESS"
                               scoringType:
                                 nameEn: "Creativeness"
@@ -1616,7 +1616,7 @@ paths:
                                 sortNo: 1
                               score: 0.6
                               criteriaDetailSubTypes: null
-                            - matchScoreLogSeq: 209
+                            - matchScoreSeq: 209
                               criteriaDetailType: "HARMONY"
                               scoringType:
                                 nameEn: "Harmony"
@@ -1624,7 +1624,7 @@ paths:
                                 sortNo: 2
                               score: 0.7
                               criteriaDetailSubTypes: null
-                            - matchScoreLogSeq: 210
+                            - matchScoreSeq: 210
                               criteriaDetailType: "EXPRESSION_OF_ENERGY_FREESTYLE"
                               scoringType:
                                 nameEn: "Expression of energy"
@@ -1632,7 +1632,7 @@ paths:
                                 sortNo: 3
                               score: 0.8
                               criteriaDetailSubTypes: null
-                            - matchScoreLogSeq: 211
+                            - matchScoreSeq: 211
                               criteriaDetailType: "MUSIC_AND_CHOREOGRAPHY"
                               scoringType:
                                 nameEn: "Music & choreography"
@@ -1905,13 +1905,13 @@ paths:
                               items:
                                 type: object
                                 required:
-                                  - matchScoreDetailSeq
+                                  - matchScoreSeq
                                   - criteriaType
                                   - poomsaeScoringType
                                   - score
                                   - criteriaDetailTypes
                                 properties:
-                                  matchScoreDetailSeq:
+                                  matchScoreSeq:
                                     type: integer
                                     nullable: true
                                     example: null
@@ -1952,13 +1952,13 @@ paths:
                                     items:
                                       type: object
                                       required:
-                                        - matchScoreDetailSeq
+                                        - matchScoreSeq
                                         - criteriaDetailType
                                         - poomsaeScoringType
                                         - score
                                         - criteriaDetailSubTypes
                                       properties:
-                                        matchScoreDetailSeq:
+                                        matchScoreSeq:
                                           type: integer
                                           nullable: true
                                           example: null
@@ -1998,12 +1998,12 @@ paths:
                                           items:
                                             type: object
                                             required:
-                                              - matchScoreDetailSeq
+                                              - matchScoreSeq
                                               - criteriaSubType
                                               - poomsaeScoringType
                                               - score
                                             properties:
-                                              matchScoreDetailSeq:
+                                              matchScoreSeq:
                                                 type: integer
                                                 nullable: true
                                                 example: 34
@@ -2076,7 +2076,7 @@ paths:
                                 sortNo: 2
                               totalScore: 1.3
                           criteriaTypes:
-                            - matchScoreDetailSeq: null
+                            - matchScoreSeq: null
                               criteriaType: "TECHNICAL_SKILLS"
                               poomsaeScoringType:
                                 nameEn: "technical skills"
@@ -2084,7 +2084,7 @@ paths:
                                 sortNo: 1
                               score: null
                               criteriaDetailTypes:
-                                - matchScoreDetailSeq: null
+                                - matchScoreSeq: null
                                   criteriaDetailType: "BASIC_MOVEMENTS_AND_PRACTICABILITY"
                                   poomsaeScoringType:
                                     nameEn: "Basic movements & Practicability"
@@ -2092,7 +2092,7 @@ paths:
                                     sortNo: 2
                                   score: 0
                                   criteriaDetailSubTypes: null
-                                - matchScoreDetailSeq: null
+                                - matchScoreSeq: null
                                   criteriaDetailType: "FOOT_TECHNIQUES_LEVEL"
                                   poomsaeScoringType:
                                     nameEn: "Level of difficulty of foot techniques"
@@ -2100,42 +2100,42 @@ paths:
                                     sortNo: 1
                                   score: null
                                   criteriaDetailSubTypes:
-                                    - matchScoreDetailSeq: 34
+                                    - matchScoreSeq: 34
                                       criteriaSubType: "JUMPING_SIDE_KICK"
                                       poomsaeScoringType:
                                         nameEn: "Jumping side Kick"
                                         nameKo: "뛰어 옆차기"
                                         sortNo: 1
                                       score: 0.3
-                                    - matchScoreDetailSeq: 39
+                                    - matchScoreSeq: 39
                                       criteriaSubType: "MULTIPLE_KICKS_IN_A_JUMP"
                                       poomsaeScoringType:
                                         nameEn: "Multiple kicks in a jump"
                                         nameKo: "뛰어 찬 발차기 수"
                                         sortNo: 2
                                       score: 0.3
-                                    - matchScoreDetailSeq: 40
+                                    - matchScoreSeq: 40
                                       criteriaSubType: "GRADIENT_OF_SPINS_IN_A_SPIN_KICK"
                                       poomsaeScoringType:
                                         nameEn: "Gradient of spins in a spin kick"
                                         nameKo: "회전 수"
                                         sortNo: 3
                                       score: 0.6
-                                    - matchScoreDetailSeq: null
+                                    - matchScoreSeq: null
                                       criteriaSubType: "KYORUGI_STYLE_CONSECUTIVE_KICKS"
                                       poomsaeScoringType:
                                         nameEn: "Kyorugi style consecutive kicks"
                                         nameKo: "겨루기방식 연속 발차기"
                                         sortNo: 4
                                       score: 0
-                                    - matchScoreDetailSeq: null
+                                    - matchScoreSeq: null
                                       criteriaSubType: "ACROBATIC_KICKING_TECHNIQUE"
                                       poomsaeScoringType:
                                         nameEn: "Acrobatic kicking technique"
                                         nameKo: "아크로바틱 발차기 기술"
                                         sortNo: 5
                                       score: 0
-                            - matchScoreDetailSeq: null
+                            - matchScoreSeq: null
                               criteriaType: "PRESENTATION_FREESTYLE"
                               poomsaeScoringType:
                                 nameEn: "presentation"
@@ -2143,7 +2143,7 @@ paths:
                                 sortNo: 2
                               score: null
                               criteriaDetailTypes:
-                                - matchScoreDetailSeq: null
+                                - matchScoreSeq: null
                                   criteriaDetailType: "CREATIVENESS"
                                   poomsaeScoringType:
                                     nameEn: "Creativeness"
@@ -2151,7 +2151,7 @@ paths:
                                     sortNo: 1
                                   score: 0
                                   criteriaDetailSubTypes: null
-                                - matchScoreDetailSeq: null
+                                - matchScoreSeq: null
                                   criteriaDetailType: "HARMONY"
                                   poomsaeScoringType:
                                     nameEn: "Harmony"
@@ -2159,7 +2159,7 @@ paths:
                                     sortNo: 2
                                   score: 0
                                   criteriaDetailSubTypes: null
-                                - matchScoreDetailSeq: 37
+                                - matchScoreSeq: 37
                                   criteriaDetailType: "EXPRESSION_OF_ENERGY_FREESTYLE"
                                   poomsaeScoringType:
                                     nameEn: "Expression of energy"
@@ -2167,7 +2167,7 @@ paths:
                                     sortNo: 3
                                   score: 0.6
                                   criteriaDetailSubTypes: null
-                                - matchScoreDetailSeq: 38
+                                - matchScoreSeq: 38
                                   criteriaDetailType: "MUSIC_AND_CHOREOGRAPHY"
                                   poomsaeScoringType:
                                     nameEn: "Music & choreography"
