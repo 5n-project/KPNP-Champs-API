@@ -741,7 +741,7 @@ paths:
                   $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/matches/{matchSeq}/competitors/{competitorSeq}/scores/deduct:
-    get:
+    post:
       summary: 심판 채점 감점
       tags:
         - 채점
@@ -935,7 +935,7 @@ paths:
                   $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/matches/{matchSeq}/competitors/{competitorSeq}/scores/deduct/undo:
-    get:
+    post:
       summary: 심판 채점 감점 되돌리기
       tags:
         - 채점
@@ -1129,7 +1129,7 @@ paths:
                   $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/matches/{matchSeq}/competitors/{competitorSeq}/scores/update:
-    get:
+    post:
       summary: 심판 채점 점수 변경
       tags:
         - 채점
@@ -1662,7 +1662,7 @@ paths:
                   $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/matches/{matchSeq}/scores/send:
-    get:
+    post:
       summary: 심판 채점 완료
       tags:
         - 채점
@@ -2620,7 +2620,7 @@ paths:
                   $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/matches/{matchSeq}/referees/{refereeSeq}/join:
-    get:
+    post:
       summary: 심판 입장 (notion 실시간 응답 데이터 문서 확인)
       tags:
         - 채점
