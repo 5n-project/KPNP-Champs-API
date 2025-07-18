@@ -15,11 +15,6 @@ paths:
           required: true
           schema:
             type: integer
-        - name: poomsaeSequenceType
-          in: query
-          required: true
-          schema:
-            type: string
       responses:
         '200':
           description: 성공
@@ -41,13 +36,16 @@ paths:
                       - refereeType
                       - givenName
                       - familyName
+                      - poomsaeMatchStyleType
                       - divisionCategoryType
                       - departmentType
+                      - poomsaeStyleType
                       - phase
                       - phaseLabel
                       - playingRound
                       - matchNumber
                       - poomsaeType
+                      - together
                     properties:
                       competitionSeq:
                         type: integer
@@ -81,6 +79,11 @@ paths:
                         type: string
                         example: "Khorassandjian"
                         description: 심판의 성
+                      poomsaeMatchStyleType:
+                        type: string
+                        enum: [CUTOFF, TOURNAMENT, CUTOFF_TOURNAMENT]
+                        example: CUTOFF
+                        description: 경기 스타일 타입
                       divisionCategoryType:
                         type: string
                         enum: [INDIVIDUAL_MALE, INDIVIDUAL_FEMALE, TEAM_MALE, TEAM_FEMALE, PAIR, TEAM_MIXED]
@@ -88,7 +91,12 @@ paths:
                       departmentType:
                         type: string
                         example: "UNDER_30"
-                        description: 부서 유형
+                        description: 부 유형
+                      poomsaeStyleType:
+                        type: string
+                        enum: [RECOGNIZED_POOMSAE, FREESTYLE]
+                        example: RECOGNIZED_POOMSAE
+                        description: 품새 스타일 타입
                       phase:
                         type: string
                         example: "Pre-A"
@@ -109,6 +117,10 @@ paths:
                         type: string
                         example: "TAEGEUK_1_JANG"
                         description: 품새 유형
+                      together:
+                        type: boolean
+                        example: false
+                        description: 함께 시연 여부
                   error:
                     type: object
                     nullable: true
@@ -119,20 +131,23 @@ paths:
                     success: true
                     data:
                       competitionSeq: 2131
-                      competitionMatchPsSeq: 16985
+                      competitionMatchPsSeq: 20087
                       competitionEventSeq: 1168
-                      matchRefereeMappingSeq: 60
-                      refereeSeq: 6805
-                      refereeType: "REF_J1"
-                      givenName: "Daniel"
-                      familyName: "Khorassandjian"
+                      matchRefereeMappingSeq: 1104
+                      refereeSeq: 6848
+                      refereeType: "REF_CR"
+                      givenName: "chunsik"
+                      familyName: "kim"
+                      poomsaeMatchStyleType: "CUTOFF"
                       divisionCategoryType: "INDIVIDUAL_FEMALE"
                       departmentType: "UNDER_30"
+                      poomsaeStyleType: "RECOGNIZED_POOMSAE"
                       phase: "Pre-A"
                       phaseLabel: "Pre-A-1"
                       playingRound: 1
                       matchNumber: "2001"
-                      poomsaeType: "TAEGEUK_1_JANG"
+                      poomsaeType: "TAEGEUK_7_JANG"
+                      together: false
                     error: null
                 COMPETITION_MATCH_NOT_FOUND:
                   $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_NOT_FOUND'
@@ -181,7 +196,6 @@ paths:
                     required:
                       - competitionSeq
                       - competitionMatchPsSeq
-                      - poomsaeMatchStyleType
                       - competitors
                     properties:
                       competitionSeq:
@@ -192,10 +206,6 @@ paths:
                         type: integer
                         example: 16985
                         description: 대회 경기 seq
-                      poomsaeMatchStyleType:
-                        type: string
-                        enum: [CUTOFF, TOURNAMENT, CUTOFF_TOURNAMENT]
-                        description: 경기 스타일 타입
                       competitors:
                         type: array
                         description: 참가자 목록
@@ -271,7 +281,6 @@ paths:
                     data:
                       competitionSeq: 2131
                       competitionMatchPsSeq: 16985
-                      poomsaeMatchStyleType: "CUTOFF"
                       competitors:
                         - matchCompetitorDetailSeq: 4899
                           poomsaeMatchSideType: "CUTOFF"
@@ -314,11 +323,6 @@ paths:
           required: true
           schema:
             type: integer
-        - name: poomsaeSequenceType
-          in: query
-          required: true
-          schema:
-            type: string
       responses:
         '200':
           description: 성공
