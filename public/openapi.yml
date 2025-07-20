@@ -199,6 +199,9 @@ paths:
     $ref: './tags/poomsae/operation.yaml#/paths/~1competitions~1{competitionSeq}~1operation~1matches~1rtds'
   /competitions/{competitionSeq}/operation/status-bar:
     $ref: './tags/poomsae/operation.yaml#/paths/~1competitions~1{competitionSeq}~1operation~1status-bar'
+  /competitions/{competitionSeq}/operation/matches/progress/{day}:
+    $ref: './tags/poomsae/operation.yaml#/paths/~1competitions~1{competitionSeq}~1operation~1matches~1progress~1{day}'
+
 
   # 심판 점수 채점
   /competitions/{competitionSeq}/days/{competitionDay}/schedules/referees:
