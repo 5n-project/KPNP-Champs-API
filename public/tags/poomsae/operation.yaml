@@ -3562,6 +3562,9 @@ paths:
                             phase:
                               type: string
                               description: 경기 강수
+                            cutoffGroup:
+                              type: string
+                              description: 컷오프일때 컷오프 조 ( 토너먼트와 컷오프 F은 null)
                             divisionCode:
                               type: string
                               description: 룰 코드
@@ -3589,6 +3592,9 @@ paths:
                             divisionCategoryNameEn:
                               type: string
                               description: 대회 유형 이름(영문)
+                            matchStyleType:
+                              type: string
+                              description: 매치 유형 (CUTOFF or TOURNAMENT)
                             matchMinTime:
                               type: integer
                               description: 경기 최소 진행 시간(초)
@@ -3738,6 +3744,7 @@ paths:
                             "matNumber": 1,
                             "matchNumber": 1001,
                             "phase": "R64",
+                            "cutoffGroup": null,
                             "divisionCode": "WT_RECOGNIZED_POOMSAE",
                             "divisionNameKo": "WT 공인품새룰",
                             "divisionNameEn": "WT Recognized Poomsae",
@@ -3747,6 +3754,7 @@ paths:
                             "divisionCategoryCode": "INDIVIDUAL_MALE",
                             "divisionCategoryNameKo": "남자개인",
                             "divisionCategoryNameEn": "Individual male",
+                            "matchStyleType" : "TOURNAMENT",
                             "matchMinTime": 90,
                             "matchMaxTime": 200,
                             "matchStatus": "ONGOING",
@@ -3777,7 +3785,8 @@ paths:
                             "competitionMatchPsSeq": 20087,
                             "matNumber": 2,
                             "matchNumber": 2001,
-                            "phase": "Pre-A",
+                            "phase": "PRE",
+                            "cutoffGroup": "B",
                             "divisionCode": "WT_RECOGNIZED_POOMSAE",
                             "divisionNameKo": "WT 공인품새룰",
                             "divisionNameEn": "WT Recognized Poomsae",
@@ -3787,6 +3796,7 @@ paths:
                             "divisionCategoryCode": "INDIVIDUAL_FEMALE",
                             "divisionCategoryNameKo": "여자개인",
                             "divisionCategoryNameEn": "Individual female",
+                            "matchStyleType" : "CUTOFF",
                             "matchMinTime": 90,
                             "matchMaxTime": 200,
                             "matchStatus": "ONGOING",
