@@ -377,6 +377,7 @@ paths:
                           type: object
                           required:
                             - matchCompetitorDetailSeq
+                            - matchSideType
                             - scoreDeductionCounts
                             - totalScore
                             - deductionScore
@@ -387,6 +388,10 @@ paths:
                               type: integer
                               example: 4899
                               description: 경기 참가자 상세 seq
+                            matchSideType:
+                              type: string
+                              example: HOME
+                              description: 토너먼트 (HOME, AWAY) - 컷오프 (CUTOFF)
                             scoreDeductionCounts:
                               type: array
                               description: 감점 횟수 목록
@@ -609,6 +614,7 @@ paths:
                       poomsaeSequenceType: "P1"
                       scoresEachCompetitor:
                         - matchCompetitorDetailSeq: 4899
+                          matchSideType: CUTOFF
                           scoreDeductionCounts:
                             - deltaType: 0.300
                               count: 1
