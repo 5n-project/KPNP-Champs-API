@@ -197,8 +197,8 @@ paths:
     $ref: './tags/poomsae/operation.yaml#/paths/~1competitions~1{competitionSeq}~1operation~1matches~1first-round'
   /competitions/{competitionSeq}/operation/matches/rtds:
     $ref: './tags/poomsae/operation.yaml#/paths/~1competitions~1{competitionSeq}~1operation~1matches~1rtds'
-
-
+  /competitions/{competitionSeq}/operation/status-bar:
+    $ref: './tags/poomsae/operation.yaml#/paths/~1competitions~1{competitionSeq}~1operation~1status-bar'
 
   # 심판 점수 채점
   /competitions/{competitionSeq}/days/{competitionDay}/schedules/referees:

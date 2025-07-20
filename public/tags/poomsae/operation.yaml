@@ -4009,3 +4009,74 @@ paths:
               examples:
                 IS_NOT_AUTHORIZED:
                   $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+
+  /competitions/{competitionSeq}/operation/status-bar:
+    get:
+      summary: 운영 - 상단 상태 바 조회 (참가자, 입장완료, 대회 진행도)
+      description: |
+        운영 페이지에 상단 상태바를 조회한다.
+      tags:
+        - 운영 - 경기
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 대회 고유 시퀀스
+      responses:
+        '200':
+          description: 상단 상태 바 데이터를 성공적으로 조회한 경우
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    required:
+                      - competitionName
+                      - competitionTimezone
+                      - competitionLocation
+                      - matList
+                    properties:
+                      competitionSeq:
+                        type: integer
+                        description: 대회 고유 seq
+                      competitorCount:
+                        type: integer
+                        description: 참가자 수
+                      completedEntryCount:
+                        type: integer
+                        description: 입장완료 수
+                      competitionProgressPercent:
+                        type: integer
+                        description: 대회 경기 진행 퍼센트
+                  error:
+                    type: string
+                    nullable: true
+              examples:
+                successResponse:
+                  summary: 성공응답
+                  value:
+                    success: true
+                    data:
+                      {
+                        "competitionSeq": 2131,
+                        "competitorCount": 207,
+                        "completedEntryCount": 0,
+                        "competitionProgressPercent": 6
+                      }
+                    error: null
+        '403':
+          description: 권한 없음
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
