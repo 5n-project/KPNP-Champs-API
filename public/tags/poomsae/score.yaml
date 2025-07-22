@@ -37,15 +37,19 @@ paths:
                       - givenName
                       - familyName
                       - poomsaeMatchStyleType
-                      - divisionCategoryType
-                      - departmentType
+                      - divisionCategoryNameEn
+                      - divisionCategoryNameKo
+                      - departmentNameEn
+                      - departmentNameKo
                       - poomsaeStyleType
+                      - together
                       - phase
                       - phaseLabel
                       - playingRound
                       - matchNumber
-                      - poomsaeType
-                      - together
+                      - poomsaeEn
+                      - poomsaeKo
+                      - playTime
                     properties:
                       competitionSeq:
                         type: integer
@@ -84,19 +88,31 @@ paths:
                         enum: [CUTOFF, TOURNAMENT, CUTOFF_TOURNAMENT]
                         example: CUTOFF
                         description: 경기 스타일 타입
-                      divisionCategoryType:
+                      divisionCategoryNameEn:
                         type: string
-                        enum: [INDIVIDUAL_MALE, INDIVIDUAL_FEMALE, TEAM_MALE, TEAM_FEMALE, PAIR, TEAM_MIXED]
-                        description: 대회 유형 코드
-                      departmentType:
+                        example: "Individual male"
+                        description: 대회 카테고리명(영문)
+                      divisionCategoryNameKo:
                         type: string
-                        example: "UNDER_30"
-                        description: 부 유형
+                        example: "남자개인"
+                        description: 대회 카테고리명(한글)
+                      departmentNameEn:
+                        type: string
+                        example: "Under 30"
+                        description: 부서명(영문)
+                      departmentNameKo:
+                        type: string
+                        example: "30세 이하"
+                        description: 부서명(한글)
                       poomsaeStyleType:
                         type: string
                         enum: [RECOGNIZED_POOMSAE, FREESTYLE]
                         example: RECOGNIZED_POOMSAE
                         description: 품새 스타일 타입
+                      together:
+                        type: boolean
+                        example: false
+                        description: 함께 시연 여부
                       phase:
                         type: string
                         example: "Pre-A"
@@ -113,14 +129,14 @@ paths:
                         type: string
                         example: "2001"
                         description: 경기 번호
-                      poomsaeType:
+                      poomsaeEn:
                         type: string
-                        example: "TAEGEUK_1_JANG"
-                        description: 품새 유형
-                      together:
-                        type: boolean
-                        example: false
-                        description: 함께 시연 여부
+                        example: "Taegeuk 7 Jang"
+                        description: 품새명(영문)
+                      poomsaeKo:
+                        type: string
+                        example: "태극 7장"
+                        description: 품새명(한글)
                   error:
                     type: object
                     nullable: true
@@ -131,23 +147,31 @@ paths:
                     success: true
                     data:
                       competitionSeq: 2131
-                      competitionMatchPsSeq: 20087
-                      competitionEventSeq: 1168
-                      matchRefereeMappingSeq: 1104
+                      competitionMatchPsSeq: 20024
+                      competitionEventSeq: 1167
+                      matchRefereeMappingSeq: 915
                       refereeSeq: 6848
                       refereeType: "REF_CR"
                       givenName: "chunsik"
                       familyName: "kim"
-                      poomsaeMatchStyleType: "CUTOFF"
-                      divisionCategoryType: "INDIVIDUAL_FEMALE"
-                      departmentType: "UNDER_30"
+                      poomsaeMatchStyleType: "TOURNAMENT"
+                      divisionCategoryNameEn: "Individual male"
+                      divisionCategoryNameKo: "남자개인"
+                      departmentNameEn: "Under 30"
+                      departmentNameKo: "30세 이하"
                       poomsaeStyleType: "RECOGNIZED_POOMSAE"
-                      phase: "Pre-A"
-                      phaseLabel: "Pre-A-1"
-                      playingRound: 1
-                      matchNumber: "2001"
-                      poomsaeType: "TAEGEUK_7_JANG"
                       together: false
+                      phase: "R64"
+                      phaseLabel: "R64-2"
+                      playingRound: 1
+                      matchNumber: "1001"
+                      poomsaeEn: "Taegeuk 7 Jang"
+                      poomsaeKo: "태극 7장"
+                      playTime:
+                        startDateTime: "2025-07-21T03:00:00.000+09:00"
+                        playTime: "05:00"
+                        competitionNocCode: "ALB"
+                        competitionTimezone: "Europe/Tirane"
                     error: null
                 COMPETITION_MATCH_NOT_FOUND:
                   $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_NOT_FOUND'
@@ -215,6 +239,8 @@ paths:
                             - matchCompetitorDetailSeq
                             - poomsaeMatchSideType
                             - competitorPsSeq
+                            - nocType
+                            - country
                             - participants
                           properties:
                             matchCompetitorDetailSeq:
@@ -229,6 +255,14 @@ paths:
                               type: integer
                               example: 589
                               description: 선수 seq
+                            nocType:
+                              type: string
+                              example: "KOR"
+                              description: 국가 코드 (NOC)
+                            country:
+                              type: string
+                              example: "Republic of Korea"
+                              description: 국가명(영문)
                             participants:
                               type: array
                               description: 참가자 상세 목록
@@ -280,15 +314,29 @@ paths:
                     success: true
                     data:
                       competitionSeq: 2131
-                      competitionMatchPsSeq: 16985
+                      competitionMatchPsSeq: 20024
                       competitors:
-                        - matchCompetitorDetailSeq: 4899
-                          poomsaeMatchSideType: "CUTOFF"
-                          competitorPsSeq: 589
+                        - matchCompetitorDetailSeq: 5299
+                          poomsaeMatchSideType: "HOME"
+                          competitorPsSeq: 706
+                          nocType: "KOR"
+                          country: "Republic of Korea"
                           participants:
-                            - participantSeq: 132395
-                              playerSeq: 41223
-                              teamSeq: 12451
+                            - participantSeq: 132345
+                              playerSeq: null
+                              teamSeq: null
+                              team: "Korea National Team"
+                              givenNameEn: "Min-seo"
+                              familyNameEn: "NAM"
+                        - matchCompetitorDetailSeq: 5298
+                          poomsaeMatchSideType: "AWAY"
+                          competitorPsSeq: 732
+                          nocType: "KOR"
+                          country: "Republic of Korea"
+                          participants:
+                            - participantSeq: 132371
+                              playerSeq: null
+                              teamSeq: null
                               team: "Korea National Team"
                               givenNameEn: "Min-seo"
                               familyNameEn: "DAM"
@@ -1169,7 +1217,7 @@ paths:
                 - poomsaeSequenceType
                 - poomsaeMatchSideType
                 - remainTime
-                - criteriaScores
+                - criteriaTypes
               properties:
                 poomsaeSequenceType:
                   type: string
@@ -1185,7 +1233,7 @@ paths:
                   type: string
                   example: "01:30"
                   description: 남은 시간 (MM:SS)
-                criteriaScores:
+                criteriaTypes:
                   type: array
                   description: 채점 항목별 점수 목록
                   items:
@@ -1699,31 +1747,29 @@ paths:
               properties:
                 poomsaeSequenceType:
                   type: string
-                  enum: [P1, P2]
-                  example: "P1"
+                  enum: [ P1, P2 ]
+                  example: P1
                   description: 품새 시퀀스 타입
                 scoresEachCompetitor:
                   type: array
-                  description: 각 선수별 점수 목록
                   items:
                     type: object
                     required:
                       - matchCompetitorDetailSeq
                       - poomsaeMatchSideType
-                      - criteriaScores
+                      - criteriaTypes
                     properties:
                       matchCompetitorDetailSeq:
                         type: integer
                         example: 5207
-                        description: 경기 참가자 상세 seq
+                        description: 경기 선수 상세 seq
                       poomsaeMatchSideType:
                         type: string
-                        enum: [HOME, AWAY, CUTOFF]
-                        example: "CUTOFF"
+                        enum: [ HOME, AWAY, CUTOFF ]
+                        example: CUTOFF
                         description: 경기 사이드 타입
-                      criteriaScores:
+                      criteriaTypes:
                         type: array
-                        description: 채점 항목별 점수 목록
                         items:
                           type: object
                           required:
@@ -1733,17 +1779,16 @@ paths:
                           properties:
                             criteriaType:
                               type: string
-                              enum: [ACCURACY, PRESENTATION, TECHNICAL_SKILLS, PRESENTATION_FREESTYLE]
-                              example: "TECHNICAL_SKILLS"
+                              enum: [ TECHNICAL_SKILLS, PRESENTATION_FREESTYLE, SCORE_DEDUCTION ]
+                              example: TECHNICAL_SKILLS
                               description: 채점 항목 타입
                             score:
                               type: number
                               nullable: true
                               example: null
-                              description: 항목별 점수
+                              description: 해당 항목 점수 (null 허용)
                             criteriaDetailTypes:
                               type: array
-                              description: 상세 항목 목록
                               items:
                                 type: object
                                 required:
@@ -1753,17 +1798,15 @@ paths:
                                 properties:
                                   criteriaDetailType:
                                     type: string
-                                    enum: [SPEED_AND_POWER, RHYTHM_AND_TEMPO, EXPRESSION_OF_ENERGY, FOOT_TECHNIQUES_LEVEL, BASIC_MOVEMENTS_AND_PRACTICABILITY, CREATIVENESS, HARMONY, EXPRESSION_OF_ENERGY_FREESTYLE, MUSIC_AND_CHOREOGRAPHY]
-                                    example: "FOOT_TECHNIQUES_LEVEL"
-                                    description: 채점 항목 상세 타입
+                                    example: FOOT_TECHNIQUES_LEVEL
+                                    description: 상세 채점 항목 타입
                                   score:
                                     type: number
                                     nullable: true
-                                    example: 0.2
-                                    description: 상세 항목 점수
+                                    example: 0.3
+                                    description: 상세 점수
                                   criteriaDetailSubTypes:
                                     type: array
-                                    description: 상세 서브 항목 목록
                                     items:
                                       type: object
                                       required:
@@ -1772,13 +1815,58 @@ paths:
                                       properties:
                                         criteriaDetailSubType:
                                           type: string
-                                          enum: [JUMPING_SIDE_KICK, MULTIPLE_KICKS_IN_A_JUMP, GRADIENT_OF_SPINS_IN_A_SPIN_KICK, KYORUGI_STYLE_CONSECUTIVE_KICKS, ACROBATIC_KICKING_TECHNIQUE]
-                                          example: "JUMPING_SIDE_KICK"
-                                          description: 채점 항목 상세 서브 타입
+                                          example: JUMPING_SIDE_KICK
+                                          description: 상세 채점 항목 서브 타입
                                         score:
                                           type: number
                                           example: 0.2
-                                          description: 서브 항목 점수
+                                          description: 서브 타입 점수
+            examples:
+              defaultRequest:
+                summary: 예시 요청
+                value:
+                  poomsaeSequenceType: "P1"
+                  scoresEachCompetitor:
+                    - matchCompetitorDetailSeq: 5207
+                      poomsaeMatchSideType: "CUTOFF"
+                      criteriaTypes:
+                        - criteriaType: "TECHNICAL_SKILLS"
+                          score: null
+                          criteriaDetailTypes:
+                            - criteriaDetailType: "FOOT_TECHNIQUES_LEVEL"
+                              score: null
+                              criteriaDetailSubTypes:
+                                - criteriaDetailSubType: "JUMPING_SIDE_KICK"
+                                  score: 0.2
+                                - criteriaDetailSubType: "MULTIPLE_KICKS_IN_A_JUMP"
+                                  score: 0.3
+                                - criteriaDetailSubType: "GRADIENT_OF_SPINS_IN_A_SPIN_KICK"
+                                  score: 0.4
+                                - criteriaDetailSubType: "KYORUGI_STYLE_CONSECUTIVE_KICKS"
+                                  score: 0.1
+                                - criteriaDetailSubType: "ACROBATIC_KICKING_TECHNIQUE"
+                                  score: 0.2
+                            - criteriaDetailType: "BASIC_MOVEMENTS_AND_PRACTICABILITY"
+                              score: 0.3
+                              criteriaDetailSubTypes: [ ]
+                        - criteriaType: "PRESENTATION_FREESTYLE"
+                          score: null
+                          criteriaDetailTypes:
+                            - criteriaDetailType: "CREATIVENESS"
+                              score: 0.2
+                              criteriaDetailSubTypes: [ ]
+                            - criteriaDetailType: "HARMONY"
+                              score: 0.3
+                              criteriaDetailSubTypes: [ ]
+                            - criteriaDetailType: "EXPRESSION_OF_ENERGY_FREESTYLE"
+                              score: 0.4
+                              criteriaDetailSubTypes: [ ]
+                            - criteriaDetailType: "MUSIC_AND_CHOREOGRAPHY"
+                              score: 0.1
+                              criteriaDetailSubTypes: [ ]
+                        - criteriaType: "SCORE_DEDUCTION"
+                          score: 0.9
+                          criteriaDetailTypes: [ ]
       responses:
         '200':
           description: 성공
