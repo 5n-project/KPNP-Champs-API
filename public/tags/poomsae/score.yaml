@@ -2466,7 +2466,7 @@ paths:
                                     properties:
                                       REF_CR:
                                         type: object
-                                        required: [refereeSeq, givenName, familyName]
+                                        required: [refereeSeq, givenName, familyName, joined]
                                         properties:
                                           refereeSeq:
                                             type: integer
@@ -2480,9 +2480,13 @@ paths:
                                             type: string
                                             example: "Grati"
                                             description: 성
+                                          joined:
+                                            type: boolean
+                                            example: true
+                                            description: 입장 여부
                                       REF_J1:
                                         type: object
-                                        required: [refereeSeq, givenName, familyName]
+                                        required: [refereeSeq, givenName, familyName, joined]
                                         properties:
                                           refereeSeq:
                                             type: integer
@@ -2496,9 +2500,13 @@ paths:
                                             type: string
                                             example: "Wu"
                                             description: 성
+                                          joined:
+                                            type: boolean
+                                            example: true
+                                            description: 입장 여부
                                       REF_J2:
                                         type: object
-                                        required: [refereeSeq, givenName, familyName]
+                                        required: [refereeSeq, givenName, familyName, joined]
                                         properties:
                                           refereeSeq:
                                             type: integer
@@ -2512,6 +2520,10 @@ paths:
                                             type: string
                                             example: "Charaf"
                                             description: 성
+                                          joined:
+                                            type: boolean
+                                            example: true
+                                            description: 입장 여부
                   error:
                     type: object
                     nullable: true
@@ -2553,14 +2565,17 @@ paths:
                                   refereeSeq: 6814
                                   givenName: "Amal"
                                   familyName: "Grati"
+                                  joined: true
                                 REF_J1:
                                   refereeSeq: 6807
                                   givenName: "Yu Ting"
                                   familyName: "Wu"
+                                  joined: true
                                 REF_J2:
                                   refereeSeq: 6818
                                   givenName: "Oriane Rives"
                                   familyName: "Charaf"
+                                  joined: false
                             - competitionMatchSeq: 20065
                               matchNumber: 1031
                               court: 1
@@ -2572,14 +2587,17 @@ paths:
                                   refereeSeq: 6814
                                   givenName: "Amal"
                                   familyName: "Grati"
+                                  joined: true
                                 REF_J1:
                                   refereeSeq: 6807
                                   givenName: "Yu Ting"
                                   familyName: "Wu"
+                                  joined: true
                                 REF_J2:
                                   refereeSeq: 6818
                                   givenName: "Oriane Rives"
                                   familyName: "Charaf"
+                                  joined: false
                         - sessionGroup: 6
                           startTime: "10:00"
                           competitionScheduleDetailSeq: 4534
@@ -2607,14 +2625,17 @@ paths:
                                   refereeSeq: 6814
                                   givenName: "Amal"
                                   familyName: "Grati"
+                                  joined: true
                                 REF_J1:
                                   refereeSeq: 6807
                                   givenName: "Yu Ting"
                                   familyName: "Wu"
+                                  joined: true
                                 REF_J2:
                                   refereeSeq: 6818
                                   givenName: "Oriane Rives"
                                   familyName: "Charaf"
+                                  joined: false
                         - sessionGroup: 11
                           startTime: ""
                           competitionScheduleDetailSeq: 4539
@@ -2642,14 +2663,17 @@ paths:
                                   refereeSeq: 6814
                                   givenName: "Amal"
                                   familyName: "Grati"
+                                  joined: true
                                 REF_J1:
                                   refereeSeq: 6810
                                   givenName: "Renata"
                                   familyName: "Bukovac"
+                                  joined: true
                                 REF_J2:
                                   refereeSeq: 6813
                                   givenName: "Ana Luisa"
                                   familyName: "Lopez Boluda"
+                                  joined: false
                         - sessionGroup: 12
                           startTime: "11:00"
                           competitionScheduleDetailSeq: 4540
@@ -2677,14 +2701,17 @@ paths:
                                   refereeSeq: 6814
                                   givenName: "Amal"
                                   familyName: "Grati"
+                                  joined: true
                                 REF_J1:
                                   refereeSeq: 6807
                                   givenName: "Yu Ting"
                                   familyName: "Wu"
+                                  joined: true
                                 REF_J2:
                                   refereeSeq: 6818
                                   givenName: "Oriane Rives"
                                   familyName: "Charaf"
+                                  joined: false
                             - competitionMatchSeq: 20130
                               matchNumber: 2044
                               court: 2
@@ -2696,14 +2723,17 @@ paths:
                                   refereeSeq: 6814
                                   givenName: "Amal"
                                   familyName: "Grati"
+                                  joined: true
                                 REF_J1:
                                   refereeSeq: 6807
                                   givenName: "Yu Ting"
                                   familyName: "Wu"
+                                  joined: true
                                 REF_J2:
                                   refereeSeq: 6818
                                   givenName: "Oriane Rives"
                                   familyName: "Charaf"
+                                  joined: false
                     error: null
                 NO_MATCH_ASSIGNED_TO_REFEREE:
                   $ref: '../../openapi.yml/#/components/examples/NO_MATCH_ASSIGNED_TO_REFEREE'
