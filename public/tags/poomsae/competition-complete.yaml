@@ -1,6 +1,7 @@
 paths:
   /competitions/complete/{competitionSeq}:
-    post:
+    get:
+      summary: 개최 완료
       tags:
         - 대회개최 - 개최 완료
       parameters:
@@ -10,67 +11,53 @@ paths:
           required: true
           schema:
             type: integer
-      summary: 개최 완료
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                competitionNameKo:
-                  type: string
-                  example: "테스트 수정제목입니다232323"
-                  description: 대회 명 (국문)
-                competitionNameEn:
-                  type: string
-                  example: "New Test"
-                  description: 대회 명 (영문)
-                competitionSdate:
-                  type: string
-                  format: date-time
-                  example: "2024-04-20 00:00:00.0"
-                  description: 대회 시작일
-                competitionEdate:
-                  type: string
-                  format: date-time
-                  example: "2024-04-20 00:00:00.0"
-                  description: 대회 종료일
-                competitionStatus:
-                  type: string
-                  example: "NN"
-                  description: 대회 상태
-                orderStatus:
-                  type: string
-                  example: "입금 전"
-                  description: 결제 상태 ("입금 전", "입금 확인", "결제 완료" 상태 일때만 조건 걸어주기)
-                payType:
-                  type: string
-                  example: "M"
-                  enum: [ M, P, K ]
-                  description: |
-                    결제 방식 
-                    - M: 무통장
-                    - P: 페이팔
-                    - K: KPNP
-                orderNum:
-                  type: string
-                  example: "O231234223"
-                  description: 주문 번호
       responses:
         '200':
           description: 성공
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/OK'
-              examples:
-                defaultResponse:
-                  summary: Default Example
-                  value:
-                    success: true
-                    data: null
-                    error: null
+                type: object
+                properties:
+                  competitionNameKo:
+                    type: string
+                    example: "테스트 수정제목입니다232323"
+                    description: 대회 명 (국문)
+                  competitionNameEn:
+                    type: string
+                    example: "New Test"
+                    description: 대회 명 (영문)
+                  competitionSdate:
+                    type: string
+                    format: date-time
+                    example: "2024-04-20 00:00:00.0"
+                    description: 대회 시작일
+                  competitionEdate:
+                    type: string
+                    format: date-time
+                    example: "2024-04-20 00:00:00.0"
+                    description: 대회 종료일
+                  competitionStatus:
+                    type: string
+                    example: "NN"
+                    description: 대회 상태
+                  orderStatus:
+                    type: string
+                    example: "입금 전"
+                    description: 결제 상태 ("입금 전", "입금 확인", "결제 완료" 상태 일때만 조건 걸어주기)
+                  payType:
+                    type: string
+                    example: "M"
+                    enum: [ M, P, K ]
+                    description: |
+                      결제 방식 
+                      - M: 무통장
+                      - P: 페이팔
+                      - K: KPNP
+                  orderNum:
+                    type: string
+                    example: "O231234223"
+                    description: 주문 번호
 
   /temp:
     post:
