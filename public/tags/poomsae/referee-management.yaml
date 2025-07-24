@@ -167,6 +167,8 @@ paths:
                     success: true
                     data: null
                     error: null
+                DUPLICATE_EMAIL:
+                  $ref: '../../openapi.yml/#/components/examples/DUPLICATE_EMAIL'
         403:
           description: 실패
           content:
@@ -559,6 +561,10 @@ paths:
                   $ref: '../../openapi.yml#/components/examples/MATCH_STATE_INVALID_FOR_OPERATION'
                 REFEREE_CSV_DATA_NOT_FOUND:
                   $ref: '../../openapi.yml#/components/examples/REFEREE_CSV_DATA_NOT_FOUND'
+                DUPLICATE_EMAIL:
+                  $ref: '../../openapi.yml/#/components/examples/DUPLICATE_EMAIL'
+                INVALID_ARGUMENT_ERROR:
+                  $ref: '../../openapi.yml/#/components/examples/INVALID_ARGUMENT_ERROR'
         403:
           description: Forbidden
           content:
