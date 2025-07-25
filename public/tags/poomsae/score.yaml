@@ -2833,7 +2833,7 @@ paths:
 
   /competitions/{competitionSeq}/matches/{matchSeq}/competitors/{competitorSeq}/scores:
     get:
-      summary: 완료된 경기 점수 조회
+      summary: 심판별 완료된 채점 점수 조회
       tags:
         - 채점
       parameters:
@@ -3211,7 +3211,7 @@ paths:
                 IS_NOT_AUTHORIZED:
                   $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
     put:
-      summary: 완료된 경기 점수 수정
+      summary: 심판별 완료된 채점 점수 수정
       tags:
         - 채점
       parameters:
