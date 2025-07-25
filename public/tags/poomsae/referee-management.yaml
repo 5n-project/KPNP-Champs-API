@@ -312,6 +312,8 @@ paths:
                     error: null
                 ITEM_NOT_FOUND:
                   $ref: '../../openapi.yml#/components/examples/ITEM_NOT_FOUND'
+                DUPLICATE_EMAIL:
+                  $ref: '../../openapi.yml/#/components/examples/DUPLICATE_EMAIL'
         403:
           description: 실패
           content:
