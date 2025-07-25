@@ -646,6 +646,15 @@ paths:
                   $ref: '../../openapi.yml/#/components/examples/INVALID_GROUP_MEMBER_COUNT'
                 NOT_SAVE:
                   $ref: '../../openapi.yml/#/components/examples/NOT_SAVE'
+                TEAM_NAME_MISMATCH:
+                  $ref: '../../openapi.yml/#/components/examples/TEAM_NAME_MISMATCH'
+                INVALID_ARGUMENT_ERROR:
+                  $ref: '../../openapi.yml/#/components/examples/INVALID_ARGUMENT_ERROR'
+                INVALID_BIRTH_DATE_ERROR:
+                  $ref: '../../openapi.yml/#/components/examples/INVALID_BIRTH_DATE_ERROR'
+                DUPLICATE_EMAIL:
+                  $ref: '../../openapi.yml/#/components/examples/DUPLICATE_EMAIL'
+
         403:
           description: Forbidden
           content:
@@ -664,5 +673,3 @@ paths:
               examples:
                 FILE_LOAD_FAILURE:
                   $ref: '../../openapi.yml/#/components/examples/FILE_LOAD_FAILURE'
-                PARTICIPANT_RULE_MISMATCH:
-                  $ref: '../../openapi.yml/#/components/examples/PARTICIPANT_RULE_MISMATCH'

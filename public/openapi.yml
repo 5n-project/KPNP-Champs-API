@@ -627,6 +627,27 @@ components:
         error:
           message: "저장 실패했습니다."
           errorCode: "E507"
+    TEAM_NAME_MISMATCH:
+      value:
+        success: false
+        data: null
+        error:
+          message: "팀명이 일치하지 않습니다."
+          errorCode: "E633"
+    INVALID_ARGUMENT_ERROR:
+      value:
+        success: false
+        data: null
+        error:
+          message: "어떤 필드에 행이 잘못됐는지 동적으로 백엔드에서 메시지 만들어주므로 그거 그대로 띄우면 됨"
+          errorCode: "E523"
+    INVALID_BIRTH_DATE_ERROR:
+      value:
+        success: false
+        data: null
+        error:
+          message: "올바르지 않은 생년월일 형식입니다."
+          errorCode: "E730"
     SCHEDULE_IS_TEMPORARY_SAVE:
       value:
         success: false
