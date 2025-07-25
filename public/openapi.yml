@@ -125,9 +125,9 @@ paths:
     $ref: './tags/poomsae/referee-management.yaml#/paths/~1competitions~1{competitionSeq}~1referee~1group'
   /competitions/{competitionSeq}/referee/csv:
     $ref: './tags/poomsae/referee-management.yaml#/paths/~1competitions~1{competitionSeq}~1referee~1csv'
-
-
- # 참가자
+  
+  
+  # 참가자
   /competitions/{competitionSeq}/participants:
     $ref: './tags/poomsae/participant.yaml#/paths/~1competitions~1{competitionSeq}~1participants'
   /competitions/{competitionSeq}/participants/deposit-confirm:
@@ -158,9 +158,9 @@ paths:
     $ref: './tags/poomsae/referee-schedule.yaml#/paths/~1competitions~1{competitionSeq}~1schedule~1referee-groups~1detail~1group~1{scheduleSeq}'
   /competitions/{competitionSeq}/schedule/referee-groups/detail/referee/{scheduleSeq}:
     $ref: './tags/poomsae/referee-schedule.yaml#/paths/~1competitions~1{competitionSeq}~1schedule~1referee-groups~1detail~1referee~1{scheduleSeq}'
-
-
- # 운영
+  
+  
+  # 운영
   /competitions/{competitionSeq}/operation/completed-matches:
     $ref: './tags/poomsae/operation.yaml#/paths/~1competitions~1{competitionSeq}~1operation~1completed-matches'
   /competitions/{competitionSeq}/operation/ongoing-matches/{day}:
@@ -222,7 +222,8 @@ paths:
     $ref: './tags/poomsae/score.yaml#/paths/~1competitions~1{competitionSeq}~1matches~1{matchSeq}~1competitors~1{competitorSeq}~1scores~1update'
   /competitions/{competitionSeq}/matches/{matchSeq}/scores/send:
     $ref: './tags/poomsae/score.yaml#/paths/~1competitions~1{competitionSeq}~1matches~1{matchSeq}~1scores~1send'
-
+  /competitions/{competitionSeq}/matches/{matchSeq}/competitors/{competitorSeq}/scores:
+      $ref: './tags/poomsae/score.yaml#/paths/~1competitions~1{competitionSeq}~1matches~1{matchSeq}~1competitors~1{competitorSeq}~1scores'
 
 
 
@@ -843,6 +844,20 @@ components:
         error:
           message: "랜덤 매치 생성은는 토너먼트 경기에서만 변경할 수 있습니다."
           errorCode: "E728"
+    SCORING_NOT_COMPLETED:
+      value:
+        success: false
+        data: null
+        error:
+          message: "심판의 채점이 완료되지 않았습니다."
+          errorCode: "E729"
+    SCORE_UPDATE_NOT_ALLOWED_AFTER_NEXT_ROUND_STARTED:
+      value:
+        success: false
+        data: null
+        error:
+          message: "다음 라운드가 진행중이거나 완료되어 점수를 승패 변경 수준으로 수정할 수 없습니다."
+          errorCode: "E731"
 
   schemas:
     getCompetitionDefaultResponse:
