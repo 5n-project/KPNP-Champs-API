@@ -220,6 +220,8 @@ paths:
                     required:
                       - competitionSeq
                       - competitionMatchPsSeq
+                      - currentMatchSideType
+                      - currentSequenceType
                       - competitors
                     properties:
                       competitionSeq:
@@ -230,6 +232,14 @@ paths:
                         type: integer
                         example: 16985
                         description: 대회 경기 seq
+                      currentMatchSideType:
+                        type: string
+                        enum: [ HOME, AWAY, CUTOFF ]
+                        description: 현재 시연중인 선수 사이드 타입
+                      poomsaeSequenceType:
+                        type: string
+                        enum: [ P1, P2 ]
+                        description: 현재 시연중인 품새 시퀀스 타입
                       competitors:
                         type: array
                         description: 참가자 목록
@@ -315,6 +325,8 @@ paths:
                     data:
                       competitionSeq: 2131
                       competitionMatchPsSeq: 20024
+                      currentMatchSideType: "HOME"
+                      currentSequenceType: "P1"
                       competitors:
                         - matchCompetitorDetailSeq: 5299
                           poomsaeMatchSideType: "HOME"
