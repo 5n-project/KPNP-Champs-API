@@ -100,3 +100,69 @@ paths:
               examples:
                 IS_NOT_AUTHORIZED:
                   $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+
+  /competitions/{competitionSeq}/fop/{competitionMatchPsSeq}/progress-seconds:
+    get:
+      summary: 경기 진행 시간 가져오기
+      tags:
+        - FOP
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: competitionMatchPsSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    properties:
+                      competitionMatchPsSeq:
+                        type: integer
+                        description:
+                          '매치 seq'
+                        example: "1234"
+                      progressSeconds:
+                        type: integer
+                        description:
+                          '진행 시간 초단위'
+                        example: "87"
+                  error:
+                    nullable: true
+                    example: null
+              examples:
+                defaultResponse:
+                  summary: Default Example
+                  value:
+                    {
+                        "success": true,
+                        "data": {
+                            "competitionMatchPsSeq": 1234,
+                            "progressSeconds": 87
+                        },
+                        "error": null
+                    }
+
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml/#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'

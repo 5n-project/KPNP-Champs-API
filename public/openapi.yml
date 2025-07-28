@@ -233,6 +233,8 @@ paths:
   # FOP
   /competitions/{competitionSeq}/fop/match/result:
     $ref: './tags/poomsae/fop.yaml#/paths/~1competitions~1{competitionSeq}~1fop~1match~1result'
+  /competitions/{competitionSeq}/fop/{competitionMatchPsSeq}/progress-seconds:
+    $ref: './tags/poomsae/fop.yaml#/paths/~1competitions~1{competitionSeq}~1fop~1{competitionMatchPsSeq}~1progress-seconds'
 
 
 
