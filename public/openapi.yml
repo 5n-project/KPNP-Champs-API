@@ -44,6 +44,10 @@ paths:
     $ref: './tags/poomsae/common.yaml#/paths/~1common~1combo~1draw-list'
   /common/combo/bank-list:
     $ref: './tags/poomsae/common.yaml#/paths/~1common~1combo~1bank-list'
+  /common/combo/application-path-list:
+    $ref: './tags/poomsae/common.yaml#/paths/~1common~1combo~1application-path-list'
+  /common/combo/participant-order-status-list:
+    $ref: './tags/poomsae/common.yaml#/paths/~1common~1combo~1participant-order-status-list'
   /competition/{competitionSeq}/all-event-filter":
     $ref: './tags/poomsae/common.yaml#/paths/~1competition~1{competitionSeq}~1all-event-filter'
   /competition/{competitionSeq}/event-filter":
