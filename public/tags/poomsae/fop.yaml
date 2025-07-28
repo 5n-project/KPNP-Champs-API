@@ -1,0 +1,102 @@
+paths:
+  /competitions/{competitionSeq}/fop/match/result:
+    patch:
+      summary: 진행중 경기 결과 선택
+      tags:
+        - FOP
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - competitionMatchPsSeq
+                - resultDecision
+              properties:
+                competitionMatchPsSeq:
+                  type: integer
+                  description:
+                    '매치 seq'
+                  example: "1234"
+                winnerMatchSideType:
+                  type: string
+                  enum:
+                    - HOME
+                    - AWAY
+                  description:
+                    '토너먼트 승자, 컷오프 일 땐 null'
+                  example: "HOME"
+                resultDecision:
+                  type: string
+                  enum:
+                    - PTF
+                    - RSC
+                    - WDR
+                    - DSQ
+                    - PUN
+                  description:
+                    '경기 결과 코드'
+                  example: "WDR"
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                  error:
+                    nullable: true
+                    example: null
+              examples:
+                defaultResponse:
+                  summary: Default Example
+                  value:
+                    {
+                      "success": true,
+                      "data": {},
+                      "error": null
+                    }
+                COMPETITION_MATCH_NOT_FOUND:
+                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+                END_OR_WAITING_MATCH_INVALID_FOR_OPERATION:
+                  $ref: '../../openapi.yml/#/components/examples/END_OR_WAITING_MATCH_INVALID_FOR_OPERATION'
+                MATCH_WINNER_NOT_FOUND:
+                  $ref: '../../openapi.yml#/components/examples/MATCH_WINNER_NOT_FOUND'
+                ONLY_TOURNAMENT_MATCH_CAN_UPDATE_RESULT:
+                  $ref: '../../openapi.yml#/components/examples/ONLY_TOURNAMENT_MATCH_CAN_UPDATE_RESULT'
+                IS_BYE_MATCH:
+                  $ref: '../../openapi.yml#/components/examples/IS_BYE_MATCH'
+                MATCH_RESULT_ALREADY_UP_TO_DATE:
+                  $ref: '../../openapi.yml#/components/examples/MATCH_RESULT_ALREADY_UP_TO_DATE'
+
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml/#/components/responses/Error'
+              examples:
+                INVALID_TYPE_ERROR:
+                  $ref: '../../openapi.yml#/components/examples/INVALID_TYPE_ERROR'
+
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml/#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'

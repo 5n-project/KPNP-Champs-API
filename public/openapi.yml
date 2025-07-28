@@ -19,6 +19,7 @@ tags:
   - name: 일정
   - name: 심판조 스케줄
   - name: 채점
+  - name: FOP
 
 paths:
 
@@ -125,8 +126,8 @@ paths:
     $ref: './tags/poomsae/referee-management.yaml#/paths/~1competitions~1{competitionSeq}~1referee~1group'
   /competitions/{competitionSeq}/referee/csv:
     $ref: './tags/poomsae/referee-management.yaml#/paths/~1competitions~1{competitionSeq}~1referee~1csv'
-  
-  
+
+
   # 참가자
   /competitions/{competitionSeq}/participants:
     $ref: './tags/poomsae/participant.yaml#/paths/~1competitions~1{competitionSeq}~1participants'
@@ -158,8 +159,8 @@ paths:
     $ref: './tags/poomsae/referee-schedule.yaml#/paths/~1competitions~1{competitionSeq}~1schedule~1referee-groups~1detail~1group~1{scheduleSeq}'
   /competitions/{competitionSeq}/schedule/referee-groups/detail/referee/{scheduleSeq}:
     $ref: './tags/poomsae/referee-schedule.yaml#/paths/~1competitions~1{competitionSeq}~1schedule~1referee-groups~1detail~1referee~1{scheduleSeq}'
-  
-  
+
+
   # 운영
   /competitions/{competitionSeq}/operation/completed-matches:
     $ref: './tags/poomsae/operation.yaml#/paths/~1competitions~1{competitionSeq}~1operation~1completed-matches'
@@ -224,6 +225,11 @@ paths:
     $ref: './tags/poomsae/score.yaml#/paths/~1competitions~1{competitionSeq}~1matches~1{matchSeq}~1scores~1send'
   /competitions/{competitionSeq}/matches/{matchSeq}/competitors/{competitorSeq}/scores:
       $ref: './tags/poomsae/score.yaml#/paths/~1competitions~1{competitionSeq}~1matches~1{matchSeq}~1competitors~1{competitorSeq}~1scores'
+
+  # FOP
+  /competitions/{competitionSeq}/fop/match/result:
+    $ref: './tags/poomsae/fop.yaml#/paths/~1competitions~1{competitionSeq}~1fop~1match~1result'
+
 
 
 
