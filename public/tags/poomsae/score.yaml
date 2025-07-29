@@ -49,7 +49,8 @@ paths:
                       - matchNumber
                       - poomsaeEn
                       - poomsaeKo
-                      - playTime
+                      - matchMaxTime
+                      - matchMinTime
                     properties:
                       competitionSeq:
                         type: integer
@@ -137,6 +138,14 @@ paths:
                         type: string
                         example: "태극 7장"
                         description: 품새명(한글)
+                      matchMaxTime:
+                        type: integer
+                        example: 120
+                        description: 최대 시연 시간
+                      matchMinTime:
+                        type: integer
+                        example: 80
+                        description: 최소 시연 시간
                   error:
                     type: object
                     nullable: true
@@ -167,11 +176,8 @@ paths:
                       matchNumber: "1001"
                       poomsaeEn: "Taegeuk 7 Jang"
                       poomsaeKo: "태극 7장"
-                      playTime:
-                        startDateTime: "2025-07-21T03:00:00.000+09:00"
-                        playTime: "05:00"
-                        competitionNocCode: "ALB"
-                        competitionTimezone: "Europe/Tirane"
+                      matchMaxTime: 120
+                      matchMinTime: 80
                     error: null
                 COMPETITION_MATCH_NOT_FOUND:
                   $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_NOT_FOUND'
