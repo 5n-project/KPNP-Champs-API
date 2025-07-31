@@ -1636,7 +1636,7 @@ paths:
 
   /competitions/{competitionSeq}/operation/matches/{competitionMatchPsSeq}/ongoing-match/referee/scores:
     get:
-      summary: '운영에 운영중인 경기에 해당하는 심판별 점수 진행 조회 (TODO: 심판 실시간 입장과 FOP 에서 현재 진행중인 품새 redis 구현 되면 해당 부분 추가해서 재 구현 해야함)'
+      summary: '운영에 운영중인 경기에 해당하는 심판별 점수 진행 조회'
       tags:
         - 운영 - 경기
       parameters:
@@ -2405,7 +2405,6 @@ paths:
             schema:
               type: object
               required:
-                - winner
                 - resultDecision
               properties:
                 winner:
@@ -2420,8 +2419,8 @@ paths:
                   enum:
                     - WBS (판정승)
                     - RSC (주심직권승)
-                    - WDR (기권승)
-                    - DSQ (실격승)
+                    - WDR (기권승, 기권패)
+                    - DSQ (실격승, 실격패)
                     - PUN (감점승)
                   description: 경기 결과 결정
                   example: "DSQ"
@@ -2465,6 +2464,8 @@ paths:
                   $ref: '../../openapi.yml#/components/examples/NO_PLAYER_ADVANCED_TO_NEXT_ROUND'
                 MATCH_RESULT_CANNOT_BE_UPDATED_AFTER_NEXT_ROUND:
                   $ref: '../../openapi.yml#/components/examples/MATCH_RESULT_CANNOT_BE_UPDATED_AFTER_NEXT_ROUND'
+                CUTOFF_MATCH_RESULT_ALREADY_UP_TO_DATE:
+                  $ref: '../../openapi.yml#/components/examples/CUTOFF_MATCH_RESULT_ALREADY_UP_TO_DATE'
         '403':
           description: 권한 없음
           content:

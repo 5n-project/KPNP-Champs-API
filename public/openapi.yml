@@ -814,6 +814,13 @@ components:
         error:
           message: "다음강수가 진행된 경우 경기 승자 및 결과를 수정할 수 없습니다."
           errorCode: "E721"
+    CUTOFF_MATCH_RESULT_ALREADY_UP_TO_DATE:
+      value:
+        success: false
+        data: null
+        error:
+          message: "경기 결과가 이미 동일하여 변경할 수 없습니다."
+          errorCode: "E734"
     NO_PLAYER_ADVANCED_TO_NEXT_ROUND:
       value:
         success: false
