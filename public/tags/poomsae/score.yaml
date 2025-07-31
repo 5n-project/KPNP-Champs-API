@@ -1774,14 +1774,14 @@ paths:
                     type: object
                     required:
                       - matchCompetitorDetailSeq
-                      - poomsaeMatchSideType
+                      - matchSideType
                       - criteriaTypes
                     properties:
                       matchCompetitorDetailSeq:
                         type: integer
                         example: 5207
                         description: 경기 선수 상세 seq
-                      poomsaeMatchSideType:
+                      matchSideType:
                         type: string
                         enum: [ HOME, AWAY, CUTOFF ]
                         example: CUTOFF
@@ -1791,10 +1791,16 @@ paths:
                         items:
                           type: object
                           required:
+                            - matchScoreSeq
                             - criteriaType
                             - score
                             - criteriaDetailTypes
                           properties:
+                            matchScoreSeq:
+                              type: integer
+                              nullable: true
+                              example: 205
+                              description: 경기 점수 로그 seq
                             criteriaType:
                               type: string
                               enum: [ TECHNICAL_SKILLS, PRESENTATION_FREESTYLE, SCORE_DEDUCTION ]
@@ -1810,10 +1816,16 @@ paths:
                               items:
                                 type: object
                                 required:
+                                  - matchScoreSeq
                                   - criteriaDetailType
                                   - score
                                   - criteriaDetailSubTypes
                                 properties:
+                                  matchScoreSeq:
+                                    type: integer
+                                    nullable: true
+                                    example: 206
+                                    description: 경기 점수 seq
                                   criteriaDetailType:
                                     type: string
                                     example: FOOT_TECHNIQUES_LEVEL
@@ -1828,9 +1840,15 @@ paths:
                                     items:
                                       type: object
                                       required:
+                                        - matchScoreSeq
                                         - criteriaDetailSubType
                                         - score
                                       properties:
+                                        matchScoreSeq:
+                                          type: integer
+                                          nullable: true
+                                          example: 207
+                                          description: 경기 점수 seq
                                         criteriaDetailSubType:
                                           type: string
                                           example: JUMPING_SIDE_KICK
@@ -1846,45 +1864,54 @@ paths:
                   poomsaeSequenceType: "P1"
                   scoresEachCompetitor:
                     - matchCompetitorDetailSeq: 5207
-                      poomsaeMatchSideType: "CUTOFF"
+                      matchSideType: "CUTOFF"
                       criteriaTypes:
-                        - criteriaType: "TECHNICAL_SKILLS"
+                        - matchScoreSeq: null
+                          criteriaType: "TECHNICAL_SKILLS"
                           score: null
                           criteriaDetailTypes:
-                            - criteriaDetailType: "FOOT_TECHNIQUES_LEVEL"
+                            - matchScoreSeq: null
+                              criteriaDetailType: "FOOT_TECHNIQUES_LEVEL"
                               score: null
                               criteriaDetailSubTypes:
-                                - criteriaDetailSubType: "JUMPING_SIDE_KICK"
+                                - matchScoreSeq: 200
+                                  criteriaDetailSubType: "JUMPING_SIDE_KICK"
                                   score: 0.2
-                                - criteriaDetailSubType: "MULTIPLE_KICKS_IN_A_JUMP"
+                                - matchScoreSeq: 201
+                                  criteriaDetailSubType: "MULTIPLE_KICKS_IN_A_JUMP"
                                   score: 0.3
-                                - criteriaDetailSubType: "GRADIENT_OF_SPINS_IN_A_SPIN_KICK"
+                                - matchScoreSeq: 202
+                                  criteriaDetailSubType: "GRADIENT_OF_SPINS_IN_A_SPIN_KICK"
                                   score: 0.4
-                                - criteriaDetailSubType: "KYORUGI_STYLE_CONSECUTIVE_KICKS"
+                                - matchScoreSeq: 203
+                                  criteriaDetailSubType: "KYORUGI_STYLE_CONSECUTIVE_KICKS"
                                   score: 0.1
-                                - criteriaDetailSubType: "ACROBATIC_KICKING_TECHNIQUE"
+                                - matchScoreSeq: 204
+                                  criteriaDetailSubType: "ACROBATIC_KICKING_TECHNIQUE"
                                   score: 0.2
-                            - criteriaDetailType: "BASIC_MOVEMENTS_AND_PRACTICABILITY"
+                            - matchScoreSeq: 205
+                              criteriaDetailType: "BASIC_MOVEMENTS_AND_PRACTICABILITY"
                               score: 0.3
                               criteriaDetailSubTypes: [ ]
                         - criteriaType: "PRESENTATION_FREESTYLE"
                           score: null
                           criteriaDetailTypes:
-                            - criteriaDetailType: "CREATIVENESS"
+                            - matchScoreSeq: 206
+                              criteriaDetailType: "CREATIVENESS"
                               score: 0.2
                               criteriaDetailSubTypes: [ ]
-                            - criteriaDetailType: "HARMONY"
+                            - matchScoreSeq: 207
+                              criteriaDetailType: "HARMONY"
                               score: 0.3
                               criteriaDetailSubTypes: [ ]
-                            - criteriaDetailType: "EXPRESSION_OF_ENERGY_FREESTYLE"
+                            - matchScoreSeq: 208
+                              criteriaDetailType: "EXPRESSION_OF_ENERGY_FREESTYLE"
                               score: 0.4
                               criteriaDetailSubTypes: [ ]
-                            - criteriaDetailType: "MUSIC_AND_CHOREOGRAPHY"
+                            - matchScoreSeq: 209
+                              criteriaDetailType: "MUSIC_AND_CHOREOGRAPHY"
                               score: 0.1
                               criteriaDetailSubTypes: [ ]
-                        - criteriaType: "SCORE_DEDUCTION"
-                          score: 0.9
-                          criteriaDetailTypes: [ ]
       responses:
         '200':
           description: 성공
