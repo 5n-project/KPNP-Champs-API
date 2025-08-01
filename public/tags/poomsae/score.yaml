@@ -45,7 +45,6 @@ paths:
                       - together
                       - phase
                       - phaseLabel
-                      - playingRound
                       - matchNumber
                       - poomsaeEn
                       - poomsaeKo
@@ -122,10 +121,6 @@ paths:
                         type: string
                         example: "Pre-A-1"
                         description: phase 라벨
-                      playingRound:
-                        type: integer
-                        example: 1
-                        description: 경기 라운드 번호
                       matchNumber:
                         type: string
                         example: "2001"
@@ -172,7 +167,6 @@ paths:
                       together: false
                       phase: "R64"
                       phaseLabel: "R64-2"
-                      playingRound: 1
                       matchNumber: "1001"
                       poomsaeEn: "Taegeuk 7 Jang"
                       poomsaeKo: "태극 7장"
@@ -253,7 +247,7 @@ paths:
                           type: object
                           required:
                             - matchCompetitorDetailSeq
-                            - poomsaeMatchSideType
+                            - matchSideType
                             - competitorPsSeq
                             - nocType
                             - country
@@ -263,7 +257,7 @@ paths:
                               type: integer
                               example: 4899
                               description: 경기 선수 상세 seq
-                            poomsaeMatchSideType:
+                            matchSideType:
                               type: string
                               enum: [HOME, AWAY, CUTOFF]
                               description: 경기 사이드 타입
@@ -335,7 +329,7 @@ paths:
                       currentSequenceType: "P1"
                       competitors:
                         - matchCompetitorDetailSeq: 5299
-                          poomsaeMatchSideType: "HOME"
+                          matchSideType: "HOME"
                           competitorPsSeq: 706
                           nocType: "KOR"
                           country: "Republic of Korea"
@@ -347,7 +341,7 @@ paths:
                               givenNameEn: "Min-seo"
                               familyNameEn: "NAM"
                         - matchCompetitorDetailSeq: 5298
-                          poomsaeMatchSideType: "AWAY"
+                          matchSideType: "AWAY"
                           competitorPsSeq: 732
                           nocType: "KOR"
                           country: "Republic of Korea"
@@ -845,7 +839,7 @@ paths:
               type: object
               required:
                 - poomsaeSequenceType
-                - poomsaeMatchSideType
+                - matchSideType
                 - deltaScore
                 - remainTime
               properties:
@@ -854,7 +848,7 @@ paths:
                   enum: [P1, P2]
                   example: "P2"
                   description: 품새 시퀀스 타입
-                poomsaeMatchSideType:
+                matchSideType:
                   type: string
                   enum: [HOME, AWAY, CUTOFF]
                   example: "HOME"
@@ -1039,7 +1033,7 @@ paths:
               type: object
               required:
                 - poomsaeSequenceType
-                - poomsaeMatchSideType
+                - matchSideType
                 - deltaScore
                 - remainTime
               properties:
@@ -1048,7 +1042,7 @@ paths:
                   enum: [P1, P2]
                   example: "P2"
                   description: 품새 시퀀스 타입
-                poomsaeMatchSideType:
+                matchSideType:
                   type: string
                   enum: [HOME, AWAY, CUTOFF]
                   example: "HOME"
@@ -1233,7 +1227,7 @@ paths:
               type: object
               required:
                 - poomsaeSequenceType
-                - poomsaeMatchSideType
+                - matchSideType
                 - remainTime
                 - criteriaTypes
               properties:
@@ -1242,7 +1236,7 @@ paths:
                   enum: [ P1, P2 ]
                   example: "P2"
                   description: 품새 시퀀스 타입
-                poomsaeMatchSideType:
+                matchSideType:
                   type: string
                   enum: [ HOME, AWAY, CUTOFF ]
                   example: "CUTOFF"
@@ -2914,7 +2908,7 @@ paths:
             type: integer
           description: 매핑된 심판 그룹 seq
         - in: query
-          name: poomsaeMatchSideType
+          name: matchSideType
           required: true
           schema:
             type: string
@@ -2956,7 +2950,7 @@ paths:
                           matchCompetitorDetailSeq:
                             type: integer
                             example: 5298
-                          poomsaeMatchSideType:
+                          matchSideType:
                             type: string
                             example: AWAY
                       referee:
@@ -3010,7 +3004,7 @@ paths:
                           poomsaeSequenceType:
                             type: string
                             example: P1
-                          poomsaeMatchSideType:
+                          matchSideType:
                             type: string
                             example: AWAY
                           deductionCounts:
@@ -3161,7 +3155,7 @@ paths:
                         poomsaeTypeKo: "태극 7장"
                       competitor:
                         matchCompetitorDetailSeq: 5298
-                        poomsaeMatchSideType: "AWAY"
+                        matchSideType: "AWAY"
                       referee:
                         refereeSeq: 6814
                         matchRefereeMappingSeq: 915
@@ -3179,7 +3173,7 @@ paths:
                         matchCompetitorDetailSeq: 5298
                         matchRefereeMappingSeq: 915
                         poomsaeSequenceType: "P1"
-                        poomsaeMatchSideType: "AWAY"
+                        matchSideType: "AWAY"
                         deductionCounts:
                           - deltaType: 0.100
                             count: 5
@@ -3292,7 +3286,7 @@ paths:
             type: integer
           description: 매핑된 심판 그룹 seq
         - in: query
-          name: poomsaeMatchSideType
+          name: matchSideType
           required: true
           schema:
             type: string
@@ -3325,7 +3319,7 @@ paths:
                   type: string
                   example: P1
                   description: 품새 시퀀스 타입
-                poomsaeMatchSideType:
+                matchSideType:
                   type: string
                   example: AWAY
                   description: 품새 경기 사이드
@@ -3439,7 +3433,7 @@ paths:
               matchCompetitorDetailSeq: 5298
               matchRefereeMappingSeq: 915
               poomsaeSequenceType: P1
-              poomsaeMatchSideType: AWAY
+              matchSideType: AWAY
               deductionCounts:
                 - deltaType: 0.100
                   count: 5
@@ -3537,7 +3531,7 @@ paths:
                           matchCompetitorDetailSeq:
                             type: integer
                             example: 5298
-                          poomsaeMatchSideType:
+                          matchSideType:
                             type: string
                             example: AWAY
                       referee:
@@ -3591,7 +3585,7 @@ paths:
                           poomsaeSequenceType:
                             type: string
                             example: P1
-                          poomsaeMatchSideType:
+                          matchSideType:
                             type: string
                             example: AWAY
                           deductionCounts:
@@ -3742,7 +3736,7 @@ paths:
                         poomsaeTypeKo: "태극 7장"
                       competitor:
                         matchCompetitorDetailSeq: 5298
-                        poomsaeMatchSideType: "AWAY"
+                        matchSideType: "AWAY"
                       referee:
                         refereeSeq: 6814
                         matchRefereeMappingSeq: 915
@@ -3760,7 +3754,7 @@ paths:
                         matchCompetitorDetailSeq: 5298
                         matchRefereeMappingSeq: 915
                         poomsaeSequenceType: "P1"
-                        poomsaeMatchSideType: "AWAY"
+                        matchSideType: "AWAY"
                         deductionCounts:
                           - deltaType: 0.100
                             count: 5
