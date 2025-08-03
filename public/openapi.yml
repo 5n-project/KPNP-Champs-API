@@ -925,6 +925,13 @@ components:
         error:
           message: "해당 일차에 존재하지 않는 스케줄입니다."
           errorCode: "E738"
+    COURT_VIEWER_MATCH_IS_OVERLAP:
+      value:
+        success: false
+        data: null
+        error:
+          message: "입력된 대진 중 중복되는 대진이 있습니다."
+          errorCode: "E739"
 
   schemas:
     getCompetitionDefaultResponse:
