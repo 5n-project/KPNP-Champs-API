@@ -1,0 +1,586 @@
+paths:
+  /competitions/{competitionSeq}/court-viewer/competition-day/{competitionDay}:
+    get:
+      summary: 코트뷰어 리스트
+      tags:
+        - 코트뷰어
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: competitionDay
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PsCourtViewerMatchesResponseDTO'
+              examples:
+                defaultResponse:
+                  $ref: '#/components/examples/PsCourtViewerMatchesResponseDTO'
+                COMPETITION_MATCH_NOT_FOUND:
+                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+                ITEM_NOT_FOUND:
+                  $ref: '../../openapi.yml/#/components/examples/ITEM_NOT_FOUND'
+                MATCH_IS_NOT_CREATED:
+                  $ref: '../../openapi.yml#/components/examples/MATCH_IS_NOT_CREATED'
+
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml/#/components/responses/Error'
+              examples:
+                INVALID_TYPE_ERROR:
+                  $ref: '../../openapi.yml#/components/examples/INVALID_TYPE_ERROR'
+
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml/#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+
+  /competitions/{competitionSeq}/court-viewer:
+    put:
+      summary: 코트뷰어 저장
+      tags:
+        - 코트뷰어
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                competitionDay:
+                  type: integer
+                  minimum: 1
+                courts:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      court:
+                        type: integer
+                        minimum: 1
+                      matches:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            competitionMatchPsSeq:
+                              type: integer
+                              format: int64
+                              minimum: 1
+                          required:
+                            - competitionMatchPsSeq
+                    required:
+                      - court
+                      - matches
+              required:
+                - competitionDay
+                - courts
+            example:
+              {
+                  "competitionDay": 1,
+                  "courts": [
+                      {
+                          "court": 1,
+                          "matches": [
+                              {
+                                  "competitionMatchPsSeq": 20052
+                              },
+                              {
+                                  "competitionMatchPsSeq": 20057
+                              }
+                          ]
+                      },
+                      {
+                          "court": 2,
+                          "matches": [
+                              {
+                                  "competitionMatchPsSeq": 20089
+                              },
+                              {
+                                  "competitionMatchPsSeq": 20091
+                              }
+                          ]
+                      },
+                      {
+                          "court": 3,
+                          "matches": []
+                      }
+                  ]
+              }
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PsCourtViewerMatchesResponseDTO'
+              examples:
+                defaultResponse:
+                  $ref: '#/components/examples/PsCourtViewerMatchesResponseDTO'
+                MATCH_IS_NOT_CREATED:
+                  $ref: '../../openapi.yml#/components/examples/MATCH_IS_NOT_CREATED'
+                SCHEDULE_IS_NOT_FOUND_PER_DAY:
+                  $ref: '../../openapi.yml#/components/examples/SCHEDULE_IS_NOT_FOUND_PER_DAY'
+                COURT_VIEWER_MATCH_ORDER_IS_WRONG:
+                  $ref: '../../openapi.yml#/components/examples/COURT_VIEWER_MATCH_ORDER_IS_WRONG'
+                ITEM_NOT_FOUND:
+                  $ref: '../../openapi.yml#/components/examples/ITEM_NOT_FOUND'
+
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml/#/components/responses/Error'
+              examples:
+                COMPETITION_CURRENT_DAY_IS_END:
+                  $ref: '../../openapi.yml#/components/examples/COMPETITION_CURRENT_DAY_IS_END'
+                COMPETITION_MATCH_NOT_FOUND:
+                  $ref: '../../openapi.yml#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml/#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+  /competitions/{competitionSeq}/court-viewer/competition-day/{competitionDay}/status:
+    get:
+      summary: 코트뷰어 n일차 상태 조회
+      tags:
+        - 코트뷰어
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: competitionDay
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PsCourtViewerStatusResponseDTO'
+              examples:
+                defaultResponse:
+                  $ref: '#/components/examples/PsCourtViewerStatusResponseDTO'
+                MATCH_IS_NOT_CREATED:
+                  $ref: '../../openapi.yml#/components/examples/MATCH_IS_NOT_CREATED'
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml/#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+components:
+  schemas:
+    PsCourtViewerMatchesResponseDTO:
+      type: object
+      properties:
+        availableMatches:
+          type: array
+          items:
+            $ref: '#/components/schemas/PsCourtViewerMatch'
+        courts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Court'
+      required:
+        - availableMatches
+        - courts
+    PsCourtViewerMatch:
+      type: object
+      properties:
+        competitionMatchPsSeq:
+          type: integer
+          format: int64
+          description: 대진 seq
+        competitionEventSeq:
+          type: integer
+          format: int64
+          description: 대진 event seq
+        matchNumber:
+          type: integer
+          description: 매치 번호
+        matchStyleType:
+          type: string
+          enum:
+            - TOURNAMENT
+            - CUTOFF
+        divisionCode:
+          type: string
+          enum:
+            - WT_RECOGNIZED_POOMSAE
+        divisionNameKo:
+          type: string
+        divisionNameEn:
+          type: string
+        departmentCode:
+          type: string
+        departmentNameKo:
+          type: string
+        departmentNameEn:
+          type: string
+        divisionCategoryCode:
+          type: string
+          enum:
+            - INDIVIDUAL_MALE
+            - INDIVIDUAL_FEMALE
+        divisionCategoryNameKo:
+          type: string
+        divisionCategoryNameEn:
+          type: string
+        phase:
+          type: string
+        phaseLabel:
+          type: string
+        phaseDescSortNo:
+          type: integer
+          description: phase 내림차순 sortNo
+        matchStatus:
+          type: string
+          enum:
+            - WAITING
+            - ONGOING
+            - END
+          description: 대진 상태
+        matchCompetitorList:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatchCompetitorDetail'
+      required:
+        - competitionMatchPsSeq
+        - competitionEventSeq
+        - matchNumber
+        - matchStyleType
+        - divisionCode
+        - divisionNameKo
+        - divisionNameEn
+        - departmentCode
+        - departmentNameKo
+        - departmentNameEn
+        - divisionCategoryCode
+        - divisionCategoryNameKo
+        - divisionCategoryNameEn
+        - phase
+        - phaseLabel
+        - phaseDescSortNo
+        - matchStatus
+        - matchCompetitorList
+    Court:
+      type: object
+      properties:
+        court:
+          type: integer
+          description: 코트 번호
+        matches:
+          type: array
+          items:
+            $ref: '#/components/schemas/PsCourtViewerMatch'
+      required:
+        - court
+        - matches
+    MatchCompetitorDetail:
+      type: object
+      properties:
+        matchSideType:
+          type: string
+          enum:
+            - HOME
+            - AWAY
+            - CUTOFF
+        name:
+          type: string
+          nullable: true
+          description: 선수 이름 또는 팀 이름
+      required:
+        - matchSideType
+    PsCourtViewerStatusResponseDTO:
+      type: object
+      properties:
+        totalMatchCount:
+          type: integer
+        endMatchCount:
+          type: integer
+        remainMatchCount:
+          type: integer
+      required:
+        - totalMatchCount
+        - endMatchCount
+        - remainMatchCount
+
+  examples:
+    PsCourtViewerMatchesResponseDTO:
+      summary: Default Example
+      value:
+        {
+          "success": true,
+          "data": {
+            "availableMatches": [
+              {
+                "competitionMatchPsSeq": 20052,
+                "competitionEventSeq": 1167,
+                "matchNumber": 1019,
+                "matchStyleType": "TOURNAMENT",
+                "divisionCode": "WT_RECOGNIZED_POOMSAE",
+                "divisionNameKo": "WT 공인품새룰",
+                "divisionNameEn": "WT Recognized Poomsae",
+                "departmentCode": "UNDER_30",
+                "departmentNameKo": "30세 이하",
+                "departmentNameEn": "Under 30",
+                "divisionCategoryCode": "INDIVIDUAL_MALE",
+                "divisionCategoryNameKo": "남자개인",
+                "divisionCategoryNameEn": "Individual male",
+                "phase": "R64",
+                "phaseLabel": "R64-30",
+                "phaseDescSortNo": 6,
+                "matchStatus": "WAITING",
+                "matchCompetitorList": [
+                  {
+                    "matchSideType": "HOME",
+                    "name": null
+                  },
+                  {
+                    "matchSideType": "AWAY",
+                    "name": null
+                  }
+                ]
+              },
+              {
+                "competitionMatchPsSeq": 20057,
+                "competitionEventSeq": 1167,
+                "matchNumber": 1023,
+                "matchStyleType": "TOURNAMENT",
+                "divisionCode": "WT_RECOGNIZED_POOMSAE",
+                "divisionNameKo": "WT 공인품새룰",
+                "divisionNameEn": "WT Recognized Poomsae",
+                "departmentCode": "UNDER_30",
+                "departmentNameKo": "30세 이하",
+                "departmentNameEn": "Under 30",
+                "divisionCategoryCode": "INDIVIDUAL_MALE",
+                "divisionCategoryNameKo": "남자개인",
+                "divisionCategoryNameEn": "Individual male",
+                "phase": "R32",
+                "phaseLabel": "R32-3",
+                "phaseDescSortNo": 5,
+                "matchStatus": "WAITING",
+                "matchCompetitorList": [
+                  {
+                    "matchSideType": "HOME",
+                    "name": null
+                  },
+                  {
+                    "matchSideType": "AWAY",
+                    "name": null
+                  }
+                ]
+              }
+            ],
+            "courts": [
+              {
+                "court": 1,
+                "matches": [
+                  {
+                    "competitionMatchPsSeq": 20028,
+                    "competitionEventSeq": 1167,
+                    "matchNumber": 1004,
+                    "matchStyleType": "TOURNAMENT",
+                    "divisionCode": "WT_RECOGNIZED_POOMSAE",
+                    "divisionNameKo": "WT 공인품새룰",
+                    "divisionNameEn": "WT Recognized Poomsae",
+                    "departmentCode": "UNDER_30",
+                    "departmentNameKo": "30세 이하",
+                    "departmentNameEn": "Under 30",
+                    "divisionCategoryCode": "INDIVIDUAL_MALE",
+                    "divisionCategoryNameKo": "남자개인",
+                    "divisionCategoryNameEn": "Individual male",
+                    "phase": "R64",
+                    "phaseLabel": "R64-6",
+                    "phaseDescSortNo": 6,
+                    "matchStatus": "WAITING",
+                    "matchCompetitorList": [
+                      {
+                        "matchSideType": "HOME",
+                        "name": "DAM Min-seo"
+                      },
+                      {
+                        "matchSideType": "AWAY",
+                        "name": "DAM Min-seo"
+                      }
+                    ]
+                  },
+                  {
+                    "competitionMatchPsSeq": 20032,
+                    "competitionEventSeq": 1167,
+                    "matchNumber": 1006,
+                    "matchStyleType": "TOURNAMENT",
+                    "divisionCode": "WT_RECOGNIZED_POOMSAE",
+                    "divisionNameKo": "WT 공인품새룰",
+                    "divisionNameEn": "WT Recognized Poomsae",
+                    "departmentCode": "UNDER_30",
+                    "departmentNameKo": "30세 이하",
+                    "departmentNameEn": "Under 30",
+                    "divisionCategoryCode": "INDIVIDUAL_MALE",
+                    "divisionCategoryNameKo": "남자개인",
+                    "divisionCategoryNameEn": "Individual male",
+                    "phase": "R64",
+                    "phaseLabel": "R64-10",
+                    "phaseDescSortNo": 6,
+                    "matchStatus": "WAITING",
+                    "matchCompetitorList": [
+                      {
+                        "matchSideType": "HOME",
+                        "name": "DAM Min-seo"
+                      },
+                      {
+                        "matchSideType": "AWAY",
+                        "name": "DAM Min-seo"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "court": 2,
+                "matches": [
+                  {
+                    "competitionMatchPsSeq": 20089,
+                    "competitionEventSeq": 1168,
+                    "matchNumber": 2003,
+                    "matchStyleType": "CUTOFF",
+                    "divisionCode": "WT_RECOGNIZED_POOMSAE",
+                    "divisionNameKo": "WT 공인품새룰",
+                    "divisionNameEn": "WT Recognized Poomsae",
+                    "departmentCode": "UNDER_30",
+                    "departmentNameKo": "30세 이하",
+                    "departmentNameEn": "Under 30",
+                    "divisionCategoryCode": "INDIVIDUAL_FEMALE",
+                    "divisionCategoryNameKo": "여자개인",
+                    "divisionCategoryNameEn": "Individual female",
+                    "phase": "Pre-A",
+                    "phaseLabel": "Pre-A-3",
+                    "phaseDescSortNo": 5,
+                    "matchStatus": "WAITING",
+                    "matchCompetitorList": [
+                      {
+                        "matchSideType": "CUTOFF",
+                        "name": "DAM Min-seo"
+                      }
+                    ]
+                  },
+                  {
+                    "competitionMatchPsSeq": 20091,
+                    "competitionEventSeq": 1168,
+                    "matchNumber": 2005,
+                    "matchStyleType": "CUTOFF",
+                    "divisionCode": "WT_RECOGNIZED_POOMSAE",
+                    "divisionNameKo": "WT 공인품새룰",
+                    "divisionNameEn": "WT Recognized Poomsae",
+                    "departmentCode": "UNDER_30",
+                    "departmentNameKo": "30세 이하",
+                    "departmentNameEn": "Under 30",
+                    "divisionCategoryCode": "INDIVIDUAL_FEMALE",
+                    "divisionCategoryNameKo": "여자개인",
+                    "divisionCategoryNameEn": "Individual female",
+                    "phase": "Pre-A",
+                    "phaseLabel": "Pre-A-5",
+                    "phaseDescSortNo": 5,
+                    "matchStatus": "WAITING",
+                    "matchCompetitorList": [
+                      {
+                        "matchSideType": "CUTOFF",
+                        "name": "DAM Min-seo"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "court": 3,
+                "matches": [ ]
+              },
+              {
+                "court": 4,
+                "matches": [
+                  {
+                    "competitionMatchPsSeq": 20107,
+                    "competitionEventSeq": 1168,
+                    "matchNumber": 2021,
+                    "matchStyleType": "CUTOFF",
+                    "divisionCode": "WT_RECOGNIZED_POOMSAE",
+                    "divisionNameKo": "WT 공인품새룰",
+                    "divisionNameEn": "WT Recognized Poomsae",
+                    "departmentCode": "UNDER_30",
+                    "departmentNameKo": "30세 이하",
+                    "departmentNameEn": "Under 30",
+                    "divisionCategoryCode": "INDIVIDUAL_FEMALE",
+                    "divisionCategoryNameKo": "여자개인",
+                    "divisionCategoryNameEn": "Individual female",
+                    "phase": "Pre-A",
+                    "phaseLabel": "Pre-A-21",
+                    "phaseDescSortNo": 5,
+                    "matchStatus": "END",
+                    "matchCompetitorList": [
+                      {
+                        "matchSideType": "CUTOFF",
+                        "name": "DAM Min-seo"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "court": 5,
+                "matches": [ ]
+              }
+            ]
+          },
+          "error": null
+        }
+    PsCourtViewerStatusResponseDTO:
+      summary: Default Example
+      value:
+        {
+          "success": true,
+          "data": {
+            "totalMatchCount": 151,
+            "endMatchCount": 13,
+            "remainMatchCount": 138
+          },
+          "error": null
+        }

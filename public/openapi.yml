@@ -20,6 +20,7 @@ tags:
   - name: 심판조 스케줄
   - name: 채점
   - name: FOP
+  - name: 코트뷰어
 
 paths:
 
@@ -236,8 +237,13 @@ paths:
   /competitions/{competitionSeq}/fop/{competitionMatchPsSeq}/progress-seconds:
     $ref: './tags/poomsae/fop.yaml#/paths/~1competitions~1{competitionSeq}~1fop~1{competitionMatchPsSeq}~1progress-seconds'
 
-
-
+  # 코트뷰어
+  /competitions/{competitionSeq}/court-viewer/competition-day/{competitionDay}:
+    $ref: './tags/poomsae/court-viewer.yaml#/paths/~1competitions~1{competitionSeq}~1court-viewer~1competition-day~1{competitionDay}'
+  /competitions/{competitionSeq}/court-viewer:
+    $ref: './tags/poomsae/court-viewer.yaml#/paths/~1competitions~1{competitionSeq}~1court-viewer'
+  /competitions/{competitionSeq}/court-viewer/competition-day/{competitionDay}/status:
+    $ref: './tags/poomsae/court-viewer.yaml#/paths/~1competitions~1{competitionSeq}~1court-viewer~1competition-day~1{competitionDay}~1status'
 
 
 components:
@@ -898,6 +904,27 @@ components:
         error:
           message: "다음 라운드가 진행중이거나 완료되어 점수를 승패 변경 수준으로 수정할 수 없습니다."
           errorCode: "E731"
+    MATCH_IS_NOT_CREATED:
+      value:
+        success: false
+        data: null
+        error:
+          message: "생성된 대진이 없습니다."
+          errorCode: "E736"
+    COURT_VIEWER_MATCH_ORDER_IS_WRONG:
+      value:
+        success: false
+        data: null
+        error:
+          message: "PHASE의 순서가 잘못되었습니다."
+          errorCode: "E737"
+    SCHEDULE_IS_NOT_FOUND_PER_DAY:
+      value:
+        success: false
+        data: null
+        error:
+          message: "해당 일차에 존재하지 않는 스케줄입니다."
+          errorCode: "E738"
 
   schemas:
     getCompetitionDefaultResponse:

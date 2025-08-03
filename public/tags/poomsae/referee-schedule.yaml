@@ -530,8 +530,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PsRefereeGroupScheduleDetailResponseDTO'
-
-
               examples:
                   defaultResponse:
                     $ref: '#/components/examples/PsRefereeGroupScheduleDetailResponseDTO'
