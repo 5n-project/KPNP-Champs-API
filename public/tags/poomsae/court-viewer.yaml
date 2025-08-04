@@ -1,4 +1,60 @@
 paths:
+  /competitions/{competitionSeq}/court-viewer/progress-type:
+    get:
+      summary: 스케줄 타입 확인
+      tags:
+        - 코트뷰어
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      competitionProgressType:
+                        type: string
+                        enum: [D,R,C,CT]
+                        description: 'D: 기본 R: 랜덤 C: 커스텀 CT: 커스텀 임시저장'
+                  error:
+                    type: string
+                required:
+                  - data
+              examples:
+                defaultResponse:
+                  summary: Default Example
+                  value:
+                    {
+                      "success": true,
+                      "data": {
+                        "competitionProgressType": "C"
+                      },
+                      "error": null
+                    }
+                ITEM_NOT_FOUND:
+                  $ref: '../../openapi.yml/#/components/examples/ITEM_NOT_FOUND'
+
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml/#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+
   /competitions/{competitionSeq}/court-viewer/competition-day/{competitionDay}:
     get:
       summary: 코트뷰어 리스트
