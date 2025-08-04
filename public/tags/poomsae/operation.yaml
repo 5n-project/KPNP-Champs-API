@@ -2797,31 +2797,62 @@ paths:
                               type: integer
                               description: 라운드 (프론트는 이거 이용할 거 없을 듯)
                               example: 2
-                            competitors:
-                              type: array
-                              items:
-                                type: object
-                                properties:
-                                  matchCompetitorDetailSeq:
-                                    type: integer
-                                    nullable: true
-                                    description: 경기에 배정된 선수 고유 Seq
-                                  competitor:
-                                    type: integer
-                                    nullable: true
-                                    description: 해당 대회에 선수 번호
-                                  name:
-                                    type: string
-                                    nullable: true
-                                    description: 선수명
-                                  country:
-                                    type: string
-                                    nullable: true
-                                    description: noc 국가코드
-                                  matchSideType:
-                                    type: string
-                                    nullable: true
-                                    description: HOME or AWAY
+                            home:
+                              type: object
+                              description: home 선수 정보
+                              properties:
+                                matchCompetitorDetailSeq:
+                                  type: integer
+                                  nullable: true
+                                  description: 경기에 배정된 선수 고유 Seq
+                                competitor:
+                                  type: integer
+                                  nullable: true
+                                  description: 해당 대회에 선수 번호
+                                name:
+                                  type: string
+                                  nullable: true
+                                  description: 선수명
+                                country:
+                                  type: string
+                                  nullable: true
+                                  description: noc 국가코드
+                                resultType:
+                                  type: string
+                                  nullable: true
+                                  description: "WIN : 승리, LOSS : 패배"
+                                matchSideType:
+                                  type: string
+                                  nullable: true
+                                  description: HOME
+                            away:
+                              type: object
+                              description: away 선수 정보
+                              properties:
+                                matchCompetitorDetailSeq:
+                                  type: integer
+                                  nullable: true
+                                  description: 경기에 배정된 선수 고유 Seq
+                                competitor:
+                                  type: integer
+                                  nullable: true
+                                  description: 해당 대회에 선수 번호
+                                name:
+                                  type: string
+                                  nullable: true
+                                  description: 선수명
+                                country:
+                                  type: string
+                                  nullable: true
+                                  description: noc 국가코드
+                                resultType:
+                                  type: string
+                                  nullable: true
+                                  description: "WIN : 승리, LOSS : 패배"
+                                matchSideType:
+                                  type: string
+                                  nullable: true
+                                  description: AWAY
                   error:
                     type: string
                     nullable: true
@@ -2877,118 +2908,930 @@ paths:
                           }
                         ],
                         "tournamentDraws": [
-                          {
-                            "competitionMatchPsSeq": 20202,
-                            "phase": "QF",
-                            "playingRound": 2,
-                            "competitors": [
-                              {
-                                "matchCompetitorDetailSeq": null,
-                                "competitor": null,
-                                "name": null,
-                                "country": null,
-                                "matchSideType": null
+                            {
+                              "competitionMatchPsSeq": 20023,
+                              "phase": "R64",
+                              "playingRound": 1,
+                              "home": {
+                                "matchCompetitorDetailSeq": 5297,
+                                "competitor": 119,
+                                "name": "M. GAM",
+                                "country": "KOR",
+                                "resultType": "WIN",
+                                "matchSideType": "HOME"
+                              },
+                              "away": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20024,
+                              "phase": "R64",
+                              "playingRound": 1,
+                              "home": {
+                                "matchCompetitorDetailSeq": 5299,
+                                "competitor": 118,
+                                "name": "M. NAM",
+                                "country": "KOR",
+                                "resultType": null,
+                                "matchSideType": "HOME"
+                              },
+                              "away": {
+                                "matchCompetitorDetailSeq": 5298,
+                                "competitor": 144,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": null,
+                                "matchSideType": "AWAY"
                               }
-                            ]
-                          },
-                          {
-                            "competitionMatchPsSeq": 20203,
-                            "phase": "QF",
-                            "playingRound": 2,
-                            "competitors": [
-                              {
-                                "matchCompetitorDetailSeq": null,
-                                "competitor": null,
-                                "name": null,
-                                "country": null,
-                                "matchSideType": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20025,
+                              "phase": "R64",
+                              "playingRound": 1,
+                              "home": {
+                                "matchCompetitorDetailSeq": 5301,
+                                "competitor": 129,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": "WIN",
+                                "matchSideType": "HOME"
+                              },
+                              "away": {
+                                "matchCompetitorDetailSeq": 5300,
+                                "competitor": 141,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": "LOSS",
+                                "matchSideType": "AWAY"
                               }
-                            ]
-                          },
-                          {
-                            "competitionMatchPsSeq": 20204,
-                            "phase": "QF",
-                            "playingRound": 2,
-                            "competitors": [
-                              {
-                                "matchCompetitorDetailSeq": null,
-                                "competitor": null,
-                                "name": null,
-                                "country": null,
-                                "matchSideType": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20026,
+                              "phase": "R64",
+                              "playingRound": 1,
+                              "home": {
+                                "matchCompetitorDetailSeq": 5303,
+                                "competitor": 146,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": null,
+                                "matchSideType": "HOME"
+                              },
+                              "away": {
+                                "matchCompetitorDetailSeq": 5302,
+                                "competitor": 163,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": null,
+                                "matchSideType": "AWAY"
                               }
-                            ]
-                          },
-                          {
-                            "competitionMatchPsSeq": 20205,
-                            "phase": "QF",
-                            "playingRound": 2,
-                            "competitors": [
-                              {
-                                "matchCompetitorDetailSeq": null,
-                                "competitor": null,
-                                "name": null,
-                                "country": null,
-                                "matchSideType": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20027,
+                              "phase": "R64",
+                              "playingRound": 1,
+                              "home": {
+                                "matchCompetitorDetailSeq": 5304,
+                                "competitor": 124,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": "WIN",
+                                "matchSideType": "HOME"
+                              },
+                              "away": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20028,
+                              "phase": "R64",
+                              "playingRound": 1,
+                              "home": {
+                                "matchCompetitorDetailSeq": 5306,
+                                "competitor": 120,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": null,
+                                "matchSideType": "HOME"
+                              },
+                              "away": {
+                                "matchCompetitorDetailSeq": 5305,
+                                "competitor": 126,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": null,
+                                "matchSideType": "AWAY"
                               }
-                            ]
-                          },
-                          {
-                            "competitionMatchPsSeq": 20206,
-                            "phase": "SF",
-                            "playingRound": 3,
-                            "competitors": [
-                              {
-                                "matchCompetitorDetailSeq": null,
-                                "competitor": null,
-                                "name": null,
-                                "country": null,
-                                "matchSideType": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20029,
+                              "phase": "R64",
+                              "playingRound": 1,
+                              "home": {
+                                "matchCompetitorDetailSeq": 5308,
+                                "competitor": 132,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": "WIN",
+                                "matchSideType": "HOME"
+                              },
+                              "away": {
+                                "matchCompetitorDetailSeq": 5307,
+                                "competitor": 138,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": "LOSS",
+                                "matchSideType": "AWAY"
                               }
-                            ]
-                          },
-                          {
-                            "competitionMatchPsSeq": 20207,
-                            "phase": "SF",
-                            "playingRound": 3,
-                            "competitors": [
-                              {
-                                "matchCompetitorDetailSeq": null,
-                                "competitor": null,
-                                "name": null,
-                                "country": null,
-                                "matchSideType": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20030,
+                              "phase": "R64",
+                              "playingRound": 1,
+                              "home": null,
+                              "away": {
+                                "matchCompetitorDetailSeq": 5309,
+                                "competitor": 166,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": "WIN",
+                                "matchSideType": "AWAY"
                               }
-                            ]
-                          },
-                          {
-                            "competitionMatchPsSeq": 20208,
-                            "phase": "BRZ",
-                            "playingRound": 4,
-                            "competitors": [
-                              {
-                                "matchCompetitorDetailSeq": null,
-                                "competitor": null,
-                                "name": null,
-                                "country": null,
-                                "matchSideType": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20031,
+                              "phase": "R64",
+                              "playingRound": 1,
+                              "home": {
+                                "matchCompetitorDetailSeq": 5310,
+                                "competitor": 150,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": "WIN",
+                                "matchSideType": "HOME"
+                              },
+                              "away": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20032,
+                              "phase": "R64",
+                              "playingRound": 1,
+                              "home": {
+                                "matchCompetitorDetailSeq": 5312,
+                                "competitor": 145,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": null,
+                                "matchSideType": "HOME"
+                              },
+                              "away": {
+                                "matchCompetitorDetailSeq": 5311,
+                                "competitor": 149,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": null,
+                                "matchSideType": "AWAY"
                               }
-                            ]
-                          },
-                          {
-                            "competitionMatchPsSeq": 20209,
-                            "phase": "F",
-                            "playingRound": 5,
-                            "competitors": [
-                              {
-                                "matchCompetitorDetailSeq": null,
-                                "competitor": null,
-                                "name": null,
-                                "country": null,
-                                "matchSideType": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20033,
+                              "phase": "R64",
+                              "playingRound": 1,
+                              "home": {
+                                "matchCompetitorDetailSeq": 5314,
+                                "competitor": 130,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": null,
+                                "matchSideType": "HOME"
+                              },
+                              "away": {
+                                "matchCompetitorDetailSeq": 5313,
+                                "competitor": 152,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": null,
+                                "matchSideType": "AWAY"
                               }
-                            ]
-                          }
+                            },
+                            {
+                              "competitionMatchPsSeq": 20034,
+                              "phase": "R64",
+                              "playingRound": 1,
+                              "home": null,
+                              "away": {
+                                "matchCompetitorDetailSeq": 5315,
+                                "competitor": 153,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": "WIN",
+                                "matchSideType": "AWAY"
+                              }
+                            },
+                            {
+                              "competitionMatchPsSeq": 20035,
+                              "phase": "R64",
+                              "playingRound": 1,
+                              "home": {
+                                "matchCompetitorDetailSeq": 5317,
+                                "competitor": 154,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": "LOSS",
+                                "matchSideType": "HOME"
+                              },
+                              "away": {
+                                "matchCompetitorDetailSeq": 5316,
+                                "competitor": 156,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": "WIN",
+                                "matchSideType": "AWAY"
+                              }
+                            },
+                            {
+                              "competitionMatchPsSeq": 20036,
+                              "phase": "R64",
+                              "playingRound": 1,
+                              "home": {
+                                "matchCompetitorDetailSeq": 5319,
+                                "competitor": 165,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": null,
+                                "matchSideType": "HOME"
+                              },
+                              "away": {
+                                "matchCompetitorDetailSeq": 5318,
+                                "competitor": 134,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": null,
+                                "matchSideType": "AWAY"
+                              }
+                            },
+                            {
+                              "competitionMatchPsSeq": 20037,
+                              "phase": "R64",
+                              "playingRound": 1,
+                              "home": {
+                                "matchCompetitorDetailSeq": 5321,
+                                "competitor": 143,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": null,
+                                "matchSideType": "HOME"
+                              },
+                              "away": {
+                                "matchCompetitorDetailSeq": 5320,
+                                "competitor": 136,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": null,
+                                "matchSideType": "AWAY"
+                              }
+                            },
+                            {
+                              "competitionMatchPsSeq": 20038,
+                              "phase": "R64",
+                              "playingRound": 1,
+                              "home": null,
+                              "away": {
+                                "matchCompetitorDetailSeq": 5322,
+                                "competitor": 123,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": "WIN",
+                                "matchSideType": "AWAY"
+                              }
+                            },
+                            {
+                              "competitionMatchPsSeq": 20039,
+                              "phase": "R64",
+                              "playingRound": 1,
+                              "home": {
+                                "matchCompetitorDetailSeq": 5323,
+                                "competitor": 128,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": "WIN",
+                                "matchSideType": "HOME"
+                              },
+                              "away": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20040,
+                              "phase": "R64",
+                              "playingRound": 1,
+                              "home": {
+                                "matchCompetitorDetailSeq": 5325,
+                                "competitor": 167,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": null,
+                                "matchSideType": "HOME"
+                              },
+                              "away": {
+                                "matchCompetitorDetailSeq": 5324,
+                                "competitor": 127,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": null,
+                                "matchSideType": "AWAY"
+                              }
+                            },
+                            {
+                              "competitionMatchPsSeq": 20041,
+                              "phase": "R64",
+                              "playingRound": 1,
+                              "home": {
+                                "matchCompetitorDetailSeq": 5327,
+                                "competitor": 139,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": null,
+                                "matchSideType": "HOME"
+                              },
+                              "away": {
+                                "matchCompetitorDetailSeq": 5326,
+                                "competitor": 158,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": null,
+                                "matchSideType": "AWAY"
+                              }
+                            },
+                            {
+                              "competitionMatchPsSeq": 20042,
+                              "phase": "R64",
+                              "playingRound": 1,
+                              "home": {
+                                "matchCompetitorDetailSeq": 5329,
+                                "competitor": 125,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": null,
+                                "matchSideType": "HOME"
+                              },
+                              "away": {
+                                "matchCompetitorDetailSeq": 5328,
+                                "competitor": 133,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": null,
+                                "matchSideType": "AWAY"
+                              }
+                            },
+                            {
+                              "competitionMatchPsSeq": 20043,
+                              "phase": "R64",
+                              "playingRound": 1,
+                              "home": {
+                                "matchCompetitorDetailSeq": 5330,
+                                "competitor": 135,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": "WIN",
+                                "matchSideType": "HOME"
+                              },
+                              "away": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20044,
+                              "phase": "R64",
+                              "playingRound": 1,
+                              "home": {
+                                "matchCompetitorDetailSeq": 5332,
+                                "competitor": 164,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": null,
+                                "matchSideType": "HOME"
+                              },
+                              "away": {
+                                "matchCompetitorDetailSeq": 5331,
+                                "competitor": 121,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": null,
+                                "matchSideType": "AWAY"
+                              }
+                            },
+                            {
+                              "competitionMatchPsSeq": 20045,
+                              "phase": "R64",
+                              "playingRound": 1,
+                              "home": {
+                                "matchCompetitorDetailSeq": 5334,
+                                "competitor": 151,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": null,
+                                "matchSideType": "HOME"
+                              },
+                              "away": {
+                                "matchCompetitorDetailSeq": 5333,
+                                "competitor": 140,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": null,
+                                "matchSideType": "AWAY"
+                              }
+                            },
+                            {
+                              "competitionMatchPsSeq": 20046,
+                              "phase": "R64",
+                              "playingRound": 1,
+                              "home": null,
+                              "away": {
+                                "matchCompetitorDetailSeq": 5335,
+                                "competitor": 122,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": "WIN",
+                                "matchSideType": "AWAY"
+                              }
+                            },
+                            {
+                              "competitionMatchPsSeq": 20047,
+                              "phase": "R64",
+                              "playingRound": 1,
+                              "home": {
+                                "matchCompetitorDetailSeq": 5336,
+                                "competitor": 160,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": "WIN",
+                                "matchSideType": "HOME"
+                              },
+                              "away": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20048,
+                              "phase": "R64",
+                              "playingRound": 1,
+                              "home": {
+                                "matchCompetitorDetailSeq": 5338,
+                                "competitor": 117,
+                                "name": "M. NAM",
+                                "country": "KOR",
+                                "resultType": null,
+                                "matchSideType": "HOME"
+                              },
+                              "away": {
+                                "matchCompetitorDetailSeq": 5337,
+                                "competitor": 142,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": null,
+                                "matchSideType": "AWAY"
+                              }
+                            },
+                            {
+                              "competitionMatchPsSeq": 20049,
+                              "phase": "R64",
+                              "playingRound": 1,
+                              "home": {
+                                "matchCompetitorDetailSeq": 5340,
+                                "competitor": 131,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": null,
+                                "matchSideType": "HOME"
+                              },
+                              "away": {
+                                "matchCompetitorDetailSeq": 5339,
+                                "competitor": 155,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": null,
+                                "matchSideType": "AWAY"
+                              }
+                            },
+                            {
+                              "competitionMatchPsSeq": 20050,
+                              "phase": "R64",
+                              "playingRound": 1,
+                              "home": null,
+                              "away": {
+                                "matchCompetitorDetailSeq": 5341,
+                                "competitor": 147,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": "WIN",
+                                "matchSideType": "AWAY"
+                              }
+                            },
+                            {
+                              "competitionMatchPsSeq": 20051,
+                              "phase": "R64",
+                              "playingRound": 1,
+                              "home": {
+                                "matchCompetitorDetailSeq": 5343,
+                                "competitor": 137,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": null,
+                                "matchSideType": "HOME"
+                              },
+                              "away": {
+                                "matchCompetitorDetailSeq": 5342,
+                                "competitor": 157,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": null,
+                                "matchSideType": "AWAY"
+                              }
+                            },
+                            {
+                              "competitionMatchPsSeq": 20052,
+                              "phase": "R64",
+                              "playingRound": 1,
+                              "home": {
+                                "matchCompetitorDetailSeq": 5345,
+                                "competitor": 162,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": null,
+                                "matchSideType": "HOME"
+                              },
+                              "away": {
+                                "matchCompetitorDetailSeq": 5344,
+                                "competitor": 116,
+                                "name": "S. Wang",
+                                "country": "CHN",
+                                "resultType": null,
+                                "matchSideType": "AWAY"
+                              }
+                            },
+                            {
+                              "competitionMatchPsSeq": 20053,
+                              "phase": "R64",
+                              "playingRound": 1,
+                              "home": {
+                                "matchCompetitorDetailSeq": 5347,
+                                "competitor": 161,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": null,
+                                "matchSideType": "HOME"
+                              },
+                              "away": {
+                                "matchCompetitorDetailSeq": 5346,
+                                "competitor": 159,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": null,
+                                "matchSideType": "AWAY"
+                              }
+                            },
+                            {
+                              "competitionMatchPsSeq": 20054,
+                              "phase": "R64",
+                              "playingRound": 1,
+                              "home": null,
+                              "away": {
+                                "matchCompetitorDetailSeq": 5348,
+                                "competitor": 148,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": "WIN",
+                                "matchSideType": "AWAY"
+                              }
+                            },
+                            {
+                              "competitionMatchPsSeq": 20055,
+                              "phase": "R32",
+                              "playingRound": 2,
+                              "home": {
+                                "matchCompetitorDetailSeq": 5349,
+                                "competitor": 119,
+                                "name": "M. GAM",
+                                "country": "KOR",
+                                "resultType": null,
+                                "matchSideType": "HOME"
+                              },
+                              "away": {
+                                "matchCompetitorDetailSeq": 9553,
+                                "competitor": 144,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": null,
+                                "matchSideType": "AWAY"
+                              }
+                            },
+                            {
+                              "competitionMatchPsSeq": 20056,
+                              "phase": "R32",
+                              "playingRound": 2,
+                              "home": {
+                                "matchCompetitorDetailSeq": 14111,
+                                "competitor": 129,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": null,
+                                "matchSideType": "HOME"
+                              },
+                              "away": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20057,
+                              "phase": "R32",
+                              "playingRound": 2,
+                              "home": {
+                                "matchCompetitorDetailSeq": 5350,
+                                "competitor": 124,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": null,
+                                "matchSideType": "HOME"
+                              },
+                              "away": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20058,
+                              "phase": "R32",
+                              "playingRound": 2,
+                              "home": {
+                                "matchCompetitorDetailSeq": 9540,
+                                "competitor": 132,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": null,
+                                "matchSideType": "HOME"
+                              },
+                              "away": {
+                                "matchCompetitorDetailSeq": 5351,
+                                "competitor": 166,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": null,
+                                "matchSideType": "AWAY"
+                              }
+                            },
+                            {
+                              "competitionMatchPsSeq": 20059,
+                              "phase": "R32",
+                              "playingRound": 2,
+                              "home": {
+                                "matchCompetitorDetailSeq": 5352,
+                                "competitor": 150,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": null,
+                                "matchSideType": "HOME"
+                              },
+                              "away": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20060,
+                              "phase": "R32",
+                              "playingRound": 2,
+                              "home": null,
+                              "away": {
+                                "matchCompetitorDetailSeq": 5353,
+                                "competitor": 153,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": null,
+                                "matchSideType": "AWAY"
+                              }
+                            },
+                            {
+                              "competitionMatchPsSeq": 20061,
+                              "phase": "R32",
+                              "playingRound": 2,
+                              "home": {
+                                "matchCompetitorDetailSeq": 9554,
+                                "competitor": 156,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": null,
+                                "matchSideType": "HOME"
+                              },
+                              "away": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20062,
+                              "phase": "R32",
+                              "playingRound": 2,
+                              "home": null,
+                              "away": {
+                                "matchCompetitorDetailSeq": 5354,
+                                "competitor": 123,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": null,
+                                "matchSideType": "AWAY"
+                              }
+                            },
+                            {
+                              "competitionMatchPsSeq": 20063,
+                              "phase": "R32",
+                              "playingRound": 2,
+                              "home": {
+                                "matchCompetitorDetailSeq": 5355,
+                                "competitor": 128,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": null,
+                                "matchSideType": "HOME"
+                              },
+                              "away": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20064,
+                              "phase": "R32",
+                              "playingRound": 2,
+                              "home": null,
+                              "away": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20065,
+                              "phase": "R32",
+                              "playingRound": 2,
+                              "home": {
+                                "matchCompetitorDetailSeq": 5356,
+                                "competitor": 135,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": null,
+                                "matchSideType": "HOME"
+                              },
+                              "away": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20066,
+                              "phase": "R32",
+                              "playingRound": 2,
+                              "home": null,
+                              "away": {
+                                "matchCompetitorDetailSeq": 5357,
+                                "competitor": 122,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": null,
+                                "matchSideType": "AWAY"
+                              }
+                            },
+                            {
+                              "competitionMatchPsSeq": 20067,
+                              "phase": "R32",
+                              "playingRound": 2,
+                              "home": {
+                                "matchCompetitorDetailSeq": 5358,
+                                "competitor": 160,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": null,
+                                "matchSideType": "HOME"
+                              },
+                              "away": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20068,
+                              "phase": "R32",
+                              "playingRound": 2,
+                              "home": null,
+                              "away": {
+                                "matchCompetitorDetailSeq": 5359,
+                                "competitor": 147,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": null,
+                                "matchSideType": "AWAY"
+                              }
+                            },
+                            {
+                              "competitionMatchPsSeq": 20069,
+                              "phase": "R32",
+                              "playingRound": 2,
+                              "home": null,
+                              "away": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20070,
+                              "phase": "R32",
+                              "playingRound": 2,
+                              "home": null,
+                              "away": {
+                                "matchCompetitorDetailSeq": 5360,
+                                "competitor": 148,
+                                "name": "M. DAM",
+                                "country": "KOR",
+                                "resultType": null,
+                                "matchSideType": "AWAY"
+                              }
+                            },
+                            {
+                              "competitionMatchPsSeq": 20071,
+                              "phase": "R16",
+                              "playingRound": 3,
+                              "home": null,
+                              "away": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20072,
+                              "phase": "R16",
+                              "playingRound": 3,
+                              "home": null,
+                              "away": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20073,
+                              "phase": "R16",
+                              "playingRound": 3,
+                              "home": null,
+                              "away": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20074,
+                              "phase": "R16",
+                              "playingRound": 3,
+                              "home": null,
+                              "away": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20075,
+                              "phase": "R16",
+                              "playingRound": 3,
+                              "home": null,
+                              "away": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20076,
+                              "phase": "R16",
+                              "playingRound": 3,
+                              "home": null,
+                              "away": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20077,
+                              "phase": "R16",
+                              "playingRound": 3,
+                              "home": null,
+                              "away": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20078,
+                              "phase": "R16",
+                              "playingRound": 3,
+                              "home": null,
+                              "away": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20079,
+                              "phase": "QF",
+                              "playingRound": 4,
+                              "home": null,
+                              "away": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20080,
+                              "phase": "QF",
+                              "playingRound": 4,
+                              "home": null,
+                              "away": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20081,
+                              "phase": "QF",
+                              "playingRound": 4,
+                              "home": null,
+                              "away": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20082,
+                              "phase": "QF",
+                              "playingRound": 4,
+                              "home": null,
+                              "away": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20083,
+                              "phase": "SF",
+                              "playingRound": 5,
+                              "home": null,
+                              "away": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20084,
+                              "phase": "SF",
+                              "playingRound": 5,
+                              "home": null,
+                              "away": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20085,
+                              "phase": "BRZ",
+                              "playingRound": 6,
+                              "home": null,
+                              "away": null
+                            },
+                            {
+                              "competitionMatchPsSeq": 20086,
+                              "phase": "F",
+                              "playingRound": 7,
+                              "home": null,
+                              "away": null
+                            }
                         ]
                       }
                     error: null
