@@ -196,6 +196,8 @@ paths:
               examples:
                 defaultResponse:
                   $ref: '#/components/examples/PsCourtViewerMatchesResponseDTO'
+                COURT_VIEWER_MATCH_IS_OVERLAP:
+                  $ref: '../../openapi.yml#/components/examples/COURT_VIEWER_MATCH_IS_OVERLAP'
                 MATCH_IS_NOT_CREATED:
                   $ref: '../../openapi.yml#/components/examples/MATCH_IS_NOT_CREATED'
                 SCHEDULE_IS_NOT_FOUND_PER_DAY:
