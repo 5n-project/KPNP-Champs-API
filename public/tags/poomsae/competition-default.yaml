@@ -124,6 +124,10 @@ paths:
                           점수 장비 타입
                           - D: 단말기
                           - C: Champs
+                      competitionParticipantNumber:
+                        type: integer
+                        description: 참가자 전체 수용가능 인원
+                        example: 2500
                       hostMainImgList:
                         type: array
                         description: 대회 메인 사진 파일 리스트
