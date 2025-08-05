@@ -238,6 +238,8 @@ paths:
     $ref: './tags/poomsae/fop.yaml#/paths/~1competitions~1{competitionSeq}~1fop~1{competitionMatchPsSeq}~1progress-seconds'
 
   # 코트뷰어
+  /competitions/{competitionSeq}/court-viewer/progress-type:
+    $ref: './tags/poomsae/court-viewer.yaml#/paths/~1competitions~1{competitionSeq}~1court-viewer~1progress-type'
   /competitions/{competitionSeq}/court-viewer/competition-day/{competitionDay}:
     $ref: './tags/poomsae/court-viewer.yaml#/paths/~1competitions~1{competitionSeq}~1court-viewer~1competition-day~1{competitionDay}'
   /competitions/{competitionSeq}/court-viewer:
