@@ -393,15 +393,37 @@ components:
       properties:
         totalMatchCount:
           type: integer
-        endMatchCount:
+          description: 전체 매치 수
+        totalEndMatchCount:
           type: integer
-        remainMatchCount:
+          description: 종료된 매치 수
+        totalRemainingMatchCount:
           type: integer
+          description: 남은 매치 수 (summaryPerDivisionList의 remainingMatchCount를 모두 더한 값)
+        summaryPerDivisionList:
+          type: array
+          description: 룰별 매치 요약 리스트
+          items:
+            type: object
+            properties:
+              divisionType:
+                type: string
+                description: 매치 룰
+              remainingMatchCount:
+                type: integer
+                description: 해당 부문에서 남은 매치 수
+              matchMaxTime:
+                type: integer
+                description: 해당 부문의 최대 매치 시간(초)
+            required:
+              - divisionType
+              - remainingMatchCount
+              - matchMaxTime
       required:
         - totalMatchCount
-        - endMatchCount
-        - remainMatchCount
-
+        - totalEndMatchCount
+        - totalRemainingMatchCount
+        - summaryPerDivisionList
   examples:
     PsCourtViewerMatchesResponseDTO:
       summary: Default Example
@@ -637,8 +659,20 @@ components:
           "success": true,
           "data": {
             "totalMatchCount": 151,
-            "endMatchCount": 13,
-            "remainMatchCount": 138
+            "totalEndMatchCount": 13,
+            "totalRemainingMatchCount": 150,
+            "summaryPerDivisionList": [
+              {
+                "divisionType": "WT_RECOGNIZED_POOMSAE",
+                "remainingMatchCount": 138,
+                "matchMaxTime": 200
+              },
+              {
+                "divisionType": "MIXED_POOMSAE",
+                "remainingMatchCount": 12,
+                "matchMaxTime": 170
+              }
+            ]
           },
           "error": null
         }
