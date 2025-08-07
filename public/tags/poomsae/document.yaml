@@ -1,0 +1,2044 @@
+paths:
+  /competitions/{competitionSeq}/documents/detail/DRAW_SHEET_OR_START_LIST:
+    get:
+      summary: DRAW_SHEET_OR_START_LIST 품새 문서 상세 조회 (DRAW_SHEET_OR_START_LIST)
+      description: DRAW_SHEET_OR_START_LIST 문서를 조회한다. (documentType 은 항상 'DRAW_SHEET_OR_START_LIST')
+      tags:
+        - 문서
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 대회의 고유 시퀀스
+        - name: documentType
+          in: path
+          required: true
+          schema:
+            type: string
+          description: 조회할 documentType
+          example: DRAW_SHEET_OR_START_LIST
+
+        - name: competitionEventSeq
+          in: query
+          required: true
+          schema:
+            type: integer
+          description: 룰 조합 seq
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    properties:
+                      header:
+                        required:
+                          - competitionLocalType
+                          - isTeam
+                          - competitionName
+                          - competitionSdate
+                          - timeZoneId
+                          - nocType
+                          - divisionName
+                          - departmentName
+                          - divisionCategoryName
+                        type: object
+                        properties:
+                          competitionLocalType:
+                            type: string
+                            description: "국제대회 : W, 지역대회 : L"
+                            example: "L"
+                          isTeam:
+                            type: boolean
+                            description: "해당 event가 팀전인지 아닌지"
+                            example: false
+                          competitionName:
+                            type: string
+                            example: "대회이름"
+                          competitionSdate:
+                            type: string
+                            example: "2025-07-22T00:00:00.000Z"
+                            description: "대회 시작 일자"
+                          timeZoneId:
+                            type: string
+                            example: "Asia/Seoul"
+                            description: "해당 대회 타임존 코드"
+                          nocType:
+                            type: string
+                            example: "KOR"
+                            description: "해당 대회 noc 코드"
+                          divisionName:
+                            type: string
+                            example: "WT Recognized Poomsae"
+                            description: "룰명"
+                          departmentName:
+                            type: string
+                            example: "Under 30"
+                            description: "부명"
+                          divisionCategoryName:
+                            type: string
+                            example: "Individual female"
+                            description: "대회유형명"
+                      contents:
+                        required:
+                          - competitionEventSeq
+                          - matchStyleType
+                        type: object
+                        properties:
+                          competitionEventSeq:
+                            type: integer
+                            example: 10571
+                            description: "해당 대회 룰 조합 seq"
+                          matchStyleType:
+                            type: string
+                            example: CUTOFF_TOURNAMENT
+                            description: "CUTOFF (tournamentDraw = null), TOURNAMENT(cutoffDraw = null), CUTOFF_TOURNAMENT(tournamentDraw 는 무조건 존재하고 cutoffDraw = null 일수도 있고 아닐수도 있음)"
+                          cutoffDraw:
+                            required:
+                              - documentName
+                              - matchStyleType
+                            type: object
+                            properties:
+                              documentName:
+                                type: string
+                                example: START LIST
+                                description: "컷오프 문서이름"
+                              cutoffDraws:
+                                type: array
+                                items:
+                                  required:
+                                    - phaseType
+                                    - phase
+                                    - group
+                                  type: object
+                                  properties:
+                                    phaseType:
+                                      type: string
+                                      example: PRE_A
+                                      description: "경기 강 + 조 "
+                                    phase:
+                                      type: string
+                                      example: PRE
+                                      description: "경기 강"
+                                    group:
+                                      type: string
+                                      example: A
+                                      description: "컷오프 조 이름"
+                                    competitors:
+                                      type: array
+                                      items:
+                                        required:
+                                          - competitionMatchPsSeq
+                                          - matchCompetitorDetailSeq
+                                          - contestNumber
+                                          - team
+                                          - country
+                                          - competitorType
+                                        type: object
+                                        properties:
+                                          competitionMatchPsSeq:
+                                            type: integer
+                                            example: 37833
+                                            description: "해당 경기 고유 seq"
+                                          matchCompetitorDetailSeq:
+                                            type: integer
+                                            example: 18195
+                                            description: "해당 경기에 배정된 선수 고유 seq"
+                                          startTime:
+                                            type: string
+                                            nullable: true
+                                            description: "경기 시작 시간"
+                                          contestNumber:
+                                            type: integer
+                                            example: 102
+                                            description: "매치 번호"
+                                          wtNumber:
+                                            type: string
+                                            example: L100034
+                                            description: "wt number"
+                                          team:
+                                            type: string
+                                            example: USA_U30_IF_14
+                                            description: "팀명"
+                                          country:
+                                            type: string
+                                            example: GER
+                                            description: "noc 국가명"
+                                          competitorType:
+                                            type: string
+                                            example: S
+                                            description: "S 개인전, T 팀전"
+                                          participants:
+                                            type: array
+                                            items:
+                                              required:
+                                                - participantSeq
+                                                - familyNameEn
+                                                - givenNameEn
+                                              type: object
+                                              properties:
+                                                participantSeq:
+                                                  type: integer
+                                                  example: 140545
+                                                  description: "참가자 고유 seq"
+                                                familyNameEn:
+                                                  type: string
+                                                  example: Tanaka
+                                                  description: "참가자 성"
+                                                givenNameEn:
+                                                  type: string
+                                                  example: David
+                                                  description: "참가자 이름"
+                          tournamentDraw:
+                            required:
+                              - documentName
+                              - contestantsCount
+                            type: object
+                            properties:
+                              documentName:
+                                type: string
+                                example: DRAW SHEET
+                                description: "토너먼트 문서 이름"
+                              contestantsCount:
+                                type: integer
+                                example: 7
+                                description: "경기 수"
+                              classifications:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    ranking:
+                                      type: integer
+                                      description: "순위"
+                                    participants:
+                                      type: array
+                                      items:
+                                        type: object
+                                        properties:
+                                          participantSeq:
+                                            type: integer
+                                            example: 140512
+                                            description: "참가자 고유 seq"
+                                          familyNameEn:
+                                            type: string
+                                            example: Choi
+                                            description: "참가자 성"
+                                          givenNameEn:
+                                            type: string
+                                            example: Nina
+                                            description: "참가자 이름"
+                                    country:
+                                      type: integer
+                                      description: "국가 noc"
+                                    team:
+                                      type: integer
+                                      description: "팀명"
+                              legends:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    resultDecisionType:
+                                      type: integer
+                                      description: "결과 코드"
+                                    description:
+                                      type: integer
+                                      description: "결과 설명"
+                              tournamentDraws:
+                                type: array
+                                items:
+                                  required:
+                                    - competitionMatchPsSeq
+                                    - phase
+                                    - playingRound
+                                    - matchNumber
+                                    - matchNumber
+                                  type: object
+                                  properties:
+                                    competitionMatchPsSeq:
+                                      type: integer
+                                      example: 37863
+                                      description: "경기 고유 seq"
+                                    phase:
+                                      type: string
+                                      example: QF
+                                      description: "경기 강"
+                                    playingRound:
+                                      type: integer
+                                      example: 3
+                                      description: "경기 라운드 SF F 뿐이면 SF = 1 , F = 2"
+                                    matchNumber:
+                                      type: integer
+                                      example: 1051
+                                      description: "경기 매치 넘버"
+                                    resultDecisionType:
+                                      type: string
+                                      nullable: true
+                                      description: "경기 결과"
+                                    home:
+                                      required:
+                                        - matchCompetitorDetailSeq
+                                        - competitor
+                                        - team
+                                        - country
+                                        - competitorType
+                                        - matchSideType
+                                      type: object
+                                      nullable: true
+                                      properties:
+                                        matchCompetitorDetailSeq:
+                                          type: integer
+                                          example: 18175
+                                          description: "경기에 배정된 선수 고유 seq"
+                                        competitor:
+                                          type: integer
+                                          example: 101
+                                          description: "대회에 대한 선수 고유seq"
+                                        team:
+                                          type: string
+                                          example: Iran_U30_IM_01
+                                          description: "팀명"
+                                        country:
+                                          type: string
+                                          example: GER
+                                          description: "소속 noc 국가"
+                                        firstPoomsaeAverageScore:
+                                          type: number
+                                          nullable: true
+                                          description: "P1 평균 스코어"
+                                        secondPoomsaeAverageScore:
+                                          type: number
+                                          nullable: true
+                                          description: "P2 평균 스코어"
+                                        resultType:
+                                          type: string
+                                          example: WIN
+                                          description: "WIN or LOSS"
+                                        competitorType:
+                                          type: string
+                                          example: S
+                                          description: "개인전 : S, 팀전 : T"
+                                        matchSideType:
+                                          type: string
+                                          example: HOME
+                                          description: "HOME"
+                                        participants:
+                                          type: array
+                                          items:
+                                            type: object
+                                            properties:
+                                              participantSeq:
+                                                type: integer
+                                                example: 140512
+                                                description: "참가자 고유 seq"
+                                              familyNameEn:
+                                                type: string
+                                                example: Choi
+                                                description: "참가자 성"
+                                              givenNameEn:
+                                                type: string
+                                                example: Nina
+                                                description: "참가자 이름"
+                                    away:
+                                      required:
+                                        - matchCompetitorDetailSeq
+                                        - competitor
+                                        - team
+                                        - country
+                                        - competitorType
+                                        - matchSideType
+                                      type: object
+                                      nullable: true
+                                      properties:
+                                        matchCompetitorDetailSeq:
+                                          type: integer
+                                          example: 18175
+                                          description: "경기에 배정된 선수 고유 seq"
+                                        competitor:
+                                          type: integer
+                                          example: 101
+                                          description: "대회에 대한 선수 고유seq"
+                                        team:
+                                          type: string
+                                          example: Iran_U30_IM_01
+                                          description: "팀명"
+                                        country:
+                                          type: string
+                                          example: GER
+                                          description: "소속 noc 국가"
+                                        firstPoomsaeAverageScore:
+                                          type: number
+                                          nullable: true
+                                          description: "P1 평균 스코어"
+                                        secondPoomsaeAverageScore:
+                                          type: number
+                                          nullable: true
+                                          description: "P2 평균 스코어"
+                                        resultType:
+                                          type: string
+                                          example: WIN
+                                          description: "WIN or LOSS"
+                                        competitorType:
+                                          type: string
+                                          example: S
+                                          description: "개인전 : S, 팀전 : T"
+                                        matchSideType:
+                                          type: string
+                                          example: AWAY
+                                          description: "AWAY"
+                                        participants:
+                                          type: array
+                                          items:
+                                            type: object
+                                            properties:
+                                              participantSeq:
+                                                type: integer
+                                                example: 140512
+                                                description: "참가자 고유 seq"
+                                              familyNameEn:
+                                                type: string
+                                                example: Choi
+                                                description: "참가자 성"
+                                              givenNameEn:
+                                                type: string
+                                                example: Nina
+                                                description: "참가자 이름"
+                  error:
+                    type: string
+                    nullable: true
+              examples:
+                토너먼트_개인전_성공_예시:
+                  summary: 토너먼트_개인전_성공_예시
+                  value:
+                    success: true
+                    data:
+                      {
+                        "header": {
+                          "competitionLocalType": "W",
+                          "isTeam": false,
+                          "competitionName": "드로우시트 전용 테스트 대회",
+                          "competitionSdate": "2025-08-06T00:00:00.000Z",
+                          "timeZoneId": "Asia/Seoul",
+                          "nocType": "KOR",
+                          "divisionName": "WT Recognized Poomsae",
+                          "departmentName": "Cadet",
+                          "divisionCategoryName": "Individual male"
+                        },
+                        "contents": {
+                          "competitionEventSeq": 12026,
+                          "matchStyleType": "TOURNAMENT",
+                          "cutoffDraw": null,
+                          "tournamentDraw": {
+                            "documentName": "DRAW SHEET",
+                            "contestantsCount": 4,
+                            "classifications": [
+                              {
+                                "ranking": 1,
+                                "participants": [
+                                  {
+                                    "participantSeq": 173243,
+                                    "familyNameEn": "Wang",
+                                    "givenNameEn": "Yuna"
+                                  }
+                                ],
+                                "country": "GER",
+                                "team": "Russia_U30_IM_02",\
+                              },
+                              {
+                                "ranking": 2,
+                                "participants": [
+                                  {
+                                    "participantSeq": 173245,
+                                    "familyNameEn": "Chen",
+                                    "givenNameEn": "Sung"
+                                  }
+                                ],
+                                "country": "GER",
+                                "team": "Morocco_U30_IM_04"
+                              },
+                              {
+                                "ranking": 3,
+                                "participants": [
+                                  {
+                                    "participantSeq": 173242,
+                                    "familyNameEn": "Choi",
+                                    "givenNameEn": "Nina"
+                                  }
+                                ],
+                                "country": "GER",
+                                "team": "Iran_U30_IM_01"
+                              }
+                            ],
+                            "legends": [
+                              {
+                                "resultDecisionType": "PUN",
+                                "description": "Win by oppenent's Penalties"
+                              }
+                            ],
+                            "tournamentDraws": [
+                              {
+                                "competitionMatchPsSeq": 39130,
+                                "phase": "SF",
+                                "playingRound": 1,
+                                "matchNumber": 1001,
+                                "resultDecisionType": "PUN",
+                                "home": {
+                                  "matchCompetitorDetailSeq": 19134,
+                                  "competitor": 19,
+                                  "team": "Iran_U30_IM_01",
+                                  "country": "GER",
+                                  "firstPoomsaeAverageScore": null,
+                                  "secondPoomsaeAverageScore": null,
+                                  "resultType": "LOSS",
+                                  "competitorType": "S",
+                                  "matchSideType": "HOME",
+                                  "participants": [
+                                    {
+                                      "participantSeq": 173242,
+                                      "familyNameEn": "Choi",
+                                      "givenNameEn": "Nina"
+                                    }
+                                  ]
+                                },
+                                "away": {
+                                  "matchCompetitorDetailSeq": 19133,
+                                  "competitor": 22,
+                                  "team": "Morocco_U30_IM_04",
+                                  "country": "GER",
+                                  "firstPoomsaeAverageScore": null,
+                                  "secondPoomsaeAverageScore": null,
+                                  "resultType": "WIN",
+                                  "competitorType": "S",
+                                  "matchSideType": "AWAY",
+                                  "participants": [
+                                    {
+                                      "participantSeq": 173245,
+                                      "familyNameEn": "Chen",
+                                      "givenNameEn": "Sung"
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "competitionMatchPsSeq": 39131,
+                                "phase": "SF",
+                                "playingRound": 1,
+                                "matchNumber": 1002,
+                                "resultDecisionType": "PUN",
+                                "home": {
+                                  "matchCompetitorDetailSeq": 19136,
+                                  "competitor": 20,
+                                  "team": "Russia_U30_IM_02",
+                                  "country": "GER",
+                                  "firstPoomsaeAverageScore": null,
+                                  "secondPoomsaeAverageScore": null,
+                                  "resultType": "WIN",
+                                  "competitorType": "S",
+                                  "matchSideType": "HOME",
+                                  "participants": [
+                                    {
+                                      "participantSeq": 173243,
+                                      "familyNameEn": "Wang",
+                                      "givenNameEn": "Yuna"
+                                    }
+                                  ]
+                                },
+                                "away": {
+                                  "matchCompetitorDetailSeq": 19135,
+                                  "competitor": 21,
+                                  "team": "UK_U30_IM_03",
+                                  "country": "GER",
+                                  "firstPoomsaeAverageScore": null,
+                                  "secondPoomsaeAverageScore": null,
+                                  "resultType": "LOSS",
+                                  "competitorType": "S",
+                                  "matchSideType": "AWAY",
+                                  "participants": [
+                                    {
+                                      "participantSeq": 173244,
+                                      "familyNameEn": "Wang",
+                                      "givenNameEn": "Jane"
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "competitionMatchPsSeq": 39132,
+                                "phase": "BRZ",
+                                "playingRound": 2,
+                                "matchNumber": 1003,
+                                "resultDecisionType": "PUN",
+                                "home": {
+                                  "matchCompetitorDetailSeq": 19190,
+                                  "competitor": 19,
+                                  "team": "Iran_U30_IM_01",
+                                  "country": "GER",
+                                  "firstPoomsaeAverageScore": null,
+                                  "secondPoomsaeAverageScore": null,
+                                  "resultType": "WIN",
+                                  "competitorType": "S",
+                                  "matchSideType": "HOME",
+                                  "participants": [
+                                    {
+                                      "participantSeq": 173242,
+                                      "familyNameEn": "Choi",
+                                      "givenNameEn": "Nina"
+                                    }
+                                  ]
+                                },
+                                "away": {
+                                  "matchCompetitorDetailSeq": 19193,
+                                  "competitor": 21,
+                                  "team": "UK_U30_IM_03",
+                                  "country": "GER",
+                                  "firstPoomsaeAverageScore": null,
+                                  "secondPoomsaeAverageScore": null,
+                                  "resultType": "LOSS",
+                                  "competitorType": "S",
+                                  "matchSideType": "AWAY",
+                                  "participants": [
+                                    {
+                                      "participantSeq": 173244,
+                                      "familyNameEn": "Wang",
+                                      "givenNameEn": "Jane"
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "competitionMatchPsSeq": 39133,
+                                "phase": "F",
+                                "playingRound": 3,
+                                "matchNumber": 1004,
+                                "resultDecisionType": "PUN",
+                                "home": {
+                                  "matchCompetitorDetailSeq": 19189,
+                                  "competitor": 22,
+                                  "team": "Morocco_U30_IM_04",
+                                  "country": "GER",
+                                  "firstPoomsaeAverageScore": null,
+                                  "secondPoomsaeAverageScore": null,
+                                  "resultType": "LOSS",
+                                  "competitorType": "S",
+                                  "matchSideType": "HOME",
+                                  "participants": [
+                                    {
+                                      "participantSeq": 173245,
+                                      "familyNameEn": "Chen",
+                                      "givenNameEn": "Sung"
+                                    }
+                                  ]
+                                },
+                                "away": {
+                                  "matchCompetitorDetailSeq": 19192,
+                                  "competitor": 20,
+                                  "team": "Russia_U30_IM_02",
+                                  "country": "GER",
+                                  "firstPoomsaeAverageScore": null,
+                                  "secondPoomsaeAverageScore": null,
+                                  "resultType": "WIN",
+                                  "competitorType": "S",
+                                  "matchSideType": "AWAY",
+                                  "participants": [
+                                    {
+                                      "participantSeq": 173243,
+                                      "familyNameEn": "Wang",
+                                      "givenNameEn": "Yuna"
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    error: null
+                토너먼트_팀전_성공_예시:
+                  summary: 토너먼트_팀전_성공_예시
+                  value:
+                    success: true
+                    data:
+                      {
+                        "header": {
+                          "competitionLocalType": "W",
+                          "isTeam": true,
+                          "competitionName": "드로우시트 전용 테스트 대회",
+                          "competitionSdate": "2025-08-06T00:00:00.000Z",
+                          "timeZoneId": "Asia/Seoul",
+                          "nocType": "KOR",
+                          "divisionName": "Mixed Poomsae",
+                          "departmentName": "18& Over",
+                          "divisionCategoryName": "Team female"
+                        },
+                        "contents": {
+                          "competitionEventSeq": 12034,
+                          "matchStyleType": "TOURNAMENT",
+                          "cutoffDraw": null,
+                          "tournamentDraw": {
+                            "documentName": "DRAW SHEET",
+                            "contestantsCount": 3,
+                            "classifications": [
+                              {
+                                "ranking": 1,
+                                "participants": [
+                                  {
+                                    "participantSeq": 173334,
+                                    "familyNameEn": "Chen",
+                                    "givenNameEn": "Sung"
+                                  },
+                                  {
+                                    "participantSeq": 173335,
+                                    "familyNameEn": "Kumar",
+                                    "givenNameEn": "Emma"
+                                  },
+                                  {
+                                    "participantSeq": 173336,
+                                    "familyNameEn": "Wang",
+                                    "givenNameEn": "Mina"
+                                  }
+                                ],
+                                "country": "KOR",
+                                "team": "KOR"
+                              },
+                              {
+                                "ranking": 2,
+                                "participants": [
+                                  {
+                                    "participantSeq": 173343,
+                                    "familyNameEn": "Kumar",
+                                    "givenNameEn": "Nina"
+                                  },
+                                  {
+                                    "participantSeq": 173345,
+                                    "familyNameEn": "Nguyen",
+                                    "givenNameEn": "John"
+                                  },
+                                  {
+                                    "participantSeq": 173344,
+                                    "familyNameEn": "Tanaka",
+                                    "givenNameEn": "Alex"
+                                  }
+                                ],
+                                "country": "KOR",
+                                "team": "KOR"
+                              },
+                              {
+                                "ranking": 3,
+                                "participants": [
+                                  {
+                                    "participantSeq": 173340,
+                                    "familyNameEn": "Nguyen",
+                                    "givenNameEn": "John"
+                                  },
+                                  {
+                                    "participantSeq": 173341,
+                                    "familyNameEn": "Nguyen",
+                                    "givenNameEn": "Luke"
+                                  },
+                                  {
+                                    "participantSeq": 173342,
+                                    "familyNameEn": "Silva",
+                                    "givenNameEn": "Ken"
+                                  }
+                                ],
+                                "country": "KOR",
+                                "team": "KOR"
+                              },
+                              {
+                                "ranking": 3,
+                                "participants": [
+                                  {
+                                    "participantSeq": 173338,
+                                    "familyNameEn": "Smith",
+                                    "givenNameEn": "Yuna"
+                                  },
+                                  {
+                                    "participantSeq": 173337,
+                                    "familyNameEn": "Tanaka",
+                                    "givenNameEn": "Yuna"
+                                  },
+                                  {
+                                    "participantSeq": 173339,
+                                    "familyNameEn": "Zhang",
+                                    "givenNameEn": "Ken"
+                                  }
+                                ],
+                                "country": "KOR",
+                                "team": "KOR"
+                              }
+                            ],
+                            "legends": [
+                              {
+                                "resultDecisionType": "PUN",
+                                "description": "Win by oppenent's Penalties"
+                              }
+                            ],
+                            "tournamentDraws": [
+                              {
+                                "competitionMatchPsSeq": 39194,
+                                "phase": "SF",
+                                "playingRound": 1,
+                                "matchNumber": 9001,
+                                "resultDecisionType": "PUN",
+                                "home": {
+                                  "matchCompetitorDetailSeq": 19186,
+                                  "competitor": 41,
+                                  "team": "KOR",
+                                  "country": "KOR",
+                                  "firstPoomsaeAverageScore": null,
+                                  "secondPoomsaeAverageScore": null,
+                                  "resultType": "WIN",
+                                  "competitorType": "T",
+                                  "matchSideType": "HOME",
+                                  "participants": [
+                                    {
+                                      "participantSeq": 173334,
+                                      "familyNameEn": "Chen",
+                                      "givenNameEn": "Sung"
+                                    },
+                                    {
+                                      "participantSeq": 173335,
+                                      "familyNameEn": "Kumar",
+                                      "givenNameEn": "Emma"
+                                    },
+                                    {
+                                      "participantSeq": 173336,
+                                      "familyNameEn": "Wang",
+                                      "givenNameEn": "Mina"
+                                    }
+                                  ]
+                                },
+                                "away": {
+                                  "matchCompetitorDetailSeq": 19185,
+                                  "competitor": 42,
+                                  "team": "KOR",
+                                  "country": "KOR",
+                                  "firstPoomsaeAverageScore": null,
+                                  "secondPoomsaeAverageScore": null,
+                                  "resultType": "LOSS",
+                                  "competitorType": "T",
+                                  "matchSideType": "AWAY",
+                                  "participants": [
+                                    {
+                                      "participantSeq": 173338,
+                                      "familyNameEn": "Smith",
+                                      "givenNameEn": "Yuna"
+                                    },
+                                    {
+                                      "participantSeq": 173337,
+                                      "familyNameEn": "Tanaka",
+                                      "givenNameEn": "Yuna"
+                                    },
+                                    {
+                                      "participantSeq": 173339,
+                                      "familyNameEn": "Zhang",
+                                      "givenNameEn": "Ken"
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "competitionMatchPsSeq": 39195,
+                                "phase": "SF",
+                                "playingRound": 1,
+                                "matchNumber": 9002,
+                                "resultDecisionType": "PUN",
+                                "home": {
+                                  "matchCompetitorDetailSeq": 19188,
+                                  "competitor": 44,
+                                  "team": "KOR",
+                                  "country": "KOR",
+                                  "firstPoomsaeAverageScore": null,
+                                  "secondPoomsaeAverageScore": null,
+                                  "resultType": "WIN",
+                                  "competitorType": "T",
+                                  "matchSideType": "HOME",
+                                  "participants": [
+                                    {
+                                      "participantSeq": 173343,
+                                      "familyNameEn": "Kumar",
+                                      "givenNameEn": "Nina"
+                                    },
+                                    {
+                                      "participantSeq": 173345,
+                                      "familyNameEn": "Nguyen",
+                                      "givenNameEn": "John"
+                                    },
+                                    {
+                                      "participantSeq": 173344,
+                                      "familyNameEn": "Tanaka",
+                                      "givenNameEn": "Alex"
+                                    }
+                                  ]
+                                },
+                                "away": {
+                                  "matchCompetitorDetailSeq": 19187,
+                                  "competitor": 43,
+                                  "team": "KOR",
+                                  "country": "KOR",
+                                  "firstPoomsaeAverageScore": null,
+                                  "secondPoomsaeAverageScore": null,
+                                  "resultType": "LOSS",
+                                  "competitorType": "T",
+                                  "matchSideType": "AWAY",
+                                  "participants": [
+                                    {
+                                      "participantSeq": 173340,
+                                      "familyNameEn": "Nguyen",
+                                      "givenNameEn": "John"
+                                    },
+                                    {
+                                      "participantSeq": 173341,
+                                      "familyNameEn": "Nguyen",
+                                      "givenNameEn": "Luke"
+                                    },
+                                    {
+                                      "participantSeq": 173342,
+                                      "familyNameEn": "Silva",
+                                      "givenNameEn": "Ken"
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "competitionMatchPsSeq": 39196,
+                                "phase": "F",
+                                "playingRound": 2,
+                                "matchNumber": 9003,
+                                "resultDecisionType": "PUN",
+                                "home": {
+                                  "matchCompetitorDetailSeq": 19194,
+                                  "competitor": 41,
+                                  "team": "KOR",
+                                  "country": "KOR",
+                                  "firstPoomsaeAverageScore": null,
+                                  "secondPoomsaeAverageScore": null,
+                                  "resultType": "WIN",
+                                  "competitorType": "T",
+                                  "matchSideType": "HOME",
+                                  "participants": [
+                                    {
+                                      "participantSeq": 173334,
+                                      "familyNameEn": "Chen",
+                                      "givenNameEn": "Sung"
+                                    },
+                                    {
+                                      "participantSeq": 173335,
+                                      "familyNameEn": "Kumar",
+                                      "givenNameEn": "Emma"
+                                    },
+                                    {
+                                      "participantSeq": 173336,
+                                      "familyNameEn": "Wang",
+                                      "givenNameEn": "Mina"
+                                    }
+                                  ]
+                                },
+                                "away": {
+                                  "matchCompetitorDetailSeq": 19195,
+                                  "competitor": 44,
+                                  "team": "KOR",
+                                  "country": "KOR",
+                                  "firstPoomsaeAverageScore": null,
+                                  "secondPoomsaeAverageScore": null,
+                                  "resultType": "LOSS",
+                                  "competitorType": "T",
+                                  "matchSideType": "AWAY",
+                                  "participants": [
+                                    {
+                                      "participantSeq": 173343,
+                                      "familyNameEn": "Kumar",
+                                      "givenNameEn": "Nina"
+                                    },
+                                    {
+                                      "participantSeq": 173345,
+                                      "familyNameEn": "Nguyen",
+                                      "givenNameEn": "John"
+                                    },
+                                    {
+                                      "participantSeq": 173344,
+                                      "familyNameEn": "Tanaka",
+                                      "givenNameEn": "Alex"
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    error: null
+                컷오프_성공_예시:
+                  summary: 컷오프_성공_예시
+                  value:
+                    success: true
+                    data:
+                      {
+                        "header": {
+                          "competitionLocalType": "L",
+                          "isTeam": true,
+                          "competitionName": "품새 프론트 <테스트 공용> 전체 룰",
+                          "competitionSdate": "2025-07-22T00:00:00.000Z",
+                          "timeZoneId": "Asia/Seoul",
+                          "nocType": "KOR",
+                          "divisionName": "WT Recognized Poomsae",
+                          "departmentName": "Under 30",
+                          "divisionCategoryName": "Team male"
+                        },
+                        "contents": {
+                          "competitionEventSeq": 10572,
+                          "matchStyleType": "CUTOFF",
+                          "cutoffDraw": {
+                            "documentName": "START LIST",
+                            "cutoffDraws": [
+                              {
+                                "phaseType": "PRE_A",
+                                "phase": "PRE",
+                                "group": "A",
+                                "competitors": [
+                                  {
+                                    "competitionMatchPsSeq": 37870,
+                                    "matchCompetitorDetailSeq": 18215,
+                                    "startTime": "2025-08-01 07:27:02.0",
+                                    "contestNumber": 2001,
+                                    "wtNumber": "L100047",
+                                    "team": "TEAM_MALE_U30_TM_03",
+                                    "country": "GER",
+                                    "competitorType": "T",
+                                    "participants": [
+                                      {
+                                        "participantSeq": 140560,
+                                        "familyNameEn": "Park",
+                                        "givenNameEn": "John"
+                                      },
+                                      {
+                                        "participantSeq": 140558,
+                                        "familyNameEn": "Tanaka",
+                                        "givenNameEn": "Mina"
+                                      },
+                                      {
+                                        "participantSeq": 140559,
+                                        "familyNameEn": "Wang",
+                                        "givenNameEn": "Minsoo"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "competitionMatchPsSeq": 37871,
+                                    "matchCompetitorDetailSeq": 18216,
+                                    "startTime": null,
+                                    "contestNumber": 2002,
+                                    "wtNumber": "L100050",
+                                    "team": "TEAM_MALE_U30_TM_04",
+                                    "country": "GER",
+                                    "competitorType": "T",
+                                    "participants": [
+                                      {
+                                        "participantSeq": 140563,
+                                        "familyNameEn": "Lim",
+                                        "givenNameEn": "Sara"
+                                      },
+                                      {
+                                        "participantSeq": 140562,
+                                        "familyNameEn": "Patel",
+                                        "givenNameEn": "Mina"
+                                      },
+                                      {
+                                        "participantSeq": 140561,
+                                        "familyNameEn": "Zhang",
+                                        "givenNameEn": "Nina"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "competitionMatchPsSeq": 37872,
+                                    "matchCompetitorDetailSeq": 18217,
+                                    "startTime": null,
+                                    "contestNumber": 2003,
+                                    "wtNumber": "L100053",
+                                    "team": "TEAM_MALE_U30_TM_05",
+                                    "country": "GER",
+                                    "competitorType": "T",
+                                    "participants": [
+                                      {
+                                        "participantSeq": 140564,
+                                        "familyNameEn": "Clark",
+                                        "givenNameEn": "Julie"
+                                      },
+                                      {
+                                        "participantSeq": 140565,
+                                        "familyNameEn": "Park",
+                                        "givenNameEn": "John"
+                                      },
+                                      {
+                                        "participantSeq": 140566,
+                                        "familyNameEn": "Silva",
+                                        "givenNameEn": "Yuna"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "competitionMatchPsSeq": 37873,
+                                    "matchCompetitorDetailSeq": 18218,
+                                    "startTime": null,
+                                    "contestNumber": 2004,
+                                    "wtNumber": "L100041",
+                                    "team": "TEAM_MALE_U30_TM_01",
+                                    "country": "GER",
+                                    "competitorType": "T",
+                                    "participants": [
+                                      {
+                                        "participantSeq": 140554,
+                                        "familyNameEn": "Choi",
+                                        "givenNameEn": "Luke"
+                                      },
+                                      {
+                                        "participantSeq": 140552,
+                                        "familyNameEn": "Clark",
+                                        "givenNameEn": "Emma"
+                                      },
+                                      {
+                                        "participantSeq": 140553,
+                                        "familyNameEn": "Silva",
+                                        "givenNameEn": "Ken"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "competitionMatchPsSeq": 37874,
+                                    "matchCompetitorDetailSeq": 18219,
+                                    "startTime": null,
+                                    "contestNumber": 2005,
+                                    "wtNumber": "L100056",
+                                    "team": "TEAM_MALE_U30_TM_06",
+                                    "country": "GER",
+                                    "competitorType": "T",
+                                    "participants": [
+                                      {
+                                        "participantSeq": 140568,
+                                        "familyNameEn": "Park",
+                                        "givenNameEn": "Yuna"
+                                      },
+                                      {
+                                        "participantSeq": 140567,
+                                        "familyNameEn": "Tanaka",
+                                        "givenNameEn": "Emma"
+                                      },
+                                      {
+                                        "participantSeq": 140569,
+                                        "familyNameEn": "Yamamoto",
+                                        "givenNameEn": "Alex"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "competitionMatchPsSeq": 37875,
+                                    "matchCompetitorDetailSeq": 18220,
+                                    "startTime": null,
+                                    "contestNumber": 2006,
+                                    "wtNumber": "L100044",
+                                    "team": "TEAM_MALE_U30_TM_02",
+                                    "country": "GER",
+                                    "competitorType": "T",
+                                    "participants": [
+                                      {
+                                        "participantSeq": 140557,
+                                        "familyNameEn": "Choi",
+                                        "givenNameEn": "Sam"
+                                      },
+                                      {
+                                        "participantSeq": 140555,
+                                        "familyNameEn": "Clark",
+                                        "givenNameEn": "David"
+                                      },
+                                      {
+                                        "participantSeq": 140556,
+                                        "familyNameEn": "Silva",
+                                        "givenNameEn": "Ken"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "competitionMatchPsSeq": 37876,
+                                    "matchCompetitorDetailSeq": 18221,
+                                    "startTime": null,
+                                    "contestNumber": 2007,
+                                    "wtNumber": "L100059",
+                                    "team": "TEAM_MALE_U30_TM_07",
+                                    "country": "GER",
+                                    "competitorType": "T",
+                                    "participants": [
+                                      {
+                                        "participantSeq": 140572,
+                                        "familyNameEn": "Garcia",
+                                        "givenNameEn": "Hana"
+                                      },
+                                      {
+                                        "participantSeq": 140571,
+                                        "familyNameEn": "Smith",
+                                        "givenNameEn": "Mina"
+                                      },
+                                      {
+                                        "participantSeq": 140570,
+                                        "familyNameEn": "Yang",
+                                        "givenNameEn": "Nina"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "competitionMatchPsSeq": 37877,
+                                    "matchCompetitorDetailSeq": 18222,
+                                    "startTime": null,
+                                    "contestNumber": 2008,
+                                    "wtNumber": "L100062",
+                                    "team": "TEAM_MALE_U30_TM_08",
+                                    "country": "GER",
+                                    "competitorType": "T",
+                                    "participants": [
+                                      {
+                                        "participantSeq": 140573,
+                                        "familyNameEn": "Chen",
+                                        "givenNameEn": "Alex"
+                                      },
+                                      {
+                                        "participantSeq": 140574,
+                                        "familyNameEn": "Yamamoto",
+                                        "givenNameEn": "Nina"
+                                      },
+                                      {
+                                        "participantSeq": 140575,
+                                        "familyNameEn": "Yamamoto",
+                                        "givenNameEn": "Ken"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "competitionMatchPsSeq": 37878,
+                                    "matchCompetitorDetailSeq": 18223,
+                                    "startTime": null,
+                                    "contestNumber": 2009,
+                                    "wtNumber": "L100065",
+                                    "team": "TEAM_MALE_U30_TM_09",
+                                    "country": "GER",
+                                    "competitorType": "T",
+                                    "participants": [
+                                      {
+                                        "participantSeq": 140576,
+                                        "familyNameEn": "Choi",
+                                        "givenNameEn": "Mina"
+                                      },
+                                      {
+                                        "participantSeq": 140577,
+                                        "familyNameEn": "Kim",
+                                        "givenNameEn": "Yuna"
+                                      },
+                                      {
+                                        "participantSeq": 140578,
+                                        "familyNameEn": "Nguyen",
+                                        "givenNameEn": "Ken"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "competitionMatchPsSeq": 37879,
+                                    "matchCompetitorDetailSeq": 18224,
+                                    "startTime": null,
+                                    "contestNumber": 2010,
+                                    "wtNumber": "L100068",
+                                    "team": "TEAM_MALE_U30_TM_10",
+                                    "country": "GER",
+                                    "competitorType": "T",
+                                    "participants": [
+                                      {
+                                        "participantSeq": 140580,
+                                        "familyNameEn": "Choi",
+                                        "givenNameEn": "Hana"
+                                      },
+                                      {
+                                        "participantSeq": 140581,
+                                        "familyNameEn": "Clark",
+                                        "givenNameEn": "Yuri"
+                                      },
+                                      {
+                                        "participantSeq": 140579,
+                                        "familyNameEn": "Yamamoto",
+                                        "givenNameEn": "Mina"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              {
+                                "phaseType": "PRE_B",
+                                "phase": "PRE",
+                                "group": "B",
+                                "competitors": [
+                                  {
+                                    "competitionMatchPsSeq": 37880,
+                                    "matchCompetitorDetailSeq": 18225,
+                                    "startTime": null,
+                                    "contestNumber": 2011,
+                                    "wtNumber": "L100071",
+                                    "team": "TEAM_MALE_U30_TM_11",
+                                    "country": "GER",
+                                    "competitorType": "T",
+                                    "participants": [
+                                      {
+                                        "participantSeq": 140583,
+                                        "familyNameEn": "Chen",
+                                        "givenNameEn": "Yuri"
+                                      },
+                                      {
+                                        "participantSeq": 140584,
+                                        "familyNameEn": "Nguyen",
+                                        "givenNameEn": "Sung"
+                                      },
+                                      {
+                                        "participantSeq": 140582,
+                                        "familyNameEn": "Patel",
+                                        "givenNameEn": "Sam"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "competitionMatchPsSeq": 37881,
+                                    "matchCompetitorDetailSeq": 18226,
+                                    "startTime": null,
+                                    "contestNumber": 2012,
+                                    "wtNumber": "L100074",
+                                    "team": "TEAM_MALE_U30_TM_12",
+                                    "country": "GER",
+                                    "competitorType": "T",
+                                    "participants": [
+                                      {
+                                        "participantSeq": 140585,
+                                        "familyNameEn": "Nguyen",
+                                        "givenNameEn": "Sung"
+                                      },
+                                      {
+                                        "participantSeq": 140586,
+                                        "familyNameEn": "Nguyen",
+                                        "givenNameEn": "Paul"
+                                      },
+                                      {
+                                        "participantSeq": 140587,
+                                        "familyNameEn": "Singh",
+                                        "givenNameEn": "Jane"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "competitionMatchPsSeq": 37882,
+                                    "matchCompetitorDetailSeq": 18227,
+                                    "startTime": null,
+                                    "contestNumber": 2013,
+                                    "wtNumber": "L100077",
+                                    "team": "TEAM_MALE_U30_TM_13",
+                                    "country": "GER",
+                                    "competitorType": "T",
+                                    "participants": [
+                                      {
+                                        "participantSeq": 140589,
+                                        "familyNameEn": "Chen",
+                                        "givenNameEn": "Yuri"
+                                      },
+                                      {
+                                        "participantSeq": 140590,
+                                        "familyNameEn": "Patel",
+                                        "givenNameEn": "Sara"
+                                      },
+                                      {
+                                        "participantSeq": 140588,
+                                        "familyNameEn": "Yang",
+                                        "givenNameEn": "Yuna"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "competitionMatchPsSeq": 37883,
+                                    "matchCompetitorDetailSeq": 18228,
+                                    "startTime": null,
+                                    "contestNumber": 2014,
+                                    "wtNumber": "L100080",
+                                    "team": "TEAM_MALE_U30_TM_14",
+                                    "country": "GER",
+                                    "competitorType": "T",
+                                    "participants": [
+                                      {
+                                        "participantSeq": 140592,
+                                        "familyNameEn": "Lee",
+                                        "givenNameEn": "Sung"
+                                      },
+                                      {
+                                        "participantSeq": 140593,
+                                        "familyNameEn": "Park",
+                                        "givenNameEn": "Mina"
+                                      },
+                                      {
+                                        "participantSeq": 140591,
+                                        "familyNameEn": "Patel",
+                                        "givenNameEn": "John"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "competitionMatchPsSeq": 37884,
+                                    "matchCompetitorDetailSeq": 18229,
+                                    "startTime": null,
+                                    "contestNumber": 2015,
+                                    "wtNumber": "L100083",
+                                    "team": "TEAM_MALE_U30_TM_15",
+                                    "country": "GER",
+                                    "competitorType": "T",
+                                    "participants": [
+                                      {
+                                        "participantSeq": 140595,
+                                        "familyNameEn": "Chen",
+                                        "givenNameEn": "John"
+                                      },
+                                      {
+                                        "participantSeq": 140594,
+                                        "familyNameEn": "Silva",
+                                        "givenNameEn": "Yuri"
+                                      },
+                                      {
+                                        "participantSeq": 140596,
+                                        "familyNameEn": "Yang",
+                                        "givenNameEn": "John"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "competitionMatchPsSeq": 37885,
+                                    "matchCompetitorDetailSeq": 18230,
+                                    "startTime": null,
+                                    "contestNumber": 2016,
+                                    "wtNumber": "L100086",
+                                    "team": "TEAM_MALE_U30_TM_16",
+                                    "country": "GER",
+                                    "competitorType": "T",
+                                    "participants": [
+                                      {
+                                        "participantSeq": 140598,
+                                        "familyNameEn": "Lee",
+                                        "givenNameEn": "Hana"
+                                      },
+                                      {
+                                        "participantSeq": 140597,
+                                        "familyNameEn": "Lim",
+                                        "givenNameEn": "Sung"
+                                      },
+                                      {
+                                        "participantSeq": 140599,
+                                        "familyNameEn": "Lim",
+                                        "givenNameEn": "Jane"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "competitionMatchPsSeq": 37886,
+                                    "matchCompetitorDetailSeq": 18231,
+                                    "startTime": null,
+                                    "contestNumber": 2017,
+                                    "wtNumber": "L100089",
+                                    "team": "TEAM_MALE_U30_TM_17",
+                                    "country": "GER",
+                                    "competitorType": "T",
+                                    "participants": [
+                                      {
+                                        "participantSeq": 140601,
+                                        "familyNameEn": "Lim",
+                                        "givenNameEn": "Sam"
+                                      },
+                                      {
+                                        "participantSeq": 140602,
+                                        "familyNameEn": "Lopez",
+                                        "givenNameEn": "Paul"
+                                      },
+                                      {
+                                        "participantSeq": 140600,
+                                        "familyNameEn": "Silva",
+                                        "givenNameEn": "Hana"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "competitionMatchPsSeq": 37887,
+                                    "matchCompetitorDetailSeq": 18232,
+                                    "startTime": null,
+                                    "contestNumber": 2018,
+                                    "wtNumber": "L100092",
+                                    "team": "TEAM_MALE_U30_TM_18",
+                                    "country": "GER",
+                                    "competitorType": "T",
+                                    "participants": [
+                                      {
+                                        "participantSeq": 140603,
+                                        "familyNameEn": "Kumar",
+                                        "givenNameEn": "Yuna"
+                                      },
+                                      {
+                                        "participantSeq": 140605,
+                                        "familyNameEn": "Lopez",
+                                        "givenNameEn": "Minsoo"
+                                      },
+                                      {
+                                        "participantSeq": 140604,
+                                        "familyNameEn": "Tanaka",
+                                        "givenNameEn": "Alex"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "competitionMatchPsSeq": 37888,
+                                    "matchCompetitorDetailSeq": 18233,
+                                    "startTime": null,
+                                    "contestNumber": 2019,
+                                    "wtNumber": "L100095",
+                                    "team": "TEAM_MALE_U30_TM_19",
+                                    "country": "GER",
+                                    "competitorType": "T",
+                                    "participants": [
+                                      {
+                                        "participantSeq": 140607,
+                                        "familyNameEn": "Chen",
+                                        "givenNameEn": "Emma"
+                                      },
+                                      {
+                                        "participantSeq": 140608,
+                                        "familyNameEn": "Kim",
+                                        "givenNameEn": "Jane"
+                                      },
+                                      {
+                                        "participantSeq": 140606,
+                                        "familyNameEn": "Patel",
+                                        "givenNameEn": "Sung"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "competitionMatchPsSeq": 37889,
+                                    "matchCompetitorDetailSeq": 18234,
+                                    "startTime": null,
+                                    "contestNumber": 2020,
+                                    "wtNumber": "L100098",
+                                    "team": "TEAM_MALE_U30_TM_20",
+                                    "country": "GER",
+                                    "competitorType": "T",
+                                    "participants": [
+                                      {
+                                        "participantSeq": 140610,
+                                        "familyNameEn": "Lopez",
+                                        "givenNameEn": "Sam"
+                                      },
+                                      {
+                                        "participantSeq": 140609,
+                                        "familyNameEn": "Wang",
+                                        "givenNameEn": "Sara"
+                                      },
+                                      {
+                                        "participantSeq": 140611,
+                                        "familyNameEn": "Zhang",
+                                        "givenNameEn": "Nina"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          "tournamentDraw": null
+                        }
+                      }
+                    error: null
+                컷오프_토너먼트_성공_예시:
+                  summary: 컷오프_토너먼트_성공_예시
+                  value:
+                    success: true
+                    data:
+                      {
+                        "header": {
+                          "competitionLocalType": "L",
+                          "isTeam": false,
+                          "competitionName": "품새 프론트 <테스트 공용> 전체 룰",
+                          "competitionSdate": "2025-07-22T00:00:00.000Z",
+                          "timeZoneId": "Asia/Seoul",
+                          "nocType": "KOR",
+                          "divisionName": "WT Recognized Poomsae",
+                          "departmentName": "Under 30",
+                          "divisionCategoryName": "Individual female"
+                        },
+                        "contents": {
+                          "competitionEventSeq": 10571,
+                          "matchStyleType": "CUTOFF_TOURNAMENT",
+                          "cutoffDraw": {
+                            "documentName": "START LIST",
+                            "cutoffDraws": [
+                              {
+                                "phaseType": "PRE_A",
+                                "phase": "PRE",
+                                "group": "A",
+                                "competitors": [
+                                  {
+                                    "competitionMatchPsSeq": 37833,
+                                    "matchCompetitorDetailSeq": 18195,
+                                    "startTime": null,
+                                    "contestNumber": 1021,
+                                    "wtNumber": "L100034",
+                                    "team": "USA_U30_IF_14",
+                                    "country": "GER",
+                                    "competitorType": "S",
+                                    "participants": [
+                                      {
+                                        "participantSeq": 140545,
+                                        "familyNameEn": "Tanaka",
+                                        "givenNameEn": "David"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "competitionMatchPsSeq": 37834,
+                                    "matchCompetitorDetailSeq": 18196,
+                                    "startTime": null,
+                                    "contestNumber": 1022,
+                                    "wtNumber": "L100035",
+                                    "team": "Iran_U30_IF_15",
+                                    "country": "GER",
+                                    "competitorType": "S",
+                                    "participants": [
+                                      {
+                                        "participantSeq": 140546,
+                                        "familyNameEn": "Lim",
+                                        "givenNameEn": "Luke"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "competitionMatchPsSeq": 37835,
+                                    "matchCompetitorDetailSeq": 18197,
+                                    "startTime": null,
+                                    "contestNumber": 1023,
+                                    "wtNumber": "L100036",
+                                    "team": "Russia_U30_IF_16",
+                                    "country": "GER",
+                                    "competitorType": "S",
+                                    "participants": [
+                                      {
+                                        "participantSeq": 140547,
+                                        "familyNameEn": "Kim",
+                                        "givenNameEn": "Minsoo"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "competitionMatchPsSeq": 37836,
+                                    "matchCompetitorDetailSeq": 18198,
+                                    "startTime": null,
+                                    "contestNumber": 1024,
+                                    "wtNumber": "L100037",
+                                    "team": "UK_U30_IF_17",
+                                    "country": "GER",
+                                    "competitorType": "S",
+                                    "participants": [
+                                      {
+                                        "participantSeq": 140548,
+                                        "familyNameEn": "Choi",
+                                        "givenNameEn": "Yuna"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "competitionMatchPsSeq": 37837,
+                                    "matchCompetitorDetailSeq": 18199,
+                                    "startTime": null,
+                                    "contestNumber": 1025,
+                                    "wtNumber": "L100038",
+                                    "team": "Morocco_U30_IF_18",
+                                    "country": "GER",
+                                    "competitorType": "S",
+                                    "participants": [
+                                      {
+                                        "participantSeq": 140549,
+                                        "familyNameEn": "Kim",
+                                        "givenNameEn": "Sung"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "competitionMatchPsSeq": 37838,
+                                    "matchCompetitorDetailSeq": 18200,
+                                    "startTime": null,
+                                    "contestNumber": 1026,
+                                    "wtNumber": "L100039",
+                                    "team": "Mexico_U30_IF_19",
+                                    "country": "GER",
+                                    "competitorType": "S",
+                                    "participants": [
+                                      {
+                                        "participantSeq": 140550,
+                                        "familyNameEn": "Tanaka",
+                                        "givenNameEn": "Hana"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "competitionMatchPsSeq": 37839,
+                                    "matchCompetitorDetailSeq": 18201,
+                                    "startTime": null,
+                                    "contestNumber": 1027,
+                                    "wtNumber": "L100040",
+                                    "team": "Japan_U30_IF_20",
+                                    "country": "GER",
+                                    "competitorType": "S",
+                                    "participants": [
+                                      {
+                                        "participantSeq": 140551,
+                                        "familyNameEn": "Choi",
+                                        "givenNameEn": "Sung"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "competitionMatchPsSeq": 37840,
+                                    "matchCompetitorDetailSeq": 18202,
+                                    "startTime": null,
+                                    "contestNumber": 1028,
+                                    "wtNumber": "L100021",
+                                    "team": "Korea_U30_IF_01",
+                                    "country": "GER",
+                                    "competitorType": "S",
+                                    "participants": [
+                                      {
+                                        "participantSeq": 140532,
+                                        "familyNameEn": "Singh",
+                                        "givenNameEn": "Yuri"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "competitionMatchPsSeq": 37841,
+                                    "matchCompetitorDetailSeq": 18203,
+                                    "startTime": null,
+                                    "contestNumber": 1029,
+                                    "wtNumber": "L100022",
+                                    "team": "USA_U30_IF_02",
+                                    "country": "GER",
+                                    "competitorType": "S",
+                                    "participants": [
+                                      {
+                                        "participantSeq": 140533,
+                                        "familyNameEn": "Yamamoto",
+                                        "givenNameEn": "David"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "competitionMatchPsSeq": 37842,
+                                    "matchCompetitorDetailSeq": 18204,
+                                    "startTime": null,
+                                    "contestNumber": 1030,
+                                    "wtNumber": "L100023",
+                                    "team": "Iran_U30_IF_03",
+                                    "country": "GER",
+                                    "competitorType": "S",
+                                    "participants": [
+                                      {
+                                        "participantSeq": 140534,
+                                        "familyNameEn": "Silva",
+                                        "givenNameEn": "Hana"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              {
+                                "phaseType": "PRE_B",
+                                "phase": "PRE",
+                                "group": "B",
+                                "competitors": [
+                                  {
+                                    "competitionMatchPsSeq": 37843,
+                                    "matchCompetitorDetailSeq": 18205,
+                                    "startTime": null,
+                                    "contestNumber": 1031,
+                                    "wtNumber": "L100024",
+                                    "team": "Russia_U30_IF_04",
+                                    "country": "GER",
+                                    "competitorType": "S",
+                                    "participants": [
+                                      {
+                                        "participantSeq": 140535,
+                                        "familyNameEn": "Garcia",
+                                        "givenNameEn": "Sung"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "competitionMatchPsSeq": 37844,
+                                    "matchCompetitorDetailSeq": 18206,
+                                    "startTime": null,
+                                    "contestNumber": 1032,
+                                    "wtNumber": "L100025",
+                                    "team": "UK_U30_IF_05",
+                                    "country": "GER",
+                                    "competitorType": "S",
+                                    "participants": [
+                                      {
+                                        "participantSeq": 140536,
+                                        "familyNameEn": "Singh",
+                                        "givenNameEn": "Minsoo"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "competitionMatchPsSeq": 37845,
+                                    "matchCompetitorDetailSeq": 18207,
+                                    "startTime": null,
+                                    "contestNumber": 1033,
+                                    "wtNumber": "L100026",
+                                    "team": "Morocco_U30_IF_06",
+                                    "country": "GER",
+                                    "competitorType": "S",
+                                    "participants": [
+                                      {
+                                        "participantSeq": 140537,
+                                        "familyNameEn": "Yang",
+                                        "givenNameEn": "Sung"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "competitionMatchPsSeq": 37846,
+                                    "matchCompetitorDetailSeq": 18208,
+                                    "startTime": null,
+                                    "contestNumber": 1034,
+                                    "wtNumber": "L100027",
+                                    "team": "Mexico_U30_IF_07",
+                                    "country": "GER",
+                                    "competitorType": "S",
+                                    "participants": [
+                                      {
+                                        "participantSeq": 140538,
+                                        "familyNameEn": "Nguyen",
+                                        "givenNameEn": "Leo"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "competitionMatchPsSeq": 37847,
+                                    "matchCompetitorDetailSeq": 18209,
+                                    "startTime": null,
+                                    "contestNumber": 1035,
+                                    "wtNumber": "L100028",
+                                    "team": "Japan_U30_IF_08",
+                                    "country": "GER",
+                                    "competitorType": "S",
+                                    "participants": [
+                                      {
+                                        "participantSeq": 140539,
+                                        "familyNameEn": "Clark",
+                                        "givenNameEn": "Paul"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "competitionMatchPsSeq": 37848,
+                                    "matchCompetitorDetailSeq": 18210,
+                                    "startTime": null,
+                                    "contestNumber": 1036,
+                                    "wtNumber": "L100029",
+                                    "team": "Argentina_U30_IF_09",
+                                    "country": "GER",
+                                    "competitorType": "S",
+                                    "participants": [
+                                      {
+                                        "participantSeq": 140540,
+                                        "familyNameEn": "Yang",
+                                        "givenNameEn": "Ken"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "competitionMatchPsSeq": 37849,
+                                    "matchCompetitorDetailSeq": 18211,
+                                    "startTime": null,
+                                    "contestNumber": 1037,
+                                    "wtNumber": "L100030",
+                                    "team": "Australia_U30_IF_10",
+                                    "country": "GER",
+                                    "competitorType": "S",
+                                    "participants": [
+                                      {
+                                        "participantSeq": 140541,
+                                        "familyNameEn": "Tanaka",
+                                        "givenNameEn": "Luke"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "competitionMatchPsSeq": 37850,
+                                    "matchCompetitorDetailSeq": 18212,
+                                    "startTime": null,
+                                    "contestNumber": 1038,
+                                    "wtNumber": "L100031",
+                                    "team": "India_U30_IF_11",
+                                    "country": "GER",
+                                    "competitorType": "S",
+                                    "participants": [
+                                      {
+                                        "participantSeq": 140542,
+                                        "familyNameEn": "Kim",
+                                        "givenNameEn": "Alex"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "competitionMatchPsSeq": 37851,
+                                    "matchCompetitorDetailSeq": 18213,
+                                    "startTime": null,
+                                    "contestNumber": 1039,
+                                    "wtNumber": "L100032",
+                                    "team": "Vietnam_U30_IF_12",
+                                    "country": "GER",
+                                    "competitorType": "S",
+                                    "participants": [
+                                      {
+                                        "participantSeq": 140543,
+                                        "familyNameEn": "Choi",
+                                        "givenNameEn": "Yuna"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "competitionMatchPsSeq": 37852,
+                                    "matchCompetitorDetailSeq": 18214,
+                                    "startTime": null,
+                                    "contestNumber": 1040,
+                                    "wtNumber": "L100033",
+                                    "team": "Korea_U30_IF_13",
+                                    "country": "GER",
+                                    "competitorType": "S",
+                                    "participants": [
+                                      {
+                                        "participantSeq": 140544,
+                                        "familyNameEn": "Choi",
+                                        "givenNameEn": "Sara"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          "tournamentDraw": {
+                            "documentName": "DRAW SHEET",
+                            "contestantsCount": 7,
+                            "classifications": [ ],
+                            "legends": [ ],
+                            "tournamentDraws": [
+                              {
+                                "competitionMatchPsSeq": 37863,
+                                "phase": "QF",
+                                "playingRound": 3,
+                                "matchNumber": 1051,
+                                "resultDecisionType": null,
+                                "home": null,
+                                "away": null
+                              },
+                              {
+                                "competitionMatchPsSeq": 37864,
+                                "phase": "QF",
+                                "playingRound": 3,
+                                "matchNumber": 1052,
+                                "resultDecisionType": null,
+                                "home": null,
+                                "away": null
+                              },
+                              {
+                                "competitionMatchPsSeq": 37865,
+                                "phase": "QF",
+                                "playingRound": 3,
+                                "matchNumber": 1053,
+                                "resultDecisionType": null,
+                                "home": null,
+                                "away": null
+                              },
+                              {
+                                "competitionMatchPsSeq": 37866,
+                                "phase": "QF",
+                                "playingRound": 3,
+                                "matchNumber": 1054,
+                                "resultDecisionType": null,
+                                "home": null,
+                                "away": null
+                              },
+                              {
+                                "competitionMatchPsSeq": 37867,
+                                "phase": "SF",
+                                "playingRound": 4,
+                                "matchNumber": 1055,
+                                "resultDecisionType": null,
+                                "home": null,
+                                "away": null
+                              },
+                              {
+                                "competitionMatchPsSeq": 37868,
+                                "phase": "SF",
+                                "playingRound": 4,
+                                "matchNumber": 1056,
+                                "resultDecisionType": null,
+                                "home": null,
+                                "away": null
+                              },
+                              {
+                                "competitionMatchPsSeq": 37869,
+                                "phase": "F",
+                                "playingRound": 5,
+                                "matchNumber": 1057,
+                                "resultDecisionType": null,
+                                "home": null,
+                                "away": null
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    error: null
+                ITEM_NOT_FOUND:
+                  $ref: '../../openapi.yml/#/components/examples/ITEM_NOT_FOUND'
+                MATCH_COMPETITOR_DETAIL_NOT_FOUND:
+                  $ref: '../../openapi.yml/#/components/examples/MATCH_COMPETITOR_DETAIL_NOT_FOUND'
+                COMPETITION_MATCH_NOT_FOUND:
+                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+                DOCUMENT_NOT_FOUND:
+                  $ref: '../../openapi.yml/#/components/examples/DOCUMENT_NOT_FOUND'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml#/components/responses/Error'
+              examples:
+                INVALID_TYPE_ERROR:
+                  $ref: '../../openapi.yml#/components/examples/INVALID_TYPE_ERROR'
+        '403':
+          description: 권한 없음
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+
+
