@@ -399,7 +399,7 @@ components:
           description: 종료된 매치 수
         totalRemainingMatchCount:
           type: integer
-          description: 남은 매치 수 (summaryPerDivisionList의 remainingMatchCount를 모두 더한 값)
+          description: 남은 매치 수, 진행중 대진 포함 (summaryPerDivisionList의 remainingMatchCount를 모두 더한 값)
         summaryPerDivisionList:
           type: array
           description: 룰별 매치 요약 리스트
@@ -411,7 +411,7 @@ components:
                 description: 매치 룰
               remainingMatchCount:
                 type: integer
-                description: 해당 부문에서 남은 매치 수
+                description: 해당 부문에서 남은 매치 수, 진행중 대진 포함
               matchMaxTime:
                 type: integer
                 description: 해당 부문의 최대 매치 시간(초)
