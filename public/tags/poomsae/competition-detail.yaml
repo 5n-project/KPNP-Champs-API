@@ -85,6 +85,8 @@ paths:
                         required:
                           - competitionOvrPeriodSdate
                           - competitionOvrPeriodEdate
+                          - competitionTimezone
+                          - competitionNocCode
                           - totalAmountKor
                           - totalAmountUsd
                         properties:
@@ -96,6 +98,12 @@ paths:
                             type: string
                             format: date-time
                             description: 'ovr 이용종료시간'
+                          competitionTimezone:
+                            type: string
+                            description: '대회 타임존 코드'
+                          competitionNocCode:
+                            type: string
+                            description: '대회 noc 국가코드'
                           totalAmountKor:
                             type: number
                             description: '이용금액 원화'
@@ -183,6 +191,8 @@ paths:
                       ovrPeriodInfo:
                         competitionOvrPeriodSdate: "2025-04-30 00:00:00"
                         competitionOvrPeriodEdate: "2025-08-12 23:59:00"
+                        competitionTimezone: "Asia/Seoul"
+                        competitionNocCode: "KOR"
                         totalAmountKor: 1050000.0
                         totalAmountUsd: 1050.0
                       usedDivisionList:
