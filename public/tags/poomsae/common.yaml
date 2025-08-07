@@ -36,6 +36,41 @@ paths:
                           nameKo: 오픈대회 자유품새
                     error: null
 
+  /common/combo/timezones:
+    get:
+      summary: 타임존 리스트 저장
+      tags:
+        - 공통
+      responses:
+        '200':
+          description: 성공적으로 조회된 응답
+          content:
+            application/json:
+              examples:
+                divisionRulesExample:
+                  summary: example
+                  value:
+                    success: true
+                    data:
+                      [
+                        {
+                          "value": "Europe/Andorra",
+                          "cityName": "Andorra",
+                          "countryName": "Andorra"
+                        },
+                        {
+                          "value": "Asia/Dubai",
+                          "cityName": "Dubai",
+                          "countryName": "United Arab Emirates"
+                        },
+                        {
+                          "value": "Asia/Kabul",
+                          "cityName": "Kabul",
+                          "countryName": "Afghanistan"
+                        },
+                      ]
+                    error: null
+
   /common/combo/countries:
     get:
       summary: 국가 조회 (+연락처)

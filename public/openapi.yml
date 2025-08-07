@@ -27,6 +27,8 @@ paths:
   # 공통
   /common/combo/rules:
     $ref: './tags/poomsae/common.yaml#/paths/~1common~1combo~1rules'
+  /common/combo/timezones:
+    $ref: './tags/poomsae/common.yaml#/paths/~1common~1combo~1timezones'
   /common/combo/countries:
     $ref: './tags/poomsae/common.yaml#/paths/~1common~1combo~1countries'
   /common/combo/noc-list:

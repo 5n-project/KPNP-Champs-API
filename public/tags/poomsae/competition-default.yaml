@@ -288,10 +288,6 @@ paths:
                   type: string
                   example: "Busan"
                   description: 장소영문명
-                competitionNocCode:
-                  type: string
-                  example: "KOR"
-                  description: 대회장 표준 시간 코드 (/noc-list 의 code)
                 competitionSubSdate:
                   type: string
                   format: date-time
@@ -425,10 +421,6 @@ paths:
                   type: string
                   example: "Busan"
                   description: 장소영문명
-                competitionNocCode:
-                  type: string
-                  example: "KOR"
-                  description: 대회장 표준 시간 코드 (/noc-list 의 code)
                 competitionSubSdate:
                   type: string
                   format: date-time
