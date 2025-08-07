@@ -2944,6 +2944,11 @@ paths:
                             type: string
                             example: 태극 7장
                             description: 품새명(한글)
+                          poomsaeStyleType:
+                            type: string
+                            enum: [RECOGNIZED_POOMSAE, FREESTYLE]
+                            example: RECOGNIZED_POOMSAE
+                            description: 품새 스타일 타입
                       competitor:
                         type: object
                         properties:
@@ -3153,6 +3158,7 @@ paths:
                         phase: "R64"
                         poomsaeTypeEn: "Taegeuk 7 Jang"
                         poomsaeTypeKo: "태극 7장"
+                        poomsaeStyleType: "RECOGNIZED_POOMSAE"
                       competitor:
                         matchCompetitorDetailSeq: 5298
                         matchSideType: "AWAY"
@@ -3525,6 +3531,11 @@ paths:
                             type: string
                             example: 태극 7장
                             description: 품새명(한글)
+                          poomsaeStyleType:
+                            type: string
+                            enum: [RECOGNIZED_POOMSAE, FREESTYLE]
+                            example: RECOGNIZED_POOMSAE
+                            description: 품새 스타일 타입
                       competitor:
                         type: object
                         properties:
@@ -3734,6 +3745,7 @@ paths:
                         phase: "R64"
                         poomsaeTypeEn: "Taegeuk 7 Jang"
                         poomsaeTypeKo: "태극 7장"
+                        poomsaeStyleType: "RECOGNIZED_POOMSAE"
                       competitor:
                         matchCompetitorDetailSeq: 5298
                         matchSideType: "AWAY"
