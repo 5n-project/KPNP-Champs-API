@@ -593,6 +593,7 @@ paths:
                       header:
                         required:
                           - competitionLocalType
+                          - competitionHostName
                           - isTeam
                           - competitionName
                           - competitionSdate
@@ -603,6 +604,9 @@ paths:
                           - divisionCategoryName
                         type: object
                         properties:
+                          competitionHostName:
+                            type: string
+                            description: "주최명"
                           competitionLocalType:
                             type: string
                             description: "국제대회 : W, 지역대회 : L"
@@ -638,6 +642,12 @@ paths:
                             type: string
                             example: "Individual female"
                             description: "대회유형명"
+                          hostLogoUrl:
+                            type: string
+                            description: "주최로고 url"
+                          competitionLogUrl:
+                            type: string
+                            description: "대회로고 url"
                       contents:
                         required:
                           - competitionEventSeq
@@ -762,6 +772,9 @@ paths:
                                 type: integer
                                 example: 7
                                 description: "경기 수"
+                              firstPhase:
+                                type: string
+                                description: "최초 경기 강"
                               classifications:
                                 type: array
                                 items:
@@ -991,6 +1004,7 @@ paths:
                           "tournamentDraw": {
                             "documentName": "DRAW SHEET",
                             "contestantsCount": 4,
+                            "firstPhase": "SF",
                             "classifications": [
                               {
                                 "ranking": 1,
@@ -1237,6 +1251,7 @@ paths:
                           "tournamentDraw": {
                             "documentName": "DRAW SHEET",
                             "contestantsCount": 3,
+                            "firstPhase": "SF",
                             "classifications": [
                               {
                                 "ranking": 1,
@@ -2493,6 +2508,7 @@ paths:
                           "tournamentDraw": {
                             "documentName": "DRAW SHEET",
                             "contestantsCount": 7,
+                            "firstPhase": "QF",
                             "classifications": [ ],
                             "legends": [ ],
                             "tournamentDraws": [
