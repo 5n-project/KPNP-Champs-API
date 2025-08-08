@@ -3865,24 +3865,33 @@ paths:
           schema:
             type: integer
           description: 대회의 고유 시퀀스
-        - in: query
-          name: division
-          required: true
-          schema:
-            type: string
-          description: '룰 코드 (예: WT_RECOGNIZED_POOMSAE, WT_FREESTYLE_POOMSAE)'
-        - in: query
-          name: department
-          required: true
-          schema:
-            type: string
-          description: '부 코드 (예: UNDER_30)'
-        - in: query
-          name: divisionCategory
-          required: true
-          schema:
-            type: string
-          description: '대회 유형 코드 (예: INDIVIDUAL_MALE)'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - division
+                - department
+                - divisionCategory
+              properties:
+                division:
+                  type: string
+                  description: '룰 코드 (예: WT_RECOGNIZED_POOMSAE, WT_FREESTYLE_POOMSAE)'
+                department:
+                  type: string
+                  description: '부 코드 (예: UNDER_30)'
+                divisionCategory:
+                  type: string
+                  description: '대회 유형 코드 (예: INDIVIDUAL_MALE)'
+            examples:
+              defaultRequest:
+                summary: 요청 예시
+                value:
+                  division: "WT_RECOGNIZED_POOMSAE"
+                  department: "UNDER_30"
+                  divisionCategory: "INDIVIDUAL_MALE"
       responses:
         '200':
           description: 성공 응답
