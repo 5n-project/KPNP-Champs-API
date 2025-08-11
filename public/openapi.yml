@@ -422,7 +422,7 @@ components:
         success: false
         data: null
         error:
-          message: "심판 그룹이 존재하지 않습니다."
+          message: "심판조가 존재하지 않습니다.\n설정에서 심판조를 생성이 필요합니다."
           errorCode: "E655"
     WRONG_SCHEDULE_MATCH:
       value:
