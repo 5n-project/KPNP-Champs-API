@@ -2369,6 +2369,13 @@ paths:
                       "data": null,
                       "error": null
                     }
+
+                SCHEDULE_IS_TEMPORARY_SAVE:
+                  $ref: '../../openapi.yml#/components/examples/SCHEDULE_IS_TEMPORARY_SAVE'
+                SCHEDULE_IS_EMPTY:
+                  $ref: '../../openapi.yml#/components/examples/SCHEDULE_IS_EMPTY'
+                MATCH_IS_ALREADY_CREATED:
+                  $ref: '../../openapi.yml#/components/examples/MATCH_IS_ALREADY_CREATED'
         '403':
           description: Forbidden
           content:

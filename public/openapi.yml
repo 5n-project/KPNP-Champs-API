@@ -952,6 +952,21 @@ components:
         error:
           message: "입력된 대진 중 중복되는 대진이 있습니다."
           errorCode: "E739"
+    SCHEDULE_IS_EMPTY:
+      value:
+        success: false
+        data: null
+        error:
+          message: "저장된 일정이 없습니다."
+          errorCode: "E669"
+    MATCH_IS_ALREADY_CREATED:
+      value:
+        success: false
+        data: null
+        error:
+          message: "대진이 이미 생성되었습니다."
+          errorCode: "E663"
+
 
   schemas:
     getCompetitionDefaultResponse:

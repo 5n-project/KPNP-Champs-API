@@ -332,6 +332,8 @@ paths:
                               gameCount: 11
                               refereeGroupName: "B"
                     error: null
+                MATCH_IS_NOT_CREATED:
+                  $ref: '../../openapi.yml/#/components/examples/MATCH_IS_NOT_CREATED'
         403:
           description: Forbidden
           content:
