@@ -542,6 +542,8 @@ paths:
                     $ref: '../../openapi.yml/#/components/examples/DENY_CHANGE_REFEREE_MATCH_IS_NOT_WAITING'
                   ALREADY_EXIST_REFEREE:
                     $ref: '../../openapi.yml/#/components/examples/ALREADY_EXIST_REFEREE'
+                  INVALID_ARGUMENT_ERROR:
+                    $ref: '../../openapi.yml/#/components/examples/INVALID_ARGUMENT_ERROR'
         400:
           description: Bad Request
           content:
