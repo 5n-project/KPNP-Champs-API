@@ -67,7 +67,7 @@ paths:
                         type: string
                         description: 대회 장소 (영문)
                         example: Busan2345
-                      competitionUtcCode:
+                      competitionNocCode:
                         type: string
                         description: 대회 UTC 코드
                         example: KOR
@@ -81,6 +81,10 @@ paths:
                         format: date-time
                         description: 참가 신청 종료일
                         example: 2025-05-22T23:59:00.0
+                      competitionTimezone:
+                        type: string
+                        description: 타임존 코드
+                        example: Asia/Seoul
                       competitionLocalType:
                         type: string
                         description: |
@@ -284,10 +288,6 @@ paths:
                   type: string
                   example: "Busan"
                   description: 장소영문명
-                competitionUtcCode:
-                  type: string
-                  example: "KOR"
-                  description: 대회장 표준 시간 코드 (/noc-list 의 code)
                 competitionSubSdate:
                   type: string
                   format: date-time
@@ -298,6 +298,10 @@ paths:
                   format: date-time
                   example: "2025-02-22T23:00:00.000Z"
                   description: 신청기간 종료일
+                competitionTimezone:
+                  type: string
+                  example: "Asia/Seoul"
+                  description: 대회 타임존 코드
                 competitionLocalType:
                   type: string
                   example: "W"
@@ -417,10 +421,6 @@ paths:
                   type: string
                   example: "Busan"
                   description: 장소영문명
-                competitionUtcCode:
-                  type: string
-                  example: "KOR"
-                  description: 대회장 표준 시간 코드 (/noc-list 의 code)
                 competitionSubSdate:
                   type: string
                   format: date-time
@@ -431,6 +431,10 @@ paths:
                   format: date-time
                   example: "2025-02-22T23:00:00.000Z"
                   description: 신청기간 종료일
+                competitionTimezone:
+                  type: string
+                  example: "Asia/Seoul"
+                  description: 대회 타임존 코드
                 competitionLocalType:
                   type: string
                   example: "W"

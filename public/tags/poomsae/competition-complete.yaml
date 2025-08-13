@@ -37,6 +37,12 @@ paths:
                     format: date-time
                     example: "2024-04-20 00:00:00.0"
                     description: 대회 종료일
+                  competitionTimezone:
+                    type: string
+                    description: '대회 타임존 코드'
+                  competitionNocCode:
+                    type: string
+                    description: '대회 noc 국가코드'
                   competitionStatus:
                     type: string
                     example: "NN"

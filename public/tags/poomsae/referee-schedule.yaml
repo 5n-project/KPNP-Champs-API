@@ -332,6 +332,8 @@ paths:
                               gameCount: 11
                               refereeGroupName: "B"
                     error: null
+                MATCH_IS_NOT_CREATED:
+                  $ref: '../../openapi.yml/#/components/examples/MATCH_IS_NOT_CREATED'
         403:
           description: Forbidden
           content:
@@ -438,15 +440,14 @@ paths:
                   $ref: '../../openapi.yml/#/components/examples/ITEM_NOT_FOUND'
                 COMPETITION_MATCH_NOT_FOUND:
                   $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+                REFEREE_GROUP_IS_NOT_EXISTS:
+                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
         400:
           description: Bad Request
           content:
             application/json:
               schema:
                 $ref: '../../openapi.yml/#/components/responses/Error'
-              examples:
-                REFEREE_GROUP_IS_NOT_EXISTS:
-                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
 
 
         403:
@@ -541,6 +542,8 @@ paths:
                     $ref: '../../openapi.yml/#/components/examples/DENY_CHANGE_REFEREE_MATCH_IS_NOT_WAITING'
                   ALREADY_EXIST_REFEREE:
                     $ref: '../../openapi.yml/#/components/examples/ALREADY_EXIST_REFEREE'
+                  INVALID_ARGUMENT_ERROR:
+                    $ref: '../../openapi.yml/#/components/examples/INVALID_ARGUMENT_ERROR'
         400:
           description: Bad Request
           content:

@@ -1,4 +1,554 @@
 paths:
+  /competitions/{competitionSeq}/documents:
+    get:
+      summary: 대회 문서 리스트 조회
+      description: 특정 대회에서 제공되는 문서 유형 리스트를 조회한다.
+      tags:
+        - 문서
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 대회의 고유 식별자
+      responses:
+        '200':
+          description: 문서 리스트 조회 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        documentType:
+                          type: string
+                          example: DRAW_SHEET_OR_START_LIST
+                          description: '문서 타입'
+                        documentNameEn:
+                          type: string
+                          example: Draw Sheet/Start list
+                          description: '문서 명'
+                        isList:
+                          type: boolean
+                          example: true
+                          description: '세부 리스트 있는지 없는지 여부'
+                  error:
+                    type: string
+                    nullable: true
+                    example: null
+              examples:
+                successResponse:
+                  summary: 성공 응답
+                  value:
+                    success: true
+                    data:
+                      [
+                        {
+                          "documentType": "DRAW_SHEET_OR_START_LIST",
+                          "documentNameEn": "Draw Sheet/Start list",
+                          "isList": true
+                        },
+                        {
+                          "documentType": "CONTESTS_RESULTS",
+                          "documentNameEn": "Contest Results",
+                          "isList": true
+                        },
+                        {
+                          "documentType": "ENTRIES_BY_NOC",
+                          "documentNameEn": "Entries by NOC",
+                          "isList": false
+                        },
+                        {
+                          "documentType": "ENTRIES_BY_DIVISION",
+                          "documentNameEn": "Entries by Division",
+                          "isList": true
+                        },
+                        {
+                          "documentType": "NUMBER_OF_ENTRIES_BY_NOC",
+                          "documentNameEn": "Number of Entries by NOC",
+                          "isList": false
+                        },
+                        {
+                          "documentType": "COMPETITION_SCHEDULES",
+                          "documentNameEn": "Competition Schedules",
+                          "isList": false
+                        },
+                        {
+                          "documentType": "SCHEDULES_BY_COURT",
+                          "documentNameEn": "Schedules by Court",
+                          "isList": true
+                        },
+                        {
+                          "documentType": "SESSION_SCHEDULES_BY_COURT",
+                          "documentNameEn": "Session Schedules by Court",
+                          "isList": true
+                        },
+                        {
+                          "documentType": "SESSION_SCHEDULES_BY_DAY",
+                          "documentNameEn": "Session Schedules by Day",
+                          "isList": true
+                        },
+                        {
+                          "documentType": "SESSION_SCHEDULES_BY_DAY_WITH_START_TIME",
+                          "documentNameEn": "Session Schedules by Day with Start Time",
+                          "isList": true
+                        },
+                        {
+                          "documentType": "MEDAL_LISTS",
+                          "documentNameEn": "MedalLists",
+                          "isList": true
+                        },
+                        {
+                          "documentType": "MEDAL_LISTS_BY_DIVISION",
+                          "documentNameEn": "MedalLists By Division",
+                          "isList": false
+                        },
+                        {
+                          "documentType": "MEDAL_STANDINGS",
+                          "documentNameEn": "Medal Standings",
+                          "isList": false
+                        },
+                        {
+                          "documentType": "MEDAL_STANDINGS_TEAM",
+                          "documentNameEn": "Medal Standings_Team",
+                          "isList": false
+                        },
+                        {
+                          "documentType": "MEDAL_STANDINGS_WOMAN",
+                          "documentNameEn": "Medal Standings_Women",
+                          "isList": false
+                        },
+                        {
+                          "documentType": "MEDAL_STANDINGS_MEN",
+                          "documentNameEn": "Medal Standings_Women",
+                          "isList": false
+                        }
+                      ]
+                    error: null
+        '403':
+          description: 권한 없음
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+
+  /competitions/{competitionSeq}/documents/sub-list/{documentType}:
+    get:
+      summary: 대회 문서 서브 리스트 조회
+      description: 선택한 문서 유형(documentType)에 따라 세부 이벤트 리스트를 조회한다.
+      tags:
+        - 문서
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 대회의 고유 식별자
+        - name: documentType
+          in: path
+          required: true
+          schema:
+            type: string
+            enum:
+              - DRAW_SHEET_OR_START_LIST
+              - CONTESTS_RESULTS
+              - ENTRIES_BY_DIVISION
+              - SCHEDULES_BY_COURT
+              - SESSION_SCHEDULES_BY_COURT
+              - SESSION_SCHEDULES_BY_DAY
+              - SESSION_SCHEDULES_BY_DAY_WITH_START_TIME
+              - MEDAL_LISTS
+          description: 조회할 문서 유형
+      responses:
+        '200':
+          description: 서브 리스트 조회 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        day:
+                          type: string
+                          nullable: true
+                          example: null
+                          description: '일차'
+                        sessionNumber:
+                          type: integer
+                          nullable: true
+                          example: null
+                          description: '세션 번호'
+                        courtNumber:
+                          type: integer
+                          nullable: true
+                          example: null
+                          description: '코트 번호'
+                        divisionType:
+                          type: string
+                          nullable: true
+                          example: null
+                          description: '대회 룰 코드 (이거를 문서 상세 조회 필요할때 넣어야함)'
+                        divisionName:
+                          type: string
+                          nullable: true
+                          example: null
+                          description: '대회 룰 명'
+                        departmentType:
+                          type: string
+                          nullable: true
+                          example: UNDER_30
+                          description: '대회 부 코드'
+                        departmentName:
+                          type: string
+                          nullable: true
+                          example: Under 30
+                          description: '대회 부 명'
+                        divisionCategoryType:
+                          type: string
+                          nullable: true
+                          example: INDIVIDUAL_MALE
+                          description: '대회유형 코드'
+                        divisionCategoryName:
+                          type: string
+                          nullable: true
+                          example: Individual male
+                          description: '대회유형 명'
+                        competitionEventSeq:
+                          type: integer
+                          nullable: true
+                          example: 10570
+                          description: '게임 코드 (상세 조회에 필요할때 이거 넣어야함)'
+                  error:
+                    type: string
+                    nullable: true
+                    example: null
+
+              examples:
+                successResponse:
+                  summary: 성공 응답
+                  value:
+                    success: true
+                    data:
+                      [
+                        {
+                          "day": null,
+                          "sessionNumber": null,
+                          "courtNumber": null,
+                          "divisionType": null,
+                          "divisionName": null,
+                          "departmentType": "UNDER_30",
+                          "departmentName": "Under 30",
+                          "divisionCategoryType": "INDIVIDUAL_MALE",
+                          "divisionCategoryName": "Individual male",
+                          "competitionEventSeq": 10570
+                        },
+                        {
+                          "day": null,
+                          "sessionNumber": null,
+                          "courtNumber": null,
+                          "divisionType": null,
+                          "divisionName": null,
+                          "departmentType": "UNDER_30",
+                          "departmentName": "Under 30",
+                          "divisionCategoryType": "INDIVIDUAL_FEMALE",
+                          "divisionCategoryName": "Individual female",
+                          "competitionEventSeq": 10571
+                        },
+                        {
+                          "day": null,
+                          "sessionNumber": null,
+                          "courtNumber": null,
+                          "divisionType": null,
+                          "divisionName": null,
+                          "departmentType": "UNDER_30",
+                          "departmentName": "Under 30",
+                          "divisionCategoryType": "TEAM_MALE",
+                          "divisionCategoryName": "Team male",
+                          "competitionEventSeq": 10572
+                        },
+                        {
+                          "day": null,
+                          "sessionNumber": null,
+                          "courtNumber": null,
+                          "divisionType": null,
+                          "divisionName": null,
+                          "departmentType": "UNDER_30",
+                          "departmentName": "Under 30",
+                          "divisionCategoryType": "TEAM_FEMALE",
+                          "divisionCategoryName": "Team female",
+                          "competitionEventSeq": 10573
+                        },
+                        {
+                          "day": null,
+                          "sessionNumber": null,
+                          "courtNumber": null,
+                          "divisionType": null,
+                          "divisionName": null,
+                          "departmentType": "UNDER_30",
+                          "departmentName": "Under 30",
+                          "divisionCategoryType": "PAIR",
+                          "divisionCategoryName": "Pair",
+                          "competitionEventSeq": 10574
+                        },
+                        {
+                          "day": null,
+                          "sessionNumber": null,
+                          "courtNumber": null,
+                          "divisionType": null,
+                          "divisionName": null,
+                          "departmentType": "UNDER_17",
+                          "departmentName": "Under 17",
+                          "divisionCategoryType": "INDIVIDUAL_MALE",
+                          "divisionCategoryName": "Individual male",
+                          "competitionEventSeq": 10575
+                        },
+                        {
+                          "day": null,
+                          "sessionNumber": null,
+                          "courtNumber": null,
+                          "divisionType": null,
+                          "divisionName": null,
+                          "departmentType": "UNDER_17",
+                          "departmentName": "Under 17",
+                          "divisionCategoryType": "INDIVIDUAL_FEMALE",
+                          "divisionCategoryName": "Individual female",
+                          "competitionEventSeq": 10576
+                        },
+                        {
+                          "day": null,
+                          "sessionNumber": null,
+                          "courtNumber": null,
+                          "divisionType": null,
+                          "divisionName": null,
+                          "departmentType": "UNDER_17",
+                          "departmentName": "Under 17",
+                          "divisionCategoryType": "PAIR",
+                          "divisionCategoryName": "Pair",
+                          "competitionEventSeq": 10577
+                        },
+                        {
+                          "day": null,
+                          "sessionNumber": null,
+                          "courtNumber": null,
+                          "divisionType": null,
+                          "divisionName": null,
+                          "departmentType": "UNDER_17",
+                          "departmentName": "Under 17",
+                          "divisionCategoryType": "TEAM_MIXED",
+                          "divisionCategoryName": "Team mixed",
+                          "competitionEventSeq": 10578
+                        },
+                        {
+                          "day": null,
+                          "sessionNumber": null,
+                          "courtNumber": null,
+                          "divisionType": null,
+                          "divisionName": null,
+                          "departmentType": "AND_OVER_18",
+                          "departmentName": "18& Over",
+                          "divisionCategoryType": "INDIVIDUAL_MALE",
+                          "divisionCategoryName": "Individual male",
+                          "competitionEventSeq": 10579
+                        },
+                        {
+                          "day": null,
+                          "sessionNumber": null,
+                          "courtNumber": null,
+                          "divisionType": null,
+                          "divisionName": null,
+                          "departmentType": "AND_OVER_18",
+                          "departmentName": "18& Over",
+                          "divisionCategoryType": "INDIVIDUAL_FEMALE",
+                          "divisionCategoryName": "Individual female",
+                          "competitionEventSeq": 10580
+                        },
+                        {
+                          "day": null,
+                          "sessionNumber": null,
+                          "courtNumber": null,
+                          "divisionType": null,
+                          "divisionName": null,
+                          "departmentType": "AND_OVER_18",
+                          "departmentName": "18& Over",
+                          "divisionCategoryType": "TEAM_MALE",
+                          "divisionCategoryName": "Team male",
+                          "competitionEventSeq": 10581
+                        },
+                        {
+                          "day": null,
+                          "sessionNumber": null,
+                          "courtNumber": null,
+                          "divisionType": null,
+                          "divisionName": null,
+                          "departmentType": "AND_OVER_18",
+                          "departmentName": "18& Over",
+                          "divisionCategoryType": "TEAM_FEMALE",
+                          "divisionCategoryName": "Team female",
+                          "competitionEventSeq": 10582
+                        },
+                        {
+                          "day": null,
+                          "sessionNumber": null,
+                          "courtNumber": null,
+                          "divisionType": null,
+                          "divisionName": null,
+                          "departmentType": "AND_OVER_18",
+                          "departmentName": "18& Over",
+                          "divisionCategoryType": "PAIR",
+                          "divisionCategoryName": "Pair",
+                          "competitionEventSeq": 10583
+                        },
+                        {
+                          "day": null,
+                          "sessionNumber": null,
+                          "courtNumber": null,
+                          "divisionType": null,
+                          "divisionName": null,
+                          "departmentType": "9-23",
+                          "departmentName": "9-23",
+                          "divisionCategoryType": "INDIVIDUAL_MALE",
+                          "divisionCategoryName": "Individual male",
+                          "competitionEventSeq": 10585
+                        },
+                        {
+                          "day": null,
+                          "sessionNumber": null,
+                          "courtNumber": null,
+                          "divisionType": null,
+                          "divisionName": null,
+                          "departmentType": "9-23",
+                          "departmentName": "9-23",
+                          "divisionCategoryType": "INDIVIDUAL_FEMALE",
+                          "divisionCategoryName": "Individual female",
+                          "competitionEventSeq": 10586
+                        },
+                        {
+                          "day": null,
+                          "sessionNumber": null,
+                          "courtNumber": null,
+                          "divisionType": null,
+                          "divisionName": null,
+                          "departmentType": "9-23",
+                          "departmentName": "9-23",
+                          "divisionCategoryType": "TEAM_MALE",
+                          "divisionCategoryName": "Team male",
+                          "competitionEventSeq": 10587
+                        },
+                        {
+                          "day": null,
+                          "sessionNumber": null,
+                          "courtNumber": null,
+                          "divisionType": null,
+                          "divisionName": null,
+                          "departmentType": "9-23",
+                          "departmentName": "9-23",
+                          "divisionCategoryType": "TEAM_FEMALE",
+                          "divisionCategoryName": "Team female",
+                          "competitionEventSeq": 10588
+                        },
+                        {
+                          "day": null,
+                          "sessionNumber": null,
+                          "courtNumber": null,
+                          "divisionType": null,
+                          "divisionName": null,
+                          "departmentType": "9-23",
+                          "departmentName": "9-23",
+                          "divisionCategoryType": "PAIR",
+                          "divisionCategoryName": "Pair",
+                          "competitionEventSeq": 10589
+                        },
+                        {
+                          "day": null,
+                          "sessionNumber": null,
+                          "courtNumber": null,
+                          "divisionType": null,
+                          "divisionName": null,
+                          "departmentType": "7-63",
+                          "departmentName": "7-63",
+                          "divisionCategoryType": "TEAM_MALE",
+                          "divisionCategoryName": "Team male",
+                          "competitionEventSeq": 10592
+                        },
+                        {
+                          "day": null,
+                          "sessionNumber": null,
+                          "courtNumber": null,
+                          "divisionType": null,
+                          "divisionName": null,
+                          "departmentType": "7-63",
+                          "departmentName": "7-63",
+                          "divisionCategoryType": "TEAM_FEMALE",
+                          "divisionCategoryName": "Team female",
+                          "competitionEventSeq": 10593
+                        },
+                        {
+                          "day": null,
+                          "sessionNumber": null,
+                          "courtNumber": null,
+                          "divisionType": null,
+                          "divisionName": null,
+                          "departmentType": "7-63",
+                          "departmentName": "7-63",
+                          "divisionCategoryType": "PAIR",
+                          "divisionCategoryName": "Pair",
+                          "competitionEventSeq": 10594
+                        },
+                        {
+                          "day": null,
+                          "sessionNumber": null,
+                          "courtNumber": null,
+                          "divisionType": null,
+                          "divisionName": null,
+                          "departmentType": "7-63",
+                          "departmentName": "7-63",
+                          "divisionCategoryType": "INDIVIDUAL_MALE",
+                          "divisionCategoryName": "Individual male",
+                          "competitionEventSeq": 10590
+                        },
+                        {
+                          "day": null,
+                          "sessionNumber": null,
+                          "courtNumber": null,
+                          "divisionType": null,
+                          "divisionName": null,
+                          "departmentType": "7-63",
+                          "departmentName": "7-63",
+                          "divisionCategoryType": "INDIVIDUAL_FEMALE",
+                          "divisionCategoryName": "Individual female",
+                          "competitionEventSeq": 10591
+                        }
+                      ]
+                    error: null
+        '403':
+          description: 권한 없음
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+
   /competitions/{competitionSeq}/documents/detail/DRAW_SHEET_OR_START_LIST:
     get:
       summary: DRAW_SHEET_OR_START_LIST 품새 문서 상세 조회 (DRAW_SHEET_OR_START_LIST)
@@ -43,6 +593,7 @@ paths:
                       header:
                         required:
                           - competitionLocalType
+                          - competitionHostName
                           - isTeam
                           - competitionName
                           - competitionSdate
@@ -53,6 +604,9 @@ paths:
                           - divisionCategoryName
                         type: object
                         properties:
+                          competitionHostName:
+                            type: string
+                            description: "주최명"
                           competitionLocalType:
                             type: string
                             description: "국제대회 : W, 지역대회 : L"
@@ -88,6 +642,12 @@ paths:
                             type: string
                             example: "Individual female"
                             description: "대회유형명"
+                          hostLogoUrl:
+                            type: string
+                            description: "주최로고 url"
+                          competitionLogUrl:
+                            type: string
+                            description: "대회로고 url"
                       contents:
                         required:
                           - competitionEventSeq
@@ -212,6 +772,9 @@ paths:
                                 type: integer
                                 example: 7
                                 description: "경기 수"
+                              firstPhase:
+                                type: string
+                                description: "최초 경기 강"
                               classifications:
                                 type: array
                                 items:
@@ -441,6 +1004,7 @@ paths:
                           "tournamentDraw": {
                             "documentName": "DRAW SHEET",
                             "contestantsCount": 4,
+                            "firstPhase": "SF",
                             "classifications": [
                               {
                                 "ranking": 1,
@@ -687,6 +1251,7 @@ paths:
                           "tournamentDraw": {
                             "documentName": "DRAW SHEET",
                             "contestantsCount": 3,
+                            "firstPhase": "SF",
                             "classifications": [
                               {
                                 "ranking": 1,
@@ -1943,6 +2508,7 @@ paths:
                           "tournamentDraw": {
                             "documentName": "DRAW SHEET",
                             "contestantsCount": 7,
+                            "firstPhase": "QF",
                             "classifications": [ ],
                             "legends": [ ],
                             "tournamentDraws": [

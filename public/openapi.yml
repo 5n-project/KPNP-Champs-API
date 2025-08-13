@@ -27,6 +27,8 @@ paths:
   # 공통
   /common/combo/rules:
     $ref: './tags/poomsae/common.yaml#/paths/~1common~1combo~1rules'
+  /common/combo/timezones:
+    $ref: './tags/poomsae/common.yaml#/paths/~1common~1combo~1timezones'
   /common/combo/countries:
     $ref: './tags/poomsae/common.yaml#/paths/~1common~1combo~1countries'
   /common/combo/noc-list:
@@ -55,6 +57,8 @@ paths:
     $ref: './tags/poomsae/common.yaml#/paths/~1competition~1{competitionSeq}~1event-filter'
   /common/competition/{competitionSeq}/operation/match-filter:
     $ref: './tags/poomsae/common.yaml#/paths/~1common~1competition~1{competitionSeq}~1operation~1match-filter'
+  /common/competition/{competitionSeq}/matches/{competitionMatchPsSeq}/results:
+    $ref: './tags/poomsae/common.yaml#/paths/~1common~1competition~1{competitionSeq}~1matches~1{competitionMatchPsSeq}~1results'
 
 
   # 대회
@@ -249,8 +253,14 @@ paths:
 
 
   # 문서
+  /competitions/{competitionSeq}/documents:
+    $ref: './tags/poomsae/document.yaml#/paths/~1competitions~1{competitionSeq}~1documents'
+  /competitions/{competitionSeq}/documents/sub-list/{documentType}:
+    $ref: './tags/poomsae/document.yaml#/paths/~1competitions~1{competitionSeq}~1documents~1sub-list~1{documentType}'
   /competitions/{competitionSeq}/documents/detail/DRAW_SHEET_OR_START_LIST:
     $ref: './tags/poomsae/document.yaml#/paths/~1competitions~1{competitionSeq}~1documents~1detail~1DRAW_SHEET_OR_START_LIST'
+
+
 components:
   responses:
     OK:
@@ -414,7 +424,7 @@ components:
         success: false
         data: null
         error:
-          message: "심판 그룹이 존재하지 않습니다."
+          message: "심판조가 존재하지 않습니다.\n설정에서 심판조를 생성이 필요합니다."
           errorCode: "E655"
     WRONG_SCHEDULE_MATCH:
       value:
@@ -944,6 +954,21 @@ components:
         error:
           message: "입력된 대진 중 중복되는 대진이 있습니다."
           errorCode: "E739"
+    SCHEDULE_IS_EMPTY:
+      value:
+        success: false
+        data: null
+        error:
+          message: "저장된 일정이 없습니다."
+          errorCode: "E669"
+    MATCH_IS_ALREADY_CREATED:
+      value:
+        success: false
+        data: null
+        error:
+          message: "대진이 이미 생성되었습니다."
+          errorCode: "E663"
+
 
   schemas:
     getCompetitionDefaultResponse:
