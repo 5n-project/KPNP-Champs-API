@@ -57,6 +57,8 @@ paths:
     $ref: './tags/poomsae/common.yaml#/paths/~1competition~1{competitionSeq}~1event-filter'
   /common/competition/{competitionSeq}/operation/match-filter:
     $ref: './tags/poomsae/common.yaml#/paths/~1common~1competition~1{competitionSeq}~1operation~1match-filter'
+  /common/competition/{competitionSeq}/matches/{competitionMatchPsSeq}/results:
+    $ref: './tags/poomsae/common.yaml#/paths/~1common~1competition~1{competitionSeq}~1matches~1{competitionMatchPsSeq}~1results'
 
 
   # 대회

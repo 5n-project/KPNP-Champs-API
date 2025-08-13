@@ -1016,3 +1016,133 @@ paths:
                     code: IS_NOT_AUTHORIZED
                     message: 권한이 없습니다.
 
+  /common/competition/{competitionSeq}/matches/{competitionMatchPsSeq}/results:
+    get:
+      summary: 운영 - 경기 스타일별 결과 리스트 조회
+      description: |
+        운영 경기에 사용할 경기 스타일에 따른 결과 리스트를 조회한다.
+      tags:
+        - 공통
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 대회 고유 시퀀스
+        - name: competitionMatchPsSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 경기 고유 시퀀스
+      responses:
+        '200':
+          description: 경기 결과 리스트를 성공적으로 조회한 경우
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    required:
+                      - competitionMatchPsSeq
+                      - matchStyleType
+                      - winnerMatchSideTypes
+                      - resultDecisionTypes
+                    properties:
+                      competitionMatchPsSeq:
+                        type: integer
+                        description: 경기 고유 시퀀스
+                      matchStyleType:
+                        type: string
+                        description: "경기 스타일 타입 (예: CUTOFF, TOURNAMENT)"
+                      winnerMatchSideTypes:
+                        type: array
+                        description: 승자 쪽 정보 목록 (토너먼트일 경우에만 값 존재)
+                        items:
+                          type: object
+                          properties:
+                            matchSideType:
+                              type: string
+                              description: 경기 편측 타입 (HOME, AWAY)
+                            matchSideTypeNameEn:
+                              type: string
+                              description: 경기 편측 영문명
+                            matchSideTypeNameKo:
+                              type: string
+                              description: 경기 편측 한글명
+                      resultDecisionTypes:
+                        type: array
+                        description: 결과 판정 타입 목록
+                        items:
+                          type: object
+                          properties:
+                            resultDecisionType:
+                              type: string
+                              description: 결과 판정 타입 코드
+                            resultDecisionTypeNameEn:
+                              type: string
+                              description: 결과 판정 영문명
+                            resultDecisionTypeNameKo:
+                              type: string
+                              description: 결과 판정 한글명
+                  error:
+                    type: string
+                    nullable: true
+              examples:
+                cutoffResponse:
+                  summary: 컷오프 스타일 예시
+                  value:
+                    success: true
+                    data:
+                      competitionMatchPsSeq: 43754
+                      matchStyleType: "CUTOFF"
+                      winnerMatchSideTypes: [ ]
+                      resultDecisionTypes:
+                        - resultDecisionType: "WDR"
+                          resultDecisionTypeNameEn: "기권패"
+                          resultDecisionTypeNameKo: "기권패"
+                        - resultDecisionType: "DSQ"
+                          resultDecisionTypeNameEn: "실격패"
+                          resultDecisionTypeNameKo: "실격패"
+                    error: null
+                tournamentResponse:
+                  summary: 토너먼트 스타일 예시
+                  value:
+                    success: true
+                    data:
+                      competitionMatchPsSeq: 43853
+                      matchStyleType: "TOURNAMENT"
+                      winnerMatchSideTypes:
+                        - matchSideType: "HOME"
+                          matchSideTypeNameEn: "Chung"
+                          matchSideTypeNameKo: "청"
+                        - matchSideType: "AWAY"
+                          matchSideTypeNameEn: "Hong"
+                          matchSideTypeNameKo: "홍"
+                      resultDecisionTypes:
+                        - resultDecisionType: "PTF"
+                          resultDecisionTypeNameEn: "판정승"
+                          resultDecisionTypeNameKo: "판정승"
+                        - resultDecisionType: "RSC"
+                          resultDecisionTypeNameEn: "주심직권승"
+                          resultDecisionTypeNameKo: "주심직권승"
+                        - resultDecisionType: "WDR"
+                          resultDecisionTypeNameEn: "기권승"
+                          resultDecisionTypeNameKo: "기권승"
+                        - resultDecisionType: "DSQ"
+                          resultDecisionTypeNameEn: "실격승"
+                          resultDecisionTypeNameKo: "실격승"
+                        - resultDecisionType: "PUN"
+                          resultDecisionTypeNameEn: "감점승"
+                          resultDecisionTypeNameKo: "감점승"
+                    error: null
+                COMPETITION_MATCH_NOT_FOUND:
+                  $ref: '../../openapi.yml#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+
+
