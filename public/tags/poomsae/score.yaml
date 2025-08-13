@@ -249,8 +249,8 @@ paths:
                             - matchCompetitorDetailSeq
                             - matchSideType
                             - competitorPsSeq
-                            - nocType
-                            - country
+                            - competitionLocalYn
+                            - team
                             - participants
                           properties:
                             matchCompetitorDetailSeq:
@@ -265,14 +265,14 @@ paths:
                               type: integer
                               example: 589
                               description: 선수 seq
-                            nocType:
+                            competitionLocalYn:
                               type: string
-                              example: "KOR"
-                              description: 국가 코드 (NOC)
-                            country:
+                              enum: [ L, W ]
+                              description: 지역 대회 여부 (지역, 국제)
+                            team:
                               type: string
-                              example: "Republic of Korea"
-                              description: 국가명(영문)
+                              example: ["KOR", "TEAM_MALE_7-63_TM_09"]
+                              description: 팀 이름
                             participants:
                               type: array
                               description: 참가자 상세 목록
@@ -290,20 +290,6 @@ paths:
                                     type: integer
                                     example: 132395
                                     description: 참가자 seq
-                                  playerSeq:
-                                    type: integer
-                                    nullable: true
-                                    example: 41223
-                                    description: 선수 seq
-                                  teamSeq:
-                                    type: integer
-                                    nullable: true
-                                    example: 12451
-                                    description: 팀 seq
-                                  team:
-                                    type: string
-                                    example: "Korea National Team"
-                                    description: 팀 이름
                                   givenNameEn:
                                     type: string
                                     example: "Min-seo"
@@ -318,8 +304,8 @@ paths:
                     description: 에러 상세 정보
                     example: null
               examples:
-                defaultResponse:
-                  summary: 성공 응답
+                localResponse:
+                  summary: 지역 대회 응답
                   value:
                     success: true
                     data:
@@ -327,32 +313,53 @@ paths:
                       competitionMatchPsSeq: 20024
                       currentMatchSideType: "HOME"
                       currentSequenceType: "P1"
+                      competitionLocalYn: "L"
                       competitors:
                         - matchCompetitorDetailSeq: 5299
                           matchSideType: "HOME"
                           competitorPsSeq: 706
-                          nocType: "KOR"
-                          country: "Republic of Korea"
+                          team: "TEAM_MALE_7-63_TM_20"
                           participants:
                             - participantSeq: 132345
-                              playerSeq: null
-                              teamSeq: null
-                              team: "Korea National Team"
                               givenNameEn: "Min-seo"
                               familyNameEn: "NAM"
                         - matchCompetitorDetailSeq: 5298
                           matchSideType: "AWAY"
                           competitorPsSeq: 732
-                          nocType: "KOR"
-                          country: "Republic of Korea"
+                          team: "TEAM_FEMALE_7-63_TF_08"
                           participants:
                             - participantSeq: 132371
-                              playerSeq: null
-                              teamSeq: null
-                              team: "Korea National Team"
                               givenNameEn: "Min-seo"
                               familyNameEn: "DAM"
                     error: null
+                worldResponse:
+                  summary: 세계 대회 응답
+                  value:
+                    success: true
+                    data:
+                      competitionSeq: 2131
+                      competitionMatchPsSeq: 20024
+                      currentMatchSideType: "HOME"
+                      currentSequenceType: "P1"
+                      competitionLocalYn: "W"
+                      competitors:
+                        - matchCompetitorDetailSeq: 5299
+                          matchSideType: "HOME"
+                          competitorPsSeq: 706
+                          team: "KOR"
+                          participants:
+                            - participantSeq: 132345
+                              givenNameEn: "Min-seo"
+                              familyNameEn: "NAM"
+                        - matchCompetitorDetailSeq: 5298
+                          matchSideType: "AWAY"
+                          competitorPsSeq: 732
+                          team: "LAO"
+                          participants:
+                            - participantSeq: 132371
+                              givenNameEn: "Min-seo"
+                              familyNameEn: "DAM"
+                      error: null
                 COMPETITION_MATCH_NOT_FOUND:
                   $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_NOT_FOUND'
                 COMPETITION_MATCH_REFEREE_NOT_ASSIGNED:
