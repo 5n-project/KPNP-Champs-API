@@ -971,6 +971,9 @@ paths:
                       resultDecision:
                         type: string
                         description: 경기 결과
+                      isCutoffTournamentAndSemiFinalMatch:
+                        type: boolean
+                        description: 해당 경기가 컷오프+토너먼트에서 컷오프의 SemiFinal 인지 아닌지 (true면 qualify 보여야함)
                       poomsaeTypes:
                         type: array
                         description: 설정한 품새 타입 리스트 (자유품새는 비어있음)
@@ -1031,6 +1034,9 @@ paths:
                               type: integer
                               nullable: true
                               description: 컷오프 랭킹 (없으면 null)
+                            nextMatchSideType:
+                              type: string
+                              description: "qualify 다음으로 진출할 사이드 타입 (HOME or AWAY)"
                             poomsaeSequenceScores:
                               type: array
                               description: 품새 시퀀스별 점수
@@ -1128,6 +1134,7 @@ paths:
                       phase: "R64"
                       phaseLabel: "R64-2"
                       resultDecision: "RSC"
+                      isCutoffTournamentAndSemiFinalMatch: false
                       poomsaeTypes:
                         - poomsaeTypeCode: "TAEGEUK_8_JANG"
                           poomsaeTypeNameKo: "태극 8장"
@@ -1147,6 +1154,7 @@ paths:
                           penalty: null
                           resultType: "LOSS"
                           cutoffRanking: null
+                          nextMatchSideType: null
                           poomsaeSequenceScores:
                             - poomsaeSequenceType: "P1"
                               scoringCriteriaScores:
@@ -1180,6 +1188,7 @@ paths:
                           penalty: null
                           resultType: "WIN"
                           cutoffRanking: null
+                          nextMatchSideType: null
                           poomsaeSequenceScores:
                             - poomsaeSequenceType: "P1"
                               scoringCriteriaScores:
@@ -5055,6 +5064,87 @@ paths:
                     error: null
                 ITEM_NOT_FOUND:
                   $ref: '../../openapi.yml#/components/examples/ITEM_NOT_FOUND'
+        '403':
+          description: 권한 없음
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+
+  /competitions/{competitionSeq}/operation/matches/{competitionMatchPsSeq}/competitor/{matchCompetitorDetailSeq}/qualify:
+    patch:
+      summary: 컷오프 + 토너먼트에 본선 경기에서 정하는 결선 토너먼트에 진출할 사이드 타입(Qualify) 수정 (notion 실시간 응답 데이터 문서 확인)
+      description: 컷오프 + 토너먼트에 본선 경기에서 정하는 결선 토너먼트에 진출할 사이드 타입 수정하는 API
+      tags:
+        - 운영 - 경기
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 대회 고유 시퀀스
+        - name: competitionMatchPsSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 경기 고유 시퀀스
+        - name: matchCompetitorDetailSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 경기에 배정된 선수 고유 시퀀
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - nextMatchSideType
+              properties:
+                nextMatchSideType:
+                  type: string
+                  enum:
+                    - HOME (청)
+                    - AWAY (홍)
+                  description: 해당 선수가 컷오프 + 토너먼트에서 다음 토너먼트로 진출할 사이드
+                  example: "HOME"
+      responses:
+        '200':
+          description: 경기 결과 수정 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    nullable: true
+                  error:
+                    type: string
+                    nullable: true
+              examples:
+                success:
+                  summary: 성공 응답 예시
+                  value:
+                    success: true
+                    data: null
+                    error: null
+                COMPETITION_MATCH_NOT_FOUND:
+                  $ref: '../../openapi.yml#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+                MATCH_COMPETITOR_DETAIL_NOT_FOUND:
+                  $ref: '../../openapi.yml#/components/examples/MATCH_COMPETITOR_DETAIL_NOT_FOUND'
+                QUALIFY_SF_ONLY:
+                  $ref: '../../openapi.yml#/components/examples/QUALIFY_SF_ONLY'
         '403':
           description: 권한 없음
           content:

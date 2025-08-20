@@ -211,8 +211,8 @@ paths:
     $ref: './tags/poomsae/operation.yaml#/paths/~1competitions~1{competitionSeq}~1operation~1status-bar'
   /competitions/{competitionSeq}/operation/matches/progress/{day}:
     $ref: './tags/poomsae/operation.yaml#/paths/~1competitions~1{competitionSeq}~1operation~1matches~1progress~1{day}'
-
-
+  /competitions/{competitionSeq}/operation/matches/{competitionMatchPsSeq}/competitor/{matchCompetitorDetailSeq}/qualify:
+    $ref: './tags/poomsae/operation.yaml#/paths/~1competitions~1{competitionSeq}~1operation~1matches~1{competitionMatchPsSeq}~1competitor~1{matchCompetitorDetailSeq}~1qualify'
   # 심판 점수 채점
   /competitions/{competitionSeq}/days/{competitionDay}/schedules/referees:
     $ref: './tags/poomsae/score.yaml#/paths/~1competitions~1{competitionSeq}~1days~1{competitionDay}~1schedules~1referees'
@@ -970,6 +970,13 @@ components:
         error:
           message: "대진이 이미 생성되었습니다."
           errorCode: "E663"
+    QUALIFY_SF_ONLY:
+      value:
+        success: false
+        data: null
+        error:
+          message: "Qualify 지정은 컷오프 + 토너먼트 형식의 본선 경기에서만 가능합니다."
+          errorCode: "E741"
 
 
   schemas:
