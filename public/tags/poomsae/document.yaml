@@ -2773,10 +2773,6 @@ paths:
                               format: date
                               description: 일정 날짜
                               example: "2025-01-01"
-                            formattedDate:
-                              type: string
-                              description: 요일 포함 포맷팅된 날짜
-                              example: "WED 01 JAN"
                             startTime:
                               type: string
                               format: time
@@ -2803,14 +2799,12 @@ paths:
                   schedules:
                     - groupId: "73112c1a-90bb-41e9-99f1-e729adcff56c"
                       scheduleDate: "2025-01-01"
-                      formattedDate: "WED 01 JAN"
                       startTime: "09:00"
                       finishTime: "10:00"
                       contents:
                         - "Head of Team meeting"
                     - groupId: "deebb6d0-bfec-43e3-863b-4d611caabecd"
                       scheduleDate: "2025-01-01"
-                      formattedDate: "WED 01 JAN"
                       startTime: "10:00"
                       finishTime: "11:00"
                       contents:
@@ -2818,7 +2812,6 @@ paths:
                         - "Team male Under 30 Semifinal Group A"
                     - groupId: "036d107c-ac82-4d3f-8c89-e4de74663572"
                       scheduleDate: "2025-01-01"
-                      formattedDate: "WED 01 JAN"
                       startTime: "11:00"
                       finishTime: "12:00"
                       contents:
@@ -2827,7 +2820,6 @@ paths:
                         - "Individual male Under30 Semifinal Group B"
                     - groupId: "89061794-8dcc-4ce7-b0c6-37a1d945c1c3"
                       scheduleDate: "2025-01-01"
-                      formattedDate: "WED 01 JAN"
                       startTime: "12:00"
                       finishTime: "13:00"
                       contents:
@@ -2835,7 +2827,6 @@ paths:
                         - "break time"
                     - groupId: "75bbf9e2-f5b7-4916-9645-2d356af7371c"
                       scheduleDate: "2025-01-01"
-                      formattedDate: "WED 01 JAN"
                       startTime: "13:00"
                       finishTime: "14:00"
                       contents:
@@ -2897,10 +2888,6 @@ paths:
                               format: date
                               description: 일정 날짜
                               example: "2025-01-01"
-                            formattedDate:
-                              type: string
-                              description: 요일 포함 포맷팅된 날짜
-                              example: "WED 01 JAN"
                             startTime:
                               type: string
                               format: time
@@ -2927,14 +2914,12 @@ paths:
                   schedules:
                     - groupId: "73112c1a-90bb-41e9-99f1-e729adcff56c"
                       scheduleDate: "2025-01-01"
-                      formattedDate: "WED 01 JAN"
                       startTime: "09:00"
                       finishTime: "10:00"
                       contents:
                         - "Head of Team meeting"
                     - groupId: "deebb6d0-bfec-43e3-863b-4d611caabecd"
                       scheduleDate: "2025-01-01"
-                      formattedDate: "WED 01 JAN"
                       startTime: "10:00"
                       finishTime: "11:00"
                       contents:
@@ -2942,7 +2927,6 @@ paths:
                         - "Team male Under 30 Semifinal Group A"
                     - groupId: "036d107c-ac82-4d3f-8c89-e4de74663572"
                       scheduleDate: "2025-01-01"
-                      formattedDate: "WED 01 JAN"
                       startTime: "11:00"
                       finishTime: "12:00"
                       contents:
@@ -2951,7 +2935,6 @@ paths:
                         - "Individual male Under30 Semifinal Group B"
                     - groupId: "89061794-8dcc-4ce7-b0c6-37a1d945c1c3"
                       scheduleDate: "2025-01-01"
-                      formattedDate: "WED 01 JAN"
                       startTime: "12:00"
                       finishTime: "13:00"
                       contents:
@@ -2959,7 +2942,6 @@ paths:
                         - "break time"
                     - groupId: "75bbf9e2-f5b7-4916-9645-2d356af7371c"
                       scheduleDate: "2025-01-01"
-                      formattedDate: "WED 01 JAN"
                       startTime: "13:00"
                       finishTime: "14:00"
                       contents:
@@ -3043,10 +3025,6 @@ paths:
                               format: date
                               description: 일정 날짜
                               example: "2025-01-01"
-                            formattedDate:
-                              type: string
-                              description: 요일 포함 포맷팅된 날짜
-                              example: "WED 01 JAN"
                             startTime:
                               type: string
                               format: time
@@ -3073,14 +3051,12 @@ paths:
                   schedules:
                     - groupId: "73112c1a-90bb-41e9-99f1-e729adcff56c"
                       scheduleDate: "2025-01-01"
-                      formattedDate: "WED 01 JAN"
                       startTime: "09:00"
                       finishTime: "10:00"
                       contents:
                         - "Head of Team meeting"
                     - groupId: "deebb6d0-bfec-43e3-863b-4d611caabecd"
                       scheduleDate: "2025-01-01"
-                      formattedDate: "WED 01 JAN"
                       startTime: "10:00"
                       finishTime: "11:00"
                       contents:
@@ -3088,7 +3064,6 @@ paths:
                         - "Team male Under 30 Semifinal Group A"
                     - groupId: "036d107c-ac82-4d3f-8c89-e4de74663572"
                       scheduleDate: "2025-01-01"
-                      formattedDate: "WED 01 JAN"
                       startTime: "11:00"
                       finishTime: "12:00"
                       contents:
