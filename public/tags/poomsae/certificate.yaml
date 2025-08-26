@@ -1,0 +1,659 @@
+paths:
+  /competitions/{competitionSeq}/certificate/{certificateSettingSeq}/winners:
+    get:
+      summary: 운영 - 상장 출력(CT) 일반 상장 수상자 리스트 조회
+      description: |
+        지정된 상장 설정에 따라 일반 상장(CT) 수상자 리스트를 조회한다.
+      tags:
+        - 운영 - 상장
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 대회 고유 시퀀스
+        - name: certificateSettingSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 상장 설정 고유 시퀀스
+        - name: divisionCode
+          in: query
+          required: false
+          schema:
+            type: string
+          description: 품새 룰 코드
+        - name: departmentCode
+          in: query
+          required: false
+          schema:
+            type: string
+          description: 부 코드
+        - name: divisionCategoryCode
+          in: query
+          required: false
+          schema:
+            type: string
+          description: 대회 유형 코드
+        - name: competitionRank
+          in: query
+          required: false
+          schema:
+            type: integer
+          description: '랭킹 : 1, 2, 3, 999(참가상랭킹)'
+        - name: pageNum
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 0
+          description: 페이지 번호 (0이 첫번째 페이지)
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 100
+          description: 페이지 크기
+      responses:
+        '200':
+          description: 일반 상장 수상자 리스트 조회 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    properties:
+                      competitionLocalType:
+                        type: string
+                        description: '대회 지역 구분 코드 ( L : 지역대회, W : 국제대회 )'
+                      list:
+                        type: array
+                        items:
+                          required:
+                            - competitor
+                            - divisionCode
+                            - divisionNameKo
+                            - divisionNameEn
+                            - departmentCode
+                            - departmentNameKo
+                            - departmentNameEn
+                            - divisionCategoryCode
+                            - divisionCategoryNameKo
+                            - divisionCategoryNameEn
+                            - competitionRank
+                            - competitorType
+                            - team
+                            - country
+                          type: object
+                          properties:
+                            competitor:
+                              type: integer
+                              description: 참가자 고유 번호
+                            divisionCode:
+                              type: string
+                              description: 룰 코드
+                            divisionNameKo:
+                              type: string
+                              description: 룰 국문명
+                            divisionNameEn:
+                              type: string
+                              description: 룰 영문명
+                            departmentCode:
+                              type: string
+                              description: 부 코드
+                            departmentNameKo:
+                              type: string
+                              description: 부 국문명
+                            departmentNameEn:
+                              type: string
+                              description: 부 영문명
+                            divisionCategoryCode:
+                              type: string
+                              description: 대회유형 코드
+                            divisionCategoryNameKo:
+                              type: string
+                              description: 대회유형 국문명
+                            divisionCategoryNameEn:
+                              type: string
+                              description: 대회유형 영문명
+                            competitionRank:
+                              type: integer
+                              description: 랭킹
+                            competitorType:
+                              type: string
+                              description: '참가자 타입 (S : 개인, T : 팀)'
+                            team:
+                              type: string
+                              description: 소속명
+                            country:
+                              type: string
+                              description: 국가 코드
+                            participants:
+                              type: array
+                              items:
+                                required:
+                                  - participantSeq
+                                  - givenNameEn
+                                  - familyNameEn
+                                  - email
+                                type: object
+                                properties:
+                                  participantSeq:
+                                    type: integer
+                                    description: 참가자 고유 seq
+                                  givenNameEn:
+                                    type: string
+                                    description: 이름
+                                  familyNameEn:
+                                    type: string
+                                    description: 성
+                                  email:
+                                    type: string
+                                    description: 이메일
+                      total:
+                        type: integer
+                      pageNum:
+                        type: integer
+                  error:
+                    type: string
+                    nullable: true
+              examples:
+                successResponse:
+                  summary: 일반 상장 수상자 예시
+                  value:
+                    {
+                      "success": true,
+                      "data": {
+                        "competitionLocalType": "W",
+                        "list": [
+                          {
+                            "competitor": 18,
+                            "divisionCode": "WT_RECOGNIZED_POOMSAE",
+                            "divisionNameKo": "WT 공인품새룰",
+                            "divisionNameEn": "WT Recognized Poomsae",
+                            "departmentCode": "UNDER_30",
+                            "departmentNameKo": "30세 이하",
+                            "departmentNameEn": "Under 30",
+                            "divisionCategoryCode": "PAIR",
+                            "divisionCategoryNameKo": "복식",
+                            "divisionCategoryNameEn": "Pair",
+                            "competitionRank": 1,
+                            "competitorType": "T",
+                            "team": "GER",
+                            "country": "GER",
+                            "participants": [
+                              {
+                                "participantSeq": 186837,
+                                "givenNameEn": "Elena",
+                                "familyNameEn": "Kumar",
+                                "email": "elena.kumar183@sample.com"
+                              },
+                              {
+                                "participantSeq": 186836,
+                                "givenNameEn": "Leo",
+                                "familyNameEn": "Wang",
+                                "email": "leo.wang181@sample.com"
+                              }
+                            ]
+                          },
+                          {
+                            "competitor": 16,
+                            "divisionCode": "WT_RECOGNIZED_POOMSAE",
+                            "divisionNameKo": "WT 공인품새룰",
+                            "divisionNameEn": "WT Recognized Poomsae",
+                            "departmentCode": "UNDER_30",
+                            "departmentNameKo": "30세 이하",
+                            "departmentNameEn": "Under 30",
+                            "divisionCategoryCode": "PAIR",
+                            "divisionCategoryNameKo": "복식",
+                            "divisionCategoryNameEn": "Pair",
+                            "competitionRank": 2,
+                            "competitorType": "T",
+                            "team": "GER",
+                            "country": "GER",
+                            "participants": [
+                              {
+                                "participantSeq": 186833,
+                                "givenNameEn": "Hana",
+                                "familyNameEn": "Lee",
+                                "email": "hana.lee175@sample.com"
+                              },
+                              {
+                                "participantSeq": 186832,
+                                "givenNameEn": "Julie",
+                                "familyNameEn": "Yang",
+                                "email": "julie.yang173@sample.com"
+                              }
+                            ]
+                          },
+                          {
+                            "competitor": 17,
+                            "divisionCode": "WT_RECOGNIZED_POOMSAE",
+                            "divisionNameKo": "WT 공인품새룰",
+                            "divisionNameEn": "WT Recognized Poomsae",
+                            "departmentCode": "UNDER_30",
+                            "departmentNameKo": "30세 이하",
+                            "departmentNameEn": "Under 30",
+                            "divisionCategoryCode": "PAIR",
+                            "divisionCategoryNameKo": "복식",
+                            "divisionCategoryNameEn": "Pair",
+                            "competitionRank": 3,
+                            "competitorType": "T",
+                            "team": "GER",
+                            "country": "GER",
+                            "participants": [
+                              {
+                                "participantSeq": 186834,
+                                "givenNameEn": "Sung",
+                                "familyNameEn": "Chen",
+                                "email": "sung.chen177@sample.com"
+                              },
+                              {
+                                "participantSeq": 186835,
+                                "givenNameEn": "Jane",
+                                "familyNameEn": "Wang",
+                                "email": "jane.wang179@sample.com"
+                              }
+                            ]
+                          },
+                          {
+                            "competitor": 9,
+                            "divisionCode": "WT_RECOGNIZED_POOMSAE",
+                            "divisionNameKo": "WT 공인품새룰",
+                            "divisionNameEn": "WT Recognized Poomsae",
+                            "departmentCode": "UNDER_30",
+                            "departmentNameKo": "30세 이하",
+                            "departmentNameEn": "Under 30",
+                            "divisionCategoryCode": "PAIR",
+                            "divisionCategoryNameKo": "복식",
+                            "divisionCategoryNameEn": "Pair",
+                            "competitionRank": 999,
+                            "competitorType": "T",
+                            "team": "GER",
+                            "country": "GER",
+                            "participants": [
+                              {
+                                "participantSeq": 186838,
+                                "givenNameEn": "Mina",
+                                "familyNameEn": "Kumar",
+                                "email": "mina.kumar185@sample.com"
+                              },
+                              {
+                                "participantSeq": 186839,
+                                "givenNameEn": "David",
+                                "familyNameEn": "Nguyen",
+                                "email": "david.nguyen187@sample.com"
+                              }
+                            ]
+                          },
+                          {
+                            "competitor": 11,
+                            "divisionCode": "WT_RECOGNIZED_POOMSAE",
+                            "divisionNameKo": "WT 공인품새룰",
+                            "divisionNameEn": "WT Recognized Poomsae",
+                            "departmentCode": "UNDER_30",
+                            "departmentNameKo": "30세 이하",
+                            "departmentNameEn": "Under 30",
+                            "divisionCategoryCode": "PAIR",
+                            "divisionCategoryNameKo": "복식",
+                            "divisionCategoryNameEn": "Pair",
+                            "competitionRank": 999,
+                            "competitorType": "T",
+                            "team": "GER",
+                            "country": "GER",
+                            "participants": [
+                              {
+                                "participantSeq": 186842,
+                                "givenNameEn": "Nina",
+                                "familyNameEn": "Clark",
+                                "email": "nina.clark193@sample.com"
+                              },
+                              {
+                                "participantSeq": 186843,
+                                "givenNameEn": "David",
+                                "familyNameEn": "Kumar",
+                                "email": "david.kumar195@sample.com"
+                              }
+                            ]
+                          },
+                          {
+                            "competitor": 12,
+                            "divisionCode": "WT_RECOGNIZED_POOMSAE",
+                            "divisionNameKo": "WT 공인품새룰",
+                            "divisionNameEn": "WT Recognized Poomsae",
+                            "departmentCode": "UNDER_30",
+                            "departmentNameKo": "30세 이하",
+                            "departmentNameEn": "Under 30",
+                            "divisionCategoryCode": "PAIR",
+                            "divisionCategoryNameKo": "복식",
+                            "divisionCategoryNameEn": "Pair",
+                            "competitionRank": 999,
+                            "competitorType": "T",
+                            "team": "GER",
+                            "country": "GER",
+                            "participants": [
+                              {
+                                "participantSeq": 186844,
+                                "givenNameEn": "Mina",
+                                "familyNameEn": "Kumar",
+                                "email": "mina.kumar197@sample.com"
+                              },
+                              {
+                                "participantSeq": 186845,
+                                "givenNameEn": "Hana",
+                                "familyNameEn": "Silva",
+                                "email": "hana.silva199@sample.com"
+                              }
+                            ]
+                          },
+                          {
+                            "competitor": 13,
+                            "divisionCode": "WT_RECOGNIZED_POOMSAE",
+                            "divisionNameKo": "WT 공인품새룰",
+                            "divisionNameEn": "WT Recognized Poomsae",
+                            "departmentCode": "UNDER_30",
+                            "departmentNameKo": "30세 이하",
+                            "departmentNameEn": "Under 30",
+                            "divisionCategoryCode": "PAIR",
+                            "divisionCategoryNameKo": "복식",
+                            "divisionCategoryNameEn": "Pair",
+                            "competitionRank": 999,
+                            "competitorType": "T",
+                            "team": "GER",
+                            "country": "GER",
+                            "participants": [
+                              {
+                                "participantSeq": 186827,
+                                "givenNameEn": "Elena",
+                                "familyNameEn": "Choi",
+                                "email": "elena.choi163@sample.com"
+                              },
+                              {
+                                "participantSeq": 186826,
+                                "givenNameEn": "Sam",
+                                "familyNameEn": "Lim",
+                                "email": "sam.lim161@sample.com"
+                              }
+                            ]
+                          },
+                          {
+                            "competitor": 14,
+                            "divisionCode": "WT_RECOGNIZED_POOMSAE",
+                            "divisionNameKo": "WT 공인품새룰",
+                            "divisionNameEn": "WT Recognized Poomsae",
+                            "departmentCode": "UNDER_30",
+                            "departmentNameKo": "30세 이하",
+                            "departmentNameEn": "Under 30",
+                            "divisionCategoryCode": "PAIR",
+                            "divisionCategoryNameKo": "복식",
+                            "divisionCategoryNameEn": "Pair",
+                            "competitionRank": 999,
+                            "competitorType": "T",
+                            "team": "GER",
+                            "country": "GER",
+                            "participants": [
+                              {
+                                "participantSeq": 186829,
+                                "givenNameEn": "Hana",
+                                "familyNameEn": "Lee",
+                                "email": "hana.lee167@sample.com"
+                              },
+                              {
+                                "participantSeq": 186828,
+                                "givenNameEn": "Sara",
+                                "familyNameEn": "Yamamoto",
+                                "email": "sara.yamamoto165@sample.com"
+                              }
+                            ]
+                          },
+                          {
+                            "competitor": 10,
+                            "divisionCode": "WT_RECOGNIZED_POOMSAE",
+                            "divisionNameKo": "WT 공인품새룰",
+                            "divisionNameEn": "WT Recognized Poomsae",
+                            "departmentCode": "UNDER_30",
+                            "departmentNameKo": "30세 이하",
+                            "departmentNameEn": "Under 30",
+                            "divisionCategoryCode": "PAIR",
+                            "divisionCategoryNameKo": "복식",
+                            "divisionCategoryNameEn": "Pair",
+                            "competitionRank": 999,
+                            "competitorType": "T",
+                            "team": "GER",
+                            "country": "GER",
+                            "participants": [
+                              {
+                                "participantSeq": 186841,
+                                "givenNameEn": "Leo",
+                                "familyNameEn": "Lim",
+                                "email": "leo.lim191@sample.com"
+                              },
+                              {
+                                "participantSeq": 186840,
+                                "givenNameEn": "Emma",
+                                "familyNameEn": "Patel",
+                                "email": "emma.patel189@sample.com"
+                              }
+                            ]
+                          },
+                          {
+                            "competitor": 15,
+                            "divisionCode": "WT_RECOGNIZED_POOMSAE",
+                            "divisionNameKo": "WT 공인품새룰",
+                            "divisionNameEn": "WT Recognized Poomsae",
+                            "departmentCode": "UNDER_30",
+                            "departmentNameKo": "30세 이하",
+                            "departmentNameEn": "Under 30",
+                            "divisionCategoryCode": "PAIR",
+                            "divisionCategoryNameKo": "복식",
+                            "divisionCategoryNameEn": "Pair",
+                            "competitionRank": 999,
+                            "competitorType": "T",
+                            "team": "GER",
+                            "country": "GER",
+                            "participants": [
+                              {
+                                "participantSeq": 186830,
+                                "givenNameEn": "Paul",
+                                "familyNameEn": "Choi",
+                                "email": "paul.choi169@sample.com"
+                              },
+                              {
+                                "participantSeq": 186831,
+                                "givenNameEn": "Mina",
+                                "familyNameEn": "Lim",
+                                "email": "mina.lim171@sample.com"
+                              }
+                            ]
+                          }
+                        ],
+                        "total": 10,
+                        "pageNum": 0
+                      },
+                      "error": null
+                    }
+                ITEM_NOT_FOUND:
+                  $ref: '../../openapi.yml#/components/examples/ITEM_NOT_FOUND'
+        '403':
+          description: 권한 없음
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+
+  /competitions/{competitionSeq}/certificate/{certificateSettingSeq}/teams:
+    get:
+      summary: 운영 - 종합 상장(GC) 수상 팀 리스트 조회
+      description: |
+        지정된 상장 설정에 따라 종합 상장(GC) 수상 팀 리스트를 조회한다.
+      tags:
+        - 운영 - 상장
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 대회 고유 시퀀스
+        - name: certificateSettingSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 상장 설정 고유 시퀀스
+      responses:
+        '200':
+          description: 종합 상장 수상 팀 리스트 조회 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: array
+                    items:
+                      required:
+                        - team
+                        - goldCount
+                        - silverCount
+                        - bronzeCount
+                        - participantCount
+                        - teamRank
+                      type: object
+                      properties:
+                        team:
+                          type: string
+                          description: 소속명
+                        goldCount:
+                          type: integer
+                          description: 금메달 수
+                        silverCount:
+                          type: integer
+                          description: 은메달 수
+                        bronzeCount:
+                          type: integer
+                          description: 동메달 수
+                        participantCount:
+                          type: integer
+                          description: 참가자 수
+                        teamRank:
+                          type: integer
+                          description: 소속 랭킹
+                  error:
+                    type: string
+                    nullable: true
+              examples:
+                successResponse:
+                  summary: 종합 상장 수상 팀 예시
+                  value:
+                    {
+                      "success": true,
+                      "data": [
+                        {
+                          "team": "GER",
+                          "goldCount": 4,
+                          "silverCount": 4,
+                          "bronzeCount": 6,
+                          "participantCount": 61,
+                          "teamRank": 1
+                        },
+                        {
+                          "team": "ALG",
+                          "goldCount": 1,
+                          "silverCount": 0,
+                          "bronzeCount": 0,
+                          "participantCount": 3,
+                          "teamRank": 2
+                        },
+                        {
+                          "team": "AFG",
+                          "goldCount": 0,
+                          "silverCount": 1,
+                          "bronzeCount": 0,
+                          "participantCount": 3,
+                          "teamRank": 3
+                        },
+                        {
+                          "team": "ARM",
+                          "goldCount": 0,
+                          "silverCount": 0,
+                          "bronzeCount": 1,
+                          "participantCount": 3,
+                          "teamRank": 4
+                        },
+                        {
+                          "team": "ALB",
+                          "goldCount": 0,
+                          "silverCount": 0,
+                          "bronzeCount": 1,
+                          "participantCount": 3,
+                          "teamRank": 4
+                        },
+                        {
+                          "team": "ARU",
+                          "goldCount": 0,
+                          "silverCount": 0,
+                          "bronzeCount": 0,
+                          "participantCount": 3,
+                          "teamRank": 6
+                        },
+                        {
+                          "team": "ARG",
+                          "goldCount": 0,
+                          "silverCount": 0,
+                          "bronzeCount": 0,
+                          "participantCount": 3,
+                          "teamRank": 6
+                        },
+                        {
+                          "team": "AND",
+                          "goldCount": 0,
+                          "silverCount": 0,
+                          "bronzeCount": 0,
+                          "participantCount": 3,
+                          "teamRank": 6
+                        },
+                        {
+                          "team": "ANT",
+                          "goldCount": 0,
+                          "silverCount": 0,
+                          "bronzeCount": 0,
+                          "participantCount": 3,
+                          "teamRank": 9
+                        },
+                        {
+                          "team": "ANG",
+                          "goldCount": 0,
+                          "silverCount": 0,
+                          "bronzeCount": 0,
+                          "participantCount": 3,
+                          "teamRank": 9
+                        }
+                      ],
+                      "error": null
+                    }
+                ITEM_NOT_FOUND:
+                  $ref: '../../openapi.yml#/components/examples/ITEM_NOT_FOUND'
+        '403':
+          description: 권한 없음
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
