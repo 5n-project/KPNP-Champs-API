@@ -1,0 +1,976 @@
+paths:
+  /competitions/{competitionSeq}/documents/detail/CONTEST_RESULTS_OF_TOURNAMENT:
+    get:
+      summary: CONTEST_RESULTS_OF_TOURNAMENT 품새 문서 상세 조회 (CONTEST_RESULTS_OF_TOURNAMENT)
+      description: CONTEST_RESULTS_OF_TOURNAMENT 문서를 조회한다. (documentType 은 항상 'CONTEST_RESULTS_OF_TOURNAMENT')
+      tags:
+        - 문서
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 대회의 고유 시퀀스
+        - name: documentType
+          in: path
+          required: true
+          schema:
+            type: string
+          description: 조회할 documentType
+          example: CONTEST_RESULTS_OF_TOURNAMENT
+
+        - name: competitionEventSeq
+          in: query
+          required: true
+          schema:
+            type: integer
+          description: 룰 조합 seq
+        - name: phaseType
+          in: query
+          required: true
+          schema:
+            type: string
+          description: phase
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    $ref: "#/components/schemas/CompetitionResults"
+                  error:
+                    type: string
+                    nullable: true
+              examples:
+                공인_룰_토너먼트_개인전:
+                  $ref: "#/components/examples/RecognizedTournamentIndividual"
+                공인_룰_토너먼트_팀전:
+                  $ref: "#/components/examples/RecognizedTournamentTeam"
+                ITEM_NOT_FOUND:
+                  $ref: '../../../openapi.yml/#/components/examples/ITEM_NOT_FOUND'
+                COMPETITION_MATCH_NOT_FOUND:
+                  $ref: '../../../openapi.yml/#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+                CUTOFF_GROUP_IS_NOT_END:
+                  $ref: '../../../openapi.yml/#/components/examples/CUTOFF_GROUP_IS_NOT_END'
+                DOCUMENT_NOT_FOUND:
+                  $ref: '../../../openapi.yml/#/components/examples/DOCUMENT_NOT_FOUND'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '../../../openapi.yml#/components/responses/Error'
+              examples:
+                INVALID_TYPE_ERROR:
+                  $ref: '../../../openapi.yml#/components/examples/INVALID_TYPE_ERROR'
+        '403':
+          description: 권한 없음
+          content:
+            application/json:
+              schema:
+                $ref: '../../../openapi.yml#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+
+components:
+  schemas:
+    CompetitionResults:
+      type: object
+      description: ""
+      required:
+        - header
+        - contents
+      properties:
+        header:
+          $ref: "#/components/schemas/CompetitionHeader"
+        contents:
+          $ref: "#/components/schemas/CompetitionContents"
+    CompetitionHeader:
+      type: object
+      description: ""
+      required:
+        - competitionHostName
+        - competitionLocalType
+        - isTeam
+        - competitionName
+        - competitionSdate
+        - timeZoneId
+        - nocType
+        - divisionName
+        - departmentName
+        - divisionCategoryName
+        - phase
+      properties:
+        competitionHostName:
+          type: string
+          description: "주최명"
+        competitionLocalType:
+          type: string
+          description: "국제대회 : W, 지역대회 : L"
+          example: "L"
+        isTeam:
+          type: boolean
+          description: "해당 event가 팀전인지 아닌지"
+          example: false
+        competitionName:
+          type: string
+          example: "대회이름"
+        competitionSdate:
+          type: string
+          example: "2025-07-22T00:00:00.000Z"
+          description: "대회 시작 일자"
+        timeZoneId:
+          type: string
+          example: "Asia/Seoul"
+          description: "해당 대회 타임존 코드"
+        nocType:
+          type: string
+          example: "KOR"
+          description: "해당 대회 noc 코드"
+        divisionName:
+          type: string
+          example: "WT Recognized Poomsae"
+          description: "룰명"
+        departmentName:
+          type: string
+          example: "Under 30"
+          description: "부명"
+        divisionCategoryName:
+          type: string
+          example: "Individual female"
+          description: "대회유형명"
+        hostLogoUrl:
+          type: string
+          description: "주최로고 url"
+        competitionLogUrl:
+          type: string
+          description: "대회로고 url"
+        phase:
+          type: string
+          description: "phase"
+    CompetitionContents:
+      type: object
+      description: ""
+      required:
+        - divisionType
+        - matchResults
+      properties:
+        divisionType:
+          type: string
+          description: "대회 룰"
+        firstPoomsaeName:
+          type: string
+          description: "첫 번째 품새 이름"
+        secondPoomsaeName:
+          type: string
+          description: "두 번째 품새 이름"
+        matchResults:
+          type: array
+          description: "문서 데이터"
+          items:
+            $ref: "#/components/schemas/MatchResult"
+    MatchResult:
+      type: object
+      description: ""
+      properties:
+        matchSideType:
+          type: string
+          description: "HOME / AWAY"
+        noc:
+          type: string
+          description: "noc type"
+        team:
+          type: string
+          description: "국제 대회일 때 NOC, 로컬 대회일 때 팀 이름"
+        participants:
+          type: array
+          description: "팀 또는 개인 참가자 (개인일 때 길이 1)"
+          items:
+            $ref: "#/components/schemas/Participant"
+        score:
+          $ref: "#/components/schemas/Score"
+        refereeScores:
+          type: array
+          description: "심판별 점수 리스트"
+          items:
+            $ref: "#/components/schemas/RefereeScoreSet"
+        resultType:
+          type: string
+          description: "WIN / LOSS"
+    Participant:
+      type: object
+      required:
+        - familyNameEn
+        - givenNameEn
+      properties:
+        familyNameEn:
+          type: string
+        givenNameEn:
+          type: string
+    Score:
+      type: object
+      description: "total 점수"
+      required:
+        - scoringCriteriaScore
+        - averageScore
+        - totalScore
+        - scoreDetails
+      properties:
+        scoringCriteriaScore:
+          $ref: "#/components/schemas/ScoringCriteriaScore"
+        averageScore:
+          type: number
+          format: double
+          description: "P1+P2의 scoringCriteriaScore 평균 점수"
+        totalScore:
+          type: number
+          format: double
+          description: "P1+P2의 total score의 합"
+        scoreDetails:
+          type: array
+          description: "P1, P2 상세점수"
+          items:
+            $ref: "#/components/schemas/ScoreDetail"
+    ScoringCriteriaScore:
+      type: object
+      description: ""
+      properties:
+        presentation:
+          type: number
+          format: double
+          nullable: true
+          description: "공인 품새 표현력 점수 합계"
+        accuracy:
+          type: number
+          format: double
+          nullable: true
+          description: "공인 품새 정확성 점수 합계"
+        technicalSkills:
+          type: number
+          format: double
+          description: "자유 품새 기술력 점수 합계"
+        presentationFreestyle:
+          type: number
+          format: double
+          description: "자유 품새 표현력 점수 합계"
+    ScoreDetail:
+      type: object
+      description: ""
+      required:
+        - sequenceType
+        - scoringCriteriaScore
+        - score
+        - totalScore
+        - deduction
+      properties:
+        sequenceType:
+          type: string
+          description: ""
+        scoringCriteriaScore:
+          $ref: "#/components/schemas/ScoringCriteriaScoreDetail"
+        score:
+          type: number
+          format: double
+          description: "scoringCriteriaScore 의 합의 평균"
+        totalScore:
+          type: number
+          format: double
+          description: "scoringCriteriaScore 의 전체 점수의 합"
+        deduction:
+          type: number
+          format: double
+          description: "감점"
+    ScoringCriteriaScoreDetail:
+      type: object
+      properties:
+        presentation:
+          type: number
+          format: double
+          nullable: true
+          description: "공인 품새 표현력 점수의 평균"
+        accuracy:
+          type: number
+          format: double
+          nullable: true
+          description: "공인 품새 정확성 점수의 평균"
+        technicalSkills:
+          type: number
+          format: double
+          description: "자유 품새 기술력 점수의 평균"
+        presentationFreestyle:
+          type: number
+          format: double
+          description: "자유 품새 표현력 점수의 평균"
+    RefereeScoreSet:
+      type: object
+      description: "심판 세트 점수"
+      properties:
+        sequenceType:
+          type: string
+        scoreDetail:
+          $ref: "#/components/schemas/ScoreDetail"
+        refereeScores:
+          type: array
+          description: "심판별 점수 목록"
+          items:
+            $ref: "#/components/schemas/RefereeScore"
+    RefereeScore:
+      type: object
+      description: "심판 점수"
+      properties:
+        refereeType:
+          type: string
+          description: "REF_CR, REF_J1, REF_J2, ..."
+        scoringCriteriaScore:
+          $ref: "#/components/schemas/ScoringCriteriaScoreRefereeDetail"
+    ScoringCriteriaScoreRefereeDetail:
+      type: object
+      properties:
+        presentation:
+          type: number
+          format: double
+          nullable: true
+          description: "공인 품새 표현력 점수"
+        accuracy:
+          type: number
+          format: double
+          nullable: true
+          description: "공인 품새 정확성 점수"
+        technicalSkills:
+          type: number
+          format: double
+          description: "자유 품새 기술력 점수"
+        presentationFreestyle:
+          type: number
+          format: double
+          description: "자유 품새 표현력 점수"
+  examples:
+    RecognizedTournamentIndividual:
+      summary: 공인 룰 토너먼트 개인전
+      value:
+        {
+          "header": {
+            "competitionHostName": "오앤",
+            "competitionLocalType": "W",
+            "isTeam": false,
+            "competitionName": "공인 테스트 250813",
+            "competitionSdate": "2025-08-13T03:00:00.000+09:00",
+            "timeZoneId": "America/Bahia",
+            "nocType": "BRA",
+            "divisionName": "WT Recognized Poomsae",
+            "departmentName": "Cadet",
+            "divisionCategoryName": "Individual male",
+            "contestNumber": 1001,
+            "phase": "Semifinals"
+          },
+          "contents": {
+            "divisionType": "WT_RECOGNIZED_POOMSAE",
+            "firstPoomsaeName": "Taegeuk 5 Jang",
+            "secondPoomsaeName": "Taegeuk 8 Jang",
+            "matchResults": [
+              {
+                "matchSideType": "HOME",
+                "noc": "GER",
+                "team": "Iran_U30_IM_01",
+                "participants": [
+                  {
+                    "familyNameEn": "Choi",
+                    "givenNameEn": "Nina"
+                  }
+                ],
+                "score": {
+                  "scoringCriteriaScore": {
+                    "presentation": 8.65,
+                    "accuracy": 5.55,
+                    "technicalSkills": null,
+                    "presentationFreestyle": null
+                  },
+                  "averageScore": 6.95,
+                  "totalScore": 55.6,
+                  "scoreDetails": [
+                    {
+                      "sequenceType": "P1",
+                      "scoringCriteriaScore": {
+                        "presentation": 3.8,
+                        "accuracy": 2.075,
+                        "technicalSkills": null,
+                        "presentationFreestyle": null
+                      },
+                      "score": 5.575,
+                      "totalScore": 22.3,
+                      "deduction": 0.3
+                    },
+                    {
+                      "sequenceType": "P2",
+                      "scoringCriteriaScore": {
+                        "presentation": 4.85,
+                        "accuracy": 3.475,
+                        "technicalSkills": null,
+                        "presentationFreestyle": null
+                      },
+                      "score": 8.325,
+                      "totalScore": 33.3,
+                      "deduction": 0
+                    }
+                  ]
+                },
+                "refereeScores": [
+                  {
+                    "sequenceType": "P1",
+                    "scoreDetail": {
+                      "sequenceType": "P1",
+                      "scoringCriteriaScore": {
+                        "presentation": 3.8,
+                        "accuracy": 2.075,
+                        "technicalSkills": null,
+                        "presentationFreestyle": null
+                      },
+                      "score": 5.575,
+                      "totalScore": 22.3,
+                      "deduction": 0.3
+                    },
+                    "refereeScores": [
+                      {
+                        "refereeType": "REF_CR",
+                        "scoringCriteriaScore": {
+                          "presentation": 5.6,
+                          "accuracy": 3.1,
+                          "technicalSkills": null,
+                          "presentationFreestyle": null
+                        }
+                      },
+                      {
+                        "refereeType": "REF_J1",
+                        "scoringCriteriaScore": {
+                          "presentation": null,
+                          "accuracy": null,
+                          "technicalSkills": null,
+                          "presentationFreestyle": null
+                        }
+                      },
+                      {
+                        "refereeType": "REF_J2",
+                        "scoringCriteriaScore": {
+                          "presentation": 3.3,
+                          "accuracy": 1.2,
+                          "technicalSkills": null,
+                          "presentationFreestyle": null
+                        }
+                      },
+                      {
+                        "refereeType": "REF_J3",
+                        "scoringCriteriaScore": {
+                          "presentation": 6,
+                          "accuracy": 0,
+                          "technicalSkills": null,
+                          "presentationFreestyle": null
+                        }
+                      },
+                      {
+                        "refereeType": "REF_J4",
+                        "scoringCriteriaScore": {
+                          "presentation": 0.3,
+                          "accuracy": 4,
+                          "technicalSkills": null,
+                          "presentationFreestyle": null
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "sequenceType": "P2",
+                    "scoreDetail": {
+                      "sequenceType": "P2",
+                      "scoringCriteriaScore": {
+                        "presentation": 4.85,
+                        "accuracy": 3.475,
+                        "technicalSkills": null,
+                        "presentationFreestyle": null
+                      },
+                      "score": 8.325,
+                      "totalScore": 33.3,
+                      "deduction": 0
+                    },
+                    "refereeScores": [
+                      {
+                        "refereeType": "REF_CR",
+                        "scoringCriteriaScore": {
+                          "presentation": 5.7,
+                          "accuracy": 3.4,
+                          "technicalSkills": null,
+                          "presentationFreestyle": null
+                        }
+                      },
+                      {
+                        "refereeType": "REF_J1",
+                        "scoringCriteriaScore": {
+                          "presentation": null,
+                          "accuracy": null,
+                          "technicalSkills": null,
+                          "presentationFreestyle": null
+                        }
+                      },
+                      {
+                        "refereeType": "REF_J2",
+                        "scoringCriteriaScore": {
+                          "presentation": 2.4,
+                          "accuracy": 2.8,
+                          "technicalSkills": null,
+                          "presentationFreestyle": null
+                        }
+                      },
+                      {
+                        "refereeType": "REF_J3",
+                        "scoringCriteriaScore": {
+                          "presentation": 5.9,
+                          "accuracy": 3.7,
+                          "technicalSkills": null,
+                          "presentationFreestyle": null
+                        }
+                      },
+                      {
+                        "refereeType": "REF_J4",
+                        "scoringCriteriaScore": {
+                          "presentation": 5.4,
+                          "accuracy": 4,
+                          "technicalSkills": null,
+                          "presentationFreestyle": null
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "resultType": "WIN"
+              },
+              {
+                "matchSideType": "AWAY",
+                "noc": "GER",
+                "team": "Russia_U30_IM_02",
+                "participants": [
+                  {
+                    "familyNameEn": "Wang",
+                    "givenNameEn": "Yuna"
+                  }
+                ],
+                "score": {
+                  "scoringCriteriaScore": {
+                    "presentation": 6.141,
+                    "accuracy": 6.575,
+                    "technicalSkills": null,
+                    "presentationFreestyle": null
+                  },
+                  "averageScore": 6.058,
+                  "totalScore": 42.5,
+                  "scoreDetails": [
+                    {
+                      "sequenceType": "P1",
+                      "scoringCriteriaScore": {
+                        "presentation": 3.675,
+                        "accuracy": 3.075,
+                        "technicalSkills": null,
+                        "presentationFreestyle": null
+                      },
+                      "score": 6.15,
+                      "totalScore": 24.6,
+                      "deduction": 0.6
+                    },
+                    {
+                      "sequenceType": "P2",
+                      "scoringCriteriaScore": {
+                        "presentation": 2.466,
+                        "accuracy": 3.5,
+                        "technicalSkills": null,
+                        "presentationFreestyle": null
+                      },
+                      "score": 5.966,
+                      "totalScore": 17.9,
+                      "deduction": 0
+                    }
+                  ]
+                },
+                "refereeScores": [
+                  {
+                    "sequenceType": "P1",
+                    "scoreDetail": {
+                      "sequenceType": "P1",
+                      "scoringCriteriaScore": {
+                        "presentation": 3.675,
+                        "accuracy": 3.075,
+                        "technicalSkills": null,
+                        "presentationFreestyle": null
+                      },
+                      "score": 6.15,
+                      "totalScore": 24.6,
+                      "deduction": 0.6
+                    },
+                    "refereeScores": [
+                      {
+                        "refereeType": "REF_CR",
+                        "scoringCriteriaScore": {
+                          "presentation": 4.8,
+                          "accuracy": 3.1,
+                          "technicalSkills": null,
+                          "presentationFreestyle": null
+                        }
+                      },
+                      {
+                        "refereeType": "REF_J1",
+                        "scoringCriteriaScore": {
+                          "presentation": null,
+                          "accuracy": null,
+                          "technicalSkills": null,
+                          "presentationFreestyle": null
+                        }
+                      },
+                      {
+                        "refereeType": "REF_J2",
+                        "scoringCriteriaScore": {
+                          "presentation": 2.7,
+                          "accuracy": 3,
+                          "technicalSkills": null,
+                          "presentationFreestyle": null
+                        }
+                      },
+                      {
+                        "refereeType": "REF_J3",
+                        "scoringCriteriaScore": {
+                          "presentation": 6,
+                          "accuracy": 2.2,
+                          "technicalSkills": null,
+                          "presentationFreestyle": null
+                        }
+                      },
+                      {
+                        "refereeType": "REF_J4",
+                        "scoringCriteriaScore": {
+                          "presentation": 1.2,
+                          "accuracy": 4,
+                          "technicalSkills": null,
+                          "presentationFreestyle": null
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "sequenceType": "P2",
+                    "scoreDetail": {
+                      "sequenceType": "P2",
+                      "scoringCriteriaScore": {
+                        "presentation": 2.466,
+                        "accuracy": 3.5,
+                        "technicalSkills": null,
+                        "presentationFreestyle": null
+                      },
+                      "score": 5.966,
+                      "totalScore": 17.9,
+                      "deduction": 0
+                    },
+                    "refereeScores": [
+                      {
+                        "refereeType": "REF_CR",
+                        "scoringCriteriaScore": {
+                          "presentation": 3.8,
+                          "accuracy": 4,
+                          "technicalSkills": null,
+                          "presentationFreestyle": null
+                        }
+                      },
+                      {
+                        "refereeType": "REF_J1",
+                        "scoringCriteriaScore": {
+                          "presentation": null,
+                          "accuracy": null,
+                          "technicalSkills": null,
+                          "presentationFreestyle": null
+                        }
+                      },
+                      {
+                        "refereeType": "REF_J2",
+                        "scoringCriteriaScore": {
+                          "presentation": 1.7,
+                          "accuracy": 2.5,
+                          "technicalSkills": null,
+                          "presentationFreestyle": null
+                        }
+                      },
+                      {
+                        "refereeType": "REF_J3",
+                        "scoringCriteriaScore": {
+                          "presentation": null,
+                          "accuracy": null,
+                          "technicalSkills": null,
+                          "presentationFreestyle": null
+                        }
+                      },
+                      {
+                        "refereeType": "REF_J4",
+                        "scoringCriteriaScore": {
+                          "presentation": 1.9,
+                          "accuracy": 4,
+                          "technicalSkills": null,
+                          "presentationFreestyle": null
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "resultType": "LOSS"
+              }
+            ]
+          }
+        }
+
+    RecognizedTournamentTeam:
+      summary: 공인 룰 토너먼트 팀전
+      value:
+        {
+            "header": {
+                "competitionHostName": "메인",
+                "competitionLocalType": "W",
+                "isTeam": true,
+                "competitionName": "대회 생성_250820",
+                "competitionSdate": "2025-08-20T03:00:00.000+09:00",
+                "timeZoneId": "America/Argentina/Salta",
+                "nocType": "ARG",
+                "divisionName": "WT Recognized Poomsae",
+                "departmentName": "Under 30",
+                "divisionCategoryName": "Team male",
+                "contestNumber": 2017,
+                "phase": "Final"
+            },
+            "contents": {
+                "divisionType": "WT_RECOGNIZED_POOMSAE",
+                "firstPoomsaeName": "Keumgang",
+                "secondPoomsaeName": "Taeback",
+                "matchResults": [
+                    {
+                        "matchSideType": "HOME",
+                        "noc": "AFG",
+                        "team": "AFG",
+                        "participants": [
+                            {
+                                "familyNameEn": "Clark",
+                                "givenNameEn": "Emma"
+                            },
+                            {
+                                "familyNameEn": "Silva",
+                                "givenNameEn": "Ken"
+                            },
+                            {
+                                "familyNameEn": "Choi",
+                                "givenNameEn": "Luke"
+                            }
+                        ],
+                        "score": {
+                            "scoringCriteriaScore": {
+                                "presentation": 11.7,
+                                "accuracy": 8,
+                                "technicalSkills": null,
+                                "presentationFreestyle": null
+                            },
+                            "averageScore": 9.85,
+                            "totalScore": 19.7,
+                            "scoreDetails": [
+                                {
+                                    "sequenceType": "P1",
+                                    "scoringCriteriaScore": {
+                                        "presentation": 5.7,
+                                        "accuracy": 4,
+                                        "technicalSkills": null,
+                                        "presentationFreestyle": null
+                                    },
+                                    "score": 9.7,
+                                    "totalScore": 9.7,
+                                    "deduction": 0
+                                },
+                                {
+                                    "sequenceType": "P2",
+                                    "scoringCriteriaScore": {
+                                        "presentation": 6,
+                                        "accuracy": 4,
+                                        "technicalSkills": null,
+                                        "presentationFreestyle": null
+                                    },
+                                    "score": 10,
+                                    "totalScore": 10,
+                                    "deduction": 0
+                                }
+                            ]
+                        },
+                        "refereeScores": [
+                            {
+                                "sequenceType": "P1",
+                                "scoreDetail": {
+                                    "sequenceType": "P1",
+                                    "scoringCriteriaScore": {
+                                        "presentation": 5.7,
+                                        "accuracy": 4,
+                                        "technicalSkills": null,
+                                        "presentationFreestyle": null
+                                    },
+                                    "score": 9.7,
+                                    "totalScore": 9.7,
+                                    "deduction": 0
+                                },
+                                "refereeScores": [
+                                    {
+                                        "refereeType": "REF_CR",
+                                        "scoringCriteriaScore": {
+                                            "presentation": 5.7,
+                                            "accuracy": 4,
+                                            "technicalSkills": null,
+                                            "presentationFreestyle": null
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "sequenceType": "P2",
+                                "scoreDetail": {
+                                    "sequenceType": "P2",
+                                    "scoringCriteriaScore": {
+                                        "presentation": 6,
+                                        "accuracy": 4,
+                                        "technicalSkills": null,
+                                        "presentationFreestyle": null
+                                    },
+                                    "score": 10,
+                                    "totalScore": 10,
+                                    "deduction": 0
+                                },
+                                "refereeScores": [
+                                    {
+                                        "refereeType": "REF_CR",
+                                        "scoringCriteriaScore": {
+                                            "presentation": 6,
+                                            "accuracy": 4,
+                                            "technicalSkills": null,
+                                            "presentationFreestyle": null
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "resultType": "LOSS"
+                    },
+                    {
+                        "matchSideType": "AWAY",
+                        "noc": "ALG",
+                        "team": "ALG",
+                        "participants": [
+                            {
+                                "familyNameEn": "Tanaka",
+                                "givenNameEn": "Mina"
+                            },
+                            {
+                                "familyNameEn": "Wang",
+                                "givenNameEn": "Minsoo"
+                            },
+                            {
+                                "familyNameEn": "Park",
+                                "givenNameEn": "John"
+                            }
+                        ],
+                        "score": {
+                            "scoringCriteriaScore": {
+                                "presentation": 12,
+                                "accuracy": 8,
+                                "technicalSkills": null,
+                                "presentationFreestyle": null
+                            },
+                            "averageScore": 10,
+                            "totalScore": 20,
+                            "scoreDetails": [
+                                {
+                                    "sequenceType": "P1",
+                                    "scoringCriteriaScore": {
+                                        "presentation": 6,
+                                        "accuracy": 4,
+                                        "technicalSkills": null,
+                                        "presentationFreestyle": null
+                                    },
+                                    "score": 10,
+                                    "totalScore": 10,
+                                    "deduction": 0
+                                },
+                                {
+                                    "sequenceType": "P2",
+                                    "scoringCriteriaScore": {
+                                        "presentation": 6,
+                                        "accuracy": 4,
+                                        "technicalSkills": null,
+                                        "presentationFreestyle": null
+                                    },
+                                    "score": 10,
+                                    "totalScore": 10,
+                                    "deduction": 0
+                                }
+                            ]
+                        },
+                        "refereeScores": [
+                            {
+                                "sequenceType": "P1",
+                                "scoreDetail": {
+                                    "sequenceType": "P1",
+                                    "scoringCriteriaScore": {
+                                        "presentation": 6,
+                                        "accuracy": 4,
+                                        "technicalSkills": null,
+                                        "presentationFreestyle": null
+                                    },
+                                    "score": 10,
+                                    "totalScore": 10,
+                                    "deduction": 0
+                                },
+                                "refereeScores": [
+                                    {
+                                        "refereeType": "REF_CR",
+                                        "scoringCriteriaScore": {
+                                            "presentation": 6,
+                                            "accuracy": 4,
+                                            "technicalSkills": null,
+                                            "presentationFreestyle": null
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "sequenceType": "P2",
+                                "scoreDetail": {
+                                    "sequenceType": "P2",
+                                    "scoringCriteriaScore": {
+                                        "presentation": 6,
+                                        "accuracy": 4,
+                                        "technicalSkills": null,
+                                        "presentationFreestyle": null
+                                    },
+                                    "score": 10,
+                                    "totalScore": 10,
+                                    "deduction": 0
+                                },
+                                "refereeScores": [
+                                    {
+                                        "refereeType": "REF_CR",
+                                        "scoringCriteriaScore": {
+                                            "presentation": 6,
+                                            "accuracy": 4,
+                                            "technicalSkills": null,
+                                            "presentationFreestyle": null
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "resultType": "WIN"
+                    }
+                ]
+            }
+        }

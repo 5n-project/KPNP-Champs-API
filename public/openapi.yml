@@ -265,6 +265,10 @@ paths:
     $ref: './tags/poomsae/document/document.yaml#/paths/~1competitions~1{competitionSeq}~1documents~1sub-list~1{documentType}'
   /competitions/{competitionSeq}/documents/detail/DRAW_SHEET_OR_START_LIST:
     $ref: './tags/poomsae/document/draw-sheet.yaml#/paths/~1competitions~1{competitionSeq}~1documents~1detail~1DRAW_SHEET_OR_START_LIST'
+  /competitions/{competitionSeq}/documents/detail/CONTEST_RESULTS_OF_CUTOFF:
+    $ref: './tags/poomsae/document/contest-result-cutoff.yaml#/paths/~1competitions~1{competitionSeq}~1documents~1detail~1CONTEST_RESULTS_OF_CUTOFF'
+  /competitions/{competitionSeq}/documents/detail/CONTESTS_RESULT_OF_TOURNAMENT:
+    $ref: './tags/poomsae/document/contest-result-tournament.yaml#/paths/~1competitions~1{competitionSeq}~1documents~1detail~1CONTEST_RESULTS_OF_TOURNAMENT'
   /competitions/{competitionSeq}/documents/schedules/contents:
     $ref: './tags/poomsae/document/document-schedules.yaml#/paths/~1competitions~1{competitionSeq}~1documents~1schedules~1contents'
   /competitions/{competitionSeq}/documents/schedules:
@@ -985,6 +989,20 @@ components:
         error:
           message: "Qualify 지정은 컷오프 + 토너먼트 형식의 본선 경기에서만 가능합니다."
           errorCode: "E741"
+    MATCH_IS_NOT_END:
+      value:
+        success: false
+        data: null
+        error:
+          message: "대진이 종료되지 않았습니다."
+          errorCode: "E671"
+    CUTOFF_GROUP_IS_NOT_END:
+      value:
+        success: false
+        data: null
+        error:
+          message: "컷오프 조가 종료되지 않았습니다."
+          errorCode: "E672"
 
 
   schemas:

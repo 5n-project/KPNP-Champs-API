@@ -57,8 +57,13 @@ paths:
                           "isList": true
                         },
                         {
-                          "documentType": "CONTESTS_RESULTS",
-                          "documentNameEn": "Contest Results",
+                          "documentType": "CONTESTS_RESULTS_OF_TOURNAMENT",
+                          "documentNameEn": "Contest Results of Tournament",
+                          "isList": true
+                        },
+                        {
+                          "documentType": "CONTESTS_RESULTS_OF_CUTOFF",
+                          "documentNameEn": "Contest Results of Cutoff",
                           "isList": true
                         },
                         {
@@ -163,7 +168,8 @@ paths:
             type: string
             enum:
               - DRAW_SHEET_OR_START_LIST
-              - CONTESTS_RESULTS
+              - CONTEST_RESULTS_OF_TOURNAMENT
+              - CONTEST_RESULTS_OF_CUTOFF
               - ENTRIES_BY_DIVISION
               - SCHEDULES_BY_COURT
               - SESSION_SCHEDULES_BY_COURT
@@ -232,11 +238,21 @@ paths:
                           nullable: true
                           example: Individual male
                           description: '대회유형 명'
+                        phaseType:
+                          type: string
+                          nullable: true
+                          example: 'SF-A'
+                          description: 'phase (상세 조회에 필요할때 이거 넣어야함)'
                         competitionEventSeq:
                           type: integer
                           nullable: true
                           example: 10570
                           description: '게임 코드 (상세 조회에 필요할때 이거 넣어야함)'
+                        competitionMatchPsSeq:
+                          type: integer
+                          nullable: true
+                          example: 49921
+                          description: 'match seq (상세 조회에 필요할때 이거 넣어야함)'
                   error:
                     type: string
                     nullable: true
@@ -255,11 +271,13 @@ paths:
                           "courtNumber": null,
                           "divisionType": null,
                           "divisionName": null,
-                          "departmentType": "UNDER_30",
-                          "departmentName": "Under 30",
-                          "divisionCategoryType": "INDIVIDUAL_MALE",
-                          "divisionCategoryName": "Individual male",
-                          "competitionEventSeq": 10570
+                          "departmentType": null,
+                          "departmentName": null,
+                          "divisionCategoryType": null,
+                          "divisionCategoryName": null,
+                          "phaseType": "Pre-A",
+                          "competitionEventSeq": 10572,
+                          "competitionMatchPsSeq": null
                         },
                         {
                           "day": null,
@@ -267,11 +285,13 @@ paths:
                           "courtNumber": null,
                           "divisionType": null,
                           "divisionName": null,
-                          "departmentType": "UNDER_30",
-                          "departmentName": "Under 30",
-                          "divisionCategoryType": "INDIVIDUAL_FEMALE",
-                          "divisionCategoryName": "Individual female",
-                          "competitionEventSeq": 10571
+                          "departmentType": null,
+                          "departmentName": null,
+                          "divisionCategoryType": null,
+                          "divisionCategoryName": null,
+                          "phaseType": "Pre-A",
+                          "competitionEventSeq": 10581,
+                          "competitionMatchPsSeq": null
                         },
                         {
                           "day": null,
@@ -279,11 +299,13 @@ paths:
                           "courtNumber": null,
                           "divisionType": null,
                           "divisionName": null,
-                          "departmentType": "UNDER_30",
-                          "departmentName": "Under 30",
-                          "divisionCategoryType": "TEAM_MALE",
-                          "divisionCategoryName": "Team male",
-                          "competitionEventSeq": 10572
+                          "departmentType": null,
+                          "departmentName": null,
+                          "divisionCategoryType": null,
+                          "divisionCategoryName": null,
+                          "phaseType": "Pre-A",
+                          "competitionEventSeq": 10587,
+                          "competitionMatchPsSeq": null
                         },
                         {
                           "day": null,
@@ -291,11 +313,13 @@ paths:
                           "courtNumber": null,
                           "divisionType": null,
                           "divisionName": null,
-                          "departmentType": "UNDER_30",
-                          "departmentName": "Under 30",
-                          "divisionCategoryType": "TEAM_FEMALE",
-                          "divisionCategoryName": "Team female",
-                          "competitionEventSeq": 10573
+                          "departmentType": null,
+                          "departmentName": null,
+                          "divisionCategoryType": null,
+                          "divisionCategoryName": null,
+                          "phaseType": "Pre-A",
+                          "competitionEventSeq": 10589,
+                          "competitionMatchPsSeq": null
                         },
                         {
                           "day": null,
@@ -303,11 +327,13 @@ paths:
                           "courtNumber": null,
                           "divisionType": null,
                           "divisionName": null,
-                          "departmentType": "UNDER_30",
-                          "departmentName": "Under 30",
-                          "divisionCategoryType": "PAIR",
-                          "divisionCategoryName": "Pair",
-                          "competitionEventSeq": 10574
+                          "departmentType": null,
+                          "departmentName": null,
+                          "divisionCategoryType": null,
+                          "divisionCategoryName": null,
+                          "phaseType": "Pre-A",
+                          "competitionEventSeq": 10591,
+                          "competitionMatchPsSeq": null
                         },
                         {
                           "day": null,
@@ -315,11 +341,13 @@ paths:
                           "courtNumber": null,
                           "divisionType": null,
                           "divisionName": null,
-                          "departmentType": "UNDER_17",
-                          "departmentName": "Under 17",
-                          "divisionCategoryType": "INDIVIDUAL_MALE",
-                          "divisionCategoryName": "Individual male",
-                          "competitionEventSeq": 10575
+                          "departmentType": null,
+                          "departmentName": null,
+                          "divisionCategoryType": null,
+                          "divisionCategoryName": null,
+                          "phaseType": "Pre-A",
+                          "competitionEventSeq": 10592,
+                          "competitionMatchPsSeq": null
                         },
                         {
                           "day": null,
@@ -327,215 +355,13 @@ paths:
                           "courtNumber": null,
                           "divisionType": null,
                           "divisionName": null,
-                          "departmentType": "UNDER_17",
-                          "departmentName": "Under 17",
-                          "divisionCategoryType": "INDIVIDUAL_FEMALE",
-                          "divisionCategoryName": "Individual female",
-                          "competitionEventSeq": 10576
-                        },
-                        {
-                          "day": null,
-                          "sessionNumber": null,
-                          "courtNumber": null,
-                          "divisionType": null,
-                          "divisionName": null,
-                          "departmentType": "UNDER_17",
-                          "departmentName": "Under 17",
-                          "divisionCategoryType": "PAIR",
-                          "divisionCategoryName": "Pair",
-                          "competitionEventSeq": 10577
-                        },
-                        {
-                          "day": null,
-                          "sessionNumber": null,
-                          "courtNumber": null,
-                          "divisionType": null,
-                          "divisionName": null,
-                          "departmentType": "UNDER_17",
-                          "departmentName": "Under 17",
-                          "divisionCategoryType": "TEAM_MIXED",
-                          "divisionCategoryName": "Team mixed",
-                          "competitionEventSeq": 10578
-                        },
-                        {
-                          "day": null,
-                          "sessionNumber": null,
-                          "courtNumber": null,
-                          "divisionType": null,
-                          "divisionName": null,
-                          "departmentType": "AND_OVER_18",
-                          "departmentName": "18& Over",
-                          "divisionCategoryType": "INDIVIDUAL_MALE",
-                          "divisionCategoryName": "Individual male",
-                          "competitionEventSeq": 10579
-                        },
-                        {
-                          "day": null,
-                          "sessionNumber": null,
-                          "courtNumber": null,
-                          "divisionType": null,
-                          "divisionName": null,
-                          "departmentType": "AND_OVER_18",
-                          "departmentName": "18& Over",
-                          "divisionCategoryType": "INDIVIDUAL_FEMALE",
-                          "divisionCategoryName": "Individual female",
-                          "competitionEventSeq": 10580
-                        },
-                        {
-                          "day": null,
-                          "sessionNumber": null,
-                          "courtNumber": null,
-                          "divisionType": null,
-                          "divisionName": null,
-                          "departmentType": "AND_OVER_18",
-                          "departmentName": "18& Over",
-                          "divisionCategoryType": "TEAM_MALE",
-                          "divisionCategoryName": "Team male",
-                          "competitionEventSeq": 10581
-                        },
-                        {
-                          "day": null,
-                          "sessionNumber": null,
-                          "courtNumber": null,
-                          "divisionType": null,
-                          "divisionName": null,
-                          "departmentType": "AND_OVER_18",
-                          "departmentName": "18& Over",
-                          "divisionCategoryType": "TEAM_FEMALE",
-                          "divisionCategoryName": "Team female",
-                          "competitionEventSeq": 10582
-                        },
-                        {
-                          "day": null,
-                          "sessionNumber": null,
-                          "courtNumber": null,
-                          "divisionType": null,
-                          "divisionName": null,
-                          "departmentType": "AND_OVER_18",
-                          "departmentName": "18& Over",
-                          "divisionCategoryType": "PAIR",
-                          "divisionCategoryName": "Pair",
-                          "competitionEventSeq": 10583
-                        },
-                        {
-                          "day": null,
-                          "sessionNumber": null,
-                          "courtNumber": null,
-                          "divisionType": null,
-                          "divisionName": null,
-                          "departmentType": "9-23",
-                          "departmentName": "9-23",
-                          "divisionCategoryType": "INDIVIDUAL_MALE",
-                          "divisionCategoryName": "Individual male",
-                          "competitionEventSeq": 10585
-                        },
-                        {
-                          "day": null,
-                          "sessionNumber": null,
-                          "courtNumber": null,
-                          "divisionType": null,
-                          "divisionName": null,
-                          "departmentType": "9-23",
-                          "departmentName": "9-23",
-                          "divisionCategoryType": "INDIVIDUAL_FEMALE",
-                          "divisionCategoryName": "Individual female",
-                          "competitionEventSeq": 10586
-                        },
-                        {
-                          "day": null,
-                          "sessionNumber": null,
-                          "courtNumber": null,
-                          "divisionType": null,
-                          "divisionName": null,
-                          "departmentType": "9-23",
-                          "departmentName": "9-23",
-                          "divisionCategoryType": "TEAM_MALE",
-                          "divisionCategoryName": "Team male",
-                          "competitionEventSeq": 10587
-                        },
-                        {
-                          "day": null,
-                          "sessionNumber": null,
-                          "courtNumber": null,
-                          "divisionType": null,
-                          "divisionName": null,
-                          "departmentType": "9-23",
-                          "departmentName": "9-23",
-                          "divisionCategoryType": "TEAM_FEMALE",
-                          "divisionCategoryName": "Team female",
-                          "competitionEventSeq": 10588
-                        },
-                        {
-                          "day": null,
-                          "sessionNumber": null,
-                          "courtNumber": null,
-                          "divisionType": null,
-                          "divisionName": null,
-                          "departmentType": "9-23",
-                          "departmentName": "9-23",
-                          "divisionCategoryType": "PAIR",
-                          "divisionCategoryName": "Pair",
-                          "competitionEventSeq": 10589
-                        },
-                        {
-                          "day": null,
-                          "sessionNumber": null,
-                          "courtNumber": null,
-                          "divisionType": null,
-                          "divisionName": null,
-                          "departmentType": "7-63",
-                          "departmentName": "7-63",
-                          "divisionCategoryType": "TEAM_MALE",
-                          "divisionCategoryName": "Team male",
-                          "competitionEventSeq": 10592
-                        },
-                        {
-                          "day": null,
-                          "sessionNumber": null,
-                          "courtNumber": null,
-                          "divisionType": null,
-                          "divisionName": null,
-                          "departmentType": "7-63",
-                          "departmentName": "7-63",
-                          "divisionCategoryType": "TEAM_FEMALE",
-                          "divisionCategoryName": "Team female",
-                          "competitionEventSeq": 10593
-                        },
-                        {
-                          "day": null,
-                          "sessionNumber": null,
-                          "courtNumber": null,
-                          "divisionType": null,
-                          "divisionName": null,
-                          "departmentType": "7-63",
-                          "departmentName": "7-63",
-                          "divisionCategoryType": "PAIR",
-                          "divisionCategoryName": "Pair",
-                          "competitionEventSeq": 10594
-                        },
-                        {
-                          "day": null,
-                          "sessionNumber": null,
-                          "courtNumber": null,
-                          "divisionType": null,
-                          "divisionName": null,
-                          "departmentType": "7-63",
-                          "departmentName": "7-63",
-                          "divisionCategoryType": "INDIVIDUAL_MALE",
-                          "divisionCategoryName": "Individual male",
-                          "competitionEventSeq": 10590
-                        },
-                        {
-                          "day": null,
-                          "sessionNumber": null,
-                          "courtNumber": null,
-                          "divisionType": null,
-                          "divisionName": null,
-                          "departmentType": "7-63",
-                          "departmentName": "7-63",
-                          "divisionCategoryType": "INDIVIDUAL_FEMALE",
-                          "divisionCategoryName": "Individual female",
-                          "competitionEventSeq": 10591
+                          "departmentType": null,
+                          "departmentName": null,
+                          "divisionCategoryType": null,
+                          "divisionCategoryName": null,
+                          "phaseType": "Pre-A",
+                          "competitionEventSeq": 10593,
+                          "competitionMatchPsSeq": null
                         }
                       ]
                     error: null
