@@ -1,0 +1,474 @@
+paths:
+  /competitions/{competitionSeq}/documents/schedules/contents:
+    get:
+      summary: 대회 일정 문서 content 목록 조회
+      description: Competition Schedules 일정 문서 content 목록 조회
+      tags:
+        - 문서
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 대회의 고유 식별자
+      responses:
+        '200':
+          description: content 목록 조회 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    properties:
+                      contents:
+                        type: array
+                        items:
+                          type: string
+                        example:
+                          - "Head of Team meeting"
+                          - "Medical meeting"
+                          - "Overall Awards"
+                          - "break time"
+                          - "Individual female Under 30 Semifinal Group A"
+                          - "Team male Under 30 Semifinal Group A"
+                          - "Individual male Under 30 Round of 32"
+                          - "Individual female Under30 Semifinal Group A"
+                  error:
+                    type: object
+                    nullable: true
+                    example: null
+        '403':
+          description: 권한 없음
+          content:
+            application/json:
+              schema:
+                $ref: '../../../openapi.yml#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+
+  /competitions/{competitionSeq}/documents/schedules:
+    post:
+      summary: 대회 일정 문서 목록 저장
+      description: Competition Schedules 일정 문서 저장
+      tags:
+        - 문서
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 대회의 고유 식별자
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                schedules:
+                  type: array
+                  description: 대회 일정 목록
+                  items:
+                    type: object
+                    properties:
+                      scheduleDate:
+                        type: string
+                        format: date
+                        example: "2025-01-01"
+                        description: 일정 날짜 (yyyy-MM-dd)
+                      startTime:
+                        type: string
+                        format: time
+                        example: "09:00"
+                        description: 일정 시작 시간 (HH:mm)
+                      finishTime:
+                        type: string
+                        format: time
+                        example: "10:00"
+                        description: 일정 종료 시간 (HH:mm)
+                      contents:
+                        type: array
+                        description: 일정에 포함되는 내용
+                        items:
+                          type: string
+                          example: "Head of Team meeting"
+            example:
+              schedules:
+                - scheduleDate: "2025-01-01"
+                  startTime: "09:00"
+                  finishTime: "10:00"
+                  contents:
+                    - "Head of Team meeting"
+                - scheduleDate: "2025-01-01"
+                  startTime: "10:00"
+                  finishTime: "11:00"
+                  contents:
+                    - "Individual female Under 30 Semifinal Group A"
+                    - "Team male Under 30 Semifinal Group A"
+                - scheduleDate: "2025-01-01"
+                  startTime: "11:00"
+                  finishTime: "12:00"
+                  contents:
+                    - "Individual male Under30 Semifinal Group A"
+                    - "Individual male Under 30 Round of 16"
+                    - "Individual male Under30 Semifinal Group B"
+                - scheduleDate: "2025-01-01"
+                  startTime: "12:00"
+                  finishTime: "13:00"
+                  contents:
+                    - "Overall Awards"
+                    - "break time"
+                - scheduleDate: "2025-01-01"
+                  startTime: "13:00"
+                  finishTime: "14:00"
+                  contents:
+                    - "Individual female Under30 Quarterfinals"
+                    - "Individual female Under30 Preliminary Group A"
+                    - "Individual male Under30 Preliminary Group A"
+                    - "Individual female Under30 Semifinals"
+                    - "Individual male Under30 Preliminary Group B"
+      responses:
+        '200':
+          description: 일정 목록 저장 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    properties:
+                      schedules:
+                        type: array
+                        description: 등록된 일정 목록
+                        items:
+                          type: object
+                          properties:
+                            groupId:
+                              type: string
+                              format: uuid
+                              description: 일정 그룹 식별자
+                              example: "73112c1a-90bb-41e9-99f1-e729adcff56c"
+                            scheduleDate:
+                              type: string
+                              format: date
+                              description: 일정 날짜
+                              example: "2025-01-01"
+                            startTime:
+                              type: string
+                              format: time
+                              description: 일정 시작 시간
+                              example: "09:00"
+                            finishTime:
+                              type: string
+                              format: time
+                              description: 일정 종료 시간
+                              example: "10:00"
+                            contents:
+                              type: array
+                              description: 일정에 포함되는 내용
+                              items:
+                                type: string
+                                example: "Head of Team meeting"
+                  error:
+                    type: object
+                    nullable: true
+                    example: null
+              example:
+                success: true
+                data:
+                  schedules:
+                    - groupId: "73112c1a-90bb-41e9-99f1-e729adcff56c"
+                      scheduleDate: "2025-01-01"
+                      startTime: "09:00"
+                      finishTime: "10:00"
+                      contents:
+                        - "Head of Team meeting"
+                    - groupId: "deebb6d0-bfec-43e3-863b-4d611caabecd"
+                      scheduleDate: "2025-01-01"
+                      startTime: "10:00"
+                      finishTime: "11:00"
+                      contents:
+                        - "Individual female Under 30 Semifinal Group A"
+                        - "Team male Under 30 Semifinal Group A"
+                    - groupId: "036d107c-ac82-4d3f-8c89-e4de74663572"
+                      scheduleDate: "2025-01-01"
+                      startTime: "11:00"
+                      finishTime: "12:00"
+                      contents:
+                        - "Individual male Under30 Semifinal Group A"
+                        - "Individual male Under 30 Round of 16"
+                        - "Individual male Under30 Semifinal Group B"
+                    - groupId: "89061794-8dcc-4ce7-b0c6-37a1d945c1c3"
+                      scheduleDate: "2025-01-01"
+                      startTime: "12:00"
+                      finishTime: "13:00"
+                      contents:
+                        - "Overall Awards"
+                        - "break time"
+                    - groupId: "75bbf9e2-f5b7-4916-9645-2d356af7371c"
+                      scheduleDate: "2025-01-01"
+                      startTime: "13:00"
+                      finishTime: "14:00"
+                      contents:
+                        - "Individual female Under30 Quarterfinals"
+                        - "Individual female Under30 Preliminary Group A"
+                        - "Individual male Under30 Preliminary Group A"
+                        - "Individual female Under30 Semifinals"
+                        - "Individual male Under30 Preliminary Group B"
+                error: null
+        '403':
+          description: 권한 없음
+          content:
+            application/json:
+              schema:
+                $ref: '../../../openapi.yml#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+
+    get:
+      summary: 대회 일정 문서 목록 조회
+      description: Competition Schedules 일정 문서 조회
+      tags:
+        - 문서
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 대회의 고유 식별자
+      responses:
+        '200':
+          description: 일정 목록 조회 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    properties:
+                      schedules:
+                        type: array
+                        description: 등록된 일정 목록
+                        items:
+                          type: object
+                          properties:
+                            groupId:
+                              type: string
+                              format: uuid
+                              description: 일정 그룹 식별자
+                              example: "73112c1a-90bb-41e9-99f1-e729adcff56c"
+                            scheduleDate:
+                              type: string
+                              format: date
+                              description: 일정 날짜
+                              example: "2025-01-01"
+                            startTime:
+                              type: string
+                              format: time
+                              description: 일정 시작 시간
+                              example: "09:00"
+                            finishTime:
+                              type: string
+                              format: time
+                              description: 일정 종료 시간
+                              example: "10:00"
+                            contents:
+                              type: array
+                              description: 일정에 포함되는 내용
+                              items:
+                                type: string
+                                example: "Head of Team meeting"
+                  error:
+                    type: object
+                    nullable: true
+                    example: null
+              example:
+                success: true
+                data:
+                  schedules:
+                    - groupId: "73112c1a-90bb-41e9-99f1-e729adcff56c"
+                      scheduleDate: "2025-01-01"
+                      startTime: "09:00"
+                      finishTime: "10:00"
+                      contents:
+                        - "Head of Team meeting"
+                    - groupId: "deebb6d0-bfec-43e3-863b-4d611caabecd"
+                      scheduleDate: "2025-01-01"
+                      startTime: "10:00"
+                      finishTime: "11:00"
+                      contents:
+                        - "Individual female Under 30 Semifinal Group A"
+                        - "Team male Under 30 Semifinal Group A"
+                    - groupId: "036d107c-ac82-4d3f-8c89-e4de74663572"
+                      scheduleDate: "2025-01-01"
+                      startTime: "11:00"
+                      finishTime: "12:00"
+                      contents:
+                        - "Individual male Under30 Semifinal Group A"
+                        - "Individual male Under 30 Round of 16"
+                        - "Individual male Under30 Semifinal Group B"
+                    - groupId: "89061794-8dcc-4ce7-b0c6-37a1d945c1c3"
+                      scheduleDate: "2025-01-01"
+                      startTime: "12:00"
+                      finishTime: "13:00"
+                      contents:
+                        - "Overall Awards"
+                        - "break time"
+                    - groupId: "75bbf9e2-f5b7-4916-9645-2d356af7371c"
+                      scheduleDate: "2025-01-01"
+                      startTime: "13:00"
+                      finishTime: "14:00"
+                      contents:
+                        - "Individual female Under30 Quarterfinals"
+                        - "Individual female Under30 Preliminary Group A"
+                        - "Individual male Under30 Preliminary Group A"
+                        - "Individual female Under30 Semifinals"
+                        - "Individual male Under30 Preliminary Group B"
+                error: null
+        '403':
+          description: 권한 없음
+          content:
+            application/json:
+              schema:
+                $ref: '../../../openapi.yml#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+
+    delete:
+      summary: 대회 일정 문서 목록 삭제
+      description: Competition Schedules 일정 문서 삭제
+      tags:
+        - 문서
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 대회의 고유 식별자
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                schedules:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      groupId:
+                        type: string
+                        format: uuid
+                        example: "afed5711-4742-4582-a18d-baaf50153f0c"
+              required:
+                - schedules
+            example:
+              schedules:
+                - groupId: "6eff3c5e-23fa-4073-b86a-26ccb58ac99a"
+                - groupId: "dbec1ba3-c144-485a-8078-d395ef92b318"
+      responses:
+        '200':
+          description: 일정 목록 삭제 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    properties:
+                      schedules:
+                        type: array
+                        description: 등록된 일정 목록
+                        items:
+                          type: object
+                          properties:
+                            groupId:
+                              type: string
+                              format: uuid
+                              description: 일정 그룹 식별자
+                              example: "73112c1a-90bb-41e9-99f1-e729adcff56c"
+                            scheduleDate:
+                              type: string
+                              format: date
+                              description: 일정 날짜
+                              example: "2025-01-01"
+                            startTime:
+                              type: string
+                              format: time
+                              description: 일정 시작 시간
+                              example: "09:00"
+                            finishTime:
+                              type: string
+                              format: time
+                              description: 일정 종료 시간
+                              example: "10:00"
+                            contents:
+                              type: array
+                              description: 일정에 포함되는 내용
+                              items:
+                                type: string
+                                example: "Head of Team meeting"
+                  error:
+                    type: object
+                    nullable: true
+                    example: null
+              example:
+                success: true
+                data:
+                  schedules:
+                    - groupId: "73112c1a-90bb-41e9-99f1-e729adcff56c"
+                      scheduleDate: "2025-01-01"
+                      startTime: "09:00"
+                      finishTime: "10:00"
+                      contents:
+                        - "Head of Team meeting"
+                    - groupId: "deebb6d0-bfec-43e3-863b-4d611caabecd"
+                      scheduleDate: "2025-01-01"
+                      startTime: "10:00"
+                      finishTime: "11:00"
+                      contents:
+                        - "Individual female Under 30 Semifinal Group A"
+                        - "Team male Under 30 Semifinal Group A"
+                    - groupId: "036d107c-ac82-4d3f-8c89-e4de74663572"
+                      scheduleDate: "2025-01-01"
+                      startTime: "11:00"
+                      finishTime: "12:00"
+                      contents:
+                        - "Individual male Under30 Semifinal Group A"
+                        - "Individual male Under 30 Round of 16"
+                        - "Individual male Under30 Semifinal Group B"
+                error: null
+        '403':
+          description: 권한 없음
+          content:
+            application/json:
+              schema:
+                $ref: '../../../openapi.yml#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
