@@ -267,7 +267,7 @@ paths:
     $ref: './tags/poomsae/document/draw-sheet.yaml#/paths/~1competitions~1{competitionSeq}~1documents~1detail~1DRAW_SHEET_OR_START_LIST'
   /competitions/{competitionSeq}/documents/detail/CONTEST_RESULTS_OF_CUTOFF:
     $ref: './tags/poomsae/document/contest-result-cutoff.yaml#/paths/~1competitions~1{competitionSeq}~1documents~1detail~1CONTEST_RESULTS_OF_CUTOFF'
-  /competitions/{competitionSeq}/documents/detail/CONTESTS_RESULT_OF_TOURNAMENT:
+  /competitions/{competitionSeq}/documents/detail/CONTEST_RESULTS_OF_TOURNAMENT:
     $ref: './tags/poomsae/document/contest-result-tournament.yaml#/paths/~1competitions~1{competitionSeq}~1documents~1detail~1CONTEST_RESULTS_OF_TOURNAMENT'
   /competitions/{competitionSeq}/documents/schedules/contents:
     $ref: './tags/poomsae/document/document-schedules.yaml#/paths/~1competitions~1{competitionSeq}~1documents~1schedules~1contents'
