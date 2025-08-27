@@ -269,6 +269,8 @@ paths:
     $ref: './tags/poomsae/document/contest-result-cutoff.yaml#/paths/~1competitions~1{competitionSeq}~1documents~1detail~1CONTEST_RESULTS_OF_CUTOFF'
   /competitions/{competitionSeq}/documents/detail/CONTEST_RESULTS_OF_TOURNAMENT:
     $ref: './tags/poomsae/document/contest-result-tournament.yaml#/paths/~1competitions~1{competitionSeq}~1documents~1detail~1CONTEST_RESULTS_OF_TOURNAMENT'
+  /competitions/{competitionSeq}/documents/detail/ENTRIES_BY_NOC:
+    $ref: './tags/poomsae/document/entries-by-noc.yaml#/paths/~1competitions~1{competitionSeq}~1documents~1detail~1ENTRIES_BY_NOC'
   /competitions/{competitionSeq}/documents/schedules/contents:
     $ref: './tags/poomsae/document/document-schedules.yaml#/paths/~1competitions~1{competitionSeq}~1documents~1schedules~1contents'
   /competitions/{competitionSeq}/documents/schedules:
@@ -1003,6 +1005,13 @@ components:
         error:
           message: "컷오프 조가 종료되지 않았습니다."
           errorCode: "E672"
+    COMPETITION_PARTICIPATE_NOT_CONFIRM_ERROR:
+      value:
+        success: false
+        data: null
+        error:
+          message: "참가 인원 확정이 안 된 대회 입니다."
+          errorCode: "E543"
 
 
   schemas:

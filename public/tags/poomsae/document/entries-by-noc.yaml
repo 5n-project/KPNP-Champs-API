@@ -1,0 +1,525 @@
+paths:
+  /competitions/{competitionSeq}/documents/detail/ENTRIES_BY_NOC:
+    get:
+      summary: ENTRIES_BY_NOC 품새 문서 상세 조회 (ENTRIES_BY_NOC)
+      description: ENTRIES_BY_NOC 문서를 조회한다. (documentType 은 항상 'ENTRIES_BY_NOC')
+      tags:
+        - 문서
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 대회의 고유 시퀀스
+        - name: documentType
+          in: path
+          required: true
+          schema:
+            type: string
+          description: 조회할 documentType
+          example: ENTRIES_BY_NOC
+
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    $ref: "#/components/schemas/CompetitionEntriesResponse"
+                  error:
+                    type: string
+                    nullable: true
+              examples:
+                국제 대회 entries by noc 리스트:
+                  $ref: "#/components/examples/InternationalCompetitionList"
+                로컬 대회 entries by noc 리스트:
+                  $ref: "#/components/examples/LocalCompetitionList"
+                COMPETITION_PARTICIPATE_NOT_CONFIRM_ERROR:
+                  $ref: '../../../openapi.yml/#/components/examples/COMPETITION_PARTICIPATE_NOT_CONFIRM_ERROR'
+                DOCUMENT_NOT_FOUND:
+                  $ref: '../../../openapi.yml/#/components/examples/DOCUMENT_NOT_FOUND'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '../../../openapi.yml#/components/responses/Error'
+              examples:
+                INVALID_TYPE_ERROR:
+                  $ref: '../../../openapi.yml#/components/examples/INVALID_TYPE_ERROR'
+        '403':
+          description: 권한 없음
+          content:
+            application/json:
+              schema:
+                $ref: '../../../openapi.yml#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+
+components:
+  schemas:
+    CompetitionEntriesResponse:
+      type: object
+      additionalProperties: false
+      required: [ header, contents ]
+      properties:
+        header:
+          $ref: "#/components/schemas/CompetitionHeader"
+        contents:
+          type: array
+          minItems: 1
+          items:
+            $ref: "#/components/schemas/NocGroup"
+
+    CompetitionHeader:
+      type: object
+      additionalProperties: false
+      required:
+        - competitionHostName
+        - competitionLocalType
+        - competitionName
+        - competitionSdate
+        - timeZoneId
+        - nocType
+      properties:
+        competitionHostName:
+          type: string
+          description: Host identifier or name
+        competitionLocalType:
+          type: string
+          description: 'L 로컬대회 <br> W 국제대회 (noc가 null)'
+          enum: [ L, W ]
+          minLength: 1
+          maxLength: 1
+        competitionName:
+          type: string
+        competitionSdate:
+          type: string
+          format: date-time
+          description: 대회 시작 날짜
+        timeZoneId:
+          type: string
+          description: 대회장 타임존
+        nocType:
+          type: string
+          description: 3-letter NOC code of the host (ISO-like)
+          pattern: "^[A-Z]{3}$"
+        hostLogoUrl:
+          type: string
+          format: uri
+        competitionLogUrl:
+          type: string
+          format: uri
+
+    NocGroup:
+      type: object
+      additionalProperties: false
+      required: [ noc, competitors ]
+      properties:
+        noc:
+          type: string
+          description: 참가자의 noc, 로컬 대회일 때는 null
+          pattern: "^[A-Z]{3}$"
+        competitors:
+          type: array
+          minItems: 1
+          items:
+            $ref: "#/components/schemas/Competitor"
+
+    Competitor:
+      type: object
+      additionalProperties: false
+      required:
+        - familyNameEn
+        - givenNameEn
+        - birthDate
+        - divisionCategoryName
+        - departmentName
+        - ranking
+        - seed
+      properties:
+        gender:
+          type: string
+          enum: [ M, F ]
+        familyNameEn:
+          type: string
+        givenNameEn:
+          type: string
+        birthDate:
+          type: string
+          description: yyyyMMdd
+          pattern: "^[0-9]{8}$"
+        divisionCategoryName:
+          type: string
+        departmentName:
+          type: string
+        ranking:
+          type: integer
+          minimum: 0
+        seed:
+          type: integer
+          minimum: 0
+  examples:
+    InternationalCompetitionList:
+      summary: 국제 대회 entries by noc 리스트
+      value:
+        {
+          "header": {
+            "competitionHostName": "champs4",
+            "competitionLocalType": "W",
+            "competitionName": "champs4 대회 250826_1",
+            "competitionSdate": "2025-08-26T03:00:00.000Z",
+            "timeZoneId": "Antarctica/Rothera",
+            "nocType": "ATA",
+            "hostLogoUrl": "https://cdn.kpnpglobal.com/kpnp/media/image/champs/2025/07/d333ab8e285a4a4aaf4349102253ad23.PNG",
+            "competitionLogUrl": "https://cdn.kpnpglobal.com/kpnp/media/image/champs/2025/07/26334ff5b1e04bf392f5e712cd0f6b3e.PNG"
+          },
+          "contents": [
+            {
+              "noc": "GER",
+              "competitors": [
+                {
+                  "gender": "M",
+                  "familyNameEn": "Choi",
+                  "givenNameEn": "Nina",
+                  "birthDate": "19901220",
+                  "divisionCategoryName": "Individual male",
+                  "departmentName": "Cadet",
+                  "ranking": 1,
+                  "seed": 1
+                },
+                {
+                  "gender": "M",
+                  "familyNameEn": "Wang",
+                  "givenNameEn": "Yuna",
+                  "birthDate": "19970627",
+                  "divisionCategoryName": "Individual male",
+                  "departmentName": "Cadet",
+                  "ranking": 2,
+                  "seed": 0
+                },
+                {
+                  "gender": "M",
+                  "familyNameEn": "Chen",
+                  "givenNameEn": "Sung",
+                  "birthDate": "20080803",
+                  "divisionCategoryName": "Individual male",
+                  "departmentName": "Cadet",
+                  "ranking": 4,
+                  "seed": 0
+                },
+                {
+                  "gender": "F",
+                  "familyNameEn": "Singh",
+                  "givenNameEn": "Yuri",
+                  "birthDate": "20060317",
+                  "divisionCategoryName": "Individual female",
+                  "departmentName": "Cadet",
+                  "ranking": 21,
+                  "seed": 0
+                },
+                {
+                  "gender": "F",
+                  "familyNameEn": "Yamamoto",
+                  "givenNameEn": "David",
+                  "birthDate": "20070804",
+                  "divisionCategoryName": "Individual female",
+                  "departmentName": "Cadet",
+                  "ranking": 22,
+                  "seed": 0
+                },
+                {
+                  "gender": "F",
+                  "familyNameEn": "Silva",
+                  "givenNameEn": "Hana",
+                  "birthDate": "20090112",
+                  "divisionCategoryName": "Individual female",
+                  "departmentName": "Cadet",
+                  "ranking": 23,
+                  "seed": 0
+                }
+              ]
+            },
+            {
+              "noc": "KOR",
+              "competitors": [
+                {
+                  "gender": "F",
+                  "familyNameEn": "Garcia",
+                  "givenNameEn": "Sung",
+                  "birthDate": "20030523",
+                  "divisionCategoryName": "Individual female",
+                  "departmentName": "Cadet",
+                  "ranking": 24,
+                  "seed": 0
+                },
+                {
+                  "gender": "F",
+                  "familyNameEn": "Singh",
+                  "givenNameEn": "Minsoo",
+                  "birthDate": "19970228",
+                  "divisionCategoryName": "Individual female",
+                  "departmentName": "Cadet",
+                  "ranking": 25,
+                  "seed": 0
+                },
+                {
+                  "gender": "F",
+                  "familyNameEn": "Yang",
+                  "givenNameEn": "Sung",
+                  "birthDate": "20061008",
+                  "divisionCategoryName": "Individual female",
+                  "departmentName": "Cadet",
+                  "ranking": 26,
+                  "seed": 0
+                },
+                {
+                  "gender": "F",
+                  "familyNameEn": "Nguyen",
+                  "givenNameEn": "Leo",
+                  "birthDate": "19991219",
+                  "divisionCategoryName": "Individual female",
+                  "departmentName": "Cadet",
+                  "ranking": 27,
+                  "seed": 0
+                },
+                {
+                  "gender": "F",
+                  "familyNameEn": "Kim",
+                  "givenNameEn": "Alex",
+                  "birthDate": "19860705",
+                  "divisionCategoryName": "Individual female",
+                  "departmentName": "Cadet",
+                  "ranking": 31,
+                  "seed": 0
+                }
+              ]
+            },
+            {
+              "noc": "LBN",
+              "competitors": [
+                {
+                  "gender": "M",
+                  "familyNameEn": "Wang",
+                  "givenNameEn": "Jane",
+                  "birthDate": "19920409",
+                  "divisionCategoryName": "Individual male",
+                  "departmentName": "Cadet",
+                  "ranking": 3,
+                  "seed": 0
+                },
+                {
+                  "gender": "F",
+                  "familyNameEn": "Clark",
+                  "givenNameEn": "Paul",
+                  "birthDate": "19880318",
+                  "divisionCategoryName": "Individual female",
+                  "departmentName": "Cadet",
+                  "ranking": 28,
+                  "seed": 0
+                },
+                {
+                  "gender": "F",
+                  "familyNameEn": "Yang",
+                  "givenNameEn": "Ken",
+                  "birthDate": "19981222",
+                  "divisionCategoryName": "Individual female",
+                  "departmentName": "Cadet",
+                  "ranking": 29,
+                  "seed": 0
+                },
+                {
+                  "gender": "F",
+                  "familyNameEn": "Tanaka",
+                  "givenNameEn": "Luke",
+                  "birthDate": "19970824",
+                  "divisionCategoryName": "Individual female",
+                  "departmentName": "Cadet",
+                  "ranking": 30,
+                  "seed": 0
+                }
+              ]
+            }
+          ]
+        }
+
+    LocalCompetitionList:
+      summary: 로컬 대회 entries by noc 리스트
+      value:
+        {
+          "header": {
+            "competitionHostName": "champs4",
+            "competitionLocalType": "W",
+            "competitionName": "champs4 대회 250826_1",
+            "competitionSdate": "2025-08-26T03:00:00.000+09:00",
+            "timeZoneId": "Antarctica/Rothera",
+            "nocType": "ATA",
+            "hostLogoUrl": "https://cdn.kpnpglobal.com/kpnp/media/image/champs/2025/07/d333ab8e285a4a4aaf4349102253ad23.PNG",
+            "competitionLogUrl": "https://cdn.kpnpglobal.com/kpnp/media/image/champs/2025/07/26334ff5b1e04bf392f5e712cd0f6b3e.PNG"
+          },
+          "contents": [
+            {
+              "noc": null,
+              "competitors": [
+                {
+                  "gender": "M",
+                  "familyNameEn": "Choi",
+                  "givenNameEn": "Nina",
+                  "birthDate": "19901220",
+                  "divisionCategoryName": "Individual male",
+                  "departmentName": "Cadet",
+                  "ranking": 1,
+                  "seed": 1
+                },
+                {
+                  "gender": "M",
+                  "familyNameEn": "Wang",
+                  "givenNameEn": "Yuna",
+                  "birthDate": "19970627",
+                  "divisionCategoryName": "Individual male",
+                  "departmentName": "Cadet",
+                  "ranking": 2,
+                  "seed": 0
+                },
+                {
+                  "gender": "M",
+                  "familyNameEn": "Wang",
+                  "givenNameEn": "Jane",
+                  "birthDate": "19920409",
+                  "divisionCategoryName": "Individual male",
+                  "departmentName": "Cadet",
+                  "ranking": 3,
+                  "seed": 0
+                },
+                {
+                  "gender": "M",
+                  "familyNameEn": "Chen",
+                  "givenNameEn": "Sung",
+                  "birthDate": "20080803",
+                  "divisionCategoryName": "Individual male",
+                  "departmentName": "Cadet",
+                  "ranking": 4,
+                  "seed": 0
+                },
+                {
+                  "gender": "F",
+                  "familyNameEn": "Singh",
+                  "givenNameEn": "Yuri",
+                  "birthDate": "20060317",
+                  "divisionCategoryName": "Individual female",
+                  "departmentName": "Cadet",
+                  "ranking": 21,
+                  "seed": 0
+                },
+                {
+                  "gender": "F",
+                  "familyNameEn": "Yamamoto",
+                  "givenNameEn": "David",
+                  "birthDate": "20070804",
+                  "divisionCategoryName": "Individual female",
+                  "departmentName": "Cadet",
+                  "ranking": 22,
+                  "seed": 0
+                },
+                {
+                  "gender": "F",
+                  "familyNameEn": "Silva",
+                  "givenNameEn": "Hana",
+                  "birthDate": "20090112",
+                  "divisionCategoryName": "Individual female",
+                  "departmentName": "Cadet",
+                  "ranking": 23,
+                  "seed": 0
+                },
+                {
+                  "gender": "F",
+                  "familyNameEn": "Garcia",
+                  "givenNameEn": "Sung",
+                  "birthDate": "20030523",
+                  "divisionCategoryName": "Individual female",
+                  "departmentName": "Cadet",
+                  "ranking": 24,
+                  "seed": 0
+                },
+                {
+                  "gender": "F",
+                  "familyNameEn": "Singh",
+                  "givenNameEn": "Minsoo",
+                  "birthDate": "19970228",
+                  "divisionCategoryName": "Individual female",
+                  "departmentName": "Cadet",
+                  "ranking": 25,
+                  "seed": 0
+                },
+                {
+                  "gender": "F",
+                  "familyNameEn": "Yang",
+                  "givenNameEn": "Sung",
+                  "birthDate": "20061008",
+                  "divisionCategoryName": "Individual female",
+                  "departmentName": "Cadet",
+                  "ranking": 26,
+                  "seed": 0
+                },
+                {
+                  "gender": "F",
+                  "familyNameEn": "Nguyen",
+                  "givenNameEn": "Leo",
+                  "birthDate": "19991219",
+                  "divisionCategoryName": "Individual female",
+                  "departmentName": "Cadet",
+                  "ranking": 27,
+                  "seed": 0
+                },
+                {
+                  "gender": "F",
+                  "familyNameEn": "Clark",
+                  "givenNameEn": "Paul",
+                  "birthDate": "19880318",
+                  "divisionCategoryName": "Individual female",
+                  "departmentName": "Cadet",
+                  "ranking": 28,
+                  "seed": 0
+                },
+                {
+                  "gender": "F",
+                  "familyNameEn": "Yang",
+                  "givenNameEn": "Ken",
+                  "birthDate": "19981222",
+                  "divisionCategoryName": "Individual female",
+                  "departmentName": "Cadet",
+                  "ranking": 29,
+                  "seed": 0
+                },
+                {
+                  "gender": "F",
+                  "familyNameEn": "Tanaka",
+                  "givenNameEn": "Luke",
+                  "birthDate": "19970824",
+                  "divisionCategoryName": "Individual female",
+                  "departmentName": "Cadet",
+                  "ranking": 30,
+                  "seed": 0
+                },
+                {
+                  "gender": "F",
+                  "familyNameEn": "Kim",
+                  "givenNameEn": "Alex",
+                  "birthDate": "19860705",
+                  "divisionCategoryName": "Individual female",
+                  "departmentName": "Cadet",
+                  "ranking": 31,
+                  "seed": 0
+                }
+              ]
+            }
+          ]
+        }
