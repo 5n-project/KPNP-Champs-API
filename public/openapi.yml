@@ -271,6 +271,8 @@ paths:
     $ref: './tags/poomsae/document/contest-result-tournament.yaml#/paths/~1competitions~1{competitionSeq}~1documents~1detail~1CONTEST_RESULTS_OF_TOURNAMENT'
   /competitions/{competitionSeq}/documents/detail/ENTRIES_BY_NOC:
     $ref: './tags/poomsae/document/entries-by-noc.yaml#/paths/~1competitions~1{competitionSeq}~1documents~1detail~1ENTRIES_BY_NOC'
+  /competitions/{competitionSeq}/documents/detail/ENTRIES_BY_DIVISION:
+    $ref: './tags/poomsae/document/entries-by-division.yaml#/paths/~1competitions~1{competitionSeq}~1documents~1detail~1ENTRIES_BY_DIVISION'
   /competitions/{competitionSeq}/documents/schedules/contents:
     $ref: './tags/poomsae/document/document-schedules.yaml#/paths/~1competitions~1{competitionSeq}~1documents~1schedules~1contents'
   /competitions/{competitionSeq}/documents/schedules:

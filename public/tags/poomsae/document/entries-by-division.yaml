@@ -1,0 +1,450 @@
+paths:
+  /competitions/{competitionSeq}/documents/detail/ENTRIES_BY_DIVISION:
+    get:
+      summary: ENTRIES_BY_DIVISION 품새 문서 상세 조회 (ENTRIES_BY_DIVISION)
+      description: ENTRIES_BY_DIVISION 문서를 조회한다. (documentType 은 항상 'ENTRIES_BY_DIVISION')
+      tags:
+        - 문서
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 대회의 고유 시퀀스
+        - name: documentType
+          in: path
+          required: true
+          schema:
+            type: string
+          description: 조회할 documentType
+          example: ENTRIES_BY_DIVISION
+
+        - name: competitionEventSeq
+          in: query
+          required: true
+          schema:
+            type: integer
+          description: 룰 조합 seq
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    $ref: "#/components/schemas/CompetitionEntriesResponse"
+                  error:
+                    type: string
+                    nullable: true
+              examples:
+                국제 대회 entries by division 리스트:
+                  $ref: "#/components/examples/InternationalCompetitionList"
+                로컬 대회 entries by division 리스트:
+                  $ref: "#/components/examples/LocalCompetitionList"
+                COMPETITION_PARTICIPATE_NOT_CONFIRM_ERROR:
+                  $ref: '../../../openapi.yml/#/components/examples/COMPETITION_PARTICIPATE_NOT_CONFIRM_ERROR'
+                ITEM_NOT_FOUND:
+                  $ref: '../../../openapi.yml/#/components/examples/ITEM_NOT_FOUND'
+                DOCUMENT_NOT_FOUND:
+                  $ref: '../../../openapi.yml/#/components/examples/DOCUMENT_NOT_FOUND'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '../../../openapi.yml#/components/responses/Error'
+              examples:
+                INVALID_TYPE_ERROR:
+                  $ref: '../../../openapi.yml#/components/examples/INVALID_TYPE_ERROR'
+        '403':
+          description: 권한 없음
+          content:
+            application/json:
+              schema:
+                $ref: '../../../openapi.yml#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+
+components:
+  schemas:
+    CompetitionEntriesResponse:
+      type: object
+      additionalProperties: false
+      required: [header, contents]
+      properties:
+        header:
+          $ref: "#/components/schemas/CompetitionHeader"
+        contents:
+          type: array
+          minItems: 1
+          items:
+            $ref: "#/components/schemas/NocGroup"
+
+    CompetitionHeader:
+      type: object
+      additionalProperties: false
+      required:
+        - competitionHostName
+        - competitionLocalType
+        - isTeam
+        - competitionName
+        - competitionSdate
+        - timeZoneId
+        - nocType
+        - divisionName
+        - departmentName
+        - divisionCategoryName
+      properties:
+        competitionHostName:
+          type: string
+          description: Host identifier or name
+        competitionLocalType:
+          type: string
+          description: "L 로컬대회 <br> W 국제대회 (noc가 null)"
+          enum: [L, W]
+          minLength: 1
+          maxLength: 1
+        isTeam:
+          type: boolean
+          description: Whether the division is a team event
+        competitionName:
+          type: string
+        competitionSdate:
+          type: string
+          format: date-time
+          description: 대회 시작 날짜
+        timeZoneId:
+          type: string
+          description: 대회장 타임존 (IANA Time Zone)
+        nocType:
+          type: string
+          description: 3-letter NOC code of the host (ISO-like)
+          pattern: "^[A-Z]{3}$"
+        divisionName:
+          type: string
+        departmentName:
+          type: string
+        divisionCategoryName:
+          type: string
+        hostLogoUrl:
+          type: string
+          format: uri
+        competitionLogUrl:
+          type: string
+          format: uri
+
+    NocGroup:
+      type: object
+      additionalProperties: false
+      required: [noc, competitors]
+      properties:
+        noc:
+          type: string
+          description: 참가자의 noc, 로컬 대회일 때는 null
+          nullable: true
+          pattern: "^[A-Z]{3}$"
+        competitors:
+          type: array
+          minItems: 1
+          items:
+            $ref: "#/components/schemas/Competitor"
+
+    Competitor:
+      type: object
+      additionalProperties: false
+      required:
+        - gender
+        - familyNameEn
+        - givenNameEn
+        - birthDate
+        - ranking
+        - seed
+      properties:
+        gender:
+          type: string
+          enum: [M, F]
+        familyNameEn:
+          type: string
+        givenNameEn:
+          type: string
+        birthDate:
+          type: string
+          description: yyyyMMdd
+          pattern: "^[0-9]{8}$"
+        ranking:
+          type: integer
+          minimum: 0
+        seed:
+          type: integer
+          minimum: 0
+  examples:
+    InternationalCompetitionList:
+      summary: 국제 대회 entries by division 리스트
+      value:
+        {
+          "header": {
+            "competitionHostName": "champs4",
+            "competitionLocalType": "W",
+            "isTeam": true,
+            "competitionName": "champs4 대회 250826_1",
+            "competitionSdate": "2025-08-26T03:00:00.000+09:00",
+            "timeZoneId": "Antarctica/Rothera",
+            "nocType": "ATA",
+            "divisionName": "WT Recognized Poomsae",
+            "departmentName": "Cadet",
+            "divisionCategoryName": "Team female",
+            "hostLogoUrl": "https://cdn.kpnpglobal.com/kpnp/media/image/champs/2025/07/d333ab8e285a4a4aaf4349102253ad23.PNG",
+            "competitionLogUrl": "https://cdn.kpnpglobal.com/kpnp/media/image/champs/2025/07/26334ff5b1e04bf392f5e712cd0f6b3e.PNG"
+          },
+          "contents": [
+            {
+              "noc": "RUS",
+              "competitors": [
+                {
+                  "gender": "F",
+                  "familyNameEn": "Kim",
+                  "givenNameEn": "Elena",
+                  "birthDate": "20000227",
+                  "ranking": 58,
+                  "seed": 0
+                },
+                {
+                  "gender": "F",
+                  "familyNameEn": "Yamamoto",
+                  "givenNameEn": "David",
+                  "birthDate": "19890321",
+                  "ranking": 3,
+                  "seed": 0
+                },
+                {
+                  "gender": "F",
+                  "familyNameEn": "Chen",
+                  "givenNameEn": "Mina",
+                  "birthDate": "20051008",
+                  "ranking": 5,
+                  "seed": 0
+                },
+                {
+                  "gender": "F",
+                  "familyNameEn": "Singh",
+                  "givenNameEn": "David",
+                  "birthDate": "19911009",
+                  "ranking": 8,
+                  "seed": 0
+                }
+              ]
+            },
+            {
+              "noc": "LBN",
+              "competitors": [
+                {
+                  "gender": "F",
+                  "familyNameEn": "Clark",
+                  "givenNameEn": "Julie",
+                  "birthDate": "19890609",
+                  "ranking": 56,
+                  "seed": 0
+                },
+                {
+                  "gender": "F",
+                  "familyNameEn": "Chen",
+                  "givenNameEn": "Ken",
+                  "birthDate": "19990310",
+                  "ranking": 57,
+                  "seed": 0
+                },
+                {
+                  "gender": "F",
+                  "familyNameEn": "Yang",
+                  "givenNameEn": "David",
+                  "birthDate": "19901114",
+                  "ranking": 59,
+                  "seed": 0
+                },
+                {
+                  "gender": "F",
+                  "familyNameEn": "Zhang",
+                  "givenNameEn": "Yuri",
+                  "birthDate": "20020608",
+                  "ranking": 60,
+                  "seed": 0
+                }
+              ]
+            },
+            {
+              "noc": "GER",
+              "competitors": [
+                {
+                  "gender": "F",
+                  "familyNameEn": "Garcia",
+                  "givenNameEn": "John",
+                  "birthDate": "20000124",
+                  "ranking": 61,
+                  "seed": 0
+                },
+                {
+                  "gender": "F",
+                  "familyNameEn": "Tanaka",
+                  "givenNameEn": "Emma",
+                  "birthDate": "19881121",
+                  "ranking": 62,
+                  "seed": 0
+                },
+                {
+                  "gender": "F",
+                  "familyNameEn": "Park",
+                  "givenNameEn": "Sam",
+                  "birthDate": "19930518",
+                  "ranking": 63,
+                  "seed": 0
+                },
+                {
+                  "gender": "F",
+                  "familyNameEn": "Yang",
+                  "givenNameEn": "Luke",
+                  "birthDate": "20020209",
+                  "ranking": 64,
+                  "seed": 0
+                },
+                {
+                  "gender": "F",
+                  "familyNameEn": "Yamamoto",
+                  "givenNameEn": "Ken",
+                  "birthDate": "19980902",
+                  "ranking": 4,
+                  "seed": 0
+                },
+                {
+                  "gender": "F",
+                  "familyNameEn": "Yamamoto",
+                  "givenNameEn": "Jane",
+                  "birthDate": "20030116",
+                  "ranking": 6,
+                  "seed": 0
+                },
+                {
+                  "gender": "F",
+                  "familyNameEn": "Lopez",
+                  "givenNameEn": "Sam",
+                  "birthDate": "20010920",
+                  "ranking": 7,
+                  "seed": 0
+                }
+              ]
+            }
+          ]
+        }
+
+    LocalCompetitionList:
+      summary: 로컬 대회 entries by division 리스트
+      value:
+        {
+          "header": {
+            "competitionHostName": "champs4",
+            "competitionLocalType": "W",
+            "isTeam": true,
+            "competitionName": "champs4 대회 250826_1",
+            "competitionSdate": "2025-08-26T03:00:00.000+09:00",
+            "timeZoneId": "Antarctica/Rothera",
+            "nocType": "ATA",
+            "divisionName": "WT Recognized Poomsae",
+            "departmentName": "Cadet",
+            "divisionCategoryName": "Team female",
+            "hostLogoUrl": "https://cdn.kpnpglobal.com/kpnp/media/image/champs/2025/07/d333ab8e285a4a4aaf4349102253ad23.PNG",
+            "competitionLogUrl": "https://cdn.kpnpglobal.com/kpnp/media/image/champs/2025/07/26334ff5b1e04bf392f5e712cd0f6b3e.PNG"
+          },
+          "contents": [
+            {
+              "noc": null,
+              "competitors": [
+                {
+                  "gender": "F",
+                  "familyNameEn": "Clark",
+                  "givenNameEn": "Julie",
+                  "birthDate": "19890609",
+                  "ranking": 56,
+                  "seed": 0
+                },
+                {
+                  "gender": "F",
+                  "familyNameEn": "Chen",
+                  "givenNameEn": "Ken",
+                  "birthDate": "19990310",
+                  "ranking": 57,
+                  "seed": 0
+                },
+                {
+                  "gender": "F",
+                  "familyNameEn": "Kim",
+                  "givenNameEn": "Elena",
+                  "birthDate": "20000227",
+                  "ranking": 58,
+                  "seed": 0
+                },
+                {
+                  "gender": "F",
+                  "familyNameEn": "Yang",
+                  "givenNameEn": "David",
+                  "birthDate": "19901114",
+                  "ranking": 59,
+                  "seed": 0
+                },
+                {
+                  "gender": "F",
+                  "familyNameEn": "Zhang",
+                  "givenNameEn": "Yuri",
+                  "birthDate": "20020608",
+                  "ranking": 60,
+                  "seed": 0
+                },
+                {
+                  "gender": "F",
+                  "familyNameEn": "Garcia",
+                  "givenNameEn": "John",
+                  "birthDate": "20000124",
+                  "ranking": 61,
+                  "seed": 0
+                },
+                {
+                  "gender": "F",
+                  "familyNameEn": "Tanaka",
+                  "givenNameEn": "Emma",
+                  "birthDate": "19881121",
+                  "ranking": 62,
+                  "seed": 0
+                },
+                {
+                  "gender": "F",
+                  "familyNameEn": "Park",
+                  "givenNameEn": "Sam",
+                  "birthDate": "19930518",
+                  "ranking": 63,
+                  "seed": 0
+                },
+                {
+                  "gender": "F",
+                  "familyNameEn": "Yang",
+                  "givenNameEn": "Luke",
+                  "birthDate": "20020209",
+                  "ranking": 64,
+                  "seed": 0
+                },
+                {
+                  "gender": "F",
+                  "familyNameEn": "Yamamoto",
+                  "givenNameEn": "David",
+                  "birthDate": "19890321",
+                  "ranking": 3,
+                  "seed": 0
+                }
+              ]
+            }
+          ]
+        }
