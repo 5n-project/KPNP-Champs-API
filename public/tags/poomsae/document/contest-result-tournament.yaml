@@ -49,16 +49,20 @@ paths:
                     type: string
                     nullable: true
               examples:
-                공인_룰_토너먼트_개인전:
+                공인 룰 토너먼트 개인전:
                   $ref: "#/components/examples/RecognizedTournamentIndividual"
-                공인_룰_토너먼트_팀전:
+                공인 룰 토너먼트 팀전:
                   $ref: "#/components/examples/RecognizedTournamentTeam"
+                복합 룰 토너먼트 개인전:
+                  $ref: "#/components/examples/MixedTournamentIndividual"
+                자유품새 토너먼트 개인전, 한번만시연:
+                  $ref: "#/components/examples/FreeTournamentIndividualOncePoomsae"
                 ITEM_NOT_FOUND:
                   $ref: '../../../openapi.yml/#/components/examples/ITEM_NOT_FOUND'
                 COMPETITION_MATCH_NOT_FOUND:
                   $ref: '../../../openapi.yml/#/components/examples/COMPETITION_MATCH_NOT_FOUND'
                 CUTOFF_GROUP_IS_NOT_END:
-                  $ref: '../../../openapi.yml/#/components/examples/CUTOFF_GROUP_IS_NOT_END'
+                  $ref: '../../../openapi.yml/#/components/examples/MATCH_IS_NOT_END'
                 DOCUMENT_NOT_FOUND:
                   $ref: '../../../openapi.yml/#/components/examples/DOCUMENT_NOT_FOUND'
         '400':
@@ -973,4 +977,612 @@ components:
                     }
                 ]
             }
+        }
+
+    MixedTournamentIndividual:
+      summary: 복합 룰 토너먼트 개인전
+      value:
+        {
+          "header": {
+            "competitionHostName": "오앤",
+            "competitionLocalType": "W",
+            "isTeam": false,
+            "competitionName": "복합품새 테스트 0822",
+            "competitionSdate": "2025-08-22T03:00:00.000+09:00",
+            "timeZoneId": "America/Maceio",
+            "nocType": "BRA",
+            "divisionName": "Mixed Poomsae",
+            "departmentName": "18& Over",
+            "divisionCategoryName": "Individual male",
+            "contestNumber": 1004,
+            "phase": "Round of 32"
+          },
+          "contents": {
+            "divisionType": "MIXED_POOMSAE",
+            "firstPoomsaeName": "Taegeuk 7 Jang",
+            "secondPoomsaeName": null,
+            "matchResults": [
+              {
+                "matchSideType": "HOME",
+                "noc": "KOR",
+                "team": "Japan_18&_IM_16",
+                "participants": [
+                  {
+                    "familyNameEn": "Lopez",
+                    "givenNameEn": "Leo"
+                  }
+                ],
+                "score": {
+                  "scoringCriteriaScore": {
+                    "presentation": 5.4,
+                    "accuracy": 4,
+                    "technicalSkills": 3.5,
+                    "presentationFreestyle": 3.6
+                  },
+                  "averageScore": 8.25,
+                  "totalScore": 16.5,
+                  "scoreDetails": [
+                    {
+                      "sequenceType": "P1",
+                      "scoringCriteriaScore": {
+                        "presentation": 5.4,
+                        "accuracy": 4,
+                        "technicalSkills": null,
+                        "presentationFreestyle": null
+                      },
+                      "score": 9.4,
+                      "totalScore": 9.4,
+                      "deduction": 0
+                    },
+                    {
+                      "sequenceType": "P2",
+                      "scoringCriteriaScore": {
+                        "presentation": null,
+                        "accuracy": null,
+                        "technicalSkills": 3.5,
+                        "presentationFreestyle": 3.6
+                      },
+                      "score": 7.1,
+                      "totalScore": 7.1,
+                      "deduction": 0
+                    }
+                  ]
+                },
+                "refereeScores": [
+                  {
+                    "sequenceType": "P1",
+                    "scoreDetail": {
+                      "sequenceType": "P1",
+                      "scoringCriteriaScore": {
+                        "presentation": 5.4,
+                        "accuracy": 4,
+                        "technicalSkills": null,
+                        "presentationFreestyle": null
+                      },
+                      "score": 9.4,
+                      "totalScore": 9.4,
+                      "deduction": 0
+                    },
+                    "refereeScores": [
+                      {
+                        "refereeType": "REF_CR",
+                        "scoringCriteriaScore": {
+                          "presentation": 5.4,
+                          "accuracy": 4,
+                          "technicalSkills": null,
+                          "presentationFreestyle": null
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "sequenceType": "P2",
+                    "scoreDetail": {
+                      "sequenceType": "P2",
+                      "scoringCriteriaScore": {
+                        "presentation": null,
+                        "accuracy": null,
+                        "technicalSkills": 3.5,
+                        "presentationFreestyle": 3.6
+                      },
+                      "score": 7.1,
+                      "totalScore": 7.1,
+                      "deduction": 0
+                    },
+                    "refereeScores": [
+                      {
+                        "refereeType": "REF_CR",
+                        "scoringCriteriaScore": {
+                          "presentation": null,
+                          "accuracy": null,
+                          "technicalSkills": 3.5,
+                          "presentationFreestyle": 3.6
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "resultType": "LOSS"
+              },
+              {
+                "matchSideType": "AWAY",
+                "noc": "KOR",
+                "team": "Russia_18&_IM_12",
+                "participants": [
+                  {
+                    "familyNameEn": "Zhang",
+                    "givenNameEn": "Paul"
+                  }
+                ],
+                "score": {
+                  "scoringCriteriaScore": {
+                    "presentation": 5.5,
+                    "accuracy": 4,
+                    "technicalSkills": 4.8,
+                    "presentationFreestyle": 3.6
+                  },
+                  "averageScore": 8.95,
+                  "totalScore": 17.9,
+                  "scoreDetails": [
+                    {
+                      "sequenceType": "P1",
+                      "scoringCriteriaScore": {
+                        "presentation": 5.5,
+                        "accuracy": 4,
+                        "technicalSkills": null,
+                        "presentationFreestyle": null
+                      },
+                      "score": 9.5,
+                      "totalScore": 9.5,
+                      "deduction": 0
+                    },
+                    {
+                      "sequenceType": "P2",
+                      "scoringCriteriaScore": {
+                        "presentation": null,
+                        "accuracy": null,
+                        "technicalSkills": 4.8,
+                        "presentationFreestyle": 3.6
+                      },
+                      "score": 8.4,
+                      "totalScore": 8.4,
+                      "deduction": 0
+                    }
+                  ]
+                },
+                "refereeScores": [
+                  {
+                    "sequenceType": "P1",
+                    "scoreDetail": {
+                      "sequenceType": "P1",
+                      "scoringCriteriaScore": {
+                        "presentation": 5.5,
+                        "accuracy": 4,
+                        "technicalSkills": null,
+                        "presentationFreestyle": null
+                      },
+                      "score": 9.5,
+                      "totalScore": 9.5,
+                      "deduction": 0
+                    },
+                    "refereeScores": [
+                      {
+                        "refereeType": "REF_CR",
+                        "scoringCriteriaScore": {
+                          "presentation": 5.5,
+                          "accuracy": 4,
+                          "technicalSkills": null,
+                          "presentationFreestyle": null
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "sequenceType": "P2",
+                    "scoreDetail": {
+                      "sequenceType": "P2",
+                      "scoringCriteriaScore": {
+                        "presentation": null,
+                        "accuracy": null,
+                        "technicalSkills": 4.8,
+                        "presentationFreestyle": 3.6
+                      },
+                      "score": 8.4,
+                      "totalScore": 8.4,
+                      "deduction": 0
+                    },
+                    "refereeScores": [
+                      {
+                        "refereeType": "REF_CR",
+                        "scoringCriteriaScore": {
+                          "presentation": null,
+                          "accuracy": null,
+                          "technicalSkills": 4.8,
+                          "presentationFreestyle": 3.6
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "resultType": "WIN"
+              }
+            ]
+          }
+        }
+
+    FreeTournamentIndividualOncePoomsae:
+      summary: 자유룰 토너먼트 개인전, 한번만시연
+      value:
+        {
+          "header": {
+            "competitionHostName": "주최명",
+            "competitionLocalType": "L",
+            "isTeam": false,
+            "competitionName": "품새 프론트 <테스트 공용> 전체 룰",
+            "competitionSdate": "2025-07-22T00:00:00.000+09:00",
+            "timeZoneId": "Asia/Seoul",
+            "nocType": "KOR",
+            "divisionName": "Free Style Poomsae",
+            "departmentName": "Under 17",
+            "divisionCategoryName": "Individual male",
+            "contestNumber": 3003,
+            "phase": "Round of 32",
+            "hostLogoUrl": "https://cdn.kpnpglobal.com/kpnp/media/image/champs/2025/07/d333ab8e285a4a4aaf4349102253ad23.PNG",
+            "competitionLogUrl": "https://cdn.kpnpglobal.com/kpnp/media/image/champs/2025/07/26334ff5b1e04bf392f5e712cd0f6b3e.PNG"
+          },
+          "contents": {
+            "divisionType": "FREE_STYLE_POOMSAE",
+            "firstPoomsaeName": null,
+            "secondPoomsaeName": null,
+            "matchResults": [
+              {
+                "matchSideType": "HOME",
+                "noc": "KOR",
+                "team": "Vietnam_U17_IM_18",
+                "participants": [
+                  {
+                    "familyNameEn": "Kim",
+                    "givenNameEn": "Yuri"
+                  }
+                ],
+                "score": {
+                  "scoringCriteriaScore": {
+                    "presentation": null,
+                    "accuracy": null,
+                    "technicalSkills": 6,
+                    "presentationFreestyle": 4
+                  },
+                  "averageScore": 0,
+                  "totalScore": 10,
+                  "scoreDetails": [
+                    {
+                      "sequenceType": "P1",
+                      "scoringCriteriaScore": {
+                        "presentation": null,
+                        "accuracy": null,
+                        "technicalSkills": 6,
+                        "presentationFreestyle": 4
+                      },
+                      "score": 10,
+                      "totalScore": 10,
+                      "deduction": 0
+                    },
+                    {
+                      "sequenceType": "P2",
+                      "scoringCriteriaScore": {
+                        "presentation": null,
+                        "accuracy": null,
+                        "technicalSkills": null,
+                        "presentationFreestyle": null
+                      },
+                      "score": null,
+                      "totalScore": null,
+                      "deduction": 0
+                    }
+                  ]
+                },
+                "refereeScores": [
+                  {
+                    "sequenceType": "P1",
+                    "scoreDetail": {
+                      "sequenceType": "P1",
+                      "scoringCriteriaScore": {
+                        "presentation": null,
+                        "accuracy": null,
+                        "technicalSkills": 6,
+                        "presentationFreestyle": 4
+                      },
+                      "score": 10,
+                      "totalScore": 10,
+                      "deduction": 0
+                    },
+                    "refereeScores": [
+                      {
+                        "refereeType": "REF_CR",
+                        "scoringCriteriaScore": {
+                          "presentation": null,
+                          "accuracy": null,
+                          "technicalSkills": 6,
+                          "presentationFreestyle": 4
+                        }
+                      },
+                      {
+                        "refereeType": "REF_J1",
+                        "scoringCriteriaScore": {
+                          "presentation": null,
+                          "accuracy": null,
+                          "technicalSkills": null,
+                          "presentationFreestyle": null
+                        }
+                      },
+                      {
+                        "refereeType": "REF_J2",
+                        "scoringCriteriaScore": {
+                          "presentation": null,
+                          "accuracy": null,
+                          "technicalSkills": null,
+                          "presentationFreestyle": null
+                        }
+                      },
+                      {
+                        "refereeType": "REF_J3",
+                        "scoringCriteriaScore": {
+                          "presentation": null,
+                          "accuracy": null,
+                          "technicalSkills": null,
+                          "presentationFreestyle": null
+                        }
+                      },
+                      {
+                        "refereeType": "REF_J4",
+                        "scoringCriteriaScore": {
+                          "presentation": null,
+                          "accuracy": null,
+                          "technicalSkills": null,
+                          "presentationFreestyle": null
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "sequenceType": "P2",
+                    "scoreDetail": {
+                      "sequenceType": "P2",
+                      "scoringCriteriaScore": {
+                        "presentation": null,
+                        "accuracy": null,
+                        "technicalSkills": null,
+                        "presentationFreestyle": null
+                      },
+                      "score": null,
+                      "totalScore": null,
+                      "deduction": 0
+                    },
+                    "refereeScores": [
+                      {
+                        "refereeType": "REF_CR",
+                        "scoringCriteriaScore": {
+                          "presentation": null,
+                          "accuracy": null,
+                          "technicalSkills": null,
+                          "presentationFreestyle": null
+                        }
+                      },
+                      {
+                        "refereeType": "REF_J1",
+                        "scoringCriteriaScore": {
+                          "presentation": null,
+                          "accuracy": null,
+                          "technicalSkills": null,
+                          "presentationFreestyle": null
+                        }
+                      },
+                      {
+                        "refereeType": "REF_J2",
+                        "scoringCriteriaScore": {
+                          "presentation": null,
+                          "accuracy": null,
+                          "technicalSkills": null,
+                          "presentationFreestyle": null
+                        }
+                      },
+                      {
+                        "refereeType": "REF_J3",
+                        "scoringCriteriaScore": {
+                          "presentation": null,
+                          "accuracy": null,
+                          "technicalSkills": null,
+                          "presentationFreestyle": null
+                        }
+                      },
+                      {
+                        "refereeType": "REF_J4",
+                        "scoringCriteriaScore": {
+                          "presentation": null,
+                          "accuracy": null,
+                          "technicalSkills": null,
+                          "presentationFreestyle": null
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "resultType": "WIN"
+              },
+              {
+                "matchSideType": "AWAY",
+                "noc": "KOR",
+                "team": "Vietnam_U17_IM_06",
+                "participants": [
+                  {
+                    "familyNameEn": "Patel",
+                    "givenNameEn": "Mina"
+                  }
+                ],
+                "score": {
+                  "scoringCriteriaScore": {
+                    "presentation": null,
+                    "accuracy": null,
+                    "technicalSkills": 6,
+                    "presentationFreestyle": 4
+                  },
+                  "averageScore": 0,
+                  "totalScore": 10,
+                  "scoreDetails": [
+                    {
+                      "sequenceType": "P1",
+                      "scoringCriteriaScore": {
+                        "presentation": null,
+                        "accuracy": null,
+                        "technicalSkills": 6,
+                        "presentationFreestyle": 4
+                      },
+                      "score": 10,
+                      "totalScore": 10,
+                      "deduction": 0
+                    },
+                    {
+                      "sequenceType": "P2",
+                      "scoringCriteriaScore": {
+                        "presentation": null,
+                        "accuracy": null,
+                        "technicalSkills": null,
+                        "presentationFreestyle": null
+                      },
+                      "score": null,
+                      "totalScore": null,
+                      "deduction": 0
+                    }
+                  ]
+                },
+                "refereeScores": [
+                  {
+                    "sequenceType": "P1",
+                    "scoreDetail": {
+                      "sequenceType": "P1",
+                      "scoringCriteriaScore": {
+                        "presentation": null,
+                        "accuracy": null,
+                        "technicalSkills": 6,
+                        "presentationFreestyle": 4
+                      },
+                      "score": 10,
+                      "totalScore": 10,
+                      "deduction": 0
+                    },
+                    "refereeScores": [
+                      {
+                        "refereeType": "REF_CR",
+                        "scoringCriteriaScore": {
+                          "presentation": null,
+                          "accuracy": null,
+                          "technicalSkills": 6,
+                          "presentationFreestyle": 4
+                        }
+                      },
+                      {
+                        "refereeType": "REF_J1",
+                        "scoringCriteriaScore": {
+                          "presentation": null,
+                          "accuracy": null,
+                          "technicalSkills": null,
+                          "presentationFreestyle": null
+                        }
+                      },
+                      {
+                        "refereeType": "REF_J2",
+                        "scoringCriteriaScore": {
+                          "presentation": null,
+                          "accuracy": null,
+                          "technicalSkills": null,
+                          "presentationFreestyle": null
+                        }
+                      },
+                      {
+                        "refereeType": "REF_J3",
+                        "scoringCriteriaScore": {
+                          "presentation": null,
+                          "accuracy": null,
+                          "technicalSkills": null,
+                          "presentationFreestyle": null
+                        }
+                      },
+                      {
+                        "refereeType": "REF_J4",
+                        "scoringCriteriaScore": {
+                          "presentation": null,
+                          "accuracy": null,
+                          "technicalSkills": null,
+                          "presentationFreestyle": null
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "sequenceType": "P2",
+                    "scoreDetail": {
+                      "sequenceType": "P2",
+                      "scoringCriteriaScore": {
+                        "presentation": null,
+                        "accuracy": null,
+                        "technicalSkills": null,
+                        "presentationFreestyle": null
+                      },
+                      "score": null,
+                      "totalScore": null,
+                      "deduction": 0
+                    },
+                    "refereeScores": [
+                      {
+                        "refereeType": "REF_CR",
+                        "scoringCriteriaScore": {
+                          "presentation": null,
+                          "accuracy": null,
+                          "technicalSkills": null,
+                          "presentationFreestyle": null
+                        }
+                      },
+                      {
+                        "refereeType": "REF_J1",
+                        "scoringCriteriaScore": {
+                          "presentation": null,
+                          "accuracy": null,
+                          "technicalSkills": null,
+                          "presentationFreestyle": null
+                        }
+                      },
+                      {
+                        "refereeType": "REF_J2",
+                        "scoringCriteriaScore": {
+                          "presentation": null,
+                          "accuracy": null,
+                          "technicalSkills": null,
+                          "presentationFreestyle": null
+                        }
+                      },
+                      {
+                        "refereeType": "REF_J3",
+                        "scoringCriteriaScore": {
+                          "presentation": null,
+                          "accuracy": null,
+                          "technicalSkills": null,
+                          "presentationFreestyle": null
+                        }
+                      },
+                      {
+                        "refereeType": "REF_J4",
+                        "scoringCriteriaScore": {
+                          "presentation": null,
+                          "accuracy": null,
+                          "technicalSkills": null,
+                          "presentationFreestyle": null
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "resultType": "LOSS"
+              }
+            ]
+          }
         }

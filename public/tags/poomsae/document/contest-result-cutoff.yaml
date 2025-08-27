@@ -49,8 +49,12 @@ paths:
                     type: string
                     nullable: true
               examples:
-                컷오프_개인:
-                  $ref: "#/components/examples/Individual"
+                공인 룰 컷오프 개인전:
+                  $ref: "#/components/examples/RecognizedCutoffIndividual"
+                자유 룰 컷오프 개인전:
+                  $ref: "#/components/examples/FreeCutoffIndividual"
+                복합 룰 컷오프 개인전:
+                  $ref: "#/components/examples/MixedCutoffIndividual"
                 ITEM_NOT_FOUND:
                   $ref: '../../../openapi.yml/#/components/examples/ITEM_NOT_FOUND'
                 COMPETITION_MATCH_NOT_FOUND:
@@ -307,418 +311,1275 @@ components:
           format: double
           description: "자유 품새 표현력 점수의 평균"
   examples:
-    Individual:
-      summary: 컷오프 개인
+    RecognizedCutoffIndividual:
+      summary: 공인룰 컷오프 개인전
       value:
         {
           "header": {
-              "competitionHostName": "메인",
-              "competitionLocalType": "W",
-              "isTeam": false,
-              "competitionName": "자유 단체 테스트",
-              "competitionSdate": "2025-08-12T04:00:00.000+09:00",
-              "timeZoneId": "America/Cuiaba",
-              "nocType": "BRA",
-              "divisionName": "Free Style Poomsae",
-              "departmentName": "Under 17",
-              "divisionCategoryName": "Individual male",
-              "phase": "Final"
+            "competitionHostName": "메인",
+            "competitionLocalType": "W",
+            "isTeam": true,
+            "competitionName": "대회 생성_250820",
+            "competitionSdate": "2025-08-20T03:00:00.000+09:00",
+            "timeZoneId": "America/Argentina/Salta",
+            "nocType": "ARG",
+            "divisionName": "WT Recognized Poomsae",
+            "departmentName": "Under 30",
+            "divisionCategoryName": "Pair",
+            "phase": "Semifinal Group A"
           },
           "contents": {
-              "divisionType": "FREE_STYLE_POOMSAE",
-              "matchResults": [
+            "divisionType": "WT_RECOGNIZED_POOMSAE",
+            "matchResults": [
+              {
+                "matchNumber": 3011,
+                "rank": 1,
+                "resultDecision": "PASS",
+                "noc": "GER",
+                "team": "GER",
+                "participants": [
                   {
-                      "matchNumber": 1034,
-                      "rank": 1,
-                      "resultDecision": null,
-                      "noc": "KOR",
-                      "team": "India_U17_IM_17",
-                      "participants": [
-                          {
-                              "familyNameEn": "Garcia",
-                              "givenNameEn": "Sara"
-                          }
-                      ],
-                      "score": {
-                          "scoringCriteriaScore": {
-                              "presentation": null,
-                              "accuracy": null,
-                              "technicalSkills": 7.666,
-                              "presentationFreestyle": 7
-                          },
-                          "averageScore": 7.333,
-                          "totalScore": 51.8,
-                          "scoreDetails": [
-                              {
-                                  "sequenceType": "P1",
-                                  "scoringCriteriaScore": {
-                                      "presentation": null,
-                                      "accuracy": null,
-                                      "technicalSkills": 3.466,
-                                      "presentationFreestyle": 3.4
-                                  },
-                                  "score": 6.866,
-                                  "totalScore": 20.6,
-                                  "deduction": 0
-                              },
-                              {
-                                  "sequenceType": "P2",
-                                  "scoringCriteriaScore": {
-                                      "presentation": null,
-                                      "accuracy": null,
-                                      "technicalSkills": 4.2,
-                                      "presentationFreestyle": 3.6
-                                  },
-                                  "score": 7.8,
-                                  "totalScore": 31.2,
-                                  "deduction": 0
-                              }
-                          ]
-                      }
+                    "familyNameEn": "Yamamoto",
+                    "givenNameEn": "Sara"
                   },
                   {
-                      "matchNumber": 1037,
-                      "rank": 3,
-                      "resultDecision": null,
-                      "noc": "KOR",
-                      "team": "Australia_U17_IM_04",
-                      "participants": [
-                          {
-                              "familyNameEn": "Park",
-                              "givenNameEn": "Elena"
-                          }
-                      ],
-                      "score": {
-                          "scoringCriteriaScore": {
-                              "presentation": null,
-                              "accuracy": null,
-                              "technicalSkills": 7.35,
-                              "presentationFreestyle": 7.025
-                          },
-                          "averageScore": 7.187,
-                          "totalScore": 57.5,
-                          "scoreDetails": [
-                              {
-                                  "sequenceType": "P1",
-                                  "scoringCriteriaScore": {
-                                      "presentation": null,
-                                      "accuracy": null,
-                                      "technicalSkills": 4.35,
-                                      "presentationFreestyle": 3.25
-                                  },
-                                  "score": 7.6,
-                                  "totalScore": 30.4,
-                                  "deduction": 0
-                              },
-                              {
-                                  "sequenceType": "P2",
-                                  "scoringCriteriaScore": {
-                                      "presentation": null,
-                                      "accuracy": null,
-                                      "technicalSkills": 3,
-                                      "presentationFreestyle": 3.775
-                                  },
-                                  "score": 6.775,
-                                  "totalScore": 27.1,
-                                  "deduction": 0
-                              }
-                          ]
-                      }
-                  },
-                  {
-                      "matchNumber": 1038,
-                      "rank": 4,
-                      "resultDecision": null,
-                      "noc": "KOR",
-                      "team": "Morocco_U17_IM_12",
-                      "participants": [
-                          {
-                              "familyNameEn": "Yamamoto",
-                              "givenNameEn": "Ken"
-                          }
-                      ],
-                      "score": {
-                          "scoringCriteriaScore": {
-                              "presentation": null,
-                              "accuracy": null,
-                              "technicalSkills": 7.116,
-                              "presentationFreestyle": 6.191
-                          },
-                          "averageScore": 6.653,
-                          "totalScore": 46.8,
-                          "scoreDetails": [
-                              {
-                                  "sequenceType": "P1",
-                                  "scoringCriteriaScore": {
-                                      "presentation": null,
-                                      "accuracy": null,
-                                      "technicalSkills": 3.65,
-                                      "presentationFreestyle": 3.225
-                                  },
-                                  "score": 6.875,
-                                  "totalScore": 27.5,
-                                  "deduction": 0
-                              },
-                              {
-                                  "sequenceType": "P2",
-                                  "scoringCriteriaScore": {
-                                      "presentation": null,
-                                      "accuracy": null,
-                                      "technicalSkills": 3.466,
-                                      "presentationFreestyle": 2.966
-                                  },
-                                  "score": 6.432,
-                                  "totalScore": 19.3,
-                                  "deduction": 0
-                              }
-                          ]
-                      }
-                  },
-                  {
-                      "matchNumber": 1032,
-                      "rank": 5,
-                      "resultDecision": null,
-                      "noc": "KOR",
-                      "team": "Mexico_U17_IM_13",
-                      "participants": [
-                          {
-                              "familyNameEn": "Patel",
-                              "givenNameEn": "Julie"
-                          }
-                      ],
-                      "score": {
-                          "scoringCriteriaScore": {
-                              "presentation": null,
-                              "accuracy": null,
-                              "technicalSkills": 6.5,
-                              "presentationFreestyle": 6
-                          },
-                          "averageScore": 6.25,
-                          "totalScore": 50,
-                          "scoreDetails": [
-                              {
-                                  "sequenceType": "P1",
-                                  "scoringCriteriaScore": {
-                                      "presentation": null,
-                                      "accuracy": null,
-                                      "technicalSkills": 2,
-                                      "presentationFreestyle": 2.825
-                                  },
-                                  "score": 4.825,
-                                  "totalScore": 19.3,
-                                  "deduction": 0
-                              },
-                              {
-                                  "sequenceType": "P2",
-                                  "scoringCriteriaScore": {
-                                      "presentation": null,
-                                      "accuracy": null,
-                                      "technicalSkills": 4.5,
-                                      "presentationFreestyle": 3.175
-                                  },
-                                  "score": 7.675,
-                                  "totalScore": 30.7,
-                                  "deduction": 0
-                              }
-                          ]
-                      }
-                  },
-                  {
-                      "matchNumber": 1031,
-                      "rank": 6,
-                      "resultDecision": null,
-                      "noc": "KOR",
-                      "team": "Mexico_U17_IM_01",
-                      "participants": [
-                          {
-                              "familyNameEn": "Kim",
-                              "givenNameEn": "Julie"
-                          }
-                      ],
-                      "score": {
-                          "scoringCriteriaScore": {
-                              "presentation": null,
-                              "accuracy": null,
-                              "technicalSkills": 5.425,
-                              "presentationFreestyle": 5.35
-                          },
-                          "averageScore": 5.387,
-                          "totalScore": 43.1,
-                          "scoreDetails": [
-                              {
-                                  "sequenceType": "P1",
-                                  "scoringCriteriaScore": {
-                                      "presentation": null,
-                                      "accuracy": null,
-                                      "technicalSkills": 2.55,
-                                      "presentationFreestyle": 2.25
-                                  },
-                                  "score": 4.8,
-                                  "totalScore": 19.2,
-                                  "deduction": 0
-                              },
-                              {
-                                  "sequenceType": "P2",
-                                  "scoringCriteriaScore": {
-                                      "presentation": null,
-                                      "accuracy": null,
-                                      "technicalSkills": 2.875,
-                                      "presentationFreestyle": 3.1
-                                  },
-                                  "score": 5.975,
-                                  "totalScore": 23.9,
-                                  "deduction": 0
-                              }
-                          ]
-                      }
-                  },
-                  {
-                      "matchNumber": 1033,
-                      "rank": 7,
-                      "resultDecision": null,
-                      "noc": "KOR",
-                      "team": "Argentina_U17_IM_15",
-                      "participants": [
-                          {
-                              "familyNameEn": "Garcia",
-                              "givenNameEn": "Paul"
-                          }
-                      ],
-                      "score": {
-                          "scoringCriteriaScore": {
-                              "presentation": null,
-                              "accuracy": null,
-                              "technicalSkills": 8.725,
-                              "presentationFreestyle": 6.325
-                          },
-                          "averageScore": 4.225,
-                          "totalScore": 33.8,
-                          "scoreDetails": [
-                              {
-                                  "sequenceType": "P1",
-                                  "scoringCriteriaScore": {
-                                      "presentation": null,
-                                      "accuracy": null,
-                                      "technicalSkills": 4,
-                                      "presentationFreestyle": 3.1
-                                  },
-                                  "score": 0.5,
-                                  "totalScore": 2,
-                                  "deduction": 6.6
-                              },
-                              {
-                                  "sequenceType": "P2",
-                                  "scoringCriteriaScore": {
-                                      "presentation": null,
-                                      "accuracy": null,
-                                      "technicalSkills": 4.725,
-                                      "presentationFreestyle": 3.225
-                                  },
-                                  "score": 7.95,
-                                  "totalScore": 31.8,
-                                  "deduction": 0
-                              }
-                          ]
-                      }
-                  },
-                  {
-                      "matchNumber": 1035,
-                      "rank": 8,
-                      "resultDecision": null,
-                      "noc": "KOR",
-                      "team": "Japan_U17_IM_14",
-                      "participants": [
-                          {
-                              "familyNameEn": "Lopez",
-                              "givenNameEn": "Yuri"
-                          }
-                      ],
-                      "score": {
-                          "scoringCriteriaScore": {
-                              "presentation": null,
-                              "accuracy": null,
-                              "technicalSkills": 7.775,
-                              "presentationFreestyle": 5.991
-                          },
-                          "averageScore": 4.183,
-                          "totalScore": 32.2,
-                          "scoreDetails": [
-                              {
-                                  "sequenceType": "P1",
-                                  "scoringCriteriaScore": {
-                                      "presentation": null,
-                                      "accuracy": null,
-                                      "technicalSkills": 3.8,
-                                      "presentationFreestyle": 2.866
-                                  },
-                                  "score": 1.266,
-                                  "totalScore": 3.8,
-                                  "deduction": 5.4
-                              },
-                              {
-                                  "sequenceType": "P2",
-                                  "scoringCriteriaScore": {
-                                      "presentation": null,
-                                      "accuracy": null,
-                                      "technicalSkills": 3.975,
-                                      "presentationFreestyle": 3.125
-                                  },
-                                  "score": 7.1,
-                                  "totalScore": 28.4,
-                                  "deduction": 0
-                              }
-                          ]
-                      }
-                  },
-                  {
-                      "matchNumber": 1036,
-                      "rank": 0,
-                      "resultDecision": "WDR",
-                      "noc": "KOR",
-                      "team": "India_U17_IM_05",
-                      "participants": [
-                          {
-                              "familyNameEn": "Yamamoto",
-                              "givenNameEn": "Hana"
-                          }
-                      ],
-                      "score": {
-                          "scoringCriteriaScore": {
-                              "presentation": null,
-                              "accuracy": null,
-                              "technicalSkills": 0,
-                              "presentationFreestyle": 0
-                          },
-                          "averageScore": 0,
-                          "totalScore": 0,
-                          "scoreDetails": [
-                              {
-                                  "sequenceType": "P1",
-                                  "scoringCriteriaScore": {
-                                      "presentation": null,
-                                      "accuracy": null,
-                                      "technicalSkills": 0,
-                                      "presentationFreestyle": 0
-                                  },
-                                  "score": 0,
-                                  "totalScore": 0,
-                                  "deduction": 0
-                              },
-                              {
-                                  "sequenceType": "P2",
-                                  "scoringCriteriaScore": {
-                                      "presentation": null,
-                                      "accuracy": null,
-                                      "technicalSkills": 0,
-                                      "presentationFreestyle": 0
-                                  },
-                                  "score": 0,
-                                  "totalScore": 0,
-                                  "deduction": 0
-                              }
-                          ]
-                      }
+                    "familyNameEn": "Lee",
+                    "givenNameEn": "Hana"
                   }
-              ]
+                ],
+                "score": {
+                  "scoringCriteriaScore": {
+                    "presentation": 9.6,
+                    "accuracy": 8,
+                    "technicalSkills": null,
+                    "presentationFreestyle": null
+                  },
+                  "averageScore": 8.8,
+                  "totalScore": 17.6,
+                  "scoreDetails": [
+                    {
+                      "sequenceType": "P1",
+                      "scoringCriteriaScore": {
+                        "presentation": 4.8,
+                        "accuracy": 4,
+                        "technicalSkills": null,
+                        "presentationFreestyle": null
+                      },
+                      "score": 8.8,
+                      "totalScore": 8.8,
+                      "deduction": 0
+                    },
+                    {
+                      "sequenceType": "P2",
+                      "scoringCriteriaScore": {
+                        "presentation": 4.8,
+                        "accuracy": 4,
+                        "technicalSkills": null,
+                        "presentationFreestyle": null
+                      },
+                      "score": 8.8,
+                      "totalScore": 8.8,
+                      "deduction": 0
+                    }
+                  ]
+                }
+              },
+              {
+                "matchNumber": 3010,
+                "rank": 2,
+                "resultDecision": "PASS",
+                "noc": "GER",
+                "team": "GER",
+                "participants": [
+                  {
+                    "familyNameEn": "Clark",
+                    "givenNameEn": "Nina"
+                  },
+                  {
+                    "familyNameEn": "Kumar",
+                    "givenNameEn": "David"
+                  }
+                ],
+                "score": {
+                  "scoringCriteriaScore": {
+                    "presentation": 9.1,
+                    "accuracy": 8,
+                    "technicalSkills": null,
+                    "presentationFreestyle": null
+                  },
+                  "averageScore": 8.55,
+                  "totalScore": 17.1,
+                  "scoreDetails": [
+                    {
+                      "sequenceType": "P1",
+                      "scoringCriteriaScore": {
+                        "presentation": 4.7,
+                        "accuracy": 4,
+                        "technicalSkills": null,
+                        "presentationFreestyle": null
+                      },
+                      "score": 8.7,
+                      "totalScore": 8.7,
+                      "deduction": 0
+                    },
+                    {
+                      "sequenceType": "P2",
+                      "scoringCriteriaScore": {
+                        "presentation": 4.4,
+                        "accuracy": 4,
+                        "technicalSkills": null,
+                        "presentationFreestyle": null
+                      },
+                      "score": 8.4,
+                      "totalScore": 8.4,
+                      "deduction": 0
+                    }
+                  ]
+                }
+              },
+              {
+                "matchNumber": 3016,
+                "rank": 3,
+                "resultDecision": "PASS",
+                "noc": "GER",
+                "team": "GER",
+                "participants": [
+                  {
+                    "familyNameEn": "Wang",
+                    "givenNameEn": "Leo"
+                  },
+                  {
+                    "familyNameEn": "Kumar",
+                    "givenNameEn": "Elena"
+                  }
+                ],
+                "score": {
+                  "scoringCriteriaScore": {
+                    "presentation": 8.8,
+                    "accuracy": 8,
+                    "technicalSkills": null,
+                    "presentationFreestyle": null
+                  },
+                  "averageScore": 8.4,
+                  "totalScore": 16.8,
+                  "scoreDetails": [
+                    {
+                      "sequenceType": "P1",
+                      "scoringCriteriaScore": {
+                        "presentation": 4.8,
+                        "accuracy": 4,
+                        "technicalSkills": null,
+                        "presentationFreestyle": null
+                      },
+                      "score": 8.8,
+                      "totalScore": 8.8,
+                      "deduction": 0
+                    },
+                    {
+                      "sequenceType": "P2",
+                      "scoringCriteriaScore": {
+                        "presentation": 4,
+                        "accuracy": 4,
+                        "technicalSkills": null,
+                        "presentationFreestyle": null
+                      },
+                      "score": 8,
+                      "totalScore": 8,
+                      "deduction": 0
+                    }
+                  ]
+                }
+              },
+              {
+                "matchNumber": 3015,
+                "rank": 4,
+                "resultDecision": "PASS",
+                "noc": "GER",
+                "team": "GER",
+                "participants": [
+                  {
+                    "familyNameEn": "Lim",
+                    "givenNameEn": "Sam"
+                  },
+                  {
+                    "familyNameEn": "Choi",
+                    "givenNameEn": "Elena"
+                  }
+                ],
+                "score": {
+                  "scoringCriteriaScore": {
+                    "presentation": 8.3,
+                    "accuracy": 8,
+                    "technicalSkills": null,
+                    "presentationFreestyle": null
+                  },
+                  "averageScore": 8.15,
+                  "totalScore": 16.3,
+                  "scoreDetails": [
+                    {
+                      "sequenceType": "P1",
+                      "scoringCriteriaScore": {
+                        "presentation": 3.9,
+                        "accuracy": 4,
+                        "technicalSkills": null,
+                        "presentationFreestyle": null
+                      },
+                      "score": 7.9,
+                      "totalScore": 7.9,
+                      "deduction": 0
+                    },
+                    {
+                      "sequenceType": "P2",
+                      "scoringCriteriaScore": {
+                        "presentation": 4.4,
+                        "accuracy": 4,
+                        "technicalSkills": null,
+                        "presentationFreestyle": null
+                      },
+                      "score": 8.4,
+                      "totalScore": 8.4,
+                      "deduction": 0
+                    }
+                  ]
+                }
+              },
+              {
+                "matchNumber": 3018,
+                "rank": 5,
+                "resultDecision": "PASS",
+                "noc": "GER",
+                "team": "GER",
+                "participants": [
+                  {
+                    "familyNameEn": "Yang",
+                    "givenNameEn": "Julie"
+                  },
+                  {
+                    "familyNameEn": "Lee",
+                    "givenNameEn": "Hana"
+                  }
+                ],
+                "score": {
+                  "scoringCriteriaScore": {
+                    "presentation": 8.1,
+                    "accuracy": 8,
+                    "technicalSkills": null,
+                    "presentationFreestyle": null
+                  },
+                  "averageScore": 8.05,
+                  "totalScore": 16.1,
+                  "scoreDetails": [
+                    {
+                      "sequenceType": "P1",
+                      "scoringCriteriaScore": {
+                        "presentation": 3.9,
+                        "accuracy": 4,
+                        "technicalSkills": null,
+                        "presentationFreestyle": null
+                      },
+                      "score": 7.9,
+                      "totalScore": 7.9,
+                      "deduction": 0
+                    },
+                    {
+                      "sequenceType": "P2",
+                      "scoringCriteriaScore": {
+                        "presentation": 4.2,
+                        "accuracy": 4,
+                        "technicalSkills": null,
+                        "presentationFreestyle": null
+                      },
+                      "score": 8.2,
+                      "totalScore": 8.2,
+                      "deduction": 0
+                    }
+                  ]
+                }
+              },
+              {
+                "matchNumber": 3019,
+                "rank": 6,
+                "resultDecision": "PASS",
+                "noc": "GER",
+                "team": "GER",
+                "participants": [
+                  {
+                    "familyNameEn": "Kumar",
+                    "givenNameEn": "Mina"
+                  },
+                  {
+                    "familyNameEn": "Nguyen",
+                    "givenNameEn": "David"
+                  }
+                ],
+                "score": {
+                  "scoringCriteriaScore": {
+                    "presentation": 7.9,
+                    "accuracy": 8,
+                    "technicalSkills": null,
+                    "presentationFreestyle": null
+                  },
+                  "averageScore": 7.95,
+                  "totalScore": 15.9,
+                  "scoreDetails": [
+                    {
+                      "sequenceType": "P1",
+                      "scoringCriteriaScore": {
+                        "presentation": 5,
+                        "accuracy": 4,
+                        "technicalSkills": null,
+                        "presentationFreestyle": null
+                      },
+                      "score": 9,
+                      "totalScore": 9,
+                      "deduction": 0
+                    },
+                    {
+                      "sequenceType": "P2",
+                      "scoringCriteriaScore": {
+                        "presentation": 2.9,
+                        "accuracy": 4,
+                        "technicalSkills": null,
+                        "presentationFreestyle": null
+                      },
+                      "score": 6.9,
+                      "totalScore": 6.9,
+                      "deduction": 0
+                    }
+                  ]
+                }
+              },
+              {
+                "matchNumber": 3017,
+                "rank": 7,
+                "resultDecision": "PASS",
+                "noc": "GER",
+                "team": "GER",
+                "participants": [
+                  {
+                    "familyNameEn": "Kumar",
+                    "givenNameEn": "Mina"
+                  },
+                  {
+                    "familyNameEn": "Silva",
+                    "givenNameEn": "Hana"
+                  }
+                ],
+                "score": {
+                  "scoringCriteriaScore": {
+                    "presentation": 7.8,
+                    "accuracy": 8,
+                    "technicalSkills": null,
+                    "presentationFreestyle": null
+                  },
+                  "averageScore": 7.9,
+                  "totalScore": 15.8,
+                  "scoreDetails": [
+                    {
+                      "sequenceType": "P1",
+                      "scoringCriteriaScore": {
+                        "presentation": 3.7,
+                        "accuracy": 4,
+                        "technicalSkills": null,
+                        "presentationFreestyle": null
+                      },
+                      "score": 7.7,
+                      "totalScore": 7.7,
+                      "deduction": 0
+                    },
+                    {
+                      "sequenceType": "P2",
+                      "scoringCriteriaScore": {
+                        "presentation": 4.1,
+                        "accuracy": 4,
+                        "technicalSkills": null,
+                        "presentationFreestyle": null
+                      },
+                      "score": 8.1,
+                      "totalScore": 8.1,
+                      "deduction": 0
+                    }
+                  ]
+                }
+              },
+              {
+                "matchNumber": 3012,
+                "rank": 8,
+                "resultDecision": "PASS",
+                "noc": "GER",
+                "team": "GER",
+                "participants": [
+                  {
+                    "familyNameEn": "Chen",
+                    "givenNameEn": "Sung"
+                  },
+                  {
+                    "familyNameEn": "Wang",
+                    "givenNameEn": "Jane"
+                  }
+                ],
+                "score": {
+                  "scoringCriteriaScore": {
+                    "presentation": 7.6,
+                    "accuracy": 8,
+                    "technicalSkills": null,
+                    "presentationFreestyle": null
+                  },
+                  "averageScore": 7.8,
+                  "totalScore": 15.6,
+                  "scoreDetails": [
+                    {
+                      "sequenceType": "P1",
+                      "scoringCriteriaScore": {
+                        "presentation": 4.4,
+                        "accuracy": 4,
+                        "technicalSkills": null,
+                        "presentationFreestyle": null
+                      },
+                      "score": 8.4,
+                      "totalScore": 8.4,
+                      "deduction": 0
+                    },
+                    {
+                      "sequenceType": "P2",
+                      "scoringCriteriaScore": {
+                        "presentation": 3.2,
+                        "accuracy": 4,
+                        "technicalSkills": null,
+                        "presentationFreestyle": null
+                      },
+                      "score": 7.2,
+                      "totalScore": 7.2,
+                      "deduction": 0
+                    }
+                  ]
+                }
+              },
+              {
+                "matchNumber": 3013,
+                "rank": 9,
+                "resultDecision": "FAIL",
+                "noc": "GER",
+                "team": "GER",
+                "participants": [
+                  {
+                    "familyNameEn": "Patel",
+                    "givenNameEn": "Emma"
+                  },
+                  {
+                    "familyNameEn": "Lim",
+                    "givenNameEn": "Leo"
+                  }
+                ],
+                "score": {
+                  "scoringCriteriaScore": {
+                    "presentation": 7.6,
+                    "accuracy": 8,
+                    "technicalSkills": null,
+                    "presentationFreestyle": null
+                  },
+                  "averageScore": 7.8,
+                  "totalScore": 15.6,
+                  "scoreDetails": [
+                    {
+                      "sequenceType": "P1",
+                      "scoringCriteriaScore": {
+                        "presentation": 5.8,
+                        "accuracy": 4,
+                        "technicalSkills": null,
+                        "presentationFreestyle": null
+                      },
+                      "score": 9.8,
+                      "totalScore": 9.8,
+                      "deduction": 0
+                    },
+                    {
+                      "sequenceType": "P2",
+                      "scoringCriteriaScore": {
+                        "presentation": 1.8,
+                        "accuracy": 4,
+                        "technicalSkills": null,
+                        "presentationFreestyle": null
+                      },
+                      "score": 5.8,
+                      "totalScore": 5.8,
+                      "deduction": 0
+                    }
+                  ]
+                }
+              },
+              {
+                "matchNumber": 3014,
+                "rank": 10,
+                "resultDecision": "FAIL",
+                "noc": "GER",
+                "team": "GER",
+                "participants": [
+                  {
+                    "familyNameEn": "Choi",
+                    "givenNameEn": "Paul"
+                  },
+                  {
+                    "familyNameEn": "Lim",
+                    "givenNameEn": "Mina"
+                  }
+                ],
+                "score": {
+                  "scoringCriteriaScore": {
+                    "presentation": 4,
+                    "accuracy": 8,
+                    "technicalSkills": null,
+                    "presentationFreestyle": null
+                  },
+                  "averageScore": 6,
+                  "totalScore": 12,
+                  "scoreDetails": [
+                    {
+                      "sequenceType": "P1",
+                      "scoringCriteriaScore": {
+                        "presentation": 2.2,
+                        "accuracy": 4,
+                        "technicalSkills": null,
+                        "presentationFreestyle": null
+                      },
+                      "score": 6.2,
+                      "totalScore": 6.2,
+                      "deduction": 0
+                    },
+                    {
+                      "sequenceType": "P2",
+                      "scoringCriteriaScore": {
+                        "presentation": 1.8,
+                        "accuracy": 4,
+                        "technicalSkills": null,
+                        "presentationFreestyle": null
+                      },
+                      "score": 5.8,
+                      "totalScore": 5.8,
+                      "deduction": 0
+                    }
+                  ]
+                }
+              }
+            ]
           }
-      }
+        }
+
+    FreeCutoffIndividual:
+      summary: 자유 룰 컷오프 개인전
+      value:
+        {
+          "header": {
+            "competitionHostName": "오앤",
+            "competitionLocalType": "W",
+            "isTeam": false,
+            "competitionName": "공인/자유 품새 테스트",
+            "competitionSdate": "2025-08-14T03:00:00.000+09:00",
+            "timeZoneId": "America/Araguaina",
+            "nocType": "BRA",
+            "divisionName": "Free Style Poomsae",
+            "departmentName": "Under 17",
+            "divisionCategoryName": "Individual male",
+            "phase": "Semifinal Group A"
+          },
+          "contents": {
+            "divisionType": "FREE_STYLE_POOMSAE",
+            "matchResults": [
+              {
+                "matchNumber": 1009,
+                "rank": 1,
+                "resultDecision": "PASS",
+                "noc": "KOR",
+                "team": "UK_U17_IM_11",
+                "participants": [
+                  {
+                    "familyNameEn": "Choi",
+                    "givenNameEn": "Yuri"
+                  }
+                ],
+                "score": {
+                  "scoringCriteriaScore": {
+                    "presentation": null,
+                    "accuracy": null,
+                    "technicalSkills": 11.7,
+                    "presentationFreestyle": 7.9
+                  },
+                  "averageScore": 9.8,
+                  "totalScore": 19.6,
+                  "scoreDetails": [
+                    {
+                      "sequenceType": "P1",
+                      "scoringCriteriaScore": {
+                        "presentation": null,
+                        "accuracy": null,
+                        "technicalSkills": 6,
+                        "presentationFreestyle": 3.9
+                      },
+                      "score": 9.9,
+                      "totalScore": 9.9,
+                      "deduction": 0
+                    },
+                    {
+                      "sequenceType": "P2",
+                      "scoringCriteriaScore": {
+                        "presentation": null,
+                        "accuracy": null,
+                        "technicalSkills": 5.7,
+                        "presentationFreestyle": 4
+                      },
+                      "score": 9.7,
+                      "totalScore": 9.7,
+                      "deduction": 0
+                    }
+                  ]
+                }
+              },
+              {
+                "matchNumber": 1010,
+                "rank": 2,
+                "resultDecision": "PASS",
+                "noc": "KOR",
+                "team": "Iran_U17_IM_09",
+                "participants": [
+                  {
+                    "familyNameEn": "Clark",
+                    "givenNameEn": "Nina"
+                  }
+                ],
+                "score": {
+                  "scoringCriteriaScore": {
+                    "presentation": null,
+                    "accuracy": null,
+                    "technicalSkills": 11.2,
+                    "presentationFreestyle": 7.8
+                  },
+                  "averageScore": 9.5,
+                  "totalScore": 19,
+                  "scoreDetails": [
+                    {
+                      "sequenceType": "P1",
+                      "scoringCriteriaScore": {
+                        "presentation": null,
+                        "accuracy": null,
+                        "technicalSkills": 5.4,
+                        "presentationFreestyle": 3.9
+                      },
+                      "score": 9.3,
+                      "totalScore": 9.3,
+                      "deduction": 0
+                    },
+                    {
+                      "sequenceType": "P2",
+                      "scoringCriteriaScore": {
+                        "presentation": null,
+                        "accuracy": null,
+                        "technicalSkills": 5.8,
+                        "presentationFreestyle": 3.9
+                      },
+                      "score": 9.7,
+                      "totalScore": 9.7,
+                      "deduction": 0
+                    }
+                  ]
+                }
+              },
+              {
+                "matchNumber": 1012,
+                "rank": 3,
+                "resultDecision": "PASS",
+                "noc": "KOR",
+                "team": "USA_U17_IM_08",
+                "participants": [
+                  {
+                    "familyNameEn": "Wang",
+                    "givenNameEn": "Ken"
+                  }
+                ],
+                "score": {
+                  "scoringCriteriaScore": {
+                    "presentation": null,
+                    "accuracy": null,
+                    "technicalSkills": 11,
+                    "presentationFreestyle": 7.7
+                  },
+                  "averageScore": 9.35,
+                  "totalScore": 18.7,
+                  "scoreDetails": [
+                    {
+                      "sequenceType": "P1",
+                      "scoringCriteriaScore": {
+                        "presentation": null,
+                        "accuracy": null,
+                        "technicalSkills": 5,
+                        "presentationFreestyle": 3.8
+                      },
+                      "score": 8.8,
+                      "totalScore": 8.8,
+                      "deduction": 0
+                    },
+                    {
+                      "sequenceType": "P2",
+                      "scoringCriteriaScore": {
+                        "presentation": null,
+                        "accuracy": null,
+                        "technicalSkills": 6,
+                        "presentationFreestyle": 3.9
+                      },
+                      "score": 9.9,
+                      "totalScore": 9.9,
+                      "deduction": 0
+                    }
+                  ]
+                }
+              },
+              {
+                "matchNumber": 1011,
+                "rank": 4,
+                "resultDecision": "PASS",
+                "noc": "KOR",
+                "team": "Korea_U17_IM_07",
+                "participants": [
+                  {
+                    "familyNameEn": "Yang",
+                    "givenNameEn": "Paul"
+                  }
+                ],
+                "score": {
+                  "scoringCriteriaScore": {
+                    "presentation": null,
+                    "accuracy": null,
+                    "technicalSkills": 10.4,
+                    "presentationFreestyle": 7.7
+                  },
+                  "averageScore": 9.05,
+                  "totalScore": 18.1,
+                  "scoreDetails": [
+                    {
+                      "sequenceType": "P1",
+                      "scoringCriteriaScore": {
+                        "presentation": null,
+                        "accuracy": null,
+                        "technicalSkills": 5.1,
+                        "presentationFreestyle": 3.7
+                      },
+                      "score": 8.8,
+                      "totalScore": 8.8,
+                      "deduction": 0
+                    },
+                    {
+                      "sequenceType": "P2",
+                      "scoringCriteriaScore": {
+                        "presentation": null,
+                        "accuracy": null,
+                        "technicalSkills": 5.3,
+                        "presentationFreestyle": 4
+                      },
+                      "score": 9.3,
+                      "totalScore": 9.3,
+                      "deduction": 0
+                    }
+                  ]
+                }
+              },
+              {
+                "matchNumber": 1008,
+                "rank": 5,
+                "resultDecision": "PASS",
+                "noc": "KOR",
+                "team": "Mexico_U17_IM_13",
+                "participants": [
+                  {
+                    "familyNameEn": "Patel",
+                    "givenNameEn": "Julie"
+                  }
+                ],
+                "score": {
+                  "scoringCriteriaScore": {
+                    "presentation": null,
+                    "accuracy": null,
+                    "technicalSkills": 10.8,
+                    "presentationFreestyle": 7.1
+                  },
+                  "averageScore": 8.95,
+                  "totalScore": 17.9,
+                  "scoreDetails": [
+                    {
+                      "sequenceType": "P1",
+                      "scoringCriteriaScore": {
+                        "presentation": null,
+                        "accuracy": null,
+                        "technicalSkills": 5.1,
+                        "presentationFreestyle": 3.8
+                      },
+                      "score": 8.9,
+                      "totalScore": 8.9,
+                      "deduction": 0
+                    },
+                    {
+                      "sequenceType": "P2",
+                      "scoringCriteriaScore": {
+                        "presentation": null,
+                        "accuracy": null,
+                        "technicalSkills": 5.7,
+                        "presentationFreestyle": 3.3
+                      },
+                      "score": 9,
+                      "totalScore": 9,
+                      "deduction": 0
+                    }
+                  ]
+                }
+              },
+              {
+                "matchNumber": 1007,
+                "rank": 6,
+                "resultDecision": "PASS",
+                "noc": "KOR",
+                "team": "Vietnam_U17_IM_06",
+                "participants": [
+                  {
+                    "familyNameEn": "Patel",
+                    "givenNameEn": "Mina"
+                  }
+                ],
+                "score": {
+                  "scoringCriteriaScore": {
+                    "presentation": null,
+                    "accuracy": null,
+                    "technicalSkills": 9.8,
+                    "presentationFreestyle": 6.7
+                  },
+                  "averageScore": 8.25,
+                  "totalScore": 16.5,
+                  "scoreDetails": [
+                    {
+                      "sequenceType": "P1",
+                      "scoringCriteriaScore": {
+                        "presentation": null,
+                        "accuracy": null,
+                        "technicalSkills": 6,
+                        "presentationFreestyle": 3.8
+                      },
+                      "score": 9.8,
+                      "totalScore": 9.8,
+                      "deduction": 0
+                    },
+                    {
+                      "sequenceType": "P2",
+                      "scoringCriteriaScore": {
+                        "presentation": null,
+                        "accuracy": null,
+                        "technicalSkills": 3.8,
+                        "presentationFreestyle": 2.9
+                      },
+                      "score": 6.7,
+                      "totalScore": 6.7,
+                      "deduction": 0
+                    }
+                  ]
+                }
+              },
+              {
+                "matchNumber": 1006,
+                "rank": 7,
+                "resultDecision": "PASS",
+                "noc": "KOR",
+                "team": "Morocco_U17_IM_12",
+                "participants": [
+                  {
+                    "familyNameEn": "Yamamoto",
+                    "givenNameEn": "Ken"
+                  }
+                ],
+                "score": {
+                  "scoringCriteriaScore": {
+                    "presentation": null,
+                    "accuracy": null,
+                    "technicalSkills": 6.3,
+                    "presentationFreestyle": 6.9
+                  },
+                  "averageScore": 6.6,
+                  "totalScore": 13.2,
+                  "scoreDetails": [
+                    {
+                      "sequenceType": "P1",
+                      "scoringCriteriaScore": {
+                        "presentation": null,
+                        "accuracy": null,
+                        "technicalSkills": 0.8,
+                        "presentationFreestyle": 2.9
+                      },
+                      "score": 3.7,
+                      "totalScore": 3.7,
+                      "deduction": 0
+                    },
+                    {
+                      "sequenceType": "P2",
+                      "scoringCriteriaScore": {
+                        "presentation": null,
+                        "accuracy": null,
+                        "technicalSkills": 5.5,
+                        "presentationFreestyle": 4
+                      },
+                      "score": 9.5,
+                      "totalScore": 9.5,
+                      "deduction": 0
+                    }
+                  ]
+                }
+              },
+              {
+                "matchNumber": 1004,
+                "rank": 8,
+                "resultDecision": "PASS",
+                "noc": "KOR",
+                "team": "Russia_U17_IM_10",
+                "participants": [
+                  {
+                    "familyNameEn": "Patel",
+                    "givenNameEn": "Sung"
+                  }
+                ],
+                "score": {
+                  "scoringCriteriaScore": {
+                    "presentation": null,
+                    "accuracy": null,
+                    "technicalSkills": 0.6,
+                    "presentationFreestyle": 7.2
+                  },
+                  "averageScore": 3.9,
+                  "totalScore": 7.8,
+                  "scoreDetails": [
+                    {
+                      "sequenceType": "P1",
+                      "scoringCriteriaScore": {
+                        "presentation": null,
+                        "accuracy": null,
+                        "technicalSkills": 0,
+                        "presentationFreestyle": 3.2
+                      },
+                      "score": 3.2,
+                      "totalScore": 3.2,
+                      "deduction": 0
+                    },
+                    {
+                      "sequenceType": "P2",
+                      "scoringCriteriaScore": {
+                        "presentation": null,
+                        "accuracy": null,
+                        "technicalSkills": 0.6,
+                        "presentationFreestyle": 4
+                      },
+                      "score": 4.6,
+                      "totalScore": 4.6,
+                      "deduction": 0
+                    }
+                  ]
+                }
+              },
+              {
+                "matchNumber": 1005,
+                "rank": 9,
+                "resultDecision": "FAIL",
+                "noc": "KOR",
+                "team": "India_U17_IM_05",
+                "participants": [
+                  {
+                    "familyNameEn": "Yamamoto",
+                    "givenNameEn": "Hana"
+                  }
+                ],
+                "score": {
+                  "scoringCriteriaScore": {
+                    "presentation": null,
+                    "accuracy": null,
+                    "technicalSkills": 0,
+                    "presentationFreestyle": 4.1
+                  },
+                  "averageScore": 2.05,
+                  "totalScore": 4.1,
+                  "scoreDetails": [
+                    {
+                      "sequenceType": "P1",
+                      "scoringCriteriaScore": {
+                        "presentation": null,
+                        "accuracy": null,
+                        "technicalSkills": 0,
+                        "presentationFreestyle": 3.6
+                      },
+                      "score": 3.6,
+                      "totalScore": 3.6,
+                      "deduction": 0
+                    },
+                    {
+                      "sequenceType": "P2",
+                      "scoringCriteriaScore": {
+                        "presentation": null,
+                        "accuracy": null,
+                        "technicalSkills": 0,
+                        "presentationFreestyle": 0.5
+                      },
+                      "score": 0.5,
+                      "totalScore": 0.5,
+                      "deduction": 0
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+
+    MixedCutoffIndividual:
+      summary: 복합 룰 컷오프 개인전
+      value:
+        {
+          "header": {
+            "competitionHostName": "주최명",
+            "competitionLocalType": "L",
+            "isTeam": true,
+            "competitionName": "품새 프론트 <테스트 공용> 전체 룰",
+            "competitionSdate": "2025-07-22T00:00:00.000+09:00",
+            "timeZoneId": "Asia/Seoul",
+            "nocType": "KOR",
+            "divisionName": "Mixed Poomsae",
+            "departmentName": "18& Over",
+            "divisionCategoryName": "Team male",
+            "phase": "Preliminary Group A",
+            "hostLogoUrl": "https://cdn.kpnpglobal.com/kpnp/media/image/champs/2025/07/d333ab8e285a4a4aaf4349102253ad23.PNG",
+            "competitionLogUrl": "https://cdn.kpnpglobal.com/kpnp/media/image/champs/2025/07/26334ff5b1e04bf392f5e712cd0f6b3e.PNG"
+          },
+          "contents": {
+            "divisionType": "MIXED_POOMSAE",
+            "matchResults": [
+              {
+                "matchNumber": 5001,
+                "rank": 1,
+                "resultDecision": "PASS",
+                "noc": "KOR",
+                "team": "TEAM_MALE_18&_TM_05",
+                "participants": [
+                  {
+                    "familyNameEn": "Tanaka",
+                    "givenNameEn": "Mina"
+                  },
+                  {
+                    "familyNameEn": "Lopez",
+                    "givenNameEn": "Jane"
+                  },
+                  {
+                    "familyNameEn": "Lee",
+                    "givenNameEn": "Mina"
+                  }
+                ],
+                "score": {
+                  "scoringCriteriaScore": {
+                    "presentation": 2.2,
+                    "accuracy": 4,
+                    "technicalSkills": 6,
+                    "presentationFreestyle": 0.4
+                  },
+                  "averageScore": 6.3,
+                  "totalScore": 12.6,
+                  "scoreDetails": [
+                    {
+                      "sequenceType": "P1",
+                      "scoringCriteriaScore": {
+                        "presentation": 2.2,
+                        "accuracy": 4,
+                        "technicalSkills": null,
+                        "presentationFreestyle": null
+                      },
+                      "score": 6.2,
+                      "totalScore": 6.2,
+                      "deduction": 0
+                    },
+                    {
+                      "sequenceType": "P2",
+                      "scoringCriteriaScore": {
+                        "presentation": null,
+                        "accuracy": null,
+                        "technicalSkills": 6,
+                        "presentationFreestyle": 0.4
+                      },
+                      "score": 6.4,
+                      "totalScore": 6.4,
+                      "deduction": 0
+                    }
+                  ]
+                }
+              },
+              {
+                "matchNumber": 5003,
+                "rank": 2,
+                "resultDecision": "PASS",
+                "noc": "KOR",
+                "team": "TEAM_MALE_18&_TM_05",
+                "participants": [
+                  {
+                    "familyNameEn": "Tanaka",
+                    "givenNameEn": "Mina"
+                  },
+                  {
+                    "familyNameEn": "Lopez",
+                    "givenNameEn": "Jane"
+                  },
+                  {
+                    "familyNameEn": "Lee",
+                    "givenNameEn": "Mina"
+                  }
+                ],
+                "score": {
+                  "scoringCriteriaScore": {
+                    "presentation": 2.2,
+                    "accuracy": 4,
+                    "technicalSkills": 6,
+                    "presentationFreestyle": 0.4
+                  },
+                  "averageScore": 6.3,
+                  "totalScore": 12.6,
+                  "scoreDetails": [
+                    {
+                      "sequenceType": "P1",
+                      "scoringCriteriaScore": {
+                        "presentation": 2.2,
+                        "accuracy": 4,
+                        "technicalSkills": null,
+                        "presentationFreestyle": null
+                      },
+                      "score": 6.2,
+                      "totalScore": 6.2,
+                      "deduction": 0
+                    },
+                    {
+                      "sequenceType": "P2",
+                      "scoringCriteriaScore": {
+                        "presentation": null,
+                        "accuracy": null,
+                        "technicalSkills": 6,
+                        "presentationFreestyle": 0.4
+                      },
+                      "score": 6.4,
+                      "totalScore": 6.4,
+                      "deduction": 0
+                    }
+                  ]
+                }
+              },
+              {
+                "matchNumber": 5002,
+                "rank": 0,
+                "resultDecision": "DSQ",
+                "noc": "KOR",
+                "team": "TEAM_MALE_18&_TM_04",
+                "participants": [
+                  {
+                    "familyNameEn": "Silva",
+                    "givenNameEn": "Yuna"
+                  },
+                  {
+                    "familyNameEn": "Silva",
+                    "givenNameEn": "Luke"
+                  },
+                  {
+                    "familyNameEn": "Lim",
+                    "givenNameEn": "Emma"
+                  }
+                ],
+                "score": {
+                  "scoringCriteriaScore": {
+                    "presentation": 0,
+                    "accuracy": 0,
+                    "technicalSkills": 0,
+                    "presentationFreestyle": 0
+                  },
+                  "averageScore": 0,
+                  "totalScore": 0,
+                  "scoreDetails": [
+                    {
+                      "sequenceType": "P1",
+                      "scoringCriteriaScore": {
+                        "presentation": 0,
+                        "accuracy": 0,
+                        "technicalSkills": null,
+                        "presentationFreestyle": null
+                      },
+                      "score": 0,
+                      "totalScore": 0,
+                      "deduction": 0
+                    },
+                    {
+                      "sequenceType": "P2",
+                      "scoringCriteriaScore": {
+                        "presentation": null,
+                        "accuracy": null,
+                        "technicalSkills": 0,
+                        "presentationFreestyle": 0
+                      },
+                      "score": 0,
+                      "totalScore": 0,
+                      "deduction": 0
+                    }
+                  ]
+                }
+              },
+              {
+                "matchNumber": 5004,
+                "rank": 0,
+                "resultDecision": "DSQ",
+                "noc": "KOR",
+                "team": "TEAM_MALE_18&_TM_06",
+                "participants": [
+                  {
+                    "familyNameEn": "Zhang",
+                    "givenNameEn": "Sara"
+                  },
+                  {
+                    "familyNameEn": "Kim",
+                    "givenNameEn": "Sung"
+                  },
+                  {
+                    "familyNameEn": "Lopez",
+                    "givenNameEn": "Sara"
+                  }
+                ],
+                "score": {
+                  "scoringCriteriaScore": {
+                    "presentation": 0,
+                    "accuracy": 0,
+                    "technicalSkills": 0,
+                    "presentationFreestyle": 0
+                  },
+                  "averageScore": 0,
+                  "totalScore": 0,
+                  "scoreDetails": [
+                    {
+                      "sequenceType": "P1",
+                      "scoringCriteriaScore": {
+                        "presentation": 0,
+                        "accuracy": 0,
+                        "technicalSkills": null,
+                        "presentationFreestyle": null
+                      },
+                      "score": 0,
+                      "totalScore": 0,
+                      "deduction": 0
+                    },
+                    {
+                      "sequenceType": "P2",
+                      "scoringCriteriaScore": {
+                        "presentation": null,
+                        "accuracy": null,
+                        "technicalSkills": 0,
+                        "presentationFreestyle": 0
+                      },
+                      "score": 0,
+                      "totalScore": 0,
+                      "deduction": 0
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
