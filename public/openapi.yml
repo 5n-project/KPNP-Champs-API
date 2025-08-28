@@ -22,6 +22,7 @@ tags:
   - name: FOP
   - name: 코트뷰어
   - name: 문서
+  - name: 운영 - 상장
 paths:
 
   # 공통
@@ -279,6 +280,13 @@ paths:
     $ref: './tags/poomsae/document/document-schedules.yaml#/paths/~1competitions~1{competitionSeq}~1documents~1schedules~1contents'
   /competitions/{competitionSeq}/documents/schedules:
     $ref: './tags/poomsae/document/document-schedules.yaml#/paths/~1competitions~1{competitionSeq}~1documents~1schedules'
+
+
+  # 상장
+  /competitions/{competitionSeq}/certificate/{certificateSettingSeq}/winners:
+    $ref: './tags/poomsae/certificate.yaml#/paths/~1competitions~1{competitionSeq}~1certificate~1{certificateSettingSeq}~1winners'
+  /competitions/{competitionSeq}/certificate/{certificateSettingSeq}/teams:
+    $ref: './tags/poomsae/certificate.yaml#/paths/~1competitions~1{competitionSeq}~1certificate~1{certificateSettingSeq}~1teams'
 
 
 components:

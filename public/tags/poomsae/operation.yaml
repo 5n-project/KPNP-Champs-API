@@ -4592,92 +4592,199 @@ paths:
                 successResponse:
                   summary: 성공응답
                   value:
-                    success: true
-                    data:
-                      {
-                        "competitionName": "20250522 ㅇㅈ품새s",
-                        "competitionTimezone": "Asia/Seoul",
+                    {
+                      "success": true,
+                      "data": {
+                        "competitionName": "단체 코트다름 0828",
+                        "competitionTimezone": "America/Bahia",
                         "hostLogoUrl": null,
                         "competitionLogUrl": null,
-                        "competitionLocation": "부산s",
+                        "competitionLocation": "마곡역",
                         "matList": [
                           1,
                           2,
                           3,
                           4,
-                          5
+                          5,
+                          6,
+                          7
                         ],
                         "ongoingMatches": [
                           {
-                            "competitionMatchPsSeq": 20024,
+                            "competitionMatchPsSeq": 45956,
                             "matNumber": 1,
-                            "matchNumber": 1001,
-                            "phase": "R64",
+                            "matchNumber": 1002,
+                            "phase": "F",
                             "cutoffGroup": null,
                             "divisionCode": "WT_RECOGNIZED_POOMSAE",
                             "divisionNameKo": "WT 공인품새룰",
                             "divisionNameEn": "WT Recognized Poomsae",
-                            "departmentCode": "UNDER_30",
-                            "departmentNameKo": "30세 이하",
-                            "departmentNameEn": "Under 30",
+                            "departmentCode": "CADET",
+                            "departmentNameKo": "유소년부",
+                            "departmentNameEn": "Cadet",
                             "divisionCategoryCode": "INDIVIDUAL_MALE",
                             "divisionCategoryNameKo": "남자개인",
                             "divisionCategoryNameEn": "Individual male",
-                            "matchStyleType" : "TOURNAMENT",
-                            "matchMinTime": 90,
-                            "matchMaxTime": 200,
+                            "matchStyleType": "TOURNAMENT",
+                            "matchMinTime": 85,
+                            "matchMaxTime": 90,
                             "matchStatus": "ONGOING",
                             "matchCompetitorList": [
                               {
-                                "matchCompetitorDetailSeq": 5299,
-                                "competitor": 118,
-                                "name": "NAM Min-seo",
-                                "country": "KOR",
-                                "firstPoomsaeAverageScore": 6.000,
-                                "secondPoomsaeAverageScore": 6.166,
-                                "poomsaeTotalScore": 30.500,
+                                "matchCompetitorDetailSeq": 27233,
+                                "competitor": 1,
+                                "name": "Choi Nina",
+                                "country": "GER",
+                                "firstPoomsaeAverageScore": null,
+                                "secondPoomsaeAverageScore": null,
+                                "poomsaeTotalScore": null,
                                 "matchSideType": "HOME"
                               },
                               {
-                                "matchCompetitorDetailSeq": 5298,
-                                "competitor": 144,
-                                "name": "DAM Min-seo",
-                                "country": "KOR",
-                                "firstPoomsaeAverageScore": 7.000,
-                                "secondPoomsaeAverageScore": 6.733,
-                                "poomsaeTotalScore": 34.200,
+                                "matchCompetitorDetailSeq": 27238,
+                                "competitor": 3,
+                                "name": "Wang Jane",
+                                "country": "GER",
+                                "firstPoomsaeAverageScore": null,
+                                "secondPoomsaeAverageScore": null,
+                                "poomsaeTotalScore": null,
                                 "matchSideType": "AWAY"
                               }
                             ]
                           },
                           {
-                            "competitionMatchPsSeq": 20087,
+                            "competitionMatchPsSeq": null,
                             "matNumber": 2,
-                            "matchNumber": 2001,
-                            "phase": "PRE",
-                            "cutoffGroup": "B",
-                            "divisionCode": "WT_RECOGNIZED_POOMSAE",
-                            "divisionNameKo": "WT 공인품새룰",
-                            "divisionNameEn": "WT Recognized Poomsae",
-                            "departmentCode": "UNDER_30",
-                            "departmentNameKo": "30세 이하",
-                            "departmentNameEn": "Under 30",
-                            "divisionCategoryCode": "INDIVIDUAL_FEMALE",
-                            "divisionCategoryNameKo": "여자개인",
-                            "divisionCategoryNameEn": "Individual female",
-                            "matchStyleType" : "CUTOFF",
+                            "matchNumber": null,
+                            "phase": null,
+                            "cutoffGroup": null,
+                            "divisionCode": null,
+                            "divisionNameKo": null,
+                            "divisionNameEn": null,
+                            "departmentCode": null,
+                            "departmentNameKo": null,
+                            "departmentNameEn": null,
+                            "divisionCategoryCode": null,
+                            "divisionCategoryNameKo": null,
+                            "divisionCategoryNameEn": null,
+                            "matchStyleType": null,
+                            "matchMinTime": null,
+                            "matchMaxTime": null,
+                            "matchStatus": null,
+                            "matchCompetitorList": [ ]
+                          },
+                          {
+                            "competitionMatchPsSeq": null,
+                            "matNumber": 3,
+                            "matchNumber": null,
+                            "phase": null,
+                            "cutoffGroup": null,
+                            "divisionCode": null,
+                            "divisionNameKo": null,
+                            "divisionNameEn": null,
+                            "departmentCode": null,
+                            "departmentNameKo": null,
+                            "departmentNameEn": null,
+                            "divisionCategoryCode": null,
+                            "divisionCategoryNameKo": null,
+                            "divisionCategoryNameEn": null,
+                            "matchStyleType": null,
+                            "matchMinTime": null,
+                            "matchMaxTime": null,
+                            "matchStatus": null,
+                            "matchCompetitorList": [ ]
+                          },
+                          {
+                            "competitionMatchPsSeq": null,
+                            "matNumber": 4,
+                            "matchNumber": null,
+                            "phase": null,
+                            "cutoffGroup": null,
+                            "divisionCode": null,
+                            "divisionNameKo": null,
+                            "divisionNameEn": null,
+                            "departmentCode": null,
+                            "departmentNameKo": null,
+                            "departmentNameEn": null,
+                            "divisionCategoryCode": null,
+                            "divisionCategoryNameKo": null,
+                            "divisionCategoryNameEn": null,
+                            "matchStyleType": null,
+                            "matchMinTime": null,
+                            "matchMaxTime": null,
+                            "matchStatus": null,
+                            "matchCompetitorList": [ ]
+                          },
+                          {
+                            "competitionMatchPsSeq": null,
+                            "matNumber": 5,
+                            "matchNumber": null,
+                            "phase": null,
+                            "cutoffGroup": null,
+                            "divisionCode": null,
+                            "divisionNameKo": null,
+                            "divisionNameEn": null,
+                            "departmentCode": null,
+                            "departmentNameKo": null,
+                            "departmentNameEn": null,
+                            "divisionCategoryCode": null,
+                            "divisionCategoryNameKo": null,
+                            "divisionCategoryNameEn": null,
+                            "matchStyleType": null,
+                            "matchMinTime": null,
+                            "matchMaxTime": null,
+                            "matchStatus": null,
+                            "matchCompetitorList": [ ]
+                          },
+                          {
+                            "competitionMatchPsSeq": null,
+                            "matNumber": 6,
+                            "matchNumber": null,
+                            "phase": null,
+                            "cutoffGroup": null,
+                            "divisionCode": null,
+                            "divisionNameKo": null,
+                            "divisionNameEn": null,
+                            "departmentCode": null,
+                            "departmentNameKo": null,
+                            "departmentNameEn": null,
+                            "divisionCategoryCode": null,
+                            "divisionCategoryNameKo": null,
+                            "divisionCategoryNameEn": null,
+                            "matchStyleType": null,
+                            "matchMinTime": null,
+                            "matchMaxTime": null,
+                            "matchStatus": null,
+                            "matchCompetitorList": [ ]
+                          },
+                          {
+                            "competitionMatchPsSeq": 45988,
+                            "matNumber": 7,
+                            "matchNumber": 7001,
+                            "phase": "SF",
+                            "cutoffGroup": "A",
+                            "divisionCode": "FREE_STYLE_POOMSAE",
+                            "divisionNameKo": "자유품새룰",
+                            "divisionNameEn": "Free Style Poomsae",
+                            "departmentCode": "UNDER_17",
+                            "departmentNameKo": "17세 이하",
+                            "departmentNameEn": "Under 17",
+                            "divisionCategoryCode": "INDIVIDUAL_MALE",
+                            "divisionCategoryNameKo": "남자개인",
+                            "divisionCategoryNameEn": "Individual male",
+                            "matchStyleType": "CUTOFF",
                             "matchMinTime": 90,
-                            "matchMaxTime": 200,
+                            "matchMaxTime": 100,
                             "matchStatus": "ONGOING",
                             "matchCompetitorList": [
                               {
-                                "matchCompetitorDetailSeq": 5207,
-                                "competitor": 1,
-                                "name": "DAM Min-seo",
+                                "matchCompetitorDetailSeq": 27212,
+                                "competitor": 6,
+                                "name": "Patel Mina",
                                 "country": "KOR",
-                                "firstPoomsaeAverageScore": 1.600,
+                                "firstPoomsaeAverageScore": null,
                                 "secondPoomsaeAverageScore": null,
-                                "poomsaeTotalScore": 1.600,
+                                "poomsaeTotalScore": null,
                                 "matchSideType": "CUTOFF"
                               }
                             ]
@@ -4686,96 +4793,104 @@ paths:
                         "waitingMatches": [
                           {
                             "matNumber": 1,
+                            "matches": [ ]
+                          },
+                          {
+                            "matNumber": 2,
+                            "matches": [ ]
+                          },
+                          {
+                            "matNumber": 3,
                             "matches": [
                               {
-                                "competitionMatchPsSeq": 20028,
-                                "matchNumber": 1004,
-                                "phase": "R64",
+                                "competitionMatchPsSeq": 45973,
+                                "matchNumber": 3001,
+                                "phase": "R16",
                                 "divisionCode": "WT_RECOGNIZED_POOMSAE",
                                 "divisionNameKo": "WT 공인품새룰",
                                 "divisionNameEn": "WT Recognized Poomsae",
-                                "departmentCode": "UNDER_30",
-                                "departmentNameKo": "30세 이하",
-                                "departmentNameEn": "Under 30",
-                                "divisionCategoryCode": "INDIVIDUAL_MALE",
-                                "divisionCategoryNameKo": "남자개인",
-                                "divisionCategoryNameEn": "Individual male",
+                                "departmentCode": "CADET",
+                                "departmentNameKo": "유소년부",
+                                "departmentNameEn": "Cadet",
+                                "divisionCategoryCode": "TEAM_MALE",
+                                "divisionCategoryNameKo": "남자단체",
+                                "divisionCategoryNameEn": "Team male",
+                                "sortNo": 5,
+                                "matchCompetitorList": [
+                                  {
+                                    "matchCompetitorDetailSeq": 27234,
+                                    "competitor": 24,
+                                    "name": "GER",
+                                    "country": "GER",
+                                    "matchSideType": "AWAY"
+                                  },
+                                  {
+                                    "matchCompetitorDetailSeq": 27221,
+                                    "competitor": 14,
+                                    "name": "ALG",
+                                    "country": "ALG",
+                                    "matchSideType": "HOME"
+                                  }
+                                ]
+                              },
+                              {
+                                "competitionMatchPsSeq": 45974,
+                                "matchNumber": 3002,
+                                "phase": "R16",
+                                "divisionCode": "WT_RECOGNIZED_POOMSAE",
+                                "divisionNameKo": "WT 공인품새룰",
+                                "divisionNameEn": "WT Recognized Poomsae",
+                                "departmentCode": "CADET",
+                                "departmentNameKo": "유소년부",
+                                "departmentNameEn": "Cadet",
+                                "divisionCategoryCode": "TEAM_MALE",
+                                "divisionCategoryNameKo": "남자단체",
+                                "divisionCategoryNameEn": "Team male",
                                 "sortNo": 6,
                                 "matchCompetitorList": [
                                   {
-                                    "matchCompetitorDetailSeq": 5305,
-                                    "competitor": 126,
-                                    "name": "DAM Min-seo",
-                                    "country": "KOR",
+                                    "matchCompetitorDetailSeq": 27223,
+                                    "competitor": 23,
+                                    "name": "GER",
+                                    "country": "GER",
                                     "matchSideType": "AWAY"
                                   },
                                   {
-                                    "matchCompetitorDetailSeq": 5306,
-                                    "competitor": 120,
-                                    "name": "DAM Min-seo",
-                                    "country": "KOR",
+                                    "matchCompetitorDetailSeq": 27222,
+                                    "competitor": 30,
+                                    "name": "GER",
+                                    "country": "GER",
                                     "matchSideType": "HOME"
                                   }
                                 ]
                               },
                               {
-                                "competitionMatchPsSeq": 20032,
-                                "matchNumber": 1006,
-                                "phase": "R64",
+                                "competitionMatchPsSeq": 45975,
+                                "matchNumber": 3003,
+                                "phase": "R16",
                                 "divisionCode": "WT_RECOGNIZED_POOMSAE",
                                 "divisionNameKo": "WT 공인품새룰",
                                 "divisionNameEn": "WT Recognized Poomsae",
-                                "departmentCode": "UNDER_30",
-                                "departmentNameKo": "30세 이하",
-                                "departmentNameEn": "Under 30",
-                                "divisionCategoryCode": "INDIVIDUAL_MALE",
-                                "divisionCategoryNameKo": "남자개인",
-                                "divisionCategoryNameEn": "Individual male",
-                                "sortNo": 10,
+                                "departmentCode": "CADET",
+                                "departmentNameKo": "유소년부",
+                                "departmentNameEn": "Cadet",
+                                "divisionCategoryCode": "TEAM_MALE",
+                                "divisionCategoryNameKo": "남자단체",
+                                "divisionCategoryNameEn": "Team male",
+                                "sortNo": 7,
                                 "matchCompetitorList": [
                                   {
-                                    "matchCompetitorDetailSeq": 5312,
-                                    "competitor": 145,
-                                    "name": "DAM Min-seo",
-                                    "country": "KOR",
-                                    "matchSideType": "HOME"
-                                  },
-                                  {
-                                    "matchCompetitorDetailSeq": 5311,
-                                    "competitor": 149,
-                                    "name": "DAM Min-seo",
-                                    "country": "KOR",
-                                    "matchSideType": "AWAY"
-                                  }
-                                ]
-                              },
-                              {
-                                "competitionMatchPsSeq": 20033,
-                                "matchNumber": 1007,
-                                "phase": "R64",
-                                "divisionCode": "WT_RECOGNIZED_POOMSAE",
-                                "divisionNameKo": "WT 공인품새룰",
-                                "divisionNameEn": "WT Recognized Poomsae",
-                                "departmentCode": "UNDER_30",
-                                "departmentNameKo": "30세 이하",
-                                "departmentNameEn": "Under 30",
-                                "divisionCategoryCode": "INDIVIDUAL_MALE",
-                                "divisionCategoryNameKo": "남자개인",
-                                "divisionCategoryNameEn": "Individual male",
-                                "sortNo": 11,
-                                "matchCompetitorList": [
-                                  {
-                                    "matchCompetitorDetailSeq": 5313,
-                                    "competitor": 152,
-                                    "name": "DAM Min-seo",
-                                    "country": "KOR",
+                                    "matchCompetitorDetailSeq": 27225,
+                                    "competitor": 19,
+                                    "name": "ALB",
+                                    "country": "ALB",
                                     "matchSideType": "AWAY"
                                   },
                                   {
-                                    "matchCompetitorDetailSeq": 5314,
-                                    "competitor": 130,
-                                    "name": "DAM Min-seo",
-                                    "country": "KOR",
+                                    "matchCompetitorDetailSeq": 27224,
+                                    "competitor": 18,
+                                    "name": "ANT",
+                                    "country": "ANT",
                                     "matchSideType": "HOME"
                                   }
                                 ]
@@ -4783,75 +4898,87 @@ paths:
                             ]
                           },
                           {
-                            "matNumber": 2,
+                            "matNumber": 4,
+                            "matches": [ ]
+                          },
+                          {
+                            "matNumber": 5,
+                            "matches": [ ]
+                          },
+                          {
+                            "matNumber": 6,
+                            "matches": [ ]
+                          },
+                          {
+                            "matNumber": 7,
                             "matches": [
                               {
-                                "competitionMatchPsSeq": 20089,
-                                "matchNumber": 2003,
-                                "phase": "Pre-A",
-                                "divisionCode": "WT_RECOGNIZED_POOMSAE",
-                                "divisionNameKo": "WT 공인품새룰",
-                                "divisionNameEn": "WT Recognized Poomsae",
-                                "departmentCode": "UNDER_30",
-                                "departmentNameKo": "30세 이하",
-                                "departmentNameEn": "Under 30",
-                                "divisionCategoryCode": "INDIVIDUAL_FEMALE",
-                                "divisionCategoryNameKo": "여자개인",
-                                "divisionCategoryNameEn": "Individual female",
+                                "competitionMatchPsSeq": 45989,
+                                "matchNumber": 7002,
+                                "phase": "SF-A",
+                                "divisionCode": "FREE_STYLE_POOMSAE",
+                                "divisionNameKo": "자유품새룰",
+                                "divisionNameEn": "Free Style Poomsae",
+                                "departmentCode": "UNDER_17",
+                                "departmentNameKo": "17세 이하",
+                                "departmentNameEn": "Under 17",
+                                "divisionCategoryCode": "INDIVIDUAL_MALE",
+                                "divisionCategoryNameKo": "남자개인",
+                                "divisionCategoryNameEn": "Individual male",
+                                "sortNo": 2,
+                                "matchCompetitorList": [
+                                  {
+                                    "matchCompetitorDetailSeq": 27213,
+                                    "competitor": 10,
+                                    "name": "Patel Sung",
+                                    "country": "KOR",
+                                    "matchSideType": "CUTOFF"
+                                  }
+                                ]
+                              },
+                              {
+                                "competitionMatchPsSeq": 45990,
+                                "matchNumber": 7003,
+                                "phase": "SF-A",
+                                "divisionCode": "FREE_STYLE_POOMSAE",
+                                "divisionNameKo": "자유품새룰",
+                                "divisionNameEn": "Free Style Poomsae",
+                                "departmentCode": "UNDER_17",
+                                "departmentNameKo": "17세 이하",
+                                "departmentNameEn": "Under 17",
+                                "divisionCategoryCode": "INDIVIDUAL_MALE",
+                                "divisionCategoryNameKo": "남자개인",
+                                "divisionCategoryNameEn": "Individual male",
                                 "sortNo": 3,
                                 "matchCompetitorList": [
                                   {
-                                    "matchCompetitorDetailSeq": 5209,
-                                    "competitor": 3,
-                                    "name": "DAM Min-seo",
+                                    "matchCompetitorDetailSeq": 27214,
+                                    "competitor": 9,
+                                    "name": "Clark Nina",
                                     "country": "KOR",
                                     "matchSideType": "CUTOFF"
                                   }
                                 ]
                               },
                               {
-                                "competitionMatchPsSeq": 20091,
-                                "matchNumber": 2005,
-                                "phase": "Pre-A",
-                                "divisionCode": "WT_RECOGNIZED_POOMSAE",
-                                "divisionNameKo": "WT 공인품새룰",
-                                "divisionNameEn": "WT Recognized Poomsae",
-                                "departmentCode": "UNDER_30",
-                                "departmentNameKo": "30세 이하",
-                                "departmentNameEn": "Under 30",
-                                "divisionCategoryCode": "INDIVIDUAL_FEMALE",
-                                "divisionCategoryNameKo": "여자개인",
-                                "divisionCategoryNameEn": "Individual female",
-                                "sortNo": 5,
+                                "competitionMatchPsSeq": 45991,
+                                "matchNumber": 7004,
+                                "phase": "SF-A",
+                                "divisionCode": "FREE_STYLE_POOMSAE",
+                                "divisionNameKo": "자유품새룰",
+                                "divisionNameEn": "Free Style Poomsae",
+                                "departmentCode": "UNDER_17",
+                                "departmentNameKo": "17세 이하",
+                                "departmentNameEn": "Under 17",
+                                "divisionCategoryCode": "INDIVIDUAL_MALE",
+                                "divisionCategoryNameKo": "남자개인",
+                                "divisionCategoryNameEn": "Individual male",
+                                "sortNo": 4,
                                 "matchCompetitorList": [
                                   {
-                                    "matchCompetitorDetailSeq": 5211,
-                                    "competitor": 5,
-                                    "name": "DAM Min-seo",
-                                    "country": "KOR",
-                                    "matchSideType": "CUTOFF"
-                                  }
-                                ]
-                              },
-                              {
-                                "competitionMatchPsSeq": 20092,
-                                "matchNumber": 2006,
-                                "phase": "Pre-A",
-                                "divisionCode": "WT_RECOGNIZED_POOMSAE",
-                                "divisionNameKo": "WT 공인품새룰",
-                                "divisionNameEn": "WT Recognized Poomsae",
-                                "departmentCode": "UNDER_30",
-                                "departmentNameKo": "30세 이하",
-                                "departmentNameEn": "Under 30",
-                                "divisionCategoryCode": "INDIVIDUAL_FEMALE",
-                                "divisionCategoryNameKo": "여자개인",
-                                "divisionCategoryNameEn": "Individual female",
-                                "sortNo": 6,
-                                "matchCompetitorList": [
-                                  {
-                                    "matchCompetitorDetailSeq": 5212,
-                                    "competitor": 6,
-                                    "name": "DAM Min-seo",
+                                    "matchCompetitorDetailSeq": 27215,
+                                    "competitor": 7,
+                                    "name": "Yang Paul",
                                     "country": "KOR",
                                     "matchSideType": "CUTOFF"
                                   }
@@ -4860,8 +4987,9 @@ paths:
                             ]
                           }
                         ]
-                      }
-                    error: null
+                      },
+                      "error": null
+                    }
                 ITEM_NOT_FOUND:
                   $ref: '../../openapi.yml#/components/examples/ITEM_NOT_FOUND'
                 COMPETITION_MATCH_NOT_FOUND:
