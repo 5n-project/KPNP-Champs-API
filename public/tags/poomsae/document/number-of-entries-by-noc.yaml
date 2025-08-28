@@ -1,0 +1,954 @@
+paths:
+  /competitions/{competitionSeq}/documents/detail/NUMBER_OF_ENTRIES_BY_NOC:
+    get:
+      summary: NUMBER_OF_ENTRIES_BY_NOC 품새 문서 상세 조회 (NUMBER_OF_ENTRIES_BY_NOC)
+      description: NUMBER_OF_ENTRIES_BY_NOC 문서를 조회한다. (documentType 은 항상 'NUMBER_OF_ENTRIES_BY_NOC')
+      tags:
+        - 문서
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 대회의 고유 시퀀스
+        - name: documentType
+          in: path
+          required: true
+          schema:
+            type: string
+          description: 조회할 documentType
+          example: NUMBER_OF_ENTRIES_BY_NOC
+
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    $ref: "#/components/schemas/EntriesContinentSummaryResponse"
+                  error:
+                    type: string
+                    nullable: true
+              examples:
+                number of entries by noc 데이터:
+                  $ref: "#/components/examples/NumberOfEntriesByNoc"
+                COMPETITION_PARTICIPATE_NOT_CONFIRM_ERROR:
+                  $ref: '../../../openapi.yml/#/components/examples/COMPETITION_PARTICIPATE_NOT_CONFIRM_ERROR'
+                DOCUMENT_NOT_FOUND:
+                  $ref: '../../../openapi.yml/#/components/examples/DOCUMENT_NOT_FOUND'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '../../../openapi.yml#/components/responses/Error'
+              examples:
+                INVALID_TYPE_ERROR:
+                  $ref: '../../../openapi.yml#/components/examples/INVALID_TYPE_ERROR'
+        '403':
+          description: 권한 없음
+          content:
+            application/json:
+              schema:
+                $ref: '../../../openapi.yml#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+components:
+  schemas:
+    # ===== Top-level Response =====
+    EntriesContinentSummaryResponse:
+      type: object
+      required: [ header, contents ]
+      properties:
+        header:
+          $ref: '#/components/schemas/CompetitionHeader'
+        contents:
+          $ref: '#/components/schemas/EntriesContents'
+      description: 대회 메타데이터와 엔트리 요약 데이터
+
+    # ===== Header =====
+    CompetitionHeader:
+      type: object
+      required:
+        - competitionHostName
+        - competitionLocalType
+        - competitionName
+        - competitionSdate
+        - timeZoneId
+        - nocType
+      properties:
+        competitionHostName:
+          type: string
+          description: 대회 주최(호스트) 식별/표기명
+        competitionLocalType:
+          type: string
+          description: '대회 지역/로컬 타입 코드(내부 규격, 예: W=World 등)'
+        competitionName:
+          type: string
+          description: 대회 명칭(표준 표기)
+        competitionSdate:
+          type: string
+          format: date-time
+          description: 대회 시작 일시(ISO 8601, 타임존 오프셋 포함)
+        timeZoneId:
+          type: string
+          description: 대회 타임존
+        nocType:
+          type: string
+          pattern: '^[A-Z]{3}$'
+          description: NOC코드
+        hostLogoUrl:
+          type: string
+          format: uri
+          description: 주최측 로고 이미지 URL
+        competitionLogUrl:
+          type: string
+          format: uri
+          description: 대회 로고/엠블럼 또는 배너 이미지 URL
+      description: 대회 메타데이터 헤더
+
+    # ===== Contents =====
+    EntriesContents:
+      type: object
+      required: [ summary, continentSummaryList ]
+      properties:
+        summary:
+          $ref: '#/components/schemas/Summary'
+        continentSummaryList:
+          type: array
+          description: 대륙별 요약 목록
+          items:
+            $ref: '#/components/schemas/ContinentSummary'
+      description: 전체 요약 및 대륙 단위 요약
+
+    # ===== Summary (Division-based) =====
+    Summary:
+      type: object
+      required: [ countList, totalCount ]
+      properties:
+        countList:
+          type: array
+          description: 종목(divisionCategory)별 참가 수 카운트 목록
+          items:
+            $ref: '#/components/schemas/DivisionCategoryCount'
+        totalCount:
+          type: integer
+          minimum: 0
+          description: countList의 합계
+      description: 종목 단위 카운트 요약
+
+    DivisionCategoryCount:
+      type: object
+      required: [ divisionCategory, count ]
+      properties:
+        divisionCategory:
+          type: string
+          enum:
+            - INDIVIDUAL_MALE
+            - INDIVIDUAL_FEMALE
+            - TEAM_MALE
+            - TEAM_FEMALE
+            - PAIR
+            - TEAM_MIXED
+        count:
+          type: integer
+          minimum: 0
+          description: 해당 종목 참가 수
+      description: 특정 종목(divisionCategory)의 참가 수
+
+    # ===== Continent Summary =====
+    ContinentSummary:
+      type: object
+      required: [ continent,continentName, summary, nocCount, nocSummaryList ]
+      properties:
+        continent:
+          type: string
+        continentName:
+          type: string
+          description: 대륙 이름
+        summary:
+          $ref: '#/components/schemas/Summary'
+        nocCount:
+          type: integer
+          minimum: 0
+          description: 해당 대륙에 포함된 NOC 수(참여한 국가 수)
+        nocSummaryList:
+          type: array
+          description: 국가(NOC)별 요약 목록
+          items:
+            $ref: '#/components/schemas/NocSummary'
+      description: 대륙 단위 종합 요약(종목별/국가별)
+
+    # ===== NOC Summary =====
+    NocSummary:
+      type: object
+      required: [ noc, countryName, summary ]
+      properties:
+        noc:
+          $ref: '#/components/schemas/NocCode'
+        countryName:
+          type: string
+          description: 국가명(영문 공식명 또는 서비스 표기명)
+        summary:
+          $ref: '#/components/schemas/Summary'
+      description: 특정 국가(NOC)의 종목별 참가 수 요약
+
+    # ===== Enums & Common =====
+    NocCode:
+      type: string
+      pattern: '^[A-Z]{3}$'
+      description: NOC코드
+
+    Continent:
+      type: string
+      enum:
+        - AFRICA
+        - ASIA
+        - EUROPE
+        - PAN_AMERICA
+        - OCEANIA
+      description: 대륙 코드(서비스 내 표준 분류). 필요 시 OCEANIA 등 확장 가능.
+
+    DivisionCategory:
+      type: string
+      enum:
+        - INDIVIDUAL_MALE
+        - INDIVIDUAL_FEMALE
+        - TEAM_MALE
+        - TEAM_FEMALE
+        - PAIR
+        - TEAM_MIXED
+      description: >
+        종목(디비전) 분류.
+        - INDIVIDUAL_*: 개인전
+        - TEAM_*: 팀전
+        - PAIR: 페어(혼성 2인)
+        - TEAM_MIXED: 혼성 팀전
+
+  examples:
+    NumberOfEntriesByNoc:
+      summary: number of entries by noc 데이터
+      value:
+        {
+          "header": {
+            "competitionHostName": "champs4",
+            "competitionLocalType": "W",
+            "competitionName": "champs4 대회 250826_1",
+            "competitionSdate": "2025-08-26T03:00:00.000+09:00",
+            "timeZoneId": "Antarctica/Rothera",
+            "nocType": "ATA"
+          },
+          "contents": {
+            "summary": {
+              "countList": [
+                {
+                  "divisionCategory": "INDIVIDUAL_MALE",
+                  "count": 4
+                },
+                {
+                  "divisionCategory": "INDIVIDUAL_FEMALE",
+                  "count": 20
+                },
+                {
+                  "divisionCategory": "TEAM_MALE",
+                  "count": 60
+                },
+                {
+                  "divisionCategory": "TEAM_FEMALE",
+                  "count": 60
+                },
+                {
+                  "divisionCategory": "PAIR",
+                  "count": 40
+                },
+                {
+                  "divisionCategory": "TEAM_MIXED",
+                  "count": 0
+                }
+              ],
+              "totalCount": 184
+            },
+            "continentSummaryList": [
+              {
+                "continent": "AFRICA",
+                "continentName": "Africa",
+                "summary": {
+                  "countList": [
+                    {
+                      "divisionCategory": "INDIVIDUAL_MALE",
+                      "count": 0
+                    },
+                    {
+                      "divisionCategory": "INDIVIDUAL_FEMALE",
+                      "count": 0
+                    },
+                    {
+                      "divisionCategory": "TEAM_MALE",
+                      "count": 6
+                    },
+                    {
+                      "divisionCategory": "TEAM_FEMALE",
+                      "count": 5
+                    },
+                    {
+                      "divisionCategory": "PAIR",
+                      "count": 14
+                    },
+                    {
+                      "divisionCategory": "TEAM_MIXED",
+                      "count": 0
+                    }
+                  ],
+                  "totalCount": 25
+                },
+                "nocCount": 3,
+                "nocSummaryList": [
+                  {
+                    "noc": "ALG",
+                    "countryName": "Algeria",
+                    "summary": {
+                      "countList": [
+                        {
+                          "divisionCategory": "INDIVIDUAL_MALE",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "INDIVIDUAL_FEMALE",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "TEAM_MALE",
+                          "count": 3
+                        },
+                        {
+                          "divisionCategory": "TEAM_FEMALE",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "PAIR",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "TEAM_MIXED",
+                          "count": 0
+                        }
+                      ],
+                      "totalCount": 3
+                    }
+                  },
+                  {
+                    "noc": "ANG",
+                    "countryName": "Angola",
+                    "summary": {
+                      "countList": [
+                        {
+                          "divisionCategory": "INDIVIDUAL_MALE",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "INDIVIDUAL_FEMALE",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "TEAM_MALE",
+                          "count": 3
+                        },
+                        {
+                          "divisionCategory": "TEAM_FEMALE",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "PAIR",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "TEAM_MIXED",
+                          "count": 0
+                        }
+                      ],
+                      "totalCount": 3
+                    }
+                  },
+                  {
+                    "noc": "UGA",
+                    "countryName": "Uganda",
+                    "summary": {
+                      "countList": [
+                        {
+                          "divisionCategory": "INDIVIDUAL_MALE",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "INDIVIDUAL_FEMALE",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "TEAM_MALE",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "TEAM_FEMALE",
+                          "count": 5
+                        },
+                        {
+                          "divisionCategory": "PAIR",
+                          "count": 14
+                        },
+                        {
+                          "divisionCategory": "TEAM_MIXED",
+                          "count": 0
+                        }
+                      ],
+                      "totalCount": 19
+                    }
+                  }
+                ]
+              },
+              {
+                "continent": "ASIA",
+                "continentName": "Asia",
+                "summary": {
+                  "countList": [
+                    {
+                      "divisionCategory": "INDIVIDUAL_MALE",
+                      "count": 1
+                    },
+                    {
+                      "divisionCategory": "INDIVIDUAL_FEMALE",
+                      "count": 15
+                    },
+                    {
+                      "divisionCategory": "TEAM_MALE",
+                      "count": 34
+                    },
+                    {
+                      "divisionCategory": "TEAM_FEMALE",
+                      "count": 25
+                    },
+                    {
+                      "divisionCategory": "PAIR",
+                      "count": 19
+                    },
+                    {
+                      "divisionCategory": "TEAM_MIXED",
+                      "count": 0
+                    }
+                  ],
+                  "totalCount": 94
+                },
+                "nocCount": 7,
+                "nocSummaryList": [
+                  {
+                    "noc": "AFG",
+                    "countryName": "Afghanistan",
+                    "summary": {
+                      "countList": [
+                        {
+                          "divisionCategory": "INDIVIDUAL_MALE",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "INDIVIDUAL_FEMALE",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "TEAM_MALE",
+                          "count": 3
+                        },
+                        {
+                          "divisionCategory": "TEAM_FEMALE",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "PAIR",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "TEAM_MIXED",
+                          "count": 0
+                        }
+                      ],
+                      "totalCount": 3
+                    }
+                  },
+                  {
+                    "noc": "ARM",
+                    "countryName": "Armenia",
+                    "summary": {
+                      "countList": [
+                        {
+                          "divisionCategory": "INDIVIDUAL_MALE",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "INDIVIDUAL_FEMALE",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "TEAM_MALE",
+                          "count": 3
+                        },
+                        {
+                          "divisionCategory": "TEAM_FEMALE",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "PAIR",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "TEAM_MIXED",
+                          "count": 0
+                        }
+                      ],
+                      "totalCount": 3
+                    }
+                  },
+                  {
+                    "noc": "IND",
+                    "countryName": "India",
+                    "summary": {
+                      "countList": [
+                        {
+                          "divisionCategory": "INDIVIDUAL_MALE",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "INDIVIDUAL_FEMALE",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "TEAM_MALE",
+                          "count": 10
+                        },
+                        {
+                          "divisionCategory": "TEAM_FEMALE",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "PAIR",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "TEAM_MIXED",
+                          "count": 0
+                        }
+                      ],
+                      "totalCount": 10
+                    }
+                  },
+                  {
+                    "noc": "KOR",
+                    "countryName": "Republic of Korea",
+                    "summary": {
+                      "countList": [
+                        {
+                          "divisionCategory": "INDIVIDUAL_MALE",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "INDIVIDUAL_FEMALE",
+                          "count": 9
+                        },
+                        {
+                          "divisionCategory": "TEAM_MALE",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "TEAM_FEMALE",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "PAIR",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "TEAM_MIXED",
+                          "count": 0
+                        }
+                      ],
+                      "totalCount": 9
+                    }
+                  },
+                  {
+                    "noc": "LBN",
+                    "countryName": "Lebanon",
+                    "summary": {
+                      "countList": [
+                        {
+                          "divisionCategory": "INDIVIDUAL_MALE",
+                          "count": 1
+                        },
+                        {
+                          "divisionCategory": "INDIVIDUAL_FEMALE",
+                          "count": 6
+                        },
+                        {
+                          "divisionCategory": "TEAM_MALE",
+                          "count": 13
+                        },
+                        {
+                          "divisionCategory": "TEAM_FEMALE",
+                          "count": 14
+                        },
+                        {
+                          "divisionCategory": "PAIR",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "TEAM_MIXED",
+                          "count": 0
+                        }
+                      ],
+                      "totalCount": 34
+                    }
+                  },
+                  {
+                    "noc": "RUS",
+                    "countryName": "Russia",
+                    "summary": {
+                      "countList": [
+                        {
+                          "divisionCategory": "INDIVIDUAL_MALE",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "INDIVIDUAL_FEMALE",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "TEAM_MALE",
+                          "count": 5
+                        },
+                        {
+                          "divisionCategory": "TEAM_FEMALE",
+                          "count": 11
+                        },
+                        {
+                          "divisionCategory": "PAIR",
+                          "count": 10
+                        },
+                        {
+                          "divisionCategory": "TEAM_MIXED",
+                          "count": 0
+                        }
+                      ],
+                      "totalCount": 26
+                    }
+                  },
+                  {
+                    "noc": "VIE",
+                    "countryName": "Vietnam",
+                    "summary": {
+                      "countList": [
+                        {
+                          "divisionCategory": "INDIVIDUAL_MALE",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "INDIVIDUAL_FEMALE",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "TEAM_MALE",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "TEAM_FEMALE",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "PAIR",
+                          "count": 9
+                        },
+                        {
+                          "divisionCategory": "TEAM_MIXED",
+                          "count": 0
+                        }
+                      ],
+                      "totalCount": 9
+                    }
+                  }
+                ]
+              },
+              {
+                "continent": "EUROPE",
+                "continentName": "Europe",
+                "summary": {
+                  "countList": [
+                    {
+                      "divisionCategory": "INDIVIDUAL_MALE",
+                      "count": 3
+                    },
+                    {
+                      "divisionCategory": "INDIVIDUAL_FEMALE",
+                      "count": 5
+                    },
+                    {
+                      "divisionCategory": "TEAM_MALE",
+                      "count": 11
+                    },
+                    {
+                      "divisionCategory": "TEAM_FEMALE",
+                      "count": 30
+                    },
+                    {
+                      "divisionCategory": "PAIR",
+                      "count": 7
+                    },
+                    {
+                      "divisionCategory": "TEAM_MIXED",
+                      "count": 0
+                    }
+                  ],
+                  "totalCount": 56
+                },
+                "nocCount": 3,
+                "nocSummaryList": [
+                  {
+                    "noc": "ALB",
+                    "countryName": "Albania",
+                    "summary": {
+                      "countList": [
+                        {
+                          "divisionCategory": "INDIVIDUAL_MALE",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "INDIVIDUAL_FEMALE",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "TEAM_MALE",
+                          "count": 3
+                        },
+                        {
+                          "divisionCategory": "TEAM_FEMALE",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "PAIR",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "TEAM_MIXED",
+                          "count": 0
+                        }
+                      ],
+                      "totalCount": 3
+                    }
+                  },
+                  {
+                    "noc": "AND",
+                    "countryName": "Andorra",
+                    "summary": {
+                      "countList": [
+                        {
+                          "divisionCategory": "INDIVIDUAL_MALE",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "INDIVIDUAL_FEMALE",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "TEAM_MALE",
+                          "count": 3
+                        },
+                        {
+                          "divisionCategory": "TEAM_FEMALE",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "PAIR",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "TEAM_MIXED",
+                          "count": 0
+                        }
+                      ],
+                      "totalCount": 3
+                    }
+                  },
+                  {
+                    "noc": "GER",
+                    "countryName": "Germany",
+                    "summary": {
+                      "countList": [
+                        {
+                          "divisionCategory": "INDIVIDUAL_MALE",
+                          "count": 3
+                        },
+                        {
+                          "divisionCategory": "INDIVIDUAL_FEMALE",
+                          "count": 5
+                        },
+                        {
+                          "divisionCategory": "TEAM_MALE",
+                          "count": 5
+                        },
+                        {
+                          "divisionCategory": "TEAM_FEMALE",
+                          "count": 30
+                        },
+                        {
+                          "divisionCategory": "PAIR",
+                          "count": 7
+                        },
+                        {
+                          "divisionCategory": "TEAM_MIXED",
+                          "count": 0
+                        }
+                      ],
+                      "totalCount": 50
+                    }
+                  }
+                ]
+              },
+              {
+                "continent": "PAN_AMERICA",
+                "continentName": "Pan America",
+                "summary": {
+                  "countList": [
+                    {
+                      "divisionCategory": "INDIVIDUAL_MALE",
+                      "count": 0
+                    },
+                    {
+                      "divisionCategory": "INDIVIDUAL_FEMALE",
+                      "count": 0
+                    },
+                    {
+                      "divisionCategory": "TEAM_MALE",
+                      "count": 9
+                    },
+                    {
+                      "divisionCategory": "TEAM_FEMALE",
+                      "count": 0
+                    },
+                    {
+                      "divisionCategory": "PAIR",
+                      "count": 0
+                    },
+                    {
+                      "divisionCategory": "TEAM_MIXED",
+                      "count": 0
+                    }
+                  ],
+                  "totalCount": 9
+                },
+                "nocCount": 3,
+                "nocSummaryList": [
+                  {
+                    "noc": "ANT",
+                    "countryName": "Antigua and Barbuda",
+                    "summary": {
+                      "countList": [
+                        {
+                          "divisionCategory": "INDIVIDUAL_MALE",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "INDIVIDUAL_FEMALE",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "TEAM_MALE",
+                          "count": 3
+                        },
+                        {
+                          "divisionCategory": "TEAM_FEMALE",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "PAIR",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "TEAM_MIXED",
+                          "count": 0
+                        }
+                      ],
+                      "totalCount": 3
+                    }
+                  },
+                  {
+                    "noc": "ARG",
+                    "countryName": "Argentina",
+                    "summary": {
+                      "countList": [
+                        {
+                          "divisionCategory": "INDIVIDUAL_MALE",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "INDIVIDUAL_FEMALE",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "TEAM_MALE",
+                          "count": 3
+                        },
+                        {
+                          "divisionCategory": "TEAM_FEMALE",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "PAIR",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "TEAM_MIXED",
+                          "count": 0
+                        }
+                      ],
+                      "totalCount": 3
+                    }
+                  },
+                  {
+                    "noc": "ARU",
+                    "countryName": "Aruba",
+                    "summary": {
+                      "countList": [
+                        {
+                          "divisionCategory": "INDIVIDUAL_MALE",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "INDIVIDUAL_FEMALE",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "TEAM_MALE",
+                          "count": 3
+                        },
+                        {
+                          "divisionCategory": "TEAM_FEMALE",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "PAIR",
+                          "count": 0
+                        },
+                        {
+                          "divisionCategory": "TEAM_MIXED",
+                          "count": 0
+                        }
+                      ],
+                      "totalCount": 3
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
