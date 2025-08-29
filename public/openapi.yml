@@ -276,6 +276,14 @@ paths:
     $ref: './tags/poomsae/document/entries-by-division.yaml#/paths/~1competitions~1{competitionSeq}~1documents~1detail~1ENTRIES_BY_DIVISION'
   /competitions/{competitionSeq}/documents/detail/NUMBER_OF_ENTRIES_BY_NOC:
     $ref: './tags/poomsae/document/number-of-entries-by-noc.yaml#/paths/~1competitions~1{competitionSeq}~1documents~1detail~1NUMBER_OF_ENTRIES_BY_NOC'
+  /competitions/{competitionSeq}/documents/detail/MEDAL_STANDINGS:
+    $ref: './tags/poomsae/document/medal-standings.yaml#/paths/~1competitions~1{competitionSeq}~1documents~1detail~1MEDAL_STANDINGS'
+  /competitions/{competitionSeq}/documents/detail/MEDAL_STANDINGS_TEAM:
+    $ref: './tags/poomsae/document/medal-standings-team.yaml#/paths/~1competitions~1{competitionSeq}~1documents~1detail~1MEDAL_STANDINGS_TEAM'
+  /competitions/{competitionSeq}/documents/detail/MEDAL_STANDINGS_MEN:
+    $ref: './tags/poomsae/document/medal-standings-men.yaml#/paths/~1competitions~1{competitionSeq}~1documents~1detail~1MEDAL_STANDINGS_MEN'
+  /competitions/{competitionSeq}/documents/detail/MEDAL_STANDINGS_WOMEN:
+    $ref: './tags/poomsae/document/medal-standings-women.yaml#/paths/~1competitions~1{competitionSeq}~1documents~1detail~1MEDAL_STANDINGS_WOMEN'
   /competitions/{competitionSeq}/documents/schedules/contents:
     $ref: './tags/poomsae/document/document-schedules.yaml#/paths/~1competitions~1{competitionSeq}~1documents~1schedules~1contents'
   /competitions/{competitionSeq}/documents/schedules:
