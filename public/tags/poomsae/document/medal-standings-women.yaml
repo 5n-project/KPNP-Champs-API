@@ -1,0 +1,426 @@
+paths:
+  /competitions/{competitionSeq}/documents/detail/MEDAL_STANDINGS_WOMEN:
+    get:
+      summary: MEDAL_STANDINGS_WOMEN 품새 문서 상세 조회 (MEDAL_STANDINGS_WOMEN)
+      description: MEDAL_STANDINGS_WOMEN 문서를 조회한다. (documentType 은 항상 'MEDAL_STANDINGS_WOMEN')
+      tags:
+        - 문서
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 대회의 고유 시퀀스
+        - name: documentType
+          in: path
+          required: true
+          schema:
+            type: string
+          description: 조회할 documentType
+          example: MEDAL_STANDINGS_WOMEN
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    $ref: "#/components/schemas/CompetitionNocSummaryResponse"
+                  error:
+                    type: string
+                    nullable: true
+              examples:
+                medal standing women 데이터:
+                  $ref: "#/components/examples/MedalStandingData"
+                COMPETITION_PARTICIPATE_NOT_CONFIRM_ERROR:
+                  $ref: '../../../openapi.yml/#/components/examples/COMPETITION_PARTICIPATE_NOT_CONFIRM_ERROR'
+                DOCUMENT_NOT_FOUND:
+                  $ref: '../../../openapi.yml/#/components/examples/DOCUMENT_NOT_FOUND'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '../../../openapi.yml#/components/responses/Error'
+              examples:
+                INVALID_TYPE_ERROR:
+                  $ref: '../../../openapi.yml#/components/examples/INVALID_TYPE_ERROR'
+        '403':
+          description: 권한 없음
+          content:
+            application/json:
+              schema:
+                $ref: '../../../openapi.yml#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+
+components:
+  schemas:
+    CompetitionNocSummaryResponse:
+      type: object
+      description: 대회 메타데이터와 NOC별 메달 집계 데이터의 루트 객체
+      required: [header, contents]
+      properties:
+        header:
+          $ref: '#/components/schemas/CompetitionHeader'
+        contents:
+          $ref: '#/components/schemas/CompetitionContents'
+
+    CompetitionHeader:
+      type: object
+      description: 대회 기본 정보(표시/정렬 및 타임존 계산에 사용)
+      required:
+        - competitionHostName
+        - competitionLocalType
+        - competitionName
+        - competitionSdate
+        - timeZoneId
+        - nocType
+        - hostLogoUrl
+        - competitionLogUrl
+      properties:
+        competitionHostName:
+          type: string
+          description: 대회 호스트(주최 측 또는 서비스 구분용 명칭)
+          minLength: 1
+        competitionLocalType:
+          type: string
+          description: |
+            대회 로컬 타입 식별자. 예: "W" (World 등 서비스 내 정의된 코드)
+          minLength: 1
+        competitionName:
+          type: string
+          description: 대회명(사용자에게 노출되는 공식 명칭)
+          minLength: 1
+        competitionSdate:
+          type: string
+          format: date-time
+          description: |
+            대회 시작 일시(ISO 8601 포맷, 오프셋 포함). 예: 2025-08-20T03:00:00.000+09:00
+        timeZoneId:
+          type: string
+          description: |
+            IANA 표준 타임존 ID. 예: America/Argentina/Salta
+          minLength: 1
+        nocType:
+          type: string
+          description: |
+            개최국 또는 기본 NOC 코드(ISO-3166/IOC 3자리 영문 코드)
+          pattern: '^[A-Z]{3}$'
+        hostLogoUrl:
+          type: string
+          format: uri
+        competitionLogUrl:
+          type: string
+          format: uri
+
+    CompetitionContents:
+      type: object
+      description: 대회 컨텐츠 블록(본 문서에서는 NOC 메달 집계 목록 포함)
+      required: [nocSummaryList]
+      properties:
+        nocSummaryList:
+          type: array
+          description: NOC별 메달 집계 목록(정렬 및 순위 포함)
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/NocSummary'
+
+    NocSummary:
+      type: object
+      description: 특정 NOC에 대한 메달 집계와 순위 및 부문별 합계
+      required:
+        - nocType
+        - rank
+        - medalCountList
+        - totalMedalCount
+        - rankByTotal
+        - divisionCategorySummaryList
+      properties:
+        nocType:
+          type: string
+          description: NOC 코드(IOC 3자리 영문)
+          pattern: '^[A-Z]{3}$'
+        rank:
+          type: integer
+          format: int32
+          minimum: 1
+          description: |
+            메달 우선순위(금→은→동)에 따른 공식 순위(동순위 발생 시 건너뛰는 방식 등 서비스 규칙 적용 결과)
+        medalCountList:
+          type: array
+          description: 메달 종류별 수량(금/은/동)
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/MedalCount'
+        totalMedalCount:
+          type: integer
+          format: int32
+          minimum: 0
+          description: 해당 NOC가 획득한 전체 메달 수(금+은+동)
+        rankByTotal:
+          type: integer
+          format: int32
+          minimum: 1
+          description: 총 메달 수 기준 순위(동점 시 서비스 정의 규칙에 따름)
+        divisionCategorySummaryList:
+          type: array
+          description: 부문(개인/팀/혼성/페어 등)별 메달 합계
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/DivisionCategorySummary'
+
+    MedalCount:
+      type: object
+      description: 특정 메달 유형에 대한 개수
+      required: [medalType, count]
+      properties:
+        medalType:
+          type: string
+          description: 메달 유형(GOLD, SILVER, BRONZE)
+          enum: [GOLD, SILVER, BRONZE]
+        count:
+          type: integer
+          format: int32
+          minimum: 0
+          description: 해당 메달 유형의 수량(음수 불가)
+
+    DivisionCategorySummary:
+      type: object
+      description: 특정 경기 부문에 대한 메달 합계
+      required:
+        - divisionCategoryType
+        - medalCountList
+        - totalMedalCount
+      properties:
+        divisionCategoryType:
+          type: string
+          description: |
+            부문 구분값
+            - INDIVIDUAL_MALE: 개인 남자
+            - INDIVIDUAL_FEMALE: 개인 여자
+            - TEAM_MALE: 팀 남자
+            - TEAM_FEMALE: 팀 여자
+            - PAIR: 페어
+            - TEAM_MIXED: 혼성 팀
+          enum:
+            - INDIVIDUAL_MALE
+            - INDIVIDUAL_FEMALE
+            - TEAM_MALE
+            - TEAM_FEMALE
+            - PAIR
+            - TEAM_MIXED
+        medalCountList:
+          type: array
+          description: 해당 부문에서 획득한 메달별 수량 목록
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/MedalCount'
+        totalMedalCount:
+          type: integer
+          format: int32
+          minimum: 0
+          description: 해당 부문에서 획득한 전체 메달 수(금+은+동)
+
+  examples:
+    MedalStandingData:
+      summary:
+        medal standing women 데이터
+      value:
+        {
+          "header": {
+            "competitionHostName": "메인",
+            "competitionLocalType": "W",
+            "competitionName": "대회 생성_250820",
+            "competitionSdate": "2025-08-20T03:00:00.000+09:00",
+            "timeZoneId": "America/Argentina/Salta",
+            "nocType": "ARG",
+            "hostLogoUrl": "https://cdn.kpnpglobal.com/kpnp/media/image/champs/2025/07/d333ab8e285a4a4aaf4349102253ad23.PNG",
+            "competitionLogUrl": "https://cdn.kpnpglobal.com/kpnp/media/image/champs/2025/07/26334ff5b1e04bf392f5e712cd0f6b3e.PNG"
+          },
+          "contents": {
+            "nocSummaryList": [
+              {
+                "nocType": "GER",
+                "rank": 1,
+                "medalCountList": [
+                  {
+                    "medalType": "GOLD",
+                    "count": 2
+                  },
+                  {
+                    "medalType": "SILVER",
+                    "count": 1
+                  },
+                  {
+                    "medalType": "BRONZE",
+                    "count": 2
+                  }
+                ],
+                "totalMedalCount": 5,
+                "rankByTotal": 1,
+                "divisionCategorySummaryList": [
+                  {
+                    "divisionCategoryType": "INDIVIDUAL_FEMALE",
+                    "medalCountList": [
+                      {
+                        "medalType": "GOLD",
+                        "count": 1
+                      },
+                      {
+                        "medalType": "SILVER",
+                        "count": 1
+                      },
+                      {
+                        "medalType": "BRONZE",
+                        "count": 2
+                      }
+                    ],
+                    "totalMedalCount": 4
+                  },
+                  {
+                    "divisionCategoryType": "TEAM_FEMALE",
+                    "medalCountList": [
+                      {
+                        "medalType": "GOLD",
+                        "count": 1
+                      },
+                      {
+                        "medalType": "SILVER",
+                        "count": 0
+                      },
+                      {
+                        "medalType": "BRONZE",
+                        "count": 0
+                      }
+                    ],
+                    "totalMedalCount": 1
+                  }
+                ]
+              },
+              {
+                "nocType": "TGA",
+                "rank": 2,
+                "medalCountList": [
+                  {
+                    "medalType": "GOLD",
+                    "count": 0
+                  },
+                  {
+                    "medalType": "SILVER",
+                    "count": 1
+                  },
+                  {
+                    "medalType": "BRONZE",
+                    "count": 1
+                  }
+                ],
+                "totalMedalCount": 2,
+                "rankByTotal": 2,
+                "divisionCategorySummaryList": [
+                  {
+                    "divisionCategoryType": "INDIVIDUAL_FEMALE",
+                    "medalCountList": [
+                      {
+                        "medalType": "GOLD",
+                        "count": 0
+                      },
+                      {
+                        "medalType": "SILVER",
+                        "count": 0
+                      },
+                      {
+                        "medalType": "BRONZE",
+                        "count": 0
+                      }
+                    ],
+                    "totalMedalCount": 0
+                  },
+                  {
+                    "divisionCategoryType": "TEAM_FEMALE",
+                    "medalCountList": [
+                      {
+                        "medalType": "GOLD",
+                        "count": 0
+                      },
+                      {
+                        "medalType": "SILVER",
+                        "count": 1
+                      },
+                      {
+                        "medalType": "BRONZE",
+                        "count": 1
+                      }
+                    ],
+                    "totalMedalCount": 2
+                  }
+                ]
+              },
+              {
+                "nocType": "STP",
+                "rank": 3,
+                "medalCountList": [
+                  {
+                    "medalType": "GOLD",
+                    "count": 0
+                  },
+                  {
+                    "medalType": "SILVER",
+                    "count": 0
+                  },
+                  {
+                    "medalType": "BRONZE",
+                    "count": 1
+                  }
+                ],
+                "totalMedalCount": 1,
+                "rankByTotal": 3,
+                "divisionCategorySummaryList": [
+                  {
+                    "divisionCategoryType": "INDIVIDUAL_FEMALE",
+                    "medalCountList": [
+                      {
+                        "medalType": "GOLD",
+                        "count": 0
+                      },
+                      {
+                        "medalType": "SILVER",
+                        "count": 0
+                      },
+                      {
+                        "medalType": "BRONZE",
+                        "count": 0
+                      }
+                    ],
+                    "totalMedalCount": 0
+                  },
+                  {
+                    "divisionCategoryType": "TEAM_FEMALE",
+                    "medalCountList": [
+                      {
+                        "medalType": "GOLD",
+                        "count": 0
+                      },
+                      {
+                        "medalType": "SILVER",
+                        "count": 0
+                      },
+                      {
+                        "medalType": "BRONZE",
+                        "count": 1
+                      }
+                    ],
+                    "totalMedalCount": 1
+                  }
+                ]
+              }
+            ]
+          }
+        }

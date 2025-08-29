@@ -57,12 +57,12 @@ paths:
                           "isList": true
                         },
                         {
-                          "documentType": "CONTESTS_RESULTS_OF_TOURNAMENT",
+                          "documentType": "CONTEST_RESULTS_OF_TOURNAMENT",
                           "documentNameEn": "Contest Results of Tournament",
                           "isList": true
                         },
                         {
-                          "documentType": "CONTESTS_RESULTS_OF_CUTOFF",
+                          "documentType": "CONTEST_RESULTS_OF_CUTOFF",
                           "documentNameEn": "Contest Results of Cutoff",
                           "isList": true
                         },
@@ -123,17 +123,17 @@ paths:
                         },
                         {
                           "documentType": "MEDAL_STANDINGS_TEAM",
-                          "documentNameEn": "Medal Standings_Team",
+                          "documentNameEn": "Medal Standings Team",
                           "isList": false
                         },
                         {
-                          "documentType": "MEDAL_STANDINGS_WOMAN",
-                          "documentNameEn": "Medal Standings_Women",
+                          "documentType": "MEDAL_STANDINGS_WOMEN",
+                          "documentNameEn": "Medal Standings Women",
                           "isList": false
                         },
                         {
                           "documentType": "MEDAL_STANDINGS_MEN",
-                          "documentNameEn": "Medal Standings_Women",
+                          "documentNameEn": "Medal Standings Men",
                           "isList": false
                         }
                       ]
