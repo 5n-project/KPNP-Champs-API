@@ -1,0 +1,279 @@
+paths:
+  /competitions/{competitionSeq}/documents/detail/MEDAL_LISTS:
+    get:
+      summary: MEDAL_LISTS 품새 문서 상세 조회 (MEDAL_LISTS)
+      description: MEDAL_LISTS 문서를 조회한다. (documentType 은 'MEDAL_LISTS')
+      tags:
+        - 문서
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 대회의 고유 시퀀스
+        - name: documentType
+          in: path
+          required: true
+          schema:
+            type: string
+          description: 조회할 documentType
+          example: MEDAL_LISTS
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    properties:
+                      header:
+                        type: object
+                        required:
+                          - documentName
+                          - competitionHostName
+                          - isTeam
+                          - competitionName
+                          - competitionSdate
+                          - timeZoneId
+                          - nocType
+                          - divisionName
+                          - departmentName
+                          - divisionCategoryName
+                        properties:
+                          documentName:
+                            type: string
+                            description: 문서이름
+                          competitionHostName:
+                            type: string
+                            description: 주최명
+                          isTeam:
+                            type: boolean
+                            description: 팀인지 아닌지
+                          competitionName:
+                            type: string
+                            description: 대회명
+                          competitionSdate:
+                            type: string
+                            description: 대회 시작 기간
+                          timeZoneId:
+                            type: string
+                            description: 타임존 코드
+                          nocType:
+                            type: string
+                            description: 대회 noc 타입
+                          divisionName:
+                            type: string
+                            description: 룰명
+                          departmentName:
+                            type: string
+                            description: 부명
+                          divisionCategoryName:
+                            type: string
+                            description: 대회 유형 명
+                          hostLogoUrl:
+                            type: string
+                            nullable: true
+                            description: 주최 로고
+                          competitionLogUrl:
+                            type: string
+                            nullable: true
+                            description: 대회 로고
+                      contents:
+                        type: object
+                        properties:
+                          medalLists:
+                            type: array
+                            items:
+                              type: object
+                              required:
+                                - competitor
+                                - medalType
+                                - country
+                                - countryName
+                                - participants
+                              properties:
+                                competitor:
+                                  type: integer
+                                  description: 선수 고유 번호
+                                medalType:
+                                  type: string
+                                  example: GOLD
+                                  description: GOLD, SILVER, BRONZE
+                                country:
+                                  type: string
+                                  example: GER
+                                  description: 소속 국가 noc
+                                countryName:
+                                  type: string
+                                  example: Germany
+                                  description: 소속 국가 명
+                                participants:
+                                  type: array
+                                  items:
+                                    type: object
+                                    required:
+                                      - participantSeq
+                                      - familyNameEn
+                                      - givenNameEn
+                                    properties:
+                                      participantSeq:
+                                        type: integer
+                                        description: 참가자 고유 seq
+                                      familyNameEn:
+                                        type: string
+                                        description: 참가자 성
+                                      givenNameEn:
+                                        type: string
+                                        description: 참가자 이름
+                  error:
+                    type: string
+                    nullable: true
+              examples:
+                SUCCESS:
+                  summary: 성공 응답
+                  value:
+                    {
+                      "success": true,
+                      "data": {
+                        "header": {
+                          "documentName": "MEDALLISTS",
+                          "competitionHostName": "메인",
+                          "isTeam": true,
+                          "competitionName": "대회 생성_250820",
+                          "competitionSdate": "2025-08-20T03:00:00.000Z",
+                          "timeZoneId": "America/Argentina/Salta",
+                          "nocType": "ARG",
+                          "divisionName": "WT Recognized Poomsae",
+                          "departmentName": "Under 30",
+                          "divisionCategoryName": "Team female",
+                          "hostLogoUrl": null,
+                          "competitionLogUrl": null
+                        },
+                        "contents": {
+                          "medalLists": [
+                            {
+                              "competitor": 30,
+                              "medalType": "GOLD",
+                              "country": "GER",
+                              "countryName": "Germany",
+                              "participants": [
+                                {
+                                  "participantSeq": 186807,
+                                  "familyNameEn": "Chen",
+                                  "givenNameEn": "Mina"
+                                },
+                                {
+                                  "participantSeq": 186806,
+                                  "familyNameEn": "Yamamoto",
+                                  "givenNameEn": "Ken"
+                                },
+                                {
+                                  "participantSeq": 186805,
+                                  "familyNameEn": "Yamamoto",
+                                  "givenNameEn": "David"
+                                }
+                              ]
+                            },
+                            {
+                              "competitor": 31,
+                              "medalType": "SILVER",
+                              "country": "TGA",
+                              "countryName": "Tonga",
+                              "participants": [
+                                {
+                                  "participantSeq": 186809,
+                                  "familyNameEn": "Lopez",
+                                  "givenNameEn": "Sam"
+                                },
+                                {
+                                  "participantSeq": 186810,
+                                  "familyNameEn": "Singh",
+                                  "givenNameEn": "David"
+                                },
+                                {
+                                  "participantSeq": 186808,
+                                  "familyNameEn": "Yamamoto",
+                                  "givenNameEn": "Jane"
+                                }
+                              ]
+                            },
+                            {
+                              "competitor": 33,
+                              "medalType": "BRONZE",
+                              "country": "TGA",
+                              "countryName": "Tonga",
+                              "participants": [
+                                {
+                                  "participantSeq": 186815,
+                                  "familyNameEn": "Choi",
+                                  "givenNameEn": "Emma"
+                                },
+                                {
+                                  "participantSeq": 186814,
+                                  "familyNameEn": "Nguyen",
+                                  "givenNameEn": "Alex"
+                                },
+                                {
+                                  "participantSeq": 186816,
+                                  "familyNameEn": "Wang",
+                                  "givenNameEn": "Emma"
+                                }
+                              ]
+                            },
+                            {
+                              "competitor": 34,
+                              "medalType": "BRONZE",
+                              "country": "STP",
+                              "countryName": "São Tomé and Príncipe",
+                              "participants": [
+                                {
+                                  "participantSeq": 186819,
+                                  "familyNameEn": "Kim",
+                                  "givenNameEn": "Sara"
+                                },
+                                {
+                                  "participantSeq": 186817,
+                                  "familyNameEn": "Singh",
+                                  "givenNameEn": "Sung"
+                                },
+                                {
+                                  "participantSeq": 186818,
+                                  "familyNameEn": "Tanaka",
+                                  "givenNameEn": "Nina"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      },
+                      "error": null
+                    }
+                ITEM_NOT_FOUND:
+                  $ref: '../../../openapi.yml/#/components/examples/ITEM_NOT_FOUND'
+                DOCUMENT_NOT_FOUND:
+                  $ref: '../../../openapi.yml/#/components/examples/DOCUMENT_NOT_FOUND'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '../../../openapi.yml#/components/responses/Error'
+              examples:
+                INVALID_TYPE_ERROR:
+                  $ref: '../../../openapi.yml#/components/examples/INVALID_TYPE_ERROR'
+        '403':
+          description: 권한 없음
+          content:
+            application/json:
+              schema:
+                $ref: '../../../openapi.yml#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'

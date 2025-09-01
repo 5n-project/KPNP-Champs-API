@@ -1,0 +1,570 @@
+paths:
+  /competitions/{competitionSeq}/documents/detail/MEDAL_LISTS_BY_DIVISION:
+    get:
+      summary: MEDAL_LISTS_BY_DIVISION 품새 문서 상세 조회
+      description: >
+        MEDAL_LISTS_BY_DIVISION 문서를 조회한다.  
+        (documentType 은 항상 'MEDAL_LISTS_BY_DIVISION')
+      tags:
+        - 문서
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 대회의 고유 시퀀스
+        - name: documentType
+          in: path
+          required: true
+          schema:
+            type: string
+          description: 조회할 documentType
+          example: MEDAL_LISTS_BY_DIVISION
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    properties:
+                      header:
+                        type: object
+                        required:
+                          - documentName
+                          - competitionHostName
+                          - competitionName
+                          - competitionSdate
+                          - timeZoneId
+                          - nocType
+                        properties:
+                          documentName:
+                            type: string
+                            description: 문서명
+                          competitionHostName:
+                            type: string
+                            description: 주최명
+                          competitionName:
+                            type: string
+                            description: 대회명
+                          competitionSdate:
+                            type: string
+                            description: 대회 시작 일자
+                          timeZoneId:
+                            type: string
+                            description: 타임존 코드
+                          nocType:
+                            type: string
+                            description: noc 코드
+                          hostLogoUrl:
+                            type: string
+                            nullable: true
+                            description: 주최로고
+                          competitionLogUrl:
+                            type: string
+                            nullable: true
+                            description: 대회로고
+                      contents:
+                        type: object
+                        properties:
+                          matchDates:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                matchDate:
+                                  type: integer
+                                  description: 1, 2 ... 해당 일차를 대회 시작 기간에 더해서 문서에 맞는 표기로 포매팅 해주셔야 함
+                                matchEvents:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      competitionEventSeq:
+                                        type: integer
+                                        description: event 고유 Seq
+                                      divisionName:
+                                        type: string
+                                        description: 룰 명
+                                      departmentName:
+                                        type: string
+                                        description: 부 명
+                                      divisionCategoryName:
+                                        type: string
+                                        description: 대회유형 명
+                                      medalLists:
+                                        type: array
+                                        items:
+                                          type: object
+                                          required:
+                                            - competitor
+                                            - medalType
+                                            - country
+                                            - competitorType
+                                            - participants
+                                          properties:
+                                            competitor:
+                                              type: integer
+                                              description: 대회 선수 고유 Seq
+                                            medalType:
+                                              type: string
+                                              enum: [GOLD, SILVER, BRONZE]
+                                              description: 메달 명
+                                            country:
+                                              type: string
+                                              description: 국가명
+                                            competitorType:
+                                              type: string
+                                              enum: [S, T]
+                                              description: >
+                                                참가자 유형  
+                                                - `S` : 단체전   
+                                                - `T` : 팀전
+                                            participants:
+                                              type: array
+                                              items:
+                                                type: object
+                                                required:
+                                                  - participantSeq
+                                                  - familyNameEn
+                                                  - givenNameEn
+                                                properties:
+                                                  participantSeq:
+                                                    type: integer
+                                                    description: 참가자 고유 Seq
+                                                  familyNameEn:
+                                                    type: string
+                                                    description: 참가자 성
+                                                  givenNameEn:
+                                                    type: string
+                                                    description: 참가자 이름
+                  error:
+                    type: string
+                    nullable: true
+              examples:
+                SUCCESS:
+                  summary: 성공 응답
+                  value:
+                    {
+                      "success": true,
+                      "data": {
+                        "header": {
+                          "documentName": "MEDALLISTS BY DIVISION",
+                          "competitionHostName": "메인",
+                          "competitionName": "대회 생성_250820",
+                          "competitionSdate": "2025-08-20T03:00:00.000Z",
+                          "timeZoneId": "America/Argentina/Salta",
+                          "nocType": "ARG",
+                          "hostLogoUrl": null,
+                          "competitionLogUrl": null
+                        },
+                        "contents": {
+                          "matchDates": [
+                            {
+                              "matchDate": 1,
+                              "matchEvents": [
+                                {
+                                  "competitionEventSeq": 13660,
+                                  "divisionName": "WT Recognized Poomsae",
+                                  "departmentName": "Under 30",
+                                  "divisionCategoryName": "Individual male",
+                                  "medalLists": [
+                                    {
+                                      "competitor": 3,
+                                      "medalType": "GOLD",
+                                      "country": "GER",
+                                      "competitorType": "S",
+                                      "participants": [
+                                        {
+                                          "participantSeq": 186760,
+                                          "familyNameEn": "Wang",
+                                          "givenNameEn": "Jane"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "competitor": 2,
+                                      "medalType": "SILVER",
+                                      "country": "GER",
+                                      "competitorType": "S",
+                                      "participants": [
+                                        {
+                                          "participantSeq": 186759,
+                                          "familyNameEn": "Wang",
+                                          "givenNameEn": "Yuna"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "competitor": 4,
+                                      "medalType": "BRONZE",
+                                      "country": "GER",
+                                      "competitorType": "S",
+                                      "participants": [
+                                        {
+                                          "participantSeq": 186761,
+                                          "familyNameEn": "Chen",
+                                          "givenNameEn": "Sung"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "competitionEventSeq": 13661,
+                                  "divisionName": "WT Recognized Poomsae",
+                                  "departmentName": "Under 30",
+                                  "divisionCategoryName": "Individual female",
+                                  "medalLists": [
+                                    {
+                                      "competitor": 6,
+                                      "medalType": "GOLD",
+                                      "country": "GER",
+                                      "competitorType": "S",
+                                      "participants": [
+                                        {
+                                          "participantSeq": 186763,
+                                          "familyNameEn": "Yamamoto",
+                                          "givenNameEn": "David"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "competitor": 7,
+                                      "medalType": "SILVER",
+                                      "country": "GER",
+                                      "competitorType": "S",
+                                      "participants": [
+                                        {
+                                          "participantSeq": 186764,
+                                          "familyNameEn": "Silva",
+                                          "givenNameEn": "Hana"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "competitor": 8,
+                                      "medalType": "BRONZE",
+                                      "country": "GER",
+                                      "competitorType": "S",
+                                      "participants": [
+                                        {
+                                          "participantSeq": 186765,
+                                          "familyNameEn": "Garcia",
+                                          "givenNameEn": "Sung"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "competitor": 5,
+                                      "medalType": "BRONZE",
+                                      "country": "GER",
+                                      "competitorType": "S",
+                                      "participants": [
+                                        {
+                                          "participantSeq": 186762,
+                                          "familyNameEn": "Singh",
+                                          "givenNameEn": "Yuri"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "competitionEventSeq": 13662,
+                                  "divisionName": "WT Recognized Poomsae",
+                                  "departmentName": "Under 30",
+                                  "divisionCategoryName": "Team male",
+                                  "medalLists": [
+                                    {
+                                      "competitor": 19,
+                                      "medalType": "GOLD",
+                                      "country": "ALG",
+                                      "competitorType": "T",
+                                      "participants": [
+                                        {
+                                          "participantSeq": 186774,
+                                          "familyNameEn": "Park",
+                                          "givenNameEn": "John"
+                                        },
+                                        {
+                                          "participantSeq": 186772,
+                                          "familyNameEn": "Tanaka",
+                                          "givenNameEn": "Mina"
+                                        },
+                                        {
+                                          "participantSeq": 186773,
+                                          "familyNameEn": "Wang",
+                                          "givenNameEn": "Minsoo"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "competitor": 22,
+                                      "medalType": "SILVER",
+                                      "country": "STP",
+                                      "competitorType": "T",
+                                      "participants": [
+                                        {
+                                          "participantSeq": 186768,
+                                          "familyNameEn": "Choi",
+                                          "givenNameEn": "Luke"
+                                        },
+                                        {
+                                          "participantSeq": 186766,
+                                          "familyNameEn": "Clark",
+                                          "givenNameEn": "Emma"
+                                        },
+                                        {
+                                          "participantSeq": 186767,
+                                          "familyNameEn": "Silva",
+                                          "givenNameEn": "Ken"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "competitor": 26,
+                                      "medalType": "BRONZE",
+                                      "country": "ARM",
+                                      "competitorType": "T",
+                                      "participants": [
+                                        {
+                                          "participantSeq": 186787,
+                                          "familyNameEn": "Chen",
+                                          "givenNameEn": "Alex"
+                                        },
+                                        {
+                                          "participantSeq": 186789,
+                                          "familyNameEn": "Yamamoto",
+                                          "givenNameEn": "Ken"
+                                        },
+                                        {
+                                          "participantSeq": 186788,
+                                          "familyNameEn": "Yamamoto",
+                                          "givenNameEn": "Nina"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "competitor": 24,
+                                      "medalType": "BRONZE",
+                                      "country": "ALG",
+                                      "competitorType": "T",
+                                      "participants": [
+                                        {
+                                          "participantSeq": 186771,
+                                          "familyNameEn": "Choi",
+                                          "givenNameEn": "Sam"
+                                        },
+                                        {
+                                          "participantSeq": 186769,
+                                          "familyNameEn": "Clark",
+                                          "givenNameEn": "David"
+                                        },
+                                        {
+                                          "participantSeq": 186770,
+                                          "familyNameEn": "Silva",
+                                          "givenNameEn": "Ken"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "competitionEventSeq": 13663,
+                                  "divisionName": "WT Recognized Poomsae",
+                                  "departmentName": "Under 30",
+                                  "divisionCategoryName": "Team female",
+                                  "medalLists": [
+                                    {
+                                      "competitor": 30,
+                                      "medalType": "GOLD",
+                                      "country": "GER",
+                                      "competitorType": "T",
+                                      "participants": [
+                                        {
+                                          "participantSeq": 186807,
+                                          "familyNameEn": "Chen",
+                                          "givenNameEn": "Mina"
+                                        },
+                                        {
+                                          "participantSeq": 186806,
+                                          "familyNameEn": "Yamamoto",
+                                          "givenNameEn": "Ken"
+                                        },
+                                        {
+                                          "participantSeq": 186805,
+                                          "familyNameEn": "Yamamoto",
+                                          "givenNameEn": "David"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "competitor": 31,
+                                      "medalType": "SILVER",
+                                      "country": "TGA",
+                                      "competitorType": "T",
+                                      "participants": [
+                                        {
+                                          "participantSeq": 186809,
+                                          "familyNameEn": "Lopez",
+                                          "givenNameEn": "Sam"
+                                        },
+                                        {
+                                          "participantSeq": 186810,
+                                          "familyNameEn": "Singh",
+                                          "givenNameEn": "David"
+                                        },
+                                        {
+                                          "participantSeq": 186808,
+                                          "familyNameEn": "Yamamoto",
+                                          "givenNameEn": "Jane"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "competitor": 33,
+                                      "medalType": "BRONZE",
+                                      "country": "TGA",
+                                      "competitorType": "T",
+                                      "participants": [
+                                        {
+                                          "participantSeq": 186815,
+                                          "familyNameEn": "Choi",
+                                          "givenNameEn": "Emma"
+                                        },
+                                        {
+                                          "participantSeq": 186814,
+                                          "familyNameEn": "Nguyen",
+                                          "givenNameEn": "Alex"
+                                        },
+                                        {
+                                          "participantSeq": 186816,
+                                          "familyNameEn": "Wang",
+                                          "givenNameEn": "Emma"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "competitor": 34,
+                                      "medalType": "BRONZE",
+                                      "country": "STP",
+                                      "competitorType": "T",
+                                      "participants": [
+                                        {
+                                          "participantSeq": 186819,
+                                          "familyNameEn": "Kim",
+                                          "givenNameEn": "Sara"
+                                        },
+                                        {
+                                          "participantSeq": 186817,
+                                          "familyNameEn": "Singh",
+                                          "givenNameEn": "Sung"
+                                        },
+                                        {
+                                          "participantSeq": 186818,
+                                          "familyNameEn": "Tanaka",
+                                          "givenNameEn": "Nina"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "competitionEventSeq": 13664,
+                                  "divisionName": "WT Recognized Poomsae",
+                                  "departmentName": "Under 30",
+                                  "divisionCategoryName": "Pair",
+                                  "medalLists": [
+                                    {
+                                      "competitor": 18,
+                                      "medalType": "GOLD",
+                                      "country": "TGA",
+                                      "competitorType": "T",
+                                      "participants": [
+                                        {
+                                          "participantSeq": 186837,
+                                          "familyNameEn": "Kumar",
+                                          "givenNameEn": "Elena"
+                                        },
+                                        {
+                                          "participantSeq": 186836,
+                                          "familyNameEn": "Wang",
+                                          "givenNameEn": "Leo"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "competitor": 16,
+                                      "medalType": "SILVER",
+                                      "country": "GER",
+                                      "competitorType": "T",
+                                      "participants": [
+                                        {
+                                          "participantSeq": 186833,
+                                          "familyNameEn": "Lee",
+                                          "givenNameEn": "Hana"
+                                        },
+                                        {
+                                          "participantSeq": 186832,
+                                          "familyNameEn": "Yang",
+                                          "givenNameEn": "Julie"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "competitor": 17,
+                                      "medalType": "BRONZE",
+                                      "country": "GER",
+                                      "competitorType": "T",
+                                      "participants": [
+                                        {
+                                          "participantSeq": 186834,
+                                          "familyNameEn": "Chen",
+                                          "givenNameEn": "Sung"
+                                        },
+                                        {
+                                          "participantSeq": 186835,
+                                          "familyNameEn": "Wang",
+                                          "givenNameEn": "Jane"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      },
+                      "error": null
+                    }
+                ITEM_NOT_FOUND:
+                  $ref: '../../../openapi.yml/#/components/examples/ITEM_NOT_FOUND'
+                DOCUMENT_NOT_FOUND:
+                  $ref: '../../../openapi.yml/#/components/examples/DOCUMENT_NOT_FOUND'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '../../../openapi.yml#/components/responses/Error'
+              examples:
+                INVALID_TYPE_ERROR:
+                  $ref: '../../../openapi.yml#/components/examples/INVALID_TYPE_ERROR'
+        '403':
+          description: 권한 없음
+          content:
+            application/json:
+              schema:
+                $ref: '../../../openapi.yml#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
