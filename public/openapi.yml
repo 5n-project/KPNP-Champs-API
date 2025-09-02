@@ -5,6 +5,7 @@ info:
 servers:
   - url: https://dev.kpnpglobal.com:9143/api/champs/ps/v1
 tags:
+  - name: 로그인
   - name: 공통
   - name: 대회
   - name: 대회개최 - 기본 정보
@@ -24,6 +25,16 @@ tags:
   - name: 문서
   - name: 운영 - 상장
 paths:
+
+  # 로그인
+  /sign-in:
+    $ref: './tags/auth.yaml#/paths/~1sign-in'
+  /sign-out:
+    $ref: './tags/auth.yaml#/paths/~1sign-out'
+  /non/login:
+    $ref: './tags/auth.yaml#/paths/~1non~1login'
+  /non/logout:
+    $ref: './tags/auth.yaml#/paths/~1non~1logout'
 
   # 공통
   /common/combo/rules:
@@ -353,6 +364,20 @@ components:
                     example: "500"
   examples:
     # 500
+    BAD_CREDENTIALS_EXCEPTION:
+      value:
+        success: false
+        data: null
+        error:
+          message: "아이디 또는 비밀번호를 잘못 입력했습니다.\n 입력하신 내용을 다시 확인해주세요."
+          errorCode: "E508"
+    NO_HANDLER_FOUND_URL_ERROR:
+      value:
+        success: false
+        data: null
+        error:
+          message: "잘못된 요청입니다."
+          errorCode: "E990"
     FILE_TRANSFER_TO_S3_ERROR:
       value:
         success: false

@@ -1,0 +1,242 @@
+paths:
+  /sign-in:
+    post:
+      summary: 회원 로그인
+      tags:
+        - 로그인
+      description: 회원 로그인 후 JWT 발급
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                  description: 사용자 아이디
+                  example: champs
+                password:
+                  type: string
+                  description: 사용자 비밀번호
+                  example: 11111
+            examples:
+              loginExample:
+                summary: 기본 로그인 요청
+                value:
+                  userId: "champs"
+                  password: "11111"
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: 요청 성공 여부
+                  data:
+                    type: object
+                    nullable: true
+                    properties:
+                      accessToken:
+                        type: string
+                        description: JWT Access Token
+                      refreshToken:
+                        type: string
+                        description: JWT Refresh Token
+                  error:
+                    type: object
+                    nullable: true
+                    properties:
+                      code:
+                        type: string
+                        description: 에러 코드
+                      message:
+                        type: string
+                        description: 에러 메시지
+              examples:
+                success:
+                  summary: 로그인 성공
+                  value:
+                    success: true
+                    data:
+                      accessToken: "_JpsS4ybNt6fJmZblPuhzmkemblZY-dgBr2TBH0WCP2djgW5frWGc1nO99djDTyy"
+                      refreshToken: "_JpsS4ybNt6fJmZblPuhzmkemblZY-dgBr2TBH0WCP1XJq-C0RBsTZmEyXFSwYf"
+                    error: null
+                BAD_CREDENTIALS_EXCEPTION:
+                  $ref: '../openapi.yml/#/components/examples/BAD_CREDENTIALS_EXCEPTION'
+
+  /sign-out:
+    post:
+      summary: 회원 로그아웃
+      tags:
+        - 로그인
+      description: 회원 로그아웃
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: 요청 성공 여부
+                  data:
+                    type: object
+                    nullable: true
+                    properties:
+                      accessToken:
+                        type: string
+                        description: JWT Access Token
+                      refreshToken:
+                        type: string
+                        description: JWT Refresh Token
+                  error:
+                    type: object
+                    nullable: true
+                    properties:
+                      code:
+                        type: string
+                        description: 에러 코드
+                      message:
+                        type: string
+                        description: 에러 메시지
+              examples:
+                success:
+                  summary: 로그아웃 성공
+                  value:
+                    success: true
+                    data: "OK"
+                    error: null
+
+  /non/login:
+    post:
+      summary: 비회원 로그인
+      tags:
+        - 로그인
+      description: 비회원 로그인 후 인증 토큰 발급
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 사용자 이메일
+                  example: "nina.choi01@sample.com"
+                password:
+                  type: string
+                  description: 사용자 생년월일
+                  example: "19901220"
+                nonMemberRoleType:
+                  type: string
+                  description: 비회원 역할 타입
+                  enum: [ COMPETITOR, REFEREE ]
+                  example: "COMPETITOR"
+            examples:
+              loginRequest:
+                summary: 로그인 요청 예시
+                value:
+                  email: "nina.choi01@sample.com"
+                  password: "19901220"
+                  nonMemberRoleType: "COMPETITOR"
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: 요청 성공 여부
+                    example: true
+                  data:
+                    type: object
+                    nullable: true
+                    properties:
+                      token:
+                        type: string
+                        description: 인증 토큰 (BCrypt 해시 등)
+                        example: "$2a$10$YK0tm38WhdK4fxt1xGuAIue"
+                      nonMemberRoleType:
+                        type: string
+                        description: 비회원 역할 타입
+                        enum: [ COMPETITOR, REFEREE ]
+                        example: "COMPETITOR"
+                  error:
+                    type: object
+                    nullable: true
+                    properties:
+                      code:
+                        type: string
+                        description: 에러 코드
+                      message:
+                        type: string
+                        description: 에러 메시지
+              examples:
+                success:
+                  summary: 로그인 성공 응답
+                  value:
+                    success: true
+                    data:
+                      token: "$2a$10$YK0tm38WhdK4fxt1xGuAIue"
+                      nonMemberRoleType: "COMPETITOR"
+                    error: null
+                BAD_CREDENTIALS_EXCEPTION:
+                  $ref: '../openapi.yml/#/components/examples/BAD_CREDENTIALS_EXCEPTION'
+                NO_HANDLER_FOUND_URL_ERROR:
+                  $ref: '../openapi.yml/#/components/examples/NO_HANDLER_FOUND_URL_ERROR'
+
+  /non/logout:
+    post:
+      summary: 비회원 로그아웃
+      tags:
+        - 로그인
+      description: 비회원 로그아웃
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: 요청 성공 여부
+                  data:
+                    type: object
+                    nullable: true
+                    properties:
+                      accessToken:
+                        type: string
+                        description: JWT Access Token
+                      refreshToken:
+                        type: string
+                        description: JWT Refresh Token
+                  error:
+                    type: object
+                    nullable: true
+                    properties:
+                      code:
+                        type: string
+                        description: 에러 코드
+                      message:
+                        type: string
+                        description: 에러 메시지
+              examples:
+                success:
+                  summary: 로그아웃 성공
+                  value:
+                    success: true
+                    data: null
+                    error: null
