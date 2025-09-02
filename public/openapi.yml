@@ -278,6 +278,18 @@ paths:
     $ref: './tags/poomsae/document/entries-by-division.yaml#/paths/~1competitions~1{competitionSeq}~1documents~1detail~1ENTRIES_BY_DIVISION'
   /competitions/{competitionSeq}/documents/detail/NUMBER_OF_ENTRIES_BY_NOC:
     $ref: './tags/poomsae/document/number-of-entries-by-noc.yaml#/paths/~1competitions~1{competitionSeq}~1documents~1detail~1NUMBER_OF_ENTRIES_BY_NOC'
+  /competitions/{competitionSeq}/documents/schedules/contents:
+    $ref: './tags/poomsae/document/competition-schedules.yaml#/paths/~1competitions~1{competitionSeq}~1documents~1schedules~1contents'
+  /competitions/{competitionSeq}/documents/schedules:
+    $ref: './tags/poomsae/document/competition-schedules.yaml#/paths/~1competitions~1{competitionSeq}~1documents~1schedules'
+  /competitions/{competitionSeq}/documents/detail/SCHEDULES_BY_COURT:
+    $ref: './tags/poomsae/document/schedules-by.yaml#/paths/~1competitions~1{competitionSeq}~1documents~1detail~1SCHEDULES_BY_COURT'
+  /competitions/{competitionSeq}/documents/detail/SESSION_SCHEDULES_BY_COURT:
+    $ref: './tags/poomsae/document/schedules-by.yaml#/paths/~1competitions~1{competitionSeq}~1documents~1detail~1SESSION_SCHEDULES_BY_COURT'
+  /competitions/{competitionSeq}/documents/detail/SESSION_SCHEDULES_BY_DAY:
+    $ref: './tags/poomsae/document/schedules-by.yaml#/paths/~1competitions~1{competitionSeq}~1documents~1detail~1SESSION_SCHEDULES_BY_DAY'
+  /competitions/{competitionSeq}/documents/detail/SESSION_SCHEDULES_BY_DAY_WITH_START_TIME:
+    $ref: './tags/poomsae/document/schedules-by.yaml#/paths/~1competitions~1{competitionSeq}~1documents~1detail~1SESSION_SCHEDULES_BY_DAY_WITH_START_TIME'
   /competitions/{competitionSeq}/documents/detail/MEDAL_STANDINGS:
     $ref: './tags/poomsae/document/medal-standings.yaml#/paths/~1competitions~1{competitionSeq}~1documents~1detail~1MEDAL_STANDINGS'
   /competitions/{competitionSeq}/documents/detail/MEDAL_STANDINGS_TEAM:
@@ -290,10 +302,6 @@ paths:
     $ref: './tags/poomsae/document/medal-lists.yaml#/paths/~1competitions~1{competitionSeq}~1documents~1detail~1MEDAL_LISTS'
   /competitions/{competitionSeq}/documents/detail/MEDAL_LISTS_BY_DIVISION:
     $ref: './tags/poomsae/document/medal-lists-by-division.yaml#/paths/~1competitions~1{competitionSeq}~1documents~1detail~1MEDAL_LISTS_BY_DIVISION'
-  /competitions/{competitionSeq}/documents/schedules/contents:
-    $ref: './tags/poomsae/document/document-schedules.yaml#/paths/~1competitions~1{competitionSeq}~1documents~1schedules~1contents'
-  /competitions/{competitionSeq}/documents/schedules:
-    $ref: './tags/poomsae/document/document-schedules.yaml#/paths/~1competitions~1{competitionSeq}~1documents~1schedules'
 
 
   # 상장

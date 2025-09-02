@@ -1,0 +1,931 @@
+paths:
+  /competitions/{competitionSeq}/documents/detail/SCHEDULES_BY_COURT:
+    get:
+      summary: SCHEDULES_BY_COURT 품새 문서 상세 조회 (SCHEDULES_BY_COURT)
+      description: SCHEDULES_BY_COURT 문서를 조회한다. (documentType 은 항상 'SCHEDULES_BY_COURT')
+      tags:
+        - 문서
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 대회의 고유 식별자
+        - name: court
+          in: query
+          required: true
+          schema:
+            type: integer
+          description: 코트 번호
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    description: 요청 성공 여부
+                  data:
+                    type: object
+                    properties:
+                      header:
+                        type: object
+                        properties:
+                          competitionHostName:
+                            type: string
+                            example: "champs4"
+                            description: 대회 주최자명
+                          competitionLocalType:
+                            type: string
+                            example: "W"
+                            description: 대회 로컬 타입
+                          competitionName:
+                            type: string
+                            example: "champs4 대회 250826_1"
+                            description: 대회 이름
+                          competitionSdate:
+                            type: string
+                            example: "2025-08-26T03:00:00.000+09:00"
+                            description: 대회 시작일
+                          timeZoneId:
+                            type: string
+                            example: "Antarctica/Rothera"
+                            description: 대회 타임존
+                          nocType:
+                            type: string
+                            example: "ATA"
+                            description: 국가 코드(NOC)
+                          hostLogoUrl:
+                            type: string
+                            nullable: true
+                            example: null
+                            description: 주최 로고 URL
+                          competitionLogUrl:
+                            type: string
+                            nullable: true
+                            example: null
+                            description: 대회 로고 URL
+                      contents:
+                        type: object
+                        properties:
+                          documentName:
+                            type: string
+                            example: "SCHEDULES by Court"
+                            description: 문서명
+                          scheduleGroups:
+                            type: array
+                            description: 코트별 스케줄 그룹
+                            items:
+                              type: object
+                              properties:
+                                court:
+                                  type: integer
+                                  example: 2
+                                  description: 코트 번호
+                                schedules:
+                                  type: array
+                                  description: 코트 스케줄 목록
+                                  items:
+                                    type: object
+                                    properties:
+                                      division:
+                                        type: string
+                                        example: "Individual female CADET"
+                                        description: 디비전/카테고리
+                                      contestNumber:
+                                        type: integer
+                                        example: 2001
+                                        description: 경기 번호
+                                      phase:
+                                        type: string
+                                        example: "Pre-A"
+                                        description: 라운드/페이즈
+                                      competitors:
+                                        type: array
+                                        description: 참가자 목록
+                                        items:
+                                          type: object
+                                          properties:
+                                            color:
+                                              type: string
+                                              nullable: true
+                                              example: null
+                                              description: 선수 구분 색상(청/홍)
+                                            galNumber:
+                                              type: string
+                                              nullable: true
+                                              example: "L100032"
+                                              description: GAL 번호
+                                            noc:
+                                              type: string
+                                              example: "KOR"
+                                              description: 국가 코드(NOC)
+                                            name:
+                                              type: string
+                                              example: "Yuna CHOI"
+                                              description: 선수 이름
+                  error:
+                    type: object
+                    nullable: true
+                    example: null
+                    description: 에러 정보
+              examples:
+                defaultResponse:
+                  summary: 성공 응답
+                  value:
+                    success: true
+                    data:
+                      header:
+                        competitionHostName: "champs4"
+                        competitionLocalType: "W"
+                        competitionName: "champs4 대회 250826_1"
+                        competitionSdate: "2025-08-26T03:00:00.000+09:00"
+                        timeZoneId: "Antarctica/Rothera"
+                        nocType: "ATA"
+                        hostLogoUrl: null
+                        competitionLogUrl: null
+                      contents:
+                        documentName: "SCHEDULES by Court"
+                        scheduleGroups:
+                          - court: 2
+                            schedules:
+                              - division: "Individual female CADET"
+                                contestNumber: 2001
+                                phase: "Pre-A"
+                                competitors:
+                                  - color: null
+                                    galNumber: "L100032"
+                                    noc: "KOR"
+                                    name: "Yuna CHOI"
+                              - division: "Individual female CADET"
+                                contestNumber: 2002
+                                phase: "Pre-A"
+                                competitors:
+                                  - color: null
+                                    galNumber: "L100040"
+                                    noc: "GER"
+                                    name: "Sung CHOI"
+                              - division: "Individual female CADET"
+                                contestNumber: 2003
+                                phase: "Pre-A"
+                                competitors:
+                                  - color: null
+                                    galNumber: "L100027"
+                                    noc: "KOR"
+                                    name: "Leo NGUYEN"
+                              - division: "Individual female CADET"
+                                contestNumber: 2004
+                                phase: "Pre-A"
+                                competitors:
+                                  - color: null
+                                    galNumber: "L100021"
+                                    noc: "GER"
+                                    name: "Yuri SINGH"
+                              - division: "Individual female CADET"
+                                contestNumber: 2015
+                                phase: "Pre-B"
+                                competitors:
+                                  - color: null
+                                    galNumber: "L100023"
+                                    noc: "GER"
+                                    name: "Hana SILVA"
+                              - division: "Pair CADET"
+                                contestNumber: 0
+                                phase: "F"
+                                competitors: [ ]
+                    error: null
+        '403':
+          description: 권한 없음
+          content:
+            application/json:
+              schema:
+                $ref: '../../../openapi.yml#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+
+  /competitions/{competitionSeq}/documents/detail/SESSION_SCHEDULES_BY_COURT:
+    get:
+      summary: SESSION_SCHEDULES_BY_COURT 품새 문서 상세 조회 (SESSION_SCHEDULES_BY_COURT)
+      description: SESSION_SCHEDULES_BY_COURT 문서를 조회한다. (documentType 은 항상 'SESSION_SCHEDULES_BY_COURT')
+      tags:
+        - 문서
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 대회의 고유 식별자
+        - name: court
+          in: query
+          required: true
+          schema:
+            type: integer
+          description: 코트 번호
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    description: 요청 성공 여부
+                  data:
+                    type: object
+                    properties:
+                      header:
+                        type: object
+                        properties:
+                          competitionHostName:
+                            type: string
+                            example: "champs4"
+                            description: 대회 주최 이름
+                          competitionLocalType:
+                            type: string
+                            example: "W"
+                            description: 대회 지역 타입
+                          competitionName:
+                            type: string
+                            example: "champs4 대회 250826_1"
+                            description: 대회 이름
+                          competitionSdate:
+                            type: string
+                            format: date-time
+                            example: "2025-08-26T03:00:00.000+09:00"
+                            description: 대회 시작일시
+                          timeZoneId:
+                            type: string
+                            example: "Antarctica/Rothera"
+                            description: 대회 시간대
+                          nocType:
+                            type: string
+                            example: "ATA"
+                            description: 국가 코드
+                          hostLogoUrl:
+                            type: string
+                            nullable: true
+                            example: null
+                            description: 주최 로고 URL
+                          competitionLogUrl:
+                            type: string
+                            nullable: true
+                            example: null
+                            description: 대회 로고 URL
+                      contents:
+                        type: object
+                        properties:
+                          documentName:
+                            type: string
+                            example: "SESSION SCHEDULES by Court"
+                            description: 문서 이름
+                          scheduleGroups:
+                            type: array
+                            description: 코트별 경기 일정 그룹
+                            items:
+                              type: object
+                              properties:
+                                court:
+                                  type: integer
+                                  example: 3
+                                  description: 코트 번호
+                                matchCount:
+                                  type: integer
+                                  example: 20
+                                  description: 경기 수
+                                schedules:
+                                  type: array
+                                  description: 경기 일정 목록
+                                  items:
+                                    type: object
+                                    properties:
+                                      division:
+                                        type: string
+                                        example: "Team male CADET"
+                                        description: 경기 종목
+                                      contestNumber:
+                                        type: integer
+                                        example: 0
+                                        description: 경기 번호
+                                      phase:
+                                        type: string
+                                        example: "R32"
+                                        description: 경기 단계
+                                      competitors:
+                                        type: array
+                                        description: 선수/팀 목록
+                                        items:
+                                          type: object
+                                          properties:
+                                            color:
+                                              type: string
+                                              nullable: true
+                                              example: "Chung"
+                                              description: 팀 색상
+                                            galNumber:
+                                              type: string
+                                              nullable: true
+                                              example: null
+                                              description: GAL 번호
+                                            noc:
+                                              type: string
+                                              example: "ALG"
+                                              description: 국가 코드
+                                            name:
+                                              type: string
+                                              example: "PARK, TANAKA, WANG"
+                                              description: 선수/팀 이름
+                  error:
+                    type: object
+                    nullable: true
+                    example: null
+                    description: 에러 정보
+              examples:
+                defaultResponse:
+                  summary: 성공 응답
+                  value:
+                    success: true
+                    data:
+                      header:
+                        competitionHostName: "champs4"
+                        competitionLocalType: "W"
+                        competitionName: "champs4 대회 250826_1"
+                        competitionSdate: "2025-08-26T03:00:00.000+09:00"
+                        timeZoneId: "Antarctica/Rothera"
+                        nocType: "ATA"
+                        hostLogoUrl: null
+                        competitionLogUrl: null
+                      contents:
+                        documentName: "SESSION SCHEDULES by Court"
+                        scheduleGroups:
+                          - court: 3
+                            matchCount: 20
+                            schedules:
+                              - division: "Team male CADET"
+                                contestNumber: 0
+                                phase: "R32"
+                                competitors:
+                                  - color: "Chung"
+                                    galNumber: null
+                                    noc: "ALG"
+                                    name: "PARK, TANAKA, WANG"
+                              - division: "Team male CADET"
+                                contestNumber: 0
+                                phase: "R32"
+                                competitors:
+                                  - color: "Chung"
+                                    galNumber: null
+                                    noc: "ALB"
+                                    name: "SILVA, CHOI, CLARK"
+                              - division: "Team male CADET"
+                                contestNumber: 0
+                                phase: "R32"
+                                competitors:
+                                  - color: "Hong"
+                                    galNumber: null
+                                    noc: "GER"
+                                    name: "CHEN, PATEL, YANG"
+                              - division: "Team male CADET"
+                                contestNumber: 0
+                                phase: "R32"
+                                competitors:
+                                  - color: "Chung"
+                                    galNumber: null
+                                    noc: "ANT"
+                                    name: "YAMAMOTO, TANAKA, PARK"
+                              - division: "Team male CADET"
+                                contestNumber: 0
+                                phase: "R32"
+                                competitors:
+                                  - color: "Hong"
+                                    galNumber: null
+                                    noc: "GER"
+                                    name: "CHEN, KIM, PATEL"
+                              - division: "Team male CADET"
+                                contestNumber: 0
+                                phase: "R32"
+                                competitors:
+                                  - color: "Hong"
+                                    galNumber: null
+                                    noc: "AFG"
+                                    name: "CLARK, SILVA, CHOI"
+                    error: null
+        '403':
+          description: 권한 없음
+          content:
+            application/json:
+              schema:
+                $ref: '../../../openapi.yml#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+
+  /competitions/{competitionSeq}/documents/detail/SESSION_SCHEDULES_BY_DAY:
+    get:
+      summary: SESSION_SCHEDULES_BY_DAY 품새 문서 상세 조회 (SESSION_SCHEDULES_BY_DAY)
+      description: SESSION_SCHEDULES_BY_DAY 문서를 조회한다. (documentType 은 항상 'SESSION_SCHEDULES_BY_DAY')
+      tags:
+        - 문서
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 대회의 고유 식별자
+        - name: day
+          in: query
+          required: true
+          schema:
+            type: integer
+          description: 일차
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: 요청 성공 여부
+                    example: true
+                  data:
+                    type: object
+                    properties:
+                      header:
+                        type: object
+                        properties:
+                          competitionHostName:
+                            type: string
+                            example: "champs4"
+                          competitionLocalType:
+                            type: string
+                            example: "W"
+                          competitionName:
+                            type: string
+                            example: "champs4 대회 250826_1"
+                          competitionSdate:
+                            type: string
+                            format: date-time
+                            example: "2025-08-26T03:00:00.000+09:00"
+                          timeZoneId:
+                            type: string
+                            example: "Antarctica/Rothera"
+                          nocType:
+                            type: string
+                            example: "ATA"
+                          hostLogoUrl:
+                            type: string
+                            nullable: true
+                            example: null
+                          competitionLogUrl:
+                            type: string
+                            nullable: true
+                            example: null
+                      contents:
+                        type: object
+                        properties:
+                          documentName:
+                            type: string
+                            example: "SESSION SCHEDULES by Day"
+                          scheduleGroups:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                day:
+                                  type: integer
+                                  example: 1
+                                matchCount:
+                                  type: integer
+                                  example: 42
+                                schedules:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      division:
+                                        type: string
+                                        example: "Individual male CADET"
+                                      contestNumber:
+                                        type: integer
+                                        example: 1001
+                                      phase:
+                                        type: string
+                                        example: "SF"
+                                      competitors:
+                                        type: array
+                                        items:
+                                          type: object
+                                          properties:
+                                            color:
+                                              type: string
+                                              nullable: true
+                                              example: "Chung"
+                                            galNumber:
+                                              type: string
+                                              nullable: true
+                                              example: "L100001"
+                                            noc:
+                                              type: string
+                                              example: "GER"
+                                            name:
+                                              type: string
+                                              example: "Nina CHOI"
+                  error:
+                    type: object
+                    nullable: true
+                    example: null
+              examples:
+                defaultResponse:
+                  summary: 성공 응답
+                  value:
+                    success: true
+                    data:
+                      header:
+                        competitionHostName: "champs4"
+                        competitionLocalType: "W"
+                        competitionName: "champs4 대회 250826_1"
+                        competitionSdate: "2025-08-26T03:00:00.000+09:00"
+                        timeZoneId: "Antarctica/Rothera"
+                        nocType: "ATA"
+                        hostLogoUrl: null
+                        competitionLogUrl: null
+                      contents:
+                        documentName: "SESSION SCHEDULES by Day"
+                        scheduleGroups:
+                          - day: 1
+                            matchCount: 42
+                            schedules:
+                              - division: "Individual male CADET"
+                                contestNumber: 1001
+                                phase: "SF"
+                                competitors:
+                                  - color: "Chung"
+                                    galNumber: "L100001"
+                                    noc: "GER"
+                                    name: "Nina CHOI"
+                                  - color: "Hong"
+                                    galNumber: "L100002"
+                                    noc: "GER"
+                                    name: "Yuna WANG"
+                              - division: "Individual male CADET"
+                                contestNumber: 1002
+                                phase: "SF"
+                                competitors:
+                                  - color: "Chung"
+                                    galNumber: "L100004"
+                                    noc: "GER"
+                                    name: "Sung CHEN"
+                                  - color: "Hong"
+                                    galNumber: "L100003"
+                                    noc: "LBN"
+                                    name: "Jane WANG"
+                              - division: "Individual female CADET"
+                                contestNumber: 2001
+                                phase: "Pre-A"
+                                competitors:
+                                  - color: null
+                                    galNumber: "L100032"
+                                    noc: "KOR"
+                                    name: "Yuna CHOI"
+                              - division: "Individual female CADET"
+                                contestNumber: 2002
+                                phase: "Pre-A"
+                                competitors:
+                                  - color: null
+                                    galNumber: "L100040"
+                                    noc: "GER"
+                                    name: "Sung CHOI"
+                              - division: "Individual female CADET"
+                                contestNumber: 2003
+                                phase: "Pre-A"
+                                competitors:
+                                  - color: null
+                                    galNumber: "L100027"
+                                    noc: "KOR"
+                                    name: "Leo NGUYEN"
+                              - division: "Team male CADET"
+                                contestNumber: 3011
+                                phase: "R16"
+                                competitors:
+                                  - color: "Chung"
+                                    galNumber: null
+                                    noc: "GER"
+                                    name: "LEE, LIM, LIM"
+                                  - color: "Hong"
+                                    galNumber: null
+                                    noc: "GER"
+                                    name: "NGUYEN, PATEL, CHEN"
+                    error: null
+        '403':
+          description: 권한 없음
+          content:
+            application/json:
+              schema:
+                $ref: '../../../openapi.yml#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+
+  /competitions/{competitionSeq}/documents/detail/SESSION_SCHEDULES_BY_DAY_WITH_START_TIME:
+    get:
+      summary: SESSION_SCHEDULES_BY_DAY_WITH_START_TIME 품새 문서 상세 조회 (SESSION_SCHEDULES_BY_DAY_WITH_START_TIME)
+      description: SESSION_SCHEDULES_BY_DAY_WITH_START_TIME 문서를 조회한다. (documentType 은 항상 'SESSION_SCHEDULES_BY_DAY_WITH_START_TIME')
+      tags:
+        - 문서
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 대회의 고유 식별자
+        - name: day
+          in: query
+          required: true
+          schema:
+            type: integer
+          description: 일차
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    properties:
+                      header:
+                        type: object
+                        properties:
+                          competitionHostName:
+                            type: string
+                            example: "champs4"
+                          competitionLocalType:
+                            type: string
+                            example: "W"
+                          competitionName:
+                            type: string
+                            example: "champs4 대회 250826_1"
+                          competitionSdate:
+                            type: string
+                            format: date-time
+                            example: "2025-08-26T03:00:00.000+09:00"
+                          timeZoneId:
+                            type: string
+                            example: "Antarctica/Rothera"
+                          nocType:
+                            type: string
+                            example: "ATA"
+                          hostLogoUrl:
+                            type: string
+                            nullable: true
+                            example: null
+                          competitionLogUrl:
+                            type: string
+                            nullable: true
+                            example: null
+                      contents:
+                        type: object
+                        properties:
+                          documentName:
+                            type: string
+                            example: "SESSION SCHEDULES by Day with Start Time"
+                          scheduleGroups:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                day:
+                                  type: integer
+                                  example: 1
+                                matchCount:
+                                  type: integer
+                                  example: 42
+                                schedules:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      startTime:
+                                        type: string
+                                        nullable: true
+                                        example: "04:43"
+                                      division:
+                                        type: string
+                                        example: "Individual male CADET"
+                                      contestNumber:
+                                        type: integer
+                                        example: 1001
+                                      phase:
+                                        type: string
+                                        example: "SF"
+                                      competitors:
+                                        type: array
+                                        items:
+                                          type: object
+                                          properties:
+                                            color:
+                                              type: string
+                                              nullable: true
+                                              example: "Chung"
+                                            galNumber:
+                                              type: string
+                                              nullable: true
+                                              example: "L100001"
+                                            noc:
+                                              type: string
+                                              example: "GER"
+                                            name:
+                                              type: string
+                                              example: "Nina CHOI"
+                  error:
+                    type: object
+                    nullable: true
+                    example: null
+              examples:
+                defaultResponse:
+                  summary: 성공 응답
+                  value:
+                    success: true
+                    data:
+                      header:
+                        competitionHostName: "champs4"
+                        competitionLocalType: "W"
+                        competitionName: "champs4 대회 250826_1"
+                        competitionSdate: "2025-08-26T03:00:00.000+09:00"
+                        timeZoneId: "Antarctica/Rothera"
+                        nocType: "ATA"
+                        hostLogoUrl: null
+                        competitionLogUrl: null
+                      contents:
+                        documentName: "SESSION SCHEDULES by Day with Start Time"
+                        scheduleGroups:
+                          - day: 1
+                            matchCount: 42
+                            schedules:
+                              - startTime: "04:43"
+                                division: "Individual male CADET"
+                                contestNumber: 1001
+                                phase: "SF"
+                                competitors:
+                                  - color: "Chung"
+                                    galNumber: "L100001"
+                                    noc: "GER"
+                                    name: "Nina CHOI"
+                                  - color: "Hong"
+                                    galNumber: "L100002"
+                                    noc: "GER"
+                                    name: "Yuna WANG"
+                              - startTime: null
+                                division: "Individual male CADET"
+                                contestNumber: 1002
+                                phase: "SF"
+                                competitors:
+                                  - color: "Chung"
+                                    galNumber: "L100004"
+                                    noc: "GER"
+                                    name: "Sung CHEN"
+                                  - color: "Hong"
+                                    galNumber: "L100003"
+                                    noc: "LBN"
+                                    name: "Jane WANG"
+                              - startTime: "05:13"
+                                division: "Individual female CADET"
+                                contestNumber: 2001
+                                phase: "Pre-A"
+                                competitors:
+                                  - color: null
+                                    galNumber: "L100032"
+                                    noc: "KOR"
+                                    name: "Yuna CHOI"
+                              - startTime: null
+                                division: "Individual female CADET"
+                                contestNumber: 2002
+                                phase: "Pre-A"
+                                competitors:
+                                  - color: null
+                                    galNumber: "L100040"
+                                    noc: "GER"
+                                    name: "Sung CHOI"
+                              - startTime: "06:18"
+                                division: "Individual female CADET"
+                                contestNumber: 2003
+                                phase: "Pre-A"
+                                competitors:
+                                  - color: null
+                                    galNumber: "L100027"
+                                    noc: "KOR"
+                                    name: "Leo NGUYEN"
+                              - startTime: null
+                                division: "Individual female CADET"
+                                contestNumber: 2004
+                                phase: "Pre-A"
+                                competitors:
+                                  - color: null
+                                    galNumber: "L100021"
+                                    noc: "GER"
+                                    name: "Yuri SINGH"
+                              - startTime: null
+                                division: "Individual female CADET"
+                                contestNumber: 2005
+                                phase: "Pre-A"
+                                competitors:
+                                  - color: null
+                                    galNumber: "L100039"
+                                    noc: "GER"
+                                    name: "Hana TANAKA"
+                              - startTime: null
+                                division: "Individual female CADET"
+                                contestNumber: 2006
+                                phase: "Pre-A"
+                                competitors:
+                                  - color: null
+                                    galNumber: "L100034"
+                                    noc: "KOR"
+                                    name: "David TANAKA"
+                              - startTime: null
+                                division: "Individual female CADET"
+                                contestNumber: 2007
+                                phase: "Pre-A"
+                                competitors:
+                                  - color: null
+                                    galNumber: "L100035"
+                                    noc: "KOR"
+                                    name: "Luke LIM"
+                              - startTime: null
+                                division: "Individual female CADET"
+                                contestNumber: 2008
+                                phase: "Pre-A"
+                                competitors:
+                                  - color: null
+                                    galNumber: "L100028"
+                                    noc: "LBN"
+                                    name: "Paul CLARK"
+                              - startTime: null
+                                division: "Individual female CADET"
+                                contestNumber: 2009
+                                phase: "Pre-A"
+                                competitors:
+                                  - color: null
+                                    galNumber: "L100033"
+                                    noc: "KOR"
+                                    name: "Sara CHOI"
+                              - startTime: null
+                                division: "Individual female CADET"
+                                contestNumber: 2010
+                                phase: "Pre-A"
+                                competitors:
+                                  - color: null
+                                    galNumber: "L100038"
+                                    noc: "LBN"
+                                    name: "Sung KIM"
+                              - startTime: null
+                                division: "Individual female CADET"
+                                contestNumber: 2011
+                                phase: "Pre-B"
+                                competitors:
+                                  - color: null
+                                    galNumber: "L100025"
+                                    noc: "KOR"
+                                    name: "Minsoo SINGH"
+                              - startTime: null
+                                division: "Team male CADET"
+                                contestNumber: 3011
+                                phase: "R16"
+                                competitors:
+                                  - color: "Chung"
+                                    galNumber: null
+                                    noc: "GER"
+                                    name: "LIM, LIM, LEE"
+                                  - color: "Hong"
+                                    galNumber: null
+                                    noc: "GER"
+                                    name: "CHEN, NGUYEN, PATEL"
+                    error: null
+        '403':
+          description: 권한 없음
+          content:
+            application/json:
+              schema:
+                $ref: '../../../openapi.yml#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
