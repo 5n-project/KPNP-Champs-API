@@ -203,3 +203,102 @@ paths:
               examples:
                 IS_NOT_AUTHORIZED:
                   $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+
+  /non/competitions:
+    get:
+      summary: 대회 목록 조회
+      tags:
+        - 대회
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    description: 요청 성공 여부
+                  data:
+                    type: array
+                    description: 대회 리스트
+                    items:
+                      type: object
+                      required:
+                        - competitionSeq
+                        - competitionNameKo
+                        - competitionSdate
+                        - competitionEdate
+                        - competitionNocCode
+                        - competitionTimezone
+                        - competitionStatus
+                        - statusDisplayNameEn
+                        - statusDisplayNameKr
+                        - totalManagerCount
+                        - joinManagerCount
+                      properties:
+                        competitionSeq:
+                          type: string
+                          example: "1726"
+                          description: 대회 seq
+                        competitionNameKo:
+                          type: string
+                          example: "asd"
+                          description: 대회명 (한글)
+                        competitionNameEn:
+                          type: string
+                          example: ""
+                          nullable: true
+                          description: 대회명 (영문)
+                        competitionSdate:
+                          type: string
+                          example: "2025-03-18T00:00:00.000+09:00"
+                          description: 대회 시작일
+                        competitionEdate:
+                          type: string
+                          example: "2025-03-21T23:59:00.000+09:00"
+                          description: 대회 종료일
+                        competitionNocCode:
+                          type: string
+                          example: "BAR"
+                          description: NOC 코드
+                        competitionTimezone:
+                          type: string
+                          example: "Asia/Seoul"
+                          description: 대회 타임존
+                        competitionStatus:
+                          type: string
+                          example: "FC"
+                          description: 대회 상태 코드
+                        statusDisplayNameEn:
+                          type: string
+                          example: "Recruitment Failed"
+                          description: 상태 (영문)
+                        statusDisplayNameKr:
+                          type: string
+                          example: "모집 실패"
+                          description: 상태 (한글)
+                        totalManagerCount:
+                          type: integer
+                          example: 1
+                          description: 총 매니저 수
+                        joinManagerCount:
+                          type: integer
+                          example: 0
+                          description: 참가 매니저 수
+                  error:
+                    type: object
+                    nullable: true
+                    description: 에러 상세 정보
+                    example: null
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml/#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
