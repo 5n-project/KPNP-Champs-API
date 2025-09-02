@@ -83,6 +83,7 @@ components:
       type: object
       additionalProperties: false
       required:
+        - documentName
         - competitionHostName
         - competitionLocalType
         - competitionName
@@ -90,6 +91,9 @@ components:
         - timeZoneId
         - nocType
       properties:
+        documentName:
+          type: string
+          description: 문서 이름
         competitionHostName:
           type: string
           description: Host identifier or name
@@ -173,6 +177,7 @@ components:
       value:
         {
           "header": {
+            "documentName": "ENTRIES BY NOC",
             "competitionHostName": "champs4",
             "competitionLocalType": "W",
             "competitionName": "champs4 대회 250826_1",
@@ -356,6 +361,7 @@ components:
       value:
         {
           "header": {
+            "documentName": "ENTRIES BY NOC",
             "competitionHostName": "champs4",
             "competitionLocalType": "W",
             "competitionName": "champs4 대회 250826_1",

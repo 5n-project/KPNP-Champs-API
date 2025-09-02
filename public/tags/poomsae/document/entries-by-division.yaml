@@ -91,6 +91,7 @@ components:
       type: object
       additionalProperties: false
       required:
+        - documentName
         - competitionHostName
         - competitionLocalType
         - isTeam
@@ -102,6 +103,9 @@ components:
         - departmentName
         - divisionCategoryName
       properties:
+        documentName:
+          type: string
+          description: 문서 이름
         competitionHostName:
           type: string
           description: Host identifier or name
@@ -190,6 +194,7 @@ components:
       value:
         {
           "header": {
+            "documentName": "ENTRIES BY DIVISION",
             "competitionHostName": "champs4",
             "competitionLocalType": "W",
             "isTeam": true,
@@ -347,6 +352,7 @@ components:
       value:
         {
           "header": {
+            "documentName": "ENTRIES BY DIVISION",
             "competitionHostName": "champs4",
             "competitionLocalType": "W",
             "isTeam": true,

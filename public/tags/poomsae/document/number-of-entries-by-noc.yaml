@@ -78,6 +78,7 @@ components:
     CompetitionHeader:
       type: object
       required:
+        - documentName
         - competitionHostName
         - competitionLocalType
         - competitionName
@@ -85,6 +86,9 @@ components:
         - timeZoneId
         - nocType
       properties:
+        documentName:
+          type: string
+          description: 문서 이름
         competitionHostName:
           type: string
           description: 대회 주최(호스트) 식별/표기명
@@ -239,6 +243,7 @@ components:
       value:
         {
           "header": {
+            "documentName": "NUMBER OF ENTRIES BY NOC",
             "competitionHostName": "champs4",
             "competitionLocalType": "W",
             "competitionName": "champs4 대회 250826_1",

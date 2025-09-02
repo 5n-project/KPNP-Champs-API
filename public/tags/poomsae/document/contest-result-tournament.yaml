@@ -101,6 +101,7 @@ components:
       type: object
       description: ""
       required:
+        - documentName
         - competitionHostName
         - competitionLocalType
         - isTeam
@@ -113,6 +114,9 @@ components:
         - divisionCategoryName
         - phase
       properties:
+        documentName:
+          type: string
+          description: 문서 이름
         competitionHostName:
           type: string
           description: "주최명"
@@ -362,6 +366,7 @@ components:
       value:
         {
           "header": {
+            "documentName": "CONTEST RESULTS OF TOURNAMENT",
             "competitionHostName": "오앤",
             "competitionLocalType": "W",
             "isTeam": false,
@@ -737,6 +742,7 @@ components:
       value:
         {
             "header": {
+                "documentName": "CONTEST RESULTS OF TOURNAMENT",
                 "competitionHostName": "메인",
                 "competitionLocalType": "W",
                 "isTeam": true,
@@ -984,6 +990,7 @@ components:
       value:
         {
           "header": {
+            "documentName": "CONTEST RESULTS OF TOURNAMENT",
             "competitionHostName": "오앤",
             "competitionLocalType": "W",
             "isTeam": false,
@@ -1215,6 +1222,7 @@ components:
       value:
         {
           "header": {
+            "documentName": "CONTEST RESULTS OF TOURNAMENT",
             "competitionHostName": "주최명",
             "competitionLocalType": "L",
             "isTeam": false,
