@@ -172,6 +172,11 @@ paths:
                         description: 비회원 역할 타입
                         enum: [ COMPETITOR, REFEREE ]
                         example: "COMPETITOR"
+                      competitorCategoryCodeTypes:
+                        type: array
+                        description: 비회원 역할 타입
+                        enum: [ KY, PS ]
+                        example: [ "KY", "PS" ]
                   error:
                     type: object
                     nullable: true
@@ -190,6 +195,7 @@ paths:
                     data:
                       token: "$2a$10$YK0tm38WhdK4fxt1xGuAIue"
                       nonMemberRoleType: "COMPETITOR"
+                      competitorCategoryCodeTypes: [ "KY", "PS" ]
                     error: null
                 BAD_CREDENTIALS_EXCEPTION:
                   $ref: '../openapi.yml/#/components/examples/BAD_CREDENTIALS_EXCEPTION'
