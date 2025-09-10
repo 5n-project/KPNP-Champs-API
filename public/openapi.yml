@@ -16,6 +16,7 @@ tags:
   - name: 운영진
   - name: 심판관리
   - name: 운영 - 참가자
+  - name: 운영 - 입장
   - name: 운영 - 경기
   - name: 일정
   - name: 심판조 스케줄
@@ -162,6 +163,17 @@ paths:
     $ref: './tags/poomsae/participant.yaml#/paths/~1competitions~1{competitionSeq}~1participants~1confirm'
   /competitions/{competitionSeq}/participants/csv:
     $ref: './tags/poomsae/participant.yaml#/paths/~1competitions~1{competitionSeq}~1participants~1csv'
+
+
+   # 운영 - 입장
+  /competition/{competitionSeq}/entries/competitors:
+    $ref: './tags/poomsae/entry.yaml#/paths/~1competition~1{competitionSeq}~1entries~1competitors'
+  /competition/{competitionSeq}/entries/competitors/{competitorEntrySeq}:
+    $ref: './tags/poomsae/entry.yaml#/paths/~1competition~1{competitionSeq}~1entries~1competitors~1{competitorEntrySeq}'
+  /competition/{competitionSeq}/entries/competitors/{competitorEntrySeq}/entry-status:
+    $ref: './tags/poomsae/entry.yaml#/paths/~1competition~1{competitionSeq}~1entries~1competitors~1{competitorEntrySeq}~1entry-status'
+  /competition/entries/competitors/{barcode}/entry-status:
+    $ref: './tags/poomsae/entry.yaml#/paths/~1competition~1entries~1competitors~1{barcode}~1entry-status'
 
 
   # 일정
@@ -1080,6 +1092,13 @@ components:
         error:
           message: "자유품새 경기에서는 함께시연을 지정할 수 없습니다."
           errorCode: "E746"
+    USER_DOES_NOT_EXIST:
+      value:
+        success: false
+        data: null
+        error:
+          message: "유저가 존재하지 않습니다."
+          errorCode: "E510"
 
 
   schemas:
