@@ -298,6 +298,10 @@ paths:
                                       type: string
                                       nullable: true
                                       description: "경기 결과"
+                                    winnerScore:
+                                      type: number
+                                      nullable: true
+                                      description: "승자 최종 점수(P1 평균과 P2 평균의 평균)"
                                     home:
                                       required:
                                         - matchCompetitorDetailSeq
@@ -325,14 +329,6 @@ paths:
                                           type: string
                                           example: GER
                                           description: "소속 noc 국가"
-                                        firstPoomsaeAverageScore:
-                                          type: number
-                                          nullable: true
-                                          description: "P1 평균 스코어"
-                                        secondPoomsaeAverageScore:
-                                          type: number
-                                          nullable: true
-                                          description: "P2 평균 스코어"
                                         resultType:
                                           type: string
                                           example: WIN
@@ -389,14 +385,6 @@ paths:
                                           type: string
                                           example: GER
                                           description: "소속 noc 국가"
-                                        firstPoomsaeAverageScore:
-                                          type: number
-                                          nullable: true
-                                          description: "P1 평균 스코어"
-                                        secondPoomsaeAverageScore:
-                                          type: number
-                                          nullable: true
-                                          description: "P2 평균 스코어"
                                         resultType:
                                           type: string
                                           example: WIN
@@ -506,13 +494,12 @@ paths:
                                 "playingRound": 1,
                                 "matchNumber": 1001,
                                 "resultDecisionType": "PUN",
+                                "winnerScore": 9.650,
                                 "home": {
                                   "matchCompetitorDetailSeq": 19134,
                                   "competitor": 19,
                                   "team": "Iran_U30_IM_01",
                                   "country": "GER",
-                                  "firstPoomsaeAverageScore": null,
-                                  "secondPoomsaeAverageScore": null,
                                   "resultType": "LOSS",
                                   "competitorType": "S",
                                   "matchSideType": "HOME",
@@ -529,8 +516,6 @@ paths:
                                   "competitor": 22,
                                   "team": "Morocco_U30_IM_04",
                                   "country": "GER",
-                                  "firstPoomsaeAverageScore": null,
-                                  "secondPoomsaeAverageScore": null,
                                   "resultType": "WIN",
                                   "competitorType": "S",
                                   "matchSideType": "AWAY",
@@ -549,13 +534,12 @@ paths:
                                 "playingRound": 1,
                                 "matchNumber": 1002,
                                 "resultDecisionType": "PUN",
+                                "winnerScore": 9.650,
                                 "home": {
                                   "matchCompetitorDetailSeq": 19136,
                                   "competitor": 20,
                                   "team": "Russia_U30_IM_02",
                                   "country": "GER",
-                                  "firstPoomsaeAverageScore": null,
-                                  "secondPoomsaeAverageScore": null,
                                   "resultType": "WIN",
                                   "competitorType": "S",
                                   "matchSideType": "HOME",
@@ -572,8 +556,6 @@ paths:
                                   "competitor": 21,
                                   "team": "UK_U30_IM_03",
                                   "country": "GER",
-                                  "firstPoomsaeAverageScore": null,
-                                  "secondPoomsaeAverageScore": null,
                                   "resultType": "LOSS",
                                   "competitorType": "S",
                                   "matchSideType": "AWAY",
@@ -592,13 +574,12 @@ paths:
                                 "playingRound": 2,
                                 "matchNumber": 1003,
                                 "resultDecisionType": "PUN",
+                                "winnerScore": 9.650,
                                 "home": {
                                   "matchCompetitorDetailSeq": 19190,
                                   "competitor": 19,
                                   "team": "Iran_U30_IM_01",
                                   "country": "GER",
-                                  "firstPoomsaeAverageScore": null,
-                                  "secondPoomsaeAverageScore": null,
                                   "resultType": "WIN",
                                   "competitorType": "S",
                                   "matchSideType": "HOME",
@@ -615,8 +596,6 @@ paths:
                                   "competitor": 21,
                                   "team": "UK_U30_IM_03",
                                   "country": "GER",
-                                  "firstPoomsaeAverageScore": null,
-                                  "secondPoomsaeAverageScore": null,
                                   "resultType": "LOSS",
                                   "competitorType": "S",
                                   "matchSideType": "AWAY",
@@ -635,13 +614,12 @@ paths:
                                 "playingRound": 3,
                                 "matchNumber": 1004,
                                 "resultDecisionType": "PUN",
+                                "winnerScore": 9.650,
                                 "home": {
                                   "matchCompetitorDetailSeq": 19189,
                                   "competitor": 22,
                                   "team": "Morocco_U30_IM_04",
                                   "country": "GER",
-                                  "firstPoomsaeAverageScore": null,
-                                  "secondPoomsaeAverageScore": null,
                                   "resultType": "LOSS",
                                   "competitorType": "S",
                                   "matchSideType": "HOME",
@@ -658,8 +636,6 @@ paths:
                                   "competitor": 20,
                                   "team": "Russia_U30_IM_02",
                                   "country": "GER",
-                                  "firstPoomsaeAverageScore": null,
-                                  "secondPoomsaeAverageScore": null,
                                   "resultType": "WIN",
                                   "competitorType": "S",
                                   "matchSideType": "AWAY",
@@ -805,13 +781,12 @@ paths:
                                 "playingRound": 1,
                                 "matchNumber": 9001,
                                 "resultDecisionType": "PUN",
+                                "winnerScore": 9.650,
                                 "home": {
                                   "matchCompetitorDetailSeq": 19186,
                                   "competitor": 41,
                                   "team": "KOR",
                                   "country": "KOR",
-                                  "firstPoomsaeAverageScore": null,
-                                  "secondPoomsaeAverageScore": null,
                                   "resultType": "WIN",
                                   "competitorType": "T",
                                   "matchSideType": "HOME",
@@ -838,8 +813,6 @@ paths:
                                   "competitor": 42,
                                   "team": "KOR",
                                   "country": "KOR",
-                                  "firstPoomsaeAverageScore": null,
-                                  "secondPoomsaeAverageScore": null,
                                   "resultType": "LOSS",
                                   "competitorType": "T",
                                   "matchSideType": "AWAY",
@@ -868,13 +841,12 @@ paths:
                                 "playingRound": 1,
                                 "matchNumber": 9002,
                                 "resultDecisionType": "PUN",
+                                "winnerScore": 9.650,
                                 "home": {
                                   "matchCompetitorDetailSeq": 19188,
                                   "competitor": 44,
                                   "team": "KOR",
                                   "country": "KOR",
-                                  "firstPoomsaeAverageScore": null,
-                                  "secondPoomsaeAverageScore": null,
                                   "resultType": "WIN",
                                   "competitorType": "T",
                                   "matchSideType": "HOME",
@@ -901,8 +873,6 @@ paths:
                                   "competitor": 43,
                                   "team": "KOR",
                                   "country": "KOR",
-                                  "firstPoomsaeAverageScore": null,
-                                  "secondPoomsaeAverageScore": null,
                                   "resultType": "LOSS",
                                   "competitorType": "T",
                                   "matchSideType": "AWAY",
@@ -931,13 +901,12 @@ paths:
                                 "playingRound": 2,
                                 "matchNumber": 9003,
                                 "resultDecisionType": "PUN",
+                                "winnerScore": 9.650,
                                 "home": {
                                   "matchCompetitorDetailSeq": 19194,
                                   "competitor": 41,
                                   "team": "KOR",
                                   "country": "KOR",
-                                  "firstPoomsaeAverageScore": null,
-                                  "secondPoomsaeAverageScore": null,
                                   "resultType": "WIN",
                                   "competitorType": "T",
                                   "matchSideType": "HOME",
@@ -964,8 +933,6 @@ paths:
                                   "competitor": 44,
                                   "team": "KOR",
                                   "country": "KOR",
-                                  "firstPoomsaeAverageScore": null,
-                                  "secondPoomsaeAverageScore": null,
                                   "resultType": "LOSS",
                                   "competitorType": "T",
                                   "matchSideType": "AWAY",
@@ -1024,7 +991,7 @@ paths:
                                   {
                                     "competitionMatchPsSeq": 37870,
                                     "matchCompetitorDetailSeq": 18215,
-                                    "startTime": "2025-08-01 07:27:02.0",
+                                    "startTime": "2025-08-20T07:47:21.000Z",
                                     "contestNumber": 2001,
                                     "wtNumber": "L100047",
                                     "team": "TEAM_MALE_U30_TM_03",
