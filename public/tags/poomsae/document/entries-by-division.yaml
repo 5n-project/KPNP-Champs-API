@@ -167,7 +167,6 @@ components:
         - gender
         - familyNameEn
         - givenNameEn
-        - birthDate
         - ranking
         - seed
       properties:
@@ -178,7 +177,7 @@ components:
           type: string
         givenNameEn:
           type: string
-        birthDate:
+        licenseNumber:
           type: string
           description: yyyyMMdd
           pattern: "^[0-9]{8}$"
@@ -210,143 +209,297 @@ components:
           },
           "contents": [
             {
-              "noc": "RUS",
-              "competitors": [
-                {
-                  "gender": "F",
-                  "familyNameEn": "Kim",
-                  "givenNameEn": "Elena",
-                  "birthDate": "20000227",
-                  "ranking": 58,
-                  "seed": 0
-                },
-                {
-                  "gender": "F",
-                  "familyNameEn": "Yamamoto",
-                  "givenNameEn": "David",
-                  "birthDate": "19890321",
-                  "ranking": 3,
-                  "seed": 0
-                },
-                {
-                  "gender": "F",
-                  "familyNameEn": "Chen",
-                  "givenNameEn": "Mina",
-                  "birthDate": "20051008",
-                  "ranking": 5,
-                  "seed": 0
-                },
-                {
-                  "gender": "F",
-                  "familyNameEn": "Singh",
-                  "givenNameEn": "David",
-                  "birthDate": "19911009",
-                  "ranking": 8,
-                  "seed": 0
-                }
-              ]
-            },
-            {
-              "noc": "LBN",
-              "competitors": [
-                {
-                  "gender": "F",
-                  "familyNameEn": "Clark",
-                  "givenNameEn": "Julie",
-                  "birthDate": "19890609",
-                  "ranking": 56,
-                  "seed": 0
-                },
-                {
-                  "gender": "F",
-                  "familyNameEn": "Chen",
-                  "givenNameEn": "Ken",
-                  "birthDate": "19990310",
-                  "ranking": 57,
-                  "seed": 0
-                },
-                {
-                  "gender": "F",
-                  "familyNameEn": "Yang",
-                  "givenNameEn": "David",
-                  "birthDate": "19901114",
-                  "ranking": 59,
-                  "seed": 0
-                },
-                {
-                  "gender": "F",
-                  "familyNameEn": "Zhang",
-                  "givenNameEn": "Yuri",
-                  "birthDate": "20020608",
-                  "ranking": 60,
-                  "seed": 0
-                }
-              ]
-            },
-            {
               "noc": "GER",
               "competitors": [
                 {
-                  "gender": "F",
-                  "familyNameEn": "Garcia",
-                  "givenNameEn": "John",
-                  "birthDate": "20000124",
-                  "ranking": 61,
+                  "gender": "M",
+                  "familyNameEn": "Yamamoto",
+                  "givenNameEn": "Mina",
+                  "licenseNumber": null,
+                  "ranking": 23,
                   "seed": 0
                 },
                 {
-                  "gender": "F",
+                  "gender": "M",
+                  "familyNameEn": "Choi",
+                  "givenNameEn": "Hana",
+                  "licenseNumber": "L100069",
+                  "ranking": 24,
+                  "seed": 0
+                },
+                {
+                  "gender": "M",
+                  "familyNameEn": "Clark",
+                  "givenNameEn": "Yuri",
+                  "licenseNumber": "L100070",
+                  "ranking": 25,
+                  "seed": 0
+                }
+              ]
+            },
+            {
+              "noc": "ALG",
+              "competitors": [
+                {
+                  "gender": "M",
+                  "familyNameEn": "Tanaka",
+                  "givenNameEn": "Mina",
+                  "licenseNumber": "L100047",
+                  "ranking": 2,
+                  "seed": 1
+                },
+                {
+                  "gender": "M",
+                  "familyNameEn": "Wang",
+                  "givenNameEn": "Minsoo",
+                  "licenseNumber": "L100048",
+                  "ranking": 3,
+                  "seed": 1
+                },
+                {
+                  "gender": "M",
+                  "familyNameEn": "Park",
+                  "givenNameEn": "John",
+                  "licenseNumber": null,
+                  "ranking": 4,
+                  "seed": 1
+                }
+              ]
+            },
+            {
+              "noc": "ARG",
+              "competitors": [
+                {
+                  "gender": "M",
+                  "familyNameEn": "Yang",
+                  "givenNameEn": "Nina",
+                  "licenseNumber": "L100059",
+                  "ranking": 14,
+                  "seed": 0
+                },
+                {
+                  "gender": "M",
+                  "familyNameEn": "Smith",
+                  "givenNameEn": "Mina",
+                  "licenseNumber": "L100060",
+                  "ranking": 15,
+                  "seed": 0
+                },
+                {
+                  "gender": "M",
+                  "familyNameEn": "Garcia",
+                  "givenNameEn": "Hana",
+                  "licenseNumber": "L100061",
+                  "ranking": 16,
+                  "seed": 0
+                }
+              ]
+            },
+            {
+              "noc": "ANT",
+              "competitors": [
+                {
+                  "gender": "M",
                   "familyNameEn": "Tanaka",
                   "givenNameEn": "Emma",
-                  "birthDate": "19881121",
-                  "ranking": 62,
+                  "licenseNumber": "L100056",
+                  "ranking": 11,
                   "seed": 0
                 },
                 {
-                  "gender": "F",
+                  "gender": "M",
                   "familyNameEn": "Park",
+                  "givenNameEn": "Yuna",
+                  "licenseNumber": "L100057",
+                  "ranking": 12,
+                  "seed": 0
+                },
+                {
+                  "gender": "M",
+                  "familyNameEn": "Yamamoto",
+                  "givenNameEn": "Alex",
+                  "licenseNumber": "L100058",
+                  "ranking": 13,
+                  "seed": 0
+                }
+              ]
+            },
+            {
+              "noc": "ALB",
+              "competitors": [
+                {
+                  "gender": "M",
+                  "familyNameEn": "Clark",
+                  "givenNameEn": "David",
+                  "licenseNumber": "L100044",
+                  "ranking": 13,
+                  "seed": 0
+                },
+                {
+                  "gender": "M",
+                  "familyNameEn": "Silva",
+                  "givenNameEn": "Ken",
+                  "licenseNumber": "L100045",
+                  "ranking": 14,
+                  "seed": 0
+                },
+                {
+                  "gender": "M",
+                  "familyNameEn": "Choi",
                   "givenNameEn": "Sam",
-                  "birthDate": "19930518",
-                  "ranking": 63,
+                  "licenseNumber": "L100046",
+                  "ranking": 1,
+                  "seed": 0
+                }
+              ]
+            },
+            {
+              "noc": "AFG",
+              "competitors": [
+                {
+                  "gender": "M",
+                  "familyNameEn": "Clark",
+                  "givenNameEn": "Emma",
+                  "licenseNumber": "L100041",
+                  "ranking": 10,
                   "seed": 0
                 },
                 {
-                  "gender": "F",
-                  "familyNameEn": "Yang",
+                  "gender": "M",
+                  "familyNameEn": "Silva",
+                  "givenNameEn": "Ken",
+                  "licenseNumber": "L100042",
+                  "ranking": 11,
+                  "seed": 0
+                },
+                {
+                  "gender": "M",
+                  "familyNameEn": "Choi",
                   "givenNameEn": "Luke",
-                  "birthDate": "20020209",
-                  "ranking": 64,
+                  "licenseNumber": "L100043",
+                  "ranking": 12,
+                  "seed": 0
+                }
+              ]
+            },
+            {
+              "noc": "AND",
+              "competitors": [
+                {
+                  "gender": "M",
+                  "familyNameEn": "Zhang",
+                  "givenNameEn": "Nina",
+                  "licenseNumber": "L100050",
+                  "ranking": 5,
+                  "seed": 2
+                },
+                {
+                  "gender": "M",
+                  "familyNameEn": "Patel",
+                  "givenNameEn": "Mina",
+                  "licenseNumber": "L100051",
+                  "ranking": 6,
+                  "seed": 2
+                },
+                {
+                  "gender": "M",
+                  "familyNameEn": "Lim",
+                  "givenNameEn": "Sara",
+                  "licenseNumber": "L100052",
+                  "ranking": 7,
+                  "seed": 2
+                }
+              ]
+            },
+            {
+              "noc": "ANG",
+              "competitors": [
+                {
+                  "gender": "M",
+                  "familyNameEn": "Clark",
+                  "givenNameEn": "Julie",
+                  "licenseNumber": "L100053",
+                  "ranking": 8,
                   "seed": 0
                 },
                 {
-                  "gender": "F",
+                  "gender": "M",
+                  "familyNameEn": "Park",
+                  "givenNameEn": "John",
+                  "licenseNumber": "L100054",
+                  "ranking": 9,
+                  "seed": 0
+                },
+                {
+                  "gender": "M",
+                  "familyNameEn": "Silva",
+                  "givenNameEn": "Yuna",
+                  "licenseNumber": "L100055",
+                  "ranking": 10,
+                  "seed": 0
+                }
+              ]
+            },
+            {
+              "noc": "ARU",
+              "competitors": [
+                {
+                  "gender": "M",
+                  "familyNameEn": "Choi",
+                  "givenNameEn": "Mina",
+                  "licenseNumber": "L100065",
+                  "ranking": 20,
+                  "seed": 0
+                },
+                {
+                  "gender": "M",
+                  "familyNameEn": "Kim",
+                  "givenNameEn": "Yuna",
+                  "licenseNumber": "L100066",
+                  "ranking": 21,
+                  "seed": 0
+                },
+                {
+                  "gender": "M",
+                  "familyNameEn": "Nguyen",
+                  "givenNameEn": "Ken",
+                  "licenseNumber": "L100067",
+                  "ranking": 22,
+                  "seed": 0
+                }
+              ]
+            },
+            {
+              "noc": "ARM",
+              "competitors": [
+                {
+                  "gender": "M",
+                  "familyNameEn": "Chen",
+                  "givenNameEn": "Alex",
+                  "licenseNumber": "L100062",
+                  "ranking": 17,
+                  "seed": 0
+                },
+                {
+                  "gender": "M",
+                  "familyNameEn": "Yamamoto",
+                  "givenNameEn": "Nina",
+                  "licenseNumber": "L100063",
+                  "ranking": 18,
+                  "seed": 0
+                },
+                {
+                  "gender": "M",
                   "familyNameEn": "Yamamoto",
                   "givenNameEn": "Ken",
-                  "birthDate": "19980902",
-                  "ranking": 4,
-                  "seed": 0
-                },
-                {
-                  "gender": "F",
-                  "familyNameEn": "Yamamoto",
-                  "givenNameEn": "Jane",
-                  "birthDate": "20030116",
-                  "ranking": 6,
-                  "seed": 0
-                },
-                {
-                  "gender": "F",
-                  "familyNameEn": "Lopez",
-                  "givenNameEn": "Sam",
-                  "birthDate": "20010920",
-                  "ranking": 7,
+                  "licenseNumber": "L100064",
+                  "ranking": 19,
                   "seed": 0
                 }
               ]
             }
           ]
         }
-
     LocalCompetitionList:
       summary: 로컬 대회 entries by division 리스트
       value:
@@ -371,83 +524,243 @@ components:
               "noc": null,
               "competitors": [
                 {
-                  "gender": "F",
+                  "gender": "M",
+                  "familyNameEn": "Clark",
+                  "givenNameEn": "Emma",
+                  "licenseNumber": null,
+                  "ranking": 10,
+                  "seed": 0
+                },
+                {
+                  "gender": "M",
+                  "familyNameEn": "Silva",
+                  "givenNameEn": "Ken",
+                  "licenseNumber": "L100042",
+                  "ranking": 11,
+                  "seed": 0
+                },
+                {
+                  "gender": "M",
+                  "familyNameEn": "Choi",
+                  "givenNameEn": "Luke",
+                  "licenseNumber": "L100043",
+                  "ranking": 12,
+                  "seed": 0
+                },
+                {
+                  "gender": "M",
+                  "familyNameEn": "Clark",
+                  "givenNameEn": "David",
+                  "licenseNumber": null,
+                  "ranking": 13,
+                  "seed": 0
+                },
+                {
+                  "gender": "M",
+                  "familyNameEn": "Silva",
+                  "givenNameEn": "Ken",
+                  "licenseNumber": "L100045",
+                  "ranking": 14,
+                  "seed": 0
+                },
+                {
+                  "gender": "M",
+                  "familyNameEn": "Choi",
+                  "givenNameEn": "Sam",
+                  "licenseNumber": "L100046",
+                  "ranking": 1,
+                  "seed": 0
+                },
+                {
+                  "gender": "M",
+                  "familyNameEn": "Tanaka",
+                  "givenNameEn": "Mina",
+                  "licenseNumber": "L100047",
+                  "ranking": 2,
+                  "seed": 1
+                },
+                {
+                  "gender": "M",
+                  "familyNameEn": "Wang",
+                  "givenNameEn": "Minsoo",
+                  "licenseNumber": "L100048",
+                  "ranking": 3,
+                  "seed": 1
+                },
+                {
+                  "gender": "M",
+                  "familyNameEn": "Park",
+                  "givenNameEn": "John",
+                  "licenseNumber": "L100049",
+                  "ranking": 4,
+                  "seed": 1
+                },
+                {
+                  "gender": "M",
+                  "familyNameEn": "Zhang",
+                  "givenNameEn": "Nina",
+                  "licenseNumber": "L100050",
+                  "ranking": 5,
+                  "seed": 2
+                },
+                {
+                  "gender": "M",
+                  "familyNameEn": "Patel",
+                  "givenNameEn": "Mina",
+                  "licenseNumber": "L100051",
+                  "ranking": 6,
+                  "seed": 2
+                },
+                {
+                  "gender": "M",
+                  "familyNameEn": "Lim",
+                  "givenNameEn": "Sara",
+                  "licenseNumber": null,
+                  "ranking": 7,
+                  "seed": 2
+                },
+                {
+                  "gender": "M",
                   "familyNameEn": "Clark",
                   "givenNameEn": "Julie",
-                  "birthDate": "19890609",
-                  "ranking": 56,
+                  "licenseNumber": "L100053",
+                  "ranking": 8,
                   "seed": 0
                 },
                 {
-                  "gender": "F",
-                  "familyNameEn": "Chen",
-                  "givenNameEn": "Ken",
-                  "birthDate": "19990310",
-                  "ranking": 57,
-                  "seed": 0
-                },
-                {
-                  "gender": "F",
-                  "familyNameEn": "Kim",
-                  "givenNameEn": "Elena",
-                  "birthDate": "20000227",
-                  "ranking": 58,
-                  "seed": 0
-                },
-                {
-                  "gender": "F",
-                  "familyNameEn": "Yang",
-                  "givenNameEn": "David",
-                  "birthDate": "19901114",
-                  "ranking": 59,
-                  "seed": 0
-                },
-                {
-                  "gender": "F",
-                  "familyNameEn": "Zhang",
-                  "givenNameEn": "Yuri",
-                  "birthDate": "20020608",
-                  "ranking": 60,
-                  "seed": 0
-                },
-                {
-                  "gender": "F",
-                  "familyNameEn": "Garcia",
+                  "gender": "M",
+                  "familyNameEn": "Park",
                   "givenNameEn": "John",
-                  "birthDate": "20000124",
-                  "ranking": 61,
+                  "licenseNumber": "L100054",
+                  "ranking": 9,
                   "seed": 0
                 },
                 {
-                  "gender": "F",
+                  "gender": "M",
+                  "familyNameEn": "Silva",
+                  "givenNameEn": "Yuna",
+                  "licenseNumber": "L100055",
+                  "ranking": 10,
+                  "seed": 0
+                },
+                {
+                  "gender": "M",
                   "familyNameEn": "Tanaka",
                   "givenNameEn": "Emma",
-                  "birthDate": "19881121",
-                  "ranking": 62,
+                  "licenseNumber": "L100056",
+                  "ranking": 11,
                   "seed": 0
                 },
                 {
-                  "gender": "F",
+                  "gender": "M",
                   "familyNameEn": "Park",
-                  "givenNameEn": "Sam",
-                  "birthDate": "19930518",
-                  "ranking": 63,
+                  "givenNameEn": "Yuna",
+                  "licenseNumber": "L100057",
+                  "ranking": 12,
                   "seed": 0
                 },
                 {
-                  "gender": "F",
-                  "familyNameEn": "Yang",
-                  "givenNameEn": "Luke",
-                  "birthDate": "20020209",
-                  "ranking": 64,
-                  "seed": 0
-                },
-                {
-                  "gender": "F",
+                  "gender": "M",
                   "familyNameEn": "Yamamoto",
-                  "givenNameEn": "David",
-                  "birthDate": "19890321",
-                  "ranking": 3,
+                  "givenNameEn": "Alex",
+                  "licenseNumber": "L100058",
+                  "ranking": 13,
+                  "seed": 0
+                },
+                {
+                  "gender": "M",
+                  "familyNameEn": "Yang",
+                  "givenNameEn": "Nina",
+                  "licenseNumber": "L100059",
+                  "ranking": 14,
+                  "seed": 0
+                },
+                {
+                  "gender": "M",
+                  "familyNameEn": "Smith",
+                  "givenNameEn": "Mina",
+                  "licenseNumber": "L100060",
+                  "ranking": 15,
+                  "seed": 0
+                },
+                {
+                  "gender": "M",
+                  "familyNameEn": "Garcia",
+                  "givenNameEn": "Hana",
+                  "licenseNumber": "L100061",
+                  "ranking": 16,
+                  "seed": 0
+                },
+                {
+                  "gender": "M",
+                  "familyNameEn": "Chen",
+                  "givenNameEn": "Alex",
+                  "licenseNumber": "L100062",
+                  "ranking": 17,
+                  "seed": 0
+                },
+                {
+                  "gender": "M",
+                  "familyNameEn": "Yamamoto",
+                  "givenNameEn": "Nina",
+                  "licenseNumber": "L100063",
+                  "ranking": 18,
+                  "seed": 0
+                },
+                {
+                  "gender": "M",
+                  "familyNameEn": "Yamamoto",
+                  "givenNameEn": "Ken",
+                  "licenseNumber": "L100064",
+                  "ranking": 19,
+                  "seed": 0
+                },
+                {
+                  "gender": "M",
+                  "familyNameEn": "Choi",
+                  "givenNameEn": "Mina",
+                  "licenseNumber": "L100065",
+                  "ranking": 20,
+                  "seed": 0
+                },
+                {
+                  "gender": "M",
+                  "familyNameEn": "Kim",
+                  "givenNameEn": "Yuna",
+                  "licenseNumber": "L100066",
+                  "ranking": 21,
+                  "seed": 0
+                },
+                {
+                  "gender": "M",
+                  "familyNameEn": "Nguyen",
+                  "givenNameEn": "Ken",
+                  "licenseNumber": "L100067",
+                  "ranking": 22,
+                  "seed": 0
+                },
+                {
+                  "gender": "M",
+                  "familyNameEn": "Yamamoto",
+                  "givenNameEn": "Mina",
+                  "licenseNumber": "L100068",
+                  "ranking": 23,
+                  "seed": 0
+                },
+                {
+                  "gender": "M",
+                  "familyNameEn": "Choi",
+                  "givenNameEn": "Hana",
+                  "licenseNumber": "L100069",
+                  "ranking": 24,
+                  "seed": 0
+                },
+                {
+                  "gender": "M",
+                  "familyNameEn": "Clark",
+                  "givenNameEn": "Yuri",
+                  "licenseNumber": "L100070",
+                  "ranking": 25,
                   "seed": 0
                 }
               ]
