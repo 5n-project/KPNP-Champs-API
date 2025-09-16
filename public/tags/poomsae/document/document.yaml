@@ -40,6 +40,10 @@ paths:
                           type: boolean
                           example: true
                           description: '세부 리스트 있는지 없는지 여부'
+                        favoriteYn:
+                          type: string
+                          example: Y
+                          description: '즐겨찾기 Y N'
                   error:
                     type: string
                     nullable: true
@@ -48,96 +52,114 @@ paths:
                 successResponse:
                   summary: 성공 응답
                   value:
-                    success: true
-                    data:
-                      [
+                    {
+                      "success": true,
+                      "data": [
                         {
                           "documentType": "DRAW_SHEET_OR_START_LIST",
                           "documentNameEn": "Draw Sheet/Start list",
-                          "isList": true
+                          "isList": true,
+                          "favoriteYn": "N"
                         },
                         {
                           "documentType": "CONTEST_RESULTS_OF_TOURNAMENT",
                           "documentNameEn": "Contest Results of Tournament",
-                          "isList": true
+                          "isList": true,
+                          "favoriteYn": "N"
                         },
                         {
                           "documentType": "CONTEST_RESULTS_OF_CUTOFF",
                           "documentNameEn": "Contest Results of Cutoff",
-                          "isList": true
+                          "isList": true,
+                          "favoriteYn": "N"
                         },
                         {
                           "documentType": "ENTRIES_BY_NOC",
                           "documentNameEn": "Entries by NOC",
-                          "isList": false
+                          "isList": false,
+                          "favoriteYn": "N"
                         },
                         {
                           "documentType": "ENTRIES_BY_DIVISION",
                           "documentNameEn": "Entries by Division",
-                          "isList": true
+                          "isList": true,
+                          "favoriteYn": "N"
                         },
                         {
                           "documentType": "NUMBER_OF_ENTRIES_BY_NOC",
                           "documentNameEn": "Number of Entries by NOC",
-                          "isList": false
+                          "isList": false,
+                          "favoriteYn": "N"
                         },
                         {
                           "documentType": "COMPETITION_SCHEDULES",
                           "documentNameEn": "Competition Schedules",
-                          "isList": false
+                          "isList": false,
+                          "favoriteYn": "N"
                         },
                         {
                           "documentType": "SCHEDULES_BY_COURT",
                           "documentNameEn": "Schedules by Court",
-                          "isList": true
+                          "isList": true,
+                          "favoriteYn": "N"
                         },
                         {
                           "documentType": "SESSION_SCHEDULES_BY_COURT",
                           "documentNameEn": "Session Schedules by Court",
-                          "isList": true
+                          "isList": true,
+                          "favoriteYn": "N"
                         },
                         {
                           "documentType": "SESSION_SCHEDULES_BY_DAY",
                           "documentNameEn": "Session Schedules by Day",
-                          "isList": true
+                          "isList": true,
+                          "favoriteYn": "N"
                         },
                         {
                           "documentType": "SESSION_SCHEDULES_BY_DAY_WITH_START_TIME",
                           "documentNameEn": "Session Schedules by Day with Start Time",
-                          "isList": true
+                          "isList": true,
+                          "favoriteYn": "N"
                         },
                         {
                           "documentType": "MEDAL_LISTS",
                           "documentNameEn": "MedalLists",
-                          "isList": true
+                          "isList": true,
+                          "favoriteYn": "N"
                         },
                         {
                           "documentType": "MEDAL_LISTS_BY_DIVISION",
                           "documentNameEn": "MedalLists By Division",
-                          "isList": false
+                          "isList": false,
+                          "favoriteYn": "N"
                         },
                         {
                           "documentType": "MEDAL_STANDINGS",
                           "documentNameEn": "Medal Standings",
-                          "isList": false
+                          "isList": false,
+                          "favoriteYn": "N"
                         },
                         {
                           "documentType": "MEDAL_STANDINGS_TEAM",
                           "documentNameEn": "Medal Standings Team",
-                          "isList": false
+                          "isList": false,
+                          "favoriteYn": "N"
                         },
                         {
                           "documentType": "MEDAL_STANDINGS_WOMEN",
                           "documentNameEn": "Medal Standings Women",
-                          "isList": false
+                          "isList": false,
+                          "favoriteYn": "N"
                         },
                         {
                           "documentType": "MEDAL_STANDINGS_MEN",
                           "documentNameEn": "Medal Standings Men",
-                          "isList": false
+                          "isList": false,
+                          "favoriteYn": "N"
                         }
-                      ]
-                    error: null
+                      ],
+                      "error": null
+                    }
         '403':
           description: 권한 없음
           content:
@@ -364,6 +386,77 @@ paths:
                           "competitionMatchPsSeq": null
                         }
                       ]
+                    error: null
+        '403':
+          description: 권한 없음
+          content:
+            application/json:
+              schema:
+                $ref: '../../../openapi.yml#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+
+  /competitions/{competitionSeq}/documents/favorite/{documentType}:
+    put:
+      summary: 문서 즐겨찾기 등록 / 해제
+      description: 해당 문서를 즐겨찾기에 등록하고나 해제 할 수 있는 API
+      tags:
+        - 문서
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 대회의 고유 식별자
+        - name: documentType
+          in: path
+          required: true
+          schema:
+            type: string
+            enum:
+              - DRAW_SHEET_OR_START_LIST
+              - CONTEST_RESULTS_OF_TOURNAMENT
+              - CONTEST_RESULTS_OF_CUTOFF
+              - ENTRIES_BY_NOC
+              - ENTRIES_BY_DIVISION
+              - NUMBER_OF_ENTRIES_BY_NOC
+              - COMPETITION_SCHEDULES
+              - SCHEDULES_BY_COURT
+              - SESSION_SCHEDULES_BY_COURT
+              - SESSION_SCHEDULES_BY_DAY
+              - SESSION_SCHEDULES_BY_DAY_WITH_START_TIME
+              - MEDAL_LISTS
+              - MEDAL_LISTS_BY_DIVISION
+              - MEDAL_STANDINGS
+              - MEDAL_STANDINGS_TEAM
+              - MEDAL_STANDINGS_WOMEN
+              - MEDAL_STANDINGS_MEN
+          description: 조회할 문서 유형
+      responses:
+        '200':
+          description: 문서 즐겨찾기 등록 및 해제 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    nullable: true
+                  error:
+                    type: string
+                    nullable: true
+              examples:
+                success:
+                  summary: 성공 응답 예시
+                  value:
+                    success: true
+                    data: null
                     error: null
         '403':
           description: 권한 없음

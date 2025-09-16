@@ -727,7 +727,7 @@ paths:
                                       startTime:
                                         type: string
                                         nullable: true
-                                        example: "04:43"
+                                        example: "2025-08-20T07:47:21.000Z"
                                       division:
                                         type: string
                                         example: "Individual male CADET"
@@ -781,7 +781,7 @@ paths:
                           - day: 1
                             matchCount: 42
                             schedules:
-                              - startTime: "04:43"
+                              - startTime: "2025-08-20T07:47:21.000Z"
                                 division: "Individual male CADET"
                                 contestNumber: 1001
                                 phase: "SF"
@@ -794,7 +794,7 @@ paths:
                                     galNumber: "L100002"
                                     noc: "GER"
                                     name: "Yuna WANG"
-                              - startTime: null
+                              - startTime: "2025-08-20T07:47:21.000Z"
                                 division: "Individual male CADET"
                                 contestNumber: 1002
                                 phase: "SF"
@@ -825,7 +825,7 @@ paths:
                                     galNumber: "L100040"
                                     noc: "GER"
                                     name: "Sung CHOI"
-                              - startTime: "06:18"
+                              - startTime: "2025-08-20T07:47:21.000Z"
                                 division: "Individual female CADET"
                                 contestNumber: 2003
                                 phase: "Pre-A"

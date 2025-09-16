@@ -337,6 +337,8 @@ paths:
                     error: null
                 ITEM_NOT_FOUND:
                   $ref: '../../openapi.yml#/components/examples/ITEM_NOT_FOUND'
+                TOGETHER_PERFORMANCE_NOT_ALLOWED_FREESTYLE:
+                  $ref: '../../openapi.yml#/components/examples/TOGETHER_PERFORMANCE_NOT_ALLOWED_FREESTYLE'
 
         403:
           description: Forbidden
