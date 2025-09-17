@@ -411,6 +411,7 @@ paths:
                       - poomsaeMatchStyleType
                       - poomsaeStyleType
                       - poomsaeSequenceType
+                      - sent
                       - scoresEachCompetitor
                     properties:
                       competitionSeq:
@@ -437,6 +438,10 @@ paths:
                         type: string
                         enum: [P1, P2]
                         description: 품새 시퀀스 타입
+                      sent:
+                        type: boolean
+                        example: true
+                        description: send 전송 여부
                       scoresEachCompetitor:
                         type: array
                         description: 각 참가자 점수 목록
@@ -662,11 +667,11 @@ paths:
                                                 format: float
                                                 example: 0.3
                                                 description: 점수
-                      error:
-                        type: object
-                        nullable: true
-                        description: 에러 상세 정보
-                        example: null
+                  error:
+                    type: object
+                    nullable: true
+                    description: 에러 상세 정보
+                    example: null
               examples:
                 defaultResponse:
                   summary: 성공 응답
@@ -679,6 +684,7 @@ paths:
                       poomsaeMatchStyleType: "CUTOFF"
                       poomsaeStyleType: "FREESTYLE"
                       poomsaeSequenceType: "P1"
+                      sent: true
                       scoresEachCompetitor:
                         - matchCompetitorDetailSeq: 4899
                           matchSideType: CUTOFF
@@ -802,7 +808,7 @@ paths:
                                     sortNo: 4
                                   score: 0.7
                                   criteriaDetailSubTypes: null
-                      error: null
+                    error: null
                 COMPETITION_MATCH_NOT_FOUND:
                   $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_NOT_FOUND'
                 COMPETITION_MATCH_REFEREE_NOT_ASSIGNED:
@@ -1934,6 +1940,7 @@ paths:
                       - poomsaeMatchStyleType
                       - poomsaeStyleType
                       - poomsaeSequenceType
+                      - sent
                       - scoresEachCompetitor
                     properties:
                       competitionSeq:
@@ -1960,6 +1967,10 @@ paths:
                         type: string
                         enum: [P1, P2]
                         description: 품새 시퀀스 타입
+                      sent:
+                        type: boolean
+                        example: true
+                        description: send 전송 여부
                       scoresEachCompetitor:
                         type: array
                         description: 각 참가자 점수 목록
@@ -2180,11 +2191,11 @@ paths:
                                                 format: float
                                                 example: 0.3
                                                 description: 점수
-                      error:
-                        type: object
-                        nullable: true
-                        description: 에러 상세 정보
-                        example: null
+                  error:
+                    type: object
+                    nullable: true
+                    description: 에러 상세 정보
+                    example: null
               examples:
                 defaultResponse:
                   summary: 성공 응답
@@ -2197,6 +2208,7 @@ paths:
                       poomsaeMatchStyleType: "CUTOFF"
                       poomsaeStyleType: "FREESTYLE"
                       poomsaeSequenceType: "P1"
+                      sent: true
                       scoresEachCompetitor:
                         - matchCompetitorDetailSeq: 4899
                           scoreDeductionCounts:
@@ -2319,7 +2331,7 @@ paths:
                                     sortNo: 4
                                   score: 0.7
                                   criteriaDetailSubTypes: null
-                      error: null
+                    error: null
                 COMPETITION_MATCH_NOT_FOUND:
                   $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_NOT_FOUND'
                 COMPETITION_MATCH_REFEREE_NOT_ASSIGNED:
