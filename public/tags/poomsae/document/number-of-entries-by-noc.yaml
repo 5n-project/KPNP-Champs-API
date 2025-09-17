@@ -286,11 +286,11 @@ components:
               },
               {
                 "divisionCategoryType": "PAIR",
-                "divisionCategoryName": "Mixed Team"
+                "divisionCategoryName": "Pair"
               },
               {
                 "divisionCategoryType": "TEAM_MIXED",
-                "divisionCategoryName": "Pair"
+                "divisionCategoryName": "Mixed Team"
               }
             ],
             "summary": {
