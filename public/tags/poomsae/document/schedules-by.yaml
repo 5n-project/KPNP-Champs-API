@@ -77,9 +77,9 @@ paths:
                             type: string
                             example: "SCHEDULES by Court"
                             description: 문서명
-                          scheduleGroups:
-                            type: array
-                            description: 코트별 스케줄 그룹
+                          scheduleDocument:
+                            type: object
+                            description: 코트 스케줄
                             items:
                               type: object
                               properties:
@@ -151,8 +151,8 @@ paths:
                         competitionLogUrl: null
                       contents:
                         documentName: "SCHEDULES by Court"
-                        scheduleGroups:
-                          - court: 2
+                        scheduleDocument:
+                            court: 2
                             schedules:
                               - division: "Individual female CADET"
                                 contestNumber: 2001
@@ -288,9 +288,9 @@ paths:
                             type: string
                             example: "SESSION SCHEDULES by Court"
                             description: 문서 이름
-                          scheduleGroups:
-                            type: array
-                            description: 코트별 경기 일정 그룹
+                          scheduleDocument:
+                            type: object
+                            description: 코트 스케줄
                             items:
                               type: object
                               properties:
@@ -366,8 +366,8 @@ paths:
                         competitionLogUrl: null
                       contents:
                         documentName: "SESSION SCHEDULES by Court"
-                        scheduleGroups:
-                          - court: 3
+                        scheduleDocument:
+                            court: 3
                             matchCount: 20
                             schedules:
                               - division: "Team male CADET"
@@ -499,8 +499,8 @@ paths:
                           documentName:
                             type: string
                             example: "SESSION SCHEDULES by Day"
-                          scheduleGroups:
-                            type: array
+                          scheduleDocument:
+                            type: object
                             items:
                               type: object
                               properties:
@@ -564,8 +564,8 @@ paths:
                         competitionLogUrl: null
                       contents:
                         documentName: "SESSION SCHEDULES by Day"
-                        scheduleGroups:
-                          - day: 1
+                        scheduleDocument:
+                            day: 1
                             matchCount: 42
                             schedules:
                               - division: "Individual male CADET"
@@ -708,8 +708,8 @@ paths:
                           documentName:
                             type: string
                             example: "SESSION SCHEDULES by Day with Start Time"
-                          scheduleGroups:
-                            type: array
+                          scheduleDocument:
+                            type: object
                             items:
                               type: object
                               properties:
@@ -777,8 +777,8 @@ paths:
                         competitionLogUrl: null
                       contents:
                         documentName: "SESSION SCHEDULES by Day with Start Time"
-                        scheduleGroups:
-                          - day: 1
+                        scheduleDocument:
+                            day: 1
                             matchCount: 42
                             schedules:
                               - startTime: "2025-08-20T07:47:21.000Z"
