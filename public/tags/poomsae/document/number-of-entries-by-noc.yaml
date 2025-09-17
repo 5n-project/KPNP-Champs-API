@@ -122,8 +122,13 @@ components:
     # ===== Contents =====
     EntriesContents:
       type: object
-      required: [ summary, continentSummaryList ]
+      required: [ summary, continentSummaryList, divisionCategoryList ]
       properties:
+        divisionCategoryList:
+          type: array
+          description: division category 타입 코드 리스트
+          items:
+            $ref: '#/components/schemas/DivisionCategoryName'
         summary:
           $ref: '#/components/schemas/Summary'
         continentSummaryList:
@@ -132,6 +137,16 @@ components:
           items:
             $ref: '#/components/schemas/ContinentSummary'
       description: 전체 요약 및 대륙 단위 요약
+
+    DivisionCategoryName:
+      type: object
+      required: [ divisionCategoryType, divisionCategoryName ]
+      properties:
+        divisionCategoryType:
+          $ref: '#/components/schemas/DivisionCategory'
+        divisionCategoryName:
+          type: string
+          description: 타입 영어 이름
 
     # ===== Summary (Division-based) =====
     Summary:
@@ -252,6 +267,32 @@ components:
             "nocType": "ATA"
           },
           "contents": {
+            "divisionCategoryList": [
+              {
+                "divisionCategoryType": "INDIVIDUAL_MALE",
+                "divisionCategoryName": "Men"
+              },
+              {
+                "divisionCategoryType": "INDIVIDUAL_FEMALE",
+                "divisionCategoryName": "Women"
+              },
+              {
+                "divisionCategoryType": "TEAM_MALE",
+                "divisionCategoryName": "Men Team"
+              },
+              {
+                "divisionCategoryType": "TEAM_FEMALE",
+                "divisionCategoryName": "Women Team"
+              },
+              {
+                "divisionCategoryType": "PAIR",
+                "divisionCategoryName": "Mixed Team"
+              },
+              {
+                "divisionCategoryType": "TEAM_MIXED",
+                "divisionCategoryName": "Pair"
+              }
+            ],
             "summary": {
               "countList": [
                 {
