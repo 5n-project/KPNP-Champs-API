@@ -761,8 +761,15 @@ components:
         success: false
         data: null
         error:
-          message: "어떤 필드에 행이 잘못됐는지 동적으로 백엔드에서 메시지 만들어주므로 그거 그대로 띄우면 됨"
+          message: "올바르지 않은 입력값입니다."
           errorCode: "E523"
+    CSV_INVALID_ARGUMENT_ERROR:
+      value:
+        success: false
+        data: null
+        error:
+          message: "어떤 필드에 행이 잘못됐는지 동적으로 백엔드에서 메시지 만들어주므로 그거 그대로 띄우면 됨"
+          errorCode: "E748"
     INVALID_BIRTH_DATE_ERROR:
       value:
         success: false

@@ -648,8 +648,8 @@ paths:
                   $ref: '../../openapi.yml/#/components/examples/NOT_SAVE'
                 TEAM_NAME_MISMATCH:
                   $ref: '../../openapi.yml/#/components/examples/TEAM_NAME_MISMATCH'
-                INVALID_ARGUMENT_ERROR:
-                  $ref: '../../openapi.yml/#/components/examples/INVALID_ARGUMENT_ERROR'
+                CSV_INVALID_ARGUMENT_ERROR:
+                  $ref: '../../openapi.yml/#/components/examples/CSV_INVALID_ARGUMENT_ERROR'
                 INVALID_BIRTH_DATE_ERROR:
                   $ref: '../../openapi.yml/#/components/examples/INVALID_BIRTH_DATE_ERROR'
                 DUPLICATE_EMAIL:
