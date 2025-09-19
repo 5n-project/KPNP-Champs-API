@@ -128,24 +128,45 @@ components:
     CompetitionContents:
       type: object
       description: 대회 컨텐츠 블록(본 문서에서는 NOC 메달 집계 목록 포함)
-      required: [ divisionCategoryTypes,nocSummaryList ]
+      required: [ divisionCategoryList,nocSummaryList ]
       properties:
-        divisionCategoryTypes:
+        divisionCategoryList:
           type: array
-          description: 문서에 표기 될 divisionCategoryTypes, 대회에 없는 division category는 표기되지 않음
-          example:
-            [
-              "INDIVIDUAL_MALE",
-              "INDIVIDUAL_FEMALE",
-              "TEAM_FEMALE",
-              "TEAM_MIXED"
-            ]
+          description: division category 타입 코드 리스트
+          items:
+            $ref: '#/components/schemas/DivisionCategoryName'
         nocSummaryList:
           type: array
           description: NOC별 메달 집계 목록(정렬 및 순위 포함)
           minItems: 1
           items:
             $ref: '#/components/schemas/NocSummary'
+
+    DivisionCategoryName:
+      type: object
+      required: [ divisionCategoryType, divisionCategoryName ]
+      properties:
+        divisionCategoryType:
+          $ref: '#/components/schemas/DivisionCategory'
+        divisionCategoryName:
+          type: string
+          description: 타입 영어 이름
+
+    DivisionCategory:
+      type: string
+      enum:
+        - INDIVIDUAL_MALE
+        - INDIVIDUAL_FEMALE
+        - TEAM_MALE
+        - TEAM_FEMALE
+        - PAIR
+        - TEAM_MIXED
+      description: >
+        종목(디비전) 분류.
+        - INDIVIDUAL_*: 개인전
+        - TEAM_*: 팀전
+        - PAIR: 페어(혼성 2인)
+        - TEAM_MIXED: 혼성 팀전
 
     NocSummary:
       type: object
@@ -261,13 +282,31 @@ components:
             "competitionLogUrl": "https://cdn.kpnpglobal.com/kpnp/media/image/champs/2025/07/26334ff5b1e04bf392f5e712cd0f6b3e.PNG"
           },
           "contents": {
-            "divisionCategoryTypes": [
-              "INDIVIDUAL_MALE",
-              "INDIVIDUAL_FEMALE",
-              "TEAM_MALE",
-              "TEAM_FEMALE",
-              "PAIR",
-              "TEAM_MIXED"
+            "divisionCategoryList": [
+              {
+                "divisionCategoryType": "INDIVIDUAL_MALE",
+                "divisionCategoryName": "Men"
+              },
+              {
+                "divisionCategoryType": "INDIVIDUAL_FEMALE",
+                "divisionCategoryName": "Women"
+              },
+              {
+                "divisionCategoryType": "TEAM_MALE",
+                "divisionCategoryName": "Men Team"
+              },
+              {
+                "divisionCategoryType": "TEAM_FEMALE",
+                "divisionCategoryName": "Women Team"
+              },
+              {
+                "divisionCategoryType": "PAIR",
+                "divisionCategoryName": "Pair"
+              },
+              {
+                "divisionCategoryType": "TEAM_MIXED",
+                "divisionCategoryName": "Mixed Team"
+              }
             ],
             "nocSummaryList": [
               {
