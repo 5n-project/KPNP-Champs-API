@@ -288,8 +288,8 @@ paths:
                             type: string
                             example: "SESSION SCHEDULES by Court"
                             description: 문서 이름
-                          scheduleDocument:
-                            type: object
+                          scheduleDocuments:
+                            type: array
                             description: 코트 스케줄
                             items:
                               type: object
@@ -302,6 +302,10 @@ paths:
                                   type: integer
                                   example: 20
                                   description: 경기 수
+                                session:
+                                  type: integer
+                                  example: 1
+                                  description: 세션
                                 schedules:
                                   type: array
                                   description: 경기 일정 목록
@@ -366,58 +370,47 @@ paths:
                         competitionLogUrl: null
                       contents:
                         documentName: "SESSION SCHEDULES by Court"
-                        scheduleDocument:
-                            court: 3
-                            matchCount: 20
+                        scheduleDocuments:
+                          - court: 2
+                            matchCount: 16
+                            session: 6
                             schedules:
-                              - division: "Team male CADET"
+                              - division: "Pair CADET"
                                 contestNumber: 0
                                 phase: "R32"
                                 competitors:
                                   - color: "Chung"
                                     galNumber: null
-                                    noc: "ALG"
-                                    name: "PARK, TANAKA, WANG"
-                              - division: "Team male CADET"
+                                    noc: "GER"
+                                    name: "KUMAR, NGUYEN"
+                              - division: "Pair CADET"
                                 contestNumber: 0
                                 phase: "R32"
                                 competitors:
                                   - color: "Chung"
                                     galNumber: null
-                                    noc: "ALB"
-                                    name: "SILVA, CHOI, CLARK"
-                              - division: "Team male CADET"
-                                contestNumber: 0
-                                phase: "R32"
-                                competitors:
+                                    noc: "GER"
+                                    name: "KUMAR, KUMAR"
                                   - color: "Hong"
                                     galNumber: null
                                     noc: "GER"
-                                    name: "CHEN, PATEL, YANG"
-                              - division: "Team male CADET"
-                                contestNumber: 0
-                                phase: "R32"
-                                competitors:
-                                  - color: "Chung"
-                                    galNumber: null
-                                    noc: "ANT"
-                                    name: "YAMAMOTO, TANAKA, PARK"
-                              - division: "Team male CADET"
-                                contestNumber: 0
-                                phase: "R32"
-                                competitors:
-                                  - color: "Hong"
-                                    galNumber: null
-                                    noc: "GER"
-                                    name: "CHEN, KIM, PATEL"
-                              - division: "Team male CADET"
-                                contestNumber: 0
-                                phase: "R32"
-                                competitors:
-                                  - color: "Hong"
-                                    galNumber: null
-                                    noc: "AFG"
-                                    name: "CLARK, SILVA, CHOI"
+                                    name: "CHEN, WANG"
+                              - court: 2
+                                matchCount: 4
+                                session: 7
+                                schedules:
+                                  - division: "Pair CADET"
+                                    contestNumber: 0
+                                    phase: "R16"
+                                    competitors:
+                                      - color: "Chung"
+                                        galNumber: null
+                                        noc: "GER"
+                                        name: "GARCIA, LIM"
+                                      - color: "Hong"
+                                        galNumber: null
+                                        noc: "GER"
+                                        name: "LEE, LOPEZ"
                     error: null
         '403':
           description: 권한 없음
@@ -499,8 +492,8 @@ paths:
                           documentName:
                             type: string
                             example: "SESSION SCHEDULES by Day"
-                          scheduleDocument:
-                            type: object
+                          scheduleDocuments:
+                            type: array
                             items:
                               type: object
                               properties:
@@ -510,6 +503,10 @@ paths:
                                 matchCount:
                                   type: integer
                                   example: 42
+                                session:
+                                  type: integer
+                                  example: 1
+                                  description: 세션
                                 schedules:
                                   type: array
                                   items:
@@ -564,11 +561,13 @@ paths:
                         competitionLogUrl: null
                       contents:
                         documentName: "SESSION SCHEDULES by Day"
-                        scheduleDocument:
-                            day: 1
-                            matchCount: 42
+                        scheduleDocuments:
+                          - day: 1
+                            matchCount: 2
+                            session: 1
                             schedules:
-                              - division: "Individual male CADET"
+                              - startTime: "2025-08-26T04:43:11.000+09:00"
+                                division: "Individual male CADET"
                                 contestNumber: 1001
                                 phase: "SF"
                                 competitors:
@@ -580,7 +579,8 @@ paths:
                                     galNumber: "L100002"
                                     noc: "GER"
                                     name: "Yuna WANG"
-                              - division: "Individual male CADET"
+                              - startTime: "2025-09-04T06:59:21.000+09:00"
+                                division: "Individual male CADET"
                                 contestNumber: 1002
                                 phase: "SF"
                                 competitors:
@@ -592,7 +592,12 @@ paths:
                                     galNumber: "L100003"
                                     noc: "LBN"
                                     name: "Jane WANG"
-                              - division: "Individual female CADET"
+                          - day: 1
+                            matchCount: 10
+                            session: 3
+                            schedules:
+                              - startTime: "2025-08-26T05:13:11.000+09:00"
+                                division: "Individual female CADET"
                                 contestNumber: 2001
                                 phase: "Pre-A"
                                 competitors:
@@ -600,7 +605,8 @@ paths:
                                     galNumber: "L100032"
                                     noc: "KOR"
                                     name: "Yuna CHOI"
-                              - division: "Individual female CADET"
+                              - startTime: null
+                                division: "Individual female CADET"
                                 contestNumber: 2002
                                 phase: "Pre-A"
                                 competitors:
@@ -608,7 +614,8 @@ paths:
                                     galNumber: "L100040"
                                     noc: "GER"
                                     name: "Sung CHOI"
-                              - division: "Individual female CADET"
+                              - startTime: "2025-08-26T06:18:12.000+09:00"
+                                division: "Individual female CADET"
                                 contestNumber: 2003
                                 phase: "Pre-A"
                                 competitors:
@@ -616,18 +623,69 @@ paths:
                                     galNumber: "L100027"
                                     noc: "KOR"
                                     name: "Leo NGUYEN"
-                              - division: "Team male CADET"
-                                contestNumber: 3011
-                                phase: "R16"
+                              - startTime: null
+                                division: "Individual female CADET"
+                                contestNumber: 2004
+                                phase: "Pre-A"
                                 competitors:
-                                  - color: "Chung"
-                                    galNumber: null
+                                  - color: null
+                                    galNumber: "L100021"
                                     noc: "GER"
-                                    name: "LEE, LIM, LIM"
-                                  - color: "Hong"
-                                    galNumber: null
+                                    name: "Yuri SINGH"
+                              - startTime: null
+                                division: "Individual female CADET"
+                                contestNumber: 2005
+                                phase: "Pre-A"
+                                competitors:
+                                  - color: null
+                                    galNumber: "L100039"
                                     noc: "GER"
-                                    name: "NGUYEN, PATEL, CHEN"
+                                    name: "Hana TANAKA"
+                              - startTime: null
+                                division: "Individual female CADET"
+                                contestNumber: 2006
+                                phase: "Pre-A"
+                                competitors:
+                                  - color: null
+                                    galNumber: "L100034"
+                                    noc: "KOR"
+                                    name: "David TANAKA"
+                              - startTime: null
+                                division: "Individual female CADET"
+                                contestNumber: 2007
+                                phase: "Pre-A"
+                                competitors:
+                                  - color: null
+                                    galNumber: "L100035"
+                                    noc: "KOR"
+                                    name: "Luke LIM"
+                              - startTime: null
+                                division: "Individual female CADET"
+                                contestNumber: 2008
+                                phase: "Pre-A"
+                                competitors:
+                                  - color: null
+                                    galNumber: "L100028"
+                                    noc: "LBN"
+                                    name: "Paul CLARK"
+                              - startTime: null
+                                division: "Individual female CADET"
+                                contestNumber: 2009
+                                phase: "Pre-A"
+                                competitors:
+                                  - color: null
+                                    galNumber: "L100033"
+                                    noc: "KOR"
+                                    name: "Sara CHOI"
+                              - startTime: null
+                                division: "Individual female CADET"
+                                contestNumber: 2010
+                                phase: "Pre-A"
+                                competitors:
+                                  - color: null
+                                    galNumber: "L100038"
+                                    noc: "LBN"
+                                    name: "Sung KIM"
                     error: null
         '403':
           description: 권한 없음
@@ -708,8 +766,8 @@ paths:
                           documentName:
                             type: string
                             example: "SESSION SCHEDULES by Day with Start Time"
-                          scheduleDocument:
-                            type: object
+                          scheduleDocuments:
+                            type: array
                             items:
                               type: object
                               properties:
@@ -719,6 +777,10 @@ paths:
                                 matchCount:
                                   type: integer
                                   example: 42
+                                session:
+                                  type: integer
+                                  example: 1
+                                  description: 세션
                                 schedules:
                                   type: array
                                   items:
@@ -777,11 +839,12 @@ paths:
                         competitionLogUrl: null
                       contents:
                         documentName: "SESSION SCHEDULES by Day with Start Time"
-                        scheduleDocument:
-                            day: 1
-                            matchCount: 42
+                        scheduleDocuments:
+                          - day: 1
+                            matchCount: 2
+                            session: 1
                             schedules:
-                              - startTime: "2025-08-20T07:47:21.000Z"
+                              - startTime: "2025-08-26T04:43:11.000+09:00"
                                 division: "Individual male CADET"
                                 contestNumber: 1001
                                 phase: "SF"
@@ -794,7 +857,7 @@ paths:
                                     galNumber: "L100002"
                                     noc: "GER"
                                     name: "Yuna WANG"
-                              - startTime: "2025-08-20T07:47:21.000Z"
+                              - startTime: "2025-09-04T06:59:21.000+09:00"
                                 division: "Individual male CADET"
                                 contestNumber: 1002
                                 phase: "SF"
@@ -807,7 +870,11 @@ paths:
                                     galNumber: "L100003"
                                     noc: "LBN"
                                     name: "Jane WANG"
-                              - startTime: "05:13"
+                          - day: 1
+                            matchCount: 10
+                            session: 3
+                            schedules:
+                              - startTime: "2025-08-26T05:13:11.000+09:00"
                                 division: "Individual female CADET"
                                 contestNumber: 2001
                                 phase: "Pre-A"
@@ -825,7 +892,7 @@ paths:
                                     galNumber: "L100040"
                                     noc: "GER"
                                     name: "Sung CHOI"
-                              - startTime: "2025-08-20T07:47:21.000Z"
+                              - startTime: "2025-08-26T06:18:12.000+09:00"
                                 division: "Individual female CADET"
                                 contestNumber: 2003
                                 phase: "Pre-A"
@@ -897,28 +964,6 @@ paths:
                                     galNumber: "L100038"
                                     noc: "LBN"
                                     name: "Sung KIM"
-                              - startTime: null
-                                division: "Individual female CADET"
-                                contestNumber: 2011
-                                phase: "Pre-B"
-                                competitors:
-                                  - color: null
-                                    galNumber: "L100025"
-                                    noc: "KOR"
-                                    name: "Minsoo SINGH"
-                              - startTime: null
-                                division: "Team male CADET"
-                                contestNumber: 3011
-                                phase: "R16"
-                                competitors:
-                                  - color: "Chung"
-                                    galNumber: null
-                                    noc: "GER"
-                                    name: "LIM, LIM, LEE"
-                                  - color: "Hong"
-                                    galNumber: null
-                                    noc: "GER"
-                                    name: "CHEN, NGUYEN, PATEL"
                     error: null
         '403':
           description: 권한 없음
