@@ -395,22 +395,34 @@ paths:
                                     galNumber: null
                                     noc: "GER"
                                     name: "CHEN, WANG"
-                              - court: 2
-                                matchCount: 4
-                                session: 7
-                                schedules:
-                                  - division: "Pair CADET"
-                                    contestNumber: 0
-                                    phase: "R16"
-                                    competitors:
-                                      - color: "Chung"
-                                        galNumber: null
-                                        noc: "GER"
-                                        name: "GARCIA, LIM"
-                                      - color: "Hong"
-                                        galNumber: null
-                                        noc: "GER"
-                                        name: "LEE, LOPEZ"
+                          - court: 2
+                            matchCount: 4
+                            session: 7
+                            schedules:
+                              - division: "Pair CADET"
+                                contestNumber: 0
+                                phase: "R16"
+                                competitors:
+                                  - color: "Chung"
+                                    galNumber: null
+                                    noc: "GER"
+                                    name: "GARCIA, LIM"
+                                  - color: "Hong"
+                                    galNumber: null
+                                    noc: "GER"
+                                    name: "LEE, LOPEZ"
+                              - division: "Pair CADET"
+                                contestNumber: 0
+                                phase: "R32"
+                                competitors:
+                                  - color: "Chung"
+                                    galNumber: null
+                                    noc: "GER"
+                                    name: "KUMAR, KUMAR"
+                                  - color: "Hong"
+                                    galNumber: null
+                                    noc: "GER"
+                                    name: "CHEN, WANG"
                     error: null
         '403':
           description: 권한 없음
