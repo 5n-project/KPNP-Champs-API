@@ -1,4 +1,127 @@
 paths:
+  /competitions/{competitionSeq}/documents/detail/COMPETITION_SCHEDULES:
+    get:
+      summary: COMPETITION_SCHEDULES 품새 문서 상세 조회 (COMPETITION_SCHEDULES)
+      description: COMPETITION_SCHEDULES 문서를 조회한다. (documentType 은 항상 'COMPETITION_SCHEDULES')
+      tags:
+        - 문서
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 대회의 고유 식별자
+        - name: court
+          in: query
+          required: true
+          schema:
+            type: integer
+          description: 코트 번호
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    description: 요청 성공 여부
+                  data:
+                    type: object
+                    properties:
+                      header:
+                        type: object
+                        properties:
+                          competitionHostName:
+                            type: string
+                            example: "champs4"
+                            description: 대회 주최자명
+                          competitionLocalType:
+                            type: string
+                            example: "W"
+                            description: 대회 로컬 타입
+                          competitionName:
+                            type: string
+                            example: "champs4 대회 250826_1"
+                            description: 대회 이름
+                          competitionSdate:
+                            type: string
+                            example: "2025-08-26T03:00:00.000+09:00"
+                            description: 대회 시작일
+                          timeZoneId:
+                            type: string
+                            example: "Antarctica/Rothera"
+                            description: 대회 타임존
+                          nocType:
+                            type: string
+                            example: "ATA"
+                            description: 국가 코드(NOC)
+                          hostLogoUrl:
+                            type: string
+                            nullable: true
+                            example: null
+                            description: 주최 로고 URL
+                          competitionLogUrl:
+                            type: string
+                            nullable: true
+                            example: null
+                            description: 대회 로고 URL
+                      contents:
+                        type: object
+                        description: 대회 일정 정보
+                        properties:
+                          documentName:
+                            type: string
+                            description: 문서명
+                            example: COMPETITION SCHEDULES
+                          schedules:
+                            type: array
+                            description: 날짜별 일정 리스트
+                            items:
+                              type: object
+                              properties:
+                                scheduleDate:
+                                  type: string
+                                  format: date
+                                  description: 일정 날짜
+                                  example: 2025-01-04
+                                formattedDate:
+                                  type: string
+                                  description: 포맷된 날짜
+                                  example: SAT 04 JAN
+                                dateSchedules:
+                                  type: array
+                                  description: 해당 날짜의 세부 일정
+                                  items:
+                                    type: object
+                                    properties:
+                                      groupId:
+                                        type: string
+                                        format: uuid
+                                        description: 일정 그룹 ID
+                                        example: c8e3bf5d-aa0a-49b6-ab46-0801c9eee7dd
+                                      startTime:
+                                        type: string
+                                        description: 시작 시간 (HH:mm)
+                                        example: "13:00"
+                                      finishTime:
+                                        type: string
+                                        description: 종료 시간 (HH:mm)
+                                        example: "14:00"
+                                      contents:
+                                        type: array
+                                        description: 시간대별 상세 일정 내용
+                                        items:
+                                          type: string
+                                          example: "Individual female Under30 Quarterfinals"
+                  error:
+                    description: 에러 정보(없을 경우 null)
+                    nullable: true
+                    example: null
   /competitions/{competitionSeq}/documents/detail/SCHEDULES_BY_COURT:
     get:
       summary: SCHEDULES_BY_COURT 품새 문서 상세 조회 (SCHEDULES_BY_COURT)
@@ -395,22 +518,34 @@ paths:
                                     galNumber: null
                                     noc: "GER"
                                     name: "CHEN, WANG"
-                              - court: 2
-                                matchCount: 4
-                                session: 7
-                                schedules:
-                                  - division: "Pair CADET"
-                                    contestNumber: 0
-                                    phase: "R16"
-                                    competitors:
-                                      - color: "Chung"
-                                        galNumber: null
-                                        noc: "GER"
-                                        name: "GARCIA, LIM"
-                                      - color: "Hong"
-                                        galNumber: null
-                                        noc: "GER"
-                                        name: "LEE, LOPEZ"
+                          - court: 2
+                            matchCount: 4
+                            session: 7
+                            schedules:
+                              - division: "Pair CADET"
+                                contestNumber: 0
+                                phase: "R16"
+                                competitors:
+                                  - color: "Chung"
+                                    galNumber: null
+                                    noc: "GER"
+                                    name: "GARCIA, LIM"
+                                  - color: "Hong"
+                                    galNumber: null
+                                    noc: "GER"
+                                    name: "LEE, LOPEZ"
+                              - division: "Pair CADET"
+                                contestNumber: 0
+                                phase: "R32"
+                                competitors:
+                                  - color: "Chung"
+                                    galNumber: null
+                                    noc: "GER"
+                                    name: "KUMAR, KUMAR"
+                                  - color: "Hong"
+                                    galNumber: null
+                                    noc: "GER"
+                                    name: "CHEN, WANG"
                     error: null
         '403':
           description: 권한 없음

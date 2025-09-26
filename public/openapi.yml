@@ -307,6 +307,8 @@ paths:
     $ref: './tags/poomsae/document/competition-schedules.yaml#/paths/~1competitions~1{competitionSeq}~1documents~1schedules~1contents'
   /competitions/{competitionSeq}/documents/schedules:
     $ref: './tags/poomsae/document/competition-schedules.yaml#/paths/~1competitions~1{competitionSeq}~1documents~1schedules'
+  /competitions/{competitionSeq}/documents/detail/COMPETITION_SCHEDULES:
+    $ref: './tags/poomsae/document/schedules-by.yaml#/paths/~1competitions~1{competitionSeq}~1documents~1detail~1COMPETITION_SCHEDULES'
   /competitions/{competitionSeq}/documents/detail/SCHEDULES_BY_COURT:
     $ref: './tags/poomsae/document/schedules-by.yaml#/paths/~1competitions~1{competitionSeq}~1documents~1detail~1SCHEDULES_BY_COURT'
   /competitions/{competitionSeq}/documents/detail/SESSION_SCHEDULES_BY_COURT:
