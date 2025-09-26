@@ -173,6 +173,7 @@ components:
       description: 특정 NOC에 대한 메달 집계와 순위 및 부문별 합계
       required:
         - nocType
+        - countryName
         - rank
         - medalCountList
         - totalMedalCount
@@ -183,6 +184,9 @@ components:
           type: string
           description: NOC 코드(IOC 3자리 영문)
           pattern: '^[A-Z]{3}$'
+        countryName:
+          type: string
+          description: 국가 이름
         rank:
           type: integer
           format: int32
@@ -269,204 +273,207 @@ components:
       summary:
         medal standing women 데이터
       value:
+  {
+    "header": {
+      "documentName": "MEDAL STANDINGS WOMEN",
+      "competitionHostName": "메인",
+      "competitionLocalType": "W",
+      "competitionName": "대회 생성_250820",
+      "competitionSdate": "2025-08-20T03:00:00.000+09:00",
+      "timeZoneId": "America/Argentina/Salta",
+      "nocType": "ARG",
+      "hostLogoUrl": null,
+      "competitionLogUrl": null
+    },
+    "contents": {
+      "divisionCategoryList": [
         {
-          "header": {
-            "documentName": "MEDAL STANDINGS WOMEN",
-            "competitionHostName": "메인",
-            "competitionLocalType": "W",
-            "competitionName": "대회 생성_250820",
-            "competitionSdate": "2025-08-20T03:00:00.000+09:00",
-            "timeZoneId": "America/Argentina/Salta",
-            "nocType": "ARG",
-            "hostLogoUrl": "https://cdn.kpnpglobal.com/kpnp/media/image/champs/2025/07/d333ab8e285a4a4aaf4349102253ad23.PNG",
-            "competitionLogUrl": "https://cdn.kpnpglobal.com/kpnp/media/image/champs/2025/07/26334ff5b1e04bf392f5e712cd0f6b3e.PNG"
-          },
-          "contents": {
-            "divisionCategoryList": [
-              {
-                "divisionCategoryType": "INDIVIDUAL_FEMALE",
-                "divisionCategoryName": "Women"
-              },
-              {
-                "divisionCategoryType": "TEAM_FEMALE",
-                "divisionCategoryName": "Women Team"
-              }
-            ],
-            "nocSummaryList": [
-              {
-                "nocType": "GER",
-                "rank": 1,
-                "medalCountList": [
-                  {
-                    "medalType": "GOLD",
-                    "count": 2
-                  },
-                  {
-                    "medalType": "SILVER",
-                    "count": 1
-                  },
-                  {
-                    "medalType": "BRONZE",
-                    "count": 2
-                  }
-                ],
-                "totalMedalCount": 5,
-                "rankByTotal": 1,
-                "divisionCategorySummaryList": [
-                  {
-                    "divisionCategoryType": "INDIVIDUAL_FEMALE",
-                    "medalCountList": [
-                      {
-                        "medalType": "GOLD",
-                        "count": 1
-                      },
-                      {
-                        "medalType": "SILVER",
-                        "count": 1
-                      },
-                      {
-                        "medalType": "BRONZE",
-                        "count": 2
-                      }
-                    ],
-                    "totalMedalCount": 4
-                  },
-                  {
-                    "divisionCategoryType": "TEAM_FEMALE",
-                    "medalCountList": [
-                      {
-                        "medalType": "GOLD",
-                        "count": 1
-                      },
-                      {
-                        "medalType": "SILVER",
-                        "count": 0
-                      },
-                      {
-                        "medalType": "BRONZE",
-                        "count": 0
-                      }
-                    ],
-                    "totalMedalCount": 1
-                  }
-                ]
-              },
-              {
-                "nocType": "TGA",
-                "rank": 2,
-                "medalCountList": [
-                  {
-                    "medalType": "GOLD",
-                    "count": 0
-                  },
-                  {
-                    "medalType": "SILVER",
-                    "count": 1
-                  },
-                  {
-                    "medalType": "BRONZE",
-                    "count": 1
-                  }
-                ],
-                "totalMedalCount": 2,
-                "rankByTotal": 2,
-                "divisionCategorySummaryList": [
-                  {
-                    "divisionCategoryType": "INDIVIDUAL_FEMALE",
-                    "medalCountList": [
-                      {
-                        "medalType": "GOLD",
-                        "count": 0
-                      },
-                      {
-                        "medalType": "SILVER",
-                        "count": 0
-                      },
-                      {
-                        "medalType": "BRONZE",
-                        "count": 0
-                      }
-                    ],
-                    "totalMedalCount": 0
-                  },
-                  {
-                    "divisionCategoryType": "TEAM_FEMALE",
-                    "medalCountList": [
-                      {
-                        "medalType": "GOLD",
-                        "count": 0
-                      },
-                      {
-                        "medalType": "SILVER",
-                        "count": 1
-                      },
-                      {
-                        "medalType": "BRONZE",
-                        "count": 1
-                      }
-                    ],
-                    "totalMedalCount": 2
-                  }
-                ]
-              },
-              {
-                "nocType": "STP",
-                "rank": 3,
-                "medalCountList": [
-                  {
-                    "medalType": "GOLD",
-                    "count": 0
-                  },
-                  {
-                    "medalType": "SILVER",
-                    "count": 0
-                  },
-                  {
-                    "medalType": "BRONZE",
-                    "count": 1
-                  }
-                ],
-                "totalMedalCount": 1,
-                "rankByTotal": 3,
-                "divisionCategorySummaryList": [
-                  {
-                    "divisionCategoryType": "INDIVIDUAL_FEMALE",
-                    "medalCountList": [
-                      {
-                        "medalType": "GOLD",
-                        "count": 0
-                      },
-                      {
-                        "medalType": "SILVER",
-                        "count": 0
-                      },
-                      {
-                        "medalType": "BRONZE",
-                        "count": 0
-                      }
-                    ],
-                    "totalMedalCount": 0
-                  },
-                  {
-                    "divisionCategoryType": "TEAM_FEMALE",
-                    "medalCountList": [
-                      {
-                        "medalType": "GOLD",
-                        "count": 0
-                      },
-                      {
-                        "medalType": "SILVER",
-                        "count": 0
-                      },
-                      {
-                        "medalType": "BRONZE",
-                        "count": 1
-                      }
-                    ],
-                    "totalMedalCount": 1
-                  }
-                ]
-              }
-            ]
-          }
+          "divisionCategoryType": "INDIVIDUAL_FEMALE",
+          "divisionCategoryName": "Women"
+        },
+        {
+          "divisionCategoryType": "TEAM_FEMALE",
+          "divisionCategoryName": "Women Team"
         }
+      ],
+      "nocSummaryList": [
+        {
+          "nocType": "GER",
+          "countryName": "Germany",
+          "rank": 1,
+          "medalCountList": [
+            {
+              "medalType": "GOLD",
+              "count": 2
+            },
+            {
+              "medalType": "SILVER",
+              "count": 1
+            },
+            {
+              "medalType": "BRONZE",
+              "count": 2
+            }
+          ],
+          "totalMedalCount": 5,
+          "rankByTotal": 1,
+          "divisionCategorySummaryList": [
+            {
+              "divisionCategoryType": "INDIVIDUAL_FEMALE",
+              "medalCountList": [
+                {
+                  "medalType": "GOLD",
+                  "count": 1
+                },
+                {
+                  "medalType": "SILVER",
+                  "count": 1
+                },
+                {
+                  "medalType": "BRONZE",
+                  "count": 2
+                }
+              ],
+              "totalMedalCount": 4
+            },
+            {
+              "divisionCategoryType": "TEAM_FEMALE",
+              "medalCountList": [
+                {
+                  "medalType": "GOLD",
+                  "count": 1
+                },
+                {
+                  "medalType": "SILVER",
+                  "count": 0
+                },
+                {
+                  "medalType": "BRONZE",
+                  "count": 0
+                }
+              ],
+              "totalMedalCount": 1
+            }
+          ]
+        },
+        {
+          "nocType": "TGA",
+          "countryName": "Tonga",
+          "rank": 2,
+          "medalCountList": [
+            {
+              "medalType": "GOLD",
+              "count": 0
+            },
+            {
+              "medalType": "SILVER",
+              "count": 1
+            },
+            {
+              "medalType": "BRONZE",
+              "count": 1
+            }
+          ],
+          "totalMedalCount": 2,
+          "rankByTotal": 2,
+          "divisionCategorySummaryList": [
+            {
+              "divisionCategoryType": "INDIVIDUAL_FEMALE",
+              "medalCountList": [
+                {
+                  "medalType": "GOLD",
+                  "count": 0
+                },
+                {
+                  "medalType": "SILVER",
+                  "count": 0
+                },
+                {
+                  "medalType": "BRONZE",
+                  "count": 0
+                }
+              ],
+              "totalMedalCount": 0
+            },
+            {
+              "divisionCategoryType": "TEAM_FEMALE",
+              "medalCountList": [
+                {
+                  "medalType": "GOLD",
+                  "count": 0
+                },
+                {
+                  "medalType": "SILVER",
+                  "count": 1
+                },
+                {
+                  "medalType": "BRONZE",
+                  "count": 1
+                }
+              ],
+              "totalMedalCount": 2
+            }
+          ]
+        },
+        {
+          "nocType": "STP",
+          "countryName": "São Tomé and Príncipe",
+          "rank": 3,
+          "medalCountList": [
+            {
+              "medalType": "GOLD",
+              "count": 0
+            },
+            {
+              "medalType": "SILVER",
+              "count": 0
+            },
+            {
+              "medalType": "BRONZE",
+              "count": 1
+            }
+          ],
+          "totalMedalCount": 1,
+          "rankByTotal": 3,
+          "divisionCategorySummaryList": [
+            {
+              "divisionCategoryType": "INDIVIDUAL_FEMALE",
+              "medalCountList": [
+                {
+                  "medalType": "GOLD",
+                  "count": 0
+                },
+                {
+                  "medalType": "SILVER",
+                  "count": 0
+                },
+                {
+                  "medalType": "BRONZE",
+                  "count": 0
+                }
+              ],
+              "totalMedalCount": 0
+            },
+            {
+              "divisionCategoryType": "TEAM_FEMALE",
+              "medalCountList": [
+                {
+                  "medalType": "GOLD",
+                  "count": 0
+                },
+                {
+                  "medalType": "SILVER",
+                  "count": 0
+                },
+                {
+                  "medalType": "BRONZE",
+                  "count": 1
+                }
+              ],
+              "totalMedalCount": 1
+            }
+          ]
+        }
+      ]
+    }
+  }

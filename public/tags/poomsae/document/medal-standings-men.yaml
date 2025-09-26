@@ -173,6 +173,7 @@ components:
       description: 특정 NOC에 대한 메달 집계와 순위 및 부문별 합계
       required:
         - nocType
+        - countryName
         - rank
         - medalCountList
         - totalMedalCount
@@ -183,6 +184,9 @@ components:
           type: string
           description: NOC 코드(IOC 3자리 영문)
           pattern: '^[A-Z]{3}$'
+        countryName:
+          type: string
+          description: 국가 이름
         rank:
           type: integer
           format: int32
@@ -278,23 +282,24 @@ components:
             "competitionSdate": "2025-08-20T03:00:00.000+09:00",
             "timeZoneId": "America/Argentina/Salta",
             "nocType": "ARG",
-            "hostLogoUrl": "https://cdn.kpnpglobal.com/kpnp/media/image/champs/2025/07/d333ab8e285a4a4aaf4349102253ad23.PNG",
-            "competitionLogUrl": "https://cdn.kpnpglobal.com/kpnp/media/image/champs/2025/07/26334ff5b1e04bf392f5e712cd0f6b3e.PNG"
+            "hostLogoUrl": null,
+            "competitionLogUrl": null
           },
           "contents": {
             "divisionCategoryList": [
-                {
-                    "divisionCategoryType": "INDIVIDUAL_MALE",
-                    "divisionCategoryName": "Men"
-                },
-                {
-                    "divisionCategoryType": "TEAM_MALE",
-                    "divisionCategoryName": "Men Team"
-                }
+              {
+                "divisionCategoryType": "INDIVIDUAL_MALE",
+                "divisionCategoryName": "Men"
+              },
+              {
+                "divisionCategoryType": "TEAM_MALE",
+                "divisionCategoryName": "Men Team"
+              }
             ],
             "nocSummaryList": [
               {
                 "nocType": "GER",
+                "countryName": "Germany",
                 "rank": 1,
                 "medalCountList": [
                   {
@@ -353,6 +358,7 @@ components:
               },
               {
                 "nocType": "ALG",
+                "countryName": "Algeria",
                 "rank": 2,
                 "medalCountList": [
                   {
@@ -411,6 +417,7 @@ components:
               },
               {
                 "nocType": "STP",
+                "countryName": "São Tomé and Príncipe",
                 "rank": 3,
                 "medalCountList": [
                   {
@@ -469,6 +476,7 @@ components:
               },
               {
                 "nocType": "ARM",
+                "countryName": "Armenia",
                 "rank": 4,
                 "medalCountList": [
                   {
@@ -527,6 +535,7 @@ components:
               },
               {
                 "nocType": "AND",
+                "countryName": "Andorra",
                 "rank": 5,
                 "medalCountList": [
                   {
@@ -585,6 +594,7 @@ components:
               },
               {
                 "nocType": "ANG",
+                "countryName": "Angola",
                 "rank": 5,
                 "medalCountList": [
                   {
@@ -643,6 +653,7 @@ components:
               },
               {
                 "nocType": "ANT",
+                "countryName": "Antigua and Barbuda",
                 "rank": 5,
                 "medalCountList": [
                   {
@@ -701,6 +712,7 @@ components:
               },
               {
                 "nocType": "ARG",
+                "countryName": "Argentina",
                 "rank": 5,
                 "medalCountList": [
                   {
@@ -759,6 +771,7 @@ components:
               },
               {
                 "nocType": "ARU",
+                "countryName": "Aruba",
                 "rank": 5,
                 "medalCountList": [
                   {
