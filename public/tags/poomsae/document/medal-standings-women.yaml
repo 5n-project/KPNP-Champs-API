@@ -273,207 +273,207 @@ components:
       summary:
         medal standing women 데이터
       value:
-  {
-    "header": {
-      "documentName": "MEDAL STANDINGS WOMEN",
-      "competitionHostName": "메인",
-      "competitionLocalType": "W",
-      "competitionName": "대회 생성_250820",
-      "competitionSdate": "2025-08-20T03:00:00.000+09:00",
-      "timeZoneId": "America/Argentina/Salta",
-      "nocType": "ARG",
-      "hostLogoUrl": null,
-      "competitionLogUrl": null
-    },
-    "contents": {
-      "divisionCategoryList": [
         {
-          "divisionCategoryType": "INDIVIDUAL_FEMALE",
-          "divisionCategoryName": "Women"
-        },
-        {
-          "divisionCategoryType": "TEAM_FEMALE",
-          "divisionCategoryName": "Women Team"
+          "header": {
+            "documentName": "MEDAL STANDINGS WOMEN",
+            "competitionHostName": "메인",
+            "competitionLocalType": "W",
+            "competitionName": "대회 생성_250820",
+            "competitionSdate": "2025-08-20T03:00:00.000+09:00",
+            "timeZoneId": "America/Argentina/Salta",
+            "nocType": "ARG",
+            "hostLogoUrl": null,
+            "competitionLogUrl": null
+          },
+          "contents": {
+            "divisionCategoryList": [
+              {
+                "divisionCategoryType": "INDIVIDUAL_FEMALE",
+                "divisionCategoryName": "Women"
+              },
+              {
+                "divisionCategoryType": "TEAM_FEMALE",
+                "divisionCategoryName": "Women Team"
+              }
+            ],
+            "nocSummaryList": [
+              {
+                "nocType": "GER",
+                "countryName": "Germany",
+                "rank": 1,
+                "medalCountList": [
+                  {
+                    "medalType": "GOLD",
+                    "count": 2
+                  },
+                  {
+                    "medalType": "SILVER",
+                    "count": 1
+                  },
+                  {
+                    "medalType": "BRONZE",
+                    "count": 2
+                  }
+                ],
+                "totalMedalCount": 5,
+                "rankByTotal": 1,
+                "divisionCategorySummaryList": [
+                  {
+                    "divisionCategoryType": "INDIVIDUAL_FEMALE",
+                    "medalCountList": [
+                      {
+                        "medalType": "GOLD",
+                        "count": 1
+                      },
+                      {
+                        "medalType": "SILVER",
+                        "count": 1
+                      },
+                      {
+                        "medalType": "BRONZE",
+                        "count": 2
+                      }
+                    ],
+                    "totalMedalCount": 4
+                  },
+                  {
+                    "divisionCategoryType": "TEAM_FEMALE",
+                    "medalCountList": [
+                      {
+                        "medalType": "GOLD",
+                        "count": 1
+                      },
+                      {
+                        "medalType": "SILVER",
+                        "count": 0
+                      },
+                      {
+                        "medalType": "BRONZE",
+                        "count": 0
+                      }
+                    ],
+                    "totalMedalCount": 1
+                  }
+                ]
+              },
+              {
+                "nocType": "TGA",
+                "countryName": "Tonga",
+                "rank": 2,
+                "medalCountList": [
+                  {
+                    "medalType": "GOLD",
+                    "count": 0
+                  },
+                  {
+                    "medalType": "SILVER",
+                    "count": 1
+                  },
+                  {
+                    "medalType": "BRONZE",
+                    "count": 1
+                  }
+                ],
+                "totalMedalCount": 2,
+                "rankByTotal": 2,
+                "divisionCategorySummaryList": [
+                  {
+                    "divisionCategoryType": "INDIVIDUAL_FEMALE",
+                    "medalCountList": [
+                      {
+                        "medalType": "GOLD",
+                        "count": 0
+                      },
+                      {
+                        "medalType": "SILVER",
+                        "count": 0
+                      },
+                      {
+                        "medalType": "BRONZE",
+                        "count": 0
+                      }
+                    ],
+                    "totalMedalCount": 0
+                  },
+                  {
+                    "divisionCategoryType": "TEAM_FEMALE",
+                    "medalCountList": [
+                      {
+                        "medalType": "GOLD",
+                        "count": 0
+                      },
+                      {
+                        "medalType": "SILVER",
+                        "count": 1
+                      },
+                      {
+                        "medalType": "BRONZE",
+                        "count": 1
+                      }
+                    ],
+                    "totalMedalCount": 2
+                  }
+                ]
+              },
+              {
+                "nocType": "STP",
+                "countryName": "São Tomé and Príncipe",
+                "rank": 3,
+                "medalCountList": [
+                  {
+                    "medalType": "GOLD",
+                    "count": 0
+                  },
+                  {
+                    "medalType": "SILVER",
+                    "count": 0
+                  },
+                  {
+                    "medalType": "BRONZE",
+                    "count": 1
+                  }
+                ],
+                "totalMedalCount": 1,
+                "rankByTotal": 3,
+                "divisionCategorySummaryList": [
+                  {
+                    "divisionCategoryType": "INDIVIDUAL_FEMALE",
+                    "medalCountList": [
+                      {
+                        "medalType": "GOLD",
+                        "count": 0
+                      },
+                      {
+                        "medalType": "SILVER",
+                        "count": 0
+                      },
+                      {
+                        "medalType": "BRONZE",
+                        "count": 0
+                      }
+                    ],
+                    "totalMedalCount": 0
+                  },
+                  {
+                    "divisionCategoryType": "TEAM_FEMALE",
+                    "medalCountList": [
+                      {
+                        "medalType": "GOLD",
+                        "count": 0
+                      },
+                      {
+                        "medalType": "SILVER",
+                        "count": 0
+                      },
+                      {
+                        "medalType": "BRONZE",
+                        "count": 1
+                      }
+                    ],
+                    "totalMedalCount": 1
+                  }
+                ]
+              }
+            ]
+          }
         }
-      ],
-      "nocSummaryList": [
-        {
-          "nocType": "GER",
-          "countryName": "Germany",
-          "rank": 1,
-          "medalCountList": [
-            {
-              "medalType": "GOLD",
-              "count": 2
-            },
-            {
-              "medalType": "SILVER",
-              "count": 1
-            },
-            {
-              "medalType": "BRONZE",
-              "count": 2
-            }
-          ],
-          "totalMedalCount": 5,
-          "rankByTotal": 1,
-          "divisionCategorySummaryList": [
-            {
-              "divisionCategoryType": "INDIVIDUAL_FEMALE",
-              "medalCountList": [
-                {
-                  "medalType": "GOLD",
-                  "count": 1
-                },
-                {
-                  "medalType": "SILVER",
-                  "count": 1
-                },
-                {
-                  "medalType": "BRONZE",
-                  "count": 2
-                }
-              ],
-              "totalMedalCount": 4
-            },
-            {
-              "divisionCategoryType": "TEAM_FEMALE",
-              "medalCountList": [
-                {
-                  "medalType": "GOLD",
-                  "count": 1
-                },
-                {
-                  "medalType": "SILVER",
-                  "count": 0
-                },
-                {
-                  "medalType": "BRONZE",
-                  "count": 0
-                }
-              ],
-              "totalMedalCount": 1
-            }
-          ]
-        },
-        {
-          "nocType": "TGA",
-          "countryName": "Tonga",
-          "rank": 2,
-          "medalCountList": [
-            {
-              "medalType": "GOLD",
-              "count": 0
-            },
-            {
-              "medalType": "SILVER",
-              "count": 1
-            },
-            {
-              "medalType": "BRONZE",
-              "count": 1
-            }
-          ],
-          "totalMedalCount": 2,
-          "rankByTotal": 2,
-          "divisionCategorySummaryList": [
-            {
-              "divisionCategoryType": "INDIVIDUAL_FEMALE",
-              "medalCountList": [
-                {
-                  "medalType": "GOLD",
-                  "count": 0
-                },
-                {
-                  "medalType": "SILVER",
-                  "count": 0
-                },
-                {
-                  "medalType": "BRONZE",
-                  "count": 0
-                }
-              ],
-              "totalMedalCount": 0
-            },
-            {
-              "divisionCategoryType": "TEAM_FEMALE",
-              "medalCountList": [
-                {
-                  "medalType": "GOLD",
-                  "count": 0
-                },
-                {
-                  "medalType": "SILVER",
-                  "count": 1
-                },
-                {
-                  "medalType": "BRONZE",
-                  "count": 1
-                }
-              ],
-              "totalMedalCount": 2
-            }
-          ]
-        },
-        {
-          "nocType": "STP",
-          "countryName": "São Tomé and Príncipe",
-          "rank": 3,
-          "medalCountList": [
-            {
-              "medalType": "GOLD",
-              "count": 0
-            },
-            {
-              "medalType": "SILVER",
-              "count": 0
-            },
-            {
-              "medalType": "BRONZE",
-              "count": 1
-            }
-          ],
-          "totalMedalCount": 1,
-          "rankByTotal": 3,
-          "divisionCategorySummaryList": [
-            {
-              "divisionCategoryType": "INDIVIDUAL_FEMALE",
-              "medalCountList": [
-                {
-                  "medalType": "GOLD",
-                  "count": 0
-                },
-                {
-                  "medalType": "SILVER",
-                  "count": 0
-                },
-                {
-                  "medalType": "BRONZE",
-                  "count": 0
-                }
-              ],
-              "totalMedalCount": 0
-            },
-            {
-              "divisionCategoryType": "TEAM_FEMALE",
-              "medalCountList": [
-                {
-                  "medalType": "GOLD",
-                  "count": 0
-                },
-                {
-                  "medalType": "SILVER",
-                  "count": 0
-                },
-                {
-                  "medalType": "BRONZE",
-                  "count": 1
-                }
-              ],
-              "totalMedalCount": 1
-            }
-          ]
-        }
-      ]
-    }
-  }
