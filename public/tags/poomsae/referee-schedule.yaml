@@ -72,6 +72,10 @@ paths:
                                       - HEAD_REFEREE
                                       - ASSISTANT_REFEREE
                                     description: '역할 유형<br>- HEAD_REFEREE:주심<br>- ASSISTANT_REFEREE:부심'
+                                  country:
+                                    type: string
+                                    description: 심판 국적
+
                       spareReferees:
                         type: array
                         items:
@@ -97,6 +101,9 @@ paths:
                                 - HEAD_REFEREE
                                 - ASSISTANT_REFEREE
                               description: '역할 유형<br>- HEAD_REFEREE:주심<br>- ASSISTANT_REFEREE:부심'
+                            country:
+                              type: string
+                              description: 심판 국적
                   error:
                     type: string
                     nullable: true
@@ -111,54 +118,148 @@ paths:
                         "refereesPerGroup": 3,
                         "refereeGroups": [
                           {
-                            "refereeGroupingSeq": 28,
+                            "refereeGroupingSeq": 530,
                             "groupName": "A",
                             "referees": [
                               {
-                                "refereeSeq": 6817,
+                                "refereeSeq": 9656,
                                 "givenName": "Agboton",
                                 "familyName": "Engelbert",
-                                "roleType": "HEAD_REFEREE"
+                                "roleType": "HEAD_REFEREE",
+                                "country": "FRA"
                               },
                               {
-                                "refereeSeq": 6809,
+                                "refereeSeq": 9643,
+                                "givenName": "Soo Kyung",
+                                "familyName": "Park",
+                                "roleType": "ASSISTANT_REFEREE",
+                                "country": "KOR"
+                              },
+                              {
+                                "refereeSeq": 9650,
+                                "givenName": "Masoumeh",
+                                "familyName": "Majidivash",
+                                "roleType": "ASSISTANT_REFEREE",
+                                "country": "DEN"
+                              }
+                            ]
+                          },
+                          {
+                            "refereeGroupingSeq": 531,
+                            "groupName": "B",
+                            "referees": [
+                              {
+                                "refereeSeq": 9653,
+                                "givenName": "Amal",
+                                "familyName": "Grati",
+                                "roleType": "HEAD_REFEREE",
+                                "country": "TUN"
+                              },
+                              {
+                                "refereeSeq": 9646,
+                                "givenName": "Yu Ting",
+                                "familyName": "Wu",
+                                "roleType": "ASSISTANT_REFEREE",
+                                "country": "TPE"
+                              },
+                              {
+                                "refereeSeq": 9655,
+                                "givenName": "Serge",
+                                "familyName": "Sembona",
+                                "roleType": "ASSISTANT_REFEREE",
+                                "country": "FRA"
+                              }
+                            ]
+                          },
+                          {
+                            "refereeGroupingSeq": 532,
+                            "groupName": "C",
+                            "referees": [
+                              {
+                                "refereeSeq": 9652,
+                                "givenName": "Ana Luisa",
+                                "familyName": "Lopez Boluda",
+                                "roleType": "HEAD_REFEREE",
+                                "country": "ESP"
+                              },
+                              {
+                                "refereeSeq": 9644,
+                                "givenName": "Daniel",
+                                "familyName": "Khorassandjian",
+                                "roleType": "ASSISTANT_REFEREE",
+                                "country": "LBN"
+                              },
+                              {
+                                "refereeSeq": 9657,
+                                "givenName": "Oriane Rives",
+                                "familyName": "Charaf",
+                                "roleType": "ASSISTANT_REFEREE",
+                                "country": "FRA"
+                              }
+                            ]
+                          },
+                          {
+                            "refereeGroupingSeq": 533,
+                            "groupName": "D",
+                            "referees": [
+                              {
+                                "refereeSeq": 9654,
+                                "givenName": "Ari Krister",
+                                "familyName": "Lindroos",
+                                "roleType": "HEAD_REFEREE",
+                                "country": "FIN"
+                              },
+                              {
+                                "refereeSeq": 9642,
+                                "givenName": "May Mohamed",
+                                "familyName": "El Sayed",
+                                "roleType": "ASSISTANT_REFEREE",
+                                "country": "EGY"
+                              },
+                              {
+                                "refereeSeq": 9647,
+                                "givenName": "Hassan",
+                                "familyName": "Sadeghi",
+                                "roleType": "ASSISTANT_REFEREE",
+                                "country": "BEL"
+                              }
+                            ]
+                          },
+                          {
+                            "refereeGroupingSeq": 534,
+                            "groupName": "E",
+                            "referees": [
+                              {
+                                "refereeSeq": 9648,
                                 "givenName": "Belmir",
                                 "familyName": "BERBEROVIC",
-                                "roleType": "ASSISTANT_REFEREE"
+                                "roleType": "HEAD_REFEREE",
+                                "country": "BIH"
                               },
                               {
-                                "refereeSeq": 6810,
+                                "refereeSeq": 9645,
+                                "givenName": "Chun Hsien",
+                                "familyName": "Liu",
+                                "roleType": "ASSISTANT_REFEREE",
+                                "country": "TPE"
+                              },
+                              {
+                                "refereeSeq": 9649,
                                 "givenName": "Renata",
                                 "familyName": "Bukovac",
-                                "roleType": "ASSISTANT_REFEREE"
+                                "roleType": "ASSISTANT_REFEREE",
+                                "country": "CRO"
                               }
                             ]
                           }
                         ],
                         "spareReferees": [
                           {
-                            "refereeSeq": 6804,
-                            "givenName": "Soo Kyung",
-                            "familyName": "Park",
-                            "roleType": "ASSISTANT_REFEREE"
-                          },
-                          {
-                            "refereeSeq": 6808,
-                            "givenName": "Hassan",
-                            "familyName": "Sadeghi",
-                            "roleType": "ASSISTANT_REFEREE"
-                          },
-                          {
-                            "refereeSeq": 6811,
-                            "givenName": "Masoumeh",
-                            "familyName": "Majidivash",
-                            "roleType": "ASSISTANT_REFEREE"
-                          },
-                          {
-                            "refereeSeq": 6816,
-                            "givenName": "Serge",
-                            "familyName": "Sembona",
-                            "roleType": "ASSISTANT_REFEREE"
+                            "refereeSeq": 9651,
+                            "givenName": "Olivia",
+                            "familyName": "Ortiz",
+                            "roleType": "ASSISTANT_REFEREE",
+                            "country": "ESP"
                           }
                         ]
                       },
@@ -532,18 +633,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/PsRefereeGroupScheduleDetailResponseDTO'
               examples:
-                  defaultResponse:
-                    $ref: '#/components/examples/PsRefereeGroupScheduleDetailResponseDTO'
-                  ITEM_NOT_FOUND:
-                    $ref: '../../openapi.yml/#/components/examples/ITEM_NOT_FOUND'
-                  COMPETITION_MATCH_NOT_FOUND:
-                    $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_NOT_FOUND'
-                  DENY_CHANGE_REFEREE_MATCH_IS_NOT_WAITING:
-                    $ref: '../../openapi.yml/#/components/examples/DENY_CHANGE_REFEREE_MATCH_IS_NOT_WAITING'
-                  ALREADY_EXIST_REFEREE:
-                    $ref: '../../openapi.yml/#/components/examples/ALREADY_EXIST_REFEREE'
-                  INVALID_ARGUMENT_ERROR:
-                    $ref: '../../openapi.yml/#/components/examples/INVALID_ARGUMENT_ERROR'
+                defaultResponse:
+                  $ref: '#/components/examples/PsRefereeGroupScheduleDetailResponseDTO'
+                ITEM_NOT_FOUND:
+                  $ref: '../../openapi.yml/#/components/examples/ITEM_NOT_FOUND'
+                COMPETITION_MATCH_NOT_FOUND:
+                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+                DENY_CHANGE_REFEREE_MATCH_IS_NOT_WAITING:
+                  $ref: '../../openapi.yml/#/components/examples/DENY_CHANGE_REFEREE_MATCH_IS_NOT_WAITING'
+                ALREADY_EXIST_REFEREE:
+                  $ref: '../../openapi.yml/#/components/examples/ALREADY_EXIST_REFEREE'
+                INVALID_ARGUMENT_ERROR:
+                  $ref: '../../openapi.yml/#/components/examples/INVALID_ARGUMENT_ERROR'
         400:
           description: Bad Request
           content:
