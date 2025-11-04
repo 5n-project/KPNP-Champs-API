@@ -1108,6 +1108,20 @@ components:
         error:
           message: "유저가 존재하지 않습니다."
           errorCode: "E510"
+    COURT_COUNT_REDUCTION_FAILED:
+      value:
+        success: false
+        data: null
+        error:
+          message: "진행 중인 경기가 있어 코트 수를 줄일 수 없습니다."
+          errorCode: "E749"
+    MAX_COURT_COUNT_EXCEEDED_ERROR:
+      value:
+        success: false
+        data: null
+        error:
+          message: "최대 코트 수를 초과했습니다."
+          errorCode: "E750"
 
 
   schemas:

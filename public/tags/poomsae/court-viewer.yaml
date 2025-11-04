@@ -206,6 +206,8 @@ paths:
                   $ref: '../../openapi.yml#/components/examples/COURT_VIEWER_MATCH_ORDER_IS_WRONG'
                 ITEM_NOT_FOUND:
                   $ref: '../../openapi.yml#/components/examples/ITEM_NOT_FOUND'
+                MAX_COURT_COUNT_EXCEEDED_ERROR:
+                  $ref: '../../openapi.yml#/components/examples/MAX_COURT_COUNT_EXCEEDED_ERROR'
 
         400:
           description: Bad Request
