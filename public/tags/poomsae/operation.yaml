@@ -5035,10 +5035,11 @@ paths:
                   data:
                     type: object
                     required:
-                      - competitionName
-                      - competitionTimezone
-                      - competitionLocation
-                      - matList
+                      - competitionSeq
+                      - competitorCount
+                      - completedEntryCount
+                      - allMatchCount
+                      - endMatchCount
                     properties:
                       competitionSeq:
                         type: integer
@@ -5049,9 +5050,12 @@ paths:
                       completedEntryCount:
                         type: integer
                         description: 입장완료 수
-                      competitionProgressPercent:
+                      allMatchCount:
                         type: integer
-                        description: 대회 경기 진행 퍼센트
+                        description: 전체 매치 수
+                      endMatchCount:
+                        type: integer
+                        description: 종료된 매치 수
                   error:
                     type: string
                     nullable: true
@@ -5059,15 +5063,17 @@ paths:
                 successResponse:
                   summary: 성공응답
                   value:
-                    success: true
-                    data:
-                      {
-                        "competitionSeq": 2131,
-                        "competitorCount": 207,
+                    {
+                      "success": true,
+                      "data": {
+                        "competitionSeq": 2726,
+                        "competitorCount": 195,
                         "completedEntryCount": 0,
-                        "competitionProgressPercent": 6
-                      }
-                    error: null
+                        "allMatchCount": 97,
+                        "endMatchCount": 0
+                      },
+                      "error": null
+                    }
         '403':
           description: 권한 없음
           content:
