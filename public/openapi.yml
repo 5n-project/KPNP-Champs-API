@@ -272,6 +272,8 @@ paths:
     $ref: './tags/poomsae/fop.yaml#/paths/~1competitions~1{competitionSeq}~1fop~1{competitionMatchPsSeq}~1progress-seconds'
   /competitions/{competitionSeq}/fop/{competitionMatchPsSeq}/timer:
     $ref: './tags/poomsae/fop.yaml#/paths/~1competitions~1{competitionSeq}~1fop~1{competitionMatchPsSeq}~1timer'
+  /competitions/{competitionSeq}/fop/timers:
+    $ref: './tags/poomsae/fop.yaml#/paths/~1competitions~1{competitionSeq}~1fop~1timers'
 
   # 코트뷰어
   /competitions/{competitionSeq}/court-viewer/progress-type:

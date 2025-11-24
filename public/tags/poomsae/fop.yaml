@@ -65,7 +65,7 @@ paths:
                   value:
                     {
                       "success": true,
-                      "data": {},
+                      "data": { },
                       "error": null
                     }
                 COMPETITION_MATCH_NOT_FOUND:
@@ -149,12 +149,12 @@ paths:
                   summary: Default Example
                   value:
                     {
-                        "success": true,
-                        "data": {
-                            "competitionMatchPsSeq": 1234,
-                            "progressSeconds": 87
-                        },
-                        "error": null
+                      "success": true,
+                      "data": {
+                        "competitionMatchPsSeq": 1234,
+                        "progressSeconds": 87
+                      },
+                      "error": null
                     }
 
         403:
@@ -223,6 +223,11 @@ paths:
                         description:
                           '타이머 진행중인지'
                         example: true
+                      version:
+                        type: integer
+                        description:
+                          'timer 연산 version'
+                        example: 43
                   error:
                     nullable: true
                     example: null
@@ -231,13 +236,126 @@ paths:
                   summary: Default Example
                   value:
                     {
-                        "competitionMatchPsSeq": 10101,
-                        "progressSeconds": 28,
-                        "lastSyncTimeMillis": 1755058320128,
-                        "accumulatedMillis": 52916,
-                        "isRunning": true
+                      "competitionMatchPsSeq": 10101,
+                      "progressSeconds": 28,
+                      "lastSyncTimeMillis": 1755058320128,
+                      "accumulatedMillis": 52916,
+                      "isRunning": true,
+                      "version": 43
                     }
 
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml/#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+
+
+  /competitions/{competitionSeq}/fop/timers:
+    post:
+      summary: 경기 진행 시간 여러개 가져오기
+      tags:
+        - FOP
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - matchSeqList
+              properties:
+                matchSeqList:
+                  type: array
+                  description: '매치 seq 리스트'
+                  items:
+                    type: integer
+                  example: [ 10015,20032 ]
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - success
+                  - data
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                        - competitionMatchPsSeq
+                        - progressSeconds
+                        - accumulatedMillis
+                        - isRunning
+                        - version
+                      properties:
+                        competitionMatchPsSeq:
+                          type: integer
+                          description: '매치 seq'
+                          example: 56331
+                        progressSeconds:
+                          type: integer
+                          description: 'stop 할 때 lastSyncTimeMs 이용해서 계산 (초단위)'
+                          example: 30721
+                        lastSyncTimeMillis:
+                          type: integer
+                          nullable: true
+                          description: 'start, sync 할 때 현재시각 저장, stop 시 null (milliseconds 단위)'
+                          example: null
+                        accumulatedMillis:
+                          type: integer
+                          description: 'start~stop 사이에 heartbeat 시점의 시간들을 누적해서 더한 값 (milliseconds 단위)'
+                          example: 0
+                        isRunning:
+                          type: boolean
+                          description: '타이머 진행중인지'
+                          example: false
+                        version:
+                          type: integer
+                          description: 'timer 연산 version'
+                          example: 9
+                  error:
+                    nullable: true
+                    example: null
+              examples:
+                defaultResponse:
+                  summary: Default Example
+                  value:
+                    [
+                      {
+                        "competitionMatchPsSeq": 56331,
+                        "progressSeconds": 30721,
+                        "lastSyncTimeMillis": null,
+                        "accumulatedMillis": 0,
+                        "isRunning": false,
+                        "version": 9
+                      },
+                      {
+                        "competitionMatchPsSeq": 60818,
+                        "progressSeconds": 24277,
+                        "lastSyncTimeMillis": null,
+                        "accumulatedMillis": 0,
+                        "isRunning": false,
+                        "version": 29
+                      }
+                    ]
         403:
           description: Forbidden
           content:
