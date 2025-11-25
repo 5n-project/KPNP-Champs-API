@@ -118,6 +118,24 @@ paths:
                                     type: string
                                     nullable: true
                                     description: 품새 한번만 시연 Y, N
+                                  matchOrderType:
+                                    type: string
+                                    nullable: true
+                                    description: 품새 시연 순서
+                                    enum:
+                                      - CHUNG_CHUNG_HONG_HONG
+                                      - HONG_HONG_CHUNG_CHUNG
+                                      - CHUNG_HONG_CHUNG_HONG
+                                      - HONG_CHUNG_HONG_CHUNG
+                                      - TOGETHER
+                                  matchMinTime:
+                                    type: integer
+                                    nullable: true
+                                    description: '시연시간(최소) 초'
+                                  matchMaxTime:
+                                    type: integer
+                                    nullable: true
+                                    description: '시연시간(최대) 초'
                                   isActive:
                                     type: boolean
                                     description: true= 사용되는 대회유형 false= disabled
@@ -196,6 +214,9 @@ paths:
                               diffPoomsaeYn: "N"
                               compositeRateType: null
                               poomsaeOnceYn: "N"
+                              matchOrderType: "CHUNG_CHUNG_HONG_HONG"
+                              matchMinTime: 85
+                              matchMaxTime: 90
                               isActive: true
                               isSaved: true
                             - competitionEventSeq: 1112
@@ -208,6 +229,9 @@ paths:
                               diffPoomsaeYn: "N"
                               compositeRateType: null
                               poomsaeOnceYn: "N"
+                              matchOrderType: "CHUNG_CHUNG_HONG_HONG"
+                              matchMinTime: 85
+                              matchMaxTime: 90
                               isActive: true
                               isSaved: true
                             - competitionEventSeq: 1113
@@ -220,6 +244,9 @@ paths:
                               diffPoomsaeYn: "N"
                               compositeRateType: null
                               poomsaeOnceYn: "N"
+                              matchOrderType: "CHUNG_CHUNG_HONG_HONG"
+                              matchMinTime: 85
+                              matchMaxTime: 90
                               isActive: true
                               isSaved: true
                             - competitionEventSeq: 1114
@@ -232,6 +259,9 @@ paths:
                               diffPoomsaeYn: "N"
                               compositeRateType: null
                               poomsaeOnceYn: "N"
+                              matchOrderType: "CHUNG_CHUNG_HONG_HONG"
+                              matchMinTime: 85
+                              matchMaxTime: 90
                               isActive: true
                               isSaved: true
                             - competitionEventSeq: null
@@ -244,6 +274,9 @@ paths:
                               diffPoomsaeYn: null
                               compositeRateType: null
                               poomsaeOnceYn: null
+                              matchOrderType: "CHUNG_CHUNG_HONG_HONG"
+                              matchMinTime: 85
+                              matchMaxTime: 90
                               isActive: true
                               isSaved: false
                             - competitionEventSeq: null
@@ -256,6 +289,9 @@ paths:
                               diffPoomsaeYn: null
                               compositeRateType: null
                               poomsaeOnceYn: null
+                              matchOrderType: "CHUNG_CHUNG_HONG_HONG"
+                              matchMinTime: 85
+                              matchMaxTime: 90
                               isActive: false
                               isSaved: false
                       divisionCategorySettings:
@@ -376,6 +412,21 @@ paths:
                             poomsaeOnceYn:
                               type: string
                               description: 품새 한번만 시연 Y, N
+                            matchOrderType:
+                              type: string
+                              description: 품새 시연 순서
+                              enum:
+                                - CHUNG_CHUNG_HONG_HONG
+                                - HONG_HONG_CHUNG_CHUNG
+                                - CHUNG_HONG_CHUNG_HONG
+                                - HONG_CHUNG_HONG_CHUNG
+                                - TOGETHER
+                            matchMinTime:
+                              type: integer
+                              description: '시연시간(최소) 초'
+                            matchMaxTime:
+                              type: integer
+                              description: '시연시간(최대) 초'
                             seed:
                               type: string
                               description: 시드
@@ -397,6 +448,9 @@ paths:
                         diffPoomsaeYn: "N"
                         compositeRateType: null
                         poomsaeOnceYn: "N"
+                        matchOrderType: "CHUNG_CHUNG_HONG_HONG"
+                        matchMinTime: 85
+                        matchMaxTime: 90
                         seed: "10"
                       - divisionCategoryCode: "INDIVIDUAL_FEMALE"
                         participateLimit: 256
@@ -406,6 +460,9 @@ paths:
                         diffPoomsaeYn: "N"
                         compositeRateType: null
                         poomsaeOnceYn: "N"
+                        matchOrderType: "CHUNG_CHUNG_HONG_HONG"
+                        matchMinTime: 85
+                        matchMaxTime: 90
                         seed: "10"
                       - divisionCategoryCode: "TEAM_MALE"
                         participateLimit: 256
@@ -415,6 +472,9 @@ paths:
                         diffPoomsaeYn: "N"
                         compositeRateType: null
                         poomsaeOnceYn: "N"
+                        matchOrderType: "CHUNG_CHUNG_HONG_HONG"
+                        matchMinTime: 85
+                        matchMaxTime: 90
                         seed: "10"
                   - competitionCodeUsedSeq: null
                     competitionDivisionUsedSeq: 770
@@ -432,6 +492,9 @@ paths:
                         diffPoomsaeYn: "N"
                         compositeRateType: null
                         poomsaeOnceYn: "N"
+                        matchOrderType: "CHUNG_CHUNG_HONG_HONG"
+                        matchMinTime: 85
+                        matchMaxTime: 90
                         seed: "10"
                       - divisionCategoryCode: "INDIVIDUAL_FEMALE"
                         participateLimit: 256
@@ -441,6 +504,9 @@ paths:
                         diffPoomsaeYn: "N"
                         compositeRateType: null
                         poomsaeOnceYn: "N"
+                        matchOrderType: "CHUNG_CHUNG_HONG_HONG"
+                        matchMinTime: 85
+                        matchMaxTime: 90
                         seed: "10"
       responses:
         '200':
@@ -460,7 +526,6 @@ paths:
                   $ref: '../../openapi.yml#/components/examples/UNSUPPORTED_CATEGORY_FOR_RULE_DEPARTMENT'
                 DUPLICATE_DIVISION_CATEGORY:
                   $ref: '../../openapi.yml#/components/examples/DUPLICATE_DIVISION_CATEGORY'
-
         403:
           description: Forbidden
           content:

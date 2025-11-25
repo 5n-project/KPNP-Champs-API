@@ -18,6 +18,7 @@ tags:
   - name: 운영 - 참가자
   - name: 운영 - 입장
   - name: 운영 - 경기
+  - name: 운영 - 설정
   - name: 일정
   - name: 심판조 스케줄
   - name: 채점
@@ -239,8 +240,14 @@ paths:
     $ref: './tags/poomsae/operation.yaml#/paths/~1competitions~1{competitionSeq}~1operation~1matches~1progress~1{day}'
   /competitions/{competitionSeq}/operation/matches/{competitionMatchPsSeq}/competitor/{matchCompetitorDetailSeq}/qualify:
     $ref: './tags/poomsae/operation.yaml#/paths/~1competitions~1{competitionSeq}~1operation~1matches~1{competitionMatchPsSeq}~1competitor~1{matchCompetitorDetailSeq}~1qualify'
+
+
+  # 운영 - 설정
   /competitions/{competitionSeq}/operation/detail:
-    $ref: './tags/poomsae/operation.yaml#/paths/~1competitions~1{competitionSeq}~1operation~1detail'
+    $ref: './tags/poomsae/operation-setting.yaml#/paths/~1competitions~1{competitionSeq}~1operation~1detail'
+  /competitions/{competitionSeq}/operation/department:
+    $ref: './tags/poomsae/operation-setting.yaml#/paths/~1competitions~1{competitionSeq}~1operation~1department'
+
 
 
   # 심판 점수 채점
@@ -1124,6 +1131,13 @@ components:
         error:
           message: "최대 코트 수를 초과했습니다."
           errorCode: "E750"
+    EVENT_UPDATE_NOT_ALLOWED:
+      value:
+        success: false
+        data: null
+        error:
+          message: "해당 대회에서 진행 중이거나 일치하지 않는 이벤트가 포함되어 있어 수정 작업을 수행할 수 없습니다."
+          errorCode: "E751"
 
 
   schemas:

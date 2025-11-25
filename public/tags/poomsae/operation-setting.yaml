@@ -1,0 +1,1470 @@
+paths:
+  /competitions/{competitionSeq}/operation/detail:
+    get:
+      summary: 운영 세부 정보 설정 조회
+      tags:
+        - 운영 - 설정
+      parameters:
+        - in: path
+          name: competitionSeq
+          description: 대회 고유 식별자
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 성공 또는 데이터 없음
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    nullable: true
+                    properties:
+                      hasSchedule:
+                        type: boolean
+                        description: "일정이 저장됐는지 아닌지 (true 면 심판조 csv 추가 및 심판조 생성 불가)"
+                      isCompetitionHost:
+                        type: boolean
+                        description: "대회를 개최한 host : true, 아니면 : false (true 이어야지 기간연장, 운영진 추가 가능함)"
+                      competitionSetting:
+                        type: object
+                        properties:
+                          competitionSettingSeq:
+                            type: integer
+                            description: '세팅 seq'
+                          matCount:
+                            type: integer
+                            description: '코트 수'
+                          resultDisplayTime:
+                            type: integer
+                            description: '채점결과 표출 시간 초'
+                          firstMatchTime:
+                            type: string
+                            description: '첫경기시간 // 9시면 0900'
+                          lunchStime:
+                            type: string
+                            description: '점심시작시간 // 12시면 1200'
+                          lunchEtime:
+                            type: string
+                            description: '점심종료시간 // 12시면 1200'
+                          dinnerStime:
+                            type: string
+                            description: '저녁시작시간 // 12시면 1200'
+                          dinnerEtime:
+                            type: string
+                            description: '저녁종료시간 // 12시면 1200'
+                          endTime:
+                            type: string
+                            description: '종료시간 // 12시면 1200'
+                      ovrPeriodInfo:
+                        type: object
+                        required:
+                          - competitionOvrPeriodSdate
+                          - competitionOvrPeriodEdate
+                          - competitionTimezone
+                          - competitionNocCode
+                          - totalAmountKor
+                          - totalAmountUsd
+                        properties:
+                          competitionOvrPeriodSdate:
+                            type: string
+                            format: date-time
+                            description: 'ovr 이용시작시간'
+                          competitionOvrPeriodEdate:
+                            type: string
+                            format: date-time
+                            description: 'ovr 이용종료시간'
+                          competitionTimezone:
+                            type: string
+                            description: '대회 타임존 코드'
+                          competitionNocCode:
+                            type: string
+                            description: '대회 noc 국가코드'
+                          totalAmountKor:
+                            type: number
+                            description: '이용금액 원화'
+                          totalAmountUsd:
+                            type: number
+                            description: '이용금액 달러'
+                      settingImageList:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            s3MediaSeq:
+                              type: integer
+                              description: 's3 media seq'
+                            s3CdnUrl:
+                              type: string
+                              description: '파일 cdn url'
+                            mediaType:
+                              $ref: '../../openapi.yml#/components/schemas/MediaType'
+                            mediaCategory:
+                              $ref: '../../openapi.yml#/components/schemas/SettingMediaCategory'
+                            originName:
+                              type: string
+                              description: '파일 원본 이름'
+                            fileSize:
+                              type: string
+                              description: '파일 크기'
+                  error:
+                    type: object
+                    nullable: true
+                    properties:
+                      message:
+                        type: string
+                      errorCode:
+                        type: string
+              examples:
+                success:
+                  summary: 조회 성공 예시
+                  value:
+                    success: true
+                    data:
+                      hasSchedule: true
+                      isCompetitionHost: true
+                      competitionSetting:
+                        competitionSettingSeq: 8
+                        matCount: 5
+                        resultDisplayTime: 30
+                        firstMatchTime: "0900"
+                        lunchStime: "1200"
+                        lunchEtime: "1300"
+                        dinnerStime: "1800"
+                        dinnerEtime: "1900"
+                        endTime: "2100"
+                      ovrPeriodInfo:
+                        competitionOvrPeriodSdate: "2025-08-19T20:00:00.000Z"
+                        competitionOvrPeriodEdate: "2025-08-22T19:59:59.000Z"
+                        competitionTimezone: "Asia/Seoul"
+                        competitionNocCode: "KOR"
+                        totalAmountKor: 1050000.0
+                        totalAmountUsd: 1050.0
+                      settingImageList:
+                        - s3MediaSeq: 2577
+                          s3CdnUrl: "https://cdn.kpnpglobal.com/kpnp/media/image/champs/2025/05/fd66bbbae3d742b2922511f20b78e7bc.JPEG"
+                          mediaType: "I"
+                          mediaCategory: "HR"
+                          originName: "사인.jpeg"
+                          fileSize: "1736"
+                    error: null
+                ITEM_NOT_FOUND:
+                  $ref: '../../openapi.yml#/components/examples/ITEM_NOT_FOUND'
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+
+  /competitions/{competitionSeq}/operation/department:
+    get:
+      summary: 운영 설정에 부별 정보 조회
+      tags:
+        - 운영 - 설정
+      parameters:
+        - in: path
+          name: competitionSeq
+          required: true
+          schema:
+            type: integer
+          description: 대회 seq
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      codeUsedSettings:
+                        description: 룰 부 조합 리스트
+                        type: array
+                        items:
+                          required:
+                            - competitionCodeUsedSeq
+                            - competitionSeq
+                            - codeJoinSeq
+                            - competitionDivisionUsedSeq
+                            - divisionCode
+                            - divisionNameKo
+                            - divisionNameEn
+                            - departmentNameKo
+                            - departmentNameEn
+                          type: object
+                          properties:
+                            competitionCodeUsedSeq:
+                              type: integer
+                              description: 해당 대회 조합 고유 Seq
+                            competitionSeq:
+                              type: integer
+                              description: 대회 Seq
+                            codeJoinSeq:
+                              type: integer
+                              description: 코드 조합 Seq
+                            competitionDivisionUsedSeq:
+                              type: integer
+                              description: 해당 대회 사용 룰 Seq
+                            divisionCode:
+                              $ref: '../../openapi.yml#/components/schemas/PoomsaeDivisionType'
+                            divisionNameKo:
+                              type: string
+                              description: 룰 국문명
+                            divisionNameEn:
+                              type: string
+                              description: 룰 영문명
+                            departmentCode:
+                              $ref: '../../openapi.yml#/components/schemas/PoomsaeDepartmentType'
+                            departmentNameKo:
+                              type: string
+                              description: 부 국문명
+                            departmentNameEn:
+                              type: string
+                              description: 부 영문명
+                            openDepartmentMinAge:
+                              type: integer
+                              nullable: true
+                              description: 오픈대회 룰인경우 최소 나이
+                            openDepartmentMaxAge:
+                              type: integer
+                              nullable: true
+                              description: 오픈대회 룰인경우 최대 나이
+                            eventSettings:
+                              description: 해당 룰 부 조합에 대회유형 리스트
+                              type: array
+                              items:
+                                required:
+                                  - divisionCategoryCode
+                                  - isActive
+                                  - isSaved
+                                type: object
+                                properties:
+                                  competitionEventSeq:
+                                    type: integer
+                                    nullable: true
+                                    description: 대회 유형 Seq
+                                  divisionCategoryCode:
+                                    $ref: '../../openapi.yml#/components/schemas/PoomsaeDivisionCategoryType'
+                                  participateLimit:
+                                    type: integer
+                                    nullable: true
+                                    description: 참가 인원
+                                  matchStyleType:
+                                    $ref: '../../openapi.yml#/components/schemas/PoomsaeMatchStyleType'
+                                  drawType:
+                                    $ref: '../../openapi.yml#/components/schemas/PoomsaeDrawType'
+                                  seed:
+                                    type: string
+                                    nullable: true
+                                    description: 시드
+                                  bronzeMedalMatchYn:
+                                    type: string
+                                    nullable: true
+                                    description: 3,4위전 여부 Y, N
+                                  diffPoomsaeYn:
+                                    type: string
+                                    nullable: true
+                                    description: 양측선수 다른 품새 시연 Y, N
+                                  compositeRateType:
+                                    $ref: '../../openapi.yml#/components/schemas/PoomsaeCompositeRateType'
+                                  poomsaeOnceYn:
+                                    type: string
+                                    nullable: true
+                                    description: 품새 한번만 시연 Y, N
+                                  matchOrderType:
+                                    type: string
+                                    nullable: true
+                                    description: 품새 시연 순서
+                                    enum:
+                                      - CHUNG_CHUNG_HONG_HONG
+                                      - HONG_HONG_CHUNG_CHUNG
+                                      - CHUNG_HONG_CHUNG_HONG
+                                      - HONG_CHUNG_HONG_CHUNG
+                                      - TOGETHER
+                                  matchMinTime:
+                                    type: integer
+                                    nullable: true
+                                    description: '시연시간(최소) 초'
+                                  matchMaxTime:
+                                    type: integer
+                                    nullable: true
+                                    description: '시연시간(최대) 초'
+                                  isActive:
+                                    type: boolean
+                                    description: true= 사용되는 대회유형 false= disabled
+                                  isSaved:
+                                    type: boolean
+                                    description: true= 저장된 거 false= 저장 안안한거
+                                  isStarted:
+                                    type: boolean
+                                    description: '해당 룰-부-대회유형에대한 경기가 시작했는지 안했는지'
+                      divisionCategorySettings:
+                        description: 존재하는 대회유형 리스트
+                        type: array
+                        items:
+                          required:
+                            - divisionCategoryCode
+                            - divisionCategoryNameKo
+                            - divisionCategoryNameEn
+                          type: object
+                          properties:
+                            divisionCategoryCode:
+                              $ref: '../../openapi.yml#/components/schemas/PoomsaeDivisionCategoryType'
+                            divisionCategoryNameKo:
+                              type: string
+                              description: 대회유형 국문명
+                            divisionCategoryNameEn:
+                              type: string
+                              description: 대회유형 영문명
+                  error:
+                    type: object
+                    nullable: true
+              examples:
+                성공 응답:
+                  value:
+                    {
+                      "success": true,
+                      "data": {
+                        "codeUsedSettings": [
+                          {
+                            "competitionCodeUsedSeq": 11191,
+                            "competitionSeq": 2757,
+                            "codeJoinSeq": 4,
+                            "competitionDivisionUsedSeq": 1885,
+                            "divisionCode": "WT_RECOGNIZED_POOMSAE",
+                            "divisionNameKo": "WT 공인품새룰",
+                            "divisionNameEn": "WT Recognized Poomsae",
+                            "departmentCode": "UNDER_30",
+                            "departmentNameKo": "30세 이하",
+                            "departmentNameEn": "Under 30",
+                            "openDepartmentMinAge": null,
+                            "openDepartmentMaxAge": null,
+                            "eventSettings": [
+                              {
+                                "competitionEventSeq": 15130,
+                                "divisionCategoryCode": "INDIVIDUAL_MALE",
+                                "participateLimit": 256,
+                                "matchStyleType": "TOURNAMENT",
+                                "drawType": "RANDOM",
+                                "seed": "25%",
+                                "bronzeMedalMatchYn": "N",
+                                "diffPoomsaeYn": "N",
+                                "compositeRateType": null,
+                                "poomsaeOnceYn": "N",
+                                "matchOrderType": "CHUNG_CHUNG_HONG_HONG",
+                                "matchMinTime": 85,
+                                "matchMaxTime": 90,
+                                "isActive": true,
+                                "isSaved": true,
+                                "isStarted": true
+                              },
+                              {
+                                "competitionEventSeq": 15131,
+                                "divisionCategoryCode": "INDIVIDUAL_FEMALE",
+                                "participateLimit": 256,
+                                "matchStyleType": "CUTOFF_TOURNAMENT",
+                                "drawType": "RANDOM",
+                                "seed": "25%",
+                                "bronzeMedalMatchYn": "N",
+                                "diffPoomsaeYn": "N",
+                                "compositeRateType": null,
+                                "poomsaeOnceYn": "N",
+                                "matchOrderType": "TOGETHER",
+                                "matchMinTime": 85,
+                                "matchMaxTime": 100,
+                                "isActive": true,
+                                "isSaved": true,
+                                "isStarted": true
+                              },
+                              {
+                                "competitionEventSeq": 15132,
+                                "divisionCategoryCode": "TEAM_MALE",
+                                "participateLimit": 256,
+                                "matchStyleType": "CUTOFF",
+                                "drawType": "RANDOM",
+                                "seed": "0%",
+                                "bronzeMedalMatchYn": "N",
+                                "diffPoomsaeYn": "N",
+                                "compositeRateType": null,
+                                "poomsaeOnceYn": "N",
+                                "matchOrderType": "HONG_HONG_CHUNG_CHUNG",
+                                "matchMinTime": 85,
+                                "matchMaxTime": 105,
+                                "isActive": true,
+                                "isSaved": true,
+                                "isStarted": true
+                              },
+                              {
+                                "competitionEventSeq": 15133,
+                                "divisionCategoryCode": "TEAM_FEMALE",
+                                "participateLimit": 256,
+                                "matchStyleType": "TOURNAMENT",
+                                "drawType": "RANDOM",
+                                "seed": "25%",
+                                "bronzeMedalMatchYn": "N",
+                                "diffPoomsaeYn": "N",
+                                "compositeRateType": null,
+                                "poomsaeOnceYn": "N",
+                                "matchOrderType": "TOGETHER",
+                                "matchMinTime": 85,
+                                "matchMaxTime": 90,
+                                "isActive": true,
+                                "isSaved": true,
+                                "isStarted": true
+                              },
+                              {
+                                "competitionEventSeq": 15134,
+                                "divisionCategoryCode": "PAIR",
+                                "participateLimit": 256,
+                                "matchStyleType": "TOURNAMENT",
+                                "drawType": "RANDOM",
+                                "seed": "25%",
+                                "bronzeMedalMatchYn": "N",
+                                "diffPoomsaeYn": "N",
+                                "compositeRateType": null,
+                                "poomsaeOnceYn": "N",
+                                "matchOrderType": "HONG_CHUNG_HONG_CHUNG",
+                                "matchMinTime": 85,
+                                "matchMaxTime": 90,
+                                "isActive": true,
+                                "isSaved": true,
+                                "isStarted": true
+                              },
+                              {
+                                "competitionEventSeq": null,
+                                "divisionCategoryCode": "TEAM_MIXED",
+                                "participateLimit": null,
+                                "matchStyleType": null,
+                                "drawType": null,
+                                "seed": null,
+                                "bronzeMedalMatchYn": null,
+                                "diffPoomsaeYn": null,
+                                "compositeRateType": null,
+                                "poomsaeOnceYn": null,
+                                "matchOrderType": null,
+                                "matchMinTime": null,
+                                "matchMaxTime": null,
+                                "isActive": false,
+                                "isSaved": false,
+                                "isStarted": false
+                              }
+                            ]
+                          },
+                          {
+                            "competitionCodeUsedSeq": 11192,
+                            "competitionSeq": 2757,
+                            "codeJoinSeq": 5,
+                            "competitionDivisionUsedSeq": 1885,
+                            "divisionCode": "WT_RECOGNIZED_POOMSAE",
+                            "divisionNameKo": "WT 공인품새룰",
+                            "divisionNameEn": "WT Recognized Poomsae",
+                            "departmentCode": "UNDER_40",
+                            "departmentNameKo": "40세 이하",
+                            "departmentNameEn": "Under 40",
+                            "openDepartmentMinAge": null,
+                            "openDepartmentMaxAge": null,
+                            "eventSettings": [
+                              {
+                                "competitionEventSeq": null,
+                                "divisionCategoryCode": "INDIVIDUAL_MALE",
+                                "participateLimit": null,
+                                "matchStyleType": null,
+                                "drawType": null,
+                                "seed": null,
+                                "bronzeMedalMatchYn": null,
+                                "diffPoomsaeYn": null,
+                                "compositeRateType": null,
+                                "poomsaeOnceYn": null,
+                                "matchOrderType": null,
+                                "matchMinTime": null,
+                                "matchMaxTime": null,
+                                "isActive": true,
+                                "isSaved": false,
+                                "isStarted": false
+                              },
+                              {
+                                "competitionEventSeq": null,
+                                "divisionCategoryCode": "INDIVIDUAL_FEMALE",
+                                "participateLimit": null,
+                                "matchStyleType": null,
+                                "drawType": null,
+                                "seed": null,
+                                "bronzeMedalMatchYn": null,
+                                "diffPoomsaeYn": null,
+                                "compositeRateType": null,
+                                "poomsaeOnceYn": null,
+                                "matchOrderType": null,
+                                "matchMinTime": null,
+                                "matchMaxTime": null,
+                                "isActive": true,
+                                "isSaved": false,
+                                "isStarted": false
+                              },
+                              {
+                                "competitionEventSeq": null,
+                                "divisionCategoryCode": "TEAM_MALE",
+                                "participateLimit": null,
+                                "matchStyleType": null,
+                                "drawType": null,
+                                "seed": null,
+                                "bronzeMedalMatchYn": null,
+                                "diffPoomsaeYn": null,
+                                "compositeRateType": null,
+                                "poomsaeOnceYn": null,
+                                "matchOrderType": null,
+                                "matchMinTime": null,
+                                "matchMaxTime": null,
+                                "isActive": false,
+                                "isSaved": false,
+                                "isStarted": false
+                              },
+                              {
+                                "competitionEventSeq": null,
+                                "divisionCategoryCode": "TEAM_FEMALE",
+                                "participateLimit": null,
+                                "matchStyleType": null,
+                                "drawType": null,
+                                "seed": null,
+                                "bronzeMedalMatchYn": null,
+                                "diffPoomsaeYn": null,
+                                "compositeRateType": null,
+                                "poomsaeOnceYn": null,
+                                "matchOrderType": null,
+                                "matchMinTime": null,
+                                "matchMaxTime": null,
+                                "isActive": false,
+                                "isSaved": false,
+                                "isStarted": false
+                              },
+                              {
+                                "competitionEventSeq": null,
+                                "divisionCategoryCode": "PAIR",
+                                "participateLimit": null,
+                                "matchStyleType": null,
+                                "drawType": null,
+                                "seed": null,
+                                "bronzeMedalMatchYn": null,
+                                "diffPoomsaeYn": null,
+                                "compositeRateType": null,
+                                "poomsaeOnceYn": null,
+                                "matchOrderType": null,
+                                "matchMinTime": null,
+                                "matchMaxTime": null,
+                                "isActive": false,
+                                "isSaved": false,
+                                "isStarted": false
+                              },
+                              {
+                                "competitionEventSeq": null,
+                                "divisionCategoryCode": "TEAM_MIXED",
+                                "participateLimit": null,
+                                "matchStyleType": null,
+                                "drawType": null,
+                                "seed": null,
+                                "bronzeMedalMatchYn": null,
+                                "diffPoomsaeYn": null,
+                                "compositeRateType": null,
+                                "poomsaeOnceYn": null,
+                                "matchOrderType": null,
+                                "matchMinTime": null,
+                                "matchMaxTime": null,
+                                "isActive": false,
+                                "isSaved": false,
+                                "isStarted": false
+                              }
+                            ]
+                          },
+                          {
+                            "competitionCodeUsedSeq": 11194,
+                            "competitionSeq": 2757,
+                            "codeJoinSeq": 7,
+                            "competitionDivisionUsedSeq": 1885,
+                            "divisionCode": "WT_RECOGNIZED_POOMSAE",
+                            "divisionNameKo": "WT 공인품새룰",
+                            "divisionNameEn": "WT Recognized Poomsae",
+                            "departmentCode": "UNDER_60",
+                            "departmentNameKo": "60세 이하",
+                            "departmentNameEn": "Under 60",
+                            "openDepartmentMinAge": null,
+                            "openDepartmentMaxAge": null,
+                            "eventSettings": [
+                              {
+                                "competitionEventSeq": null,
+                                "divisionCategoryCode": "INDIVIDUAL_MALE",
+                                "participateLimit": null,
+                                "matchStyleType": null,
+                                "drawType": null,
+                                "seed": null,
+                                "bronzeMedalMatchYn": null,
+                                "diffPoomsaeYn": null,
+                                "compositeRateType": null,
+                                "poomsaeOnceYn": null,
+                                "matchOrderType": null,
+                                "matchMinTime": null,
+                                "matchMaxTime": null,
+                                "isActive": true,
+                                "isSaved": false,
+                                "isStarted": false
+                              },
+                              {
+                                "competitionEventSeq": null,
+                                "divisionCategoryCode": "INDIVIDUAL_FEMALE",
+                                "participateLimit": null,
+                                "matchStyleType": null,
+                                "drawType": null,
+                                "seed": null,
+                                "bronzeMedalMatchYn": null,
+                                "diffPoomsaeYn": null,
+                                "compositeRateType": null,
+                                "poomsaeOnceYn": null,
+                                "matchOrderType": null,
+                                "matchMinTime": null,
+                                "matchMaxTime": null,
+                                "isActive": true,
+                                "isSaved": false,
+                                "isStarted": false
+                              },
+                              {
+                                "competitionEventSeq": null,
+                                "divisionCategoryCode": "TEAM_MALE",
+                                "participateLimit": null,
+                                "matchStyleType": null,
+                                "drawType": null,
+                                "seed": null,
+                                "bronzeMedalMatchYn": null,
+                                "diffPoomsaeYn": null,
+                                "compositeRateType": null,
+                                "poomsaeOnceYn": null,
+                                "matchOrderType": null,
+                                "matchMinTime": null,
+                                "matchMaxTime": null,
+                                "isActive": true,
+                                "isSaved": false,
+                                "isStarted": false
+                              },
+                              {
+                                "competitionEventSeq": null,
+                                "divisionCategoryCode": "TEAM_FEMALE",
+                                "participateLimit": null,
+                                "matchStyleType": null,
+                                "drawType": null,
+                                "seed": null,
+                                "bronzeMedalMatchYn": null,
+                                "diffPoomsaeYn": null,
+                                "compositeRateType": null,
+                                "poomsaeOnceYn": null,
+                                "matchOrderType": null,
+                                "matchMinTime": null,
+                                "matchMaxTime": null,
+                                "isActive": true,
+                                "isSaved": false,
+                                "isStarted": false
+                              },
+                              {
+                                "competitionEventSeq": null,
+                                "divisionCategoryCode": "PAIR",
+                                "participateLimit": null,
+                                "matchStyleType": null,
+                                "drawType": null,
+                                "seed": null,
+                                "bronzeMedalMatchYn": null,
+                                "diffPoomsaeYn": null,
+                                "compositeRateType": null,
+                                "poomsaeOnceYn": null,
+                                "matchOrderType": null,
+                                "matchMinTime": null,
+                                "matchMaxTime": null,
+                                "isActive": true,
+                                "isSaved": false,
+                                "isStarted": false
+                              },
+                              {
+                                "competitionEventSeq": null,
+                                "divisionCategoryCode": "TEAM_MIXED",
+                                "participateLimit": null,
+                                "matchStyleType": null,
+                                "drawType": null,
+                                "seed": null,
+                                "bronzeMedalMatchYn": null,
+                                "diffPoomsaeYn": null,
+                                "compositeRateType": null,
+                                "poomsaeOnceYn": null,
+                                "matchOrderType": null,
+                                "matchMinTime": null,
+                                "matchMaxTime": null,
+                                "isActive": false,
+                                "isSaved": false,
+                                "isStarted": false
+                              }
+                            ]
+                          },
+                          {
+                            "competitionCodeUsedSeq": 11195,
+                            "competitionSeq": 2757,
+                            "codeJoinSeq": 8,
+                            "competitionDivisionUsedSeq": 1885,
+                            "divisionCode": "WT_RECOGNIZED_POOMSAE",
+                            "divisionNameKo": "WT 공인품새룰",
+                            "divisionNameEn": "WT Recognized Poomsae",
+                            "departmentCode": "UNDER_65",
+                            "departmentNameKo": "65세 이하",
+                            "departmentNameEn": "Under 65",
+                            "openDepartmentMinAge": null,
+                            "openDepartmentMaxAge": null,
+                            "eventSettings": [
+                              {
+                                "competitionEventSeq": null,
+                                "divisionCategoryCode": "INDIVIDUAL_MALE",
+                                "participateLimit": null,
+                                "matchStyleType": null,
+                                "drawType": null,
+                                "seed": null,
+                                "bronzeMedalMatchYn": null,
+                                "diffPoomsaeYn": null,
+                                "compositeRateType": null,
+                                "poomsaeOnceYn": null,
+                                "matchOrderType": null,
+                                "matchMinTime": null,
+                                "matchMaxTime": null,
+                                "isActive": true,
+                                "isSaved": false,
+                                "isStarted": false
+                              },
+                              {
+                                "competitionEventSeq": null,
+                                "divisionCategoryCode": "INDIVIDUAL_FEMALE",
+                                "participateLimit": null,
+                                "matchStyleType": null,
+                                "drawType": null,
+                                "seed": null,
+                                "bronzeMedalMatchYn": null,
+                                "diffPoomsaeYn": null,
+                                "compositeRateType": null,
+                                "poomsaeOnceYn": null,
+                                "matchOrderType": null,
+                                "matchMinTime": null,
+                                "matchMaxTime": null,
+                                "isActive": true,
+                                "isSaved": false,
+                                "isStarted": false
+                              },
+                              {
+                                "competitionEventSeq": null,
+                                "divisionCategoryCode": "TEAM_MALE",
+                                "participateLimit": null,
+                                "matchStyleType": null,
+                                "drawType": null,
+                                "seed": null,
+                                "bronzeMedalMatchYn": null,
+                                "diffPoomsaeYn": null,
+                                "compositeRateType": null,
+                                "poomsaeOnceYn": null,
+                                "matchOrderType": null,
+                                "matchMinTime": null,
+                                "matchMaxTime": null,
+                                "isActive": false,
+                                "isSaved": false,
+                                "isStarted": false
+                              },
+                              {
+                                "competitionEventSeq": null,
+                                "divisionCategoryCode": "TEAM_FEMALE",
+                                "participateLimit": null,
+                                "matchStyleType": null,
+                                "drawType": null,
+                                "seed": null,
+                                "bronzeMedalMatchYn": null,
+                                "diffPoomsaeYn": null,
+                                "compositeRateType": null,
+                                "poomsaeOnceYn": null,
+                                "matchOrderType": null,
+                                "matchMinTime": null,
+                                "matchMaxTime": null,
+                                "isActive": false,
+                                "isSaved": false,
+                                "isStarted": false
+                              },
+                              {
+                                "competitionEventSeq": null,
+                                "divisionCategoryCode": "PAIR",
+                                "participateLimit": null,
+                                "matchStyleType": null,
+                                "drawType": null,
+                                "seed": null,
+                                "bronzeMedalMatchYn": null,
+                                "diffPoomsaeYn": null,
+                                "compositeRateType": null,
+                                "poomsaeOnceYn": null,
+                                "matchOrderType": null,
+                                "matchMinTime": null,
+                                "matchMaxTime": null,
+                                "isActive": false,
+                                "isSaved": false,
+                                "isStarted": false
+                              },
+                              {
+                                "competitionEventSeq": null,
+                                "divisionCategoryCode": "TEAM_MIXED",
+                                "participateLimit": null,
+                                "matchStyleType": null,
+                                "drawType": null,
+                                "seed": null,
+                                "bronzeMedalMatchYn": null,
+                                "diffPoomsaeYn": null,
+                                "compositeRateType": null,
+                                "poomsaeOnceYn": null,
+                                "matchOrderType": null,
+                                "matchMinTime": null,
+                                "matchMaxTime": null,
+                                "isActive": false,
+                                "isSaved": false,
+                                "isStarted": false
+                              }
+                            ]
+                          },
+                          {
+                            "competitionCodeUsedSeq": 11196,
+                            "competitionSeq": 2757,
+                            "codeJoinSeq": 9,
+                            "competitionDivisionUsedSeq": 1885,
+                            "divisionCode": "WT_RECOGNIZED_POOMSAE",
+                            "divisionNameKo": "WT 공인품새룰",
+                            "divisionNameEn": "WT Recognized Poomsae",
+                            "departmentCode": "OVER_65",
+                            "departmentNameKo": "65세 초과",
+                            "departmentNameEn": "Over 65",
+                            "openDepartmentMinAge": null,
+                            "openDepartmentMaxAge": null,
+                            "eventSettings": [
+                              {
+                                "competitionEventSeq": null,
+                                "divisionCategoryCode": "INDIVIDUAL_MALE",
+                                "participateLimit": null,
+                                "matchStyleType": null,
+                                "drawType": null,
+                                "seed": null,
+                                "bronzeMedalMatchYn": null,
+                                "diffPoomsaeYn": null,
+                                "compositeRateType": null,
+                                "poomsaeOnceYn": null,
+                                "matchOrderType": null,
+                                "matchMinTime": null,
+                                "matchMaxTime": null,
+                                "isActive": true,
+                                "isSaved": false,
+                                "isStarted": false
+                              },
+                              {
+                                "competitionEventSeq": null,
+                                "divisionCategoryCode": "INDIVIDUAL_FEMALE",
+                                "participateLimit": null,
+                                "matchStyleType": null,
+                                "drawType": null,
+                                "seed": null,
+                                "bronzeMedalMatchYn": null,
+                                "diffPoomsaeYn": null,
+                                "compositeRateType": null,
+                                "poomsaeOnceYn": null,
+                                "matchOrderType": null,
+                                "matchMinTime": null,
+                                "matchMaxTime": null,
+                                "isActive": true,
+                                "isSaved": false,
+                                "isStarted": false
+                              },
+                              {
+                                "competitionEventSeq": null,
+                                "divisionCategoryCode": "TEAM_MALE",
+                                "participateLimit": null,
+                                "matchStyleType": null,
+                                "drawType": null,
+                                "seed": null,
+                                "bronzeMedalMatchYn": null,
+                                "diffPoomsaeYn": null,
+                                "compositeRateType": null,
+                                "poomsaeOnceYn": null,
+                                "matchOrderType": null,
+                                "matchMinTime": null,
+                                "matchMaxTime": null,
+                                "isActive": false,
+                                "isSaved": false,
+                                "isStarted": false
+                              },
+                              {
+                                "competitionEventSeq": null,
+                                "divisionCategoryCode": "TEAM_FEMALE",
+                                "participateLimit": null,
+                                "matchStyleType": null,
+                                "drawType": null,
+                                "seed": null,
+                                "bronzeMedalMatchYn": null,
+                                "diffPoomsaeYn": null,
+                                "compositeRateType": null,
+                                "poomsaeOnceYn": null,
+                                "matchOrderType": null,
+                                "matchMinTime": null,
+                                "matchMaxTime": null,
+                                "isActive": false,
+                                "isSaved": false,
+                                "isStarted": false
+                              },
+                              {
+                                "competitionEventSeq": null,
+                                "divisionCategoryCode": "PAIR",
+                                "participateLimit": null,
+                                "matchStyleType": null,
+                                "drawType": null,
+                                "seed": null,
+                                "bronzeMedalMatchYn": null,
+                                "diffPoomsaeYn": null,
+                                "compositeRateType": null,
+                                "poomsaeOnceYn": null,
+                                "matchOrderType": null,
+                                "matchMinTime": null,
+                                "matchMaxTime": null,
+                                "isActive": false,
+                                "isSaved": false,
+                                "isStarted": false
+                              },
+                              {
+                                "competitionEventSeq": null,
+                                "divisionCategoryCode": "TEAM_MIXED",
+                                "participateLimit": null,
+                                "matchStyleType": null,
+                                "drawType": null,
+                                "seed": null,
+                                "bronzeMedalMatchYn": null,
+                                "diffPoomsaeYn": null,
+                                "compositeRateType": null,
+                                "poomsaeOnceYn": null,
+                                "matchOrderType": null,
+                                "matchMinTime": null,
+                                "matchMaxTime": null,
+                                "isActive": false,
+                                "isSaved": false,
+                                "isStarted": false
+                              }
+                            ]
+                          },
+                          {
+                            "competitionCodeUsedSeq": 11197,
+                            "competitionSeq": 2757,
+                            "codeJoinSeq": 10,
+                            "competitionDivisionUsedSeq": 1885,
+                            "divisionCode": "WT_RECOGNIZED_POOMSAE",
+                            "divisionNameKo": "WT 공인품새룰",
+                            "divisionNameEn": "WT Recognized Poomsae",
+                            "departmentCode": "OVER_60",
+                            "departmentNameKo": "60세 초과",
+                            "departmentNameEn": "Over 60",
+                            "openDepartmentMinAge": null,
+                            "openDepartmentMaxAge": null,
+                            "eventSettings": [
+                              {
+                                "competitionEventSeq": null,
+                                "divisionCategoryCode": "INDIVIDUAL_MALE",
+                                "participateLimit": null,
+                                "matchStyleType": null,
+                                "drawType": null,
+                                "seed": null,
+                                "bronzeMedalMatchYn": null,
+                                "diffPoomsaeYn": null,
+                                "compositeRateType": null,
+                                "poomsaeOnceYn": null,
+                                "matchOrderType": null,
+                                "matchMinTime": null,
+                                "matchMaxTime": null,
+                                "isActive": false,
+                                "isSaved": false,
+                                "isStarted": false
+                              },
+                              {
+                                "competitionEventSeq": null,
+                                "divisionCategoryCode": "INDIVIDUAL_FEMALE",
+                                "participateLimit": null,
+                                "matchStyleType": null,
+                                "drawType": null,
+                                "seed": null,
+                                "bronzeMedalMatchYn": null,
+                                "diffPoomsaeYn": null,
+                                "compositeRateType": null,
+                                "poomsaeOnceYn": null,
+                                "matchOrderType": null,
+                                "matchMinTime": null,
+                                "matchMaxTime": null,
+                                "isActive": false,
+                                "isSaved": false,
+                                "isStarted": false
+                              },
+                              {
+                                "competitionEventSeq": null,
+                                "divisionCategoryCode": "TEAM_MALE",
+                                "participateLimit": null,
+                                "matchStyleType": null,
+                                "drawType": null,
+                                "seed": null,
+                                "bronzeMedalMatchYn": null,
+                                "diffPoomsaeYn": null,
+                                "compositeRateType": null,
+                                "poomsaeOnceYn": null,
+                                "matchOrderType": null,
+                                "matchMinTime": null,
+                                "matchMaxTime": null,
+                                "isActive": true,
+                                "isSaved": false,
+                                "isStarted": false
+                              },
+                              {
+                                "competitionEventSeq": null,
+                                "divisionCategoryCode": "TEAM_FEMALE",
+                                "participateLimit": null,
+                                "matchStyleType": null,
+                                "drawType": null,
+                                "seed": null,
+                                "bronzeMedalMatchYn": null,
+                                "diffPoomsaeYn": null,
+                                "compositeRateType": null,
+                                "poomsaeOnceYn": null,
+                                "matchOrderType": null,
+                                "matchMinTime": null,
+                                "matchMaxTime": null,
+                                "isActive": true,
+                                "isSaved": false,
+                                "isStarted": false
+                              },
+                              {
+                                "competitionEventSeq": null,
+                                "divisionCategoryCode": "PAIR",
+                                "participateLimit": null,
+                                "matchStyleType": null,
+                                "drawType": null,
+                                "seed": null,
+                                "bronzeMedalMatchYn": null,
+                                "diffPoomsaeYn": null,
+                                "compositeRateType": null,
+                                "poomsaeOnceYn": null,
+                                "matchOrderType": null,
+                                "matchMinTime": null,
+                                "matchMaxTime": null,
+                                "isActive": true,
+                                "isSaved": false,
+                                "isStarted": false
+                              },
+                              {
+                                "competitionEventSeq": null,
+                                "divisionCategoryCode": "TEAM_MIXED",
+                                "participateLimit": null,
+                                "matchStyleType": null,
+                                "drawType": null,
+                                "seed": null,
+                                "bronzeMedalMatchYn": null,
+                                "diffPoomsaeYn": null,
+                                "compositeRateType": null,
+                                "poomsaeOnceYn": null,
+                                "matchOrderType": null,
+                                "matchMinTime": null,
+                                "matchMaxTime": null,
+                                "isActive": false,
+                                "isSaved": false,
+                                "isStarted": false
+                              }
+                            ]
+                          },
+                          {
+                            "competitionCodeUsedSeq": 11198,
+                            "competitionSeq": 2757,
+                            "codeJoinSeq": 11,
+                            "competitionDivisionUsedSeq": 1886,
+                            "divisionCode": "FREE_STYLE_POOMSAE",
+                            "divisionNameKo": "자유품새룰",
+                            "divisionNameEn": "Free Style Poomsae",
+                            "departmentCode": "UNDER_17",
+                            "departmentNameKo": "17세 이하",
+                            "departmentNameEn": "Under 17",
+                            "openDepartmentMinAge": null,
+                            "openDepartmentMaxAge": null,
+                            "eventSettings": [
+                              {
+                                "competitionEventSeq": 15135,
+                                "divisionCategoryCode": "INDIVIDUAL_MALE",
+                                "participateLimit": 256,
+                                "matchStyleType": "CUTOFF",
+                                "drawType": "RANDOM",
+                                "seed": "0%",
+                                "bronzeMedalMatchYn": "N",
+                                "diffPoomsaeYn": "N",
+                                "compositeRateType": null,
+                                "poomsaeOnceYn": "N",
+                                "matchOrderType": "CHUNG_CHUNG_HONG_HONG",
+                                "matchMinTime": 85,
+                                "matchMaxTime": 90,
+                                "isActive": true,
+                                "isSaved": true,
+                                "isStarted": false
+                              },
+                              {
+                                "competitionEventSeq": 15136,
+                                "divisionCategoryCode": "INDIVIDUAL_FEMALE",
+                                "participateLimit": 256,
+                                "matchStyleType": "CUTOFF",
+                                "drawType": "RANDOM",
+                                "seed": "0%",
+                                "bronzeMedalMatchYn": "N",
+                                "diffPoomsaeYn": "N",
+                                "compositeRateType": null,
+                                "poomsaeOnceYn": "N",
+                                "matchOrderType": "CHUNG_CHUNG_HONG_HONG",
+                                "matchMinTime": 85,
+                                "matchMaxTime": 90,
+                                "isActive": true,
+                                "isSaved": true,
+                                "isStarted": false
+                              },
+                              {
+                                "competitionEventSeq": null,
+                                "divisionCategoryCode": "TEAM_MALE",
+                                "participateLimit": null,
+                                "matchStyleType": null,
+                                "drawType": null,
+                                "seed": null,
+                                "bronzeMedalMatchYn": null,
+                                "diffPoomsaeYn": null,
+                                "compositeRateType": null,
+                                "poomsaeOnceYn": null,
+                                "matchOrderType": null,
+                                "matchMinTime": null,
+                                "matchMaxTime": null,
+                                "isActive": false,
+                                "isSaved": false,
+                                "isStarted": false
+                              },
+                              {
+                                "competitionEventSeq": null,
+                                "divisionCategoryCode": "TEAM_FEMALE",
+                                "participateLimit": null,
+                                "matchStyleType": null,
+                                "drawType": null,
+                                "seed": null,
+                                "bronzeMedalMatchYn": null,
+                                "diffPoomsaeYn": null,
+                                "compositeRateType": null,
+                                "poomsaeOnceYn": null,
+                                "matchOrderType": null,
+                                "matchMinTime": null,
+                                "matchMaxTime": null,
+                                "isActive": false,
+                                "isSaved": false,
+                                "isStarted": false
+                              },
+                              {
+                                "competitionEventSeq": 15137,
+                                "divisionCategoryCode": "PAIR",
+                                "participateLimit": 256,
+                                "matchStyleType": "CUTOFF",
+                                "drawType": "RANDOM",
+                                "seed": "0%",
+                                "bronzeMedalMatchYn": "N",
+                                "diffPoomsaeYn": "N",
+                                "compositeRateType": null,
+                                "poomsaeOnceYn": "N",
+                                "matchOrderType": "CHUNG_CHUNG_HONG_HONG",
+                                "matchMinTime": 85,
+                                "matchMaxTime": 90,
+                                "isActive": true,
+                                "isSaved": true,
+                                "isStarted": false
+                              },
+                              {
+                                "competitionEventSeq": 15138,
+                                "divisionCategoryCode": "TEAM_MIXED",
+                                "participateLimit": 256,
+                                "matchStyleType": "CUTOFF",
+                                "drawType": "RANDOM",
+                                "seed": "0%",
+                                "bronzeMedalMatchYn": "N",
+                                "diffPoomsaeYn": "N",
+                                "compositeRateType": null,
+                                "poomsaeOnceYn": "N",
+                                "matchOrderType": "CHUNG_CHUNG_HONG_HONG",
+                                "matchMinTime": 85,
+                                "matchMaxTime": 90,
+                                "isActive": true,
+                                "isSaved": true,
+                                "isStarted": false
+                              }
+                            ]
+                          },
+                          {
+                            "competitionCodeUsedSeq": 11199,
+                            "competitionSeq": 2757,
+                            "codeJoinSeq": 12,
+                            "competitionDivisionUsedSeq": 1886,
+                            "divisionCode": "FREE_STYLE_POOMSAE",
+                            "divisionNameKo": "자유품새룰",
+                            "divisionNameEn": "Free Style Poomsae",
+                            "departmentCode": "OVER_17",
+                            "departmentNameKo": "17세 초과",
+                            "departmentNameEn": "Over 17",
+                            "openDepartmentMinAge": null,
+                            "openDepartmentMaxAge": null,
+                            "eventSettings": [
+                              {
+                                "competitionEventSeq": null,
+                                "divisionCategoryCode": "INDIVIDUAL_MALE",
+                                "participateLimit": null,
+                                "matchStyleType": null,
+                                "drawType": null,
+                                "seed": null,
+                                "bronzeMedalMatchYn": null,
+                                "diffPoomsaeYn": null,
+                                "compositeRateType": null,
+                                "poomsaeOnceYn": null,
+                                "matchOrderType": null,
+                                "matchMinTime": null,
+                                "matchMaxTime": null,
+                                "isActive": true,
+                                "isSaved": false,
+                                "isStarted": false
+                              },
+                              {
+                                "competitionEventSeq": null,
+                                "divisionCategoryCode": "INDIVIDUAL_FEMALE",
+                                "participateLimit": null,
+                                "matchStyleType": null,
+                                "drawType": null,
+                                "seed": null,
+                                "bronzeMedalMatchYn": null,
+                                "diffPoomsaeYn": null,
+                                "compositeRateType": null,
+                                "poomsaeOnceYn": null,
+                                "matchOrderType": null,
+                                "matchMinTime": null,
+                                "matchMaxTime": null,
+                                "isActive": true,
+                                "isSaved": false,
+                                "isStarted": false
+                              },
+                              {
+                                "competitionEventSeq": null,
+                                "divisionCategoryCode": "TEAM_MALE",
+                                "participateLimit": null,
+                                "matchStyleType": null,
+                                "drawType": null,
+                                "seed": null,
+                                "bronzeMedalMatchYn": null,
+                                "diffPoomsaeYn": null,
+                                "compositeRateType": null,
+                                "poomsaeOnceYn": null,
+                                "matchOrderType": null,
+                                "matchMinTime": null,
+                                "matchMaxTime": null,
+                                "isActive": false,
+                                "isSaved": false,
+                                "isStarted": false
+                              },
+                              {
+                                "competitionEventSeq": null,
+                                "divisionCategoryCode": "TEAM_FEMALE",
+                                "participateLimit": null,
+                                "matchStyleType": null,
+                                "drawType": null,
+                                "seed": null,
+                                "bronzeMedalMatchYn": null,
+                                "diffPoomsaeYn": null,
+                                "compositeRateType": null,
+                                "poomsaeOnceYn": null,
+                                "matchOrderType": null,
+                                "matchMinTime": null,
+                                "matchMaxTime": null,
+                                "isActive": false,
+                                "isSaved": false,
+                                "isStarted": false
+                              },
+                              {
+                                "competitionEventSeq": null,
+                                "divisionCategoryCode": "PAIR",
+                                "participateLimit": null,
+                                "matchStyleType": null,
+                                "drawType": null,
+                                "seed": null,
+                                "bronzeMedalMatchYn": null,
+                                "diffPoomsaeYn": null,
+                                "compositeRateType": null,
+                                "poomsaeOnceYn": null,
+                                "matchOrderType": null,
+                                "matchMinTime": null,
+                                "matchMaxTime": null,
+                                "isActive": true,
+                                "isSaved": false,
+                                "isStarted": false
+                              },
+                              {
+                                "competitionEventSeq": null,
+                                "divisionCategoryCode": "TEAM_MIXED",
+                                "participateLimit": null,
+                                "matchStyleType": null,
+                                "drawType": null,
+                                "seed": null,
+                                "bronzeMedalMatchYn": null,
+                                "diffPoomsaeYn": null,
+                                "compositeRateType": null,
+                                "poomsaeOnceYn": null,
+                                "matchOrderType": null,
+                                "matchMinTime": null,
+                                "matchMaxTime": null,
+                                "isActive": true,
+                                "isSaved": false,
+                                "isStarted": false
+                              }
+                            ]
+                          }
+                        ],
+                        "divisionCategorySettings": [
+                          {
+                            "divisionCategoryCode": "INDIVIDUAL_MALE",
+                            "divisionCategoryNameKo": "남자개인",
+                            "divisionCategoryNameEn": "Individual male"
+                          },
+                          {
+                            "divisionCategoryCode": "INDIVIDUAL_FEMALE",
+                            "divisionCategoryNameKo": "여자개인",
+                            "divisionCategoryNameEn": "Individual female"
+                          },
+                          {
+                            "divisionCategoryCode": "TEAM_MALE",
+                            "divisionCategoryNameKo": "남자단체",
+                            "divisionCategoryNameEn": "Team male"
+                          },
+                          {
+                            "divisionCategoryCode": "TEAM_FEMALE",
+                            "divisionCategoryNameKo": "여자단체",
+                            "divisionCategoryNameEn": "Team female"
+                          },
+                          {
+                            "divisionCategoryCode": "PAIR",
+                            "divisionCategoryNameKo": "복식",
+                            "divisionCategoryNameEn": "Pair"
+                          },
+                          {
+                            "divisionCategoryCode": "TEAM_MIXED",
+                            "divisionCategoryNameKo": "혼성단체전",
+                            "divisionCategoryNameEn": "Team mixed"
+                          }
+                        ]
+                      },
+                      "error": null
+                    }
+                ITEM_NOT_FOUND:
+                  $ref: '../../openapi.yml#/components/examples/ITEM_NOT_FOUND'
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+
+    patch:
+      summary: 운영 설정에 부별 정보 수정
+      tags:
+        - 운영 - 설정
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                events:
+                  type: array
+                  items:
+                    required:
+                      - competitionDivisionUsedSeq
+                      - divisionCode
+                    type: object
+                    properties:
+                      competitionEventSeq:
+                        type: integer
+                        description: 고유 이벤트 seq
+                      matchOrderType:
+                        type: string
+                        description: 품새 시연 순서
+                        enum:
+                          - CHUNG_CHUNG_HONG_HONG
+                          - HONG_HONG_CHUNG_CHUNG
+                          - CHUNG_HONG_CHUNG_HONG
+                          - HONG_CHUNG_HONG_CHUNG
+                          - TOGETHER
+                      matchMinTime:
+                        type: integer
+                        description: '시연시간(최소) 초'
+                      matchMaxTime:
+                        type: integer
+                        description: '시연시간(최대) 초'
+              example:
+                {
+                  "events": [
+                    {
+                      "competitionEventSeq": 15130,
+                      "matchOrderType": "TOGETHER",
+                      "matchMinTime": 70,
+                      "matchMaxTime": 120
+                    },
+                    {
+                      "competitionEventSeq": 15135,
+                      "matchOrderType": "TOGETHER",
+                      "matchMinTime": 70,
+                      "matchMaxTime": 120
+                    },
+                    {
+                      "competitionEventSeq": 15150,
+                      "matchOrderType": "TOGETHER",
+                      "matchMinTime": 70,
+                      "matchMaxTime": 120
+                    }
+                  ]
+                }
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml#/components/responses/OK'
+              examples:
+                defaultResponse:
+                  summary: Default Example
+                  value:
+                    success: true
+                    data: null
+                    error: null
+                MATCH_STATE_INVALID_FOR_OPERATION:
+                  $ref: '../../openapi.yml#/components/examples/MATCH_STATE_INVALID_FOR_OPERATION'
+                EVENT_UPDATE_NOT_ALLOWED:
+                  $ref: '../../openapi.yml#/components/examples/EVENT_UPDATE_NOT_ALLOWED'
+
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'

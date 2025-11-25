@@ -35,6 +35,9 @@ paths:
                           matCount:
                             type: integer
                             description: '코트 수'
+                          resultDisplayTime:
+                            type: integer
+                            description: '채점결과 표출 시간 초'
                           firstMatchTime:
                             type: string
                             description: '첫경기시간 // 9시면 0900'
@@ -53,33 +56,6 @@ paths:
                           endTime:
                             type: string
                             description: '종료시간 // 12시면 1200'
-                          settingDetailList:
-                            type: array
-                            items:
-                              type: object
-                              properties:
-                                competitionSettingDetailSeq:
-                                  type: integer
-                                  description: '세팅 상세 seq'
-                                competitionDivisionUsedSeq:
-                                  type: integer
-                                  description: '해당 대회 사용 룰 seq'
-                                divisionCode:
-                                  $ref: "../../openapi.yml#/components/schemas/PoomsaeDivisionType"
-                                matchOrderType:
-                                  $ref: "../../openapi.yml#/components/schemas/PoomsaeMatchOrderType"
-                                matchMinTime:
-                                  type: integer
-                                  description: '시연시간(최소) 초'
-                                matchMaxTime:
-                                  type: integer
-                                  description: '시연시간(최대) 초'
-                                breakTime:
-                                  type: integer
-                                  description: '휴식시간 초'
-                                resultDisplayTime:
-                                  type: integer
-                                  description: '채점결과 표출 시간 초'
                       ovrPeriodInfo:
                         type: object
                         required:
@@ -110,23 +86,6 @@ paths:
                           totalAmountUsd:
                             type: number
                             description: '이용금액 달러'
-                      usedDivisionList:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            competitionDivisionUsedSeq:
-                              type: integer
-                              description: '사용 룰 Seq'
-                            divisionCode:
-                              type: string
-                              description: '사용중인 룰 코드'
-                            divisionNameKo:
-                              type: string
-                              description: '룰 국문명'
-                            divisionNameEn:
-                              type: string
-                              description: '룰 영문명'
                       settingImageList:
                         type: array
                         items:
@@ -165,29 +124,13 @@ paths:
                       competitionSetting:
                         competitionSettingSeq: 8
                         matCount: 5
+                        resultDisplayTime: 1
                         firstMatchTime: "0900"
                         lunchStime: "1200"
                         lunchEtime: "1300"
                         dinnerStime: "1800"
                         dinnerEtime: "1900"
                         endTime: "2100"
-                        settingDetailList:
-                          - competitionSettingDetailSeq: 3
-                            competitionDivisionUsedSeq: 14
-                            divisionCode: "WT_RECOGNIZED_POOMSAE"
-                            matchOrderType: "CHUNG_CHUNG_HONG_HONG"
-                            matchMinTime: 90
-                            matchMaxTime: 120
-                            breakTime: 100
-                            resultDisplayTime: 60
-                          - competitionSettingDetailSeq: 4
-                            competitionDivisionUsedSeq: 69
-                            divisionCode: "OPEN_RECOGNIZED_POOMSAE"
-                            matchOrderType: "HONG_HONG_CHUNG_CHUNG"
-                            matchMinTime: 90
-                            matchMaxTime: 120
-                            breakTime: 80
-                            resultDisplayTime: 60
                       ovrPeriodInfo:
                         competitionOvrPeriodSdate: "2025-04-30 00:00:00"
                         competitionOvrPeriodEdate: "2025-08-12 23:59:00"
@@ -195,11 +138,6 @@ paths:
                         competitionNocCode: "KOR"
                         totalAmountKor: 1050000.0
                         totalAmountUsd: 1050.0
-                      usedDivisionList:
-                        competitionDivisionUsedSeq : 69
-                        divisionCode: "WT_RECOGNIZED_POOMSAE"
-                        divisionNameKo: "WT 공인품새룰"
-                        divisionNameEn: "WT Recognized Poomsae"
                       settingImageList:
                         - s3MediaSeq: 2577
                           s3CdnUrl: "https://cdn.kpnpglobal.com/kpnp/media/image/champs/2025/05/fd66bbbae3d742b2922511f20b78e7bc.JPEG"
@@ -242,6 +180,9 @@ paths:
                 matCount:
                   type: integer
                   description: '코트 수'
+                resultDisplayTime:
+                  type: integer
+                  description: '결과 표시 시간'
                 firstMatchTime:
                   type: string
                   description: '첫경기시간 // 9시면 0900'
@@ -260,34 +201,6 @@ paths:
                 endTime:
                   type: string
                   description: '종료시간 // 12시면 1200'
-                competitionSettings:
-                  type: array
-                  items:
-                    required:
-                      - competitionDivisionUsedSeq
-                      - matchOrderType
-                      - matchMinTime
-                      - matchMaxTime
-                      - breakTime
-                      - resultDisplayTime
-                    type: object
-                    properties:
-                      competitionDivisionUsedSeq:
-                        type: integer
-                      matchOrderType:
-                        $ref: "../../openapi.yml#/components/schemas/PoomsaeMatchOrderType"
-                      matchMinTime:
-                        type: integer
-                        description: '시연시간(최소) 초'
-                      matchMaxTime:
-                        type: integer
-                        description: '시연시간(최대) 초'
-                      breakTime:
-                        type: integer
-                        description: '휴식시간 초 // 1분 30초면 90으로'
-                      resultDisplayTime:
-                        type: integer
-                        description: '채점결과 표출 시간 초'
               required:
                 - matCount
                 - competitionSettings
@@ -302,26 +215,13 @@ paths:
                 summary: 저장 요청 예시
                 value:
                   matCount: 5
+                  resultDisplayTime: 1
                   firstMatchTime: "0900"
                   lunchStime: "1200"
                   lunchEtime: "1300"
                   dinnerStime: "1800"
                   dinnerEtime: "1900"
                   endTime: "2100"
-                  competitionSettings:
-                    - competitionDivisionUsedSeq: 14
-                      matchOrderType: "CHUNG_CHUNG_HONG_HONG"
-                      matchMinTime: 90
-                      matchMaxTime: 120
-                      breakTime: 60
-                      resultDisplayTime: 60
-                    - competitionDivisionUsedSeq: 69
-                      matchOrderType: "HONG_HONG_CHUNG_CHUNG"
-                      matchMinTime: 90
-                      matchMaxTime: 120
-                      breakTime: 60
-                      resultDisplayTime: 60
-
       responses:
         '200':
           description: 저장 성공 또는 데이터 없음
