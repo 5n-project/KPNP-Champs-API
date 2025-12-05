@@ -673,3 +673,49 @@ paths:
               examples:
                 FILE_LOAD_FAILURE:
                   $ref: '../../openapi.yml/#/components/examples/FILE_LOAD_FAILURE'
+
+  /competitions/{competitionSeq}/participants/confirm/rollback:
+    post:
+      summary: 참가자 확정 되돌리기
+      tags:
+        - 운영 - 참가자
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 대회의 고유 시퀀스
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: boolean
+                  error:
+                    type: string
+                    nullable: true
+              examples:
+                defaultResponse:
+                  summary: 성공 응답
+                  value:
+                    success: true
+                    data: true
+                    error: null
+                MATCH_STATE_INVALID_FOR_OPERATION:
+                  $ref: '../../openapi.yml/#/components/examples/MATCH_STATE_INVALID_FOR_OPERATION'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml/#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'

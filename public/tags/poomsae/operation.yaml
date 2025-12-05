@@ -2744,6 +2744,10 @@ paths:
                             type: string
                             nullable: true
                             description: 선수 프로필 이미지 url
+                      isTeam:
+                        type: boolean
+                        description: 팀인지 아닌지
+                        nullable: false
                       cutoffDraws:
                         type: array
                         description: 컷오프 대진표 리스트
@@ -2887,6 +2891,7 @@ paths:
                           "country": null,
                           "profileImageUrl": null
                         },
+                        "isTeam": true,
                         "cutoffDraws": [
                           {
                             "phaseType": "SF_A",

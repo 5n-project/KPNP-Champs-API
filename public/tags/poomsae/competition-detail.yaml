@@ -56,6 +56,9 @@ paths:
                           endTime:
                             type: string
                             description: '종료시간 // 12시면 1200'
+                          displayTeamNameYn:
+                            type: string
+                            description: '팀명 표출 Y,N'
                       ovrPeriodInfo:
                         type: object
                         required:
@@ -131,6 +134,7 @@ paths:
                         dinnerStime: "1800"
                         dinnerEtime: "1900"
                         endTime: "2100"
+                        displayTeamNameYn: "Y"
                       ovrPeriodInfo:
                         competitionOvrPeriodSdate: "2025-04-30 00:00:00"
                         competitionOvrPeriodEdate: "2025-08-12 23:59:00"
@@ -201,6 +205,9 @@ paths:
                 endTime:
                   type: string
                   description: '종료시간 // 12시면 1200'
+                displayTeamNameYn:
+                  type: string
+                  description: '팀명 표출 Y,N'
               required:
                 - matCount
                 - competitionSettings
@@ -210,6 +217,7 @@ paths:
                 - dinnerStime
                 - dinnerEtime
                 - endTime
+                - displayTeamNameYn
             examples:
               defaultRequest:
                 summary: 저장 요청 예시
@@ -222,6 +230,7 @@ paths:
                   dinnerStime: "1800"
                   dinnerEtime: "1900"
                   endTime: "2100"
+                  displayTeamNameYn: "Y"
       responses:
         '200':
           description: 저장 성공 또는 데이터 없음

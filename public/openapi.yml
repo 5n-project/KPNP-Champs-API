@@ -164,6 +164,8 @@ paths:
     $ref: './tags/poomsae/participant.yaml#/paths/~1competitions~1{competitionSeq}~1participants~1confirm'
   /competitions/{competitionSeq}/participants/csv:
     $ref: './tags/poomsae/participant.yaml#/paths/~1competitions~1{competitionSeq}~1participants~1csv'
+  /competitions/{competitionSeq}/participants/confirm/rollback:
+    $ref: './tags/poomsae/participant.yaml#/paths/~1competitions~1{competitionSeq}~1participants~1confirm~1rollback'
 
 
    # 운영 - 입장
