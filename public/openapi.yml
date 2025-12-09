@@ -275,6 +275,14 @@ paths:
     $ref: './tags/poomsae/score.yaml#/paths/~1competitions~1{competitionSeq}~1matches~1{matchSeq}~1competitors~1{competitorSeq}~1scores'
 
   # FOP
+  /competitions/{competitionSeq}/fop/status/main/{status}:
+    $ref: './tags/poomsae/fop.yaml#/paths/~1competitions~1{competitionSeq}~1fop~1status~1main~1{status}'
+  /competitions/{competitionSeq}/fop/status/side/{status}/activate:
+    $ref: './tags/poomsae/fop.yaml#/paths/~1competitions~1{competitionSeq}~1fop~1status~1side~1{status}~1activate'
+  /competitions/{competitionSeq}/fop/status/side/{status}/deactivate:
+    $ref: './tags/poomsae/fop.yaml#/paths/~1competitions~1{competitionSeq}~1fop~1status~1side~1{status}~1deactivate'
+  /competitions/{competitionSeq}/fop/status/match/{competitionMatchPsSeq}:
+    $ref: './tags/poomsae/fop.yaml#/paths/~1competitions~1{competitionSeq}~1fop~1status~1match~1{competitionMatchPsSeq}'
   /competitions/{competitionSeq}/fop/match/result:
     $ref: './tags/poomsae/fop.yaml#/paths/~1competitions~1{competitionSeq}~1fop~1match~1result'
   /competitions/{competitionSeq}/fop/{competitionMatchPsSeq}/progress-seconds:
@@ -1140,6 +1148,13 @@ components:
         error:
           message: "해당 대회에서 진행 중이거나 일치하지 않는 이벤트가 포함되어 있어 수정 작업을 수행할 수 없습니다."
           errorCode: "E751"
+    WRONG_FOP_STATUS:
+      value:
+        success: false
+        data: null
+        error:
+          message: "잘못된 FOP 상태값입니다."
+          errorCode: "E664"
 
 
   schemas:

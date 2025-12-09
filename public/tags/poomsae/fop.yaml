@@ -1,4 +1,533 @@
 paths:
+  /competitions/{competitionSeq}/fop/status/main/{status}:
+    post:
+      summary: FOP 조작 버튼 API (Main Status 변경)
+      tags:
+        - FOP
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: status
+          in: path
+          required: true
+          description: FOP main status
+          schema:
+            type: string
+            enum:
+              - NONE
+              - DRAW_POOMSAE
+              - READY
+              - FIRST_START
+              - STOP
+              - START
+              - RESULT
+              - NEXT_POOMSAE
+              - SCORE
+              - FINISH
+              - REMATCH
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - competitionMatchPsSeq
+              properties:
+                competitionMatchPsSeq:
+                  type: integer
+                  description:
+                    '매치 seq'
+                  example: "1234"
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                properties:
+                  success:
+                    type: boolean
+                    required: true
+                    example: true
+                  data:
+                    type: object
+                    required: true
+                    properties:
+                      clientEffectTypeList:
+                        required: true
+                        type: array
+                        description: 프론트에서 띄워야 할 alert
+                  error:
+                    required: true
+                    nullable: true
+                    example: null
+              examples:
+                defaultResponse:
+                  summary: Default Example
+                  value:
+                    {
+                      "success": true,
+                      "data": {
+                        "clientEffectTypeList": [
+                          "show-phaseProcessingModal"
+                        ]
+                      },
+                      "error": null
+                    }
+                COMPETITION_MATCH_NOT_FOUND:
+                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml/#/components/responses/Error'
+              examples:
+                INVALID_TYPE_ERROR:
+                  $ref: '../../openapi.yml#/components/examples/INVALID_TYPE_ERROR'
+                WRONG_FOP_STATUS:
+                  $ref: '../../openapi.yml#/components/examples/WRONG_FOP_STATUS'
+
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml/#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+
+  /competitions/{competitionSeq}/fop/status/side/{status}/activate:
+    post:
+      summary: FOP 조작 버튼 API (activate Side Status)
+      tags:
+        - FOP
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: status
+          in: path
+          required: true
+          description: FOP main status
+          schema:
+            type: string
+            enum:
+              - LOGO
+              - SHOW_POOMSAE
+              - INJURY
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - competitionMatchPsSeq
+              properties:
+                competitionMatchPsSeq:
+                  type: integer
+                  description:
+                    '매치 seq'
+                  example: "1234"
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                properties:
+                  success:
+                    type: boolean
+                    required: true
+                    example: true
+                  data:
+                    required: true
+                    nullable: true
+                    example: null
+                  error:
+                    required: true
+                    nullable: true
+                    example: null
+              examples:
+                defaultResponse:
+                  summary: Default Example
+                  value:
+                    {
+                      "success": true,
+                      "data": null,
+                      "error": null
+                    }
+                COMPETITION_MATCH_NOT_FOUND:
+                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml/#/components/responses/Error'
+              examples:
+                INVALID_TYPE_ERROR:
+                  $ref: '../../openapi.yml#/components/examples/INVALID_TYPE_ERROR'
+                WRONG_FOP_STATUS:
+                  $ref: '../../openapi.yml#/components/examples/WRONG_FOP_STATUS'
+
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml/#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+
+  /competitions/{competitionSeq}/fop/status/side/{status}/deactivate:
+    post:
+      summary: FOP 조작 버튼 API (deactivate Side Status)
+      tags:
+        - FOP
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: status
+          in: path
+          required: true
+          description: FOP main status
+          schema:
+            type: string
+            enum:
+              - LOGO
+              - SHOW_POOMSAE
+              - INJURY
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - competitionMatchPsSeq
+              properties:
+                competitionMatchPsSeq:
+                  type: integer
+                  description:
+                    '매치 seq'
+                  example: "1234"
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                properties:
+                  success:
+                    type: boolean
+                    required: true
+                    example: true
+                  data:
+                    required: true
+                    nullable: true
+                    example: null
+                  error:
+                    required: true
+                    nullable: true
+                    example: null
+              examples:
+                defaultResponse:
+                  summary: Default Example
+                  value:
+                    {
+                      "success": true,
+                      "data": null,
+                      "error": null
+                    }
+                COMPETITION_MATCH_NOT_FOUND:
+                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml/#/components/responses/Error'
+              examples:
+                INVALID_TYPE_ERROR:
+                  $ref: '../../openapi.yml#/components/examples/INVALID_TYPE_ERROR'
+                WRONG_FOP_STATUS:
+                  $ref: '../../openapi.yml#/components/examples/WRONG_FOP_STATUS'
+
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml/#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+
+  /competitions/{competitionSeq}/fop/status/match/{competitionMatchPsSeq}:
+    get:
+      summary: match 마지막 FOP 상태 가져오기
+      tags:
+        - FOP
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: competitionMatchPsSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: FOP 상태 변경 이벤트 데이터 조회 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                description: FOP(Floor of Play) 상태 변경 이벤트 페이로드
+                required:
+                  - location
+                  - method
+                  - data
+                properties:
+                  location:
+                    type: string
+                    description: 이벤트가 발생한 도메인/모듈 식별자
+                    example: fop
+                  method:
+                    type: string
+                    description: 이벤트 동작 식별자
+                    example: change-status
+                  data:
+                    type: object
+                    description: 상태 변경에 필요한 매치 및 품새 정보
+                    required:
+                      - matchInfo
+                      - mainStatus
+                      - data
+                      - enableNextStatusTypes
+                    properties:
+                      matchInfo:
+                        type: object
+                        description: 매치 기본 정보
+                        required:
+                          - competitionMatchPsSeq
+                          - matchNumber
+                          - divisionCode
+                          - divisionNameKo
+                          - divisionNameEn
+                          - departmentCode
+                          - departmentNameKo
+                          - departmentNameEn
+                          - divisionCategoryCode
+                          - divisionCategoryNameKo
+                          - divisionCategoryNameEn
+                          - matchStyleType
+                          - phase
+                        properties:
+                          competitionMatchPsSeq:
+                            type: integer
+                            format: int64
+                            description: 품새 매치 식별자(내부 시퀀스)
+                            example: 20024
+                          matchNumber:
+                            type: integer
+                            description: 운영 화면에 노출되는 매치 번호
+                            example: 1001
+                          divisionCode:
+                            type: string
+                            description: 디비전 코드
+                            example: WT_RECOGNIZED_POOMSAE
+                          divisionNameKo:
+                            type: string
+                            description: 디비전 한글명
+                            example: WT 공인품새룰
+                          divisionNameEn:
+                            type: string
+                            description: 디비전 영문명
+                            example: WT Recognized Poomsae
+                          departmentCode:
+                            type: string
+                            description: 부서/연령/그룹 코드
+                            example: UNDER_30
+                          departmentNameKo:
+                            type: string
+                            description: 부서/연령/그룹 한글명
+                            example: 30세 이하
+                          departmentNameEn:
+                            type: string
+                            description: 부서/연령/그룹 영문명
+                            example: Under 30
+                          divisionCategoryCode:
+                            type: string
+                            description: 디비전 카테고리 코드
+                            example: INDIVIDUAL_MALE
+                          divisionCategoryNameKo:
+                            type: string
+                            description: 디비전 카테고리 한글명
+                            example: 남자개인
+                          divisionCategoryNameEn:
+                            type: string
+                            description: 디비전 카테고리 영문명
+                            example: Individual male
+                          matchStyleType:
+                            type: string
+                            description: 매치 진행 방식
+                            example: TOURNAMENT
+                          phase:
+                            type: string
+                            description: 토너먼트 페이즈
+                            example: R64
+
+                      mainStatus:
+                        type: string
+                        nullable: false
+                        description: FOP 메인 상태(경기 진행 핵심 상태)
+                        example: DRAW_POOMSAE
+                      sideStatus:
+                        type: string
+                        nullable: true
+                        description: FOP 보조 상태(옵션 상태)
+                        example: null
+
+                      data:
+                        type: object
+                        description: 상태에 종속되는 상세 데이터(품새 선택/진행 정보)
+                        required:
+                          - firstPoomsaeType
+                          - firstPoomsaeNameEn
+                          - firstPoomsaeNameKo
+                          - secondPoomsaeType
+                          - secondPoomsaeNameEn
+                          - secondPoomsaeNameKo
+                          - currentPoomsaeSequenceType
+                        properties:
+                          firstPoomsaeType:
+                            type: string
+                            description: 1품새 타입 코드
+                            example: TAEGEUK_7_JANG
+                          firstPoomsaeNameEn:
+                            type: string
+                            description: 1품새 영문명
+                            example: Taegeuk 7 Jang
+                          firstPoomsaeNameKo:
+                            type: string
+                            description: 1품새 한글명
+                            example: 태극 7장
+                          secondPoomsaeType:
+                            type: string
+                            description: 2품새 타입 코드
+                            example: TAEGEUK_8_JANG
+                          secondPoomsaeNameEn:
+                            type: string
+                            description: 2품새 영문명
+                            example: Taegeuk 8 Jang
+                          secondPoomsaeNameKo:
+                            type: string
+                            description: 2품새 한글명
+                            example: 태극 8장
+                          currentPoomsaeSequenceType:
+                            type: string
+                            description: 현재 선택/진행 중인 품새 순번/포지션 식별자
+                            example: P1
+
+                      enableNextStatusTypes:
+                        type: array
+                        description: 현재 상태에서 전이 가능한 다음 상태 목록
+                        items:
+                          type: string
+                        example:
+                          - READY
+
+              examples:
+                defaultResponse:
+                  value:
+                    {
+                      "success": true,
+                      "data": {
+                        "location": "fop",
+                        "method": "change-status",
+                        "data": {
+                          "matchInfo": {
+                            "competitionMatchPsSeq": 20024,
+                            "matchNumber": 1001,
+                            "divisionCode": "WT_RECOGNIZED_POOMSAE",
+                            "divisionNameKo": "WT 공인품새룰",
+                            "divisionNameEn": "WT Recognized Poomsae",
+                            "departmentCode": "UNDER_30",
+                            "departmentNameKo": "30세 이하",
+                            "departmentNameEn": "Under 30",
+                            "divisionCategoryCode": "INDIVIDUAL_MALE",
+                            "divisionCategoryNameKo": "남자개인",
+                            "divisionCategoryNameEn": "Individual male",
+                            "matchStyleType": "TOURNAMENT",
+                            "phase": "R64"
+                          },
+                          "mainStatus": "DRAW_POOMSAE",
+                          "sideStatus": null,
+                          "data": {
+                            "firstPoomsaeType": "TAEGEUK_7_JANG",
+                            "firstPoomsaeNameEn": "Taegeuk 7 Jang",
+                            "firstPoomsaeNameKo": "태극 7장",
+                            "secondPoomsaeType": "TAEGEUK_8_JANG",
+                            "secondPoomsaeNameEn": "Taegeuk 8 Jang",
+                            "secondPoomsaeNameKo": "태극 8장",
+                            "currentPoomsaeSequenceType": "P1"
+                          },
+                          "enableNextStatusTypes": [
+                            "READY"
+                          ]
+                        }
+                      },
+                      "error": null
+                    }
+                COMPETITION_MATCH_NOT_FOUND:
+                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml/#/components/responses/Error'
+              examples:
+                INVALID_TYPE_ERROR:
+                  $ref: '../../openapi.yml#/components/examples/INVALID_TYPE_ERROR'
+
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml/#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+
   /competitions/{competitionSeq}/fop/match/result:
     patch:
       summary: 진행중 경기 결과 선택
@@ -56,6 +585,8 @@ paths:
                     type: boolean
                     example: true
                   data:
+                    nullable: true
+                    example: null
                   error:
                     nullable: true
                     example: null
