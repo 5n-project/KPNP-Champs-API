@@ -611,6 +611,8 @@ paths:
                   $ref: '../../openapi.yml#/components/examples/IS_BYE_MATCH'
                 MATCH_RESULT_ALREADY_UP_TO_DATE:
                   $ref: '../../openapi.yml#/components/examples/MATCH_RESULT_ALREADY_UP_TO_DATE'
+                CANNOT_DISQUALIFY_ALL_CUTOFF_COMPETITORS:
+                  $ref: '../../openapi.yml#/components/examples/CANNOT_DISQUALIFY_ALL_CUTOFF_COMPETITORS'
 
         400:
           description: Bad Request

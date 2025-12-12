@@ -168,7 +168,7 @@ paths:
     $ref: './tags/poomsae/participant.yaml#/paths/~1competitions~1{competitionSeq}~1participants~1confirm~1rollback'
 
 
-   # 운영 - 입장
+    # 운영 - 입장
   /competition/{competitionSeq}/entries/competitors:
     $ref: './tags/poomsae/entry.yaml#/paths/~1competition~1{competitionSeq}~1entries~1competitors'
   /competition/{competitionSeq}/entries/competitors/{competitorEntrySeq}:
@@ -242,6 +242,8 @@ paths:
     $ref: './tags/poomsae/operation.yaml#/paths/~1competitions~1{competitionSeq}~1operation~1matches~1progress~1{day}'
   /competitions/{competitionSeq}/operation/matches/{competitionMatchPsSeq}/competitor/{matchCompetitorDetailSeq}/qualify:
     $ref: './tags/poomsae/operation.yaml#/paths/~1competitions~1{competitionSeq}~1operation~1matches~1{competitionMatchPsSeq}~1competitor~1{matchCompetitorDetailSeq}~1qualify'
+  /competitions/{competitionSeq}/operation/events/{competitionEventSeq}/process-subsequent:
+    $ref: './tags/poomsae/operation.yaml#/paths/~1competitions~1{competitionSeq}~1operation~1events~1{competitionEventSeq}~1process-subsequent'
 
 
   # 운영 - 설정
@@ -1155,7 +1157,34 @@ components:
         error:
           message: "잘못된 FOP 상태값입니다."
           errorCode: "E664"
-
+    CURRENT_PHASE_IS_ONGOING:
+      value:
+        success: false
+        data: null
+        error:
+          message: "현재 페이즈가 진행중입니다."
+          errorCode: "E752"
+    FEATURE_NOT_SUPPORTED_IN_TOURNAMENT:
+      value:
+        success: false
+        data: null
+        error:
+          message: "해당 기능은 토너먼트 일정에서는 지원하지 않습니다."
+          errorCode: "E753"
+    CANNOT_DISQUALIFY_ALL_CUTOFF_COMPETITORS:
+      value:
+        success: false
+        data: null
+        error:
+          message: "컷오프 전체 인원을 실격처리 할 수 없습니다."
+          errorCode: "E754"
+    NO_PHASES_TO_PROCESS:
+      value:
+        success: false
+        data: null
+        error:
+          message: "처리 할 페이즈가 없습니다."
+          errorCode: "E755"
 
   schemas:
     getCompetitionDefaultResponse:

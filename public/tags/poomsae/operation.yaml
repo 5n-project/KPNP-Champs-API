@@ -5257,3 +5257,63 @@ paths:
               examples:
                 IS_NOT_AUTHORIZED:
                   $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+  /competitions/{competitionSeq}/operation/events/{competitionEventSeq}/process-subsequent:
+    post:
+      summary: 운영 빈 매치 처리
+      description: 과반수 이상 실격했을 때 다음 라운드의 빈 매치 처리
+      tags:
+        - 운영 - 경기
+      parameters:
+        - name: competitionSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 대회 고유 시퀀스
+        - name: competitionEventSeq
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 종목 seq
+      responses:
+        '200':
+          description: 경기 결과 수정 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    nullable: true
+                  error:
+                    type: string
+                    nullable: true
+              examples:
+                success:
+                  summary: 성공 응답 예시
+                  value:
+                    success: true
+                    data: null
+                    error: null
+                ITEM_NOT_FOUND:
+                  $ref: '../../openapi.yml#/components/examples/ITEM_NOT_FOUND'
+                COMPETITION_MATCH_NOT_FOUND:
+                  $ref: '../../openapi.yml#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+                FEATURE_NOT_SUPPORTED_IN_TOURNAMENT:
+                  $ref: '../../openapi.yml#/components/examples/FEATURE_NOT_SUPPORTED_IN_TOURNAMENT'
+                CURRENT_PHASE_IS_ONGOING:
+                  $ref: '../../openapi.yml#/components/examples/CURRENT_PHASE_IS_ONGOING'
+        '403':
+          description: 권한 없음
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml#/components/responses/Error'
+              examples:
+                IS_NOT_AUTHORIZED:
+                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
