@@ -2927,7 +2927,7 @@ paths:
             type: integer
           description: 매핑된 심판 그룹 seq
         - in: query
-          name: matchSideType
+          name: poomsaeMatchSideType
           required: true
           schema:
             type: string
