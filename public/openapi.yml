@@ -78,10 +78,12 @@ paths:
   # 대회
   /competitions:
     $ref: './tags/poomsae/competition.yaml#/paths/~1competitions'
-  /non/competitions:
-    $ref: './tags/poomsae/competition.yaml#/paths/~1non~1competitions'
   /competitions/host:
     $ref: './tags/poomsae/competition.yaml#/paths/~1competitions~1host'
+  /non/competitions:
+    $ref: './tags/poomsae/competition.yaml#/paths/~1non~1competitions'
+  /non/competitions/referee:
+    $ref: './tags/poomsae/competition.yaml#/paths/~1non~1competitions~1referee'
 
 
   # 대회개최 - 기본 정보
