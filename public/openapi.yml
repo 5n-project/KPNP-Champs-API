@@ -1187,6 +1187,13 @@ components:
         error:
           message: "처리 할 페이즈가 없습니다."
           errorCode: "E755"
+    ATHLETE_CSV_DATA_NOT_FOUND:
+      value:
+        success: false
+        data: null
+        error:
+          message: "CSV 파일에 선수 데이터가 포함되어 있지 않습니다."
+          errorCode: "E756"
 
   schemas:
     getCompetitionDefaultResponse:

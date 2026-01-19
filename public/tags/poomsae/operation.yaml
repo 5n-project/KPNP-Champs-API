@@ -856,6 +856,7 @@ paths:
                       - phase
                       - phaseLabel
                       - resultDecision
+                      - poomsaeOnceYn
                       - matchCompetitorList
                     properties:
                       competitionMatchPsSeq:
@@ -938,6 +939,9 @@ paths:
                       isCutoffTournamentAndSemiFinalMatch:
                         type: boolean
                         description: 해당 경기가 컷오프+토너먼트에서 컷오프의 SemiFinal 인지 아닌지 (true면 qualify 보여야함)
+                      poomsaeOnceYn:
+                        type: string
+                        description: "한번만 시연 : Y 아니면 N"
                       poomsaeTypes:
                         type: array
                         description: 설정한 품새 타입 리스트 (자유품새는 비어있음)
@@ -1099,6 +1103,7 @@ paths:
                       phaseLabel: "R64-2"
                       resultDecision: "RSC"
                       isCutoffTournamentAndSemiFinalMatch: false
+                      poomsaeOnceYn: "N"
                       poomsaeTypes:
                         - poomsaeTypeCode: "TAEGEUK_8_JANG"
                           poomsaeTypeNameKo: "태극 8장"

@@ -654,6 +654,8 @@ paths:
                   $ref: '../../openapi.yml/#/components/examples/INVALID_BIRTH_DATE_ERROR'
                 DUPLICATE_EMAIL:
                   $ref: '../../openapi.yml/#/components/examples/DUPLICATE_EMAIL'
+                DUPLICATE_EMAIL:
+                  $ref: '../../openapi.yml/#/components/examples/DUPLICATE_EMAIL'
 
         403:
           description: Forbidden
