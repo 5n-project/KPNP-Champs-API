@@ -3433,19 +3433,6 @@ paths:
                   count: 5
                 - deltaType: 0.300
                   count: 0
-              criteriaTotalScores:
-                - criteriaType: ACCURACY
-                  scoringType:
-                    nameEn: accuracy
-                    nameKo: "정확도"
-                    sortNo: 1
-                  totalScore: 3.500
-                - criteriaType: PRESENTATION
-                  scoringType:
-                    nameEn: presentation
-                    nameKo: "표현력"
-                    sortNo: 2
-                  totalScore: 1.500
               criteriaTypes:
                 - matchScoreSeq: 944
                   criteriaType: ACCURACY
