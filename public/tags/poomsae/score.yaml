@@ -3361,37 +3361,6 @@ paths:
                         type: integer
                         example: 5
                         description: 감점 횟수
-                totalScore:
-                  type: number
-                  example: 5.000
-                  description: 총점
-                deductionScore:
-                  type: number
-                  example: 2.700
-                  description: 감점 총합
-                criteriaTotalScores:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      criteriaType:
-                        type: string
-                        example: ACCURACY
-                      scoringType:
-                        type: object
-                        properties:
-                          nameEn:
-                            type: string
-                            example: accuracy
-                          nameKo:
-                            type: string
-                            example: 정확도
-                          sortNo:
-                            type: integer
-                            example: 1
-                      totalScore:
-                        type: number
-                        example: 3.500
                 criteriaTypes:
                   type: array
                   items:
@@ -3464,8 +3433,6 @@ paths:
                   count: 5
                 - deltaType: 0.300
                   count: 0
-              totalScore: 5.000
-              deductionScore: 2.700
               criteriaTotalScores:
                 - criteriaType: ACCURACY
                   scoringType:
