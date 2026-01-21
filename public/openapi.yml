@@ -1194,6 +1194,27 @@ components:
         error:
           message: "CSV 파일에 선수 데이터가 포함되어 있지 않습니다."
           errorCode: "E756"
+    CANNOT_RESET_WAITING_MATCH:
+      value:
+        success: false
+        data: null
+        error:
+          message: "대기중 경기는 리셋 할 수 없습니다."
+          errorCode: "E757"
+    CANNOT_RESET_MATCH_CUTOFF_GROUP_FINISHED:
+      value:
+        success: false
+        data: null
+        error:
+          message: "해당 컷오프 조가 종료되어 경기를 리셋 할 수 없습니다."
+          errorCode: "E758"
+    CANNOT_RESET_MATCH_NEXT_ROUND_IN_PROGRESS:
+      value:
+        success: false
+        data: null
+        error:
+          message: "다음 라운드 경기가 진행되어 경기를 리셋 할 수 없습니다."
+          errorCode: "E759"
 
   schemas:
     getCompetitionDefaultResponse:

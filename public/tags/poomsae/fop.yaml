@@ -28,6 +28,7 @@ paths:
               - SCORE
               - FINISH
               - REMATCH
+              - RESET
       requestBody:
         required: true
         content:
@@ -82,6 +83,12 @@ paths:
                     }
                 COMPETITION_MATCH_NOT_FOUND:
                   $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+                CANNOT_RESET_WAITING_MATCH:
+                  $ref: '../../openapi.yml/#/components/examples/CANNOT_RESET_WAITING_MATCH'
+                CANNOT_RESET_MATCH_CUTOFF_GROUP_FINISHED:
+                  $ref: '../../openapi.yml/#/components/examples/CANNOT_RESET_MATCH_CUTOFF_GROUP_FINISHED'
+                CANNOT_RESET_MATCH_NEXT_ROUND_IN_PROGRESS:
+                  $ref: '../../openapi.yml/#/components/examples/CANNOT_RESET_MATCH_NEXT_ROUND_IN_PROGRESS'
 
         400:
           description: Bad Request
