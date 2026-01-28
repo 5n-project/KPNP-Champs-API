@@ -1180,12 +1180,12 @@ components:
         error:
           message: "컷오프 전체 인원을 실격처리 할 수 없습니다."
           errorCode: "E754"
-    NO_PHASES_TO_PROCESS:
+    CANNOT_PROCESS_LAST_PHASE:
       value:
         success: false
         data: null
         error:
-          message: "처리 할 페이즈가 없습니다."
+          message: "마지막 페이즈는 처리 할 수 없습니다."
           errorCode: "E755"
     ATHLETE_CSV_DATA_NOT_FOUND:
       value:

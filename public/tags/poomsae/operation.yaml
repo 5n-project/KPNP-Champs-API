@@ -5313,6 +5313,15 @@ paths:
                   $ref: '../../openapi.yml#/components/examples/FEATURE_NOT_SUPPORTED_IN_TOURNAMENT'
                 CURRENT_PHASE_IS_ONGOING:
                   $ref: '../../openapi.yml#/components/examples/CURRENT_PHASE_IS_ONGOING'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '../../openapi.yml#/components/responses/Error'
+              examples:
+                CANNOT_PROCESS_LAST_PHASE:
+                  $ref: '../../openapi.yml#/components/examples/CANNOT_PROCESS_LAST_PHASE'
         '403':
           description: 권한 없음
           content:
