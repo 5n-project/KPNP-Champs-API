@@ -1215,6 +1215,22 @@ components:
         error:
           message: "다음 라운드 경기가 진행되어 경기를 리셋 할 수 없습니다."
           errorCode: "E759"
+    MISSING_COURT_ASSIGNMENT:
+      value:
+        success: false
+        data: null
+        error:
+          message: "코트 배정 누락 안내:\n코트뷰어에서 배치 상태를 재확인해 주시기 바랍니다."
+          errorCode: "E762"
+
+    EXIST_WAITING_MATCHES:
+      value:
+        success: false
+        data: null
+        error:
+          message: "대기 중인 매치가 존재합니다.\n원활한 진행을 위해 코트뷰어를 확인해 주세요."
+          errorCode: "E763"
+
 
   schemas:
     getCompetitionDefaultResponse:

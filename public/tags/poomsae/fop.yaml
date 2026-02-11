@@ -89,6 +89,10 @@ paths:
                   $ref: '../../openapi.yml/#/components/examples/CANNOT_RESET_MATCH_CUTOFF_GROUP_FINISHED'
                 CANNOT_RESET_MATCH_NEXT_ROUND_IN_PROGRESS:
                   $ref: '../../openapi.yml/#/components/examples/CANNOT_RESET_MATCH_NEXT_ROUND_IN_PROGRESS'
+                MISSING_COURT_ASSIGNMENT:
+                  $ref: '../../openapi.yml/#/components/examples/MISSING_COURT_ASSIGNMENT'
+                EXIST_WAITING_MATCHES:
+                  $ref: '../../openapi.yml/#/components/examples/EXIST_WAITING_MATCHES'
 
         400:
           description: Bad Request
