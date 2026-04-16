@@ -2354,6 +2354,8 @@ paths:
                   $ref: '../../openapi.yml#/components/examples/SCHEDULE_IS_EMPTY'
                 MATCH_IS_ALREADY_CREATED:
                   $ref: '../../openapi.yml#/components/examples/MATCH_IS_ALREADY_CREATED'
+                ALREADY_SAVED_DATA:
+                  $ref: '../../openapi.yml#/components/examples/ALREADY_SAVED_DATA'
         '403':
           description: Forbidden
           content:
@@ -2451,6 +2453,8 @@ paths:
                   $ref: '../../openapi.yml#/components/examples/MATCH_RESULT_CANNOT_BE_UPDATED_AFTER_NEXT_ROUND'
                 CUTOFF_MATCH_RESULT_ALREADY_UP_TO_DATE:
                   $ref: '../../openapi.yml#/components/examples/CUTOFF_MATCH_RESULT_ALREADY_UP_TO_DATE'
+                ALREADY_SAVED_DATA:
+                  $ref: '../../openapi.yml#/components/examples/ALREADY_SAVED_DATA'
         '403':
           description: 권한 없음
           content:
@@ -3918,6 +3922,8 @@ paths:
                   $ref: '../../openapi.yml#/components/examples/ONLY_TOURNAMENT_RANDOM_MATCH'
                 NO_PLAYER_ADVANCED_TO_NEXT_ROUND:
                   $ref: '../../openapi.yml#/components/examples/NO_PLAYER_ADVANCED_TO_NEXT_ROUND'
+                ALREADY_SAVED_DATA:
+                  $ref: '../../openapi.yml#/components/examples/ALREADY_SAVED_DATA'
         '403':
           description: 권한 없음
           content:

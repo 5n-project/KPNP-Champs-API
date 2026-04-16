@@ -409,6 +409,8 @@ paths:
                   $ref: '../../openapi.yml/#/components/examples/COMPETITION_PARTICIPATE_LIMIT_OVER'
                 COMPETITION_MATCH_PROGRESS_NOT_ADD:
                   $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_PROGRESS_NOT_ADD'
+                ALREADY_SAVED_DATA:
+                  $ref: '../../openapi.yml/#/components/examples/ALREADY_SAVED_DATA'
         '403':
           description: Forbidden
           content:
@@ -712,6 +714,8 @@ paths:
                     error: null
                 MATCH_STATE_INVALID_FOR_OPERATION:
                   $ref: '../../openapi.yml/#/components/examples/MATCH_STATE_INVALID_FOR_OPERATION'
+                ALREADY_SAVED_DATA:
+                  $ref: '../../openapi.yml/#/components/examples/ALREADY_SAVED_DATA'
         '403':
           description: Forbidden
           content:

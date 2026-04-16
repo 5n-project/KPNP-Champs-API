@@ -1231,6 +1231,14 @@ components:
           message: "대기 중인 매치가 존재합니다.\n원활한 진행을 위해 코트뷰어를 확인해 주세요."
           errorCode: "E763"
 
+    ALREADY_SAVED_DATA:
+      value:
+        success: false
+        data: null
+        error:
+          message: "이미 저장 된 데이터입니다."
+          errorCode: "E765"
+
 
   schemas:
     getCompetitionDefaultResponse:
