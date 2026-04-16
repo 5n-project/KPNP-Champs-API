@@ -1,4 +1,4 @@
-paths:
+﻿paths:
   /competitions/{competitionSeq}/documents/detail/CONTEST_RESULTS_OF_TOURNAMENT:
     get:
       summary: CONTEST_RESULTS_OF_TOURNAMENT 품새 문서 상세 조회 (CONTEST_RESULTS_OF_TOURNAMENT)
@@ -58,31 +58,31 @@ paths:
                 자유품새 토너먼트 개인전, 한번만시연:
                   $ref: "#/components/examples/FreeTournamentIndividualOncePoomsae"
                 ITEM_NOT_FOUND:
-                  $ref: '../../../openapi.yml/#/components/examples/ITEM_NOT_FOUND'
+                  $ref: '../../../components/examples.yaml#/ITEM_NOT_FOUND'
                 COMPETITION_MATCH_NOT_FOUND:
-                  $ref: '../../../openapi.yml/#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+                  $ref: '../../../components/examples.yaml#/COMPETITION_MATCH_NOT_FOUND'
                 CUTOFF_GROUP_IS_NOT_END:
-                  $ref: '../../../openapi.yml/#/components/examples/MATCH_IS_NOT_END'
+                  $ref: '../../../components/examples.yaml#/MATCH_IS_NOT_END'
                 DOCUMENT_NOT_FOUND:
-                  $ref: '../../../openapi.yml/#/components/examples/DOCUMENT_NOT_FOUND'
+                  $ref: '../../../components/examples.yaml#/DOCUMENT_NOT_FOUND'
         '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '../../../openapi.yml#/components/responses/Error'
+                $ref: '../../../components/responses.yaml#/Error'
               examples:
                 INVALID_TYPE_ERROR:
-                  $ref: '../../../openapi.yml#/components/examples/INVALID_TYPE_ERROR'
+                  $ref: '../../../components/examples.yaml#/INVALID_TYPE_ERROR'
         '403':
           description: 권한 없음
           content:
             application/json:
               schema:
-                $ref: '../../../openapi.yml#/components/responses/Error'
+                $ref: '../../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
 components:
   schemas:
@@ -1594,3 +1594,4 @@ components:
             ]
           }
         }
+

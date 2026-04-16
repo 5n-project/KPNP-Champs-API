@@ -1,4 +1,4 @@
-paths:
+﻿paths:
   /common/combo/rules:
     get:
       summary: 품새 대회룰 조회
@@ -93,7 +93,8 @@ paths:
                       countries:
                         type: array
                         items:
-                          $ref: '../../openapi.yml#/components/schemas/Country'
+#                          $ref: '../../components/schemas.yaml#/Country'
+                          $ref: '../../components/schemas.yaml#/Country'
               example:
                 success: true
                 data:
@@ -1143,6 +1144,8 @@ paths:
                           resultDecisionTypeNameKo: "감점승"
                     error: null
                 COMPETITION_MATCH_NOT_FOUND:
-                  $ref: '../../openapi.yml#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/COMPETITION_MATCH_NOT_FOUND'
+
+
 
 

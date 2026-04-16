@@ -1,4 +1,4 @@
-paths:
+﻿paths:
   /competitions/{competitionSeq}/documents:
     get:
       summary: 대회 문서 리스트 조회
@@ -165,10 +165,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../../../openapi.yml#/components/responses/Error'
+                $ref: '../../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/documents/sub-list/{documentType}:
     get:
@@ -392,10 +392,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../../../openapi.yml#/components/responses/Error'
+                $ref: '../../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/documents/favorite/{documentType}:
     put:
@@ -463,7 +463,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../../../openapi.yml#/components/responses/Error'
+                $ref: '../../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../../components/examples.yaml#/IS_NOT_AUTHORIZED'
+
+

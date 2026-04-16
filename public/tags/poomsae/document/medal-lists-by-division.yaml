@@ -1,4 +1,4 @@
-paths:
+﻿paths:
   /competitions/{competitionSeq}/documents/detail/MEDAL_LISTS_BY_DIVISION:
     get:
       summary: MEDAL_LISTS_BY_DIVISION 품새 문서 상세 조회
@@ -547,24 +547,26 @@ paths:
                       "error": null
                     }
                 ITEM_NOT_FOUND:
-                  $ref: '../../../openapi.yml/#/components/examples/ITEM_NOT_FOUND'
+                  $ref: '../../../components/examples.yaml#/ITEM_NOT_FOUND'
                 DOCUMENT_NOT_FOUND:
-                  $ref: '../../../openapi.yml/#/components/examples/DOCUMENT_NOT_FOUND'
+                  $ref: '../../../components/examples.yaml#/DOCUMENT_NOT_FOUND'
         '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '../../../openapi.yml#/components/responses/Error'
+                $ref: '../../../components/responses.yaml#/Error'
               examples:
                 INVALID_TYPE_ERROR:
-                  $ref: '../../../openapi.yml#/components/examples/INVALID_TYPE_ERROR'
+                  $ref: '../../../components/examples.yaml#/INVALID_TYPE_ERROR'
         '403':
           description: 권한 없음
           content:
             application/json:
               schema:
-                $ref: '../../../openapi.yml#/components/responses/Error'
+                $ref: '../../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../../components/examples.yaml#/IS_NOT_AUTHORIZED'
+
+

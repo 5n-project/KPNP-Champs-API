@@ -1,4 +1,4 @@
-paths:
+﻿paths:
   /competitions/{competitionSeq}/fop/status/main/{status}:
     post:
       summary: FOP 조작 버튼 API (Main Status 변경)
@@ -82,39 +82,39 @@ paths:
                       "error": null
                     }
                 COMPETITION_MATCH_NOT_FOUND:
-                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/COMPETITION_MATCH_NOT_FOUND'
                 CANNOT_RESET_WAITING_MATCH:
-                  $ref: '../../openapi.yml/#/components/examples/CANNOT_RESET_WAITING_MATCH'
+                  $ref: '../../components/examples.yaml#/CANNOT_RESET_WAITING_MATCH'
                 CANNOT_RESET_MATCH_CUTOFF_GROUP_FINISHED:
-                  $ref: '../../openapi.yml/#/components/examples/CANNOT_RESET_MATCH_CUTOFF_GROUP_FINISHED'
+                  $ref: '../../components/examples.yaml#/CANNOT_RESET_MATCH_CUTOFF_GROUP_FINISHED'
                 CANNOT_RESET_MATCH_NEXT_ROUND_IN_PROGRESS:
-                  $ref: '../../openapi.yml/#/components/examples/CANNOT_RESET_MATCH_NEXT_ROUND_IN_PROGRESS'
+                  $ref: '../../components/examples.yaml#/CANNOT_RESET_MATCH_NEXT_ROUND_IN_PROGRESS'
                 MISSING_COURT_ASSIGNMENT:
-                  $ref: '../../openapi.yml/#/components/examples/MISSING_COURT_ASSIGNMENT'
+                  $ref: '../../components/examples.yaml#/MISSING_COURT_ASSIGNMENT'
                 EXIST_WAITING_MATCHES:
-                  $ref: '../../openapi.yml/#/components/examples/EXIST_WAITING_MATCHES'
+                  $ref: '../../components/examples.yaml#/EXIST_WAITING_MATCHES'
 
         400:
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml/#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 INVALID_TYPE_ERROR:
-                  $ref: '../../openapi.yml#/components/examples/INVALID_TYPE_ERROR'
+                  $ref: '../../components/examples.yaml#/INVALID_TYPE_ERROR'
                 WRONG_FOP_STATUS:
-                  $ref: '../../openapi.yml#/components/examples/WRONG_FOP_STATUS'
+                  $ref: '../../components/examples.yaml#/WRONG_FOP_STATUS'
 
         403:
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml/#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/fop/status/side/{status}/activate:
     post:
@@ -182,29 +182,29 @@ paths:
                       "error": null
                     }
                 COMPETITION_MATCH_NOT_FOUND:
-                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/COMPETITION_MATCH_NOT_FOUND'
 
         400:
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml/#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 INVALID_TYPE_ERROR:
-                  $ref: '../../openapi.yml#/components/examples/INVALID_TYPE_ERROR'
+                  $ref: '../../components/examples.yaml#/INVALID_TYPE_ERROR'
                 WRONG_FOP_STATUS:
-                  $ref: '../../openapi.yml#/components/examples/WRONG_FOP_STATUS'
+                  $ref: '../../components/examples.yaml#/WRONG_FOP_STATUS'
 
         403:
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml/#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/fop/status/side/{status}/deactivate:
     post:
@@ -272,29 +272,29 @@ paths:
                       "error": null
                     }
                 COMPETITION_MATCH_NOT_FOUND:
-                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/COMPETITION_MATCH_NOT_FOUND'
 
         400:
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml/#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 INVALID_TYPE_ERROR:
-                  $ref: '../../openapi.yml#/components/examples/INVALID_TYPE_ERROR'
+                  $ref: '../../components/examples.yaml#/INVALID_TYPE_ERROR'
                 WRONG_FOP_STATUS:
-                  $ref: '../../openapi.yml#/components/examples/WRONG_FOP_STATUS'
+                  $ref: '../../components/examples.yaml#/WRONG_FOP_STATUS'
 
         403:
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml/#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/fop/status/match/{competitionMatchPsSeq}:
     get:
@@ -517,27 +517,27 @@ paths:
                       "error": null
                     }
                 COMPETITION_MATCH_NOT_FOUND:
-                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/COMPETITION_MATCH_NOT_FOUND'
 
         400:
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml/#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 INVALID_TYPE_ERROR:
-                  $ref: '../../openapi.yml#/components/examples/INVALID_TYPE_ERROR'
+                  $ref: '../../components/examples.yaml#/INVALID_TYPE_ERROR'
 
         403:
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml/#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/fop/match/result:
     patch:
@@ -611,39 +611,39 @@ paths:
                       "error": null
                     }
                 COMPETITION_MATCH_NOT_FOUND:
-                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/COMPETITION_MATCH_NOT_FOUND'
                 END_OR_WAITING_MATCH_INVALID_FOR_OPERATION:
-                  $ref: '../../openapi.yml/#/components/examples/END_OR_WAITING_MATCH_INVALID_FOR_OPERATION'
+                  $ref: '../../components/examples.yaml#/END_OR_WAITING_MATCH_INVALID_FOR_OPERATION'
                 MATCH_WINNER_NOT_FOUND:
-                  $ref: '../../openapi.yml#/components/examples/MATCH_WINNER_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/MATCH_WINNER_NOT_FOUND'
                 ONLY_TOURNAMENT_MATCH_CAN_UPDATE_RESULT:
-                  $ref: '../../openapi.yml#/components/examples/ONLY_TOURNAMENT_MATCH_CAN_UPDATE_RESULT'
+                  $ref: '../../components/examples.yaml#/ONLY_TOURNAMENT_MATCH_CAN_UPDATE_RESULT'
                 IS_BYE_MATCH:
-                  $ref: '../../openapi.yml#/components/examples/IS_BYE_MATCH'
+                  $ref: '../../components/examples.yaml#/IS_BYE_MATCH'
                 MATCH_RESULT_ALREADY_UP_TO_DATE:
-                  $ref: '../../openapi.yml#/components/examples/MATCH_RESULT_ALREADY_UP_TO_DATE'
+                  $ref: '../../components/examples.yaml#/MATCH_RESULT_ALREADY_UP_TO_DATE'
                 CANNOT_DISQUALIFY_ALL_CUTOFF_COMPETITORS:
-                  $ref: '../../openapi.yml#/components/examples/CANNOT_DISQUALIFY_ALL_CUTOFF_COMPETITORS'
+                  $ref: '../../components/examples.yaml#/CANNOT_DISQUALIFY_ALL_CUTOFF_COMPETITORS'
 
         400:
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml/#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 INVALID_TYPE_ERROR:
-                  $ref: '../../openapi.yml#/components/examples/INVALID_TYPE_ERROR'
+                  $ref: '../../components/examples.yaml#/INVALID_TYPE_ERROR'
 
         403:
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml/#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/fop/{competitionMatchPsSeq}/progress-seconds:
     get:
@@ -706,10 +706,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml/#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
 
   /competitions/{competitionSeq}/fop/{competitionMatchPsSeq}/timer:
@@ -793,10 +793,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml/#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
 
   /competitions/{competitionSeq}/fop/timers:
@@ -905,7 +905,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml/#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
+

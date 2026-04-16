@@ -1,4 +1,4 @@
-paths:
+﻿paths:
   /sign-in:
     post:
       summary: 회원 로그인
@@ -67,7 +67,7 @@ paths:
                       refreshToken: "_JpsS4ybNt6fJmZblPuhzmkemblZY-dgBr2TBH0WCP1XJq-C0RBsTZmEyXFSwYf"
                     error: null
                 BAD_CREDENTIALS_EXCEPTION:
-                  $ref: '../openapi.yml/#/components/examples/BAD_CREDENTIALS_EXCEPTION'
+                  $ref: '../components/examples.yaml#/BAD_CREDENTIALS_EXCEPTION'
 
   /sign-out:
     post:
@@ -198,9 +198,9 @@ paths:
                       competitorCategoryCodeTypes: [ "KY", "PS" ]
                     error: null
                 BAD_CREDENTIALS_EXCEPTION:
-                  $ref: '../openapi.yml/#/components/examples/BAD_CREDENTIALS_EXCEPTION'
+                  $ref: '../components/examples.yaml#/BAD_CREDENTIALS_EXCEPTION'
                 NO_HANDLER_FOUND_URL_ERROR:
-                  $ref: '../openapi.yml/#/components/examples/NO_HANDLER_FOUND_URL_ERROR'
+                  $ref: '../components/examples.yaml#/NO_HANDLER_FOUND_URL_ERROR'
 
   /non/logout:
     post:
@@ -246,3 +246,4 @@ paths:
                     success: true
                     data: null
                     error: null
+

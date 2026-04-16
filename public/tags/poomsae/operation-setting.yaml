@@ -1,4 +1,4 @@
-paths:
+﻿paths:
   /competitions/{competitionSeq}/operation/detail:
     get:
       summary: 운영 세부 정보 설정 조회
@@ -107,9 +107,9 @@ paths:
                               type: string
                               description: '파일 cdn url'
                             mediaType:
-                              $ref: '../../openapi.yml#/components/schemas/MediaType'
+                              $ref: '../../components/schemas.yaml#/MediaType'
                             mediaCategory:
-                              $ref: '../../openapi.yml#/components/schemas/SettingMediaCategory'
+                              $ref: '../../components/schemas.yaml#/SettingMediaCategory'
                             originName:
                               type: string
                               description: '파일 원본 이름'
@@ -159,16 +159,16 @@ paths:
                           fileSize: "1736"
                     error: null
                 ITEM_NOT_FOUND:
-                  $ref: '../../openapi.yml#/components/examples/ITEM_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/ITEM_NOT_FOUND'
         403:
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/operation/department:
     get:
@@ -224,7 +224,7 @@ paths:
                               type: integer
                               description: 해당 대회 사용 룰 Seq
                             divisionCode:
-                              $ref: '../../openapi.yml#/components/schemas/PoomsaeDivisionType'
+                              $ref: '../../components/schemas.yaml#/PoomsaeDivisionType'
                             divisionNameKo:
                               type: string
                               description: 룰 국문명
@@ -232,7 +232,7 @@ paths:
                               type: string
                               description: 룰 영문명
                             departmentCode:
-                              $ref: '../../openapi.yml#/components/schemas/PoomsaeDepartmentType'
+                              $ref: '../../components/schemas.yaml#/PoomsaeDepartmentType'
                             departmentNameKo:
                               type: string
                               description: 부 국문명
@@ -262,15 +262,15 @@ paths:
                                     nullable: true
                                     description: 대회 유형 Seq
                                   divisionCategoryCode:
-                                    $ref: '../../openapi.yml#/components/schemas/PoomsaeDivisionCategoryType'
+                                    $ref: '../../components/schemas.yaml#/PoomsaeDivisionCategoryType'
                                   participateLimit:
                                     type: integer
                                     nullable: true
                                     description: 참가 인원
                                   matchStyleType:
-                                    $ref: '../../openapi.yml#/components/schemas/PoomsaeMatchStyleType'
+                                    $ref: '../../components/schemas.yaml#/PoomsaeMatchStyleType'
                                   drawType:
-                                    $ref: '../../openapi.yml#/components/schemas/PoomsaeDrawType'
+                                    $ref: '../../components/schemas.yaml#/PoomsaeDrawType'
                                   seed:
                                     type: string
                                     nullable: true
@@ -284,7 +284,7 @@ paths:
                                     nullable: true
                                     description: 양측선수 다른 품새 시연 Y, N
                                   compositeRateType:
-                                    $ref: '../../openapi.yml#/components/schemas/PoomsaeCompositeRateType'
+                                    $ref: '../../components/schemas.yaml#/PoomsaeCompositeRateType'
                                   poomsaeOnceYn:
                                     type: string
                                     nullable: true
@@ -327,7 +327,7 @@ paths:
                           type: object
                           properties:
                             divisionCategoryCode:
-                              $ref: '../../openapi.yml#/components/schemas/PoomsaeDivisionCategoryType'
+                              $ref: '../../components/schemas.yaml#/PoomsaeDivisionCategoryType'
                             divisionCategoryNameKo:
                               type: string
                               description: 대회유형 국문명
@@ -1373,16 +1373,16 @@ paths:
                       "error": null
                     }
                 ITEM_NOT_FOUND:
-                  $ref: '../../openapi.yml#/components/examples/ITEM_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/ITEM_NOT_FOUND'
         403:
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
     patch:
       summary: 운영 설정에 부별 정보 수정
@@ -1450,7 +1450,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/OK'
+                $ref: '../../components/responses.yaml#/OK'
               examples:
                 defaultResponse:
                   summary: Default Example
@@ -1459,16 +1459,19 @@ paths:
                     data: null
                     error: null
                 MATCH_STATE_INVALID_FOR_OPERATION:
-                  $ref: '../../openapi.yml#/components/examples/MATCH_STATE_INVALID_FOR_OPERATION'
+                  $ref: '../../components/examples.yaml#/MATCH_STATE_INVALID_FOR_OPERATION'
                 EVENT_UPDATE_NOT_ALLOWED:
-                  $ref: '../../openapi.yml#/components/examples/EVENT_UPDATE_NOT_ALLOWED'
+                  $ref: '../../components/examples.yaml#/EVENT_UPDATE_NOT_ALLOWED'
 
         403:
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
+
+
+

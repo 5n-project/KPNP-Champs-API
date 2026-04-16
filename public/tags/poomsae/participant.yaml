@@ -1,4 +1,4 @@
-paths:
+﻿paths:
   /competitions/{competitionSeq}/participants:
     get:
       summary: 참가자 목록 조회
@@ -261,10 +261,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml/#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
     post:
       summary: 인원 추가
@@ -402,24 +402,24 @@ paths:
                     data: true
                     error: null
                 DUPLICATE_EMAIL:
-                  $ref: '../../openapi.yml/#/components/examples/DUPLICATE_EMAIL'
+                  $ref: '../../components/examples.yaml#/DUPLICATE_EMAIL'
                 NOT_EXIST_PARTICIPANTS_IN_DIVISION_CATEGORY:
-                  $ref: '../../openapi.yml/#/components/examples/NOT_EXIST_PARTICIPANTS_IN_DIVISION_CATEGORY'
+                  $ref: '../../components/examples.yaml#/NOT_EXIST_PARTICIPANTS_IN_DIVISION_CATEGORY'
                 COMPETITION_PARTICIPATE_LIMIT_OVER:
-                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_PARTICIPATE_LIMIT_OVER'
+                  $ref: '../../components/examples.yaml#/COMPETITION_PARTICIPATE_LIMIT_OVER'
                 COMPETITION_MATCH_PROGRESS_NOT_ADD:
-                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_PROGRESS_NOT_ADD'
+                  $ref: '../../components/examples.yaml#/COMPETITION_MATCH_PROGRESS_NOT_ADD'
                 ALREADY_SAVED_DATA:
-                  $ref: '../../openapi.yml/#/components/examples/ALREADY_SAVED_DATA'
+                  $ref: '../../components/examples.yaml#/ALREADY_SAVED_DATA'
         '403':
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml/#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/participants/deposit-confirm:
     patch:
@@ -476,16 +476,16 @@ paths:
                     data: true
                     error: null
                 CONFIRM_PARTICIPANT_COMPETITION:
-                  $ref: '../../openapi.yml/#/components/examples/CONFIRM_PARTICIPANT_COMPETITION'
+                  $ref: '../../components/examples.yaml#/CONFIRM_PARTICIPANT_COMPETITION'
         '403':
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml/#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/participants/deposit-cancel:
     patch:
@@ -542,16 +542,16 @@ paths:
                     data: true
                     error: null
                 CONFIRM_PARTICIPANT_COMPETITION:
-                  $ref: '../../openapi.yml/#/components/examples/CONFIRM_PARTICIPANT_COMPETITION'
+                  $ref: '../../components/examples.yaml#/CONFIRM_PARTICIPANT_COMPETITION'
         '403':
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml/#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/participants/confirm:
     post:
@@ -588,16 +588,16 @@ paths:
                     data: true
                     error: null
                 CONFIRM_PARTICIPANT_COMPETITION:
-                  $ref: '../../openapi.yml/#/components/examples/CONFIRM_PARTICIPANT_COMPETITION'
+                  $ref: '../../components/examples.yaml#/CONFIRM_PARTICIPANT_COMPETITION'
         '403':
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml/#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/participants/csv:
     post:
@@ -632,7 +632,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml/#/components/responses/OK'
+                $ref: '../../components/responses.yaml#/OK'
               examples:
                 defaultResponse:
                   summary: 성공 응답 예시
@@ -641,42 +641,42 @@ paths:
                     data: null
                     error: null
                 CONFIRM_PARTICIPANT_COMPETITION:
-                  $ref: '../../openapi.yml/#/components/examples/CONFIRM_PARTICIPANT_COMPETITION'
+                  $ref: '../../components/examples.yaml#/CONFIRM_PARTICIPANT_COMPETITION'
                 INVALID_PAIR_MEMBER_COUNT:
-                  $ref: '../../openapi.yml/#/components/examples/INVALID_PAIR_MEMBER_COUNT'
+                  $ref: '../../components/examples.yaml#/INVALID_PAIR_MEMBER_COUNT'
                 INVALID_GROUP_MEMBER_COUNT:
-                  $ref: '../../openapi.yml/#/components/examples/INVALID_GROUP_MEMBER_COUNT'
+                  $ref: '../../components/examples.yaml#/INVALID_GROUP_MEMBER_COUNT'
                 NOT_SAVE:
-                  $ref: '../../openapi.yml/#/components/examples/NOT_SAVE'
+                  $ref: '../../components/examples.yaml#/NOT_SAVE'
                 TEAM_NAME_MISMATCH:
-                  $ref: '../../openapi.yml/#/components/examples/TEAM_NAME_MISMATCH'
+                  $ref: '../../components/examples.yaml#/TEAM_NAME_MISMATCH'
                 CSV_INVALID_ARGUMENT_ERROR:
-                  $ref: '../../openapi.yml/#/components/examples/CSV_INVALID_ARGUMENT_ERROR'
+                  $ref: '../../components/examples.yaml#/CSV_INVALID_ARGUMENT_ERROR'
                 INVALID_BIRTH_DATE_ERROR:
-                  $ref: '../../openapi.yml/#/components/examples/INVALID_BIRTH_DATE_ERROR'
+                  $ref: '../../components/examples.yaml#/INVALID_BIRTH_DATE_ERROR'
                 DUPLICATE_EMAIL:
-                  $ref: '../../openapi.yml/#/components/examples/DUPLICATE_EMAIL'
+                  $ref: '../../components/examples.yaml#/DUPLICATE_EMAIL'
                 ATHLETE_CSV_DATA_NOT_FOUND:
-                  $ref: '../../openapi.yml/#/components/examples/ATHLETE_CSV_DATA_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/ATHLETE_CSV_DATA_NOT_FOUND'
 
         403:
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml/#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
         400:
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml/#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 FILE_LOAD_FAILURE:
-                  $ref: '../../openapi.yml/#/components/examples/FILE_LOAD_FAILURE'
+                  $ref: '../../components/examples.yaml#/FILE_LOAD_FAILURE'
 
   /competitions/{competitionSeq}/participants/confirm/rollback:
     post:
@@ -713,15 +713,17 @@ paths:
                     data: true
                     error: null
                 MATCH_STATE_INVALID_FOR_OPERATION:
-                  $ref: '../../openapi.yml/#/components/examples/MATCH_STATE_INVALID_FOR_OPERATION'
+                  $ref: '../../components/examples.yaml#/MATCH_STATE_INVALID_FOR_OPERATION'
                 ALREADY_SAVED_DATA:
-                  $ref: '../../openapi.yml/#/components/examples/ALREADY_SAVED_DATA'
+                  $ref: '../../components/examples.yaml#/ALREADY_SAVED_DATA'
         '403':
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml/#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
+
+

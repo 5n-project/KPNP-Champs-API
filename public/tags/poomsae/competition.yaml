@@ -1,4 +1,4 @@
-paths:
+﻿paths:
   /competitions/host:
     get:
       summary: 호스트가 주최한 대회 목록 조회
@@ -199,10 +199,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml/#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /non/competitions:
     get:
@@ -298,10 +298,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml/#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /non/competitions/referee:
     get:
@@ -387,7 +387,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml/#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
+

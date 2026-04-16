@@ -1,4 +1,4 @@
-paths:
+﻿paths:
   /schedule/{competitionSeq}/progress:
     get:
       summary: 일정타입
@@ -51,10 +51,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml/#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /schedule/{competitionSeq}/init-data:
     get:
@@ -245,7 +245,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml/#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
+

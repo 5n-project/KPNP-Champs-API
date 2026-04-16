@@ -1,4 +1,4 @@
-paths:
+﻿paths:
   /competitions/{competitionSeq}/matches/{matchSeq}:
     get:
       summary: 경기 정보 조회
@@ -174,18 +174,18 @@ paths:
                       matchMinTime: 80
                     error: null
                 COMPETITION_MATCH_NOT_FOUND:
-                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/COMPETITION_MATCH_NOT_FOUND'
                 COMPETITION_MATCH_REFEREE_NOT_ASSIGNED:
-                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_REFEREE_NOT_ASSIGNED'
+                  $ref: '../../components/examples.yaml#/COMPETITION_MATCH_REFEREE_NOT_ASSIGNED'
         403:
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml/#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/matches/{matchSeq}/competitors:
     get:
@@ -361,18 +361,18 @@ paths:
                               familyNameEn: "DAM"
                       error: null
                 COMPETITION_MATCH_NOT_FOUND:
-                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/COMPETITION_MATCH_NOT_FOUND'
                 COMPETITION_MATCH_REFEREE_NOT_ASSIGNED:
-                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_REFEREE_NOT_ASSIGNED'
+                  $ref: '../../components/examples.yaml#/COMPETITION_MATCH_REFEREE_NOT_ASSIGNED'
         403:
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml/#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/matches/{matchSeq}/scores:
     get:
@@ -810,18 +810,18 @@ paths:
                                   criteriaDetailSubTypes: null
                     error: null
                 COMPETITION_MATCH_NOT_FOUND:
-                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/COMPETITION_MATCH_NOT_FOUND'
                 COMPETITION_MATCH_REFEREE_NOT_ASSIGNED:
-                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_REFEREE_NOT_ASSIGNED'
+                  $ref: '../../components/examples.yaml#/COMPETITION_MATCH_REFEREE_NOT_ASSIGNED'
         403:
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml/#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/matches/{matchSeq}/competitors/{competitorSeq}/scores/deduct:
     post:
@@ -1000,22 +1000,22 @@ paths:
                           score: 0.6
                     error: null
                 COMPETITION_MATCH_NOT_FOUND:
-                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/COMPETITION_MATCH_NOT_FOUND'
                 COMPETITION_MATCH_REFEREE_NOT_ASSIGNED:
-                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_REFEREE_NOT_ASSIGNED'
+                  $ref: '../../components/examples.yaml#/COMPETITION_MATCH_REFEREE_NOT_ASSIGNED'
                 INSUFFICIENT_SCORE_FOR_DEDUCTION:
-                  $ref: '../../openapi.yml/#/components/examples/INSUFFICIENT_SCORE_FOR_DEDUCTION'
+                  $ref: '../../components/examples.yaml#/INSUFFICIENT_SCORE_FOR_DEDUCTION'
                 SCORING_ALREADY_FINISHED:
-                  $ref: '../../openapi.yml/#/components/examples/SCORING_ALREADY_FINISHED'
+                  $ref: '../../components/examples.yaml#/SCORING_ALREADY_FINISHED'
         403:
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml/#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/matches/{matchSeq}/competitors/{competitorSeq}/scores/deduct/undo:
     post:
@@ -1194,22 +1194,22 @@ paths:
                           score: 0.6
                     error: null
                 COMPETITION_MATCH_NOT_FOUND:
-                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/COMPETITION_MATCH_NOT_FOUND'
                 COMPETITION_MATCH_REFEREE_NOT_ASSIGNED:
-                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_REFEREE_NOT_ASSIGNED'
+                  $ref: '../../components/examples.yaml#/COMPETITION_MATCH_REFEREE_NOT_ASSIGNED'
                 NO_DEDUCTION_TO_UNDO:
-                  $ref: '../../openapi.yml/#/components/examples/NO_DEDUCTION_TO_UNDO'
+                  $ref: '../../components/examples.yaml#/NO_DEDUCTION_TO_UNDO'
                 SCORING_ALREADY_FINISHED:
-                  $ref: '../../openapi.yml/#/components/examples/SCORING_ALREADY_FINISHED'
+                  $ref: '../../components/examples.yaml#/SCORING_ALREADY_FINISHED'
         403:
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml/#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/matches/{matchSeq}/competitors/{competitorSeq}/scores/update:
     post:
@@ -1725,24 +1725,24 @@ paths:
                               criteriaDetailSubTypes: null
                     error: null
                 COMPETITION_MATCH_NOT_FOUND:
-                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/COMPETITION_MATCH_NOT_FOUND'
                 COMPETITION_MATCH_REFEREE_NOT_ASSIGNED:
-                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_REFEREE_NOT_ASSIGNED'
+                  $ref: '../../components/examples.yaml#/COMPETITION_MATCH_REFEREE_NOT_ASSIGNED'
                 OUT_OF_SCORE_SCALE:
-                  $ref: '../../openapi.yml/#/components/examples/OUT_OF_SCORE_SCALE'
+                  $ref: '../../components/examples.yaml#/OUT_OF_SCORE_SCALE'
                 REQUIRED_TYPE_NOT_SCORED:
-                  $ref: '../../openapi.yml/#/components/examples/REQUIRED_TYPE_NOT_SCORED'
+                  $ref: '../../components/examples.yaml#/REQUIRED_TYPE_NOT_SCORED'
                 SCORING_ALREADY_FINISHED:
-                  $ref: '../../openapi.yml/#/components/examples/SCORING_ALREADY_FINISHED'
+                  $ref: '../../components/examples.yaml#/SCORING_ALREADY_FINISHED'
         403:
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml/#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/matches/{matchSeq}/scores/send:
     post:
@@ -2333,24 +2333,24 @@ paths:
                                   criteriaDetailSubTypes: null
                     error: null
                 COMPETITION_MATCH_NOT_FOUND:
-                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/COMPETITION_MATCH_NOT_FOUND'
                 COMPETITION_MATCH_REFEREE_NOT_ASSIGNED:
-                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_REFEREE_NOT_ASSIGNED'
+                  $ref: '../../components/examples.yaml#/COMPETITION_MATCH_REFEREE_NOT_ASSIGNED'
                 OUT_OF_SCORE_SCALE:
-                  $ref: '../../openapi.yml/#/components/examples/OUT_OF_SCORE_SCALE'
+                  $ref: '../../components/examples.yaml#/OUT_OF_SCORE_SCALE'
                 REQUIRED_TYPE_NOT_SCORED:
-                  $ref: '../../openapi.yml/#/components/examples/REQUIRED_TYPE_NOT_SCORED'
+                  $ref: '../../components/examples.yaml#/REQUIRED_TYPE_NOT_SCORED'
                 SCORING_ALREADY_FINISHED:
-                  $ref: '../../openapi.yml/#/components/examples/SCORING_ALREADY_FINISHED'
+                  $ref: '../../components/examples.yaml#/SCORING_ALREADY_FINISHED'
         403:
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml/#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/days/{competitionDay}/schedules/referees:
     get:
@@ -2794,16 +2794,16 @@ paths:
                                   joined: false
                     error: null
                 NO_MATCH_ASSIGNED_TO_REFEREE:
-                  $ref: '../../openapi.yml/#/components/examples/NO_MATCH_ASSIGNED_TO_REFEREE'
+                  $ref: '../../components/examples.yaml#/NO_MATCH_ASSIGNED_TO_REFEREE'
         403:
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml/#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/matches/{matchSeq}/referees/{refereeSeq}/join:
     post:
@@ -2876,18 +2876,18 @@ paths:
                       matchStatus: "ready"
                     error: null
                 COMPETITION_MATCH_REFEREE_NOT_ASSIGNED:
-                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_REFEREE_NOT_ASSIGNED'
+                  $ref: '../../components/examples.yaml#/COMPETITION_MATCH_REFEREE_NOT_ASSIGNED'
                 REFEREE_MISMATCH:
-                  $ref: '../../openapi.yml/#/components/examples/REFEREE_MISMATCH'
+                  $ref: '../../components/examples.yaml#/REFEREE_MISMATCH'
         403:
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml/#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/matches/{matchSeq}/competitors/{competitorSeq}/scores:
     get:
@@ -3262,18 +3262,18 @@ paths:
                                 criteriaDetailSubTypes: [ ]
                     error: null
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
                 SCORING_NOT_COMPLETED:
-                  $ref: '../../openapi.yml/#/components/examples/SCORING_NOT_COMPLETED'
+                  $ref: '../../components/examples.yaml#/SCORING_NOT_COMPLETED'
         403:
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml/#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
     put:
       summary: 심판별 완료된 채점 점수 수정
       tags:
@@ -3803,17 +3803,18 @@ paths:
                                 criteriaDetailSubTypes: [ ]
                     error: null
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
                 SCORING_NOT_COMPLETED:
-                  $ref: '../../openapi.yml/#/components/examples/SCORING_NOT_COMPLETED'
+                  $ref: '../../components/examples.yaml#/SCORING_NOT_COMPLETED'
                 SCORE_UPDATE_NOT_ALLOWED_AFTER_NEXT_ROUND_STARTED:
-                  $ref: '../../openapi.yml/#/components/examples/SCORE_UPDATE_NOT_ALLOWED_AFTER_NEXT_ROUND_STARTED'
+                  $ref: '../../components/examples.yaml#/SCORE_UPDATE_NOT_ALLOWED_AFTER_NEXT_ROUND_STARTED'
         403:
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml/#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
+

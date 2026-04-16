@@ -1,4 +1,4 @@
-paths:
+﻿paths:
   /competitions/complete/{competitionSeq}:
     get:
       summary: 개최 완료
@@ -90,7 +90,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/OK'
+                $ref: '../../components/responses.yaml#/OK'
               examples:
                 success:
                   value:
@@ -198,21 +198,21 @@ paths:
                       competitionSeq: https://www.sandbox.paypal.com/checkoutnow?token=13B720637N5657644
                     error: null
                 FAILD_PAYPAL:
-                  $ref: '../../openapi.yml#/components/examples/FAILD_PAYPAL'
+                  $ref: '../../components/examples.yaml#/FAILD_PAYPAL'
                 PAYMENT_METHOD_ERROR:
-                  $ref: '../../openapi.yml#/components/examples/PAYMENT_METHOD_ERROR'
+                  $ref: '../../components/examples.yaml#/PAYMENT_METHOD_ERROR'
                 PAYMENT_DENIED:
-                  $ref: '../../openapi.yml#/components/examples/PAYMENT_DENIED'
+                  $ref: '../../components/examples.yaml#/PAYMENT_DENIED'
                 PAYER_CANNOT_PAY:
-                  $ref: '../../openapi.yml#/components/examples/PAYER_CANNOT_PAY'
+                  $ref: '../../components/examples.yaml#/PAYER_CANNOT_PAY'
                 PAYPAL_INTERNAL_SERVER_ERROR:
-                  $ref: '../../openapi.yml#/components/examples/PAYPAL_INTERNAL_SERVER_ERROR'
+                  $ref: '../../components/examples.yaml#/PAYPAL_INTERNAL_SERVER_ERROR'
                 NOT_DIFFERENCE_DATE:
-                  $ref: '../../openapi.yml#/components/examples/NOT_DIFFERENCE_DATE'
+                  $ref: '../../components/examples.yaml#/NOT_DIFFERENCE_DATE'
                 DIFFERENT_PAYMENT:
-                  $ref: '../../openapi.yml#/components/examples/DIFFERENT_PAYMENT'
+                  $ref: '../../components/examples.yaml#/DIFFERENT_PAYMENT'
                 USER_STUDING_PRODUCT:
-                  $ref: '../../openapi.yml#/components/examples/USER_STUDING_PRODUCT'
+                  $ref: '../../components/examples.yaml#/USER_STUDING_PRODUCT'
 
   /orderSheet/{competitionSeq}:
     get:
@@ -426,11 +426,11 @@ paths:
                           discountUsd: 10.5
                     error: null
                 PENDING_PAYMENT_IN_PROGRESS:
-                  $ref: '../../openapi.yml#/components/examples/PENDING_PAYMENT_IN_PROGRESS'
+                  $ref: '../../components/examples.yaml#/PENDING_PAYMENT_IN_PROGRESS'
                 NEXT_ROUND_IS_START:
-                  $ref: '../../openapi.yml#/components/examples/NEXT_ROUND_IS_START'
+                  $ref: '../../components/examples.yaml#/NEXT_ROUND_IS_START'
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /paypalCapture:
     get:
@@ -485,15 +485,15 @@ paths:
                     data: "결제 성공"
                     error: null
                 FAILD_PAYPAL:
-                  $ref: '../../openapi.yml#/components/examples/FAILD_PAYPAL'
+                  $ref: '../../components/examples.yaml#/FAILD_PAYPAL'
                 PAYMENT_DENIED:
-                  $ref: '../../openapi.yml#/components/examples/PAYMENT_DENIED'
+                  $ref: '../../components/examples.yaml#/PAYMENT_DENIED'
                 PAYER_CANNOT_PAY:
-                  $ref: '../../openapi.yml#/components/examples/PAYER_CANNOT_PAY'
+                  $ref: '../../components/examples.yaml#/PAYER_CANNOT_PAY'
                 PAYPAL_INTERNAL_SERVER_ERROR:
-                  $ref: '../../openapi.yml#/components/examples/PAYPAL_INTERNAL_SERVER_ERROR'
+                  $ref: '../../components/examples.yaml#/PAYPAL_INTERNAL_SERVER_ERROR'
                 USER_STUDING_PRODUCT:
-                  $ref: '../../openapi.yml#/components/examples/USER_STUDING_PRODUCT'
+                  $ref: '../../components/examples.yaml#/USER_STUDING_PRODUCT'
 
   /payFinish:
     get:
@@ -518,6 +518,9 @@ paths:
                 properties:
                   payment:
                     oneOf:
-                      - $ref: '../../openapi.yml#/components/schemas/PaypalPayment'
-                      - $ref: '../../openapi.yml#/components/schemas/MTJPayment'
+                      - $ref: '../../components/schemas.yaml#/PaypalPayment'
+                      - $ref: '../../components/schemas.yaml#/MTJPayment'
+
+
+
 

@@ -1,4 +1,4 @@
-openapi: 3.0.3
+﻿openapi: 3.0.3
 info:
   title: KPNP - 품새 API
   version: 0.0.1
@@ -364,1441 +364,276 @@ paths:
 components:
   responses:
     OK:
-      description: Successful operation
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              success:
-                type: boolean
-                example: false
-              data:
-                type: string
-                example: null
-              error:
-                type: string
-                example: null
+      $ref: './components/responses.yaml#/OK'
     Error:
-      description: error operation
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              success:
-                type: boolean
-                example: false
-              data:
-                type: string
-                example: null
-              error:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: "내부 오류 발생"
-                  errorCode:
-                    type: string
-                    example: "500"
+      $ref: './components/responses.yaml#/Error'
   examples:
-    # 500
     BAD_CREDENTIALS_EXCEPTION:
-      value:
-        success: false
-        data: null
-        error:
-          message: "아이디 또는 비밀번호를 잘못 입력했습니다.\n 입력하신 내용을 다시 확인해주세요."
-          errorCode: "E508"
+      $ref: './components/examples.yaml#/BAD_CREDENTIALS_EXCEPTION'
     NO_HANDLER_FOUND_URL_ERROR:
-      value:
-        success: false
-        data: null
-        error:
-          message: "잘못된 요청입니다."
-          errorCode: "E990"
+      $ref: './components/examples.yaml#/NO_HANDLER_FOUND_URL_ERROR'
     FILE_TRANSFER_TO_S3_ERROR:
-      value:
-        success: false
-        data: null
-        error:
-          message: "파일 S3에 전송 중 오류 발생."
-          errorCode: "E009"
+      $ref: './components/examples.yaml#/FILE_TRANSFER_TO_S3_ERROR'
     COMPETITION_OVERLAP:
-      value:
-        success: false
-        data: null
-        error:
-          message: "대회 중복 개최 요청"
-          errorCode: "E522"
+      $ref: './components/examples.yaml#/COMPETITION_OVERLAP'
     VALIDATE_WT_GRAGE_IS_EMPTY:
-      value:
-        success: false
-        data: null
-        error:
-          message: "등급은 필수 항목입니다"
-          errorCode: "E700"
+      $ref: './components/examples.yaml#/VALIDATE_WT_GRAGE_IS_EMPTY'
     VALIDATE_BANK_INFO_IS_EMPTY:
-      value:
-        success: false
-        data: null
-        error:
-          message: "참가비 항목을 입력해주세요"
-          errorCode: "E701"
+      $ref: './components/examples.yaml#/VALIDATE_BANK_INFO_IS_EMPTY'
     INVALID_ARGUMENT_ERROR_FILE_SIZE:
-      value:
-        success: false
-        data: null
-        error:
-          message: "크기가 1에서 3 사이여야 합니다"
-          errorCode: "E523"
+      $ref: './components/examples.yaml#/INVALID_ARGUMENT_ERROR_FILE_SIZE'
     UNSUPPORTED_OPERATION:
-      value:
-        success: false
-        data: null
-        error:
-          message: "지원하지 않는 메소드입니다."
-          errorCode: "E011"
-
-    #403
+      $ref: './components/examples.yaml#/UNSUPPORTED_OPERATION'
     IS_NOT_AUTHORIZED:
-      value:
-        success: false
-        data: null
-        error:
-          message: "접근 권한이 없습니다."
-          errorCode: "E099"
-
-    #400
+      $ref: './components/examples.yaml#/IS_NOT_AUTHORIZED'
     FILE_LOAD_FAILURE:
-      value:
-        success: false
-        data: null
-        error:
-          message: "불러오기를 실패했습니다. 다시 확인해주세요."
-          errorCode: "E604"
+      $ref: './components/examples.yaml#/FILE_LOAD_FAILURE'
     INVALID_TYPE_ERROR:
-      value:
-        success: false
-        data: null
-        error:
-          message: "올바르지 않은 타입입니다."
-          errorCode: "E003"
+      $ref: './components/examples.yaml#/INVALID_TYPE_ERROR'
     ILLEGAL_ARGUMENT_ERROR:
-      value:
-        success: false
-        data: null
-        error:
-          message: "필수 파라미터가 없습니다."
-          errorCode: "E004"
+      $ref: './components/examples.yaml#/ILLEGAL_ARGUMENT_ERROR'
     CODE_NOT_FOUND:
-      value:
-        success: false
-        data: null
-        error:
-          message: "The code does not exist. (동적으로 바뀔 수 있음 사용자에게 보여질 에러메시지는 아님)"
-          errorCode: "E006"
+      $ref: './components/examples.yaml#/CODE_NOT_FOUND'
     PARTICIPANT_RULE_MISMATCH:
-      value:
-        success: false
-        data: null
-        error:
-          message: "룰이 일치하지 않습니다. 대회 운영룰과 일치하는 파일을 올려주세요."
-          errorCode: "E603"
+      $ref: './components/examples.yaml#/PARTICIPANT_RULE_MISMATCH'
     COMPETITION_DAY_START_ORDER_INVALID:
-      value:
-        success: false
-        data: null
-        error:
-          message: "대회 일차는 이전 일차가 완료된 후에 순차적으로 시작할 수 있습니다."
-          errorCode: "E705"
+      $ref: './components/examples.yaml#/COMPETITION_DAY_START_ORDER_INVALID'
     COMPETITION_CURRENT_DAY_IS_ALREADY_START:
-      value:
-        success: false
-        data: null
-        error:
-          message: "해당 일차 대회가 이미 시작되었습니다."
-          errorCode: "E611"
+      $ref: './components/examples.yaml#/COMPETITION_CURRENT_DAY_IS_ALREADY_START'
     COMPETITION_CURRENT_DAY_IS_NOT_START:
-      value:
-        success: false
-        data: null
-        error:
-          message: "해당 일차 대회가 시작되지 않았습니다."
-          errorCode: "E610"
+      $ref: './components/examples.yaml#/COMPETITION_CURRENT_DAY_IS_NOT_START'
     COMPETITION_CURRENT_DAY_IS_END:
-      value:
-        success: false
-        data: null
-        error:
-          message: "해당 일차 대회가 종료되었습니다."
-          errorCode: "E609"
+      $ref: './components/examples.yaml#/COMPETITION_CURRENT_DAY_IS_END'
     REFEREE_GROUP_IS_NOT_EXISTS:
-      value:
-        success: false
-        data: null
-        error:
-          message: "심판조가 존재하지 않습니다.\n설정에서 심판조를 생성이 필요합니다."
-          errorCode: "E655"
+      $ref: './components/examples.yaml#/REFEREE_GROUP_IS_NOT_EXISTS'
     WRONG_SCHEDULE_MATCH:
-      value:
-        success: false
-        data: null
-        error:
-          message: "잘못된 매치입니다."
-          errorCode: "E658"
+      $ref: './components/examples.yaml#/WRONG_SCHEDULE_MATCH'
     DENY_CHANGE_REFEREE_WRONG_SEQ:
-      value:
-        success: false
-        data: null
-        error:
-          message: "잘못된 파라미터입니다."
-          errorCode: "E661"
+      $ref: './components/examples.yaml#/DENY_CHANGE_REFEREE_WRONG_SEQ'
     DENY_CHANGE_REFEREE_WRONG_REFEREE_SEQ:
-      value:
-        success: false
-        data: null
-        error:
-          message: "존재하지 않는 심판입니다."
-          errorCode: "E662"
-
-
-    # 200
+      $ref: './components/examples.yaml#/DENY_CHANGE_REFEREE_WRONG_REFEREE_SEQ'
     EXIST_REFEREE_GROUP:
-      value:
-        success: false
-        data: null
-        error:
-          message: "삭제하려는 심판 목록 중 일부 심판이 이미 심판조에 편성되어 있습니다."
-          errorCode: "E645"
+      $ref: './components/examples.yaml#/EXIST_REFEREE_GROUP'
     REFEREE_DELETE_REQUEST_INVALID_1:
-      value:
-        success: false
-        data: null
-        error:
-          message: "삭제할 심판 목록은 비어 있을 수 없습니다."
-          errorCode: "E523"
+      $ref: './components/examples.yaml#/REFEREE_DELETE_REQUEST_INVALID_1'
     ITEM_NOT_FOUND:
-      value:
-        success: false
-        data: null
-        error:
-          message: "데이터가 존재하지 않습니다."
-          errorCode: "E501"
+      $ref: './components/examples.yaml#/ITEM_NOT_FOUND'
     INVALID_REFEREE_INVITATION:
-      value:
-        success: false
-        data: null
-        error:
-          message: "초대 대상 심판 회원 중 존재하지 않는 회원이 있습니다."
-          errorCode: "E646"
+      $ref: './components/examples.yaml#/INVALID_REFEREE_INVITATION'
     REFEREE_ALREADY_REGISTERED:
-      value:
-        success: false
-        data: null
-        error:
-          message: "이미 해당 대회에 심판으로 등록된 회원이 있습니다."
-          errorCode: "E649"
+      $ref: './components/examples.yaml#/REFEREE_ALREADY_REGISTERED'
     INVALID_HEAD_REFEREE:
-      value:
-        success: false
-        data: null
-        error:
-          message: "요청에 포함된 주심 중 존재하지 않는 심판이 있습니다."
-          errorCode: "E647"
+      $ref: './components/examples.yaml#/INVALID_HEAD_REFEREE'
     INSUFFICIENT_REFEREES_FOR_GROUP_CREATION:
-      value:
-        success: false
-        data: null
-        error:
-          message: "심판조 생성을 위한 충분한 심판 인원이 부족합니다."
-          errorCode: "E648"
+      $ref: './components/examples.yaml#/INSUFFICIENT_REFEREES_FOR_GROUP_CREATION'
     MATCH_STATE_INVALID_FOR_OPERATION:
-      value:
-        success: false
-        data: null
-        error:
-          message: "경기가 진행 중이거나 종료되어 해당 작업을 수행할 수 없습니다."
-          errorCode: "E651"
+      $ref: './components/examples.yaml#/MATCH_STATE_INVALID_FOR_OPERATION'
     REFEREE_CSV_DATA_NOT_FOUND:
-      value:
-        success: false
-        data: null
-        error:
-          message: "CSV 파일에 심판 데이터가 포함되어 있지 않습니다."
-          errorCode: "E650"
+      $ref: './components/examples.yaml#/REFEREE_CSV_DATA_NOT_FOUND'
     VALIDATE_FILE_IS_OVER_MAX:
-      value:
-        success: false
-        data: null
-        error:
-          message: "파일 등록 최대 개수를 초과하였습니다."
-          errorCode: "E702"
+      $ref: './components/examples.yaml#/VALIDATE_FILE_IS_OVER_MAX'
     FAILD_PAYPAL:
-      value:
-        success: false
-        data: null
-        error:
-          message: "PAYPAL 결제 실패"
-          errorCode: "E519"
+      $ref: './components/examples.yaml#/FAILD_PAYPAL'
     PAYMENT_METHOD_ERROR:
-      value:
-        success: false
-        data: null
-        error:
-          message: "결제 방식 오류"
-          errorCode: "E520"
+      $ref: './components/examples.yaml#/PAYMENT_METHOD_ERROR'
     PAYMENT_DENIED:
-      value:
-        success: false
-        data: null
-        error:
-          message: "결제가 거절되었습니다. 페이팔에 문의해주세요."
-          errorCode: "E623"
+      $ref: './components/examples.yaml#/PAYMENT_DENIED'
     PAYER_CANNOT_PAY:
-      value:
-        success: false
-        data: null
-        error:
-          message: "결제가 진행되지 않았습니다. 결제 수단 정보를 확인하거나 잔액 부족 시 다른 결제 수단을 사용해 주세요."
-          errorCode: "E624"
+      $ref: './components/examples.yaml#/PAYER_CANNOT_PAY'
     PAYPAL_INTERNAL_SERVER_ERROR:
-      value:
-        success: false
-        data: null
-        error:
-          message: "네트워크 연결에 문제가 생겼습니다."
-          errorCode: "E625"
+      $ref: './components/examples.yaml#/PAYPAL_INTERNAL_SERVER_ERROR'
     NOT_DIFFERENCE_DATE:
-      value:
-        success: false
-        data: null
-        error:
-          message: "결제하려는 상품의 결제 일자가 잘못되었습니다."
-          errorCode: "E529"
+      $ref: './components/examples.yaml#/NOT_DIFFERENCE_DATE'
     DIFFERENT_PAYMENT:
-      value:
-        success: false
-        data: null
-        error:
-          message: "계산된 가격이 다릅니다."
-          errorCode: "E517"
+      $ref: './components/examples.yaml#/DIFFERENT_PAYMENT'
     USER_STUDING_PRODUCT:
-      value:
-        success: false
-        data: null
-        error:
-          message: "해당 상품은 이미 결제 하신 상품입니다."
-          errorCode: "E516"
+      $ref: './components/examples.yaml#/USER_STUDING_PRODUCT'
     NEXT_ROUND_IS_START:
-      value:
-        success: false
-        data: null
-        error:
-          message: "다음 라운드 경기가 시작되어 결과를 변경할 수 없습니다."
-          errorCode: "E620"
+      $ref: './components/examples.yaml#/NEXT_ROUND_IS_START'
     PENDING_PAYMENT_IN_PROGRESS:
-      value:
-        success: false
-        data: null
-        error:
-          message: "진행중인 결제가 있거나 환불요청 상태입니다. 결제 완료 또는 환불 완료 후 접근 가능합니다."
-          errorCode: "E626"
+      $ref: './components/examples.yaml#/PENDING_PAYMENT_IN_PROGRESS'
     UNSUPPORTED_CATEGORY_FOR_RULE_DEPARTMENT:
-      value:
-        success: false
-        data: null
-        error:
-          message: "선택한 품새 룰과 부 조합에 허용되지 않는 카테고리가 포함되어 있습니다."
-          errorCode: "E652"
+      $ref: './components/examples.yaml#/UNSUPPORTED_CATEGORY_FOR_RULE_DEPARTMENT'
     DUPLICATE_DIVISION_CATEGORY:
-      value:
-        success: false
-        data: null
-        error:
-          message: "대회 유형이 중복되었습니다."
-          errorCode: "E653"
+      $ref: './components/examples.yaml#/DUPLICATE_DIVISION_CATEGORY'
     DUPLICATE_EMAIL:
-      value:
-        success: false
-        data: null
-        error:
-          message: "중복된 이메일 리스트 , 구분자로 보냄"
-          errorCode: "E642"
+      $ref: './components/examples.yaml#/DUPLICATE_EMAIL'
     NOT_EXIST_PARTICIPANTS_IN_DIVISION_CATEGORY:
-      value:
-        success: false
-        data: null
-        error:
-          message: "해당 대회 유형에 참가 인원이 존재하지 않습니다."
-          errorCode: "E703"
+      $ref: './components/examples.yaml#/NOT_EXIST_PARTICIPANTS_IN_DIVISION_CATEGORY'
     COMPETITION_PARTICIPATE_LIMIT_OVER:
-      value:
-        success: false
-        data: null
-        error:
-          message: "참가 인원 수 초과"
-          errorCode: "E530"
+      $ref: './components/examples.yaml#/COMPETITION_PARTICIPATE_LIMIT_OVER'
     COMPETITION_MATCH_PROGRESS_NOT_ADD:
-      value:
-        success: false
-        data: null
-        error:
-          message: "해당 대회 유형은 경기가 시작 되어 인원 추가가 불가능 합니다."
-          errorCode: "E704"
+      $ref: './components/examples.yaml#/COMPETITION_MATCH_PROGRESS_NOT_ADD'
     CONFIRM_PARTICIPANT_COMPETITION:
-      value:
-        success: false
-        data: null
-        error:
-          message: "이미 참가자 확정 된 대회 입니다."
-          errorCode: "E525"
+      $ref: './components/examples.yaml#/CONFIRM_PARTICIPANT_COMPETITION'
     INVALID_PAIR_MEMBER_COUNT:
-      value:
-        success: false
-        data: null
-        error:
-          message: "복식전은 2명의 팀원이 필요합니다."
-          errorCode: "E635"
+      $ref: './components/examples.yaml#/INVALID_PAIR_MEMBER_COUNT'
     INVALID_GROUP_MEMBER_COUNT:
-      value:
-        success: false
-        data: null
-        error:
-          message: "단체전은 최소 3명의 팀원이 필요합니다."
-          errorCode: "E634"
+      $ref: './components/examples.yaml#/INVALID_GROUP_MEMBER_COUNT'
     NOT_SAVE:
-      value:
-        success: false
-        data: null
-        error:
-          message: "저장 실패했습니다."
-          errorCode: "E507"
+      $ref: './components/examples.yaml#/NOT_SAVE'
     TEAM_NAME_MISMATCH:
-      value:
-        success: false
-        data: null
-        error:
-          message: "팀명이 일치하지 않습니다."
-          errorCode: "E633"
+      $ref: './components/examples.yaml#/TEAM_NAME_MISMATCH'
     INVALID_ARGUMENT_ERROR:
-      value:
-        success: false
-        data: null
-        error:
-          message: "올바르지 않은 입력값입니다."
-          errorCode: "E523"
+      $ref: './components/examples.yaml#/INVALID_ARGUMENT_ERROR'
     CSV_INVALID_ARGUMENT_ERROR:
-      value:
-        success: false
-        data: null
-        error:
-          message: "어떤 필드에 행이 잘못됐는지 동적으로 백엔드에서 메시지 만들어주므로 그거 그대로 띄우면 됨"
-          errorCode: "E748"
+      $ref: './components/examples.yaml#/CSV_INVALID_ARGUMENT_ERROR'
     INVALID_BIRTH_DATE_ERROR:
-      value:
-        success: false
-        data: null
-        error:
-          message: "올바르지 않은 생년월일 형식입니다."
-          errorCode: "E730"
+      $ref: './components/examples.yaml#/INVALID_BIRTH_DATE_ERROR'
     SCHEDULE_IS_TEMPORARY_SAVE:
-      value:
-        success: false
-        data: null
-        error:
-          message: "일정이 임시 저장 상태입니다. \n 일정을 저장해 주세요."
-          errorCode: "E630"
+      $ref: './components/examples.yaml#/SCHEDULE_IS_TEMPORARY_SAVE'
     NO_REMAINING_MATCHES:
-      value:
-        success: false
-        data: null
-        error:
-          message: "남은 경기가 없습니다."
-          errorCode: "E615"
+      $ref: './components/examples.yaml#/NO_REMAINING_MATCHES'
     COURT_VIEWER_MAX_PER_COURT:
-      value:
-        success: false
-        data: null
-        error:
-          message: "코트 별 최대 경기 수를 초과했습니다."
-          errorCode: "E644"
+      $ref: './components/examples.yaml#/COURT_VIEWER_MAX_PER_COURT'
     COMPETITION_IS_STILL_ONGOING:
-      value:
-        success: false
-        data: null
-        error:
-          message: "경기가 아직 진행중입니다."
-          errorCode: "E614"
+      $ref: './components/examples.yaml#/COMPETITION_IS_STILL_ONGOING'
     COMPETITION_MATCH_NOT_FOUND:
-      value:
-        success: false
-        data: null
-        error:
-          message: "대회의 경기를 찾을 수 없습니다."
-          errorCode: "E706"
+      $ref: './components/examples.yaml#/COMPETITION_MATCH_NOT_FOUND'
     DOCUMENT_NOT_FOUND:
-      value:
-        success: false
-        data: null
-        error:
-          message: "문서 내역이 존재하지 않습니다."
-          errorCode: "E619"
+      $ref: './components/examples.yaml#/DOCUMENT_NOT_FOUND'
     COMPETITION_MATCH_REFEREE_NOT_ASSIGNED:
-      value:
-        success: false
-        data: null
-        error:
-          message: "해당 경기에 심판으로 배정되지 않았습니다."
-          errorCode: "E707"
+      $ref: './components/examples.yaml#/COMPETITION_MATCH_REFEREE_NOT_ASSIGNED'
     INSUFFICIENT_SCORE_FOR_DEDUCTION:
-      value:
-        success: false
-        data: null
-        error:
-          message: "현재 점수가 더 작아 감점할 수 없습니다."
-          errorCode: "E709"
+      $ref: './components/examples.yaml#/INSUFFICIENT_SCORE_FOR_DEDUCTION'
     NO_DEDUCTION_TO_UNDO:
-      value:
-        success: false
-        data: null
-        error:
-          message: "감점이 없어 되돌릴 수 없습니다."
-          errorCode: "E710"
+      $ref: './components/examples.yaml#/NO_DEDUCTION_TO_UNDO'
     DENY_CHANGE_REFEREE_GROUP_SESSION_IS_START:
-      value:
-        success: false
-        data: null
-        error:
-          message: "세션이 시작되어 심판조를 변경할 수 없습니다."
-          errorCode: "E656"
+      $ref: './components/examples.yaml#/DENY_CHANGE_REFEREE_GROUP_SESSION_IS_START'
     DENY_CHANGE_REFEREE_GROUP_OVERLAP:
-      value:
-        success: false
-        data: null
-        error:
-          message: "같은 심판조로는 변경할 수 없습니다."
-          errorCode: "E657"
+      $ref: './components/examples.yaml#/DENY_CHANGE_REFEREE_GROUP_OVERLAP'
     DENY_CHANGE_REFEREE_GROUP_SAME_SESSION:
-      value:
-        success: false
-        data: null
-        error:
-          message: "이미 같은 세션에 배정된 심판조입니다."
-          errorCode: "E657"
+      $ref: './components/examples.yaml#/DENY_CHANGE_REFEREE_GROUP_SAME_SESSION'
     DENY_CHANGE_REFEREE_MATCH_IS_NOT_WAITING:
-      value:
-        success: false
-        data: null
-        error:
-          message: "진행중이거나 종료된 경기의 심판은 바꿀 수 없습니다."
-          errorCode: "E659"
+      $ref: './components/examples.yaml#/DENY_CHANGE_REFEREE_MATCH_IS_NOT_WAITING'
     ALREADY_EXIST_REFEREE:
-      value:
-        success: false
-        data: null
-        error:
-          message: "이미 배정된 심판입니다."
-          errorCode: "E660"
+      $ref: './components/examples.yaml#/ALREADY_EXIST_REFEREE'
     MATCH_COMPETITOR_DETAIL_NOT_FOUND:
-      value:
-        success: false
-        data: null
-        error:
-          message: "해당 경기의 선수를 찾을 수 없습니다."
-          errorCode: "E708"
+      $ref: './components/examples.yaml#/MATCH_COMPETITOR_DETAIL_NOT_FOUND'
     CANNOT_APPLY_DEDUCTION:
-      value:
-        success: false
-        data: null
-        error:
-          message: "더 이상 감점을 뺼 수 없습니다."
-          errorCode: "E713"
+      $ref: './components/examples.yaml#/CANNOT_APPLY_DEDUCTION'
     END_OR_WAITING_MATCH_INVALID_FOR_OPERATION:
-      value:
-        success: false
-        data: null
-        error:
-          message: "경기가 시작 전이거나 종료되어 해당 작업을 수행할 수 없습니다."
-          errorCode: "E714"
+      $ref: './components/examples.yaml#/END_OR_WAITING_MATCH_INVALID_FOR_OPERATION'
     OUT_OF_SCORE_SCALE:
-      value:
-        success: false
-        data: null
-        error:
-          message: "가능한 범위를 벗어나는 점수가 있습니다."
-          errorCode: "E715"
+      $ref: './components/examples.yaml#/OUT_OF_SCORE_SCALE'
     REQUIRED_TYPE_NOT_SCORED:
-      value:
-        success: false
-        data: null
-        error:
-          message: "누락된 채점이 존재합니다."
-          errorCode: "E716"
+      $ref: './components/examples.yaml#/REQUIRED_TYPE_NOT_SCORED'
     SCORING_ALREADY_FINISHED:
-      value:
-        success: false
-        data: null
-        error:
-          message: "이미 채점이 완료되었습니다."
-          errorCode: "E717"
+      $ref: './components/examples.yaml#/SCORING_ALREADY_FINISHED'
     NO_MATCH_ASSIGNED_TO_REFEREE:
-      value:
-        success: false
-        data: null
-        error:
-          message: "심판으로 배정된 경기가 없습니다."
-          errorCode: "E718"
+      $ref: './components/examples.yaml#/NO_MATCH_ASSIGNED_TO_REFEREE'
     MATCH_WINNER_NOT_FOUND:
-      value:
-        success: false
-        data: null
-        error:
-          message: "해당 경기의 승자가 존재하지 않습니다."
-          errorCode: "E720"
+      $ref: './components/examples.yaml#/MATCH_WINNER_NOT_FOUND'
     MATCH_RESULT_CANNOT_BE_UPDATED_AFTER_NEXT_ROUND:
-      value:
-        success: false
-        data: null
-        error:
-          message: "다음강수가 진행된 경우 경기 승자 및 결과를 수정할 수 없습니다."
-          errorCode: "E721"
+      $ref: './components/examples.yaml#/MATCH_RESULT_CANNOT_BE_UPDATED_AFTER_NEXT_ROUND'
     CUTOFF_MATCH_RESULT_ALREADY_UP_TO_DATE:
-      value:
-        success: false
-        data: null
-        error:
-          message: "경기 결과가 이미 동일하여 변경할 수 없습니다."
-          errorCode: "E734"
+      $ref: './components/examples.yaml#/CUTOFF_MATCH_RESULT_ALREADY_UP_TO_DATE'
     NO_PLAYER_ADVANCED_TO_NEXT_ROUND:
-      value:
-        success: false
-        data: null
-        error:
-          message: "다음강수에 진출한 선수가 존재하지 않습니다."
-          errorCode: "E722"
+      $ref: './components/examples.yaml#/NO_PLAYER_ADVANCED_TO_NEXT_ROUND'
     MATCH_RESULT_ALREADY_UP_TO_DATE:
-      value:
-        success: false
-        data: null
-        error:
-          message: "승자와 경기 결과가 이미 동일하여 변경할 수 없습니다."
-          errorCode: "E723"
+      $ref: './components/examples.yaml#/MATCH_RESULT_ALREADY_UP_TO_DATE'
     ONLY_TOURNAMENT_MATCH_CAN_UPDATE_RESULT:
-      value:
-        success: false
-        data: null
-        error:
-          message: "승자 및 경기 결과는 토너먼트 경기에서만 변경할 수 있습니다."
-          errorCode: "E719"
+      $ref: './components/examples.yaml#/ONLY_TOURNAMENT_MATCH_CAN_UPDATE_RESULT'
     IS_BYE_MATCH:
-      value:
-        success: false
-        data: null
-        error:
-          message: "부전승 경기는 변경할 수 없습니다."
-          errorCode: "E620-2"
+      $ref: './components/examples.yaml#/IS_BYE_MATCH'
     CANNOT_DEDUCT_ZERO_PENALTY:
-      value:
-        success: false
-        data: null
-        error:
-          message: "현재 패널티 점수가 0점이어서 차감할 수 없습니다."
-          errorCode: "E711"
+      $ref: './components/examples.yaml#/CANNOT_DEDUCT_ZERO_PENALTY'
     CANNOT_APPLY_PENALTY_WHEN_SCORE_IS_TWO:
-      value:
-        success: false
-        data: null
-        error:
-          message: "현재 패널티 점수가 2점이라 패널티를 부여할 수 없습니다."
-          errorCode: "E712"
+      $ref: './components/examples.yaml#/CANNOT_APPLY_PENALTY_WHEN_SCORE_IS_TWO'
     INVALID_POOMSAE_FOR_MATCH:
-      value:
-        success: false
-        data: null
-        error:
-          message: "해당 매치에서 허용되지 않은 품새는 저장할 수 없습니다."
-          errorCode: "E724"
+      $ref: './components/examples.yaml#/INVALID_POOMSAE_FOR_MATCH'
     REFEREE_MISMATCH:
-      value:
-        success: false
-        data: null
-        error:
-          message: "경기에 배정받은 심판과 사용자가 일치하지 않습니다."
-          errorCode: "E725"
+      $ref: './components/examples.yaml#/REFEREE_MISMATCH'
     ONLY_TOURNAMENT_RANDOM_MATCH:
-      value:
-        success: false
-        data: null
-        error:
-          message: "랜덤 매치 생성은는 토너먼트 경기에서만 변경할 수 있습니다."
-          errorCode: "E728"
+      $ref: './components/examples.yaml#/ONLY_TOURNAMENT_RANDOM_MATCH'
     SCORING_NOT_COMPLETED:
-      value:
-        success: false
-        data: null
-        error:
-          message: "심판의 채점이 완료되지 않았습니다."
-          errorCode: "E729"
+      $ref: './components/examples.yaml#/SCORING_NOT_COMPLETED'
     SCORE_UPDATE_NOT_ALLOWED_AFTER_NEXT_ROUND_STARTED:
-      value:
-        success: false
-        data: null
-        error:
-          message: "다음 라운드가 진행중이거나 완료되어 점수를 승패 변경 수준으로 수정할 수 없습니다."
-          errorCode: "E731"
+      $ref: './components/examples.yaml#/SCORE_UPDATE_NOT_ALLOWED_AFTER_NEXT_ROUND_STARTED'
     MATCH_IS_NOT_CREATED:
-      value:
-        success: false
-        data: null
-        error:
-          message: "생성된 대진이 없습니다."
-          errorCode: "E736"
+      $ref: './components/examples.yaml#/MATCH_IS_NOT_CREATED'
     COURT_VIEWER_MATCH_ORDER_IS_WRONG:
-      value:
-        success: false
-        data: null
-        error:
-          message: "PHASE의 순서가 잘못되었습니다."
-          errorCode: "E737"
+      $ref: './components/examples.yaml#/COURT_VIEWER_MATCH_ORDER_IS_WRONG'
     SCHEDULE_IS_NOT_FOUND_PER_DAY:
-      value:
-        success: false
-        data: null
-        error:
-          message: "해당 일차에 존재하지 않는 스케줄입니다."
-          errorCode: "E738"
+      $ref: './components/examples.yaml#/SCHEDULE_IS_NOT_FOUND_PER_DAY'
     COURT_VIEWER_MATCH_IS_OVERLAP:
-      value:
-        success: false
-        data: null
-        error:
-          message: "입력된 대진 중 중복되는 대진이 있습니다."
-          errorCode: "E739"
+      $ref: './components/examples.yaml#/COURT_VIEWER_MATCH_IS_OVERLAP'
     SCHEDULE_IS_EMPTY:
-      value:
-        success: false
-        data: null
-        error:
-          message: "저장된 일정이 없습니다."
-          errorCode: "E669"
+      $ref: './components/examples.yaml#/SCHEDULE_IS_EMPTY'
     MATCH_IS_ALREADY_CREATED:
-      value:
-        success: false
-        data: null
-        error:
-          message: "대진이 이미 생성되었습니다."
-          errorCode: "E663"
+      $ref: './components/examples.yaml#/MATCH_IS_ALREADY_CREATED'
     QUALIFY_SF_ONLY:
-      value:
-        success: false
-        data: null
-        error:
-          message: "Qualify 지정은 컷오프 + 토너먼트 형식의 본선 경기에서만 가능합니다."
-          errorCode: "E741"
+      $ref: './components/examples.yaml#/QUALIFY_SF_ONLY'
     MATCH_IS_NOT_END:
-      value:
-        success: false
-        data: null
-        error:
-          message: "대진이 종료되지 않았습니다."
-          errorCode: "E671"
+      $ref: './components/examples.yaml#/MATCH_IS_NOT_END'
     CUTOFF_GROUP_IS_NOT_END:
-      value:
-        success: false
-        data: null
-        error:
-          message: "컷오프 조가 종료되지 않았습니다."
-          errorCode: "E672"
+      $ref: './components/examples.yaml#/CUTOFF_GROUP_IS_NOT_END'
     COMPETITION_PARTICIPATE_NOT_CONFIRM_ERROR:
-      value:
-        success: false
-        data: null
-        error:
-          message: "참가 인원 확정이 안 된 대회 입니다."
-          errorCode: "E543"
+      $ref: './components/examples.yaml#/COMPETITION_PARTICIPATE_NOT_CONFIRM_ERROR'
     TOGETHER_PERFORMANCE_NOT_ALLOWED_FREESTYLE:
-      value:
-        success: false
-        data: null
-        error:
-          message: "자유품새 경기에서는 함께시연을 지정할 수 없습니다."
-          errorCode: "E746"
+      $ref: './components/examples.yaml#/TOGETHER_PERFORMANCE_NOT_ALLOWED_FREESTYLE'
     USER_DOES_NOT_EXIST:
-      value:
-        success: false
-        data: null
-        error:
-          message: "유저가 존재하지 않습니다."
-          errorCode: "E510"
+      $ref: './components/examples.yaml#/USER_DOES_NOT_EXIST'
     COURT_COUNT_REDUCTION_FAILED:
-      value:
-        success: false
-        data: null
-        error:
-          message: "진행 중인 경기가 있어 코트 수를 줄일 수 없습니다."
-          errorCode: "E749"
+      $ref: './components/examples.yaml#/COURT_COUNT_REDUCTION_FAILED'
     MAX_COURT_COUNT_EXCEEDED_ERROR:
-      value:
-        success: false
-        data: null
-        error:
-          message: "최대 코트 수를 초과했습니다."
-          errorCode: "E750"
+      $ref: './components/examples.yaml#/MAX_COURT_COUNT_EXCEEDED_ERROR'
     EVENT_UPDATE_NOT_ALLOWED:
-      value:
-        success: false
-        data: null
-        error:
-          message: "해당 대회에서 진행 중이거나 일치하지 않는 이벤트가 포함되어 있어 수정 작업을 수행할 수 없습니다."
-          errorCode: "E751"
+      $ref: './components/examples.yaml#/EVENT_UPDATE_NOT_ALLOWED'
     WRONG_FOP_STATUS:
-      value:
-        success: false
-        data: null
-        error:
-          message: "잘못된 FOP 상태값입니다."
-          errorCode: "E664"
+      $ref: './components/examples.yaml#/WRONG_FOP_STATUS'
     CURRENT_PHASE_IS_ONGOING:
-      value:
-        success: false
-        data: null
-        error:
-          message: "현재 페이즈가 진행중입니다."
-          errorCode: "E752"
+      $ref: './components/examples.yaml#/CURRENT_PHASE_IS_ONGOING'
     FEATURE_NOT_SUPPORTED_IN_TOURNAMENT:
-      value:
-        success: false
-        data: null
-        error:
-          message: "해당 기능은 토너먼트 일정에서는 지원하지 않습니다."
-          errorCode: "E753"
+      $ref: './components/examples.yaml#/FEATURE_NOT_SUPPORTED_IN_TOURNAMENT'
     CANNOT_DISQUALIFY_ALL_CUTOFF_COMPETITORS:
-      value:
-        success: false
-        data: null
-        error:
-          message: "컷오프 전체 인원을 실격처리 할 수 없습니다."
-          errorCode: "E754"
+      $ref: './components/examples.yaml#/CANNOT_DISQUALIFY_ALL_CUTOFF_COMPETITORS'
     CANNOT_PROCESS_LAST_PHASE:
-      value:
-        success: false
-        data: null
-        error:
-          message: "마지막 페이즈는 처리 할 수 없습니다."
-          errorCode: "E755"
+      $ref: './components/examples.yaml#/CANNOT_PROCESS_LAST_PHASE'
     ATHLETE_CSV_DATA_NOT_FOUND:
-      value:
-        success: false
-        data: null
-        error:
-          message: "CSV 파일에 선수 데이터가 포함되어 있지 않습니다."
-          errorCode: "E756"
+      $ref: './components/examples.yaml#/ATHLETE_CSV_DATA_NOT_FOUND'
     CANNOT_RESET_WAITING_MATCH:
-      value:
-        success: false
-        data: null
-        error:
-          message: "대기중 경기는 리셋 할 수 없습니다."
-          errorCode: "E757"
+      $ref: './components/examples.yaml#/CANNOT_RESET_WAITING_MATCH'
     CANNOT_RESET_MATCH_CUTOFF_GROUP_FINISHED:
-      value:
-        success: false
-        data: null
-        error:
-          message: "해당 컷오프 조가 종료되어 경기를 리셋 할 수 없습니다."
-          errorCode: "E758"
+      $ref: './components/examples.yaml#/CANNOT_RESET_MATCH_CUTOFF_GROUP_FINISHED'
     CANNOT_RESET_MATCH_NEXT_ROUND_IN_PROGRESS:
-      value:
-        success: false
-        data: null
-        error:
-          message: "다음 라운드 경기가 진행되어 경기를 리셋 할 수 없습니다."
-          errorCode: "E759"
+      $ref: './components/examples.yaml#/CANNOT_RESET_MATCH_NEXT_ROUND_IN_PROGRESS'
     MISSING_COURT_ASSIGNMENT:
-      value:
-        success: false
-        data: null
-        error:
-          message: "코트 배정 누락 안내:\n코트뷰어에서 배치 상태를 재확인해 주시기 바랍니다."
-          errorCode: "E762"
-
+      $ref: './components/examples.yaml#/MISSING_COURT_ASSIGNMENT'
     EXIST_WAITING_MATCHES:
-      value:
-        success: false
-        data: null
-        error:
-          message: "대기 중인 매치가 존재합니다.\n원활한 진행을 위해 코트뷰어를 확인해 주세요."
-          errorCode: "E763"
-
+      $ref: './components/examples.yaml#/EXIST_WAITING_MATCHES'
     ALREADY_SAVED_DATA:
-      value:
-        success: false
-        data: null
-        error:
-          message: "이미 저장 된 데이터입니다."
-          errorCode: "E765"
-
-
+      $ref: './components/examples.yaml#/ALREADY_SAVED_DATA'
   schemas:
     getCompetitionDefaultResponse:
-      properties:
-        divisionList:
-          type: array
-          items:
-            type: object
-            properties:
-              divisionSeq:
-                type: number
-                example: 623
-              divisionCode:
-                type: string
-                example: "00"
-              divisionNameEn:
-                type: string
-                example: "WT Recognized Poomsae"
-              divisionNameKo:
-                type: string
-                example: "WT 공인품새룰"
-        countryList:
-          type: array
-          items:
-            type: object
-            properties:
-              codeDetailNo:
-                type: string
-                example: "AF"
-              codeDetailName:
-                type: string
-                example: "(+93) Afghanistan"
-        utcList:
-          type: array
-          items:
-            type: object
-            properties:
-              code:
-                type: string
-                example: "COK"
-              nameEn:
-                type: string
-                example: "Cook Islands"
-              subCode1:
-                type: string
-                example: null
-              exp1:
-                type: string
-                example: "-1000"
-              utcInfo:
-                type: string
-                example: "(UTC -10:00)"
-        wtClassList:
-          type: array
-          items:
-            type: object
-            properties:
-              code:
-                type: string
-                example: "G1"
-        bankList:
-          type: array
-          items:
-            type: object
-            properties:
-              code:
-                type: string
-                example: "BFTVVNVX"
-              nameEn:
-                type: string
-                example: "VietcomBank"
-              nameKo:
-                type: string
-                example: "비엣콤 은행"
-        poomsaeList:
-          type: array
-          items:
-            type: object
-            properties:
-              code:
-                type: string
-                example: "C00"
-              nameEn:
-                type: string
-                example: "Taegeuk 1 Jang"
-              nameKo:
-                type: string
-                example: "태극 1장"
-        compositeRateList:
-          type: array
-          items:
-            type: object
-            properties:
-              code:
-                type: string
-                example: "D0"
-              nameEn:
-                type: string
-                example: null
-              nameKo:
-                type: string
-                example: "공인10:자유90"
-        matchOrderList:
-          type: array
-          items:
-            type: object
-            properties:
-              code:
-                type: string
-                example: "E1"
-              nameEn:
-                type: string
-                example: "Chung-Chung-Hong-Hong"
-              nameKo:
-                type: string
-                example: "청-청-홍-홍"
-        poomsaeDrawList:
-          type: array
-          items:
-            type: object
-            properties:
-              code:
-                type: string
-                example: "H"
-              nameEn:
-                type: string
-                example: "PinSelect"
-              nameKo:
-                type: string
-                example: "고정선택"
-        hostDefaultInfo:
-          type: object
-          properties:
-            competitionNameKo:
-              type: string
-              example: "정수의 WT공인품새 테스트대회"
-            competitionNameEn:
-              type: string
-              example: "Test"
-            competitionContent:
-              type: string
-              example: "정수대회소개임ㅋㅋㅋ"
-            competitionHostName:
-              type: string
-              example: "호스트"
-            competitionHostCountry:
-              type: string
-              example: "KR"
-            competitionHostCall:
-              type: string
-              example: "01075345140"
-            competitionSdate:
-              type: string
-              format: date-time
-              example: "2025-02-23 00:00:00.0"
-            competitionEdate:
-              type: string
-              format: date-time
-              example: "2025-03-10 23:59:00.0"
-            competitionLocationKo:
-              type: string
-              example: "부산"
-            competitionLocationEn:
-              type: string
-              example: "Busan"
-            competitionUtcCode:
-              type: string
-              example: "KOR"
-            competitionSubSdate:
-              type: string
-              format: date-time
-              example: "2025-02-19 00:00:00.0"
-            competitionSubEdate:
-              type: string
-              format: date-time
-              example: "2025-02-22 23:59:00.0"
-            competitionLocalYn:
-              type: string
-              example: "W"
-            competitionWtCodeSendYn:
-              type: string
-              example: "Y"
-            competitionWtClassCode:
-              type: string
-              example: "G1"
-            competitionParticipantPayYn:
-              type: string
-              example: "N"
-            bankName:
-              type: string
-              example: null
-            accountNumber:
-              type: string
-              example: null
-            accountHolderName:
-              type: string
-              example: null
-            competitionParticipantPay:
-              type: string
-              example: "N"
-            orderStatus:
-              type: string
-              example: null
-            scoreDevice:
-              type: string
-              example: "D"
-        hostDivisionList:
-          type: array
-          items:
-            type: object
-            properties:
-              divisionSeq:
-                type: number
-                example: 623
-              delDivisionUsedSeq:
-                type: number
-                example: 14
-        hostMainImgList:
-          type: array
-          items:
-            type: object
-            properties:
-              s3MediaSeq:
-                type: number
-                example: 219
-              s3CdnUrl:
-                type: string
-                example: "https://cdn.kpnpglobal.com/kpnp/media/image/champs/2024/02/fa418844fa014a819d7e7e38e08d0311.JPEG"
-              mediaType:
-                type: string
-                example: "I"
-              originName:
-                type: string
-                example: "테스트 이미지.jpeg"
-              fileSize:
-                type: string
-                example: "6"
-              sortNo:
-                type: number
-                example: 2
-        hostFileList:
-          type: array
-          items:
-            type: object
-            properties:
-              s3MediaSeq:
-                type: number
-                example: 220
-              s3CdnUrl:
-                type: string
-                example: "https://cdn.kpnpglobal.com/kpnp/media/file/champs/2024/02/308614928b5b477db2ec949cdbcad063.TXT"
-              mediaType:
-                type: string
-                example: "F"
-              originName:
-                type: string
-                example: "테스트 파일 - 복사본.txt"
-              fileSize:
-                type: string
-                example: "0"
-              sortNo:
-                type: number
-                example: 2
+      $ref: './components/schemas.yaml#/getCompetitionDefaultResponse'
     CompetitionMediaRequest:
-      type: object
-      properties:
-        competitionSeq:
-          type: integer
-          example: 2035
-        s3MediaSeqList:
-          type: array
-          items:
-            type: integer
-          example: [ 2527, 2528 ]
-      required:
-        - competitionSeq
-        - s3MediaSeqList
+      $ref: './components/schemas.yaml#/CompetitionMediaRequest'
     Country:
-      type: object
-      properties:
-        codeDetailNo:
-          type: string
-          example: "AF"
-        codeDetailName:
-          type: string
-          example: "(+93) Afghanistan"
+      $ref: './components/schemas.yaml#/Country'
     PaypalPayment:
-      type: object
-      description: 페이팔 결제시
-      required:
-        - kpnpOrdersSeq
-        - orderNum
-        - paymentDate
-        - payType
-        - paymentAmount
-        - unit
-      properties:
-        kpnpOrdersSeq:
-          type: string
-          example: "47"
-          description: 주문 SEQ
-        orderNum:
-          type: string
-          example: "O170902826322267"
-          description: 주문 번호
-        fullNameKr:
-          type: string
-          example: "김범준"
-          description: 주문자 이름 (한글)
-        fullNameEn:
-          type: string
-          example: "kbj"
-          description: 주문자 이름 (영문)
-        paymentDate:
-          type: string
-          example: "2024-03-18 11:48:21.0"
-          description: 결제일
-        payType:
-          type: string
-          example: "P"
-          description: 결제 방식 (P = Paypal)
-        paymentAmount:
-          type: number
-          format: double
-          example: 110.0
-          description: 결제 금액
-        unit:
-          type: string
-          example: "usd"
-          description: 화폐 단위
+      $ref: './components/schemas.yaml#/PaypalPayment'
     MTJPayment:
-      type: object
-      description: 무통장 결제시
-      required:
-        - kpnpOrdersSeq
-        - orderNum
-        - paymentDate
-        - payType
-        - unit
-        - kpnpBankNameEn
-        - kpnpBankAccountNum
-        - kpnpBankAccountName
-        - depositDate
-        - depositorName
-        - swiftCode
-        - kpnpTel
-        - kpnpFax
-        - kpnpEmail
-      properties:
-        kpnpOrdersSeq:
-          type: string
-          example: "19"
-          description: 주문 seq
-        orderNum:
-          type: string
-          example: "O170902826322267"
-          description: 주문번호
-        fullNameKr:
-          type: string
-          example: "김범준"
-          description: 주문자 이름
-        fullNameEn:
-          type: string
-          example: "kbj"
-          description: 주문자 이름 En
-        payType:
-          type: string
-          example: "M"
-          description: 결제 방식 (M = 무통장)
-        paymentDate:
-          type: string
-          example: "2024-02-27 10:06:29.0"
-          description: 입금기간
-        paymentAmount:
-          type: number
-          format: double
-          example: 20000.0
-          description: 입금할 금액
-        unit:
-          type: string
-          example: "kor"
-          description: 화폐
-        kpnpBankNameKr:
-          type: string
-          example: "KEB 하나"
-          description: 은행명 Kr
-        kpnpBankNameEn:
-          type: string
-          example: "KEB Hana"
-          description: 은행명 En
-        kpnpBankAccountNum:
-          type: string
-          example: "4289-1000-869-238"
-          description: 계좌번호
-        kpnpBankAccountName:
-          type: string
-          example: "KPNP CO.LTD"
-          description: 예금주
-        depositDate:
-          type: string
-          example: "2024-02-28 10:06"
-          description: 입금기간
-        depositorName:
-          type: string
-          example: "곽은정12877"
-          description: 입금자명
-        swiftCode:
-          type: string
-          example: "KOEXKRSE"
-          description: SWIFT_CODE
-        bankAddress:
-          type: string
-          example: "Gasan Digital 1-Ro, Geumcheon-gu, Seoul, South Korea"
-          description: 은행본점 (주소)
-        kpnpTel:
-          type: string
-          example: "02-563-5989"
-          description: KPNP 전화번호
-        kpnpFax:
-          type: string
-          example: "02-6449-2989"
-          description: KPNP 팩스번호
-        kpnpEmail:
-          type: string
-          example: "Sales1@kpnp.net"
-          description: KPNP 담당자 EMAIL
-        bankPostalCode:
-          type: string
-          example: "085-08"
-          description: 은행본점 (우편번호)
-
-    # Enums
+      $ref: './components/schemas.yaml#/MTJPayment'
     CompetitionMediaCategory:
-      type: string
-      description: 대회 개최 미디어 구분
-      enum:
-        - M (메인사진)
-        - F (파일)
+      $ref: './components/schemas.yaml#/CompetitionMediaCategory'
     SettingMediaCategory:
-      type: string
-      description: 미디어 구분
-      enum:
-        - CR (대회로고)
-        - HR (주최로고)
+      $ref: './components/schemas.yaml#/SettingMediaCategory'
     MediaCategory:
-      type: string
-      description: 미디어 구분
-      enum:
-        - M (메인사진)
-        - F (파일)
-        - CR (대회로고)
-        - HR (주최로고)
-        - BI (베너이미지)
-        - S (스폰서)
+      $ref: './components/schemas.yaml#/MediaCategory'
     MediaType:
-      type: string
-      description: 미디어 타입
-      enum:
-        - I (이미지)
-        - F (파일)
+      $ref: './components/schemas.yaml#/MediaType'
     PoomsaeDivisionType:
-      type: string
-      enum:
-        - WT_RECOGNIZED_POOMSAE (WT 공인품새룰)
-        - FREE_STYLE_POOMSAE (자유품새룰)
-        - MIXED_POOMSAE (복합품새룰)
-        - KVR_RECOGNIZED_POOMSAE (한국 공인품새룰)
-        - OPEN_RECOGNIZED_POOMSAE (오픈대회 공인품새)
-        - OPEN_FREE_STYLE_POOMSAE (오픈대회 자유품새)
-      example:
-        - WT_RECOGNIZED_POOMSAE
-        - FREE_STYLE_POOMSAE
-
+      $ref: './components/schemas.yaml#/PoomsaeDivisionType'
     PoomsaeDepartmentType:
-      type: string
-      description: 품새 부 구분
-      enum:
-        - CADET (Cadet, 유소년부)
-        - JUNIOR (Junior, 청소년부)
-        - UNDER_30 (Under 30, 30세 이하)
-        - UNDER_40 (Under 40, 40세 이하)
-        - UNDER_50 (Under 50, 50세 이하)
-        - UNDER_60 (Under 60, 60세 이하)
-        - UNDER_65 (Under 65, 65세 이하)
-        - OVER_65 (Over 65, 65세 초과)
-        - OVER_60 (Over 60, 60세 초과)
-        - UNDER_17 (Under 17, 17세 이하)
-        - OVER_17 (Over 17, 17세 초과)
-        - AND_OVER_18 (18& Over, 18세 이상)
-        - ELEMENTARY_LOWER (Elementary Lower, 초등 저학년부)
-        - ELEMENTARY_MIDDLE (Elementary Middle, 초등 중학년부)
-        - ELEMENTARY_UPPER (Elementary Upper, 초등 고학년부)
-        - MIDDLE_1ST (Middle 1st, 중등부 1학년)
-        - MIDDLE_2ND (Middle 2nd, 중등부 2학년)
-        - MIDDLE_3ND (Middle 3nd, 중등부 3학년)
-        - HIGH_1ST (High 1st, 고등부 1학년)
-        - HIGH_2ND (High 2nd, 고등부 2학년)
-        - HIGH_3ND (High 3nd, 고등부 3학년)
-        - UNIVERSITY_1 (University 1, 대학 1부)
-        - UNIVERSITY_2 (University 2, 대학 2부)
-        - GEUMGANG_1 (Geumgang 1, 금강 1부)
-        - GEUMGANG_2 (Geumgang 2, 금강 2부)
-        - TAEBAEK_1 (Taebaek 1, 태백 1부)
-        - TAEBAEK_2 (Taebaek 2, 태백 2부)
-        - JITAE_1 (Jitae 1, 지태 1부)
-        - JITAE_2 (Jitae 2, 지태 2부)
-        - CHEONGWON (Cheongwon, 천권부)
-        - HANSU (Hansu, 한수부)
-        - MIDDLE (Middle, 중등부)
-        - HIGH (High, 고등부)
-        - UNIVERSITY (University, 대학부)
-        - ADULT (Adult, 성인부)
-        - SENIOR (Senior, 장년부)
-
+      $ref: './components/schemas.yaml#/PoomsaeDepartmentType'
     PoomsaeDivisionCategoryType:
-      type: string
-      description: 품새 세부 종목 구분
-      enum:
-        - INDIVIDUAL_MALE (Individual male, 남자개인)
-        - INDIVIDUAL_FEMALE (Individual female, 여자개인)
-        - TEAM_MALE (Team male, 남자단체)
-        - TEAM_FEMALE (Team female, 여자단체)
-        - PAIR (Pair, 복식)
-        - TEAM_MIXED (Team mixed, 혼성단체전)
-
+      $ref: './components/schemas.yaml#/PoomsaeDivisionCategoryType'
     PoomsaeMatchStyleType:
-      type: string
-      description: 경기 방식
-      enum:
-        - TOURNAMENT (토너먼트)
-        - CUTOFF_TOURNAMENT (컷오프+토너먼트)
-        - CUTOFF (컷오프)
-
+      $ref: './components/schemas.yaml#/PoomsaeMatchStyleType'
     PoomsaeDrawType:
-      type: string
-      description: 품새 추첨 방식
-      enum:
-        - RANDOM (Random, 무작위)
-        - PIN_SELECT (PinSelect, 고정선택)
-        - REFEREE_SELECT (RefereeSelect, 심판추첨)
-
+      $ref: './components/schemas.yaml#/PoomsaeDrawType'
     PoomsaeCompositeRateType:
-      type: string
-      description: 복합품새 비중 코드
-      enum:
-        - D0 (10:90, 공인10:자유90)
-        - D1 (20:80, 공인20:자유80)
-        - D2 (30:70, 공인30:자유70)
-        - D3 (40:60, 공인40:자유60)
-        - D4 (50:50, 공인50:자유50)
-        - D5 (60:40, 공인60:자유40)
-        - D6 (30:70, 공인70:자유30)
-        - D7 (80:20, 공인80:자유20)
-        - D8 (90:10, 공인90:자유10)
+      $ref: './components/schemas.yaml#/PoomsaeCompositeRateType'
     PoomsaeMatchOrderType:
-      type: string
-      description: 품새 시연 순서 타입
-      enum:
-        - CHUNG_CHUNG_HONG_HONG (Chung-Chung-Hong-Hong, 청-청-홍-홍)
-        - HONG_HONG_CHUNG_CHUNG (Hong-Hong-Chung-Chung, 홍-홍-청-청)
-        - CHUNG_HONG_CHUNG_HONG (Chung-Hong-Chung-Hong, 청-홍-청-홍)
-        - HONG_CHUNG_HONG_CHUNG (Hong-Chung-Hong-Chung, 홍-청-홍-청)
-        - TOGETHER (Together, 함께시연)
+      $ref: './components/schemas.yaml#/PoomsaeMatchOrderType'

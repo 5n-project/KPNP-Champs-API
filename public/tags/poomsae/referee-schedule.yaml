@@ -1,4 +1,4 @@
-paths:
+﻿paths:
   /competitions/{competitionSeq}/referee-groups:
     get:
       summary: 심판 조 리스트
@@ -266,17 +266,17 @@ paths:
                       "error": null
                     }
                 ITEM_NOT_FOUND:
-                  $ref: '../../openapi.yml/#/components/examples/ITEM_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/ITEM_NOT_FOUND'
 
         403:
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml/#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/schedule/referee-groups:
     get:
@@ -434,16 +434,16 @@ paths:
                               refereeGroupName: "B"
                     error: null
                 MATCH_IS_NOT_CREATED:
-                  $ref: '../../openapi.yml/#/components/examples/MATCH_IS_NOT_CREATED'
+                  $ref: '../../components/examples.yaml#/MATCH_IS_NOT_CREATED'
         403:
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml/#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/schedule/referee-groups/detail/{scheduleSeq}:
     get:
@@ -478,10 +478,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml/#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/schedule/referee-groups/detail/group/{scheduleSeq}:
     put:
@@ -530,25 +530,25 @@ paths:
                   $ref: '#/components/examples/PsRefereeGroupScheduleDetailResponseDTO'
 
                 DENY_CHANGE_REFEREE_GROUP_SESSION_IS_START:
-                  $ref: '../../openapi.yml/#/components/examples/DENY_CHANGE_REFEREE_GROUP_SESSION_IS_START'
+                  $ref: '../../components/examples.yaml#/DENY_CHANGE_REFEREE_GROUP_SESSION_IS_START'
                 DENY_CHANGE_REFEREE_GROUP_OVERLAP:
-                  $ref: '../../openapi.yml/#/components/examples/DENY_CHANGE_REFEREE_GROUP_OVERLAP'
+                  $ref: '../../components/examples.yaml#/DENY_CHANGE_REFEREE_GROUP_OVERLAP'
                 DENY_CHANGE_REFEREE_GROUP_SAME_SESSION:
-                  $ref: '../../openapi.yml/#/components/examples/DENY_CHANGE_REFEREE_GROUP_SAME_SESSION'
+                  $ref: '../../components/examples.yaml#/DENY_CHANGE_REFEREE_GROUP_SAME_SESSION'
                 DENY_CHANGE_REFEREE_MATCH_IS_NOT_WAITING:
-                  $ref: '../../openapi.yml/#/components/examples/DENY_CHANGE_REFEREE_MATCH_IS_NOT_WAITING'
+                  $ref: '../../components/examples.yaml#/DENY_CHANGE_REFEREE_MATCH_IS_NOT_WAITING'
                 ITEM_NOT_FOUND:
-                  $ref: '../../openapi.yml/#/components/examples/ITEM_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/ITEM_NOT_FOUND'
                 COMPETITION_MATCH_NOT_FOUND:
-                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/COMPETITION_MATCH_NOT_FOUND'
                 REFEREE_GROUP_IS_NOT_EXISTS:
-                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
         400:
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml/#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
 
 
         403:
@@ -556,10 +556,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml/#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
 
   /competitions/{competitionSeq}/schedule/referee-groups/detail/referee/{scheduleSeq}:
@@ -636,26 +636,26 @@ paths:
                 defaultResponse:
                   $ref: '#/components/examples/PsRefereeGroupScheduleDetailResponseDTO'
                 ITEM_NOT_FOUND:
-                  $ref: '../../openapi.yml/#/components/examples/ITEM_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/ITEM_NOT_FOUND'
                 COMPETITION_MATCH_NOT_FOUND:
-                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/COMPETITION_MATCH_NOT_FOUND'
                 DENY_CHANGE_REFEREE_MATCH_IS_NOT_WAITING:
-                  $ref: '../../openapi.yml/#/components/examples/DENY_CHANGE_REFEREE_MATCH_IS_NOT_WAITING'
+                  $ref: '../../components/examples.yaml#/DENY_CHANGE_REFEREE_MATCH_IS_NOT_WAITING'
                 ALREADY_EXIST_REFEREE:
-                  $ref: '../../openapi.yml/#/components/examples/ALREADY_EXIST_REFEREE'
+                  $ref: '../../components/examples.yaml#/ALREADY_EXIST_REFEREE'
                 INVALID_ARGUMENT_ERROR:
-                  $ref: '../../openapi.yml/#/components/examples/INVALID_ARGUMENT_ERROR'
+                  $ref: '../../components/examples.yaml#/INVALID_ARGUMENT_ERROR'
         400:
           description: Bad Request
           content:
             application/json:
               examples:
                 WRONG_SCHEDULE_MATCH:
-                  $ref: '../../openapi.yml/#/components/examples/WRONG_SCHEDULE_MATCH'
+                  $ref: '../../components/examples.yaml#/WRONG_SCHEDULE_MATCH'
                 DENY_CHANGE_REFEREE_WRONG_SEQ:
-                  $ref: '../../openapi.yml/#/components/examples/DENY_CHANGE_REFEREE_WRONG_SEQ'
+                  $ref: '../../components/examples.yaml#/DENY_CHANGE_REFEREE_WRONG_SEQ'
                 DENY_CHANGE_REFEREE_WRONG_REFEREE_SEQ:
-                  $ref: '../../openapi.yml/#/components/examples/DENY_CHANGE_REFEREE_WRONG_REFEREE_SEQ'
+                  $ref: '../../components/examples.yaml#/DENY_CHANGE_REFEREE_WRONG_REFEREE_SEQ'
 
 components:
   schemas:
@@ -916,3 +916,4 @@ components:
           },
           "error": null
         }
+

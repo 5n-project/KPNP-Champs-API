@@ -1,4 +1,4 @@
-paths:
+﻿paths:
   /competitions/default/{competitionSeq}:
     get:
       summary: 대회 기본 정보 조회
@@ -225,7 +225,7 @@ paths:
                               description: 정렬 순서
                               example: "2"
                       poomsaeDivisionTypeList:
-                        $ref: "../../openapi.yml#/components/schemas/PoomsaeDivisionType"
+                        $ref: "../../components/schemas.yaml#/PoomsaeDivisionType"
                   error:
                     type: object
                     example: null
@@ -245,7 +245,7 @@ paths:
               type: object
               properties:
                 poomsaeDivisionTypeList:
-                  $ref: "../../openapi.yml#/components/schemas/PoomsaeDivisionType"
+                  $ref: "../../components/schemas.yaml#/PoomsaeDivisionType"
                 competitionNameKo:
                   type: string
                   example: "품새대회 등록"
@@ -352,7 +352,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/OK'
+                $ref: '../../components/responses.yaml#/OK'
               examples:
                 success:
                   value:
@@ -361,7 +361,7 @@ paths:
                       competitionSeq: 2020
                     error: null
                 COMPETITION_OVERLAP:
-                  $ref: '../../openapi.yml#/components/examples/COMPETITION_OVERLAP'
+                  $ref: '../../components/examples.yaml#/COMPETITION_OVERLAP'
     put:
       summary: 대회 개최 수정
       tags:
@@ -378,7 +378,7 @@ paths:
                   example: "100"
                   description: 대회 seq
                 poomsaeDivisionTypeList:
-                  $ref: "../../openapi.yml#/components/schemas/PoomsaeDivisionType"
+                  $ref: "../../components/schemas.yaml#/PoomsaeDivisionType"
                 competitionNameKo:
                   type: string
                   example: "품새대회 등록"
@@ -485,7 +485,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/OK'
+                $ref: '../../components/responses.yaml#/OK'
               examples:
                 success:
                   value:
@@ -494,16 +494,16 @@ paths:
                       competitionSeq: 2020
                     error: null
                 COMPETITION_OVERLAP:
-                  $ref: '../../openapi.yml#/components/examples/COMPETITION_OVERLAP'
+                  $ref: '../../components/examples.yaml#/COMPETITION_OVERLAP'
         500:
           description: 실패
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml#/components/examples/INVALID_ARGUMENT_ERROR_FILE_SIZE'
+                  $ref: '../../components/examples.yaml#/INVALID_ARGUMENT_ERROR_FILE_SIZE'
 
   /competitions/media:
     post:
@@ -525,13 +525,13 @@ paths:
                   format: binary
                   description: 업로드할 파일 (MultipartFile)
                 mediaList[0].mediaCategory:
-                  $ref: '../../openapi.yml#/components/schemas/CompetitionMediaCategory'
+                  $ref: '../../components/schemas.yaml#/CompetitionMediaCategory'
                 mediaList[1].mediaInfo:
                   type: string
                   format: binary
                   description: 업로드할 파일 (MultipartFile)
                 mediaList[1].mediaCategory:
-                  $ref: '../../openapi.yml#/components/schemas/CompetitionMediaCategory'
+                  $ref: '../../components/schemas.yaml#/CompetitionMediaCategory'
               required:
                 - competitionSeq
                 - mediaList[0].mediaInfo
@@ -542,7 +542,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/OK'
+                $ref: '../../components/responses.yaml#/OK'
               examples:
                 success:
                   value:
@@ -551,13 +551,13 @@ paths:
                       competitionSeq: 2020
                     error: null
                 INVALID_TYPE_ERROR:
-                  $ref: '../../openapi.yml#/components/examples/INVALID_TYPE_ERROR'
+                  $ref: '../../components/examples.yaml#/INVALID_TYPE_ERROR'
                 ILLEGAL_ARGUMENT_ERROR:
-                  $ref: '../../openapi.yml#/components/examples/ILLEGAL_ARGUMENT_ERROR'
+                  $ref: '../../components/examples.yaml#/ILLEGAL_ARGUMENT_ERROR'
                 VALIDATE_FILE_IS_OVER_MAX:
-                  $ref: '../../openapi.yml#/components/examples/VALIDATE_FILE_IS_OVER_MAX'
+                  $ref: '../../components/examples.yaml#/VALIDATE_FILE_IS_OVER_MAX'
                 INVALID_ARGUMENT_ERROR_FILE_SIZE:
-                  $ref: '../../openapi.yml#/components/examples/INVALID_ARGUMENT_ERROR_FILE_SIZE'
+                  $ref: '../../components/examples.yaml#/INVALID_ARGUMENT_ERROR_FILE_SIZE'
     delete:
       summary: 파일 삭제
       tags:
@@ -567,14 +567,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '../../openapi.yml#/components/schemas/CompetitionMediaRequest'
+              $ref: '../../components/schemas.yaml#/CompetitionMediaRequest'
       responses:
         200:
           description: 성공
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/OK'
+                $ref: '../../components/responses.yaml#/OK'
               examples:
                 success:
                   value:
@@ -587,7 +587,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml#/components/examples/INVALID_ARGUMENT_ERROR_FILE_SIZE'
+                  $ref: '../../components/examples.yaml#/INVALID_ARGUMENT_ERROR_FILE_SIZE'
+
+

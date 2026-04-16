@@ -1,4 +1,4 @@
-paths:
+﻿paths:
   /competitions/detail/{competitionSeq}:
     get:
       summary: 세부 정보 설정 조회
@@ -101,9 +101,9 @@ paths:
                               type: string
                               description: '파일 cdn url'
                             mediaType:
-                              $ref: '../../openapi.yml#/components/schemas/MediaType'
+                              $ref: '../../components/schemas.yaml#/MediaType'
                             mediaCategory:
-                              $ref: '../../openapi.yml#/components/schemas/SettingMediaCategory'
+                              $ref: '../../components/schemas.yaml#/SettingMediaCategory'
                             originName:
                               type: string
                               description: '파일 원본 이름'
@@ -151,17 +151,17 @@ paths:
                           fileSize: "1736"
                     error: null
                 ITEM_NOT_FOUND:
-                  $ref: '../../openapi.yml#/components/examples/ITEM_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/ITEM_NOT_FOUND'
 
         403:
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
     post:
       summary: 세부 정보 설정 저장
@@ -237,7 +237,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/OK'
+                $ref: '../../components/responses.yaml#/OK'
               examples:
                 success:
                   value:
@@ -245,21 +245,21 @@ paths:
                     data: null
                     error: null
                 ITEM_NOT_FOUND:
-                  $ref: '../../openapi.yml#/components/examples/ITEM_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/ITEM_NOT_FOUND'
                 TOGETHER_PERFORMANCE_NOT_ALLOWED_FREESTYLE:
-                  $ref: '../../openapi.yml#/components/examples/TOGETHER_PERFORMANCE_NOT_ALLOWED_FREESTYLE'
+                  $ref: '../../components/examples.yaml#/TOGETHER_PERFORMANCE_NOT_ALLOWED_FREESTYLE'
                 COURT_COUNT_REDUCTION_FAILED:
-                  $ref: '../../openapi.yml#/components/examples/COURT_COUNT_REDUCTION_FAILED'
+                  $ref: '../../components/examples.yaml#/COURT_COUNT_REDUCTION_FAILED'
 
         403:
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/detail/{competitionSeq}/media:
     post:
@@ -285,13 +285,13 @@ paths:
                   format: binary
                   description: 업로드할 파일 (MultipartFile)
                 mediaList[0].mediaCategory:
-                  $ref: '../../openapi.yml#/components/schemas/SettingMediaCategory'
+                  $ref: '../../components/schemas.yaml#/SettingMediaCategory'
                 mediaList[1].mediaInfo:
                   type: string
                   format: binary
                   description: 업로드할 파일 (MultipartFile)
                 mediaList[1].mediaCategory:
-                  $ref: '../../openapi.yml#/components/schemas/SettingMediaCategory'
+                  $ref: '../../components/schemas.yaml#/SettingMediaCategory'
               required:
                 - competitionSeq
                 - mediaList[0].mediaInfo
@@ -302,7 +302,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/OK'
+                $ref: '../../components/responses.yaml#/OK'
               examples:
                 success:
                   value:
@@ -314,23 +314,23 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
         400:
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 INVALID_TYPE_ERROR:
-                  $ref: '../../openapi.yml#/components/examples/INVALID_TYPE_ERROR'
+                  $ref: '../../components/examples.yaml#/INVALID_TYPE_ERROR'
                 ILLEGAL_ARGUMENT_ERROR:
-                  $ref: '../../openapi.yml#/components/examples/ILLEGAL_ARGUMENT_ERROR'
+                  $ref: '../../components/examples.yaml#/ILLEGAL_ARGUMENT_ERROR'
                 CODE_NOT_FOUND:
-                  $ref: '../../openapi.yml#/components/examples/CODE_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/CODE_NOT_FOUND'
     delete:
       summary: 파일 삭제
       tags:
@@ -362,7 +362,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/OK'
+                $ref: '../../components/responses.yaml#/OK'
               examples:
                 success:
                   value:
@@ -370,14 +370,17 @@ paths:
                     data: null
                     error: null
                 ITEM_NOT_FOUND:
-                  $ref: '../../openapi.yml#/components/examples/ITEM_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/ITEM_NOT_FOUND'
 
         403:
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
+
+
+

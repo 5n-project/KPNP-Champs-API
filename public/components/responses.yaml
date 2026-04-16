@@ -1,0 +1,38 @@
+﻿OK:
+  description: Successful operation
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          success:
+            type: boolean
+            example: false
+          data:
+            type: string
+            example: null
+          error:
+            type: string
+            example: null
+Error:
+  description: error operation
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          success:
+            type: boolean
+            example: false
+          data:
+            type: string
+            example: null
+          error:
+            type: object
+            properties:
+              message:
+                type: string
+                example: "내부 오류 발생"
+              errorCode:
+                type: string
+                example: "500"

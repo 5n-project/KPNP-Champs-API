@@ -1,4 +1,4 @@
-paths:
+﻿paths:
   /competitions/{competitionSeq}/operation/completed-matches:
     get:
       summary: 운영 완료된 경기 리스트 조회
@@ -263,10 +263,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml/#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/operation/start-day/{day}:
     post:
@@ -309,33 +309,33 @@ paths:
                     data: null
                     error: null
                 ITEM_NOT_FOUND:
-                  $ref: '../../openapi.yml/#/components/examples/ITEM_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/ITEM_NOT_FOUND'
                 SCHEDULE_IS_TEMPORARY_SAVE:
-                  $ref: '../../openapi.yml/#/components/examples/SCHEDULE_IS_TEMPORARY_SAVE'
+                  $ref: '../../components/examples.yaml#/SCHEDULE_IS_TEMPORARY_SAVE'
                 NO_REMAINING_MATCHES:
-                  $ref: '../../openapi.yml/#/components/examples/NO_REMAINING_MATCHES'
+                  $ref: '../../components/examples.yaml#/NO_REMAINING_MATCHES'
                 COURT_VIEWER_MAX_PER_COURT:
-                  $ref: '../../openapi.yml/#/components/examples/COURT_VIEWER_MAX_PER_COURT'
+                  $ref: '../../components/examples.yaml#/COURT_VIEWER_MAX_PER_COURT'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml/#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 COMPETITION_DAY_START_ORDER_INVALID:
-                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_DAY_START_ORDER_INVALID'
+                  $ref: '../../components/examples.yaml#/COMPETITION_DAY_START_ORDER_INVALID'
                 COMPETITION_CURRENT_DAY_IS_ALREADY_START:
-                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_CURRENT_DAY_IS_ALREADY_START'
+                  $ref: '../../components/examples.yaml#/COMPETITION_CURRENT_DAY_IS_ALREADY_START'
         '403':
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml/#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/operation/end-day/{day}:
     patch:
@@ -378,29 +378,29 @@ paths:
                     data: null
                     error: null
                 ITEM_NOT_FOUND:
-                  $ref: '../../openapi.yml/#/components/examples/ITEM_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/ITEM_NOT_FOUND'
                 COMPETITION_IS_STILL_ONGOING:
-                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_IS_STILL_ONGOING'
+                  $ref: '../../components/examples.yaml#/COMPETITION_IS_STILL_ONGOING'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml/#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 COMPETITION_CURRENT_DAY_IS_NOT_START:
-                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_CURRENT_DAY_IS_NOT_START'
+                  $ref: '../../components/examples.yaml#/COMPETITION_CURRENT_DAY_IS_NOT_START'
                 COMPETITION_CURRENT_DAY_IS_END:
-                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_CURRENT_DAY_IS_END'
+                  $ref: '../../components/examples.yaml#/COMPETITION_CURRENT_DAY_IS_END'
         '403':
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml/#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/operation/day-status:
     get:
@@ -455,10 +455,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/operation/ongoing-matches/{day}:
     get:
@@ -795,16 +795,16 @@ paths:
                       }
                     error: null
                 ITEM_NOT_FOUND:
-                  $ref: '../../openapi.yml/#/components/examples/ITEM_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/ITEM_NOT_FOUND'
         '403':
           description: 권한 없음
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml/#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml/#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/operation/matches/{competitionMatchPsSeq}/scores:
     get:
@@ -1185,29 +1185,29 @@ paths:
                             totalAverageScore: 14.698
                     error: null
                 ITEM_NOT_FOUND:
-                  $ref: '../../openapi.yml/#/components/examples/ITEM_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/ITEM_NOT_FOUND'
                 MATCH_COMPETITOR_DETAIL_NOT_FOUND:
-                  $ref: '../../openapi.yml/#/components/examples/MATCH_COMPETITOR_DETAIL_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/MATCH_COMPETITOR_DETAIL_NOT_FOUND'
                 COMPETITION_MATCH_NOT_FOUND:
-                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/COMPETITION_MATCH_NOT_FOUND'
         '403':
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml/#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml/#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 INVALID_TYPE_ERROR:
-                  $ref: '../../openapi.yml#/components/examples/INVALID_TYPE_ERROR'
+                  $ref: '../../components/examples.yaml#/INVALID_TYPE_ERROR'
 
   /competitions/{competitionSeq}/operation/matches/{competitionMatchPsSeq}/completed-match/referee/scores:
     get:
@@ -1588,29 +1588,29 @@ paths:
                     }
                     error: null
                 ITEM_NOT_FOUND:
-                  $ref: '../../openapi.yml/#/components/examples/ITEM_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/ITEM_NOT_FOUND'
                 MATCH_COMPETITOR_DETAIL_NOT_FOUND:
-                  $ref: '../../openapi.yml/#/components/examples/MATCH_COMPETITOR_DETAIL_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/MATCH_COMPETITOR_DETAIL_NOT_FOUND'
                 COMPETITION_MATCH_NOT_FOUND:
-                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/COMPETITION_MATCH_NOT_FOUND'
         '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 INVALID_TYPE_ERROR:
-                  $ref: '../../openapi.yml#/components/examples/INVALID_TYPE_ERROR'
+                  $ref: '../../components/examples.yaml#/INVALID_TYPE_ERROR'
         '403':
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/operation/matches/{competitionMatchPsSeq}/ongoing-match/referee/scores:
     get:
@@ -1998,29 +1998,29 @@ paths:
                     }
                     error: null
                 ITEM_NOT_FOUND:
-                  $ref: '../../openapi.yml/#/components/examples/ITEM_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/ITEM_NOT_FOUND'
                 MATCH_COMPETITOR_DETAIL_NOT_FOUND:
-                  $ref: '../../openapi.yml/#/components/examples/MATCH_COMPETITOR_DETAIL_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/MATCH_COMPETITOR_DETAIL_NOT_FOUND'
                 COMPETITION_MATCH_NOT_FOUND:
-                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/COMPETITION_MATCH_NOT_FOUND'
         '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 INVALID_TYPE_ERROR:
-                  $ref: '../../openapi.yml#/components/examples/INVALID_TYPE_ERROR'
+                  $ref: '../../components/examples.yaml#/INVALID_TYPE_ERROR'
         '403':
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/operation/matches/{competitionMatchPsSeq}/competitor/{matchCompetitorDetailSeq}/deduction:
     post:
@@ -2227,33 +2227,33 @@ paths:
                       }
                     error: null
                 ITEM_NOT_FOUND:
-                  $ref: '../../openapi.yml/#/components/examples/ITEM_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/ITEM_NOT_FOUND'
                 MATCH_COMPETITOR_DETAIL_NOT_FOUND:
-                  $ref: '../../openapi.yml/#/components/examples/MATCH_COMPETITOR_DETAIL_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/MATCH_COMPETITOR_DETAIL_NOT_FOUND'
                 COMPETITION_MATCH_NOT_FOUND:
-                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/COMPETITION_MATCH_NOT_FOUND'
                 END_OR_WAITING_MATCH_INVALID_FOR_OPERATION:
-                  $ref: '../../openapi.yml/#/components/examples/END_OR_WAITING_MATCH_INVALID_FOR_OPERATION'
+                  $ref: '../../components/examples.yaml#/END_OR_WAITING_MATCH_INVALID_FOR_OPERATION'
                 CANNOT_APPLY_DEDUCTION:
-                  $ref: '../../openapi.yml/#/components/examples/CANNOT_APPLY_DEDUCTION'
+                  $ref: '../../components/examples.yaml#/CANNOT_APPLY_DEDUCTION'
         '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 INVALID_TYPE_ERROR:
-                  $ref: '../../openapi.yml#/components/examples/INVALID_TYPE_ERROR'
+                  $ref: '../../components/examples.yaml#/INVALID_TYPE_ERROR'
         '403':
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
 
   /competitions/{competitionSeq}/operation/matches/completed:
@@ -2305,10 +2305,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/operation/matches:
     post:
@@ -2349,22 +2349,22 @@ paths:
                     }
 
                 SCHEDULE_IS_TEMPORARY_SAVE:
-                  $ref: '../../openapi.yml#/components/examples/SCHEDULE_IS_TEMPORARY_SAVE'
+                  $ref: '../../components/examples.yaml#/SCHEDULE_IS_TEMPORARY_SAVE'
                 SCHEDULE_IS_EMPTY:
-                  $ref: '../../openapi.yml#/components/examples/SCHEDULE_IS_EMPTY'
+                  $ref: '../../components/examples.yaml#/SCHEDULE_IS_EMPTY'
                 MATCH_IS_ALREADY_CREATED:
-                  $ref: '../../openapi.yml#/components/examples/MATCH_IS_ALREADY_CREATED'
+                  $ref: '../../components/examples.yaml#/MATCH_IS_ALREADY_CREATED'
                 ALREADY_SAVED_DATA:
-                  $ref: '../../openapi.yml#/components/examples/ALREADY_SAVED_DATA'
+                  $ref: '../../components/examples.yaml#/ALREADY_SAVED_DATA'
         '403':
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/operation/matches/{competitionMatchPsSeq}/result:
     patch:
@@ -2436,34 +2436,34 @@ paths:
                     data: null
                     error: null
                 COMPETITION_MATCH_NOT_FOUND:
-                  $ref: '../../openapi.yml#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/COMPETITION_MATCH_NOT_FOUND'
                 MATCH_COMPETITOR_DETAIL_NOT_FOUND:
-                  $ref: '../../openapi.yml#/components/examples/MATCH_COMPETITOR_DETAIL_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/MATCH_COMPETITOR_DETAIL_NOT_FOUND'
                 MATCH_WINNER_NOT_FOUND:
-                  $ref: '../../openapi.yml#/components/examples/MATCH_WINNER_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/MATCH_WINNER_NOT_FOUND'
                 ONLY_TOURNAMENT_MATCH_CAN_UPDATE_RESULT:
-                  $ref: '../../openapi.yml#/components/examples/ONLY_TOURNAMENT_MATCH_CAN_UPDATE_RESULT'
+                  $ref: '../../components/examples.yaml#/ONLY_TOURNAMENT_MATCH_CAN_UPDATE_RESULT'
                 IS_BYE_MATCH:
-                  $ref: '../../openapi.yml#/components/examples/IS_BYE_MATCH'
+                  $ref: '../../components/examples.yaml#/IS_BYE_MATCH'
                 MATCH_RESULT_ALREADY_UP_TO_DATE:
-                  $ref: '../../openapi.yml#/components/examples/MATCH_RESULT_ALREADY_UP_TO_DATE'
+                  $ref: '../../components/examples.yaml#/MATCH_RESULT_ALREADY_UP_TO_DATE'
                 NO_PLAYER_ADVANCED_TO_NEXT_ROUND:
-                  $ref: '../../openapi.yml#/components/examples/NO_PLAYER_ADVANCED_TO_NEXT_ROUND'
+                  $ref: '../../components/examples.yaml#/NO_PLAYER_ADVANCED_TO_NEXT_ROUND'
                 MATCH_RESULT_CANNOT_BE_UPDATED_AFTER_NEXT_ROUND:
-                  $ref: '../../openapi.yml#/components/examples/MATCH_RESULT_CANNOT_BE_UPDATED_AFTER_NEXT_ROUND'
+                  $ref: '../../components/examples.yaml#/MATCH_RESULT_CANNOT_BE_UPDATED_AFTER_NEXT_ROUND'
                 CUTOFF_MATCH_RESULT_ALREADY_UP_TO_DATE:
-                  $ref: '../../openapi.yml#/components/examples/CUTOFF_MATCH_RESULT_ALREADY_UP_TO_DATE'
+                  $ref: '../../components/examples.yaml#/CUTOFF_MATCH_RESULT_ALREADY_UP_TO_DATE'
                 ALREADY_SAVED_DATA:
-                  $ref: '../../openapi.yml#/components/examples/ALREADY_SAVED_DATA'
+                  $ref: '../../components/examples.yaml#/ALREADY_SAVED_DATA'
         '403':
           description: 권한 없음
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/operation/matches/{competitionMatchPsSeq}/competitor/{matchCompetitorDetailSeq}/penalty:
     patch:
@@ -2541,24 +2541,24 @@ paths:
                     }
                     error: null
                 COMPETITION_MATCH_NOT_FOUND:
-                  $ref: '../../openapi.yml#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/COMPETITION_MATCH_NOT_FOUND'
                 MATCH_COMPETITOR_DETAIL_NOT_FOUND:
-                  $ref: '../../openapi.yml#/components/examples/MATCH_COMPETITOR_DETAIL_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/MATCH_COMPETITOR_DETAIL_NOT_FOUND'
                 END_OR_WAITING_MATCH_INVALID_FOR_OPERATION:
-                  $ref: '../../openapi.yml#/components/examples/END_OR_WAITING_MATCH_INVALID_FOR_OPERATION'
+                  $ref: '../../components/examples.yaml#/END_OR_WAITING_MATCH_INVALID_FOR_OPERATION'
                 CANNOT_DEDUCT_ZERO_PENALTY:
-                  $ref: '../../openapi.yml#/components/examples/CANNOT_DEDUCT_ZERO_PENALTY'
+                  $ref: '../../components/examples.yaml#/CANNOT_DEDUCT_ZERO_PENALTY'
                 CANNOT_APPLY_PENALTY_WHEN_SCORE_IS_TWO:
-                  $ref: '../../openapi.yml#/components/examples/CANNOT_APPLY_PENALTY_WHEN_SCORE_IS_TWO'
+                  $ref: '../../components/examples.yaml#/CANNOT_APPLY_PENALTY_WHEN_SCORE_IS_TWO'
         '403':
           description: 권한 없음
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/operation/matches/{competitionMatchPsSeq}/poomsae:
     patch:
@@ -2623,20 +2623,20 @@ paths:
                     data: null
                     error: null
                 MATCH_STATE_INVALID_FOR_OPERATION:
-                  $ref: '../../openapi.yml#/components/examples/MATCH_STATE_INVALID_FOR_OPERATION'
+                  $ref: '../../components/examples.yaml#/MATCH_STATE_INVALID_FOR_OPERATION'
                 INVALID_POOMSAE_FOR_MATCH:
-                  $ref: '../../openapi.yml#/components/examples/INVALID_POOMSAE_FOR_MATCH'
+                  $ref: '../../components/examples.yaml#/INVALID_POOMSAE_FOR_MATCH'
                 COMPETITION_MATCH_NOT_FOUND:
-                  $ref: '../../openapi.yml#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/COMPETITION_MATCH_NOT_FOUND'
         '403':
           description: 권한 없음
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/operation/draw:
     get:
@@ -3830,20 +3830,20 @@ paths:
                       }
                     error: null
                 ITEM_NOT_FOUND:
-                  $ref: '../../openapi.yml/#/components/examples/ITEM_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/ITEM_NOT_FOUND'
                 MATCH_COMPETITOR_DETAIL_NOT_FOUND:
-                  $ref: '../../openapi.yml/#/components/examples/MATCH_COMPETITOR_DETAIL_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/MATCH_COMPETITOR_DETAIL_NOT_FOUND'
                 COMPETITION_MATCH_NOT_FOUND:
-                  $ref: '../../openapi.yml/#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/COMPETITION_MATCH_NOT_FOUND'
         '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 INVALID_TYPE_ERROR:
-                  $ref: '../../openapi.yml#/components/examples/INVALID_TYPE_ERROR'
+                  $ref: '../../components/examples.yaml#/INVALID_TYPE_ERROR'
 
   /competitions/{competitionSeq}/operation/matches/random:
     put:
@@ -3913,26 +3913,26 @@ paths:
                     data: null
                     error: null
                 ITEM_NOT_FOUND:
-                  $ref: '../../openapi.yml#/components/examples/ITEM_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/ITEM_NOT_FOUND'
                 MATCH_STATE_INVALID_FOR_OPERATION:
-                  $ref: '../../openapi.yml#/components/examples/MATCH_STATE_INVALID_FOR_OPERATION'
+                  $ref: '../../components/examples.yaml#/MATCH_STATE_INVALID_FOR_OPERATION'
                 COMPETITION_MATCH_NOT_FOUND:
-                  $ref: '../../openapi.yml#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/COMPETITION_MATCH_NOT_FOUND'
                 ONLY_TOURNAMENT_RANDOM_MATCH:
-                  $ref: '../../openapi.yml#/components/examples/ONLY_TOURNAMENT_RANDOM_MATCH'
+                  $ref: '../../components/examples.yaml#/ONLY_TOURNAMENT_RANDOM_MATCH'
                 NO_PLAYER_ADVANCED_TO_NEXT_ROUND:
-                  $ref: '../../openapi.yml#/components/examples/NO_PLAYER_ADVANCED_TO_NEXT_ROUND'
+                  $ref: '../../components/examples.yaml#/NO_PLAYER_ADVANCED_TO_NEXT_ROUND'
                 ALREADY_SAVED_DATA:
-                  $ref: '../../openapi.yml#/components/examples/ALREADY_SAVED_DATA'
+                  $ref: '../../components/examples.yaml#/ALREADY_SAVED_DATA'
         '403':
           description: 권한 없음
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/operation/matches/first-round:
     get:
@@ -4323,20 +4323,20 @@ paths:
                     "error": null
                   }
                 ITEM_NOT_FOUND:
-                  $ref: '../../openapi.yml#/components/examples/ITEM_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/ITEM_NOT_FOUND'
                 COMPETITION_MATCH_NOT_FOUND:
-                  $ref: '../../openapi.yml#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/COMPETITION_MATCH_NOT_FOUND'
                 MATCH_COMPETITOR_DETAIL_NOT_FOUND:
-                  $ref: '../../openapi.yml#/components/examples/MATCH_COMPETITOR_DETAIL_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/MATCH_COMPETITOR_DETAIL_NOT_FOUND'
         '403':
           description: 권한 없음
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/operation/matches/rtds:
     get:
@@ -4971,21 +4971,21 @@ paths:
                       "error": null
                     }
                 ITEM_NOT_FOUND:
-                  $ref: '../../openapi.yml#/components/examples/ITEM_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/ITEM_NOT_FOUND'
                 COMPETITION_MATCH_NOT_FOUND:
-                  $ref: '../../openapi.yml#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/COMPETITION_MATCH_NOT_FOUND'
                 MATCH_COMPETITOR_DETAIL_NOT_FOUND:
-                  $ref: '../../openapi.yml#/components/examples/MATCH_COMPETITOR_DETAIL_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/MATCH_COMPETITOR_DETAIL_NOT_FOUND'
 
         '403':
           description: 권한 없음
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/operation/status-bar:
     get:
@@ -5059,10 +5059,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/operation/matches/progress/{day}:
     get:
@@ -5177,16 +5177,16 @@ paths:
                         totalMatchCount: 104
                     error: null
                 ITEM_NOT_FOUND:
-                  $ref: '../../openapi.yml#/components/examples/ITEM_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/ITEM_NOT_FOUND'
         '403':
           description: 권한 없음
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/operation/matches/{competitionMatchPsSeq}/competitor/{matchCompetitorDetailSeq}/qualify:
     patch:
@@ -5254,20 +5254,20 @@ paths:
                     data: null
                     error: null
                 COMPETITION_MATCH_NOT_FOUND:
-                  $ref: '../../openapi.yml#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/COMPETITION_MATCH_NOT_FOUND'
                 MATCH_COMPETITOR_DETAIL_NOT_FOUND:
-                  $ref: '../../openapi.yml#/components/examples/MATCH_COMPETITOR_DETAIL_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/MATCH_COMPETITOR_DETAIL_NOT_FOUND'
                 QUALIFY_SF_ONLY:
-                  $ref: '../../openapi.yml#/components/examples/QUALIFY_SF_ONLY'
+                  $ref: '../../components/examples.yaml#/QUALIFY_SF_ONLY'
         '403':
           description: 권한 없음
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
   /competitions/{competitionSeq}/operation/events/{competitionEventSeq}/process-subsequent:
     post:
       summary: 운영 빈 매치 처리
@@ -5312,28 +5312,30 @@ paths:
                     data: null
                     error: null
                 ITEM_NOT_FOUND:
-                  $ref: '../../openapi.yml#/components/examples/ITEM_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/ITEM_NOT_FOUND'
                 COMPETITION_MATCH_NOT_FOUND:
-                  $ref: '../../openapi.yml#/components/examples/COMPETITION_MATCH_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/COMPETITION_MATCH_NOT_FOUND'
                 FEATURE_NOT_SUPPORTED_IN_TOURNAMENT:
-                  $ref: '../../openapi.yml#/components/examples/FEATURE_NOT_SUPPORTED_IN_TOURNAMENT'
+                  $ref: '../../components/examples.yaml#/FEATURE_NOT_SUPPORTED_IN_TOURNAMENT'
                 CURRENT_PHASE_IS_ONGOING:
-                  $ref: '../../openapi.yml#/components/examples/CURRENT_PHASE_IS_ONGOING'
+                  $ref: '../../components/examples.yaml#/CURRENT_PHASE_IS_ONGOING'
         '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 CANNOT_PROCESS_LAST_PHASE:
-                  $ref: '../../openapi.yml#/components/examples/CANNOT_PROCESS_LAST_PHASE'
+                  $ref: '../../components/examples.yaml#/CANNOT_PROCESS_LAST_PHASE'
         '403':
           description: 권한 없음
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
+
+

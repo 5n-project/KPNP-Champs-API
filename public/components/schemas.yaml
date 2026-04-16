@@ -1,0 +1,561 @@
+﻿getCompetitionDefaultResponse:
+  properties:
+    divisionList:
+      type: array
+      items:
+        type: object
+        properties:
+          divisionSeq:
+            type: number
+            example: 623
+          divisionCode:
+            type: string
+            example: "00"
+          divisionNameEn:
+            type: string
+            example: "WT Recognized Poomsae"
+          divisionNameKo:
+            type: string
+            example: "WT 공인품새룰"
+    countryList:
+      type: array
+      items:
+        type: object
+        properties:
+          codeDetailNo:
+            type: string
+            example: "AF"
+          codeDetailName:
+            type: string
+            example: "(+93) Afghanistan"
+    utcList:
+      type: array
+      items:
+        type: object
+        properties:
+          code:
+            type: string
+            example: "COK"
+          nameEn:
+            type: string
+            example: "Cook Islands"
+          subCode1:
+            type: string
+            example: null
+          exp1:
+            type: string
+            example: "-1000"
+          utcInfo:
+            type: string
+            example: "(UTC -10:00)"
+    wtClassList:
+      type: array
+      items:
+        type: object
+        properties:
+          code:
+            type: string
+            example: "G1"
+    bankList:
+      type: array
+      items:
+        type: object
+        properties:
+          code:
+            type: string
+            example: "BFTVVNVX"
+          nameEn:
+            type: string
+            example: "VietcomBank"
+          nameKo:
+            type: string
+            example: "비엣콤 은행"
+    poomsaeList:
+      type: array
+      items:
+        type: object
+        properties:
+          code:
+            type: string
+            example: "C00"
+          nameEn:
+            type: string
+            example: "Taegeuk 1 Jang"
+          nameKo:
+            type: string
+            example: "태극 1장"
+    compositeRateList:
+      type: array
+      items:
+        type: object
+        properties:
+          code:
+            type: string
+            example: "D0"
+          nameEn:
+            type: string
+            example: null
+          nameKo:
+            type: string
+            example: "공인10:자유90"
+    matchOrderList:
+      type: array
+      items:
+        type: object
+        properties:
+          code:
+            type: string
+            example: "E1"
+          nameEn:
+            type: string
+            example: "Chung-Chung-Hong-Hong"
+          nameKo:
+            type: string
+            example: "청-청-홍-홍"
+    poomsaeDrawList:
+      type: array
+      items:
+        type: object
+        properties:
+          code:
+            type: string
+            example: "H"
+          nameEn:
+            type: string
+            example: "PinSelect"
+          nameKo:
+            type: string
+            example: "고정선택"
+    hostDefaultInfo:
+      type: object
+      properties:
+        competitionNameKo:
+          type: string
+          example: "정수의 WT공인품새 테스트대회"
+        competitionNameEn:
+          type: string
+          example: "Test"
+        competitionContent:
+          type: string
+          example: "정수대회소개임ㅋㅋㅋ"
+        competitionHostName:
+          type: string
+          example: "호스트"
+        competitionHostCountry:
+          type: string
+          example: "KR"
+        competitionHostCall:
+          type: string
+          example: "01075345140"
+        competitionSdate:
+          type: string
+          format: date-time
+          example: "2025-02-23 00:00:00.0"
+        competitionEdate:
+          type: string
+          format: date-time
+          example: "2025-03-10 23:59:00.0"
+        competitionLocationKo:
+          type: string
+          example: "부산"
+        competitionLocationEn:
+          type: string
+          example: "Busan"
+        competitionUtcCode:
+          type: string
+          example: "KOR"
+        competitionSubSdate:
+          type: string
+          format: date-time
+          example: "2025-02-19 00:00:00.0"
+        competitionSubEdate:
+          type: string
+          format: date-time
+          example: "2025-02-22 23:59:00.0"
+        competitionLocalYn:
+          type: string
+          example: "W"
+        competitionWtCodeSendYn:
+          type: string
+          example: "Y"
+        competitionWtClassCode:
+          type: string
+          example: "G1"
+        competitionParticipantPayYn:
+          type: string
+          example: "N"
+        bankName:
+          type: string
+          example: null
+        accountNumber:
+          type: string
+          example: null
+        accountHolderName:
+          type: string
+          example: null
+        competitionParticipantPay:
+          type: string
+          example: "N"
+        orderStatus:
+          type: string
+          example: null
+        scoreDevice:
+          type: string
+          example: "D"
+    hostDivisionList:
+      type: array
+      items:
+        type: object
+        properties:
+          divisionSeq:
+            type: number
+            example: 623
+          delDivisionUsedSeq:
+            type: number
+            example: 14
+    hostMainImgList:
+      type: array
+      items:
+        type: object
+        properties:
+          s3MediaSeq:
+            type: number
+            example: 219
+          s3CdnUrl:
+            type: string
+            example: "https://cdn.kpnpglobal.com/kpnp/media/image/champs/2024/02/fa418844fa014a819d7e7e38e08d0311.JPEG"
+          mediaType:
+            type: string
+            example: "I"
+          originName:
+            type: string
+            example: "테스트 이미지.jpeg"
+          fileSize:
+            type: string
+            example: "6"
+          sortNo:
+            type: number
+            example: 2
+    hostFileList:
+      type: array
+      items:
+        type: object
+        properties:
+          s3MediaSeq:
+            type: number
+            example: 220
+          s3CdnUrl:
+            type: string
+            example: "https://cdn.kpnpglobal.com/kpnp/media/file/champs/2024/02/308614928b5b477db2ec949cdbcad063.TXT"
+          mediaType:
+            type: string
+            example: "F"
+          originName:
+            type: string
+            example: "테스트 파일 - 복사본.txt"
+          fileSize:
+            type: string
+            example: "0"
+          sortNo:
+            type: number
+            example: 2
+CompetitionMediaRequest:
+  type: object
+  properties:
+    competitionSeq:
+      type: integer
+      example: 2035
+    s3MediaSeqList:
+      type: array
+      items:
+        type: integer
+      example: [ 2527, 2528 ]
+  required:
+    - competitionSeq
+    - s3MediaSeqList
+Country:
+  type: object
+  properties:
+    codeDetailNo:
+      type: string
+      example: "AF"
+    codeDetailName:
+      type: string
+      example: "(+93) Afghanistan"
+PaypalPayment:
+  type: object
+  description: 페이팔 결제시
+  required:
+    - kpnpOrdersSeq
+    - orderNum
+    - paymentDate
+    - payType
+    - paymentAmount
+    - unit
+  properties:
+    kpnpOrdersSeq:
+      type: string
+      example: "47"
+      description: 주문 SEQ
+    orderNum:
+      type: string
+      example: "O170902826322267"
+      description: 주문 번호
+    fullNameKr:
+      type: string
+      example: "김범준"
+      description: 주문자 이름 (한글)
+    fullNameEn:
+      type: string
+      example: "kbj"
+      description: 주문자 이름 (영문)
+    paymentDate:
+      type: string
+      example: "2024-03-18 11:48:21.0"
+      description: 결제일
+    payType:
+      type: string
+      example: "P"
+      description: 결제 방식 (P = Paypal)
+    paymentAmount:
+      type: number
+      format: double
+      example: 110.0
+      description: 결제 금액
+    unit:
+      type: string
+      example: "usd"
+      description: 화폐 단위
+MTJPayment:
+  type: object
+  description: 무통장 결제시
+  required:
+    - kpnpOrdersSeq
+    - orderNum
+    - paymentDate
+    - payType
+    - unit
+    - kpnpBankNameEn
+    - kpnpBankAccountNum
+    - kpnpBankAccountName
+    - depositDate
+    - depositorName
+    - swiftCode
+    - kpnpTel
+    - kpnpFax
+    - kpnpEmail
+  properties:
+    kpnpOrdersSeq:
+      type: string
+      example: "19"
+      description: 주문 seq
+    orderNum:
+      type: string
+      example: "O170902826322267"
+      description: 주문번호
+    fullNameKr:
+      type: string
+      example: "김범준"
+      description: 주문자 이름
+    fullNameEn:
+      type: string
+      example: "kbj"
+      description: 주문자 이름 En
+    payType:
+      type: string
+      example: "M"
+      description: 결제 방식 (M = 무통장)
+    paymentDate:
+      type: string
+      example: "2024-02-27 10:06:29.0"
+      description: 입금기간
+    paymentAmount:
+      type: number
+      format: double
+      example: 20000.0
+      description: 입금할 금액
+    unit:
+      type: string
+      example: "kor"
+      description: 화폐
+    kpnpBankNameKr:
+      type: string
+      example: "KEB 하나"
+      description: 은행명 Kr
+    kpnpBankNameEn:
+      type: string
+      example: "KEB Hana"
+      description: 은행명 En
+    kpnpBankAccountNum:
+      type: string
+      example: "4289-1000-869-238"
+      description: 계좌번호
+    kpnpBankAccountName:
+      type: string
+      example: "KPNP CO.LTD"
+      description: 예금주
+    depositDate:
+      type: string
+      example: "2024-02-28 10:06"
+      description: 입금기간
+    depositorName:
+      type: string
+      example: "곽은정12877"
+      description: 입금자명
+    swiftCode:
+      type: string
+      example: "KOEXKRSE"
+      description: SWIFT_CODE
+    bankAddress:
+      type: string
+      example: "Gasan Digital 1-Ro, Geumcheon-gu, Seoul, South Korea"
+      description: 은행본점 (주소)
+    kpnpTel:
+      type: string
+      example: "02-563-5989"
+      description: KPNP 전화번호
+    kpnpFax:
+      type: string
+      example: "02-6449-2989"
+      description: KPNP 팩스번호
+    kpnpEmail:
+      type: string
+      example: "Sales1@kpnp.net"
+      description: KPNP 담당자 EMAIL
+    bankPostalCode:
+      type: string
+      example: "085-08"
+      description: 은행본점 (우편번호)
+
+# Enums
+CompetitionMediaCategory:
+  type: string
+  description: 대회 개최 미디어 구분
+  enum:
+    - M (메인사진)
+    - F (파일)
+SettingMediaCategory:
+  type: string
+  description: 미디어 구분
+  enum:
+    - CR (대회로고)
+    - HR (주최로고)
+MediaCategory:
+  type: string
+  description: 미디어 구분
+  enum:
+    - M (메인사진)
+    - F (파일)
+    - CR (대회로고)
+    - HR (주최로고)
+    - BI (베너이미지)
+    - S (스폰서)
+MediaType:
+  type: string
+  description: 미디어 타입
+  enum:
+    - I (이미지)
+    - F (파일)
+PoomsaeDivisionType:
+  type: string
+  enum:
+    - WT_RECOGNIZED_POOMSAE (WT 공인품새룰)
+    - FREE_STYLE_POOMSAE (자유품새룰)
+    - MIXED_POOMSAE (복합품새룰)
+    - KVR_RECOGNIZED_POOMSAE (한국 공인품새룰)
+    - OPEN_RECOGNIZED_POOMSAE (오픈대회 공인품새)
+    - OPEN_FREE_STYLE_POOMSAE (오픈대회 자유품새)
+  example:
+    - WT_RECOGNIZED_POOMSAE
+    - FREE_STYLE_POOMSAE
+
+PoomsaeDepartmentType:
+  type: string
+  description: 품새 부 구분
+  enum:
+    - CADET (Cadet, 유소년부)
+    - JUNIOR (Junior, 청소년부)
+    - UNDER_30 (Under 30, 30세 이하)
+    - UNDER_40 (Under 40, 40세 이하)
+    - UNDER_50 (Under 50, 50세 이하)
+    - UNDER_60 (Under 60, 60세 이하)
+    - UNDER_65 (Under 65, 65세 이하)
+    - OVER_65 (Over 65, 65세 초과)
+    - OVER_60 (Over 60, 60세 초과)
+    - UNDER_17 (Under 17, 17세 이하)
+    - OVER_17 (Over 17, 17세 초과)
+    - AND_OVER_18 (18& Over, 18세 이상)
+    - ELEMENTARY_LOWER (Elementary Lower, 초등 저학년부)
+    - ELEMENTARY_MIDDLE (Elementary Middle, 초등 중학년부)
+    - ELEMENTARY_UPPER (Elementary Upper, 초등 고학년부)
+    - MIDDLE_1ST (Middle 1st, 중등부 1학년)
+    - MIDDLE_2ND (Middle 2nd, 중등부 2학년)
+    - MIDDLE_3ND (Middle 3nd, 중등부 3학년)
+    - HIGH_1ST (High 1st, 고등부 1학년)
+    - HIGH_2ND (High 2nd, 고등부 2학년)
+    - HIGH_3ND (High 3nd, 고등부 3학년)
+    - UNIVERSITY_1 (University 1, 대학 1부)
+    - UNIVERSITY_2 (University 2, 대학 2부)
+    - GEUMGANG_1 (Geumgang 1, 금강 1부)
+    - GEUMGANG_2 (Geumgang 2, 금강 2부)
+    - TAEBAEK_1 (Taebaek 1, 태백 1부)
+    - TAEBAEK_2 (Taebaek 2, 태백 2부)
+    - JITAE_1 (Jitae 1, 지태 1부)
+    - JITAE_2 (Jitae 2, 지태 2부)
+    - CHEONGWON (Cheongwon, 천권부)
+    - HANSU (Hansu, 한수부)
+    - MIDDLE (Middle, 중등부)
+    - HIGH (High, 고등부)
+    - UNIVERSITY (University, 대학부)
+    - ADULT (Adult, 성인부)
+    - SENIOR (Senior, 장년부)
+
+PoomsaeDivisionCategoryType:
+  type: string
+  description: 품새 세부 종목 구분
+  enum:
+    - INDIVIDUAL_MALE (Individual male, 남자개인)
+    - INDIVIDUAL_FEMALE (Individual female, 여자개인)
+    - TEAM_MALE (Team male, 남자단체)
+    - TEAM_FEMALE (Team female, 여자단체)
+    - PAIR (Pair, 복식)
+    - TEAM_MIXED (Team mixed, 혼성단체전)
+
+PoomsaeMatchStyleType:
+  type: string
+  description: 경기 방식
+  enum:
+    - TOURNAMENT (토너먼트)
+    - CUTOFF_TOURNAMENT (컷오프+토너먼트)
+    - CUTOFF (컷오프)
+
+PoomsaeDrawType:
+  type: string
+  description: 품새 추첨 방식
+  enum:
+    - RANDOM (Random, 무작위)
+    - PIN_SELECT (PinSelect, 고정선택)
+    - REFEREE_SELECT (RefereeSelect, 심판추첨)
+
+PoomsaeCompositeRateType:
+  type: string
+  description: 복합품새 비중 코드
+  enum:
+    - D0 (10:90, 공인10:자유90)
+    - D1 (20:80, 공인20:자유80)
+    - D2 (30:70, 공인30:자유70)
+    - D3 (40:60, 공인40:자유60)
+    - D4 (50:50, 공인50:자유50)
+    - D5 (60:40, 공인60:자유40)
+    - D6 (30:70, 공인70:자유30)
+    - D7 (80:20, 공인80:자유20)
+    - D8 (90:10, 공인90:자유10)
+PoomsaeMatchOrderType:
+  type: string
+  description: 품새 시연 순서 타입
+  enum:
+    - CHUNG_CHUNG_HONG_HONG (Chung-Chung-Hong-Hong, 청-청-홍-홍)
+    - HONG_HONG_CHUNG_CHUNG (Hong-Hong-Chung-Chung, 홍-홍-청-청)
+    - CHUNG_HONG_CHUNG_HONG (Chung-Hong-Chung-Hong, 청-홍-청-홍)
+    - HONG_CHUNG_HONG_CHUNG (Hong-Chung-Hong-Chung, 홍-청-홍-청)
+    - TOGETHER (Together, 함께시연)

@@ -1,4 +1,4 @@
-paths:
+﻿paths:
   /competitions/{competitionSeq}/documents/detail/COMPETITION_SCHEDULES:
     get:
       summary: COMPETITION_SCHEDULES 품새 문서 상세 조회 (COMPETITION_SCHEDULES)
@@ -327,10 +327,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../../../openapi.yml#/components/responses/Error'
+                $ref: '../../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/documents/detail/SESSION_SCHEDULES_BY_COURT:
     get:
@@ -552,10 +552,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../../../openapi.yml#/components/responses/Error'
+                $ref: '../../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/documents/detail/SESSION_SCHEDULES_BY_DAY:
     get:
@@ -827,10 +827,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../../../openapi.yml#/components/responses/Error'
+                $ref: '../../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/documents/detail/SESSION_SCHEDULES_BY_DAY_WITH_START_TIME:
     get:
@@ -1105,7 +1105,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../../../openapi.yml#/components/responses/Error'
+                $ref: '../../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../../components/examples.yaml#/IS_NOT_AUTHORIZED'
+

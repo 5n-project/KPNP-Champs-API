@@ -1,4 +1,4 @@
-paths:
+﻿paths:
   /competitions/{competitionSeq}/certificate/{certificateSettingSeq}/winners:
     get:
       summary: 운영 - 상장 출력(CT) 일반 상장 수상자 리스트 조회
@@ -481,16 +481,16 @@ paths:
                       "error": null
                     }
                 ITEM_NOT_FOUND:
-                  $ref: '../../openapi.yml#/components/examples/ITEM_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/ITEM_NOT_FOUND'
         '403':
           description: 권한 없음
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/certificate/{certificateSettingSeq}/teams:
     get:
@@ -647,13 +647,15 @@ paths:
                       "error": null
                     }
                 ITEM_NOT_FOUND:
-                  $ref: '../../openapi.yml#/components/examples/ITEM_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/ITEM_NOT_FOUND'
         '403':
           description: 권한 없음
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
+
+

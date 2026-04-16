@@ -1,4 +1,4 @@
-paths:
+﻿paths:
   /competition/{competitionSeq}/entries/competitors:
     get:
       summary: 대회 운영에 입장 - 선수목록 조회
@@ -408,10 +408,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competition/{competitionSeq}/entries/competitors/{competitorEntrySeq}:
     get:
@@ -614,16 +614,16 @@ paths:
                       "error": null
                     }
                 USER_DOES_NOT_EXIST:
-                  $ref: '../../openapi.yml#/components/examples/USER_DOES_NOT_EXIST'
+                  $ref: '../../components/examples.yaml#/USER_DOES_NOT_EXIST'
         '403':
           description: 권한 없음
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competition/{competitionSeq}/entries/competitors/{competitorEntrySeq}/entry-status:
     put:
@@ -687,10 +687,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competition/entries/competitors/{barcode}/entry-status:
     put:
@@ -732,15 +732,17 @@ paths:
                       "error": null
                     }
                 INVALID_ARGUMENT_ERROR:
-                  $ref: '../../openapi.yml#/components/examples/INVALID_ARGUMENT_ERROR'
+                  $ref: '../../components/examples.yaml#/INVALID_ARGUMENT_ERROR'
         '403':
           description: 권한 없음
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
+
+
 
 

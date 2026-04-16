@@ -1,4 +1,4 @@
-paths:
+﻿paths:
   /competitions/{competitionSeq}/managers/search:
     get:
       tags:
@@ -71,16 +71,16 @@ paths:
                           firstNameEn: Press
                           memId: kpnp_press
                 ITEM_NOT_FOUND:
-                  $ref: '../../openapi.yml#/components/examples/ITEM_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/ITEM_NOT_FOUND'
         403:
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/managers:
     get:
@@ -191,7 +191,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/OK'
+                $ref: '../../components/responses.yaml#/OK'
               examples:
                 success:
                   value:
@@ -199,16 +199,16 @@ paths:
                     data: null
                     error: null
                 ITEM_NOT_FOUND:
-                  $ref: '../../openapi.yml#/components/examples/ITEM_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/ITEM_NOT_FOUND'
         403:
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
   /competitions/{competitionSeq}/managers/{competitionManagerSeq}:
     delete:
       tags:
@@ -233,7 +233,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/OK'
+                $ref: '../../components/responses.yaml#/OK'
               examples:
                 success:
                   value:
@@ -241,13 +241,15 @@ paths:
                     data: null
                     error: null
                 ITEM_NOT_FOUND:
-                  $ref: '../../openapi.yml#/components/examples/ITEM_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/ITEM_NOT_FOUND'
         403:
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
+
+

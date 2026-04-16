@@ -1,4 +1,4 @@
-paths:
+﻿paths:
   /competitions/{competitionSeq}/referees:
     get:
       summary: 심판 리스트 조회
@@ -86,10 +86,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/referee/non-member:
     post:
@@ -159,7 +159,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/OK'
+                $ref: '../../components/responses.yaml#/OK'
               examples:
                 defaultResponse:
                   summary: Default Example
@@ -168,16 +168,16 @@ paths:
                     data: null
                     error: null
                 DUPLICATE_EMAIL:
-                  $ref: '../../openapi.yml/#/components/examples/DUPLICATE_EMAIL'
+                  $ref: '../../components/examples.yaml#/DUPLICATE_EMAIL'
         403:
           description: 실패
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/referee:
     delete:
@@ -214,7 +214,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/OK'
+                $ref: '../../components/responses.yaml#/OK'
               examples:
                 defaultResponse:
                   summary: Default Example
@@ -223,18 +223,18 @@ paths:
                     data: true
                     error: null
                 EXIST_REFEREE_GROUP:
-                  $ref: '../../openapi.yml#/components/examples/EXIST_REFEREE_GROUP'
+                  $ref: '../../components/examples.yaml#/EXIST_REFEREE_GROUP'
                 REFEREE_DELETE_REQUEST_INVALID_1:
-                  $ref: '../../openapi.yml#/components/examples/REFEREE_DELETE_REQUEST_INVALID_1'
+                  $ref: '../../components/examples.yaml#/REFEREE_DELETE_REQUEST_INVALID_1'
         403:
           description: 실패
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/referee/{refereeSeq}:
     put:
@@ -302,7 +302,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/OK'
+                $ref: '../../components/responses.yaml#/OK'
               examples:
                 defaultResponse:
                   summary: Default Example
@@ -311,18 +311,18 @@ paths:
                     data: null
                     error: null
                 ITEM_NOT_FOUND:
-                  $ref: '../../openapi.yml#/components/examples/ITEM_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/ITEM_NOT_FOUND'
                 DUPLICATE_EMAIL:
-                  $ref: '../../openapi.yml/#/components/examples/DUPLICATE_EMAIL'
+                  $ref: '../../components/examples.yaml#/DUPLICATE_EMAIL'
         403:
           description: 실패
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/referee/search:
     get:
@@ -386,10 +386,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/referee/member:
     post:
@@ -430,7 +430,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/OK'
+                $ref: '../../components/responses.yaml#/OK'
               examples:
                 defaultResponse:
                   summary: Default Example
@@ -439,18 +439,18 @@ paths:
                     data: null
                     error: null
                 INVALID_REFEREE_INVITATION:
-                  $ref: '../../openapi.yml#/components/examples/INVALID_REFEREE_INVITATION'
+                  $ref: '../../components/examples.yaml#/INVALID_REFEREE_INVITATION'
                 REFEREE_ALREADY_REGISTERED:
-                  $ref: '../../openapi.yml#/components/examples/INVALID_REFEREE_INVITATION'
+                  $ref: '../../components/examples.yaml#/INVALID_REFEREE_INVITATION'
         403:
           description: 실패
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/referee/group:
     post:
@@ -494,7 +494,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/OK'
+                $ref: '../../components/responses.yaml#/OK'
               examples:
                 defaultResponse:
                   summary: Default Example
@@ -503,20 +503,20 @@ paths:
                     data: null
                     error: null
                 INVALID_HEAD_REFEREE:
-                  $ref: '../../openapi.yml#/components/examples/INVALID_HEAD_REFEREE'
+                  $ref: '../../components/examples.yaml#/INVALID_HEAD_REFEREE'
                 INSUFFICIENT_REFEREES_FOR_GROUP_CREATION:
-                  $ref: '../../openapi.yml#/components/examples/INSUFFICIENT_REFEREES_FOR_GROUP_CREATION'
+                  $ref: '../../components/examples.yaml#/INSUFFICIENT_REFEREES_FOR_GROUP_CREATION'
                 MATCH_STATE_INVALID_FOR_OPERATION:
-                  $ref: '../../openapi.yml#/components/examples/MATCH_STATE_INVALID_FOR_OPERATION'
+                  $ref: '../../components/examples.yaml#/MATCH_STATE_INVALID_FOR_OPERATION'
         403:
           description: 실패
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
   /competitions/{competitionSeq}/referee/csv:
     post:
@@ -551,7 +551,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/OK'
+                $ref: '../../components/responses.yaml#/OK'
               examples:
                 defaultResponse:
                   summary: 성공 응답 예시
@@ -560,28 +560,30 @@ paths:
                     data: null
                     error: null
                 MATCH_STATE_INVALID_FOR_OPERATION:
-                  $ref: '../../openapi.yml#/components/examples/MATCH_STATE_INVALID_FOR_OPERATION'
+                  $ref: '../../components/examples.yaml#/MATCH_STATE_INVALID_FOR_OPERATION'
                 REFEREE_CSV_DATA_NOT_FOUND:
-                  $ref: '../../openapi.yml#/components/examples/REFEREE_CSV_DATA_NOT_FOUND'
+                  $ref: '../../components/examples.yaml#/REFEREE_CSV_DATA_NOT_FOUND'
                 DUPLICATE_EMAIL:
-                  $ref: '../../openapi.yml/#/components/examples/DUPLICATE_EMAIL'
+                  $ref: '../../components/examples.yaml#/DUPLICATE_EMAIL'
                 CSV_INVALID_ARGUMENT_ERROR:
-                  $ref: '../../openapi.yml/#/components/examples/CSV_INVALID_ARGUMENT_ERROR'
+                  $ref: '../../components/examples.yaml#/CSV_INVALID_ARGUMENT_ERROR'
         403:
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../components/examples.yaml#/IS_NOT_AUTHORIZED'
         400:
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '../../openapi.yml#/components/responses/Error'
+                $ref: '../../components/responses.yaml#/Error'
               examples:
                 FILE_LOAD_FAILURE:
-                  $ref: '../../openapi.yml#/components/examples/FILE_LOAD_FAILURE'
+                  $ref: '../../components/examples.yaml#/FILE_LOAD_FAILURE'
+
+

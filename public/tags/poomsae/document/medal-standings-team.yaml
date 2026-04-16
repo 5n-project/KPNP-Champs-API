@@ -1,4 +1,4 @@
-paths:
+﻿paths:
   /competitions/{competitionSeq}/documents/detail/MEDAL_STANDINGS_TEAM:
     get:
       summary: MEDAL_STANDINGS_TEAM 품새 문서 상세 조회 (MEDAL_STANDINGS_TEAM)
@@ -39,27 +39,27 @@ paths:
                 medal standing team 데이터:
                   $ref: "#/components/examples/MedalStandingData"
                 COMPETITION_PARTICIPATE_NOT_CONFIRM_ERROR:
-                  $ref: '../../../openapi.yml/#/components/examples/COMPETITION_PARTICIPATE_NOT_CONFIRM_ERROR'
+                  $ref: '../../../components/examples.yaml#/COMPETITION_PARTICIPATE_NOT_CONFIRM_ERROR'
                 DOCUMENT_NOT_FOUND:
-                  $ref: '../../../openapi.yml/#/components/examples/DOCUMENT_NOT_FOUND'
+                  $ref: '../../../components/examples.yaml#/DOCUMENT_NOT_FOUND'
         '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '../../../openapi.yml#/components/responses/Error'
+                $ref: '../../../components/responses.yaml#/Error'
               examples:
                 INVALID_TYPE_ERROR:
-                  $ref: '../../../openapi.yml#/components/examples/INVALID_TYPE_ERROR'
+                  $ref: '../../../components/examples.yaml#/INVALID_TYPE_ERROR'
         '403':
           description: 권한 없음
           content:
             application/json:
               schema:
-                $ref: '../../../openapi.yml#/components/responses/Error'
+                $ref: '../../../components/responses.yaml#/Error'
               examples:
                 IS_NOT_AUTHORIZED:
-                  $ref: '../../../openapi.yml#/components/examples/IS_NOT_AUTHORIZED'
+                  $ref: '../../../components/examples.yaml#/IS_NOT_AUTHORIZED'
 
 components:
   schemas:
@@ -890,3 +890,4 @@ components:
             ]
           }
         }
+

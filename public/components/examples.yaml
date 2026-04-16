@@ -1,0 +1,838 @@
+﻿# 500
+BAD_CREDENTIALS_EXCEPTION:
+  value:
+    success: false
+    data: null
+    error:
+      message: "아이디 또는 비밀번호를 잘못 입력했습니다.\n 입력하신 내용을 다시 확인해주세요."
+      errorCode: "E508"
+NO_HANDLER_FOUND_URL_ERROR:
+  value:
+    success: false
+    data: null
+    error:
+      message: "잘못된 요청입니다."
+      errorCode: "E990"
+FILE_TRANSFER_TO_S3_ERROR:
+  value:
+    success: false
+    data: null
+    error:
+      message: "파일 S3에 전송 중 오류 발생."
+      errorCode: "E009"
+COMPETITION_OVERLAP:
+  value:
+    success: false
+    data: null
+    error:
+      message: "대회 중복 개최 요청"
+      errorCode: "E522"
+VALIDATE_WT_GRAGE_IS_EMPTY:
+  value:
+    success: false
+    data: null
+    error:
+      message: "등급은 필수 항목입니다"
+      errorCode: "E700"
+VALIDATE_BANK_INFO_IS_EMPTY:
+  value:
+    success: false
+    data: null
+    error:
+      message: "참가비 항목을 입력해주세요"
+      errorCode: "E701"
+INVALID_ARGUMENT_ERROR_FILE_SIZE:
+  value:
+    success: false
+    data: null
+    error:
+      message: "크기가 1에서 3 사이여야 합니다"
+      errorCode: "E523"
+UNSUPPORTED_OPERATION:
+  value:
+    success: false
+    data: null
+    error:
+      message: "지원하지 않는 메소드입니다."
+      errorCode: "E011"
+
+#403
+IS_NOT_AUTHORIZED:
+  value:
+    success: false
+    data: null
+    error:
+      message: "접근 권한이 없습니다."
+      errorCode: "E099"
+
+#400
+FILE_LOAD_FAILURE:
+  value:
+    success: false
+    data: null
+    error:
+      message: "불러오기를 실패했습니다. 다시 확인해주세요."
+      errorCode: "E604"
+INVALID_TYPE_ERROR:
+  value:
+    success: false
+    data: null
+    error:
+      message: "올바르지 않은 타입입니다."
+      errorCode: "E003"
+ILLEGAL_ARGUMENT_ERROR:
+  value:
+    success: false
+    data: null
+    error:
+      message: "필수 파라미터가 없습니다."
+      errorCode: "E004"
+CODE_NOT_FOUND:
+  value:
+    success: false
+    data: null
+    error:
+      message: "The code does not exist. (동적으로 바뀔 수 있음 사용자에게 보여질 에러메시지는 아님)"
+      errorCode: "E006"
+PARTICIPANT_RULE_MISMATCH:
+  value:
+    success: false
+    data: null
+    error:
+      message: "룰이 일치하지 않습니다. 대회 운영룰과 일치하는 파일을 올려주세요."
+      errorCode: "E603"
+COMPETITION_DAY_START_ORDER_INVALID:
+  value:
+    success: false
+    data: null
+    error:
+      message: "대회 일차는 이전 일차가 완료된 후에 순차적으로 시작할 수 있습니다."
+      errorCode: "E705"
+COMPETITION_CURRENT_DAY_IS_ALREADY_START:
+  value:
+    success: false
+    data: null
+    error:
+      message: "해당 일차 대회가 이미 시작되었습니다."
+      errorCode: "E611"
+COMPETITION_CURRENT_DAY_IS_NOT_START:
+  value:
+    success: false
+    data: null
+    error:
+      message: "해당 일차 대회가 시작되지 않았습니다."
+      errorCode: "E610"
+COMPETITION_CURRENT_DAY_IS_END:
+  value:
+    success: false
+    data: null
+    error:
+      message: "해당 일차 대회가 종료되었습니다."
+      errorCode: "E609"
+REFEREE_GROUP_IS_NOT_EXISTS:
+  value:
+    success: false
+    data: null
+    error:
+      message: "심판조가 존재하지 않습니다.\n설정에서 심판조를 생성이 필요합니다."
+      errorCode: "E655"
+WRONG_SCHEDULE_MATCH:
+  value:
+    success: false
+    data: null
+    error:
+      message: "잘못된 매치입니다."
+      errorCode: "E658"
+DENY_CHANGE_REFEREE_WRONG_SEQ:
+  value:
+    success: false
+    data: null
+    error:
+      message: "잘못된 파라미터입니다."
+      errorCode: "E661"
+DENY_CHANGE_REFEREE_WRONG_REFEREE_SEQ:
+  value:
+    success: false
+    data: null
+    error:
+      message: "존재하지 않는 심판입니다."
+      errorCode: "E662"
+
+
+# 200
+EXIST_REFEREE_GROUP:
+  value:
+    success: false
+    data: null
+    error:
+      message: "삭제하려는 심판 목록 중 일부 심판이 이미 심판조에 편성되어 있습니다."
+      errorCode: "E645"
+REFEREE_DELETE_REQUEST_INVALID_1:
+  value:
+    success: false
+    data: null
+    error:
+      message: "삭제할 심판 목록은 비어 있을 수 없습니다."
+      errorCode: "E523"
+ITEM_NOT_FOUND:
+  value:
+    success: false
+    data: null
+    error:
+      message: "데이터가 존재하지 않습니다."
+      errorCode: "E501"
+INVALID_REFEREE_INVITATION:
+  value:
+    success: false
+    data: null
+    error:
+      message: "초대 대상 심판 회원 중 존재하지 않는 회원이 있습니다."
+      errorCode: "E646"
+REFEREE_ALREADY_REGISTERED:
+  value:
+    success: false
+    data: null
+    error:
+      message: "이미 해당 대회에 심판으로 등록된 회원이 있습니다."
+      errorCode: "E649"
+INVALID_HEAD_REFEREE:
+  value:
+    success: false
+    data: null
+    error:
+      message: "요청에 포함된 주심 중 존재하지 않는 심판이 있습니다."
+      errorCode: "E647"
+INSUFFICIENT_REFEREES_FOR_GROUP_CREATION:
+  value:
+    success: false
+    data: null
+    error:
+      message: "심판조 생성을 위한 충분한 심판 인원이 부족합니다."
+      errorCode: "E648"
+MATCH_STATE_INVALID_FOR_OPERATION:
+  value:
+    success: false
+    data: null
+    error:
+      message: "경기가 진행 중이거나 종료되어 해당 작업을 수행할 수 없습니다."
+      errorCode: "E651"
+REFEREE_CSV_DATA_NOT_FOUND:
+  value:
+    success: false
+    data: null
+    error:
+      message: "CSV 파일에 심판 데이터가 포함되어 있지 않습니다."
+      errorCode: "E650"
+VALIDATE_FILE_IS_OVER_MAX:
+  value:
+    success: false
+    data: null
+    error:
+      message: "파일 등록 최대 개수를 초과하였습니다."
+      errorCode: "E702"
+FAILD_PAYPAL:
+  value:
+    success: false
+    data: null
+    error:
+      message: "PAYPAL 결제 실패"
+      errorCode: "E519"
+PAYMENT_METHOD_ERROR:
+  value:
+    success: false
+    data: null
+    error:
+      message: "결제 방식 오류"
+      errorCode: "E520"
+PAYMENT_DENIED:
+  value:
+    success: false
+    data: null
+    error:
+      message: "결제가 거절되었습니다. 페이팔에 문의해주세요."
+      errorCode: "E623"
+PAYER_CANNOT_PAY:
+  value:
+    success: false
+    data: null
+    error:
+      message: "결제가 진행되지 않았습니다. 결제 수단 정보를 확인하거나 잔액 부족 시 다른 결제 수단을 사용해 주세요."
+      errorCode: "E624"
+PAYPAL_INTERNAL_SERVER_ERROR:
+  value:
+    success: false
+    data: null
+    error:
+      message: "네트워크 연결에 문제가 생겼습니다."
+      errorCode: "E625"
+NOT_DIFFERENCE_DATE:
+  value:
+    success: false
+    data: null
+    error:
+      message: "결제하려는 상품의 결제 일자가 잘못되었습니다."
+      errorCode: "E529"
+DIFFERENT_PAYMENT:
+  value:
+    success: false
+    data: null
+    error:
+      message: "계산된 가격이 다릅니다."
+      errorCode: "E517"
+USER_STUDING_PRODUCT:
+  value:
+    success: false
+    data: null
+    error:
+      message: "해당 상품은 이미 결제 하신 상품입니다."
+      errorCode: "E516"
+NEXT_ROUND_IS_START:
+  value:
+    success: false
+    data: null
+    error:
+      message: "다음 라운드 경기가 시작되어 결과를 변경할 수 없습니다."
+      errorCode: "E620"
+PENDING_PAYMENT_IN_PROGRESS:
+  value:
+    success: false
+    data: null
+    error:
+      message: "진행중인 결제가 있거나 환불요청 상태입니다. 결제 완료 또는 환불 완료 후 접근 가능합니다."
+      errorCode: "E626"
+UNSUPPORTED_CATEGORY_FOR_RULE_DEPARTMENT:
+  value:
+    success: false
+    data: null
+    error:
+      message: "선택한 품새 룰과 부 조합에 허용되지 않는 카테고리가 포함되어 있습니다."
+      errorCode: "E652"
+DUPLICATE_DIVISION_CATEGORY:
+  value:
+    success: false
+    data: null
+    error:
+      message: "대회 유형이 중복되었습니다."
+      errorCode: "E653"
+DUPLICATE_EMAIL:
+  value:
+    success: false
+    data: null
+    error:
+      message: "중복된 이메일 리스트 , 구분자로 보냄"
+      errorCode: "E642"
+NOT_EXIST_PARTICIPANTS_IN_DIVISION_CATEGORY:
+  value:
+    success: false
+    data: null
+    error:
+      message: "해당 대회 유형에 참가 인원이 존재하지 않습니다."
+      errorCode: "E703"
+COMPETITION_PARTICIPATE_LIMIT_OVER:
+  value:
+    success: false
+    data: null
+    error:
+      message: "참가 인원 수 초과"
+      errorCode: "E530"
+COMPETITION_MATCH_PROGRESS_NOT_ADD:
+  value:
+    success: false
+    data: null
+    error:
+      message: "해당 대회 유형은 경기가 시작 되어 인원 추가가 불가능 합니다."
+      errorCode: "E704"
+CONFIRM_PARTICIPANT_COMPETITION:
+  value:
+    success: false
+    data: null
+    error:
+      message: "이미 참가자 확정 된 대회 입니다."
+      errorCode: "E525"
+INVALID_PAIR_MEMBER_COUNT:
+  value:
+    success: false
+    data: null
+    error:
+      message: "복식전은 2명의 팀원이 필요합니다."
+      errorCode: "E635"
+INVALID_GROUP_MEMBER_COUNT:
+  value:
+    success: false
+    data: null
+    error:
+      message: "단체전은 최소 3명의 팀원이 필요합니다."
+      errorCode: "E634"
+NOT_SAVE:
+  value:
+    success: false
+    data: null
+    error:
+      message: "저장 실패했습니다."
+      errorCode: "E507"
+TEAM_NAME_MISMATCH:
+  value:
+    success: false
+    data: null
+    error:
+      message: "팀명이 일치하지 않습니다."
+      errorCode: "E633"
+INVALID_ARGUMENT_ERROR:
+  value:
+    success: false
+    data: null
+    error:
+      message: "올바르지 않은 입력값입니다."
+      errorCode: "E523"
+CSV_INVALID_ARGUMENT_ERROR:
+  value:
+    success: false
+    data: null
+    error:
+      message: "어떤 필드에 행이 잘못됐는지 동적으로 백엔드에서 메시지 만들어주므로 그거 그대로 띄우면 됨"
+      errorCode: "E748"
+INVALID_BIRTH_DATE_ERROR:
+  value:
+    success: false
+    data: null
+    error:
+      message: "올바르지 않은 생년월일 형식입니다."
+      errorCode: "E730"
+SCHEDULE_IS_TEMPORARY_SAVE:
+  value:
+    success: false
+    data: null
+    error:
+      message: "일정이 임시 저장 상태입니다. \n 일정을 저장해 주세요."
+      errorCode: "E630"
+NO_REMAINING_MATCHES:
+  value:
+    success: false
+    data: null
+    error:
+      message: "남은 경기가 없습니다."
+      errorCode: "E615"
+COURT_VIEWER_MAX_PER_COURT:
+  value:
+    success: false
+    data: null
+    error:
+      message: "코트 별 최대 경기 수를 초과했습니다."
+      errorCode: "E644"
+COMPETITION_IS_STILL_ONGOING:
+  value:
+    success: false
+    data: null
+    error:
+      message: "경기가 아직 진행중입니다."
+      errorCode: "E614"
+COMPETITION_MATCH_NOT_FOUND:
+  value:
+    success: false
+    data: null
+    error:
+      message: "대회의 경기를 찾을 수 없습니다."
+      errorCode: "E706"
+DOCUMENT_NOT_FOUND:
+  value:
+    success: false
+    data: null
+    error:
+      message: "문서 내역이 존재하지 않습니다."
+      errorCode: "E619"
+COMPETITION_MATCH_REFEREE_NOT_ASSIGNED:
+  value:
+    success: false
+    data: null
+    error:
+      message: "해당 경기에 심판으로 배정되지 않았습니다."
+      errorCode: "E707"
+INSUFFICIENT_SCORE_FOR_DEDUCTION:
+  value:
+    success: false
+    data: null
+    error:
+      message: "현재 점수가 더 작아 감점할 수 없습니다."
+      errorCode: "E709"
+NO_DEDUCTION_TO_UNDO:
+  value:
+    success: false
+    data: null
+    error:
+      message: "감점이 없어 되돌릴 수 없습니다."
+      errorCode: "E710"
+DENY_CHANGE_REFEREE_GROUP_SESSION_IS_START:
+  value:
+    success: false
+    data: null
+    error:
+      message: "세션이 시작되어 심판조를 변경할 수 없습니다."
+      errorCode: "E656"
+DENY_CHANGE_REFEREE_GROUP_OVERLAP:
+  value:
+    success: false
+    data: null
+    error:
+      message: "같은 심판조로는 변경할 수 없습니다."
+      errorCode: "E657"
+DENY_CHANGE_REFEREE_GROUP_SAME_SESSION:
+  value:
+    success: false
+    data: null
+    error:
+      message: "이미 같은 세션에 배정된 심판조입니다."
+      errorCode: "E657"
+DENY_CHANGE_REFEREE_MATCH_IS_NOT_WAITING:
+  value:
+    success: false
+    data: null
+    error:
+      message: "진행중이거나 종료된 경기의 심판은 바꿀 수 없습니다."
+      errorCode: "E659"
+ALREADY_EXIST_REFEREE:
+  value:
+    success: false
+    data: null
+    error:
+      message: "이미 배정된 심판입니다."
+      errorCode: "E660"
+MATCH_COMPETITOR_DETAIL_NOT_FOUND:
+  value:
+    success: false
+    data: null
+    error:
+      message: "해당 경기의 선수를 찾을 수 없습니다."
+      errorCode: "E708"
+CANNOT_APPLY_DEDUCTION:
+  value:
+    success: false
+    data: null
+    error:
+      message: "더 이상 감점을 뺼 수 없습니다."
+      errorCode: "E713"
+END_OR_WAITING_MATCH_INVALID_FOR_OPERATION:
+  value:
+    success: false
+    data: null
+    error:
+      message: "경기가 시작 전이거나 종료되어 해당 작업을 수행할 수 없습니다."
+      errorCode: "E714"
+OUT_OF_SCORE_SCALE:
+  value:
+    success: false
+    data: null
+    error:
+      message: "가능한 범위를 벗어나는 점수가 있습니다."
+      errorCode: "E715"
+REQUIRED_TYPE_NOT_SCORED:
+  value:
+    success: false
+    data: null
+    error:
+      message: "누락된 채점이 존재합니다."
+      errorCode: "E716"
+SCORING_ALREADY_FINISHED:
+  value:
+    success: false
+    data: null
+    error:
+      message: "이미 채점이 완료되었습니다."
+      errorCode: "E717"
+NO_MATCH_ASSIGNED_TO_REFEREE:
+  value:
+    success: false
+    data: null
+    error:
+      message: "심판으로 배정된 경기가 없습니다."
+      errorCode: "E718"
+MATCH_WINNER_NOT_FOUND:
+  value:
+    success: false
+    data: null
+    error:
+      message: "해당 경기의 승자가 존재하지 않습니다."
+      errorCode: "E720"
+MATCH_RESULT_CANNOT_BE_UPDATED_AFTER_NEXT_ROUND:
+  value:
+    success: false
+    data: null
+    error:
+      message: "다음강수가 진행된 경우 경기 승자 및 결과를 수정할 수 없습니다."
+      errorCode: "E721"
+CUTOFF_MATCH_RESULT_ALREADY_UP_TO_DATE:
+  value:
+    success: false
+    data: null
+    error:
+      message: "경기 결과가 이미 동일하여 변경할 수 없습니다."
+      errorCode: "E734"
+NO_PLAYER_ADVANCED_TO_NEXT_ROUND:
+  value:
+    success: false
+    data: null
+    error:
+      message: "다음강수에 진출한 선수가 존재하지 않습니다."
+      errorCode: "E722"
+MATCH_RESULT_ALREADY_UP_TO_DATE:
+  value:
+    success: false
+    data: null
+    error:
+      message: "승자와 경기 결과가 이미 동일하여 변경할 수 없습니다."
+      errorCode: "E723"
+ONLY_TOURNAMENT_MATCH_CAN_UPDATE_RESULT:
+  value:
+    success: false
+    data: null
+    error:
+      message: "승자 및 경기 결과는 토너먼트 경기에서만 변경할 수 있습니다."
+      errorCode: "E719"
+IS_BYE_MATCH:
+  value:
+    success: false
+    data: null
+    error:
+      message: "부전승 경기는 변경할 수 없습니다."
+      errorCode: "E620-2"
+CANNOT_DEDUCT_ZERO_PENALTY:
+  value:
+    success: false
+    data: null
+    error:
+      message: "현재 패널티 점수가 0점이어서 차감할 수 없습니다."
+      errorCode: "E711"
+CANNOT_APPLY_PENALTY_WHEN_SCORE_IS_TWO:
+  value:
+    success: false
+    data: null
+    error:
+      message: "현재 패널티 점수가 2점이라 패널티를 부여할 수 없습니다."
+      errorCode: "E712"
+INVALID_POOMSAE_FOR_MATCH:
+  value:
+    success: false
+    data: null
+    error:
+      message: "해당 매치에서 허용되지 않은 품새는 저장할 수 없습니다."
+      errorCode: "E724"
+REFEREE_MISMATCH:
+  value:
+    success: false
+    data: null
+    error:
+      message: "경기에 배정받은 심판과 사용자가 일치하지 않습니다."
+      errorCode: "E725"
+ONLY_TOURNAMENT_RANDOM_MATCH:
+  value:
+    success: false
+    data: null
+    error:
+      message: "랜덤 매치 생성은는 토너먼트 경기에서만 변경할 수 있습니다."
+      errorCode: "E728"
+SCORING_NOT_COMPLETED:
+  value:
+    success: false
+    data: null
+    error:
+      message: "심판의 채점이 완료되지 않았습니다."
+      errorCode: "E729"
+SCORE_UPDATE_NOT_ALLOWED_AFTER_NEXT_ROUND_STARTED:
+  value:
+    success: false
+    data: null
+    error:
+      message: "다음 라운드가 진행중이거나 완료되어 점수를 승패 변경 수준으로 수정할 수 없습니다."
+      errorCode: "E731"
+MATCH_IS_NOT_CREATED:
+  value:
+    success: false
+    data: null
+    error:
+      message: "생성된 대진이 없습니다."
+      errorCode: "E736"
+COURT_VIEWER_MATCH_ORDER_IS_WRONG:
+  value:
+    success: false
+    data: null
+    error:
+      message: "PHASE의 순서가 잘못되었습니다."
+      errorCode: "E737"
+SCHEDULE_IS_NOT_FOUND_PER_DAY:
+  value:
+    success: false
+    data: null
+    error:
+      message: "해당 일차에 존재하지 않는 스케줄입니다."
+      errorCode: "E738"
+COURT_VIEWER_MATCH_IS_OVERLAP:
+  value:
+    success: false
+    data: null
+    error:
+      message: "입력된 대진 중 중복되는 대진이 있습니다."
+      errorCode: "E739"
+SCHEDULE_IS_EMPTY:
+  value:
+    success: false
+    data: null
+    error:
+      message: "저장된 일정이 없습니다."
+      errorCode: "E669"
+MATCH_IS_ALREADY_CREATED:
+  value:
+    success: false
+    data: null
+    error:
+      message: "대진이 이미 생성되었습니다."
+      errorCode: "E663"
+QUALIFY_SF_ONLY:
+  value:
+    success: false
+    data: null
+    error:
+      message: "Qualify 지정은 컷오프 + 토너먼트 형식의 본선 경기에서만 가능합니다."
+      errorCode: "E741"
+MATCH_IS_NOT_END:
+  value:
+    success: false
+    data: null
+    error:
+      message: "대진이 종료되지 않았습니다."
+      errorCode: "E671"
+CUTOFF_GROUP_IS_NOT_END:
+  value:
+    success: false
+    data: null
+    error:
+      message: "컷오프 조가 종료되지 않았습니다."
+      errorCode: "E672"
+COMPETITION_PARTICIPATE_NOT_CONFIRM_ERROR:
+  value:
+    success: false
+    data: null
+    error:
+      message: "참가 인원 확정이 안 된 대회 입니다."
+      errorCode: "E543"
+TOGETHER_PERFORMANCE_NOT_ALLOWED_FREESTYLE:
+  value:
+    success: false
+    data: null
+    error:
+      message: "자유품새 경기에서는 함께시연을 지정할 수 없습니다."
+      errorCode: "E746"
+USER_DOES_NOT_EXIST:
+  value:
+    success: false
+    data: null
+    error:
+      message: "유저가 존재하지 않습니다."
+      errorCode: "E510"
+COURT_COUNT_REDUCTION_FAILED:
+  value:
+    success: false
+    data: null
+    error:
+      message: "진행 중인 경기가 있어 코트 수를 줄일 수 없습니다."
+      errorCode: "E749"
+MAX_COURT_COUNT_EXCEEDED_ERROR:
+  value:
+    success: false
+    data: null
+    error:
+      message: "최대 코트 수를 초과했습니다."
+      errorCode: "E750"
+EVENT_UPDATE_NOT_ALLOWED:
+  value:
+    success: false
+    data: null
+    error:
+      message: "해당 대회에서 진행 중이거나 일치하지 않는 이벤트가 포함되어 있어 수정 작업을 수행할 수 없습니다."
+      errorCode: "E751"
+WRONG_FOP_STATUS:
+  value:
+    success: false
+    data: null
+    error:
+      message: "잘못된 FOP 상태값입니다."
+      errorCode: "E664"
+CURRENT_PHASE_IS_ONGOING:
+  value:
+    success: false
+    data: null
+    error:
+      message: "현재 페이즈가 진행중입니다."
+      errorCode: "E752"
+FEATURE_NOT_SUPPORTED_IN_TOURNAMENT:
+  value:
+    success: false
+    data: null
+    error:
+      message: "해당 기능은 토너먼트 일정에서는 지원하지 않습니다."
+      errorCode: "E753"
+CANNOT_DISQUALIFY_ALL_CUTOFF_COMPETITORS:
+  value:
+    success: false
+    data: null
+    error:
+      message: "컷오프 전체 인원을 실격처리 할 수 없습니다."
+      errorCode: "E754"
+CANNOT_PROCESS_LAST_PHASE:
+  value:
+    success: false
+    data: null
+    error:
+      message: "마지막 페이즈는 처리 할 수 없습니다."
+      errorCode: "E755"
+ATHLETE_CSV_DATA_NOT_FOUND:
+  value:
+    success: false
+    data: null
+    error:
+      message: "CSV 파일에 선수 데이터가 포함되어 있지 않습니다."
+      errorCode: "E756"
+CANNOT_RESET_WAITING_MATCH:
+  value:
+    success: false
+    data: null
+    error:
+      message: "대기중 경기는 리셋 할 수 없습니다."
+      errorCode: "E757"
+CANNOT_RESET_MATCH_CUTOFF_GROUP_FINISHED:
+  value:
+    success: false
+    data: null
+    error:
+      message: "해당 컷오프 조가 종료되어 경기를 리셋 할 수 없습니다."
+      errorCode: "E758"
+CANNOT_RESET_MATCH_NEXT_ROUND_IN_PROGRESS:
+  value:
+    success: false
+    data: null
+    error:
+      message: "다음 라운드 경기가 진행되어 경기를 리셋 할 수 없습니다."
+      errorCode: "E759"
+MISSING_COURT_ASSIGNMENT:
+  value:
+    success: false
+    data: null
+    error:
+      message: "코트 배정 누락 안내:\n코트뷰어에서 배치 상태를 재확인해 주시기 바랍니다."
+      errorCode: "E762"
+
+EXIST_WAITING_MATCHES:
+  value:
+    success: false
+    data: null
+    error:
+      message: "대기 중인 매치가 존재합니다.\n원활한 진행을 위해 코트뷰어를 확인해 주세요."
+      errorCode: "E763"
+
+ALREADY_SAVED_DATA:
+  value:
+    success: false
+    data: null
+    error:
+      message: "이미 저장 된 데이터입니다."
+      errorCode: "E765"
+
+
