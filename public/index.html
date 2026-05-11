@@ -10,17 +10,67 @@
 <div id="swagger-ui"/>
 
 <script src="//unpkg.com/swagger-ui-dist@3/swagger-ui-bundle.js"></script>
+<script src="//unpkg.com/swagger-ui-dist@3/swagger-ui-standalone-preset.js"></script>
 <script>
 
   window.onload = function () {
+    const urls = [
+      {
+        name: "Poomsae API",
+        url: "./poomsae/poomsae.openapi.yml"
+      },
+      {
+        name: "Dealer API",
+        url: "./dealer/dealer.openapi.json"
+      },
+      {
+        name: "Admin API",
+        url: "./admin/admin.openapi.json"
+      }
+    ]
+    const storageKey = "swagger-selected-api"
+    const fallbackPrimaryName = "Poomsae API"
+    const savedPrimaryName = localStorage.getItem(storageKey)
+    const primaryName = urls.some(function (item) {
+      return item.name === savedPrimaryName
+    }) ? savedPrimaryName : fallbackPrimaryName
+
     const ui = SwaggerUIBundle({
-      url: "openapi.yml",
+      urls: urls,
+      "urls.primaryName": primaryName,
       dom_id: "#swagger-ui",
       deepLinking: true,
       defaultModelsExpandDepth: 10,
       defaultModelExpandDepth: 10,
-      supportedSubmitMethods: []
+      supportedSubmitMethods: [],
+      presets: [
+        SwaggerUIBundle.presets.apis,
+        SwaggerUIStandalonePreset
+      ],
+      layout: "StandaloneLayout",
+      onComplete: function () {
+        bindApiSelect()
+      }
     })
+
+    function bindApiSelect(retryCount) {
+      const nextRetryCount = retryCount || 0
+      const select = document.querySelector(".download-url-wrapper select")
+
+      if (!select) {
+        if (nextRetryCount < 10) {
+          window.setTimeout(function () {
+            bindApiSelect(nextRetryCount + 1)
+          }, 100)
+        }
+        return
+      }
+
+      select.addEventListener("change", function () {
+        const selectedName = select.options[select.selectedIndex].text
+        localStorage.setItem(storageKey, selectedName)
+      })
+    }
   }
 </script>
 </body>
